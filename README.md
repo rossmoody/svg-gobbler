@@ -1,6 +1,6 @@
 # :tada: SVG Crowbazaar
 
-`javascript:javascript: (function () { var e = document.createElement('script'); e.setAttribute('src', 'https://raw.githubusercontent.com/rossmoody/svg-crowbazaar/master/svg-crowbazaar.js'); e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();`
+`javascript:javascript: (function () { var e = document.createElement('script'); e.setAttribute('src', 'https://cdn.jsdelivr.net/gh/rossmoody/svg-crowbazaar/svg-crowbazaar.js'); e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();`
 
 ## Description
 
