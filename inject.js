@@ -11,17 +11,17 @@
   const prefix = {
     xmlns: 'http://www.w3.org/2000/xmlns/',
     xlink: 'http://www.w3.org/1999/xlink',
-    svg: 'http://www.w3.org/2000/svg',
+    svg: 'http://www.w3.org/2000/svg'
   }
 
   initialize()
 
-  function initialize() {
+  function initialize () {
     const documents = [window.document]
 
     const SVGSources = []
     ;(iframes = document.querySelectorAll('iframe')),
-      (objects = document.querySelectorAll('object'))
+    (objects = document.querySelectorAll('object'))
 
     // add empty svg element
     const emptySvg = window.document.createElementNS(prefix.svg, 'svg')
@@ -62,7 +62,7 @@
     }
   }
 
-  function createPopover(sources) {
+  function createPopover (sources) {
     cleanup()
 
     sources.forEach(s1 => {
@@ -134,14 +134,14 @@
     })
   }
 
-  function cleanup() {
+  function cleanup () {
     const crowbarElements = document.querySelectorAll('.svg-crowbar')
     ;[].forEach.call(crowbarElements, el => {
       el.parentNode.removeChild(el)
     })
   }
 
-  function getSources(doc, emptySvgDeclarationComputed) {
+  function getSources (doc, emptySvgDeclarationComputed) {
     const svgInfo = []
 
     const svgs = doc.querySelectorAll('svg')
@@ -174,13 +174,13 @@
         id: svg.getAttribute('id'),
         name: svg.getAttribute('name'),
         childElementCount: svg.childElementCount,
-        source: [doctype + source],
+        source: [doctype + source]
       })
     })
     return svgInfo
   }
 
-  function download(source) {
+  function download (source) {
     let filename = 'untitled'
 
     if (source.name) {
@@ -210,8 +210,8 @@
     }, 10)
   }
 
-  function setInlineStyles(svg, emptySvgDeclarationComputed) {
-    function explicitlySetStyle(element) {
+  function setInlineStyles (svg, emptySvgDeclarationComputed) {
+    function explicitlySetStyle (element) {
       const cSSStyleDeclarationComputed = getComputedStyle(element)
       let i, len, key, value
       let computedStyleStr = ''
@@ -224,11 +224,11 @@
       }
       element.setAttribute('style', computedStyleStr)
     }
-    function traverse(obj) {
+    function traverse (obj) {
       const tree = []
       tree.push(obj)
       visit(obj)
-      function visit(node) {
+      function visit (node) {
         if (node && node.hasChildNodes()) {
           let child = node.firstChild
           while (child) {

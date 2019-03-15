@@ -1,11 +1,20 @@
 {
   "name": "SVGeez",
-  "version": "1.0",
-  "description": "Download all the SVGs.",
-  "permissions": ["storage"],
+  "version": "0.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "author": "Ross Moody",
+  "description": "Download all the SVGeez.",
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "scripts": ["background.js"]
   },
-  "manifest_version": 2
+  "icons": {
+    "16": "./assets/icon16.png",
+    "48": "./assets/icon48.png",
+    "128": "./assets/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "./assets/icon128.png"
+  },
+  "permissions": ["activeTab"]
 }
