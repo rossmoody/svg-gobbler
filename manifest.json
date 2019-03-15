@@ -1,0 +1,11 @@
+{
+  "name": "SVGeez",
+  "version": "1.0",
+  "description": "Download all the SVGs.",
+  "permissions": ["storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
