@@ -1,11 +1,13 @@
 {
-  "name": "SVGeez",
+  "name": "SVGeezy",
   "version": "0.1",
   "manifest_version": 2,
   "author": "Ross Moody",
-  "description": "Download all the SVGeez.",
+  "description": "Download all the SVGeezies.",
   "background": {
-    "scripts": ["./scripts/background.js"]
+    "scripts": [
+      "./scripts/background.js"
+    ]
   },
   "icons": {
     "16": "./assets/icon16.png",
@@ -15,5 +17,7 @@
   "browser_action": {
     "default_icon": "./assets/icon128.png"
   },
-  "permissions": ["activeTab"]
+  "permissions": [
+    "activeTab"
+  ]
 }
