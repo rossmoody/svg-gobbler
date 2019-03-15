@@ -1,10 +1,14 @@
-# :tada: SVGeez
+A tool to quickly preview and get all the svgeezies from a web page. Highlight and copy or download all the SVG assets from a website.
+
+SVGeezy lets you preview, download and copy the code all SVG icons and illustrations in a website.
+
+svg-grabber is an open source tool created by Jaques Bouman and Juan Rios at NGTI in Rotterdam, The Netherlands. Available for download, forking on Github at https://github.com/ngti/svg-grabber
 
 SVGeez is a simple script that highlights any available SVG content on your current tab and lets you download it.
 
-# How to Use
+# Developer mode
 
-SVGeez can be sideloaded as an extension in Chrome or Brave browser.
+If you would like to modify this extension, you will need to install it manually.
 
 ## :wrench: Side load as an extension
 
@@ -15,10 +19,11 @@ SVGeez can be sideloaded as an extension in Chrome or Brave browser.
 
 ## :thumbsup: Contribute back
 
-1. Follow the instructions under `How to use` to set up the extensions on your local machine
-2. Edit the source code in the cloned `SVGeez` folder
-3. Click the refresh icon in `chrome://extensions` to see the changes reflected
-4. File a Pull Request
+Feel free to submit a pull request if you've made an improvement of some kind.
+
+### Permissions
+
+The extension requires permission to read and modify all the data of the website that you want to extrach the svg files from. It is nessesary to parse and extract the svg assets on the site.
 
 ### About
 

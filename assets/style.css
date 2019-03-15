@@ -1,0 +1,24 @@
+.svgeez__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.7);
+  height: 100%;
+  width: 100%;
+}
+
+.svgeez__button {
+  position: absolute;
+  padding: 4px;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.svgeez__button button {
+  width: auto;
+}
