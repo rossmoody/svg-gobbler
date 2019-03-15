@@ -5,7 +5,7 @@
   "author": "Ross Moody",
   "description": "Download all the SVGeez.",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["./scripts/background.js"]
   },
   "icons": {
     "16": "./assets/icon16.png",
