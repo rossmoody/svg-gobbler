@@ -2,7 +2,6 @@
   "name": "SVGeez",
   "version": "0.1",
   "manifest_version": 2,
-  "default_locale": "en",
   "author": "Ross Moody",
   "description": "Download all the SVGeez.",
   "background": {
