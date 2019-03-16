@@ -1,10 +1,10 @@
-SVGeez is a simple script that highlights any available SVG content on your current web page and lets you download it.
+SVGeezy is a simple browser extension that highlights any available svg content in your current window and lets you download them. The extension is available (soon) on the extension store.
 
 ## Developer mode
 
 If you would like to modify this extension, you will need to install it manually.
 
-### :wrench: Side load as an extension
+### :wrench: Side load
 
 1. Download or clone the repo to your local machine
 2. In Chrome or Brave browser address bar, navigate to `chrome://extensions`
@@ -13,7 +13,7 @@ If you would like to modify this extension, you will need to install it manually
 
 ### :thumbsup: Contribute back
 
-Feel free to submit a pull request if you've made an improvement of some kind.
+Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and I am not very good at javascript. 
 
 #### Permissions
 
