@@ -1,4 +1,4 @@
-SVGeezy is a simple browser extension that highlights any available svg content in your current window and lets you download them. The extension is available (soon) on the extension store.
+SVGobbler is a simple browser extension that highlights any available svg content in your current window and lets you download them. The extension is available (soon) on the extension store.
 
 ## Developer mode
 
