@@ -1,4 +1,4 @@
-SVGobbler is a simple browser extension that highlights any available svg content in your current window and lets you download them. The extension is available (soon) on the extension store.
+SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it. The extension is available (soon) on the extension store.
 
 ## Developer mode
 
