@@ -17,9 +17,7 @@ If you would like to modify this extension, you will need to install it manually
 3. In the top right of the screen, flip the toggle to enable `Developer Mode`
 4. Click the button to `Load unpacked` and select the `extension` folder inside the cloned SVG Gobbler repo
 
-## Making edits
-
-### Installation
+## Installation
 
 1. `cd` into the SVG Gobbler repo
 2. Run `npm install` to install necessary dependencies
@@ -27,7 +25,7 @@ If you would like to modify this extension, you will need to install it manually
 4. Make your edits in the `src` folder
 5. Navigate to pages with svg content and click the extensions icon to test
 
-### Contribute back
+## Contribute back
 
 Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and can use all the help it can get.
 
