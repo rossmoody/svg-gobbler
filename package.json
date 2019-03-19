@@ -1,0 +1,20 @@
+{
+  "name": "svg-gobbler",
+  "version": "1.0.0",
+  "description": "SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it. The extension is available (soon) on the extension store.",
+  "devDependencies": {
+    "css-loader": "^2.1.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "build": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rossmoody/svg-gobbler.git"
+  }
+}
