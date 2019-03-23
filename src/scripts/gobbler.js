@@ -1,3 +1,5 @@
+import { svgo } from './svgo'
+
 export const gobbler = () => {
   const findSVGs = () => {
     // Collect all SVG content
@@ -17,7 +19,7 @@ export const gobbler = () => {
       svgInfo.push({
         top: svgLoc.top,
         left: svgLoc.left,
-        element: i,
+        element: i
       })
     })
     return svgInfo
@@ -44,12 +46,15 @@ export const gobbler = () => {
         ajax.open('GET', i.element.data, true)
         ajax.send()
         ajax.onload = function(e) {
-          let string = parser.parseFromString(
-            ajax.responseText,
-            'image/svg+xml'
-          ).children[0]
-          string = serializer.serializeToString(string)
-          i.source = [string]
+          let xml = parser.parseFromString(ajax.responseText, 'image/svg+xml')
+            .children[0]
+          console.log(xml)
+          const string = serializer.serializeToString(xml)
+          console.log(string)
+          svgo.optimize(string).then(function(result) {
+            i.source = [result.data]
+          })
+          // i.source = [string]
         }
         return i
       } else {

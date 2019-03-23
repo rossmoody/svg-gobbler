@@ -5,27 +5,34 @@ module.exports = {
   entry: './src/scripts/index.js',
   output: {
     filename: './index.js',
-    path: path.resolve(__dirname, 'extension'),
+    path: path.resolve(__dirname, 'extension')
   },
   mode: 'development',
+  node: {
+    fs: 'empty' // webpack doesn't like fs or require modules and errors without this
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: './style.css',
-    }),
+      filename: './style.css' // needed to export separate css file to inject
+    })
   ],
   module: {
     rules: [
       {
+        test: /\.js$/, // needed to correctly load svgo fs.readFileSync()
+        include: path.resolve('node_modules', 'svgo'), // limits to only svgo dep
+        loader: 'transform-loader?brfs' // adds transform-loader, brfs dependencies
+      },
+      {
         test: /\.s?css$/,
         use: [
           {
-            // creates a separate css file to inject
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader // creates a separate css file
           },
-          'css-loader', // translates CSS into CommonJS
-          'sass-loader', // compiles Sass to CSS, using Node Sass by default
-        ],
-      },
-    ],
-  },
+          'css-loader', // translates CSS
+          'sass-loader' // compiles Sass to CSS, using Node Sass by default
+        ]
+      }
+    ]
+  }
 }
