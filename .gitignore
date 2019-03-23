@@ -1,8 +1,7 @@
 # modules
 node_modules
-
-# package-lock
 package-lock.json
 
 # auto generated files
 extension/index.js
+extension/style.css
