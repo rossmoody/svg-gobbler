@@ -1,7 +1,7 @@
 import SVGO from 'svgo'
+
 export const svgo = new SVGO({
   multipass: true,
-  floatPrecision: 5,
   plugins: [
     {
       cleanupAttrs: true
@@ -94,7 +94,7 @@ export const svgo = new SVGO({
       mergePaths: true
     },
     {
-      convertShapeToPath: true
+      convertShapeToPath: false
     },
     {
       sortAttrs: true
@@ -103,7 +103,7 @@ export const svgo = new SVGO({
       transformsWithOnePath: false
     },
     {
-      removeDimensions: true
+      removeDimensions: false
     },
     {
       removeAttrs: { attrs: '(stroke|fill)' }
