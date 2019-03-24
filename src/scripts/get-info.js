@@ -1,13 +1,11 @@
 import { prettyName } from './util'
 
 export const getInfo = allSVGs => {
-  // console.log(foo)
+  // the array that holds all the svg info
   const svgInfo = []
 
+  // iterate through for filename
   allSVGs.forEach(i => {
-    const svgLoc = i.getBoundingClientRect()
-
-    // iterate through for filename
     let filename = 'gobble'
     if (i.alt) {
       filename = prettyName(i.alt)
@@ -19,8 +17,6 @@ export const getInfo = allSVGs => {
 
     // all the info collected and used for svgs
     svgInfo.push({
-      top: svgLoc.top,
-      left: svgLoc.left,
       filename: filename,
       element: i,
       parent: i.parentElement

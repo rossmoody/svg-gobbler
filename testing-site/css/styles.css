@@ -1,0 +1,188 @@
+html {
+  height: 101%;
+}
+
+body {
+  font-size: 62.5%;
+  line-height: 1;
+  font-family: 'Muli', sans-serif, Arial, Tahoma, sans-serif;
+  background-color: #f3f3f6;
+}
+
+.app-icon {
+  height: 48px;
+  width: 48px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+strong {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: 0;
+  max-width: 100%;
+}
+
+p {
+  font-size: 14px;
+  line-height: 24px;
+  color: #434352;
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 58px;
+  font-weight: 700;
+  padding: 0 0 20px;
+  color: #434352;
+}
+
+h2 {
+  color: #434352;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 34px;
+  padding: 0 0 20px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+ol,
+ul {
+  list-style: none;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+a {
+  color: #fb542b;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.twentyBot {
+  margin: 0 0 20px 0;
+}
+
+.header {
+  width: 100%;
+  height: 5rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 60px;
+}
+
+.header img {
+  height: 40px;
+}
+
+.logo {
+  width: 1024px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 0 60px;
+}
+
+.container {
+  display: flex;
+  width: 960px;
+  margin: 70px 0 0 0;
+}
+
+.left {
+  display: flex;
+  flex: 1;
+  padding: 0 50px 0 0;
+}
+
+.right {
+  display: flex;
+  flex: 1;
+}
+
+@media (max-width: 980px) {
+  .container {
+    width: 800px;
+  }
+  h1 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 740px) {
+  h1 {
+    font-size: 34px;
+    padding: 0 0 10px;
+  }
+  .page {
+    padding: 0 30px;
+  }
+  .header {
+    padding: 0 30px;
+  }
+  .container {
+    flex-direction: column-reverse;
+  }
+  .left {
+    padding: 0px;
+  }
+  .right {
+    align-items: center;
+    flex: inherit;
+  }
+  .right img {
+    width: 80%;
+  }
+  ul {
+    margin: 0 0 70px;
+  }
+}

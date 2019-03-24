@@ -106,7 +106,7 @@ export const svgo = new SVGO({
       removeDimensions: false
     },
     {
-      removeAttrs: { attrs: '(stroke|fill)' }
+      removeAttrs: false
     }
   ]
 })

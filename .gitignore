@@ -5,4 +5,7 @@ package-lock.json
 # auto generated files
 extension/dist
 
+# ds 
+.DS_Store
+
 
