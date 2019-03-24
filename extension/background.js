@@ -4,6 +4,6 @@
  */
 
 chrome.browserAction.onClicked.addListener(function() {
-  chrome.tabs.executeScript(null, { file: './index.js' })
-  chrome.tabs.insertCSS(null, { file: './style.css' })
+  chrome.tabs.executeScript(null, { file: './dist/index.js' })
+  chrome.tabs.insertCSS(null, { file: './dist/style.css' })
 })

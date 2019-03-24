@@ -1,13 +1,13 @@
 import { createDownload } from './create-download'
 
 export const createButtons = svgInfo => {
-  const container = document.createElement('div')
-  container.setAttribute('class', 'svg-gobbler')
-  document.body.appendChild(container)
+  // const container = document.createElement('div')
+  // container.setAttribute('class', 'svg-gobbler')
+  // document.body.appendChild(container)
 
   svgInfo.forEach((svg, id) => {
     const btnContainer = document.createElement('div')
-    container.appendChild(btnContainer)
+    svg.parent.appendChild(btnContainer)
     btnContainer.setAttribute('class', 'svg-gobbler__btn-container')
     btnContainer.style['top'] = `${svg.top + document.body.scrollTop}px`
     btnContainer.style['left'] = `${svg.left + document.body.scrollLeft}px`
