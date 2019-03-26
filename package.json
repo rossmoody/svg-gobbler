@@ -10,6 +10,7 @@
     "css-loader": "^2.1.1",
     "file-saver": "^2.0.1",
     "http-server": "^0.11.1",
+    "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
@@ -19,7 +20,7 @@
     "webpack-cli": "^3.3.0"
   },
   "scripts": {
-    "server": "http-server ./testing-site -o",
+    "server": "live-server --open=/testing-site",
     "build": "webpack --mode=development --watch",
     "build-prod": "webpack --mode=production"
   },

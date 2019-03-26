@@ -4,7 +4,6 @@ export const getInfo = allSVGs => {
   // the array that holds all the svg info
   const svgInfo = []
 
-  // iterate through for filename
   allSVGs.forEach(i => {
     let filename = 'gobble'
     if (i.alt) {
@@ -18,8 +17,7 @@ export const getInfo = allSVGs => {
     // all the info collected and used for svgs
     svgInfo.push({
       filename: filename,
-      element: i,
-      parent: i.parentElement
+      element: i
     })
   })
 

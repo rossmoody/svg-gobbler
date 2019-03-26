@@ -1,5 +1,5 @@
 export const getSources = svgInfo => {
-  svgInfo = svgInfo.map(i => {
+  const parsedSvgInfo = svgInfo.map(i => {
     let serializer = new XMLSerializer()
     let parser = new DOMParser()
     let ajax = new XMLHttpRequest()
@@ -14,10 +14,21 @@ export const getSources = svgInfo => {
         i.source = string
       }
       return i
+    } else if (i.element.tagName === 'DIV') {
+      let style = window.getComputedStyle(i.element, null)
+      style = style.backgroundImage.slice(4, -1).replace(/"/g, '')
+      ajax.open('GET', style, true)
+      ajax.onload = function() {
+        let xml = parser.parseFromString(ajax.responseText, 'image/svg+xml')
+          .children[0]
+        const string = serializer.serializeToString(xml)
+        i.source = string
+      }
+      return i
     } else if (i.element.hasAttribute('data')) {
       ajax.open('GET', i.element.data, true)
       ajax.send()
-      ajax.onload = function(e) {
+      ajax.onload = function() {
         let xml = parser.parseFromString(ajax.responseText, 'image/svg+xml')
           .children[0]
         const string = serializer.serializeToString(xml)
@@ -31,5 +42,5 @@ export const getSources = svgInfo => {
     }
   })
 
-  return svgInfo
+  return parsedSvgInfo
 }

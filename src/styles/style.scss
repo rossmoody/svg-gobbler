@@ -1,13 +1,14 @@
-.svg-gobbler {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  background: rgba(255, 255, 255, 0.6);
-  width: 100%;
-  height: 100%;
-  &__btn-container {
+.gobbler {
+  &__cont {
     position: absolute;
-    background: blue;
+    display: flex;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0;
+    margin: 0;
+    border: 1px solid red;
+
+    &__btn {
+      height: 24px;
+    }
   }
 }
