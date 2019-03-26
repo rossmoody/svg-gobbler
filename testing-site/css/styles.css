@@ -1,12 +1,7 @@
-html {
-  height: 101%;
-}
-
+html,
 body {
-  font-size: 62.5%;
-  line-height: 1;
-  font-family: 'Muli', sans-serif, Arial, Tahoma, sans-serif;
-  background-color: #f3f3f6;
+  margin: 0;
+  padding: 0;
 }
 
 .row {

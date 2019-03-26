@@ -17,7 +17,8 @@ export const getInfo = allSVGs => {
     // all the info collected and used for svgs
     svgInfo.push({
       filename: filename,
-      element: i
+      element: i,
+      srctype: i.srctype
     })
   })
 
