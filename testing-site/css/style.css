@@ -1,4 +1,3 @@
-html,
 body {
   margin: 0;
   padding: 0;
@@ -7,11 +6,12 @@ body {
 .row {
   display: flex;
   justify-content: space-between;
-  padding: 32px;
+  padding: 24px;
 }
 
 .account-book {
   background-image: url('../images/account-book.svg');
+  margin: 0;
   height: 40px;
   width: 40px;
   background-repeat: no-repeat;
@@ -39,12 +39,37 @@ body {
   width: 80px;
 }
 
+.row__img-src {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .row__item {
   height: 40px;
   width: 40px;
 }
 
+.bg-img {
+  background-image: url('../images/bgImg.jpg');
+  height: 120px;
+  width: 120px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.row__bg-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h4 {
+  padding: 24px;
+}
+
 .object {
   height: 120px;
+  padding: 24px;
   width: 120px;
 }

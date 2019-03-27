@@ -1,12 +1,15 @@
+// Used to make the filename pretty
 export function prettyName(uglyName) {
   return uglyName.replace(/[^a-z0-9]/gi, '-').toLowerCase()
 }
 
+// Sets the srctype property when mapping the global array
 export function addSrcType(i, srcType) {
   i.srctype = srcType
   return i
 }
 
+// Checks if SVG is inline or a sprite that xlinks via 'use' tag
 export function isRegSVG(el) {
   const inner = el.innerHTML
   if (!inner.includes('<use')) {
@@ -15,9 +18,15 @@ export function isRegSVG(el) {
   }
 }
 
-export function hasBgImg(el) {
-  const style = window.getComputedStyle(el, null)
-  if (style.backgroundImage !== 'none') {
+// checks if the element bas a backgroung image that
+// is of type 'svg'. This currently checks all divs on the page
+// This seems like it could be optimized
+export function hasSvgBgImg(el) {
+  let style = window.getComputedStyle(el, null)
+  let url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
+  let fileType = url.substr(url.lastIndexOf('.') + 1)
+  if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
+    el.bgImgUrl = url
     addSrcType(el, 'bgImg')
     return el
   }

@@ -1,29 +1,28 @@
 import { ajaxCall } from './util'
 
+///////////////////////
+// Requests, parses and serializes SVG information
+// using different methods based on how it's positioned
+// in the DOM (bgImg, imgSrc, inline SVG, sprite, object)
 export const getSources = svgInfo => {
   const parsedSvgInfo = svgInfo.map(i => {
     let serializer = new XMLSerializer()
     if (i.srctype === 'imgTag') {
       ajaxCall(i, i.element.src)
       return i
-    } else if (i.element.tagName === 'DIV') {
-      let style = window.getComputedStyle(i.element, null)
-      style = style.backgroundImage.slice(4, -1).replace(/"/g, '')
-      ajaxCall(i, style)
+    } else if (i.srctype === 'bgImg') {
+      ajaxCall(i, i.bgImgUrl)
       return i
-    } else if (i.element.tagName === 'use') {
+    } else if (i.srctype === 'useTag') {
       let href = i.element.href.baseVal
       ajaxCall(i, href)
       return i
-    } else if (i.element.hasAttribute('data')) {
+    } else if (i.srctype === 'objTag') {
       ajaxCall(i, i.element.data)
       return i
-    } else {
-      const inner = i.element.innerHTML
-      if (!inner.includes('xlink')) {
-        const string = serializer.serializeToString(i.element)
-        i.source = string
-      }
+    } else if (i.srctype === 'svgTag') {
+      const string = serializer.serializeToString(i.element)
+      i.source = string
       return i
     }
   })

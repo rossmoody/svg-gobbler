@@ -7,6 +7,13 @@ module.exports = {
     filename: './index.js',
     path: path.resolve(__dirname, 'extension/dist')
   },
+  mode: 'development',
+  devtool: 'cheap-module-source-map',
+  devServer: {
+    contentBase: './testing-site',
+    hot: true,
+    open: true
+  },
   node: {
     fs: 'empty' // webpack doesn't like fs or require modules and errors without this
   },
