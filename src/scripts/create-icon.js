@@ -44,8 +44,9 @@ const iconHtml = `<a href="">
         </svg>
     </a>`
 
-export function insertIcon () {
+export function insertIcon (cont) {
   const baseIcon = document.createElement('div')
   baseIcon.setAttribute('class', 'add')
   baseIcon.innerHTML = iconHtml
+  cont.appendChild(baseIcon)
 }

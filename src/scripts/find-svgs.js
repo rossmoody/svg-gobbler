@@ -1,14 +1,19 @@
 import { hasSvgBgImg, isRegSVG, addSrcType } from './util'
 
-// find all the svgs
+//////////
+// Element finder mechanism
+const arrConstructor = (prop) => {
+  return Array.from(document.querySelectorAll(prop))
+}
+
 export const findSVGs = () => {
   //////////////
   // Collect SVGs
-  const svgTags = Array.from(document.querySelectorAll('svg'))
-  const objDatas = Array.from(document.querySelectorAll('object[data*=".svg"]'))
-  const imgSrcs = Array.from(document.querySelectorAll('img[src*=".svg"]'))
-  const svgSprites = Array.from(document.querySelectorAll('use'))
-  const pageDivs = Array.from(document.querySelectorAll('div'))
+  const svgTags = arrConstructor('svg')
+  const objDatas = arrConstructor('object[data*=".svg"]')
+  const imgSrcs = arrConstructor('img[src*=".svg"]')
+  const svgSprites = arrConstructor('use')
+  const pageDivs = arrConstructor('div')
 
   /////////////
   // Process SVGs and add 'srctype' property
@@ -20,7 +25,7 @@ export const findSVGs = () => {
 
   ////////////
   // Combine SVG Arrays
-  const allSVGs = regSvg.concat(imgSrc, objSvg, bgImg, svgSprite)
+  const allSVGs = [...regSvg, ...imgSrc, ...objSvg, ...bgImg, ...svgSprite]
   // console.log(allSVGs)
   return allSVGs
 }
