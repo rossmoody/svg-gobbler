@@ -1,29 +1,35 @@
-<!-- <p align="center">
-  <a target="_blank" rel="noopener noreferrer" href="/primer/components/blob/master/static/assets/readme-components.png"><img width="300px" src="https://github.com/primer/components/raw/master/static/assets/readme-components.png" style="max-width:100%;"></a>
-</p> -->
-
 <h1 align="center">SVG Gobbler</h1>
 
-> SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it. The extension is available (soon) on the extension store.
+> SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it. It also give you the option of optimizing the SVG file with SVGO before exporting. The extension is available (soon) on the extension store.
 
 ## Developer mode
 
-If you would like to modify this extension, you will need to install it manually. Before making edits you will need to side load SVG Gobbler as a developer extension to test any changes.
-
-## Side load extension
-
-1. Download or clone this repo to your local machine
-2. In Chrome or Brave browser address bar, navigate to `chrome://extensions`
-3. In the top right of the screen, flip the toggle to enable `Developer Mode`
-4. Click the button to `Load unpacked` and select the `extension` folder inside the cloned SVG Gobbler repo
+Currently, if you would like to use or modify this extension you will need to install it manually. Before making edits you will need to build it locally and side load SVG Gobbler as a developer extension to test any changes.
 
 ## Installation
 
-1. `cd` into the SVG Gobbler repo
+1. Clone the repo and `cd` into the root folder
 2. Run `npm install` to install necessary dependencies
 3. Run `npm run build` to bundle and build the latest `style.css` file and `index.js` file into the `extension` folder. This also tells webpack to watch for edits
-4. Make your edits in the `src` folder
-5. Navigate to pages with svg content and click the extensions icon to test
+
+Once this is complete you have all you need to side load the extension and start hacking. Editing content in the `src` directory will automatically build and update the extension folder which will feed the extension in the browser the latest code.
+
+## Side load extension
+
+1. Open Chrome or Brave Browser
+2. In the address bar, navigate to `chrome://extensions`
+3. In the top right of the screen, flip the toggle to enable `Developer Mode`
+4. Click the button to `Load unpacked` and select the `extension` folder inside the cloned SVG Gobbler repo
+
+## Start testing server
+
+You can start up a testing server webpage that includes different SVG import syntaxes for testing by running:
+
+```
+npm start
+```
+
+This will start the webpack dev server from the `test-server` directory. You can visit http://localhost:8080 to see the page.
 
 ## Contribute back
 

@@ -2,7 +2,7 @@ import { findSVGs } from './find-svgs'
 import { getInfo } from './get-info'
 import { getSources } from './get-sources'
 import { createButtons } from './create-buttons'
-import { removeDaGobbler } from './close-gobbler'
+import { removeDaGobbler } from './util'
 
 // Does all the things
 export const gobbler = () => {
