@@ -1,7 +1,7 @@
 import FileSaver from 'file-saver'
 import SVGO from 'svgo'
 
-const svgo = new SVGO({
+const svgo = new SVGO( {
   multipass: true,
   plugins: [
     {
@@ -110,14 +110,14 @@ const svgo = new SVGO({
       removeAttrs: false
     }
   ]
-})
+} )
 
 
 //////////////////
 // Export the SVG for download
 export const createDownload = svg => {
-  svgo.optimize(svg.source).then(function (result) {
-    let blob = new Blob([result.data], { type: 'text/xml' })
-    FileSaver.saveAs(blob, `${svg.filename}.svg`)
-  })
+  svgo.optimize( svg.source ).then( function ( result ) {
+    let blob = new Blob( [ result.data ], { type: 'text/xml' } )
+    FileSaver.saveAs( blob, `${ svg.filename }.svg` )
+  } )
 }

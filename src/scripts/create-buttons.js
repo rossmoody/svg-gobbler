@@ -2,7 +2,7 @@ import { createDownload } from './create-download'
 
 ///////////////
 // Add overlay element to viewport baed on SVG position
-function addOverlay (el, cont) {
+function addOverlay ( el, cont ) {
   var rects = el.getBoundingClientRect()
   var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
   var scrollLeft =
@@ -19,28 +19,28 @@ function addOverlay (el, cont) {
 // Create a btn for each svg element
 export const createButtons = svgInfo => {
   // Create page container
-  const container = document.createElement('div')
-  container.setAttribute('class', 'gobbler')
-  container.setAttribute('id', 'gobblegobble')
+  const container = document.createElement( 'div' )
+  container.setAttribute( 'class', 'gobbler' )
+  container.setAttribute( 'id', 'gobblegobble' )
 
   // Append container after body
-  document.body.insertAdjacentElement('beforeend', container)
+  document.body.insertAdjacentElement( 'beforeend', container )
 
-  svgInfo.forEach((svg, id) => {
+  svgInfo.forEach( ( svg, id ) => {
     // create overlay and container
-    const svgContainer = document.createElement('button')
-    svgContainer.setAttribute('class', 'gobbler__overlay')
-    svgContainer.setAttribute('data-source-id', id)
+    const svgContainer = document.createElement( 'button' )
+    svgContainer.setAttribute( 'class', 'gobbler__overlay' )
+    svgContainer.setAttribute( 'data-source-id', id )
 
     // attach to body container
-    container.appendChild(svgContainer)
+    container.appendChild( svgContainer )
 
     // process svg coordinates in viewport
-    addOverlay(svg.element, svgContainer)
+    addOverlay( svg.element, svgContainer )
 
     // Set onclick for btn
     svgContainer.onclick = () => {
-      createDownload(svg)
+      createDownload( svg )
     }
-  })
+  } )
 }
