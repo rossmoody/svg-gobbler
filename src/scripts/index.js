@@ -1,4 +1,4 @@
-import { gobbler } from './gobbler.js'
+import { init } from './gobbler.js'
 import '../styles/style.scss'
 
-gobbler()
+init()

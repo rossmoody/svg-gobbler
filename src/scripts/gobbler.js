@@ -2,10 +2,24 @@ import { findSVGs } from './find-svgs'
 import { getInfo } from './get-info'
 import { getSources } from './get-sources'
 import { createButtons } from './create-buttons'
-import { removeDaGobbler } from './util'
 
+///////////////
+// Removes the gobbler container on scroll
+function removeDaGobbler () {
+  const gobbler = document.getElementById('gobblegobble')
+
+  // Remove the container
+  function removeAllTheGobbles () {
+    gobbler.remove()
+  }
+
+  // Event listener
+  window.addEventListener('scroll', removeAllTheGobbles, { once: true })
+}
+
+//////
 // Does all the things
-export const gobbler = () => {
+export const init = () => {
   const hasGobbles = document.getElementById('gobblegobble')
 
   // stop lots of containers getting made

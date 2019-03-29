@@ -1,4 +1,17 @@
-import { ajaxCall } from './util'
+export function ajaxCall (el, elSvg) {
+  let ajax = new XMLHttpRequest()
+  let serializer = new XMLSerializer()
+  let parser = new DOMParser()
+
+  ajax.open('GET', elSvg, true)
+  ajax.send()
+  ajax.onload = function () {
+    let xml = parser.parseFromString(ajax.responseText, 'image/svg+xml')
+      .children[0]
+    const string = serializer.serializeToString(xml)
+    el.source = string
+  }
+}
 
 ///////////////////////
 // Requests, parses and serializes SVG information
