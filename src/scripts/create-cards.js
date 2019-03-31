@@ -2,7 +2,7 @@ import { createDownload } from './create-download'
 
 //////////////////
 // Create a btn for each svg element
-export const createCards = svgInfo => {
+export function createCards ( svgInfo ) {
   // Create page container
   const domContainer = document.createElement( 'div' )
   domContainer.setAttribute( 'class', 'gobbler' )

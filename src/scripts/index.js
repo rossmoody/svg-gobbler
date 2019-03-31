@@ -19,11 +19,9 @@ function init () {
     // Log source information
     const svgInfo = getSources( allSVGs )
 
-    createCards( svgInfo )
-
-    // setTimeout( () => {
-    //   createCards( svgInfo )
-    // }, 2500 )
+    setTimeout( () => {
+      createCards( svgInfo )
+    }, 1000 )
   }
 }
 
