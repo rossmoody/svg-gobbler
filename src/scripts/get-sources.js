@@ -18,28 +18,26 @@ const ajaxCall = ( el, elSvg ) => {
 // using different methods based on how it's positioned
 // in the DOM (bgImg, imgSrc, inline SVG, sprite, object)
 export const getSources = svgInfo => {
-  return new Promise( ( resolve, reject ) => {
-    const svgFilePromises = svgInfo.map( i => {
-      let serializer = new XMLSerializer()
-      if ( i.srctype === 'imgTag' ) {
-        ajaxCall( i, i.src )
-        return i
-      } else if ( i.srctype === 'bgImg' ) {
-        ajaxCall( i, i.bgImgUrl )
-        return i
-      } else if ( i.srctype === 'useTag' ) {
-        let href = i.firstElementChild.href.baseVal
-        ajaxCall( i, href )
-        return i
-      } else if ( i.srctype === 'objTag' ) {
-        ajaxCall( i, i.data )
-        return i
-      } else if ( i.srctype === 'svgTag' ) {
-        const string = serializer.serializeToString( i )
-        i.source = string
-        return i
-      }
-    } )
-    resolve( svgFilePromises )
+  const svgFilePromises = svgInfo.map( i => {
+    let serializer = new XMLSerializer()
+    if ( i.srctype === 'imgTag' ) {
+      ajaxCall( i, i.src )
+      return i
+    } else if ( i.srctype === 'bgImg' ) {
+      ajaxCall( i, i.bgImgUrl )
+      return i
+    } else if ( i.srctype === 'useTag' ) {
+      let href = i.firstElementChild.href.baseVal
+      ajaxCall( i, href )
+      return i
+    } else if ( i.srctype === 'objTag' ) {
+      ajaxCall( i, i.data )
+      return i
+    } else if ( i.srctype === 'svgTag' ) {
+      const string = serializer.serializeToString( i )
+      i.source = string
+      return i
+    }
   } )
+  return svgFilePromises
 }

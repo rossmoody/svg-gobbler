@@ -19,7 +19,7 @@ import { createCards } from './create-cards'
 
 //////
 // Does all the things
-function init () {
+async function init () {
   const hasGobbles = document.querySelector( '.gobbler' )
 
   // stop lots of containers getting made
@@ -27,10 +27,14 @@ function init () {
     console.log( 'gobble gobble' )
   } else {
     // Find and process all the svgs
-    const allSVGs = findSVGs()
+    const allSVGs = await findSVGs()
 
     // Log source information
-    getSources( allSVGs ).then( sources => createCards( sources ) )
+    const svgInfo = await getSources( allSVGs )
+
+    console.log( svgInfo )
+
+    // createCards( svgInfo )
 
     // Scroll listener
     // removeDaGobbler()
