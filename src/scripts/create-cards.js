@@ -1,13 +1,5 @@
 import { createDownload } from './create-download'
 
-///////////////
-// Add overlay element to viewport baed on SVG position
-function addOverlay ( el, cont ) {
-  var rects = el.getBoundingClientRect()
-  cont.style.width = rects.width + 'px'
-  cont.style.height = rects.height + 'px'
-}
-
 //////////////////
 // Create a btn for each svg element
 export const createCards = svgInfo => {
@@ -28,17 +20,12 @@ export const createCards = svgInfo => {
     // attach to body container
     domContainer.appendChild( svgCard )
 
-    // process svg coordinates in viewport
-    // addOverlay( svg.element, svgCard )
+    svgCard.innerHTML = svg.source
 
-    let clone = svg.cloneNode( true )
-    clone.setAttribute( 'class', 'gobbler__clone' )
-    svgCard.appendChild( clone )
-
-    // Set onclick for btn
-    svgCard.onclick = () => {
-      createDownload( svg )
-    }
+    // // Set onclick for btn
+    // svgCard.onclick = () => {
+    //   createDownload( svg )
+    // }
   } )
 
   // Append container at end of dom container

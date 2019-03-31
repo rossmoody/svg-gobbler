@@ -112,30 +112,10 @@ const svgo = new SVGO( {
   ]
 } )
 
-////////////
-// Used to make the filename pretty
-function prettyName ( uglyName ) {
-  return uglyName.replace( /[^a-z0-9]/gi, '-' ).toLowerCase()
-}
-
-//////////////////////
-// Make a filename systematically
-const getFilename = i => {
-  let filename = 'gobble'
-  if ( i.alt ) {
-    filename = prettyName( i.alt )
-  } else if ( i.id ) {
-    filename = prettyName( i.id )
-  } else if ( window.document.title ) {
-    filename = prettyName( window.document.title )
-  }
-  i.filename = filename
-}
-
 //////////////////
 // Export the SVG for download
 export const createDownload = svg => {
-  getFilename( svg )
+  i.filename = 'svg-gobbler'
   svgo.optimize( svg.source ).then( function ( result ) {
     let blob = new Blob( [ result.data ], { type: 'text/xml' } )
     FileSaver.saveAs( blob, `${ svg.filename }.svg` )

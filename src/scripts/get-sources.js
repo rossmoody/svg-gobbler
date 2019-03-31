@@ -17,27 +17,30 @@ const ajaxCall = ( el, elSvg ) => {
 // Requests, parses and serializes SVG information
 // using different methods based on how it's positioned
 // in the DOM (bgImg, imgSrc, inline SVG, sprite, object)
-export const getSources = svgInfo => {
-  const svgFilePromises = svgInfo.map( i => {
+export function getSources ( svgInfo ) {
+  const svgObjects = []
+
+  svgInfo.forEach( i => {
     let serializer = new XMLSerializer()
     if ( i.srctype === 'imgTag' ) {
       ajaxCall( i, i.src )
-      return i
+      svgObjects.push( i )
     } else if ( i.srctype === 'bgImg' ) {
       ajaxCall( i, i.bgImgUrl )
-      return i
+      svgObjects.push( i )
     } else if ( i.srctype === 'useTag' ) {
       let href = i.firstElementChild.href.baseVal
       ajaxCall( i, href )
-      return i
+      svgObjects.push( i )
     } else if ( i.srctype === 'objTag' ) {
       ajaxCall( i, i.data )
-      return i
+      svgObjects.push( i )
     } else if ( i.srctype === 'svgTag' ) {
       const string = serializer.serializeToString( i )
       i.source = string
-      return i
+      svgObjects.push( i )
     }
   } )
-  return svgFilePromises
+  console.log( svgObjects )
+  return svgObjects
 }
