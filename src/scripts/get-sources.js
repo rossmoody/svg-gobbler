@@ -13,7 +13,7 @@ const ajaxCall = ( el, elSvg ) => {
       el.source = string
       resolve()
     }
-  }
+  })
 }
 
 ///////////////////////
