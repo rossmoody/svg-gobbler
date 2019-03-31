@@ -1,7 +1,29 @@
 .gobbler {
+  z-index: 10000000;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+
   &__overlay {
-    position: absolute;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__card {
     border: 1px solid red;
-    border-radius: 8px;
+    border-radius: 4px;
+    z-index: 3000000;
+    background: #f4f4f4;
+    margin: 18px;
+    padding: 24px;
+
+    & svg {
+      width: 48px;
+      box-sizing: border-box;
+    }
   }
 }
