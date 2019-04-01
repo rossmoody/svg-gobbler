@@ -5,8 +5,9 @@ import { createCards } from './create-cards'
 
 //////
 // Does all the things
-function init () {
+async function init () {
   const hasGobbles = document.querySelector( '.gobbler' )
+  const overlay = document.querySelector( '.gobbler__overlay' )
 
   // stop lots of containers getting made
   if ( hasGobbles ) {
@@ -17,11 +18,15 @@ function init () {
     const allSVGs = findSVGs()
 
     // Log source information
-    const svgInfo = getSources( allSVGs )
+    const svgInfo = await getSources( allSVGs )
 
-    setTimeout( () => {
-      createCards( svgInfo )
-    }, 1000 )
+    // Create the interactive card elements
+    createCards( svgInfo )
+
+    // Click on overlay to close
+    overlay.addEventListener( 'click', function () {
+      hasGobbles.remove()
+    } )
   }
 }
 

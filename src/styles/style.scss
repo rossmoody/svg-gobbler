@@ -1,8 +1,13 @@
 .gobbler {
   z-index: 10000000;
   position: absolute;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
 
   &__overlay {
     position: fixed;
@@ -10,22 +15,41 @@
     right: 0;
     top: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(53, 73, 255, 0.8);
   }
 
   &__card {
-    border: 1px solid red;
-    border-radius: 4px;
-    z-index: 3000000;
-    background: #f4f4f4;
-    margin: 18px;
-    padding: 24px;
-    height: 200px;
-    width: 200px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 8px;
+    z-index: 30000000;
+    padding: 12px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, .15);
 
-    & svg {
-      width: 48px;
-      box-sizing: border-box;
+    &__clone {
+      padding: 24px;
+
+      &__wrapper {
+        position: relative;
+        height: 0;
+        width: 100%;
+        padding: 0 0 100% 0;
+
+        &__svg {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          left: 0;
+          top: 0;
+          overflow: visible;
+        }
+      }
+    }
+
+    &__btn-container {
+      height: 40px;
+      width: 100%;
     }
   }
 }

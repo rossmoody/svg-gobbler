@@ -39,6 +39,9 @@ Feel free to submit a pull request if you've made an improvement of some kind. T
 
 The extension requires permission to read and modify all the data of the website that you want to download the svg files from. It is nessesary to parse and extract the svg assets on the site.
 
-## About
+### About
 
 This started as a pet project to improve the [SVG Crowbar](http://nytimes.github.com/svg-crowbar/) tool that is no longer being maintained by NY Times. It has come a long way since then but I always appreciated the simplistic approach they started and it's nice to pay homage.
+
+### Very Helpful Articles
+- [Scaling SVG Article](https://css-tricks.com/scale-svg/p)

@@ -1,11 +1,3 @@
-/* 
-1. Find all possible elements that could contain SVGs
-2. Parse the raw svg code as a string and save it to a new array with only id and source props
-3. Create cards with innerHTML set to source. Download file is also source
-*/
-
-
-
 /////////////
 // Checks if SVG is inline or a sprite that xlinks via 'use' tag
 function isRegSVG ( el ) {
@@ -41,6 +33,8 @@ function addSrcType ( i, srcType ) {
   return i
 }
 
+
+
 //////////
 // Array creator
 function arrConstructor ( prop ) {
@@ -64,6 +58,6 @@ export function findSVGs () {
 
   ////////////
   // Combine SVG Arrays
-  const allSVGs = [ ...regSvg, ...imgSrc, ...objSvg, ...bgImg ]
+  let allSVGs = [ ...regSvg, ...imgSrc, ...objSvg, ...bgImg ]
   return allSVGs
 }
