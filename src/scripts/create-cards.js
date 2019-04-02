@@ -13,7 +13,7 @@ function cleanupXML ( el, elxml ) {
   elxml.removeAttribute( 'width' )
   elxml.removeAttribute( 'style' )
   elxml.hasAttribute( 'viewBox' ) ? '' : elxml.setAttribute( 'viewBox', `0 0 ${ viewBoxHeight } ${ viewBoxWidth }` )
-  elxml.getAttribute( 'viewBox' ) === '0 0 0 0' ? elxml.setAttribute( 'viewBox', `0 0 48 48` ) : ''
+  elxml.getAttribute( 'viewBox' ) === '0 0 0 0' ? elxml.setAttribute( 'viewBox', `0 0 24 24` ) : ''
   elxml.setAttribute( 'preserveAspectRatio', 'xMidYMid meet' )
   return elxml
 }

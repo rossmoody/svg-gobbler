@@ -25,6 +25,7 @@ async function init () {
 
     // Click on overlay to close
     overlay.addEventListener( 'click', function () {
+      const hasGobbles = document.querySelector( '.gobbler' )
       hasGobbles.remove()
     } )
   }
