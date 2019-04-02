@@ -41,23 +41,20 @@ class SVG {
     this.type = type
   }
   getXML () {
-    let ajax = new XMLHttpRequest()
     let serializer = new XMLSerializer()
     let parser = new DOMParser()
 
     if ( this.url ) {
-      return new Promise( resolve => {
-        ajax.open( 'GET', this.url, true )
-        ajax.send()
-        ajax.onload = () => {
-          let xml = parser.parseFromString( ajax.responseText, 'image/svg+xml' )
-            .children[ 0 ]
-          let string = serializer.serializeToString( xml )
-          this.svgXml = xml
+      return fetch( this.url )
+        .then( response => {
+          return response.text()
+        } )
+        .then( response => {
+          const xml = parser.parseFromString( response, 'image/svg+xml' ).children[ 0 ]
+          const string = serializer.serializeToString( xml )
           this.svgString = string
-          resolve()
-        }
-      } )
+          this.svgXml = xml
+        } )
     } else {
       const string = serializer.serializeToString( this.ele )
       this.svgString = string
@@ -100,6 +97,8 @@ export async function findSVGs () {
     return newEl
   } )
   allSVGs = await Promise.all( allSVGs )
+  console.log( allSVGs )
   const finalSVGs = removeDups( allSVGs, 'svgString' )
+  console.log( finalSVGs )
   return finalSVGs
 }
