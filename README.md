@@ -1,6 +1,17 @@
-<h1 align="center">SVG Gobbler</h1>
+<div style="text-align:center"><img src="./extension/img/icon128.png">
+<h1>SVG Gobbler</h1>
 
-> SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it. It also give you the option of optimizing the SVG file with SVGO before exporting. The extension is available (soon) on the extension store.
+#### Download on the Chrome extension store for use in [Brave](www.brave.com/download) or [Chrome](https://ernestsembutnieks.com/brave-browser-vs-google-chrome/).
+
+SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download or copy it. It also give you the option of optimizing the SVG file with SVGO before exporting. The extension is available (soon) on the extension store.
+
+</div>
+
+## How to use
+
+<div style="padding: 12px 0;"><img src="./src/assets/using-gobbler.gif"></div>
+
+Click the SVG Gobbler extension icon to search the current page for SVGs.
 
 ## Developer mode
 
@@ -33,7 +44,7 @@ This will start the webpack dev server from the `test-server` directory. You can
 
 ## Contribute back
 
-Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and can use all the help it can get.
+Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and I'm not very good at javascript.
 
 ## Permissions
 
@@ -43,5 +54,16 @@ The extension requires permission to read and modify all the data of the website
 
 This started as a pet project to improve the [SVG Crowbar](http://nytimes.github.com/svg-crowbar/) tool that is no longer being maintained by NY Times. It has come a long way since then but I always appreciated the simplistic approach they started and it's nice to pay homage.
 
+## Third party dependencies
+
+#### [FileSaver.js](https://github.com/eligrey/FileSaver.js)
+
+Used to export the SVG strings to file or clipboard.
+
+#### [SVGO](https://github.com/svg/svgo)
+
+Node tool used to optimize the SVG content before exporting.
+
 ### Very Helpful Articles
+
 - [Scaling SVG Article](https://css-tricks.com/scale-svg/p)
