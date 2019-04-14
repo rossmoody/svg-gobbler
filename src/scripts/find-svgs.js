@@ -161,7 +161,7 @@ class SVG {
     let parser = new DOMParser()
 
     if (this.url) {
-      return fetch(this.url)
+      return fetch(this.url, { mode: 'no-cors' })
         .then(response => {
           return response.text()
         })

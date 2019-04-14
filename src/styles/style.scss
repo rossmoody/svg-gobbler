@@ -1,23 +1,18 @@
-/* Colors */
 $brandAccent: #fa555c;
 $lightGray: #eef0f5;
 $darkGray: #2d3341;
 $successGreen: #10d173;
 $white: #ffffff;
 
-/* Variables */
 $check-icon: url("data:image/svg+xml;charset=UTF-8, <svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='10' width='10'><path d='M1 6.714L4.429 9 9 1' stroke='white' stroke-width='2' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'/></svg>");
 
 $close-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M19.528 18.46l-8.471-8.464 8.471-8.464A.753.753 0 0 0 18.464.467L10 8.94 1.536.467A.753.753 0 1 0 .472 1.532l8.471 8.464-8.471 8.465a.75.75 0 0 0 0 1.064.75.75 0 0 0 1.064 0L10 11.053l8.464 8.472a.75.75 0 0 0 1.064 0 .75.75 0 0 0 0-1.064z' fill='#5E6175' fill-rule='evenodd'/></svg>");
 
-
-/* Mixins */
 @mixin flex-center() {
   align-items: center;
   justify-content: center;
 }
 
-/* Animation */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -34,7 +29,6 @@ $close-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 20 20' xml
   }
 }
 
-/* CSS */
 .gobbler {
   z-index: 10000000;
   position: absolute;
