@@ -1,11 +1,11 @@
-<div style="text-align:center"><img src="./extension/img/icon128.png">
-<h1>SVG Gobbler</h1>
+<p align="center">
+<img src="./extension/img/icon128.png">
+</p>
+<h1 align="center">SVG Gobbler</h1>
 
-#### Download on the Chrome extension store for use in [Brave](www.brave.com/download) or [Chrome](https://ernestsembutnieks.com/brave-browser-vs-google-chrome/).
+<h4 align="center"> Download on the Chrome extension store for use in <a href="www.brave.com/download">Brave</a> or <a href="https://ernestsembutnieks.com/brave-browser-vs-google-chrome/">Chrome.</a></h4>
 
-SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download or copy it. It also give you the option of optimizing the SVG file with SVGO before exporting. The extension is available (soon) on the extension store.
-
-</div>
+<p align="center">SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download or copy it. It also give you the option of optimizing the SVG file with SVGO before exporting. The extension is available (soon) on the extension store.</p>
 
 ## How to use
 
