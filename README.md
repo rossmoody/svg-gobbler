@@ -3,11 +3,13 @@
 </p>
 <h1 align="center">SVG Gobbler</h1>
 
-<h4 align="center"> Download on the Chrome extension store for use in <a href="www.brave.com/download">Brave</a> or <a href="https://ernestsembutnieks.com/brave-browser-vs-google-chrome/">Chrome.</a></h4>
+<h4 align="center"><a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0">Download this extension</a> on the Chrome Web store for use in <a href="www.brave.com/download">Brave</a> or <a href="https://ernestsembutnieks.com/brave-browser-vs-google-chrome/">Chrome.</a></h4>
 
-<p align="center">SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download or copy it. It also give you the option of optimizing the SVG file with SVGO before exporting. The extension is available (soon) on the extension store.</p>
+<p align="center">SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download or copy it. It also give you the option of optimizing the SVG file with SVGO before exporting.</p>
 
-## How to use
+<h2 align="center"><a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0"> Download SVG Gobbler</a></p>
+
+## 🎉 How to use
 
 <p><img src="./src/assets/using-gobbler.gif"></p>
 
