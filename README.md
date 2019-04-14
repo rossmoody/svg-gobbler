@@ -9,7 +9,9 @@
 
 ## How to use
 
-<div style="padding: 12px 0;"><img src="./src/assets/using-gobbler.gif"></div>
+<p><img src="./src/assets/using-gobbler.gif"></p>
+
+<br />
 
 Click the SVG Gobbler extension icon to search the current page for SVGs.
 
