@@ -3,17 +3,16 @@ import { findSVGs } from './find-svgs'
 import { createCards } from './create-cards'
 
 // Does all the things
-async function init () {
-  const hasGobbles = document.querySelector( '.gobbler' )
-  if ( hasGobbles ) {
-    console.log( 'gobble gobble' )
+async function init() {
+  const hasGobbles = document.querySelector('.gobbler')
+  if (hasGobbles) {
+    console.log('gobble gobble')
   } else {
-
     // Find and process all the svgs
     const allSVGs = await findSVGs()
 
     // Create the cards
-    createCards( allSVGs )
+    allSVGs.length === 0 ? console.log('Shit is empty') : createCards(allSVGs)
   }
 }
 
