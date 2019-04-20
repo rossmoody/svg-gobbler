@@ -1,6 +1,5 @@
 # modules
 node_modules
-package-lock.json
 
 # auto generated files
 extension/dist
