@@ -1,0 +1,398 @@
+/* Colors */
+$white: #ffffff;
+$gray1: #F0F3F9;
+$gray2: #e5e8ee;
+$gray3: #9A9DA8;
+$gray4: #4A5162;
+$primary: #fa555c;
+$success: #10d173;
+
+/* Icons */
+$tag-good-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M2 13l7 7L21 4' stroke='#10d173' stroke-width='3' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+
+$tag-bad-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path stroke='#fa555c' stroke-width='3' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round' d='M2.5 2.5L21 21M2.5 21.5L21 3'/></svg>");
+
+$tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><circle fill='#FB575E' cx='12' cy='12' r='11'/><path d='M12 6v7.619M12 17.772V18' stroke='#FFF' stroke-width='2' stroke-linecap='round'/></g></svg>");
+
+
+/* Mixins */
+@mixin special-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  left: auto;
+  cursor: help;
+  height: 20px;
+  width: 20px;
+  background: $white;
+
+  &::before {
+    content: $tag-alert-icon;
+  }
+}
+
+@mixin special-tag-hover {
+  bottom: -4px;
+  transform: translateY(100%);
+  width: 140px;
+  line-height: 16px;
+  font-size: 11px;
+  right: 0;
+  background: $gray4;
+  position: absolute;
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+  animation: 0.3s ease-in fadeIn;
+  color: $white;
+}
+
+@mixin font-family {
+  font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”,
+    “Helvetica Neue”, Helvetica, Arial, sans-serif;
+}
+
+/* Animation */
+@keyframes loadCards {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+
+  70% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100;
+  }
+}
+
+@keyframes loadSadness {
+  0% {
+    opacity: 0;
+    bottom: 0;
+  }
+
+  20% {
+    opacity: 1;
+    bottom: 90px;
+  }
+
+  90% {
+    opacity: 1;
+    bottom: 90px;
+  }
+
+  100% {
+    opacity: 0;
+    bottom: 0px;
+  }
+}
+
+
+/* Styles */
+.gob {
+  position: absolute;
+  width: 100%;
+  z-index: 1000000000;
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-gap: 24px;
+    margin: 0 72px;
+    z-index: 2;
+  }
+
+  &__overlay {
+    animation: .2s fadeIn;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: $gray1;
+    opacity: .96;
+    z-index: 0;
+  }
+
+  &__header {
+    visibility: hidden;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px;
+
+    &--show {
+      visibility: visible;
+      animation: loadCards .5s ease-in-out 1;
+    }
+  }
+
+  &__logoCont {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  &__logo {
+    height: 32px;
+    width: 32px;
+  }
+
+  &__countCont {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    color: $gray4;
+    font-weight: 600;
+    padding: 0 18px;
+    font-size: 24px;
+    @include font-family();
+  }
+
+  &__count {
+    &--svg {
+      background: $primary;
+      color: $white;
+      @include font-family();
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 40px;
+      margin: 0 8px;
+      padding: 5px;
+      font-weight: 500;
+    }
+
+    &--title {
+      color: $gray4;
+      @include font-family();
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  &__close {
+    height: 32px;
+    width: 32px;
+    border-radius: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    margin: 0 0 0 48px;
+
+    &:hover {
+      background: $primary;
+    }
+
+    &:hover path {
+      stroke: $white;
+    }
+
+    & svg {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  &__card {
+    display: none;
+    flex-direction: column;
+    z-index: 1;
+    background: $white;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    position: relative;
+    @include font-family();
+
+    &--show {
+      display: flex;
+      animation: loadCards .5s ease-in-out 1;
+    }
+
+    &:hover .gob__btns {
+      opacity: 1;
+      transform: translateY(0%);
+      transition: all .25s ease-in-out;
+    }
+
+    &__svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      padding: 24px 48px;
+      overflow: hidden;
+
+      &__wrapper {
+        position: relative;
+        height: 0;
+        width: 100%;
+        padding: 0 0 100% 0;
+      }
+
+      &__trick {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        overflow: visible;
+      }
+    }
+
+    &__footer {
+      margin: 0 16px;
+      padding: 8px 0 16px;
+      border-top: 1px solid $gray2;
+      position: relative;
+      overflow: hidden;
+    }
+  }
+
+  &__btns {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    background: $white;
+    padding: 0 0 10px;
+    grid-gap: 8px;
+    position: absolute;
+    top: 8px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(20%);
+    transition: all .25s ease-in-out;
+  }
+
+  &__btn {
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid $gray2;
+    color: $gray4;
+    cursor: pointer;
+    outline: none;
+    font-size: 13px;
+    font-weight: 400;
+
+    &:hover {
+      background: $primary;
+      color: $white;
+      border: 1px solid $primary;
+    }
+
+    &--download::before {
+      content: 'Download';
+    }
+
+    &--copy::before {
+      content: 'Copy'
+    }
+
+    &--success {
+      background: $success !important;
+      border: 1px solid $success !important;
+      color: white;
+      transition: all .2s ease-in-out;
+
+      &--download::before {
+        content: 'Gobble';
+        transition: all .2s ease-in-out;
+      }
+
+      &--copy::before {
+        content: 'Copied!';
+        transition: all .2s ease-in-out;
+      }
+    }
+  }
+
+  &__tag {
+    background: $gray1;
+    display: inline-block;
+    color: $gray4;
+    font-size: 11px;
+    line-height: 11px;
+    padding: 6px 9px;
+    margin: 0 6px 6px 0;
+    border-radius: 20px;
+    font-weight: 500;
+    vertical-align: middle;
+
+    &--good::before,
+    &--bad::before {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      margin: 0 4px;
+      vertical-align: middle;
+    }
+
+    &--good::before {
+      content: $tag-good-icon;
+    }
+
+    &--bad::before {
+      content: $tag-bad-icon;
+    }
+
+    &--sprite {
+      @include special-tag();
+
+      &:hover::after {
+        @include special-tag-hover();
+        content: 'Output from SVG sprites is broken at the moment. The code is closed off in something scary called the "shadow DOM".';
+      }
+    }
+
+    &--symbol {
+      @include special-tag();
+
+      &:hover::after {
+        @include special-tag-hover();
+        content: 'Output from SVG symbols are unreliable and will likely contain several nested XML icons inside.';
+      }
+    }
+  }
+
+  &__noGobbler {
+    z-index: 5000;
+    padding: 16px 24px;
+    background: $white;
+    @include font-family();
+    font-size: 20px;
+    color: $gray4;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 20px;
+    border-radius: 60px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, .15);
+    animation: 3s loadSadness ease-in-out 1;
+  }
+}
