@@ -118,20 +118,38 @@ function hasSvgBgImg(el) {
   let fileType = url.substr(url.lastIndexOf('.') + 1)
   if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
     el.url = url
-    el.type = 'bgImg'
+    el.type = 'bg img'
     return el
   }
 }
 
-function addSrcType(el, srcType) {
-  el.type = srcType
+function isXlink(el) {
+  const firstChild = el.firstElementChild
+
+  if (firstChild.tagName === 'symbol') {
+    el.type = 'symbol'
+    el.spriteId = el.getAttribute('id')
+  } else if (firstChild.tagName === 'use') {
+    el.spriteId = firstChild.getAttributeNS(
+      'http://www.w3.org/1999/xlink',
+      'href'
+    )
+    el.type = 'sprite'
+  } else {
+    el.type = 'inline svg'
+  }
+  return el
+}
+
+function addSrcType(el) {
   if (el.tagName === 'IMG') {
     el.url = el.src
-    return el
+    el.type = 'img src'
   } else if (el.tagName === 'OBJECT') {
     el.url = el.data
-    return el
+    el.type = 'object'
   }
+  return el
 }
 
 function removeDups(arr, comp) {
@@ -149,9 +167,8 @@ function removeDups(arr, comp) {
 }
 
 class SVG {
-  constructor(ele, id, url = null, type = 'svg') {
+  constructor(ele, url = null, type) {
     this.ele = ele
-    this.id = id
     this.url = url
     this.type = type
   }
@@ -161,7 +178,7 @@ class SVG {
     let parser = new DOMParser()
 
     if (this.url) {
-      return fetch(this.url, { mode: 'no-cors' })
+      return fetch(this.url)
         .then(response => {
           return response.text()
         })
@@ -173,19 +190,37 @@ class SVG {
           this.svgXml = xml
         })
     } else {
-      const string = serializer.serializeToString(this.ele)
-      this.svgString = string
-      this.svgXml = this.ele
+      return new Promise((resolve, reject) => {
+        this.svgString = this.ele.eleString
+        this.svgXml = this.ele
+        resolve()
+      })
     }
   }
-  // sets size attributes to svg viewBox attr dynamically for better render in card
-  cleanupXML() {
+  // Set size attributes to svg viewBox attr dynamically for better render in card
+  async cleanupXML() {
     let rects = this.ele.getBoundingClientRect()
     let viewBoxHeight = rects.width
     let viewBoxWidth = rects.height
 
+    if (rects.width === 0 && rects.height === 0) {
+      this.rects = 'hidden'
+    } else if (
+      this.svgXml.hasAttribute('width') &&
+      this.svgXml.hasAttribute('height')
+    ) {
+      this.inlineSize = true
+      const width = this.svgXml.getAttribute('width')
+      const height = this.svgXml.getAttribute('height')
+      width.includes('px')
+        ? (this.rects = `${width.slice(0, -2)}x${height.slice(0, -2)}`)
+        : (this.rects = `${width}x${height}`)
+    } else {
+      this.rects = `${Math.floor(rects.width)}x${Math.floor(rects.height)}`
+    }
+
     this.cleanXml = this.svgXml.cloneNode(true)
-    this.cleanXml.setAttribute('class', 'card__clone__svg')
+    this.cleanXml.setAttribute('class', 'gob__card__svg__trick')
     this.cleanXml.removeAttribute('height')
     this.cleanXml.removeAttribute('width')
     this.cleanXml.removeAttribute('style')
@@ -201,27 +236,12 @@ class SVG {
     this.cleanXml.setAttribute('preserveAspectRatio', 'xMidYMid meet')
   }
 
-  createOrigDownload() {
-    const filename = 'svg-gobbler-original'
-    let blob = new Blob([this.svgString], { type: 'text/xml' })
-    FileSaver.saveAs(blob, `${filename}.svg`)
-  }
-
   createOptiDownload() {
-    const filename = 'svg-gobbler-optimized'
+    const filename = 'gobble-gobble'
     svgo.optimize(this.svgString).then(function(result) {
       let blob = new Blob([result.data], { type: 'text/xml' })
       FileSaver.saveAs(blob, `${filename}.svg`)
     })
-  }
-
-  copyOrigClipboard() {
-    const el = document.createElement('textarea')
-    el.value = this.svgString
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
   }
 
   copyOptiClipboard() {
@@ -243,18 +263,29 @@ export async function findSVGs() {
   let pageDivs = Array.from(document.querySelectorAll('div'))
 
   pageDivs = pageDivs.filter(i => hasSvgBgImg(i))
-  objDatas = objDatas.map(i => addSrcType(i, 'obj'))
-  imgSrcs = imgSrcs.map(i => addSrcType(i, 'img'))
+  objDatas = objDatas.map(i => addSrcType(i))
+  imgSrcs = imgSrcs.map(i => addSrcType(i))
+  svgTags = svgTags.map(i => isXlink(i))
 
   let allSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 
-  allSVGs = allSVGs.map(async (i, index) => {
-    const newEl = new SVG(i, index, i.url, i.type)
+  // Remove dups
+  allSVGs = allSVGs.map(i => {
+    const serializer = new XMLSerializer()
+    const string = serializer.serializeToString(i)
+    i.eleString = string
+    return i
+  })
+  allSVGs = removeDups(allSVGs, 'eleString')
+
+  // Create SVG classes
+  allSVGs = allSVGs.map(async i => {
+    const newEl = new SVG(i, i.url, i.type)
     await newEl.getXML()
-    newEl.cleanupXML()
+    await newEl.cleanupXML()
     return newEl
   })
   allSVGs = await Promise.all(allSVGs)
-  allSVGs = removeDups(allSVGs, 'svgString')
+  // console.log(allSVGs)
   return allSVGs
 }

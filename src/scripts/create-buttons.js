@@ -1,48 +1,34 @@
-import { downloadIcon, copyIcon } from './icons'
-
-export function createButtons(btnContainer, svg) {
-  function toggleClass(el) {
-    el.classList.add('success')
+export function createButtons(btns, svg) {
+  // Toggle success class
+  function toggleSuccess(el, btnClass) {
+    el.classList.add('gob__btn--success')
+    el.classList.add(btnClass)
     setTimeout(() => {
-      el.classList.remove('success')
-    }, 3000)
+      el.classList.remove('gob__btn--success')
+      el.classList.remove(btnClass)
+    }, 1500)
   }
 
+  // Create element helper
   function createElement(el, elClass) {
     const i = document.createElement(el)
-    i.className = elClass
-    i.classList.add('card__btn')
-    i.addEventListener('click', function() {
-      toggleClass(i)
-    })
+    i.classList.add(elClass)
     return i
   }
 
-  const dOrig = createElement('div', 'card__btn--d-orig')
-  dOrig.insertAdjacentHTML('beforeend', downloadIcon)
-  btnContainer.appendChild(dOrig)
-  dOrig.addEventListener('click', function() {
-    svg.createOrigDownload()
-  })
-
-  const cOrig = createElement('div', 'card__btn--c-orig')
-  cOrig.insertAdjacentHTML('beforeend', copyIcon)
-  cOrig.addEventListener('click', function() {
-    svg.copyOrigClipboard()
-  })
-  btnContainer.appendChild(cOrig)
-
-  const dOpti = createElement('div', 'card__btn--d-opti')
-  dOpti.insertAdjacentHTML('beforeend', downloadIcon)
-  btnContainer.appendChild(dOpti)
+  const dOpti = createElement('button', 'gob__btn')
+  dOpti.classList.add('gob__btn--download')
   dOpti.addEventListener('click', function() {
+    toggleSuccess(dOpti, 'gob__btn--success--download')
     svg.createOptiDownload()
   })
+  btns.appendChild(dOpti)
 
-  const cOpti = createElement('div', 'card__btn--c-opti')
-  cOpti.insertAdjacentHTML('beforeend', copyIcon)
+  const cOpti = createElement('button', 'gob__btn')
+  cOpti.classList.add('gob__btn--copy')
   cOpti.addEventListener('click', function() {
+    toggleSuccess(cOpti, 'gob__btn--success--copy')
     svg.copyOptiClipboard()
   })
-  btnContainer.appendChild(cOpti)
+  btns.appendChild(cOpti)
 }

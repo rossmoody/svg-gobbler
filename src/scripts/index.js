@@ -1,18 +1,15 @@
-import '../styles/style.scss'
-import { findSVGs } from './find-svgs'
-import { createCards } from './create-cards'
+import '../styles/core.scss'
 
-// Does all the things
+import { findSVGs } from './find-svgs'
+import { createCards, noGobbles } from './create-cards'
+
 async function init() {
-  const hasGobbles = document.querySelector('.gobbler')
+  const hasGobbles = document.querySelector('.gob')
   if (hasGobbles) {
     console.log('gobble gobble')
   } else {
-    // Find and process all the svgs
     const allSVGs = await findSVGs()
-
-    // Create the cards
-    allSVGs.length === 0 ? console.log('Shit is empty') : createCards(allSVGs)
+    allSVGs.length === 0 ? noGobbles() : createCards(allSVGs)
   }
 }
 
