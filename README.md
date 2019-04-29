@@ -5,17 +5,33 @@
 
 <h4 align="center"><a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0">Download this extension</a> on the Chrome Web store for use in <a href="www.brave.com/download">Brave</a> or <a href="https://ernestsembutnieks.com/brave-browser-vs-google-chrome/">Chrome.</a></h4>
 
-<p align="center">SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download or copy it. It also give you the option of optimizing the SVG file with SVGO before exporting.</p>
+<p align="center">SVG Gobbler is a simple browser extension that finds SVG content in your current window, highlights unique attributes including size and lets you download or copy to clipboard. The SVG code is automatically optimized using SVGO during export.</p>
 
 <h2 align="center"><a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0"> Download SVG Gobbler</a></p>
 
 ## 🎉 How to use
 
-<p><img src="./src/assets/using-gobbler.gif"></p>
+<p><img src="./src/assets/using-gobbler1.1.gif"></p>
 
 <br />
 
 Click the SVG Gobbler extension icon to search the current page for SVGs.
+
+Unique attributes for each SVG element will be shown within the card. The attributes currently being shown are:
+
+1. How the SVG is placed:
+
+   - background image
+   - image source
+   - inline svg
+   - object data
+   - sprite
+   - symbol
+
+2. The size of the SVG in the DOM
+3. Whether or not the SVG has a viewBox. If it has one, the value will be shown
+4. Whether or not the SVG is currently hidden from view
+5. Whether or not the SVG is sized via inline width/height
 
 ## Developer mode
 
