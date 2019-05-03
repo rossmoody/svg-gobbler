@@ -1,10 +1,10 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  entry: './src/scripts/index.js',
+  entry: './src/scripts/init.js',
   output: {
     filename: './index.js',
     path: path.resolve(__dirname, 'extension/dist')
