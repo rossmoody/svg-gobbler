@@ -8,9 +8,9 @@ $primary: #fa555c;
 $success: #10d173;
 
 /* Icons */
-$tag-good-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M2 13l7 7L21 4' stroke='#10d173' stroke-width='3' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+$tag-good-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g><circle fill='#45DE80' cx='12' cy='12' r='12'></circle><polyline stroke='#FFFFFF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' points='6 13.9384615 10.2660256 18 17 6'></polyline></g></g></svg>");
 
-$tag-bad-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path stroke='#fa555c' stroke-width='3' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round' d='M2.5 2.5L21 21M2.5 21.5L21 3'/></svg>");
+$tag-bad-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox= '0 0 24 24 ' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><circle fill='#FB575E' fill-rule='nonzero' cx='12' cy='12' r='12'/><path d='M7 7l10 10M7 17L17 7' stroke='#FFF' stroke-width='2.5' stroke-linecap='round'/></g></svg>");
 
 $tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g fill='none' fill-rule='evenodd'><circle fill='#FB575E' cx='12' cy='12' r='11'/><path d='M12 6v7.619M12 17.772V18' stroke='#FFF' stroke-width='2' stroke-linecap='round'/></g></svg>");
 
@@ -264,11 +264,82 @@ $tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24'
     &__footer {
       margin: 0 16px;
       padding: 8px 0 16px;
+      min-height: 40px;
       border-top: 1px solid $gray2;
       position: relative;
       overflow: hidden;
+      display: grid;
+      align-items: start;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 8px;
+      align-content: center;
+
+      & h3,
+      h4 {
+        margin: 0;
+        padding: 0;
+        @include font-family();
+        font-size: 12px;
+      }
+
+      & h3 {
+        color: $gray4;
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      & h4 {
+        text-transform: uppercase;
+        letter-spacing: .6px;
+        font-weight: 600;
+        color: $gray3;
+        margin: 0 0 2px;
+      }
+
+      & span {
+        font-size: 12px;
+        color: $gray4;
+        margin: 0 0 6px 0;
+      }
     }
   }
+
+  &__typecont {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__sizecont {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__attrcont {
+    display: flex;
+    flex-direction: column;
+
+    &--good,
+    &--bad {
+      display: flex;
+
+      &::before {
+        height: 12px;
+        width: 12px;
+        margin: 0 4px 0 0;
+        border-radius: 20px;
+      }
+    }
+
+    &--good::before {
+      content: $tag-good-icon;
+    }
+
+    &--bad::before {
+      content: $tag-bad-icon;
+    }
+  }
+
 
   &__btns {
     display: grid;
@@ -333,33 +404,6 @@ $tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24'
   }
 
   &__tag {
-    background: $gray1;
-    display: inline-block;
-    color: $gray4;
-    font-size: 11px;
-    line-height: 11px;
-    padding: 6px 9px;
-    margin: 0 6px 6px 0;
-    border-radius: 20px;
-    font-weight: 500;
-    vertical-align: middle;
-
-    &--good::before,
-    &--bad::before {
-      display: inline-block;
-      height: 10px;
-      width: 10px;
-      margin: 0 4px;
-      vertical-align: middle;
-    }
-
-    &--good::before {
-      content: $tag-good-icon;
-    }
-
-    &--bad::before {
-      content: $tag-bad-icon;
-    }
 
     &--sprite {
       @include special-tag();

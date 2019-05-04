@@ -18,12 +18,16 @@ function createElement(el, elClass, elPar = null, innH = null) {
   return elPar ? elPar.appendChild(i) : i
 }
 
-// Tag helper
-function makeTag(string, tagClass, cont) {
-  const newTag = createElement('div', 'gob__tag')
-  newTag.innerHTML = string
-  newTag.classList.add(tagClass)
-  cont.appendChild(newTag)
+const hasAttr = el => {
+  let viewbox
+  let visible
+  el.svgXml.hasAttribute('viewBox')
+    ? (viewbox = 'gob__attrcont--good')
+    : (viewbox = 'gob__attrcont--bad')
+  el.rects !== 'hidden'
+    ? (visible = 'gob__attrcont--good')
+    : (visible = 'gob__attrcont--bad')
+  return `<span class=${viewbox}>viewBox</span><span class=${visible}>Visible</span>`
 }
 
 export function createCards(svgInfo, cont) {
@@ -50,8 +54,7 @@ export function createCards(svgInfo, cont) {
     gobblerCard.appendChild(gobblerCardFooter)
     gobblerCardFooter.appendChild(gobblerCardBtns)
 
-    // create card tags
-    makeTag(el.type, 'gob__tag--good', gobblerCardFooter)
+    // create card warnings
     el.type === 'sprite'
       ? (() => {
           const newTag = createElement('div', 'gob__tag--sprite')
@@ -64,19 +67,21 @@ export function createCards(svgInfo, cont) {
           gobblerCard.appendChild(newTag)
         })()
       : null
-    el.inlineSize
-      ? makeTag('inline sizes', 'gob__tag--good', gobblerCardFooter)
-      : null
-    el.rects && el.rects !== 'hidden'
-      ? makeTag(el.rects, 'gob__tag--good', gobblerCardFooter)
-      : makeTag(el.rects, 'gob__tag--bad', gobblerCardFooter)
-    el.svgXml.hasAttribute('viewBox')
-      ? (() => {
-          const viewBox = el.svgXml.getAttribute('viewBox')
-          makeTag('viewBox', 'gob__tag--good', gobblerCardFooter)
-          makeTag(viewBox, 'gob__tag--good', gobblerCardFooter)
-        })()
-      : makeTag('no viewBox', 'gob__tag--bad', gobblerCardFooter)
+
+    // create card footer
+    createElement(
+      'div',
+      'gob__typecont',
+      gobblerCardFooter,
+      `<h4>Type</h4><h3>${el.type}</h3>`
+    )
+    createElement(
+      'div',
+      'gob__sizecont',
+      gobblerCardFooter,
+      `<h4>Size</h4><h3>${el.rects}</h3>`
+    )
+    createElement('div', 'gob__attrcont', gobblerCardFooter, hasAttr(el))
 
     // create download buttons
     const dOpti = createElement('button', 'gob__btn')
