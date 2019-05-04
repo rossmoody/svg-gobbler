@@ -1,15 +1,41 @@
 import '../styles/core.scss'
+import { organizeSVGs } from './organize-svgs'
+import { createUI } from './create-ui'
 
-import { findSVGs } from './find-svgs'
-import { createCards, noGobbles } from './create-cards'
+class DecisionMaker {
+  noGobbles() {
+    const doc = document.querySelector('body')
+    const noGobbler = document.createElement('div')
+    noGobbler.classList.add('gob__noGobbler')
+    noGobbler.innerHTML = `😢 Drats, no SVGs to gobble `
+    doc.insertAdjacentElement('beforebegin', noGobbler)
+    setTimeout(() => {
+      noGobbler.remove()
+    }, 3000)
+  }
+
+  theGobbles(i) {
+    function scrollToTop() {
+      const c = document.documentElement.scrollTop || document.body.scrollTop
+      if (c > 0) {
+        window.requestAnimationFrame(scrollToTop)
+        window.scrollTo(0, c - c / 8)
+      }
+    }
+    scrollToTop()
+    createUI(i)
+  }
+}
+
+const start = new DecisionMaker()
 
 async function init() {
   const hasGobbles = document.querySelector('.gob')
   if (hasGobbles) {
-    console.log('gobble gobble')
+    console.log('There are already Gobblers about...')
   } else {
-    const allSVGs = await findSVGs()
-    allSVGs.length === 0 ? noGobbles() : createCards(allSVGs)
+    const allSVGs = await organizeSVGs()
+    allSVGs.length === 0 ? start.noGobbles() : start.theGobbles(allSVGs)
   }
 }
 

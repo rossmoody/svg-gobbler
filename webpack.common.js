@@ -4,7 +4,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  entry: './src/scripts/init.js',
+  entry: './src/scripts/index.js',
   output: {
     filename: './index.js',
     path: path.resolve(__dirname, 'extension/dist')
