@@ -11,7 +11,7 @@
 
 ## 🎉 How to use
 
-<p><img src="./src/assets/using-gobbler1.1.gif"></p>
+<p><img src="./src/assets/using-gobbler-1.gif"></p>
 
 <br />
 
@@ -19,7 +19,7 @@ Click the SVG Gobbler extension icon to search the current page for SVGs.
 
 Unique attributes for each SVG element will be shown within the card. The attributes currently being shown are:
 
-1. How the SVG is placed:
+1. If the SVG is placed as a:
 
    - background image
    - image source
@@ -29,9 +29,8 @@ Unique attributes for each SVG element will be shown within the card. The attrib
    - symbol
 
 2. The size of the SVG in the DOM
-3. Whether or not the SVG has a viewBox. If it has one, the value will be shown
-4. Whether or not the SVG is currently hidden from view
-5. Whether or not the SVG is sized via inline width/height
+3. Whether or not the SVG has a viewBox
+4. Whether or not the SVG is currently visible
 
 ## Developer mode
 

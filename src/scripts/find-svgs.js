@@ -12,7 +12,7 @@ class ManageSVGs {
           'href'
         )
       } else {
-        el.type = 'inline svg'
+        el.type = 'inline'
       }
     } else if (el.tagName === 'IMG') {
       el.url = el.src

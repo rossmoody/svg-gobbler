@@ -279,12 +279,12 @@ $tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24'
         margin: 0;
         padding: 0;
         @include font-family();
-        font-size: 12px;
+        font-size: 11px;
       }
 
       & h3 {
         color: $gray4;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
         text-transform: capitalize;
       }
