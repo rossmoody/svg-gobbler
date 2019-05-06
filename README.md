@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./src/assets/gob-animate.gif">
+<img src="./src/assets/gob-animate.gif" width="600px">
 </p>
 <h1 align="center">SVG Gobbler</h1>
 
