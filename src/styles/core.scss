@@ -164,6 +164,7 @@ $tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24'
     padding: 0 18px;
     font-size: 24px;
     @include font-family();
+    margin: 0;
   }
 
   &__count {
@@ -186,6 +187,7 @@ $tag-alert-icon: url("data:image/svg+xml;charset=UTF-8, <svg viewBox='0 0 24 24'
       @include font-family();
       font-size: 16px;
       font-weight: 500;
+      margin: 0;
     }
   }
 
