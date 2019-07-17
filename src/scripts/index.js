@@ -1,4 +1,4 @@
-import "../styles/core.scss"
+import "../styles/index.scss"
 import { organizeSVGs } from "./organize-svgs"
 import { createUI } from "./create-ui"
 
