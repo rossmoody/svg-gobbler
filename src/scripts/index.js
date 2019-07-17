@@ -1,14 +1,25 @@
-import '../styles/core.scss'
-import { organizeSVGs } from './organize-svgs'
-import { createUI } from './create-ui'
+import "../styles/core.scss"
+import { organizeSVGs } from "./organize-svgs"
+import { createUI } from "./create-ui"
 
 class DecisionMaker {
   noGobbles() {
-    const doc = document.querySelector('body')
-    const noGobbler = document.createElement('div')
-    noGobbler.classList.add('gob__noGobbler')
+    const doc = document.querySelector("body")
+    const noGobbler = document.createElement("div")
+    noGobbler.classList.add("gob__noGobbler")
     noGobbler.innerHTML = `😢 Drats, no SVGs to gobble `
-    doc.insertAdjacentElement('beforebegin', noGobbler)
+    doc.insertAdjacentElement("beforebegin", noGobbler)
+    setTimeout(() => {
+      noGobbler.remove()
+    }, 3000)
+  }
+
+  errorGobbles(error) {
+    const doc = document.querySelector("body")
+    const noGobbler = document.createElement("div")
+    noGobbler.classList.add("gob__noGobbler")
+    noGobbler.innerHTML = `😢 There's an error: "${error}"`
+    doc.insertAdjacentElement("beforebegin", noGobbler)
     setTimeout(() => {
       noGobbler.remove()
     }, 3000)
@@ -30,12 +41,16 @@ class DecisionMaker {
 const start = new DecisionMaker()
 
 async function init() {
-  const hasGobbles = document.querySelector('.gob')
-  if (hasGobbles) {
-    console.log('There are already Gobblers about...')
-  } else {
-    const allSVGs = await organizeSVGs()
-    allSVGs.length === 0 ? start.noGobbles() : start.theGobbles(allSVGs)
+  try {
+    const hasGobbles = document.querySelector(".gob")
+    if (hasGobbles) {
+      console.log("There are already Gobblers about...")
+    } else {
+      const allSVGs = await organizeSVGs()
+      allSVGs.length === 0 ? start.noGobbles() : start.theGobbles(allSVGs)
+    }
+  } catch (error) {
+    start.errorGobbles(error)
   }
 }
 
