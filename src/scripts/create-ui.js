@@ -29,7 +29,7 @@ export const createUI = svgInfo => {
   createElement('div', 'gob__logo', logoCont, gobLogo)
   createElement('h1', 'gob__title', logoCont, 'SVG Gobbler')
   createElement('div', 'gob__count--svg', countCont, svgInfo.length)
-  createElement('h2', 'gob__count--title', countCont, 'SVGs to gobble')
+  createElement('h2', 'gob__count--title', countCont, 'SVGs on the page')
   createElement('div', 'gob__close', countCont, closeIcon)
 
   // Close event listeners
