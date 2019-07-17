@@ -6,6 +6,7 @@ class SVG {
     this.url = url
     this.type = type
   }
+
   // get svg XML info from el with URL
   async getXML() {
     let serializer = new XMLSerializer()
@@ -31,6 +32,7 @@ class SVG {
       })
     }
   }
+
   // Set size attributes to svg viewBox attr dynamically for better render in card
   async cleanupXML() {
     let rects = this.ele.getBoundingClientRect()
@@ -69,17 +71,37 @@ class SVG {
       : null
     this.cleanXml.setAttribute('preserveAspectRatio', 'xMidYMid meet')
   }
+
+  async checkForWhite() {
+    const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
+    for (const string of whiteStrings) {
+      this.svgString.includes(string) ? this.hasWhite = true : null
+    }
+    
+  }
+
+  async checkForFill() {
+    if (this.svgString.includes('fill=') && !this.svgString.includes('fill="none"')) {
+      null
+    } else {
+      this.cleanXml.setAttribute('fill', '#232323')
+    }
+  }
 }
 
 export async function organizeSVGs() {
   let allSVGs = findSVGs()
+
   // Create SVG classes
   allSVGs = allSVGs.map(async i => {
     const newEl = new SVG(i, i.url, i.type)
     await newEl.getXML()
     await newEl.cleanupXML()
+    await newEl.checkForWhite()
+    await newEl.checkForFill()
     return newEl
   })
   allSVGs = await Promise.all(allSVGs)
+  console.log(allSVGs)
   return allSVGs
 }

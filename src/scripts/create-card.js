@@ -37,6 +37,10 @@ export function createCards(svgInfo, cont) {
     const gobblerCard = createElement('div', 'gob__card')
     cont.appendChild(gobblerCard)
     const gobblerCardClone = createElement('div', 'gob__card__svg')
+
+    // Check if SVG has white attribute
+    el.hasWhite ? gobblerCardClone.classList.add('gob__card__svg--white') : null
+
     const gobblerCardCloneWrapper = createElement(
       'div',
       'gob__card__svg__wrapper'
@@ -61,6 +65,7 @@ export function createCards(svgInfo, cont) {
           gobblerCard.appendChild(newTag)
         })()
       : null
+
     el.type === 'symbol'
       ? (() => {
           const newTag = createElement('div', 'gob__tag--symbol')
@@ -75,12 +80,14 @@ export function createCards(svgInfo, cont) {
       gobblerCardFooter,
       `<h4>Type</h4><h3>${el.type}</h3>`
     )
+
     createElement(
       'div',
       'gob__sizecont',
       gobblerCardFooter,
       `<h4>Size</h4><h3>${el.rects}</h3>`
     )
+
     createElement('div', 'gob__attrcont', gobblerCardFooter, hasAttr(el))
 
     // create download buttons
