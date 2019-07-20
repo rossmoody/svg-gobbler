@@ -212,6 +212,7 @@
     border-radius: 12px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
     position: relative;
+    height: fit-content;
     @include font-family();
 
     &--show {
@@ -229,7 +230,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 200px;
+      min-height: 160px;
       padding: 24px 48px;
       overflow: hidden;
 
@@ -273,12 +274,12 @@
         margin: 0;
         padding: 0;
         @include font-family();
-        font-size: 11px;
+        font-size: 10px;
       }
 
       & h3 {
         color: $gray4;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         text-transform: capitalize;
       }
@@ -292,7 +293,7 @@
       }
 
       & span {
-        font-size: 12px;
+        font-size: 11px;
         color: $gray4;
         margin: 0 0 6px 0;
       }
