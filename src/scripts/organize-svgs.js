@@ -13,23 +13,21 @@ class SVG {
     let parser = new DOMParser()
 
     if (this.url) {
-      return fetch(this.url)
-        .then(response => {
-          return response.text()
-        })
-        .then(response => {
-          const xml = parser.parseFromString(response, 'image/svg+xml')
-            .children[0]
-          const string = serializer.serializeToString(xml)
-          this.svgString = string
-          this.svgXml = xml
-        })
+      let response = await fetch(this.url, { mode: 'no-cors'});
+
+      if (response.type === 'opaque') {
+        this.svgString = '';
+        this.svgXml = this.ele;
+        return;
+      }
+      
+      const xml = parser.parseFromString(response.text(), 'image/svg+xml').children[0]
+      const string = serializer.serializeToString(xml)
+      this.svgString = string
+      this.svgXml = xml
     } else {
-      return new Promise((resolve, reject) => {
-        this.svgString = this.ele.eleString
-        this.svgXml = this.ele
-        resolve()
-      })
+      this.svgString = this.ele.eleString;
+      this.svgXml = this.ele;
     }
   }
 
