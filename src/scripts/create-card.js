@@ -91,20 +91,34 @@ export function createCards(svgInfo, cont) {
     createElement('div', 'gob__attrcont', gobblerCardFooter, hasAttr(el))
 
     // create download buttons
-    const dOpti = createElement('button', 'gob__btn')
-    dOpti.classList.add('gob__btn--download')
-    dOpti.addEventListener('click', () => {
-      toggleSuccess(dOpti, 'gob__btn--success--download')
-      download.createOptiDownload(el)
-    })
-    gobblerCardBtns.appendChild(dOpti)
+    if (el.svgString.length > 0) {
+      const dOpti = createElement('button', 'gob__btn')
+      dOpti.classList.add('gob__btn--download')
+      dOpti.addEventListener('click', () => {
+        toggleSuccess(dOpti, 'gob__btn--success--download')
+        download.createOptiDownload(el)
+      })
+      gobblerCardBtns.appendChild(dOpti)
+    } else {
+      // unfortunately, this opens it instead of downloading because of same-origin policies
+      // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
+      const dOpti = createElement('a', 'gob__btn')
+      dOpti.classList.add('gob__btn--download')
+      dOpti.setAttribute("download", "gobble-unoptimized.svg");  // does not have an effect
+      dOpti.setAttribute("target", "_blank");
+      dOpti.setAttribute("href", el.url);
+      gobblerCardBtns.appendChild(dOpti)
+    }
 
-    const cOpti = createElement('button', 'gob__btn')
-    cOpti.classList.add('gob__btn--copy')
-    cOpti.addEventListener('click', () => {
-      toggleSuccess(cOpti, 'gob__btn--success--copy')
-      download.copyOptiClipboard(el)
-    })
-    gobblerCardBtns.appendChild(cOpti)
+    if (el.svgString.length > 0) {
+      console.log('svgstring: ', el.svgString);
+      const cOpti = createElement('button', 'gob__btn')
+      cOpti.classList.add('gob__btn--copy')
+      cOpti.addEventListener('click', () => {
+        toggleSuccess(cOpti, 'gob__btn--success--copy')
+        download.copyOptiClipboard(el)
+      })
+      gobblerCardBtns.appendChild(cOpti)
+    }
   })
 }
