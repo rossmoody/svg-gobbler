@@ -1,91 +1,7 @@
 @import './colors';
 @import './icons';
-
-/* Mixins */
-@mixin special-tag {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  left: auto;
-  cursor: help;
-  height: 20px;
-  width: 20px;
-  background: $white;
-
-  &::before {
-    content: $tag-alert-icon;
-  }
-}
-
-@mixin special-tag-hover {
-  bottom: -4px;
-  transform: translateY(100%);
-  width: 140px;
-  line-height: 16px;
-  font-size: 11px;
-  right: 0;
-  background: $gray4;
-  position: absolute;
-  padding: 8px 12px;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
-  animation: 0.3s ease-in fadeIn;
-  color: $white;
-}
-
-@mixin font-family {
-  font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”,
-    “Helvetica Neue”, Helvetica, Arial, sans-serif;
-}
-
-/* Animation */
-@keyframes loadCards {
-  0% {
-    opacity: 0;
-    transform: translateY(10%);
-  }
-
-  70% {
-    transform: translateY(0%);
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 100;
-  }
-}
-
-@keyframes loadSadness {
-  0% {
-    opacity: 0;
-    bottom: 0;
-  }
-
-  20% {
-    opacity: 1;
-    bottom: 90px;
-  }
-
-  90% {
-    opacity: 1;
-    bottom: 90px;
-  }
-
-  100% {
-    opacity: 0;
-    bottom: 0px;
-  }
-}
-
+@import './mixins';
+@import './motion';
 
 /* Styles */
 .gob {
@@ -98,39 +14,43 @@
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     grid-gap: 24px;
     margin: 0 72px;
-    z-index: 2;
   }
 
   &__overlay {
-    animation: .2s fadeIn;
+    animation: 0.2s fadeIn;
     position: fixed;
     bottom: 0;
     right: 0;
     top: 0;
     left: 0;
     background-color: $gray1;
-    opacity: .96;
+    opacity: 0.96;
     z-index: 0;
   }
 
   &__header {
     visibility: hidden;
-    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 32px;
+    padding: 0 32px;
+    height: 64px;
+    margin: 0 0 32px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
+    z-index: 2;
+    background: $gray5;
 
     &--show {
       visibility: visible;
-      animation: loadCards .5s ease-in-out 1;
+      animation: loadCards 0.5s ease-in-out 1;
     }
   }
 
   &__logoCont {
     display: flex;
     align-items: center;
-    z-index: 2;
   }
 
   &__logo {
@@ -139,18 +59,8 @@
   }
 
   &__countCont {
-    z-index: 2;
     display: flex;
     align-items: center;
-  }
-
-  &__title {
-    color: $gray4;
-    font-weight: 600;
-    padding: 0 18px;
-    font-size: 24px;
-    @include font-family();
-    margin: 0;
   }
 
   &__count {
@@ -164,43 +74,61 @@
       align-items: center;
       border-radius: 40px;
       margin: 0 8px;
-      padding: 5px;
       font-weight: 500;
       min-width: 24px;
-    }
-
-    &--title {
-      color: $gray4;
-      @include font-family();
-      font-size: 16px;
-      font-weight: 500;
-      margin: 0;
+      padding: 4px 12px;
     }
   }
 
-  &__close {
-    height: 32px;
-    width: 32px;
-    border-radius: 100px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
-    margin: 0 0 0 48px;
+  &__feedback {
+    @include header-icon();
+    @include font-family();
+    margin: 0 0 0 24px;
+
+    & path {
+      fill: $white;
+    }
 
     &:hover {
       background: $primary;
     }
 
-    &:hover path {
-      stroke: $white;
+    &:hover::after {
+      bottom: 4px;
+      transform: translateY(100%);
+      font-size: 14px;
+      background: $white;
+      position: absolute;
+      padding: 8px 12px;
+      width: auto;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      animation: 0.3s ease-in fadeIn;
+      color: $gray5;
+      content: 'Send feedback';
     }
 
     & svg {
-      height: 12px;
-      width: 12px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  &__close {
+    @include header-icon();
+    margin: 0 0 0 48px;
+
+    & path {
+      stroke: $white;
+    }
+
+    &:hover {
+      background: $primary;
+    }
+
+    & svg {
+      height: 16px;
+      width: 16px;
     }
   }
 
@@ -210,20 +138,20 @@
     z-index: 1;
     background: $white;
     border-radius: 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     height: fit-content;
     @include font-family();
 
     &--show {
       display: flex;
-      animation: loadCards .5s ease-in-out 1;
+      animation: loadCards 0.5s ease-in-out 1;
     }
 
     &:hover .gob__btns {
       opacity: 1;
       transform: translateY(0%);
-      transition: all .25s ease-in-out;
+      transition: all 0.25s ease-in-out;
     }
 
     &__svg {
@@ -258,7 +186,8 @@
 
     &__footer {
       margin: 0 16px;
-      padding: 8px 0 16px;
+      line-height: 1.4;
+      padding: 12px 0 16px;
       min-height: 40px;
       border-top: 1px solid $gray2;
       position: relative;
@@ -274,22 +203,22 @@
         margin: 0;
         padding: 0;
         @include font-family();
-        font-size: 10px;
       }
 
       & h3 {
         color: $gray4;
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 500;
         text-transform: capitalize;
       }
 
       & h4 {
         text-transform: uppercase;
-        letter-spacing: .6px;
+        letter-spacing: 0.6px;
         font-weight: 600;
         color: $gray3;
         margin: 0 0 2px;
+        font-size: 11px;
       }
 
       & span {
@@ -335,10 +264,9 @@
     }
   }
 
-
   &__btns {
     display: grid;
-    align-items: start;
+    align-items: center;
     grid-template-columns: 1fr 1fr;
     background: $white;
     padding: 0 0 10px;
@@ -350,7 +278,11 @@
     left: 0;
     opacity: 0;
     transform: translateY(20%);
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+
+    &--block {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__btn {
@@ -365,6 +297,7 @@
     outline: none;
     font-size: 13px;
     font-weight: 400;
+    text-decoration: none;
 
     &:hover {
       background: $primary;
@@ -377,29 +310,32 @@
     }
 
     &--copy::before {
-      content: 'Copy'
+      content: 'Copy';
+    }
+
+    &--cors-btn::before {
+      content: 'Open in new tab ' $new-tab-icon;
     }
 
     &--success {
       background: $success !important;
       border: 1px solid $success !important;
       color: white;
-      transition: all .2s ease-in-out;
+      transition: all 0.2s ease-in-out;
 
       &--download::before {
         content: 'Gobble';
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
 
       &--copy::before {
         content: 'Copied!';
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
       }
     }
   }
 
   &__tag {
-
     &--sprite {
       @include special-tag();
 
@@ -417,6 +353,15 @@
         content: 'Output from SVG symbols are unreliable and will likely contain several nested XML icons inside.';
       }
     }
+
+    &--cors {
+      @include special-tag();
+
+      &:hover::after {
+        @include special-tag-hover();
+        content: "This SVG can't be processed normally due to security policy and must be opened in a new tab.";
+      }
+    }
   }
 
   &__noGobbler {
@@ -431,7 +376,7 @@
     transform: translateX(-50%);
     line-height: 20px;
     border-radius: 60px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, .15);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
     animation: 3s loadSadness ease-in-out 1;
   }
 }

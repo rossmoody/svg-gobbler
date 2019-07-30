@@ -1,0 +1,47 @@
+/* Animation */
+@keyframes loadCards {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+
+  70% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100;
+  }
+}
+
+@keyframes loadSadness {
+  0% {
+    opacity: 0;
+    bottom: 0;
+  }
+
+  20% {
+    opacity: 1;
+    bottom: 90px;
+  }
+
+  90% {
+    opacity: 1;
+    bottom: 90px;
+  }
+
+  100% {
+    opacity: 0;
+    bottom: 0px;
+  }
+}

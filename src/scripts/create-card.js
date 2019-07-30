@@ -34,31 +34,22 @@ export function createCards(svgInfo, cont) {
   // Create cards
   svgInfo.forEach((el, i) => {
     // Create dom elements
-    const gobblerCard = createElement('div', 'gob__card')
-    cont.appendChild(gobblerCard)
-    const gobblerCardClone = createElement('div', 'gob__card__svg')
+    const gobblerCard = createElement('div', 'gob__card', cont)
+    const gobblerCardClone = createElement('div', 'gob__card__svg', gobblerCard)
+    const gobblerCardCloneWrapper = createElement('div', 'gob__card__svg__wrapper', gobblerCardClone)
+    gobblerCardCloneWrapper.appendChild(el.cleanXml)
+    const gobblerCardFooter = createElement('div', 'gob__card__footer', gobblerCard)
+    const gobblerCardBtns = createElement('div', 'gob__btns', gobblerCardFooter)
 
     // Check if SVG has white attribute
     el.hasWhite ? gobblerCardClone.classList.add('gob__card__svg--white') : null
-
-    const gobblerCardCloneWrapper = createElement(
-      'div',
-      'gob__card__svg__wrapper'
-    )
-    const gobblerCardFooter = createElement('div', 'gob__card__footer')
-    const gobblerCardBtns = createElement('div', 'gob__btns')
 
     // Smooth card load
     setTimeout(() => {
       gobblerCard.classList.add('gob__card--show')
     }, 60 * i)
-    gobblerCard.appendChild(gobblerCardClone)
-    gobblerCardClone.appendChild(gobblerCardCloneWrapper)
-    gobblerCardCloneWrapper.appendChild(el.cleanXml)
-    gobblerCard.appendChild(gobblerCardFooter)
-    gobblerCardFooter.appendChild(gobblerCardBtns)
 
-    // create card warnings
+    // Create card warnings
     el.type === 'sprite'
       ? (() => {
           const newTag = createElement('div', 'gob__tag--sprite')
@@ -73,7 +64,7 @@ export function createCards(svgInfo, cont) {
         })()
       : null
 
-    // create card footer
+    // Create card footer
     createElement(
       'div',
       'gob__typecont',
@@ -90,8 +81,8 @@ export function createCards(svgInfo, cont) {
 
     createElement('div', 'gob__attrcont', gobblerCardFooter, hasAttr(el))
 
-    // create download buttons
     if (el.svgString.length > 0) {
+      // Download button
       const dOpti = createElement('button', 'gob__btn')
       dOpti.classList.add('gob__btn--download')
       dOpti.addEventListener('click', () => {
@@ -99,19 +90,8 @@ export function createCards(svgInfo, cont) {
         download.createOptiDownload(el)
       })
       gobblerCardBtns.appendChild(dOpti)
-    } else {
-      // unfortunately, this opens it instead of downloading because of same-origin policies
-      // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
-      const dOpti = createElement('a', 'gob__btn')
-      dOpti.classList.add('gob__btn--download')
-      dOpti.setAttribute("download", "gobble-unoptimized.svg");  // does not have an effect
-      dOpti.setAttribute("target", "_blank");
-      dOpti.setAttribute("href", el.url);
-      gobblerCardBtns.appendChild(dOpti)
-    }
 
-    if (el.svgString.length > 0) {
-      console.log('svgstring: ', el.svgString);
+      // Copy button
       const cOpti = createElement('button', 'gob__btn')
       cOpti.classList.add('gob__btn--copy')
       cOpti.addEventListener('click', () => {
@@ -119,6 +99,22 @@ export function createCards(svgInfo, cont) {
         download.copyOptiClipboard(el)
       })
       gobblerCardBtns.appendChild(cOpti)
+
+    } else {
+      // adds alert to card
+      const newTag = createElement('div', 'gob__tag--cors')
+      gobblerCard.appendChild(newTag)
+
+      // adds full width to button
+      gobblerCardBtns.classList.add('gob__btns--block')
+
+      // Same-origin policies button. opens svg in new window
+      const corsBtn = createElement('a', 'gob__btn')
+      corsBtn.classList.add('gob__btn--cors-btn')
+      corsBtn.setAttribute('target', '_blank')
+      corsBtn.setAttribute('href', el.url)
+  
+      gobblerCardBtns.appendChild(corsBtn)
     }
   })
 }
