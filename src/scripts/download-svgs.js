@@ -120,9 +120,6 @@ class ButtonHandler {
       let blob = new Blob([result.data], { type: 'text/xml' })
       FileSaver.saveAs(blob, `${filename}.svg`)
     })
-    // Unoptimized save snippet
-    // let blob = new Blob([i.svgString], { type: 'text/xml' })
-    // FileSaver.saveAs(blob, `${filename}.svg`)
   }
 
   copyOptiClipboard(i) {
@@ -134,14 +131,6 @@ class ButtonHandler {
       document.execCommand('copy')
       document.body.removeChild(el)
     })
-
-  // Unoptimized copy snippet
-  //   const el = document.createElement('textarea')
-  //   el.value = i.svgString
-  //   document.body.appendChild(el)
-  //   el.select()
-  //   document.execCommand('copy')
-  //   document.body.removeChild(el)
   }
 }
 

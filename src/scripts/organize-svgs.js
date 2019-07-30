@@ -13,21 +13,22 @@ class SVG {
     let parser = new DOMParser()
 
     if (this.url) {
-      let response = await fetch(this.url, { mode: 'no-cors'});
+      let response = await fetch(this.url, { mode: 'no-cors' })
 
       if (response.type === 'opaque') {
-        this.svgString = '';
-        this.svgXml = this.ele;
-        return;
+        this.svgString = ''
+        this.svgXml = this.ele
+        return
       }
-      
-      const xml = parser.parseFromString(response.text(), 'image/svg+xml').children[0]
+
+      const xml = parser.parseFromString(response.text(), 'image/svg+xml')
+        .children[0]
       const string = serializer.serializeToString(xml)
       this.svgString = string
       this.svgXml = xml
     } else {
-      this.svgString = this.ele.eleString;
-      this.svgXml = this.ele;
+      this.svgString = this.ele.eleString
+      this.svgXml = this.ele
     }
   }
 
@@ -73,13 +74,15 @@ class SVG {
   async checkForWhite() {
     const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
     for (const string of whiteStrings) {
-      this.svgString.includes(string) ? this.hasWhite = true : null
+      this.svgString.includes(string) ? (this.hasWhite = true) : null
     }
-    
   }
 
   async checkForFill() {
-    if (this.svgString.includes('fill=') && !this.svgString.includes('fill="none"')) {
+    if (
+      this.svgString.includes('fill=') &&
+      !this.svgString.includes('fill="none"')
+    ) {
       null
     } else {
       this.cleanXml.setAttribute('fill', '#232323')
