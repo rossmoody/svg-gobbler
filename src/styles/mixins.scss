@@ -1,0 +1,47 @@
+/* Mixins */
+@mixin special-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  left: auto;
+  cursor: help;
+  height: 20px;
+  width: 20px;
+  background: $white;
+  border-radius: 20px;
+
+  &::before {
+    content: $tag-alert-icon;
+  }
+}
+
+@mixin special-tag-hover {
+  bottom: -4px;
+  transform: translateY(100%);
+  width: 140px;
+  line-height: 16px;
+  font-size: 11px;
+  right: 0;
+  background: $gray4;
+  position: absolute;
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  animation: 0.3s ease-in fadeIn;
+  color: $white;
+}
+
+@mixin header-icon {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 100px;
+}
+
+@mixin font-family {
+  font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”,
+    “Helvetica Neue”, Helvetica, Arial, sans-serif;
+}
