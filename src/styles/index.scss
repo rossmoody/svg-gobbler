@@ -9,6 +9,10 @@
   width: 100%;
   z-index: 1000000000;
 
+  &--hide {
+    animation: fallOut .5s ease-in-out 1;
+  }
+
   &__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -314,7 +318,7 @@
     }
 
     &--cors-btn::before {
-      content: 'Open in new tab ' $new-tab-icon;
+      content: 'Open in new tab';
     }
 
     &--success {

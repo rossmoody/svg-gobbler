@@ -10,14 +10,14 @@ function createElement(el, elClass, elPar = null, innH = null) {
 }
 
 // Structure object
-  const struct = {
-    globalContainer: 'gob',
-    header: 'gob__header',
-    container: 'gob__container',
-    overlay: 'gob__overlay',
-    logoContainer: 'gob__logoCont',
-    countContainer: 'gob__countCont'
-  }
+const struct = {
+  globalContainer: 'gob',
+  header: 'gob__header',
+  container: 'gob__container',
+  overlay: 'gob__overlay',
+  logoContainer: 'gob__logoCont',
+  countContainer: 'gob__countCont'
+}
 
 export const createUI = svgInfo => {
   const gobbler = createElement('div', struct.globalContainer)
@@ -50,19 +50,29 @@ export const createUI = svgInfo => {
   createElement('div', 'gob__feedback', countCont, feedbackIcon)
   createElement('div', 'gob__close', countCont, closeIcon)
 
+  // Close gobbler
+  function closeGobbler() {
+    gobbler.classList.add('gob--hide')
+    setTimeout(() => {
+      gobbler.remove()
+    }, 500)
+  }
+
   // Close event listeners
   document.querySelector('.gob__close').addEventListener('click', function() {
-    gobbler.remove()
+    closeGobbler()
   })
   document.querySelector('.gob__overlay').addEventListener('click', function() {
-    gobbler.remove()
+    closeGobbler()
   })
 
   // Header event listeners
-  document.querySelector('.gob__feedback').addEventListener('click', function() {
-    var win = window.open('https://www.surveymonkey.com/r/WQJVQNQ', '_blank');
-    win.focus();
-  })
+  document
+    .querySelector('.gob__feedback')
+    .addEventListener('click', function() {
+      var win = window.open('https://www.surveymonkey.com/r/WQJVQNQ', '_blank')
+      win.focus()
+    })
 
   // Smooth load header
   setTimeout(() => {
