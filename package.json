@@ -1,6 +1,6 @@
 {
   "name": "svg-gobbler",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it. The extension is available (soon) on the extension store.",
   "devDependencies": {
     "@babel/core": "^7.4.3",
