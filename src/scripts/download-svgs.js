@@ -113,9 +113,19 @@ const svgo = new SVGO({
   ]
 })
 
+// Make filename from site domain
+function fileName() {
+  let site = document.domain
+  // prefixes
+  site = site.replace(/https|www|http/g, '')
+  // suffixes
+  site = site.replace(/\.|com|gov|com|net|org|info|coop|int|co\.uk|org\.uk|ac\.uk|uk/g, '')
+  return `icon-${site}`
+}
+
 class ButtonHandler {
   createOptiDownload(i) {
-    const filename = 'gobble-gobble'
+    const filename = fileName()
     svgo.optimize(i.svgString).then(function(result) {
       let blob = new Blob([result.data], { type: 'text/xml' })
       FileSaver.saveAs(blob, `${filename}.svg`)
