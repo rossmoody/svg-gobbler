@@ -1,4 +1,4 @@
-import { closeIcon, gobLogo, feedbackIcon, newTab } from './icons'
+import { closeIcon, gobLogo, feedbackIcon } from './icons'
 import { createCards } from './create-card'
 
 // Element creation helper

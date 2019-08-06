@@ -317,8 +317,10 @@
       content: 'Copy';
     }
 
-    &--cors-btn::before {
-      content: 'Open in new tab';
+    &--cors-btn {
+      &::before {
+        content: 'Open in new tab';
+      }
     }
 
     &--success {
@@ -360,10 +362,16 @@
 
     &--cors {
       @include special-tag();
+      height: 28px;
+      width: 28px;
+
+      &::before {
+        content: $cors-alert-icon;
+      }
 
       &:hover::after {
         @include special-tag-hover();
-        content: "This SVG can't be processed normally due to security policy and must be opened in a new tab.";
+        content: "This SVG can't be optimized due to security policy and must be opened in a new tab.";
       }
     }
   }
