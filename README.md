@@ -8,7 +8,7 @@
 
 ## 🎉 How to use
 
-<p><img src="./src/assets/using-gobbler-2.gif"></p>
+<p><img src="./src/assets/animation/using-gobbler-2.gif"></p>
 
 <br />
 
