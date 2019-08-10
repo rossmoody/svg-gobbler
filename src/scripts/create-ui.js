@@ -1,22 +1,36 @@
-import { closeIcon, gobLogo, feedbackIcon } from './icons'
+import {
+  closeIcon,
+  gobLogo,
+  feedbackIcon,
+  infoIcon,
+  viewboxIcon,
+  hiddenIcon
+} from './icons'
 import { createCards } from './create-card'
+import { globalActions } from './global'
 
 // Element creation helper
-function createElement(el, elClass, elPar = null, innH = null) {
+function createElement(el, elClass) {
   const i = document.createElement(el)
   i.className = elClass
-  i.innerHTML = innH
-  return elPar ? elPar.appendChild(i) : i
+  return i
 }
 
-// Structure object
 const struct = {
+  // Foundation
   globalContainer: 'gob',
   header: 'gob__header',
   container: 'gob__container',
   overlay: 'gob__overlay',
   logoContainer: 'gob__logoCont',
-  countContainer: 'gob__countCont'
+  countContainer: 'gob__countCont',
+  // Header
+  logo: 'gob__logo',
+  count: 'gob__count--svg',
+  tooltip: 'gob__tooltip',
+  tooltipRow: 'gob__tooltip--row',
+  feedback: 'gob__feedback',
+  close: 'gob__close'
 }
 
 export const createUI = svgInfo => {
@@ -37,42 +51,61 @@ export const createUI = svgInfo => {
   header.appendChild(logoCont)
   header.appendChild(countCont)
 
-  // Deliver singular or plural of "SVGs"
+  // Create SVG Counter
   function isPlural() {
     return svgInfo.length === 1
-      ? svgInfo.length + ' SVG'
-      : svgInfo.length + ' SVGs'
+      ? svgInfo.length + ' SVG ' + infoIcon
+      : svgInfo.length + ' SVGs ' + infoIcon
+  }
+
+  function vbCount() {
+    let num = 0
+    svgInfo.forEach(el => {
+      if (el.ele.hasAttribute('viewBox')) {
+        num++
+      }
+    })
+    return num
+  }
+
+  function hiddenCount() {
+    let num = 0
+    svgInfo.forEach(el => {
+      if(el.rects == 'N/A') {
+        num++
+      }
+    })
+    return num
+  }
+
+  // Create tooltip
+  function generateTooltip(i) {
+    const viewboxes = vbCount()
+    const hiddens = hiddenCount()
+    const gobTooltip = createElement('div', struct.tooltip)
+    const viewboxCont = createElement('div', struct.tooltipRow)
+    viewboxCont.innerHTML = `${viewboxIcon} ${viewboxes} SVGs have a viewBox`
+    const hiddenCont = createElement('div', struct.tooltipRow)
+    hiddenCont.innerHTML = `${hiddenIcon} ${hiddens} SVGs are hidden from view`
+    gobTooltip.appendChild(viewboxCont)
+    gobTooltip.appendChild(hiddenCont)
+    i.appendChild(gobTooltip)
   }
 
   // Create header
-  createElement('div', 'gob__logo', logoCont, gobLogo)
-  createElement('div', 'gob__count--svg', countCont, isPlural())
-  createElement('div', 'gob__feedback', countCont, feedbackIcon)
-  createElement('div', 'gob__close', countCont, closeIcon)
-
-  // Close gobbler
-  function closeGobbler() {
-    gobbler.classList.add('gob--hide')
-    setTimeout(() => {
-      gobbler.remove()
-    }, 500)
-  }
-
-  // Close event listeners
-  document.querySelector('.gob__close').addEventListener('click', function() {
-    closeGobbler()
-  })
-  document.querySelector('.gob__overlay').addEventListener('click', function() {
-    closeGobbler()
-  })
-
-  // Header event listeners
-  document
-    .querySelector('.gob__feedback')
-    .addEventListener('click', function() {
-      var win = window.open('https://www.surveymonkey.com/r/WQJVQNQ', '_blank')
-      win.focus()
-    })
+  const gobLogoEl = createElement('div', struct.logo)
+  gobLogoEl.innerHTML = gobLogo
+  logoCont.appendChild(gobLogoEl)
+  const gobCount = createElement('div', struct.count)
+  gobCount.innerHTML = isPlural()
+  countCont.appendChild(gobCount)
+  generateTooltip(gobCount)
+  const gobFeedback = createElement('div', struct.feedback)
+  gobFeedback.innerHTML = feedbackIcon
+  countCont.appendChild(gobFeedback)
+  const gobClose = createElement('div', struct.close)
+  gobClose.innerHTML = closeIcon
+  countCont.appendChild(gobClose)
 
   // Smooth load header
   setTimeout(() => {
@@ -80,4 +113,5 @@ export const createUI = svgInfo => {
   }, 80)
 
   createCards(svgInfo, container)
+  globalActions()
 }

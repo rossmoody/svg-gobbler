@@ -39,7 +39,7 @@ class SVG {
     let viewBoxWidth = rects.height
 
     if (rects.width === 0 && rects.height === 0) {
-      this.rects = 'hidden'
+      this.rects = 'N/A'
     } else if (
       this.svgXml.hasAttribute('width') &&
       this.svgXml.hasAttribute('height')

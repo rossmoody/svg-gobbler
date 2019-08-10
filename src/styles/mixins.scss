@@ -45,3 +45,38 @@
   font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”,
     “Helvetica Neue”, Helvetica, Arial, sans-serif;
 }
+
+/* Tooltip functionality */
+
+.gob {
+  &__tooltip {
+    @include font-family();
+    visibility: hidden;
+    bottom: 4px;
+    transform: translateY(100%);
+    font-size: 14px;
+    background: $white;
+    position: absolute;
+    padding: 8px 12px;
+    width: auto;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    animation: 0.3s ease-in fadeIn;
+    color: $gray5;
+  
+    /* Position the tooltip */
+    position: absolute;
+
+    &--row {
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+
+      & svg {
+        height: 20px !important;
+        width: 20px !important;
+        margin: 0 8px 0 0 !important;
+      }
+    }
+  }
+}
