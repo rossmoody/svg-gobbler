@@ -22,12 +22,12 @@ const hasAttr = el => {
   let viewbox
   let visible
   el.svgXml.hasAttribute('viewBox')
-    ? (viewbox = 'gob__attrcont--good')
-    : (viewbox = 'gob__attrcont--bad')
-  el.rects !== 'hidden'
-    ? (visible = 'gob__attrcont--good')
-    : (visible = 'gob__attrcont--bad')
-  return `<span class=${viewbox}>viewBox</span><span class=${visible}>Visible</span>`
+    ? (viewbox = 'gob__attrcont--viewbox')
+    : (viewbox = 'gob__display-none')
+  el.rects !== 'N/A'
+    ? (visible = 'gob__attrcont--hidden')
+    : (visible = 'gob__display-none')
+  return `<span class=${viewbox}></span><span class=${visible}></span>`
 }
 
 export function createCards(svgInfo, cont) {

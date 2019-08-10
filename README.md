@@ -1,6 +1,3 @@
-<p align="center">
-<img src="./src/assets/gob-animate.gif" width="400px">
-</p>
 <h1 align="center">SVG Gobbler</h1>
 
 <h4 align="center"><a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0">Download this extension</a> on the Chrome Web store for use in <a href="www.brave.com/download">Brave</a> or <a href="https://ernestsembutnieks.com/brave-browser-vs-google-chrome/">Chrome.</a></h4>
@@ -11,7 +8,7 @@
 
 ## 🎉 How to use
 
-<p><img src="./src/assets/using-gobbler-1.gif"></p>
+<p><img src="./src/assets/animation/using-gobbler-2.gif"></p>
 
 <br />
 
@@ -50,16 +47,6 @@ Once this is complete you have all you need to side load the extension and start
 2. In the address bar, navigate to `chrome://extensions`
 3. In the top right of the screen, flip the toggle to enable `Developer Mode`
 4. Click the button to `Load unpacked` and select the `extension` folder inside the cloned SVG Gobbler repo
-
-## Start testing server
-
-You can start up a testing server webpage that includes different SVG import syntaxes for testing by running:
-
-```
-npm start
-```
-
-This will start the webpack dev server from the `test-server` directory. You can visit http://localhost:8080 to see the page.
 
 ## Contribute back
 

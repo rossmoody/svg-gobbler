@@ -81,6 +81,16 @@
       font-weight: 500;
       min-width: 24px;
       padding: 4px 12px;
+
+      &:hover .gob__tooltip {
+        visibility: visible;
+      }
+
+      & svg {
+        height: 14px;
+        width: 14px;
+        margin: 0 0 0 6px;
+      }
     }
   }
 
@@ -224,12 +234,6 @@
         margin: 0 0 2px;
         font-size: 11px;
       }
-
-      & span {
-        font-size: 11px;
-        color: $gray4;
-        margin: 0 0 6px 0;
-      }
     }
   }
 
@@ -245,26 +249,28 @@
 
   &__attrcont {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
 
-    &--good,
-    &--bad {
+    &--viewbox,
+    &--hidden {
       display: flex;
 
       &::before {
-        height: 12px;
-        width: 12px;
-        margin: 0 4px 0 0;
-        border-radius: 20px;
+        height: 20px;
+        width: 20px;
+        margin: 0px 6px;
       }
     }
 
-    &--good::before {
-      content: $tag-good-icon;
+    &--viewbox::before {
+      content: $viewbox-icon;
     }
 
-    &--bad::before {
-      content: $tag-bad-icon;
+    &--hidden::before {
+      content: $hidden-icon;
     }
   }
 
@@ -317,8 +323,10 @@
       content: 'Copy';
     }
 
-    &--cors-btn::before {
-      content: 'Open in new tab';
+    &--cors-btn {
+      &::before {
+        content: 'Open in new tab';
+      }
     }
 
     &--success {
@@ -360,10 +368,16 @@
 
     &--cors {
       @include special-tag();
+      height: 28px;
+      width: 28px;
+
+      &::before {
+        content: $cors-alert-icon;
+      }
 
       &:hover::after {
         @include special-tag-hover();
-        content: "This SVG can't be processed normally due to security policy and must be opened in a new tab.";
+        content: "This SVG can't be optimized due to security policy and must be opened in a new tab.";
       }
     }
   }
@@ -383,4 +397,9 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
     animation: 3s loadSadness ease-in-out 1;
   }
+
+  &__display-none {
+    display: none;
+  }
 }
+
