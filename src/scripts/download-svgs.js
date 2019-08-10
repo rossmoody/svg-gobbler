@@ -135,6 +135,11 @@ class ButtonHandler {
     })
   }
 
+  createRegDownload(i) {
+    let blob = new Blob([i.svgString], { type: 'text/xml' })
+    FileSaver.saveAs(blob, `${filename}.svg`)
+  }
+
   copyOptiClipboard(i) {
     svgo.optimize(i.svgString).then(function(result) {
       const el = document.createElement('textarea')
@@ -144,6 +149,15 @@ class ButtonHandler {
       document.execCommand('copy')
       document.body.removeChild(el)
     })
+  }
+
+  copyRegClipboard(i) {
+    const el = document.createElement('textarea')
+    el.value = i.svgString
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand('copy')
+    document.body.removeChild(el)
   }
 }
 
