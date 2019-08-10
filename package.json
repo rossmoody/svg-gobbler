@@ -7,11 +7,14 @@
     "@babel/preset-env": "^7.4.3",
     "babel-loader": "^8.0.5",
     "brfs": "^2.0.2",
+    "concurrently": "^4.1.1",
     "css-loader": "^2.1.1",
     "file-saver": "^2.0.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.12.0",
+    "onchange": "^6.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "prettier": "1.18.2",
     "sass-loader": "^7.1.0",
     "svgo": "^1.2.0",
     "terser-webpack-plugin": "^1.2.3",
@@ -21,7 +24,7 @@
     "webpack-merge": "^4.2.1"
   },
   "scripts": {
-    "build": "webpack --config webpack.prod.js --watch"
+    "gobbler": "concurrently \"webpack --config webpack.prod.js --watch\" \"onchange '**/*.js' -- prettier --write {{changed}}\""
   },
   "repository": {
     "type": "git",

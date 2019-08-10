@@ -1,5 +1,4 @@
 export const globalActions = () => {
-
   // Close gobbler
   function closeGobbler() {
     const gobbler = document.querySelector('.gob')

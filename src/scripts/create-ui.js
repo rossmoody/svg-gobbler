@@ -4,7 +4,7 @@ import {
   feedbackIcon,
   infoIcon,
   viewboxIcon,
-  hiddenIcon
+  hiddenIcon,
 } from './icons'
 import { createCards } from './create-card'
 import { globalActions } from './global'
@@ -30,7 +30,7 @@ const struct = {
   tooltip: 'gob__tooltip',
   tooltipRow: 'gob__tooltip--row',
   feedback: 'gob__feedback',
-  close: 'gob__close'
+  close: 'gob__close',
 }
 
 export const createUI = svgInfo => {
@@ -71,7 +71,7 @@ export const createUI = svgInfo => {
   function hiddenCount() {
     let num = 0
     svgInfo.forEach(el => {
-      if(el.rects == 'N/A') {
+      if (el.rects == 'N/A') {
         num++
       }
     })

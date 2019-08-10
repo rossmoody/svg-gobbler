@@ -36,9 +36,17 @@ export function createCards(svgInfo, cont) {
     // Create dom elements
     const gobblerCard = createElement('div', 'gob__card', cont)
     const gobblerCardClone = createElement('div', 'gob__card__svg', gobblerCard)
-    const gobblerCardCloneWrapper = createElement('div', 'gob__card__svg__wrapper', gobblerCardClone)
+    const gobblerCardCloneWrapper = createElement(
+      'div',
+      'gob__card__svg__wrapper',
+      gobblerCardClone
+    )
     gobblerCardCloneWrapper.appendChild(el.cleanXml)
-    const gobblerCardFooter = createElement('div', 'gob__card__footer', gobblerCard)
+    const gobblerCardFooter = createElement(
+      'div',
+      'gob__card__footer',
+      gobblerCard
+    )
     const gobblerCardBtns = createElement('div', 'gob__btns', gobblerCardFooter)
 
     // Check if SVG has white attribute
@@ -99,7 +107,6 @@ export function createCards(svgInfo, cont) {
         download.copyOptiClipboard(el)
       })
       gobblerCardBtns.appendChild(cOpti)
-
     } else {
       // adds alert to card
       const newTag = createElement('div', 'gob__tag--cors')
@@ -113,7 +120,7 @@ export function createCards(svgInfo, cont) {
       corsBtn.classList.add('gob__btn--cors-btn')
       corsBtn.setAttribute('target', '_blank')
       corsBtn.setAttribute('href', el.url)
-  
+
       gobblerCardBtns.appendChild(corsBtn)
     }
   })

@@ -6,111 +6,111 @@ const svgo = new SVGO({
   multipass: true,
   plugins: [
     {
-      cleanupAttrs: true
+      cleanupAttrs: true,
     },
     {
-      removeDoctype: true
+      removeDoctype: true,
     },
     {
-      removeXMLProcInst: true
+      removeXMLProcInst: true,
     },
     {
-      removeComments: true
+      removeComments: true,
     },
     {
-      removeMetadata: true
+      removeMetadata: true,
     },
     {
-      removeTitle: true
+      removeTitle: true,
     },
     {
-      removeDesc: true
+      removeDesc: true,
     },
     {
-      removeUselessDefs: true
+      removeUselessDefs: true,
     },
     {
-      removeEditorsNSData: true
+      removeEditorsNSData: true,
     },
     {
-      removeEmptyAttrs: true
+      removeEmptyAttrs: true,
     },
     {
-      removeHiddenElems: true
+      removeHiddenElems: true,
     },
     {
-      removeEmptyText: true
+      removeEmptyText: true,
     },
     {
-      removeEmptyContainers: true
+      removeEmptyContainers: true,
     },
     {
-      removeViewBox: false
+      removeViewBox: false,
     },
     {
-      cleanUpEnableBackground: true
+      cleanUpEnableBackground: true,
     },
     {
-      convertStyleToAttrs: true
+      convertStyleToAttrs: true,
     },
     {
-      convertColors: true
+      convertColors: true,
     },
     {
-      convertPathData: true
+      convertPathData: true,
     },
     {
-      convertTransform: true
+      convertTransform: true,
     },
     {
-      removeUnknownsAndDefaults: true
+      removeUnknownsAndDefaults: true,
     },
     {
-      removeNonInheritableGroupAttrs: true
+      removeNonInheritableGroupAttrs: true,
     },
     {
-      removeUselessStrokeAndFill: true
+      removeUselessStrokeAndFill: true,
     },
     {
-      removeUnusedNS: true
+      removeUnusedNS: true,
     },
     {
-      cleanupIDs: true
+      cleanupIDs: true,
     },
     {
-      cleanupNumericValues: true
+      cleanupNumericValues: true,
     },
     {
-      moveElemsAttrsToGroup: true
+      moveElemsAttrsToGroup: true,
     },
     {
-      moveGroupAttrsToElems: true
+      moveGroupAttrsToElems: true,
     },
     {
-      collapseGroups: true
+      collapseGroups: true,
     },
     {
-      removeRasterImages: false
+      removeRasterImages: false,
     },
     {
-      mergePaths: true
+      mergePaths: true,
     },
     {
-      convertShapeToPath: false
+      convertShapeToPath: false,
     },
     {
-      sortAttrs: true
+      sortAttrs: true,
     },
     {
-      transformsWithOnePath: false
+      transformsWithOnePath: false,
     },
     {
-      removeDimensions: false
+      removeDimensions: false,
     },
     {
-      removeAttrs: false
-    }
-  ]
+      removeAttrs: false,
+    },
+  ],
 })
 
 // Make filename from site domain
@@ -119,7 +119,10 @@ function fileName() {
   // prefixes
   site = site.replace(/https|www|http/g, '')
   // suffixes
-  site = site.replace(/\.|com|gov|com|net|org|info|coop|int|co\.uk|org\.uk|ac\.uk|uk/g, '')
+  site = site.replace(
+    /\.|com|gov|com|net|org|info|coop|int|co\.uk|org\.uk|ac\.uk|uk/g,
+    ''
+  )
   return `icon-${site}`
 }
 
