@@ -4,13 +4,17 @@
 @import './motion';
 
 /* Styles */
+html {
+  overflow: auto;
+}
+
 .gob {
   position: absolute;
   width: 100%;
   z-index: 1000000000;
 
   &--hide {
-    animation: fallOut .5s ease-in-out 1;
+    animation: fallOut 0.5s ease-in-out 1;
   }
 
   &__container {
@@ -402,4 +406,3 @@
     display: none;
   }
 }
-
