@@ -24,7 +24,7 @@
     "webpack-merge": "^4.2.1"
   },
   "scripts": {
-    "gobbler": "concurrently \"webpack --config webpack.prod.js --watch\" \"onchange '**/*.js' -- prettier --write {{changed}}\""
+    "gobbler": "concurrently \"webpack --config webpack.prod.js --watch\" \"onchange '**/*.(js|scss)' -- prettier --write {{changed}}\""
   },
   "repository": {
     "type": "git",
