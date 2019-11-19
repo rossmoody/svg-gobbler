@@ -2,10 +2,10 @@ class ManageSVGs {
   filterSVGs(el) {
     if (el.tagName === 'svg') {
       const firstChild = el.firstElementChild
-      if (firstChild.tagName === 'symbol') {
+      if (firstChild && firstChild.tagName === 'symbol') {
         el.type = 'symbol'
         el.spriteId = el.getAttribute('id')
-      } else if (firstChild.tagName === 'use') {
+      } else if (firstChild && firstChild.tagName === 'use') {
         el.type = 'sprite'
         el.spriteId = firstChild.getAttributeNS(
           'http://www.w3.org/1999/xlink',
