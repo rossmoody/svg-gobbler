@@ -1,11 +1,4 @@
-import {
-  closeIcon,
-  gobLogo,
-  feedbackIcon,
-  infoIcon,
-  viewboxIcon,
-  hiddenIcon,
-} from './icons'
+import { closeIcon, gobLogo, feedbackIcon } from './icons'
 import { createCards } from './create-card'
 import { globalActions } from './global'
 
@@ -54,42 +47,8 @@ export const createUI = svgInfo => {
   // Create SVG Counter
   function isPlural() {
     return svgInfo.length === 1
-      ? svgInfo.length + ' SVG ' + infoIcon
-      : svgInfo.length + ' SVGs ' + infoIcon
-  }
-
-  function vbCount() {
-    let num = 0
-    svgInfo.forEach(el => {
-      if (el.ele.hasAttribute('viewBox')) {
-        num++
-      }
-    })
-    return num
-  }
-
-  function hiddenCount() {
-    let num = 0
-    svgInfo.forEach(el => {
-      if (el.rects == 'N/A') {
-        num++
-      }
-    })
-    return num
-  }
-
-  // Create tooltip
-  function generateTooltip(i) {
-    const viewboxes = vbCount()
-    const hiddens = hiddenCount()
-    const gobTooltip = createElement('div', struct.tooltip)
-    const viewboxCont = createElement('div', struct.tooltipRow)
-    viewboxCont.innerHTML = `${viewboxIcon} ${viewboxes} SVGs have a viewBox`
-    const hiddenCont = createElement('div', struct.tooltipRow)
-    hiddenCont.innerHTML = `${hiddenIcon} ${hiddens} SVGs are hidden from view`
-    gobTooltip.appendChild(viewboxCont)
-    gobTooltip.appendChild(hiddenCont)
-    i.appendChild(gobTooltip)
+      ? svgInfo.length + ' SVG '
+      : svgInfo.length + ' SVGs '
   }
 
   // Create header
@@ -99,7 +58,6 @@ export const createUI = svgInfo => {
   const gobCount = createElement('div', struct.count)
   gobCount.innerHTML = isPlural()
   countCont.appendChild(gobCount)
-  generateTooltip(gobCount)
   const gobFeedback = createElement('div', struct.feedback)
   gobFeedback.innerHTML = feedbackIcon
   countCont.appendChild(gobFeedback)

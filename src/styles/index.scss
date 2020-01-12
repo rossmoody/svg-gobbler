@@ -203,9 +203,9 @@ html {
     }
 
     &__footer {
-      margin: 0 16px;
+      margin: 0 20px;
       line-height: 1.4;
-      padding: 12px 0 16px;
+      padding: 12px 0 20px;
       min-height: 90px;
       border-top: 1px solid $gray2;
       position: relative;
@@ -214,7 +214,7 @@ html {
       align-items: start;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 8px;
-      align-content: center;
+      align-content: start;
 
       & h3,
       h4 {
@@ -257,25 +257,6 @@ html {
     align-items: center;
     height: 100%;
     justify-content: flex-end;
-
-    &--viewbox,
-    &--hidden {
-      display: flex;
-
-      &::before {
-        height: 20px;
-        width: 20px;
-        margin: 0px 6px;
-      }
-    }
-
-    &--viewbox::before {
-      content: $viewbox-icon;
-    }
-
-    &--hidden::before {
-      content: $hidden-icon;
-    }
   }
 
   &__btns {

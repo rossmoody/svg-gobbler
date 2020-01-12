@@ -40,11 +40,13 @@ class SVG {
     if (this.svgXml.viewBox) {
       viewBoxWidth = this.svgXml.viewBox.baseVal.width
       viewBoxHeight = this.svgXml.viewBox.baseVal.height
-      this.rects = `${viewBoxWidth}x${viewBoxHeight}`
     } else {
-      this.rects = `N/A`
+      viewBoxWidth = this.ele.width
+      viewBoxHeight = this.ele.height
+      console.log(`${viewBoxWidth}x${viewBoxHeight}`)
     }
 
+    this.rects = `${viewBoxWidth}x${viewBoxHeight}`
     this.cleanXml = this.svgXml.cloneNode(true)
     this.cleanXml.setAttribute('class', 'gob__card__svg__trick')
     this.cleanXml.removeAttribute('height')
