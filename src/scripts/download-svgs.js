@@ -135,6 +135,29 @@ class ButtonHandler {
     })
   }
 
+  createOptimizedExportedDownload(i, fileExt) {
+    const filename = fileName()
+    svgo.optimize(i.svgString).then(function(result) {
+      const canvas = document.createElement('canvas')
+      canvas.width = i.svgXml.width.baseVal.value
+      canvas.height = i.svgXml.height.baseVal.value
+      canvas.style.width = i.svgXml.width.baseVal.value
+      canvas.style.height = i.svgXml.height.baseVal.value
+      const ctx = canvas.getContext('2d')
+      const img = document.createElement('img')
+      img.setAttribute(
+        'src',
+        'data:image/svg+xml;base64,' +
+          btoa(unescape(encodeURIComponent(result.data)))
+      )
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0)
+        let imgURI = canvas.toDataURL('image/' + fileExt, 1)
+        FileSaver.saveAs(imgURI, `${filename}.${fileExt}`)
+      }
+    })
+  }
+
   createRegDownload(i) {
     let blob = new Blob([i.svgString], { type: 'text/xml' })
     FileSaver.saveAs(blob, `${filename}.svg`)
