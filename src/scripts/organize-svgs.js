@@ -34,24 +34,15 @@ class SVG {
 
   // Set size attributes to svg viewBox attr dynamically for better render in card
   async cleanupXML() {
-    let rects = this.ele.getBoundingClientRect()
-    let viewBoxHeight = rects.width
-    let viewBoxWidth = rects.height
+    let viewBoxHeight
+    let viewBoxWidth
 
-    if (rects.width === 0 && rects.height === 0) {
-      this.rects = 'N/A'
-    } else if (
-      this.svgXml.hasAttribute('width') &&
-      this.svgXml.hasAttribute('height')
-    ) {
-      this.inlineSize = true
-      const width = this.svgXml.getAttribute('width')
-      const height = this.svgXml.getAttribute('height')
-      width.includes('px')
-        ? (this.rects = `${width.slice(0, -2)}x${height.slice(0, -2)}`)
-        : (this.rects = `${width}x${height}`)
+    if (this.svgXml.viewBox) {
+      viewBoxWidth = this.svgXml.viewBox.baseVal.width
+      viewBoxHeight = this.svgXml.viewBox.baseVal.height
+      this.rects = `${viewBoxWidth}x${viewBoxHeight}`
     } else {
-      this.rects = `${Math.floor(rects.width)}x${Math.floor(rects.height)}`
+      this.rects = `N/A`
     }
 
     this.cleanXml = this.svgXml.cloneNode(true)
