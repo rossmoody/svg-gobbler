@@ -84,16 +84,12 @@ html {
       margin: 0 8px;
       font-weight: 500;
       min-width: 24px;
-      padding: 4px 12px;
+      padding: 8px 16px;
+      border: none;
 
-      &:hover .gob__tooltip {
-        visibility: visible;
-      }
-
-      & svg {
-        height: 14px;
-        width: 14px;
-        margin: 0 0 0 6px;
+      &:hover {
+        box-shadow: 4px 4px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
       }
     }
   }
@@ -134,7 +130,7 @@ html {
 
   &__close {
     @include header-icon();
-    margin: 0 0 0 48px;
+    margin: 0 0 0 24px;
 
     & path {
       stroke: $white;
@@ -249,14 +245,6 @@ html {
   &__sizecont {
     display: flex;
     flex-direction: column;
-  }
-
-  &__attrcont {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
-    justify-content: flex-end;
   }
 
   &__btns {

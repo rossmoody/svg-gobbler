@@ -1,6 +1,8 @@
 import { closeIcon, gobLogo, feedbackIcon } from './icons'
 import { createCards } from './create-card'
 import { globalActions } from './global'
+import JSZip from 'jszip'
+import FileSaver from 'file-saver'
 
 // Element creation helper
 function createElement(el, elClass) {
@@ -20,8 +22,7 @@ const struct = {
   // Header
   logo: 'gob__logo',
   count: 'gob__count--svg',
-  tooltip: 'gob__tooltip',
-  tooltipRow: 'gob__tooltip--row',
+  downloadAll: 'gob__download',
   feedback: 'gob__feedback',
   close: 'gob__close',
 }
@@ -47,17 +48,26 @@ export const createUI = svgInfo => {
   // Create SVG Counter
   function isPlural() {
     return svgInfo.length === 1
-      ? svgInfo.length + ' SVG '
-      : svgInfo.length + ' SVGs '
+      ? `Download the ${svgInfo.length} SVG`
+      : `Download all ${svgInfo.length} SVGs`
   }
 
   // Create header
   const gobLogoEl = createElement('div', struct.logo)
   gobLogoEl.innerHTML = gobLogo
   logoCont.appendChild(gobLogoEl)
-  const gobCount = createElement('div', struct.count)
+  const gobCount = createElement('button', struct.count)
   gobCount.innerHTML = isPlural()
   countCont.appendChild(gobCount)
+  gobCount.addEventListener('click', () => {
+    var zip = new JSZip()
+    svgInfo.forEach((svg, index) => {
+      zip.file(`svg-${index}.svg`, svg.svgString)
+    })
+    zip.generateAsync({ type: 'blob' }).then(function(content) {
+      FileSaver.saveAs(content, 'gobbled_svgs.zip')
+    })
+  })
   const gobFeedback = createElement('div', struct.feedback)
   gobFeedback.innerHTML = feedbackIcon
   countCont.appendChild(gobFeedback)

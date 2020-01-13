@@ -96,6 +96,6 @@ export async function organizeSVGs() {
     return newEl
   })
   allSVGs = await Promise.all(allSVGs)
-  console.log(allSVGs)
+  // console.log(allSVGs)
   return allSVGs
 }
