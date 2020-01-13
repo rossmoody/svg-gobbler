@@ -108,23 +108,23 @@ export function createCards(svgInfo, cont) {
       })
       gobblerCardBtns.appendChild(cOpti)
 
-      // PNG options
-      const pOpti = createElement('button', 'gob__btn')
-      pOpti.classList.add('gob__btn--pngdownload')
-      pOpti.addEventListener('click', () => {
-        toggleSuccess(pOpti, 'gob__btn--success--pngdownload')
-        download.createOptimizedExportedDownload(el, 'png')
-      })
-      gobblerCardBtns.appendChild(pOpti)
+      // // PNG options
+      // const pOpti = createElement('button', 'gob__btn')
+      // pOpti.classList.add('gob__btn--pngdownload')
+      // pOpti.addEventListener('click', () => {
+      //   toggleSuccess(pOpti, 'gob__btn--success--pngdownload')
+      //   download.createOptimizedExportedDownload(el, 'png')
+      // })
+      // gobblerCardBtns.appendChild(pOpti)
 
-      // JPG options
-      const jOpti = createElement('button', 'gob__btn')
-      jOpti.classList.add('gob__btn--jpgdownload')
-      jOpti.addEventListener('click', () => {
-        toggleSuccess(jOpti, 'gob__btn--success--jpgdownload')
-        download.createOptimizedExportedDownload(el, 'jpg')
-      })
-      gobblerCardBtns.appendChild(jOpti)
+      // // JPG options
+      // const jOpti = createElement('button', 'gob__btn')
+      // jOpti.classList.add('gob__btn--jpgdownload')
+      // jOpti.addEventListener('click', () => {
+      //   toggleSuccess(jOpti, 'gob__btn--success--jpgdownload')
+      //   download.createOptimizedExportedDownload(el, 'jpg')
+      // })
+      // gobblerCardBtns.appendChild(jOpti)
     } else {
       // adds alert to card
       const newTag = createElement('div', 'gob__tag--cors')
