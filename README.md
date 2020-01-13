@@ -59,17 +59,3 @@ The extension requires permission to read and modify all the data of the website
 ### About
 
 This started as a pet project to improve the [SVG Crowbar](http://nytimes.github.com/svg-crowbar/) tool that is no longer being maintained by NY Times. It has come a long way since then but I always appreciated the simplistic approach they started and it's nice to pay homage.
-
-## Third party dependencies
-
-#### [FileSaver.js](https://github.com/eligrey/FileSaver.js)
-
-Used to export the SVG strings to file or clipboard.
-
-#### [SVGO](https://github.com/svg/svgo)
-
-Node tool used to optimize the SVG content before exporting.
-
-### Very Helpful Articles
-
-- [Scaling SVG Article](https://css-tricks.com/scale-svg/p)
