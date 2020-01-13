@@ -37,7 +37,7 @@ Currently, if you would like to use or modify this extension you will need to in
 
 1. Clone the repo and `cd` into the root folder
 2. Run `npm install` to install necessary dependencies
-3. Run `npm run gobbler` to bundle and build the latest `style.css` file and `index.js` file into the `extension` folder. This also tells webpack to watch for edits and also start Prettier to automatically format the code.
+3. Run `npm start` to bundle and build the latest `style.css` file and `index.js` file into the `extension` folder. This also tells webpack to watch for edits and also start Prettier to automatically format the code.
 
 Once this is complete you have all you need to side load the extension and start hacking. Editing content in the `src` directory will automatically build and update the extension folder which will feed the extension in the browser the latest code.
 
