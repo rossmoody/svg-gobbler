@@ -1,6 +1,6 @@
 <h1 align="center">SVG Gobbler</h1>
 
-<h4 align="center">Download this extension on <a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0">the Chrome Web store</a> or in the <a href="https://addons.mozilla.org/en-US/firefox/addon/svg-gobbler/">Add-On Marketplace</a> for Firefox. 
+<p align="center">Download this extension on <a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en-US&authuser=0">the Chrome Web store</a> or in the <a href="https://addons.mozilla.org/en-US/firefox/addon/svg-gobbler/">Add-On Marketplace</a> for Firefox.</p> 
 
 <p align="center">SVG Gobbler is a simple browser extension that finds SVG content in your current window and lets you download or copy to clipboard. The SVG code is automatically optimized using SVGO during export.</p>
 
