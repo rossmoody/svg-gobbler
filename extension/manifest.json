@@ -1,10 +1,10 @@
 {
   "name": "SVG Gobbler",
   "short_name": "SVG Gobbler",
-  "version": "1.17",
+  "version": "1.18",
   "manifest_version": 2,
   "author": "Ross Moody",
-  "description": "Download and optimize SVGs from websites.",
+  "description": "Download SVGs from the web.",
   "background": {
     "scripts": ["background.js"]
   },
@@ -15,7 +15,11 @@
     "128": "./img/icon128.png"
   },
   "browser_action": {
-    "default_icon": "./img/icon128.png"
+    "default_icon": {
+      "16": "./img/icon16.png",
+      "24": "./img/icon24.png",
+      "32": "./img/icon32.png"
+    }
   },
   "permissions": ["activeTab"]
 }
