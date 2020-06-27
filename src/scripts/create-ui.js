@@ -1,4 +1,4 @@
-import { closeIcon, gobLogo, feedbackIcon } from './icons'
+import { closeIcon, gobLogo } from './icons'
 import { createCards } from './create-card'
 import { globalActions } from './global'
 import JSZip from 'jszip'
@@ -23,11 +23,10 @@ const struct = {
   logo: 'gob__logo',
   count: 'gob__count--svg',
   downloadAll: 'gob__download',
-  feedback: 'gob__feedback',
   close: 'gob__close',
 }
 
-export const createUI = svgInfo => {
+export const createUI = (svgInfo) => {
   const gobbler = createElement('div', struct.globalContainer)
   document.body.insertAdjacentElement('beforebegin', gobbler)
 
@@ -48,8 +47,8 @@ export const createUI = svgInfo => {
   // Create SVG Counter
   function isPlural() {
     return svgInfo.length === 1
-      ? `Download the ${svgInfo.length} SVG`
-      : `Download all ${svgInfo.length} SVGs`
+      ? `Download ${svgInfo.length} SVG`
+      : `Download ${svgInfo.length} SVGs`
   }
 
   // Create header
@@ -64,13 +63,11 @@ export const createUI = svgInfo => {
     svgInfo.forEach((svg, index) => {
       zip.file(`svg-${index}.svg`, svg.svgString)
     })
-    zip.generateAsync({ type: 'blob' }).then(function(content) {
+    zip.generateAsync({ type: 'blob' }).then(function (content) {
       FileSaver.saveAs(content, 'gobbled_svgs.zip')
     })
   })
-  const gobFeedback = createElement('div', struct.feedback)
-  gobFeedback.innerHTML = feedbackIcon
-  countCont.appendChild(gobFeedback)
+
   const gobClose = createElement('div', struct.close)
   gobClose.innerHTML = closeIcon
   countCont.appendChild(gobClose)

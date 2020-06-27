@@ -1,6 +1,7 @@
 import '../styles/index.scss'
 import { organizeSVGs } from './organize-svgs'
 import { createUI } from './create-ui'
+import FileSaver from 'file-saver'
 
 class DecisionMaker {
   noGobbles() {
@@ -12,6 +13,17 @@ class DecisionMaker {
     setTimeout(() => {
       noGobbler.remove()
     }, 3000)
+  }
+
+  oneGobble() {
+    const docEl = document.documentElement
+    const string = new XMLSerializer().serializeToString(docEl)
+    const el = document.createElement('textarea')
+    docEl.insertAdjacentElement('beforeend', el)
+    el.value = string
+    el.select()
+    console.log(el)
+    // document.execCommand('copy')
   }
 
   errorGobbles(error) {
@@ -45,6 +57,11 @@ async function init() {
     const hasGobbles = document.querySelector('.gob')
     if (hasGobbles) {
       console.log('There are already Gobblers about...')
+    } else if (
+      !document.querySelector('body') &&
+      document.querySelector('svg')
+    ) {
+      start.oneGobble()
     } else {
       const allSVGs = await organizeSVGs()
       allSVGs.length === 0 ? start.noGobbles() : start.theGobbles(allSVGs)

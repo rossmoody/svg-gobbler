@@ -80,51 +80,21 @@ html {
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 40px;
+      border-radius: 6px;
       margin: 0 8px;
       font-weight: 500;
       min-width: 24px;
       padding: 8px 16px;
       border: none;
+      letter-spacing: normal;
+      text-transform: none;
 
       &:hover {
         box-shadow: 4px 4px rgba(0, 0, 0, 0.15);
+        background: $primary;
+        color: $white;
         cursor: pointer;
       }
-    }
-  }
-
-  &__feedback {
-    @include header-icon();
-    @include font-family();
-    margin: 0 0 0 24px;
-
-    & path {
-      fill: $white;
-    }
-
-    &:hover {
-      background: $primary;
-    }
-
-    &:hover::after {
-      bottom: 4px;
-      transform: translateY(100%);
-      font-size: 14px;
-      background: $white;
-      position: absolute;
-      padding: 8px 12px;
-      width: auto;
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-      animation: 0.3s ease-in fadeIn;
-      color: $gray5;
-      content: 'Send feedback';
-    }
-
-    & svg {
-      height: 20px;
-      width: 20px;
     }
   }
 
@@ -276,11 +246,14 @@ html {
     border-radius: 6px;
     border: 1px solid $gray2;
     color: $gray4;
+    background: white;
     cursor: pointer;
     outline: none;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 13px !important;
+    font-weight: 400 !important;
     text-decoration: none;
+    letter-spacing: normal;
+    text-transform: none;
 
     &:hover {
       background: $primary;
@@ -344,7 +317,7 @@ html {
 
       &:hover::after {
         @include special-tag-hover();
-        content: 'Output from SVG sprites is broken at the moment. The code is closed off in something scary called the "shadow DOM".';
+        content: 'Output from SVG sprites is impossible at the moment. The code is closed off in shadow DOM.';
       }
     }
 

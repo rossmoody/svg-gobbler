@@ -9,44 +9,44 @@ class SVG {
 
   // get svg XML info from el with URL
   async getXML() {
-    let serializer = new XMLSerializer()
-    let parser = new DOMParser()
+    this.svgString = this.ele.eleString
+    this.svgXml = this.ele
 
     if (this.url) {
-      let response = await fetch(this.url, { mode: 'no-cors' })
-
-      if (response.type === 'opaque') {
-        this.svgString = ''
-        this.svgXml = this.ele
-        return
-      }
-
-      const xml = parser.parseFromString(response.text(), 'image/svg+xml')
-        .children[0]
-      const string = serializer.serializeToString(xml)
-      this.svgString = string
-      this.svgXml = xml
-    } else {
-      this.svgString = this.ele.eleString
-      this.svgXml = this.ele
+      await fetch(this.url, { mode: 'no-cors' })
+        .then((r) => r.text())
+        .then((text) => {
+          this.svgString = text
+        })
+        .catch((e) => console.log(e))
     }
   }
 
   // Set size attributes to svg viewBox attr dynamically for better render in card
   async cleanupXML() {
-    let viewBoxHeight
-    let viewBoxWidth
+    let rects = this.ele.getBoundingClientRect()
+    let viewBoxHeight = Math.floor(rects.width)
+    let viewBoxWidth = Math.floor(rects.height)
 
-    if (this.svgXml.viewBox) {
-      viewBoxWidth = this.svgXml.viewBox.baseVal.width
-      viewBoxHeight = this.svgXml.viewBox.baseVal.height
+    if (rects.width === 0 && rects.height === 0) {
+      this.rects = 'N/A'
+    } else if (
+      this.svgXml.hasAttribute('width') &&
+      this.svgXml.hasAttribute('height')
+    ) {
+      const width = this.svgXml.getAttribute('width')
+      const height = this.svgXml.getAttribute('height')
+      if (width.includes('100%')) {
+        this.rects = '100%'
+      } else if (width.includes('px')) {
+        this.rects = `${width.slice(0, -2)}x${height.slice(0, -2)}`
+      } else {
+        this.rects = `${width}x${height}`
+      }
     } else {
-      viewBoxWidth = this.ele.width
-      viewBoxHeight = this.ele.height
-      console.log(`${viewBoxWidth}x${viewBoxHeight}`)
+      this.rects = `${viewBoxWidth}x${viewBoxHeight}`
     }
 
-    this.rects = `${viewBoxWidth}x${viewBoxHeight}`
     this.cleanXml = this.svgXml.cloneNode(true)
     this.cleanXml.setAttribute('class', 'gob__card__svg__trick')
     this.cleanXml.removeAttribute('height')
@@ -87,7 +87,7 @@ export async function organizeSVGs() {
   let allSVGs = findSVGs()
 
   // Create SVG classes
-  allSVGs = allSVGs.map(async i => {
+  allSVGs = allSVGs.map(async (i) => {
     const newEl = new SVG(i, i.url, i.type)
     await newEl.getXML()
     await newEl.cleanupXML()
@@ -96,6 +96,5 @@ export async function organizeSVGs() {
     return newEl
   })
   allSVGs = await Promise.all(allSVGs)
-  // console.log(allSVGs)
   return allSVGs
 }

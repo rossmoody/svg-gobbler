@@ -91,22 +91,22 @@ export function createCards(svgInfo, cont) {
 
     if (el.svgString.length > 0) {
       // Download button
-      const dOpti = createElement('button', 'gob__btn')
-      dOpti.classList.add('gob__btn--download')
-      dOpti.addEventListener('click', () => {
-        toggleSuccess(dOpti, 'gob__btn--success--download')
-        download.createOptiDownload(el)
+      const downloadButton = createElement('button', 'gob__btn')
+      downloadButton.classList.add('gob__btn--download')
+      downloadButton.addEventListener('click', () => {
+        toggleSuccess(downloadButton, 'gob__btn--success--download')
+        download.createRegDownload(el)
       })
-      gobblerCardBtns.appendChild(dOpti)
+      gobblerCardBtns.appendChild(downloadButton)
 
       // Copy button
-      const cOpti = createElement('button', 'gob__btn')
-      cOpti.classList.add('gob__btn--copy')
-      cOpti.addEventListener('click', () => {
-        toggleSuccess(cOpti, 'gob__btn--success--copy')
-        download.copyOptiClipboard(el)
+      const copyButton = createElement('button', 'gob__btn')
+      copyButton.classList.add('gob__btn--copy')
+      copyButton.addEventListener('click', () => {
+        toggleSuccess(copyButton, 'gob__btn--success--copy')
+        download.copyRegClipboard(el)
       })
-      gobblerCardBtns.appendChild(cOpti)
+      gobblerCardBtns.appendChild(copyButton)
     } else {
       // adds alert to card
       const newTag = createElement('div', 'gob__tag--cors')
