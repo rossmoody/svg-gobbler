@@ -18,7 +18,7 @@ function createElement(el, elClass, elPar = null, innH = null) {
   return elPar ? elPar.appendChild(i) : i
 }
 
-const hasAttr = el => {
+const hasAttr = (el) => {
   let viewbox
   let visible
   el.svgXml.hasAttribute('viewBox')
@@ -107,24 +107,6 @@ export function createCards(svgInfo, cont) {
         download.copyOptiClipboard(el)
       })
       gobblerCardBtns.appendChild(cOpti)
-
-      // // PNG options
-      // const pOpti = createElement('button', 'gob__btn')
-      // pOpti.classList.add('gob__btn--pngdownload')
-      // pOpti.addEventListener('click', () => {
-      //   toggleSuccess(pOpti, 'gob__btn--success--pngdownload')
-      //   download.createOptimizedExportedDownload(el, 'png')
-      // })
-      // gobblerCardBtns.appendChild(pOpti)
-
-      // // JPG options
-      // const jOpti = createElement('button', 'gob__btn')
-      // jOpti.classList.add('gob__btn--jpgdownload')
-      // jOpti.addEventListener('click', () => {
-      //   toggleSuccess(jOpti, 'gob__btn--success--jpgdownload')
-      //   download.createOptimizedExportedDownload(el, 'jpg')
-      // })
-      // gobblerCardBtns.appendChild(jOpti)
     } else {
       // adds alert to card
       const newTag = createElement('div', 'gob__tag--cors')
