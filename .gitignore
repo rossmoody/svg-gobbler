@@ -3,6 +3,7 @@ node_modules
 
 # auto generated files
 extension/dist
+package.zip
 
 # ds 
 .DS_Store
