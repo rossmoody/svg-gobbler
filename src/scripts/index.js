@@ -1,7 +1,7 @@
 import '../styles/index.scss'
 import { organizeSVGs } from './organize-svgs'
 import { createUI } from './create-ui'
-import FileSaver from 'file-saver'
+import { download } from './download-svgs'
 
 class DecisionMaker {
   noGobbles() {
@@ -16,14 +16,7 @@ class DecisionMaker {
   }
 
   oneGobble() {
-    const docEl = document.documentElement
-    const string = new XMLSerializer().serializeToString(docEl)
-    const el = document.createElement('textarea')
-    docEl.insertAdjacentElement('beforeend', el)
-    el.value = string
-    el.select()
-    console.log(el)
-    // document.execCommand('copy')
+    download.copyIsolatedSVG()
   }
 
   errorGobbles(error) {

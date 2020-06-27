@@ -27,6 +27,19 @@ class ButtonHandler {
     document.execCommand('copy')
     document.body.removeChild(el)
   }
+
+  copyIsolatedSVG() {
+    const docEl = document.documentElement
+    const string = new XMLSerializer().serializeToString(docEl)
+    navigator.clipboard.writeText(string).then(
+      function () {
+        alert('The SVG was copied to your clipboard.')
+      },
+      function (err) {
+        alert('Could not copy:', err)
+      }
+    )
+  }
 }
 
 export const download = new ButtonHandler()
