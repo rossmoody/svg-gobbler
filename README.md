@@ -6,13 +6,13 @@
 
 ## Developer mode
 
-Currently, if you would like to use or modify this extension you will need to install it manually. Before making edits you will need to build it locally and side load SVG Gobbler as a developer extension to test any changes.
+Currently, if you would like to modify this extension you will need to install it manually. Before making edits you will need to build it locally and side load SVG Gobbler as a developer extension to test any changes.
 
 ### Installation
 
 1. Clone the repo and `cd` into the root folder
 2. Run `npm install` to install necessary dependencies
-3. Run `npm start` to bundle and build the latest `style.css` file and `index.js` file into the `extension` folder. This also tells webpack to watch for edits and also start Prettier to automatically format the code.
+3. Run `npm start` to bundle and build the latest `style.css` file and `index.js` file into the `extension/dist` folder. This also tells webpack to watch for edits and also start Prettier to automatically format the code.
 
 ### Side load extension
 
@@ -43,10 +43,6 @@ Unique attributes for each SVG element will be shown within the card. The attrib
 ## Contribute
 
 Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and I'm not very good at javascript.
-
-## Permissions
-
-The extension requires permission to read and modify all the data of the website that you want to download the svg files from. It is nessesary to parse and extract the svg assets on the site.
 
 ### About
 
