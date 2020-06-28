@@ -6,6 +6,8 @@ const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
   stats: 'errors-only',
   entry: './src/scripts/index.js',
+  mode: 'production',
+  devtool: 'cheap-module-eval-source-map',
   output: {
     filename: './index.js',
     path: path.resolve(__dirname, 'extension/dist'),

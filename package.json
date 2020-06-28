@@ -25,7 +25,7 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "start": "concurrently \"webpack --config webpack.prod.js --watch\" \"onchange '**/*.(js|scss)' -- prettier --write {{changed}}\"",
+    "start": "concurrently \"webpack --config webpack.js --watch\" \"onchange '**/*.(js|scss)' -- prettier --write {{changed}}\"",
     "zip": "bestzip package.zip extension/*"
   },
   "repository": {
