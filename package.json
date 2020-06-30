@@ -6,15 +6,12 @@
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "babel-loader": "^8.1.0",
-    "bestzip": "^2.1.5",
     "brfs": "^2.0.2",
-    "concurrently": "^5.2.0",
     "css-loader": "^3.6.0",
     "file-saver": "^2.0.2",
     "jszip": "3.2.2",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
-    "onchange": "^6.1.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prettier": "2.0.5",
     "sass-loader": "^7.3.1",
@@ -25,8 +22,8 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "start": "concurrently \"webpack --config webpack.js --watch\" \"onchange '**/*.(js|scss)' -- prettier --write {{changed}}\"",
-    "zip": "bestzip package.zip extension/*"
+    "start": "webpack --config webpack.js --watch",
+    "format": "-- prettier --write"
   },
   "repository": {
     "type": "git",

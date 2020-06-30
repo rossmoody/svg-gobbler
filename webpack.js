@@ -4,10 +4,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  stats: 'errors-only',
   entry: './src/scripts/index.js',
   mode: 'production',
-  devtool: 'cheap-module-eval-source-map',
   output: {
     filename: './index.js',
     path: path.resolve(__dirname, 'extension/dist'),
@@ -15,6 +13,7 @@ module.exports = {
   node: {
     fs: 'empty', // webpack doesn't like fs or require modules and errors without this
   },
+  stats: 'minimal',
   optimization: {
     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
