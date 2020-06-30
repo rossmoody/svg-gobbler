@@ -26,7 +26,7 @@ const struct = {
   close: 'gob__close',
 }
 
-const createUI = (svgInfo) => {
+const createUI = svgInfo => {
   const gobbler = createElement('div', struct.globalContainer)
   document.body.insertAdjacentElement('beforebegin', gobbler)
 
@@ -63,7 +63,7 @@ const createUI = (svgInfo) => {
     svgInfo.forEach((svg, index) => {
       zip.file(`svg-${index}.svg`, svg.svgString)
     })
-    zip.generateAsync({ type: 'blob' }).then((content) => {
+    zip.generateAsync({ type: 'blob' }).then(content => {
       FileSaver.saveAs(content, 'gobbled_svgs.zip')
     })
   })

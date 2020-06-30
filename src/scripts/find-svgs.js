@@ -41,14 +41,14 @@ class ManageSVGs {
 
   removeDups(arr, comp) {
     const unique = arr
-      .map((e) => e[comp])
+      .map(e => e[comp])
 
       // store the keys of the unique objects
       .map((e, i, final) => final.indexOf(e) === i && i)
 
       // eliminate the dead keys & store unique objects
-      .filter((e) => arr[e])
-      .map((e) => arr[e])
+      .filter(e => arr[e])
+      .map(e => arr[e])
 
     return unique
   }
@@ -66,7 +66,7 @@ export function findSVGs() {
   let allSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 
   // Filter the SVG elements down
-  allSVGs = allSVGs.filter((i) => {
+  allSVGs = allSVGs.filter(i => {
     svgCtrl.filterSVGs(i)
     i.type ? svgCtrl.serializeSVG(i) : null
     return i.type

@@ -9,15 +9,13 @@ const globalActions = () => {
   }
 
   // Close event listeners
-  document.querySelector('.gob__close').addEventListener('click', function () {
+  document.querySelector('.gob__close').addEventListener('click', () => {
     closeGobbler()
   })
 
-  document
-    .querySelector('.gob__overlay')
-    .addEventListener('click', function () {
-      closeGobbler()
-    })
+  document.querySelector('.gob__overlay').addEventListener('click', () => {
+    closeGobbler()
+  })
 }
 
 export default globalActions

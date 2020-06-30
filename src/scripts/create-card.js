@@ -18,7 +18,7 @@ function createElement(el, elClass, elPar = null, innH = null) {
   return elPar ? elPar.appendChild(i) : i
 }
 
-const hasAttr = (el) => {
+const hasAttr = el => {
   let viewbox
   let visible
 

@@ -14,8 +14,8 @@ class SVG {
 
     if (this.url) {
       await fetch(this.url, { mode: 'no-cors' })
-        .then((r) => r.text())
-        .then((text) => {
+        .then(r => r.text())
+        .then(text => {
           this.svgString = text
         })
         .catch()
@@ -52,49 +52,45 @@ class SVG {
     this.cleanXml.removeAttribute('height')
     this.cleanXml.removeAttribute('width')
     this.cleanXml.removeAttribute('style')
-    this.cleanXml.hasAttribute('viewBox')
-      ? ''
-      : this.cleanXml.setAttribute(
-          'viewBox',
-          `0 0 ${viewBoxHeight} ${viewBoxWidth}`
-        )
-    this.cleanXml.getAttribute('viewBox') === '0 0 0 0'
-      ? this.cleanXml.setAttribute('viewBox', `0 0 24 24`)
-      : null
+
+    if (!this.cleanXml.hasAttribute('viewBox')) {
+      this.cleanXml.setAttribute(
+        'viewBox',
+        `0 0 ${viewBoxHeight} ${viewBoxWidth}`
+      )
+    }
+
+    if (this.cleanXml.getAttribute('viewBox') === '0 0 0 0') {
+      this.cleanXml.setAttribute('viewBox', `0 0 24 24`)
+    }
+
     this.cleanXml.setAttribute('preserveAspectRatio', 'xMidYMid meet')
   }
 
   async checkForWhite() {
     const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
-    for (const string of whiteStrings) {
-      this.svgString.includes(string) ? (this.hasWhite = true) : null
-    }
-  }
 
-  async checkForFill() {
-    if (
-      this.svgString.includes('fill=') &&
-      !this.svgString.includes('fill="none"')
-    ) {
-      null
-    } else {
-      this.cleanXml.setAttribute('fill', '#232323')
+    for (const string of whiteStrings) {
+      if (this.svgString.includes(string)) {
+        this.hasWhite = true
+      }
     }
   }
 }
 
-export async function organizeSVGs() {
+async function organizeSVGs() {
   let allSVGs = findSVGs()
 
   // Create SVG classes
-  allSVGs = allSVGs.map(async (i) => {
+  allSVGs = allSVGs.map(async i => {
     const newEl = new SVG(i, i.url, i.type)
     await newEl.getXML()
     await newEl.cleanupXML()
     await newEl.checkForWhite()
-    await newEl.checkForFill()
     return newEl
   })
   allSVGs = await Promise.all(allSVGs)
   return allSVGs
 }
+
+export default organizeSVGs

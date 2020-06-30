@@ -3,6 +3,7 @@
   "plugins": ["prettier"],
   "rules": {
     "no-undef": "off",
+    "no-restricted-syntax": "off",
     "prettier/prettier": [
       "error",
       {
