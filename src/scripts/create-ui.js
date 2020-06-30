@@ -63,7 +63,7 @@ const createUI = (svgInfo) => {
     svgInfo.forEach((svg, index) => {
       zip.file(`svg-${index}.svg`, svg.svgString);
     });
-    zip.generateAsync({ type: 'blob' }).then(function (content) {
+    zip.generateAsync({ type: 'blob' }).then((content) => {
       FileSaver.saveAs(content, 'gobbled_svgs.zip');
     });
   });

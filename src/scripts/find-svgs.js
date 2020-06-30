@@ -1,42 +1,42 @@
 class ManageSVGs {
   filterSVGs(el) {
     if (el.tagName === 'svg') {
-      const firstChild = el.firstElementChild
+      const firstChild = el.firstElementChild;
       if (firstChild && firstChild.tagName === 'symbol') {
-        el.type = 'symbol'
-        el.spriteId = el.getAttribute('id')
+        el.type = 'symbol';
+        el.spriteId = el.getAttribute('id');
       } else if (firstChild && firstChild.tagName === 'use') {
-        el.type = 'sprite'
+        el.type = 'sprite';
         el.spriteId = firstChild.getAttributeNS(
           'http://www.w3.org/1999/xlink',
           'href'
-        )
+        );
       } else {
-        el.type = 'inline'
+        el.type = 'inline';
       }
     } else if (el.tagName === 'IMG') {
-      el.url = el.src
-      el.type = 'img src'
+      el.url = el.src;
+      el.type = 'img src';
     } else if (el.tagName === 'OBJECT') {
-      el.url = el.data
-      el.type = 'object'
+      el.url = el.data;
+      el.type = 'object';
     } else if (el.tagName === 'DIV') {
-      const style = window.getComputedStyle(el, null)
-      const url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
-      const fileType = url.substr(url.lastIndexOf('.') + 1)
+      const style = window.getComputedStyle(el, null);
+      const url = style.backgroundImage.slice(4, -1).replace(/"/g, '');
+      const fileType = url.substr(url.lastIndexOf('.') + 1);
 
       if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
-        el.url = url
-        el.type = 'bg img'
+        el.url = url;
+        el.type = 'bg img';
       }
     }
-    return el
+    return el;
   }
 
   serializeSVG(el) {
-    const serializer = new XMLSerializer()
-    const string = serializer.serializeToString(el)
-    el.eleString = string
+    const serializer = new XMLSerializer();
+    const string = serializer.serializeToString(el);
+    el.eleString = string;
   }
 
   removeDups(arr, comp) {
@@ -48,31 +48,33 @@ class ManageSVGs {
 
       // eliminate the dead keys & store unique objects
       .filter((e) => arr[e])
-      .map((e) => arr[e])
+      .map((e) => arr[e]);
 
-    return unique
+    return unique;
   }
 }
 
-const svgCtrl = new ManageSVGs()
+const svgCtrl = new ManageSVGs();
 
 // Gather all the possible SVG elements on a page
 export function findSVGs() {
-  const svgTags = Array.from(document.querySelectorAll('svg'))
-  const objDatas = Array.from(document.querySelectorAll('object[data*=".svg"]'))
-  const imgSrcs = Array.from(document.querySelectorAll('img[src*=".svg"]'))
-  const pageDivs = Array.from(document.querySelectorAll('div'))
+  const svgTags = Array.from(document.querySelectorAll('svg'));
+  const objDatas = Array.from(
+    document.querySelectorAll('object[data*=".svg"]')
+  );
+  const imgSrcs = Array.from(document.querySelectorAll('img[src*=".svg"]'));
+  const pageDivs = Array.from(document.querySelectorAll('div'));
 
-  let allSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
+  let allSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs];
 
   // Filter the SVG elements down
   allSVGs = allSVGs.filter((i) => {
-    svgCtrl.filterSVGs(i)
-    i.type ? svgCtrl.serializeSVG(i) : null
-    return i.type
-  })
+    svgCtrl.filterSVGs(i);
+    i.type ? svgCtrl.serializeSVG(i) : null;
+    return i.type;
+  });
 
   // Remove duplicates
-  allSVGs = svgCtrl.removeDups(allSVGs, 'eleString')
-  return allSVGs
+  allSVGs = svgCtrl.removeDups(allSVGs, 'eleString');
+  return allSVGs;
 }
