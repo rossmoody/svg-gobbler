@@ -3,10 +3,6 @@
   "version": "1.4.0",
   "description": "SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it.",
   "dependencies": {
-    "jszip": "3.2.2",
-    "file-saver": "^2.0.2"
-  },
-  "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "babel-loader": "^8.1.0",
@@ -19,7 +15,9 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "file-saver": "^2.0.2",
     "husky": "^4.2.5",
+    "jszip": "3.2.2",
     "lint-staged": "^10.2.11",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
@@ -34,7 +32,7 @@
   },
   "scripts": {
     "start": "webpack --config webpack.js --watch",
-    "lint": "eslint '**/*.js' --fix"
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
