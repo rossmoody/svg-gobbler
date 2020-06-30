@@ -18,15 +18,15 @@ class SVG {
         .then((text) => {
           this.svgString = text
         })
-        .catch((e) => console.log(e))
+        .catch()
     }
   }
 
   // Set size attributes to svg viewBox attr dynamically for better render in card
   async cleanupXML() {
-    let rects = this.ele.getBoundingClientRect()
-    let viewBoxHeight = Math.floor(rects.width)
-    let viewBoxWidth = Math.floor(rects.height)
+    const rects = this.ele.getBoundingClientRect()
+    const viewBoxHeight = Math.floor(rects.width)
+    const viewBoxWidth = Math.floor(rects.height)
 
     if (rects.width === 0 && rects.height === 0) {
       this.rects = 'N/A'

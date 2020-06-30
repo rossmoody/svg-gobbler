@@ -1,8 +1,8 @@
-import { closeIcon, gobLogo } from './icons'
-import { createCards } from './create-card'
-import { globalActions } from './global'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
+import { closeIcon, gobLogo } from './icons'
+import createCards from './create-card'
+import globalActions from './global'
 
 // Element creation helper
 function createElement(el, elClass) {
@@ -26,7 +26,7 @@ const struct = {
   close: 'gob__close',
 }
 
-export const createUI = (svgInfo) => {
+const createUI = (svgInfo) => {
   const gobbler = createElement('div', struct.globalContainer)
   document.body.insertAdjacentElement('beforebegin', gobbler)
 
@@ -59,7 +59,7 @@ export const createUI = (svgInfo) => {
   gobCount.innerHTML = isPlural()
   countCont.appendChild(gobCount)
   gobCount.addEventListener('click', () => {
-    var zip = new JSZip()
+    const zip = new JSZip()
     svgInfo.forEach((svg, index) => {
       zip.file(`svg-${index}.svg`, svg.svgString)
     })
@@ -80,3 +80,5 @@ export const createUI = (svgInfo) => {
   createCards(svgInfo, container)
   globalActions()
 }
+
+export default createUI

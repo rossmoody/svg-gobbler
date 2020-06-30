@@ -1,4 +1,4 @@
-import { download } from './download-svgs'
+import download from './download-svgs'
 
 // Toggle success class
 function toggleSuccess(el, btnClass) {
@@ -30,7 +30,7 @@ const hasAttr = (el) => {
   return `<span class=${viewbox}></span><span class=${visible}></span>`
 }
 
-export function createCards(svgInfo, cont) {
+const createCards = (svgInfo, cont) => {
   // Create cards
   svgInfo.forEach((el, i) => {
     // Create dom elements
@@ -125,3 +125,5 @@ export function createCards(svgInfo, cont) {
     }
   })
 }
+
+export default createCards

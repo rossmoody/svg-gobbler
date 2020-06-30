@@ -21,9 +21,9 @@ class ManageSVGs {
       el.url = el.data
       el.type = 'object'
     } else if (el.tagName === 'DIV') {
-      let style = window.getComputedStyle(el, null)
-      let url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
-      let fileType = url.substr(url.lastIndexOf('.') + 1)
+      const style = window.getComputedStyle(el, null)
+      const url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
+      const fileType = url.substr(url.lastIndexOf('.') + 1)
 
       if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
         el.url = url
@@ -58,10 +58,10 @@ const svgCtrl = new ManageSVGs()
 
 // Gather all the possible SVG elements on a page
 export function findSVGs() {
-  let svgTags = Array.from(document.querySelectorAll('svg'))
-  let objDatas = Array.from(document.querySelectorAll('object[data*=".svg"]'))
-  let imgSrcs = Array.from(document.querySelectorAll('img[src*=".svg"]'))
-  let pageDivs = Array.from(document.querySelectorAll('div'))
+  const svgTags = Array.from(document.querySelectorAll('svg'))
+  const objDatas = Array.from(document.querySelectorAll('object[data*=".svg"]'))
+  const imgSrcs = Array.from(document.querySelectorAll('img[src*=".svg"]'))
+  const pageDivs = Array.from(document.querySelectorAll('div'))
 
   let allSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 

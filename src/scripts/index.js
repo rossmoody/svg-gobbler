@@ -1,7 +1,7 @@
 import '../styles/index.scss'
 import { organizeSVGs } from './organize-svgs'
-import { createUI } from './create-ui'
-import { download } from './download-svgs'
+import createUI from './create-ui'
+import download from './download-svgs'
 
 class DecisionMaker {
   noGobbles() {

@@ -15,7 +15,7 @@ function fileName() {
 class ButtonHandler {
   createRegDownload(i) {
     const filename = fileName()
-    let blob = new Blob([i.svgString], { type: 'text/xml' })
+    const blob = new Blob([i.svgString], { type: 'text/xml' })
     FileSaver.saveAs(blob, `${filename}.svg`)
   }
 
@@ -42,4 +42,6 @@ class ButtonHandler {
   }
 }
 
-export const download = new ButtonHandler()
+const download = new ButtonHandler()
+
+export default download
