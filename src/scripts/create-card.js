@@ -18,27 +18,8 @@ function createElement(el, elClass, elPar = null, innH = null) {
   return elPar ? elPar.appendChild(i) : i
 }
 
-const hasAttr = el => {
-  let viewbox
-  let visible
-
-  if (el.svgClone.hasAttribute('viewBox')) {
-    viewbox = 'gob__attrcont--viewbox'
-  } else {
-    viewbox = 'gob__display-none'
-  }
-
-  if (el.rects !== 'N/A') {
-    visible = 'gob__attrcont--hidden'
-  } else {
-    visible = 'gob__display-none'
-  }
-
-  return `<span class=${viewbox}></span><span class=${visible}></span>`
-}
-
 const createCards = (svgInfo, cont) => {
-  // Create cards
+  // Create cards`
   svgInfo.forEach((el, i) => {
     // Create dom elements
     const gobblerCard = createElement('div', 'gob__card', cont)
@@ -90,7 +71,7 @@ const createCards = (svgInfo, cont) => {
       `<h4>Size</h4><h3>${el.rects}</h3>`
     )
 
-    createElement('div', 'gob__attrcont', gobblerCardFooter, hasAttr(el))
+    createElement('div', 'gob__attrcont', gobblerCardFooter)
 
     if (el.svgString.length > 0) {
       // Download button

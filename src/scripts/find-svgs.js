@@ -1,9 +1,7 @@
 class SVG {
   constructor(svg) {
     this.originalSvg = svg
-  }
 
-  classify() {
     if (this.originalSvg.tagName === 'svg') {
       const firstChild = this.originalSvg.firstElementChild
       if (firstChild && firstChild.tagName === 'symbol') {
@@ -68,16 +66,11 @@ function findSVGs() {
 
   // Classify the elements and filter out div elements with no SVG attributes
   let filteredSVGs = pageSVGs
-    .map(ele => {
-      const svg = new SVG(ele)
-      svg.classify()
-      return svg
-    })
+    .map(ele => new SVG(ele))
     .filter(svg => svg.type)
     .map(svg => serialize(svg))
 
   filteredSVGs = removeDups(filteredSVGs, 'dupCheck')
-  console.log(filteredSVGs)
   return filteredSVGs
 }
 

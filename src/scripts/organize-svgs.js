@@ -16,7 +16,6 @@ async function generateSvgString(svg) {
 // Set size attributes to svg viewBox attr dynamically for better render in card
 async function cleanupXML(svg) {
   const rects = svg.originalSvg.getBoundingClientRect()
-  console.log(rects)
   const viewBoxHeight = Math.floor(rects.width)
   const viewBoxWidth = Math.floor(rects.height)
 
