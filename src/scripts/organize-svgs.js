@@ -1,79 +1,67 @@
-import { findSVGs } from './find-svgs'
+import findSVGs from './find-svgs'
 
-class SVG {
-  constructor(ele, url = null, type) {
-    this.ele = ele
-    this.url = url
-    this.type = type
+async function generateSvgString(svg) {
+  svg.svgString = svg.dupCheck
+
+  if (svg.url) {
+    await fetch(svg.url, { mode: 'no-cors' })
+      .then(r => r.text())
+      .then(text => {
+        svg.svgString = text
+      })
+      .catch()
   }
+}
 
-  // get svg XML info from el with URL
-  async getXML() {
-    this.svgString = this.ele.eleString
-    this.svgXml = this.ele
+// Set size attributes to svg viewBox attr dynamically for better render in card
+async function cleanupXML(svg) {
+  const rects = svg.originalSvg.getBoundingClientRect()
+  console.log(rects)
+  const viewBoxHeight = Math.floor(rects.width)
+  const viewBoxWidth = Math.floor(rects.height)
 
-    if (this.url) {
-      await fetch(this.url, { mode: 'no-cors' })
-        .then(r => r.text())
-        .then(text => {
-          this.svgString = text
-        })
-        .catch()
-    }
-  }
-
-  // Set size attributes to svg viewBox attr dynamically for better render in card
-  async cleanupXML() {
-    const rects = this.ele.getBoundingClientRect()
-    const viewBoxHeight = Math.floor(rects.width)
-    const viewBoxWidth = Math.floor(rects.height)
-
-    if (rects.width === 0 && rects.height === 0) {
-      this.rects = 'N/A'
-    } else if (
-      this.svgXml.hasAttribute('width') &&
-      this.svgXml.hasAttribute('height')
-    ) {
-      const width = this.svgXml.getAttribute('width')
-      const height = this.svgXml.getAttribute('height')
-      if (width.includes('100%')) {
-        this.rects = '100%'
-      } else if (width.includes('px')) {
-        this.rects = `${width.slice(0, -2)}x${height.slice(0, -2)}`
-      } else {
-        this.rects = `${width}x${height}`
-      }
+  if (rects.width === 0 && rects.height === 0) {
+    svg.rects = 'N/A'
+  } else if (
+    svg.originalSvg.hasAttribute('width') &&
+    svg.originalSvg.hasAttribute('height')
+  ) {
+    const width = svg.originalSvg.getAttribute('width')
+    const height = svg.originalSvg.getAttribute('height')
+    if (width.includes('100%')) {
+      svg.rects = '100%'
+    } else if (width.includes('px')) {
+      svg.rects = `${width.slice(0, -2)}x${height.slice(0, -2)}`
     } else {
-      this.rects = `${viewBoxWidth}x${viewBoxHeight}`
+      svg.rects = `${width}x${height}`
     }
-
-    this.cleanXml = this.svgXml.cloneNode(true)
-    this.cleanXml.setAttribute('class', 'gob__card__svg__trick')
-    this.cleanXml.removeAttribute('height')
-    this.cleanXml.removeAttribute('width')
-    this.cleanXml.removeAttribute('style')
-
-    if (!this.cleanXml.hasAttribute('viewBox')) {
-      this.cleanXml.setAttribute(
-        'viewBox',
-        `0 0 ${viewBoxHeight} ${viewBoxWidth}`
-      )
-    }
-
-    if (this.cleanXml.getAttribute('viewBox') === '0 0 0 0') {
-      this.cleanXml.setAttribute('viewBox', `0 0 24 24`)
-    }
-
-    this.cleanXml.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+  } else {
+    svg.rects = `${viewBoxWidth}x${viewBoxHeight}`
   }
 
-  async checkForWhite() {
-    const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
+  svg.svgClone = svg.originalSvg.cloneNode(true)
+  svg.svgClone.setAttribute('class', 'gob__card__svg__trick')
+  svg.svgClone.removeAttribute('height')
+  svg.svgClone.removeAttribute('width')
+  svg.svgClone.removeAttribute('style')
 
-    for (const string of whiteStrings) {
-      if (this.svgString.includes(string)) {
-        this.hasWhite = true
-      }
+  if (!svg.svgClone.hasAttribute('viewBox')) {
+    svg.svgClone.setAttribute('viewBox', `0 0 ${viewBoxHeight} ${viewBoxWidth}`)
+  }
+
+  if (svg.svgClone.getAttribute('viewBox') === '0 0 0 0') {
+    svg.svgClone.setAttribute('viewBox', `0 0 24 24`)
+  }
+
+  svg.svgClone.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+}
+
+async function checkForWhite(svg) {
+  const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
+
+  for (const string of whiteStrings) {
+    if (svg.svgString.includes(string)) {
+      svg.hasWhite = true
     }
   }
 }
@@ -81,15 +69,15 @@ class SVG {
 async function organizeSVGs() {
   let allSVGs = findSVGs()
 
-  // Create SVG classes
-  allSVGs = allSVGs.map(async i => {
-    const newEl = new SVG(i, i.url, i.type)
-    await newEl.getXML()
-    await newEl.cleanupXML()
-    await newEl.checkForWhite()
-    return newEl
+  allSVGs = allSVGs.map(async svg => {
+    await generateSvgString(svg)
+    await cleanupXML(svg)
+    await checkForWhite(svg)
+    return svg
   })
+
   allSVGs = await Promise.all(allSVGs)
+
   return allSVGs
 }
 

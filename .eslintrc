@@ -4,6 +4,9 @@
   "rules": {
     "no-undef": "off",
     "no-restricted-syntax": "off",
+    "no-alert": "off",
+    "no-console": "off",
+    "no-param-reassign": "off",
     "prettier/prettier": [
       "error",
       {

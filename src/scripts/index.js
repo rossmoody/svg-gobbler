@@ -3,7 +3,7 @@ import organizeSVGs from './organize-svgs'
 import createUI from './create-ui'
 import download from './download-svgs'
 
-class DecisionMaker {
+const start = {
   noGobbles() {
     const doc = document.querySelector('body')
     const noGobbler = document.createElement('div')
@@ -13,11 +13,11 @@ class DecisionMaker {
     setTimeout(() => {
       noGobbler.remove()
     }, 3000)
-  }
+  },
 
   oneGobble() {
     download.copyIsolatedSVG()
-  }
+  },
 
   errorGobbles(error) {
     const doc = document.querySelector('body')
@@ -28,7 +28,7 @@ class DecisionMaker {
     setTimeout(() => {
       noGobbler.remove()
     }, 3000)
-  }
+  },
 
   theGobbles(i) {
     function scrollToTop() {
@@ -40,10 +40,8 @@ class DecisionMaker {
     }
     scrollToTop()
     createUI(i)
-  }
+  },
 }
-
-const start = new DecisionMaker()
 
 async function init() {
   try {
@@ -57,7 +55,11 @@ async function init() {
       start.oneGobble()
     } else {
       const allSVGs = await organizeSVGs()
-      allSVGs.length === 0 ? start.noGobbles() : start.theGobbles(allSVGs)
+      if (allSVGs.length === 0) {
+        start.noGobbles()
+      } else {
+        start.theGobbles(allSVGs)
+      }
     }
   } catch (error) {
     start.errorGobbles(error)

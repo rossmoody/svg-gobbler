@@ -22,7 +22,7 @@ const hasAttr = el => {
   let viewbox
   let visible
 
-  if (el.svgXml.hasAttribute('viewBox')) {
+  if (el.svgClone.hasAttribute('viewBox')) {
     viewbox = 'gob__attrcont--viewbox'
   } else {
     viewbox = 'gob__display-none'
@@ -48,7 +48,7 @@ const createCards = (svgInfo, cont) => {
       'gob__card__svg__wrapper',
       gobblerCardClone
     )
-    gobblerCardCloneWrapper.appendChild(el.cleanXml)
+    gobblerCardCloneWrapper.appendChild(el.svgClone)
     const gobblerCardFooter = createElement(
       'div',
       'gob__card__footer',
