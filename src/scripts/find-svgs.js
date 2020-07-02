@@ -1,3 +1,5 @@
+import util from './util'
+
 class SVG {
   constructor(svg) {
     this.originalSvg = svg
@@ -35,28 +37,10 @@ class SVG {
   }
 }
 
-function serialize(i) {
-  const serializer = new XMLSerializer()
-  i.dupCheck = serializer.serializeToString(i.originalSvg)
-  return i
-}
-
-function removeDups(arr, comp) {
-  const unique = arr
-    .map(e => e[comp])
-
-    // store the keys of the unique objects
-    .map((e, i, final) => final.indexOf(e) === i && i)
-
-    // eliminate the dead keys & store unique objects
-    .filter(e => arr[e])
-    .map(e => arr[e])
-
-  return unique
-}
-
-// Gather all the possible SVG elements on a page
-function findSVGs() {
+/**
+ * Gather all the possible SVG elements on a page
+ */
+async function findSVGs() {
   const svgTags = Array.from(document.querySelectorAll('svg'))
   const objDatas = Array.from(document.querySelectorAll('object[data*=".svg"]'))
   const imgSrcs = Array.from(document.querySelectorAll('img[src*=".svg"]'))
@@ -64,13 +48,16 @@ function findSVGs() {
 
   const pageSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 
-  // Classify the elements and filter out div elements with no SVG attributes
+  /**
+   * Classify the elements and filter out div elements with no SVG attributes
+   */
   let filteredSVGs = pageSVGs
     .map(ele => new SVG(ele))
     .filter(svg => svg.type)
-    .map(svg => serialize(svg))
+    .map(svg => util.serialize(svg, 'dupCheck', 'originalSvg'))
 
-  filteredSVGs = removeDups(filteredSVGs, 'dupCheck')
+  filteredSVGs = util.removeDups(filteredSVGs, 'dupCheck')
+
   return filteredSVGs
 }
 

@@ -9,11 +9,10 @@ async function generateSvgString(svg) {
       .then(text => {
         svg.svgString = text
       })
-      .catch()
+      .catch(e => console.log('Error in fetch:', e))
   }
 }
 
-// Set size attributes to svg viewBox attr dynamically for better render in card
 async function cleanupXML(svg) {
   const rects = svg.originalSvg.getBoundingClientRect()
   const viewBoxHeight = Math.floor(rects.width)
@@ -66,7 +65,7 @@ async function checkForWhite(svg) {
 }
 
 async function organizeSVGs() {
-  let allSVGs = findSVGs()
+  let allSVGs = await findSVGs()
 
   allSVGs = allSVGs.map(async svg => {
     await generateSvgString(svg)
