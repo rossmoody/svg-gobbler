@@ -1,4 +1,4 @@
-import download from './download-svgs'
+import download from './download'
 
 // Toggle success class
 function toggleSuccess(el, btnClass) {

@@ -1,6 +1,6 @@
-import organizeSVGs from './organize-svgs'
+import organizeSVGs from './organize'
 import createUI from './create-ui'
-import download from './download-svgs'
+import download from './download'
 
 const start = {
   noGobbles() {

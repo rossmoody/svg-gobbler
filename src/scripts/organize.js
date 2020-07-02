@@ -1,4 +1,4 @@
-import findSVGs from './find-svgs'
+import findSVGs from './find'
 
 async function generateSvgString(svg) {
   svg.svgString = svg.dupCheck
