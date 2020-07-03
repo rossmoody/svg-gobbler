@@ -32,7 +32,8 @@
   },
   "scripts": {
     "start": "webpack --config webpack.js --watch",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "build": "webpack --config webpack.js"
   },
   "repository": {
     "type": "git",
