@@ -2,7 +2,7 @@
   "globals": {
     "window": true
   },
-  "env": { "browser": true },
+  "env": { "browser": true, "jest": true },
   "extends": ["airbnb-base", "prettier"],
   "plugins": ["prettier"],
   "rules": {
