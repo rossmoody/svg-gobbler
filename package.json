@@ -17,12 +17,14 @@
     "eslint-plugin-prettier": "^3.1.4",
     "file-saver": "^2.0.2",
     "husky": "^4.2.5",
+    "jest": "^26.1.0",
     "jszip": "3.2.2",
     "lint-staged": "^10.2.11",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prettier": "^2.0.5",
+    "puppeteer": "^5.0.0",
     "sass-loader": "^7.3.1",
     "terser-webpack-plugin": "^3.0.3",
     "transform-loader": "^0.2.4",
@@ -33,7 +35,8 @@
   "scripts": {
     "start": "webpack --config webpack.js --watch",
     "lint": "eslint . --fix",
-    "build": "webpack --config webpack.js"
+    "build": "webpack --config webpack.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
