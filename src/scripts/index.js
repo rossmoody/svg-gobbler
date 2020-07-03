@@ -54,6 +54,7 @@ async function init() {
       start.oneGobble()
     } else {
       const allSVGs = await findSVGs()
+      // console.log(allSVGs)
       if (allSVGs.length === 0) {
         start.noGobbles()
       } else {

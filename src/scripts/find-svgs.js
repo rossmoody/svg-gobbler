@@ -36,7 +36,7 @@ async function findSVGs() {
 
   filteredSVGs = await Promise.all(filteredSVGs)
 
-  return removeDups(filteredSVGs, 'svgString')
+  return removeDups(filteredSVGs, 'uniqueIdentifier')
 }
 
 export default findSVGs

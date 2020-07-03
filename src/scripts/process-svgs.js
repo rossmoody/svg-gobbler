@@ -2,6 +2,15 @@ class SVG {
   constructor(el) {
     this.origEle = el
     this.cloneEle = el.cloneNode(true)
+    this.svgString = undefined
+    this.url = undefined
+    this.type = undefined
+    this.cors = false
+    this.hasWhite = false
+    this.size = undefined
+    this.height = undefined
+    this.width = undefined
+    this.uniqueIdentifier = undefined
   }
 
   determineType() {
@@ -39,18 +48,29 @@ class SVG {
   }
 
   async fetchSvg() {
+    let response
     const serializer = new XMLSerializer()
-    this.svgString = serializer.serializeToString(this.origEle)
+    const string = serializer.serializeToString(this.origEle)
+
     if (this.url) {
-      const response = await fetch(this.url, { mode: 'no-cors' })
+      try {
+        response = await fetch(this.url, { mode: 'no-cors' })
+      } catch (error) {
+        console.log(`Error in fetch: ${error}`)
+      }
+
       if (response.type === 'opaque') {
-        this.svgString = this.url
+        this.uniqueIdentifier = this.url
         this.cors = true
       } else {
         response.text().then(text => {
           this.svgString = text
+          this.uniqueIdentifier = text
         })
       }
+    } else {
+      this.svgString = string
+      this.uniqueIdentifier = string
     }
     return this
   }
@@ -59,7 +79,7 @@ class SVG {
     const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
 
     for (const string of whiteStrings) {
-      if (this.svgString.includes(string)) {
+      if (this.svgString && this.svgString.includes(string)) {
         this.hasWhite = true
       }
     }
