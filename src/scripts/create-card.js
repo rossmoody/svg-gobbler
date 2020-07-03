@@ -12,7 +12,7 @@ function toggleSuccess(el, btnClass) {
 
 // Element creation helper
 function createElement(el, elClass, elPar = null, innH = null) {
-  const i = document.createElement(el)
+  const i = window.document.createElement(el)
   i.className = elClass
   i.innerHTML = innH
   return elPar ? elPar.appendChild(i) : i
@@ -29,7 +29,7 @@ const createCards = (svgInfo, cont) => {
       'gob__card__svg__wrapper',
       gobblerCardClone
     )
-    gobblerCardCloneWrapper.appendChild(el.svgClone)
+    gobblerCardCloneWrapper.appendChild(el.cloneEle)
     const gobblerCardFooter = createElement(
       'div',
       'gob__card__footer',
@@ -68,12 +68,12 @@ const createCards = (svgInfo, cont) => {
       'div',
       'gob__sizecont',
       gobblerCardFooter,
-      `<h4>Size</h4><h3>${el.rects}</h3>`
+      `<h4>Size</h4><h3>${el.size}</h3>`
     )
 
     createElement('div', 'gob__attrcont', gobblerCardFooter)
 
-    if (el.svgString.length > 0) {
+    if (!el.cors) {
       // Download button
       const downloadButton = createElement('button', 'gob__btn')
       downloadButton.classList.add('gob__btn--download')

@@ -317,7 +317,7 @@ html {
 
       &:hover::after {
         @include special-tag-hover();
-        content: 'Output from SVG sprites is impossible at the moment. The code is closed off in shadow DOM.';
+        content: 'Output from SVG sprites hit or miss. I am working on improving it.';
       }
     }
 
@@ -341,7 +341,7 @@ html {
 
       &:hover::after {
         @include special-tag-hover();
-        content: "This SVG can't be optimized due to security policy and must be opened in a new tab.";
+        content: "This SVG can't be accessed due to security policy and must be opened in a new tab.";
       }
     }
   }

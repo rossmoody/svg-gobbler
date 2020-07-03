@@ -1,4 +1,4 @@
-import organizeSVGs from './organize'
+import findSVGs from './find-svgs'
 import createUI from './create-ui'
 import download from './download'
 
@@ -53,7 +53,7 @@ async function init() {
     ) {
       start.oneGobble()
     } else {
-      const allSVGs = await organizeSVGs()
+      const allSVGs = await findSVGs()
       if (allSVGs.length === 0) {
         start.noGobbles()
       } else {

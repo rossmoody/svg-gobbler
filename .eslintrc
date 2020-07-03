@@ -1,12 +1,13 @@
 {
+  "globals": {
+    "window": true
+  },
+  "env": { "browser": true },
   "extends": ["airbnb-base", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "no-undef": "off",
-    "no-restricted-syntax": "off",
-    "no-alert": "off",
     "no-console": "off",
-    "no-param-reassign": "off",
+    "no-restricted-syntax": "off",
     "prettier/prettier": [
       "error",
       {
