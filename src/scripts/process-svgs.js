@@ -8,8 +8,8 @@ class SVG {
     this.cors = false
     this.hasWhite = false
     this.size = undefined
-    this.height = undefined
-    this.width = undefined
+    this.height = 48
+    this.width = 48
     this.uniqueIdentifier = undefined
   }
 
@@ -87,9 +87,9 @@ class SVG {
 
   determineSize() {
     const rects = this.origEle.getBoundingClientRect()
-    this.height = Math.floor(rects.height)
-    this.width = Math.floor(rects.width)
-    this.size = `${rects.width}x${rects.height}`
+    this.height = Math.ceil(rects.height)
+    this.width = Math.ceil(rects.width)
+    this.size = `${this.width}x${this.height}`
 
     if (this.width === 0 && this.height === 0) {
       this.size = 'N/A'
@@ -99,7 +99,7 @@ class SVG {
     ) {
       const width = this.origEle.getAttribute('width')
       const height = this.origEle.getAttribute('height')
-      if (width.includes('100%')) {
+      if (width.includes('%')) {
         this.size = '100%'
       } else if (width.includes('px')) {
         this.size = `${width.slice(0, -2)}x${height.slice(0, -2)}`
