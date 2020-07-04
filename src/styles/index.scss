@@ -13,10 +13,6 @@ html {
   width: 100%;
   z-index: 1000000000;
 
-  &--hide {
-    animation: fallOut 0.5s ease-in-out 1;
-  }
-
   &__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -95,24 +91,6 @@ html {
         color: $white;
         cursor: pointer;
       }
-    }
-  }
-
-  &__close {
-    @include header-icon();
-    margin: 0 0 0 24px;
-
-    & path {
-      stroke: $white;
-    }
-
-    &:hover {
-      background: $primary;
-    }
-
-    & svg {
-      height: 16px;
-      width: 16px;
     }
   }
 

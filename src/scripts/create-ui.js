@@ -1,8 +1,7 @@
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
-import { closeIcon, gobLogo } from './icons'
+import { gobLogo } from './icons'
 import createCards from './create-card'
-import globalActions from './global'
 
 // Element creation helper
 function createElement(el, elClass) {
@@ -23,7 +22,6 @@ const struct = {
   logo: 'gob__logo',
   count: 'gob__count--svg',
   downloadAll: 'gob__download',
-  close: 'gob__close',
 }
 
 const createUI = svgInfo => {
@@ -68,17 +66,12 @@ const createUI = svgInfo => {
     })
   })
 
-  const gobClose = createElement('div', struct.close)
-  gobClose.innerHTML = closeIcon
-  countCont.appendChild(gobClose)
-
   // Smooth load header
   setTimeout(() => {
     header.classList.add('gob__header--show')
   }, 80)
 
   createCards(svgInfo, container)
-  globalActions()
 }
 
 export default createUI
