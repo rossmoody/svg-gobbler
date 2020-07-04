@@ -29,7 +29,7 @@ const createCards = (svgInfo, cont) => {
       'gob__card__svg__wrapper',
       gobblerCardClone
     )
-    gobblerCardCloneWrapper.insertAdjacentHTML('afterbegin', el.origEleJson)
+    gobblerCardCloneWrapper.insertAdjacentHTML('afterbegin', el.origEleString)
     const gobblerCardFooter = createElement(
       'div',
       'gob__card__footer',

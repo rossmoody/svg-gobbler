@@ -1,7 +1,7 @@
 class SVG {
   constructor(el) {
     this.origEle = el
-    this.origEleJson = undefined
+    this.origEleString = undefined
     this.cloneEle = el.cloneNode(true)
     this.svgString = undefined
     this.url = undefined
@@ -15,7 +15,7 @@ class SVG {
 
   serialize() {
     const serializer = new XMLSerializer()
-    this.origEleJson = serializer.serializeToString(this.origEle)
+    this.origEleString = serializer.serializeToString(this.origEle)
     return this
   }
 
