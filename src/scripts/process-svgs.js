@@ -1,7 +1,7 @@
 class SVG {
   constructor(el) {
     this.origEle = el
-    this.origEleJson = ''
+    this.origEleJson = undefined
     this.cloneEle = el.cloneNode(true)
     this.svgString = undefined
     this.url = undefined
@@ -11,7 +11,12 @@ class SVG {
     this.size = undefined
     this.height = 48
     this.width = 48
-    this.uniqueIdentifier = undefined
+  }
+
+  serialize() {
+    const serializer = new XMLSerializer()
+    this.origEleJson = serializer.serializeToString(this.origEle)
+    return this
   }
 
   determineType() {
@@ -48,12 +53,6 @@ class SVG {
     return this
   }
 
-  serialize() {
-    const serializer = new XMLSerializer()
-    this.origEleJson = serializer.serializeToString(this.origEle)
-    return this
-  }
-
   async fetchSvg() {
     let response
     const serializer = new XMLSerializer()
@@ -63,12 +62,10 @@ class SVG {
       try {
         response = await fetch(this.url, { mode: 'no-cors' })
         if (response.type === 'opaque') {
-          this.uniqueIdentifier = this.url
           this.cors = true
         } else {
           response.text().then(text => {
             this.svgString = text
-            this.uniqueIdentifier = text
           })
         }
       } catch (error) {
@@ -76,7 +73,6 @@ class SVG {
       }
     } else {
       this.svgString = string
-      this.uniqueIdentifier = string
     }
     return this
   }

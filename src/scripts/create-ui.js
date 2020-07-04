@@ -1,6 +1,6 @@
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
-import { gobLogo } from './icons'
+import gobLogo from './icons'
 import createCards from './create-card'
 
 // Element creation helper
