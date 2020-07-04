@@ -1,30 +1,35 @@
 class SVG {
   constructor(el) {
+    // The element swiped from the dom
     this.origEle = el
+    // Serialized version of the original elements
+    // Used to filter duplicates
     this.origEleString = undefined
-    this.cloneEle = el.cloneNode(true)
-    this.svgString = undefined
     this.url = undefined
     this.type = undefined
-    this.cors = false
-    this.hasWhite = false
+    // The string that gets rendered in the card.
+    // Concat by height and width
     this.size = undefined
+    // This is determined by rects
     this.height = 48
     this.width = 48
-  }
-
-  serialize() {
-    const serializer = new XMLSerializer()
-    this.origEleString = serializer.serializeToString(this.origEle)
-    return this
+    // This is what is downloaded or copied
+    this.svgString = undefined
+    // This is what is rendered in the card
+    this.presentationSvg = undefined
+    // Boolean if fetch fails
+    this.cors = false
+    // Boolean for if we should render the icon
+    // with a grey background
+    this.hasWhite = false
   }
 
   determineType() {
-    if (this.cloneEle.tagName === 'svg') {
-      const firstChild = this.cloneEle.firstElementChild
+    if (this.origEle.tagName === 'svg') {
+      const firstChild = this.origEle.firstElementChild
       if (firstChild && firstChild.tagName === 'symbol') {
         this.type = 'symbol'
-        this.spriteId = this.cloneEle.getAttribute('id')
+        this.spriteId = this.origEle.getAttribute('id')
       } else if (firstChild && firstChild.tagName === 'use') {
         this.type = 'sprite'
         this.spriteId = firstChild.getAttributeNS(
@@ -53,38 +58,10 @@ class SVG {
     return this
   }
 
-  async fetchSvg() {
-    let response
+  serialize() {
     const serializer = new XMLSerializer()
-    const string = serializer.serializeToString(this.origEle)
-
-    if (this.url) {
-      try {
-        response = await fetch(this.url, { mode: 'no-cors' })
-        if (response.type === 'opaque') {
-          this.cors = true
-        } else {
-          response.text().then(text => {
-            this.svgString = text
-          })
-        }
-      } catch (error) {
-        console.log(`Some things aren't meant to be. This is why: ${error}`)
-      }
-    } else {
-      this.svgString = string
-    }
+    this.origEleString = serializer.serializeToString(this.origEle)
     return this
-  }
-
-  checkForWhite() {
-    const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
-
-    for (const string of whiteStrings) {
-      if (this.svgString && this.svgString.includes(string)) {
-        this.hasWhite = true
-      }
-    }
   }
 
   determineSize() {
@@ -111,21 +88,61 @@ class SVG {
         this.height = height
       }
     }
+    return this
   }
 
-  cleanupClone() {
-    this.cloneEle.setAttribute('class', 'gob__card__svg__trick')
-    this.cloneEle.removeAttribute('height')
-    this.cloneEle.removeAttribute('width')
-    this.cloneEle.removeAttribute('style')
-    this.cloneEle.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+  async fetchSvg() {
+    let response
+    const serializer = new XMLSerializer()
 
-    if (!this.cloneEle.hasAttribute('viewBox')) {
-      this.cloneEle.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
+    this.presentationSvg = this.origEleString
+
+    if (this.url) {
+      try {
+        response = await fetch(this.url, { mode: 'no-cors' })
+        if (response.type === 'opaque') {
+          this.cors = true
+        } else {
+          response.text().then(text => {
+            // Would love to optimize this but not sure
+            // how to conver it to element
+            this.svgString = text
+          })
+        }
+      } catch (error) {
+        console.log(`Some things aren't meant to be. This is why: ${error}`)
+      }
+    } else {
+      console.log(this.origEleString, '<- orig')
+      const clone = this.origEle.cloneNode(true)
+      clone.setAttribute('class', 'gob__card__svg__trick')
+      clone.removeAttribute('height')
+      clone.removeAttribute('width')
+      clone.removeAttribute('style')
+      clone.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+
+      if (!clone.hasAttribute('viewBox')) {
+        clone.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
+      }
+
+      if (clone.getAttribute('viewBox') === '0 0 0 0') {
+        clone.setAttribute('viewBox', `0 0 24 24`)
+      }
+
+      this.svgString = serializer.serializeToString(this.origEle)
+      this.presentationSvg = serializer.serializeToString(clone)
+      console.log(this.presentationSvg, '<- clone')
     }
+    return this
+  }
 
-    if (this.cloneEle.getAttribute('viewBox') === '0 0 0 0') {
-      this.cloneEle.setAttribute('viewBox', `0 0 24 24`)
+  checkForWhite() {
+    const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
+
+    for (const string of whiteStrings) {
+      if (this.svgString && this.svgString.includes(string)) {
+        this.hasWhite = true
+      }
     }
   }
 }

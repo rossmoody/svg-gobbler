@@ -24,13 +24,12 @@ async function findSVGs() {
 
   let filteredSVGs = pageSVGs
     .map(ele => new SVG(ele))
-    .map(ele => ele.serialize())
     .map(ele => ele.determineType())
+    .map(ele => ele.serialize())
     .filter(ele => ele.type)
+    .map(ele => ele.determineSize())
     .map(async svg => {
       const result = await svg.fetchSvg()
-      result.cleanupClone()
-      result.determineSize()
       result.checkForWhite()
       return result
     })

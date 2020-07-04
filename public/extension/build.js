@@ -4,7 +4,7 @@ import build from '../../src/scripts/index'
 // a message is received that contains data
 function gobble(data) {
   build(data)
-  // console.log(data)
+  console.log(data)
 }
 
 export default gobble
