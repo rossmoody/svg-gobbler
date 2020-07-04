@@ -1,4 +1,3 @@
-import findSVGs from './find-svgs'
 import createUI from './create-ui'
 import download from './download'
 
@@ -44,7 +43,7 @@ const start = {
   },
 }
 
-export default async function gobble() {
+export default async function gobble(data) {
   try {
     const hasGobbles = document.querySelector('.gob')
     if (hasGobbles) {
@@ -55,8 +54,7 @@ export default async function gobble() {
     ) {
       start.oneGobble()
     } else {
-      const allSVGs = await findSVGs()
-      // console.log(allSVGs)
+      const allSVGs = data
       if (allSVGs.length === 0) {
         start.noGobbles()
       } else {
@@ -67,5 +65,3 @@ export default async function gobble() {
     start.errorGobbles(error)
   }
 }
-
-gobble()

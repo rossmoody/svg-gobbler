@@ -1,6 +1,7 @@
 class SVG {
   constructor(el) {
     this.origEle = el
+    this.origEleJson = ''
     this.cloneEle = el.cloneNode(true)
     this.svgString = undefined
     this.url = undefined
@@ -44,6 +45,12 @@ class SVG {
         this.type = 'bg img'
       }
     }
+    return this
+  }
+
+  serialize() {
+    const serializer = new XMLSerializer()
+    this.origEleJson = serializer.serializeToString(this.origEle)
     return this
   }
 

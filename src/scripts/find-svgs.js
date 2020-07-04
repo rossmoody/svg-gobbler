@@ -24,6 +24,7 @@ async function findSVGs() {
 
   let filteredSVGs = pageSVGs
     .map(ele => new SVG(ele))
+    .map(ele => ele.serialize())
     .map(ele => ele.determineType())
     .filter(ele => ele.type)
     .map(async svg => {
