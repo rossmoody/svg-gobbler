@@ -17,6 +17,36 @@
       "pre-commit": "lint-staged"
     }
   },
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "eslintConfig": {
+    "globals": {
+      "window": true
+    },
+    "env": {
+      "browser": true,
+      "jest": true
+    },
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "no-console": "off",
+      "no-restricted-syntax": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "semi": false
+        }
+      ]
+    }
+  },
   "dependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
