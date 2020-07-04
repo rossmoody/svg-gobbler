@@ -5,8 +5,7 @@
   "scripts": {
     "start": "webpack --config webpack.js --watch",
     "lint": "eslint . --fix",
-    "serve": "live-server ./public --watch",
-    "test": "jest"
+    "serve": "live-server ./public --watch"
   },
   "repository": {
     "type": "git",
@@ -62,7 +61,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "file-saver": "^2.0.2",
     "husky": "^4.2.5",
-    "jest": "^26.1.0",
     "jszip": "3.2.2",
     "lint-staged": "^10.2.11",
     "live-server": "^1.2.1",

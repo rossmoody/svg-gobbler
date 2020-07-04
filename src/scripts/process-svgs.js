@@ -55,18 +55,17 @@ class SVG {
     if (this.url) {
       try {
         response = await fetch(this.url, { mode: 'no-cors' })
+        if (response.type === 'opaque') {
+          this.uniqueIdentifier = this.url
+          this.cors = true
+        } else {
+          response.text().then(text => {
+            this.svgString = text
+            this.uniqueIdentifier = text
+          })
+        }
       } catch (error) {
-        console.log(`Error in fetch: ${error}`)
-      }
-
-      if (response.type === 'opaque') {
-        this.uniqueIdentifier = this.url
-        this.cors = true
-      } else {
-        response.text().then(text => {
-          this.svgString = text
-          this.uniqueIdentifier = text
-        })
+        console.log(`Some things aren't meant to be. This is why: ${error}`)
       }
     } else {
       this.svgString = string
