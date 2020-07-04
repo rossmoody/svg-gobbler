@@ -8,7 +8,10 @@ module.exports = {
   mode: 'production',
   output: {
     filename: './index.js',
-    path: path.resolve(__dirname, 'extension/dist'),
+    path: path.resolve(__dirname, 'public/extension/dist'),
+    library: 'gobble',
+    libraryTarget: 'window',
+    libraryExport: 'default',
   },
   node: {
     fs: 'empty', // webpack doesn't like fs or require modules and errors without this

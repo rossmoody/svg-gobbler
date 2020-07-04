@@ -5,7 +5,7 @@ const globalActions = () => {
     gobbler.classList.add('gob--hide')
     setTimeout(() => {
       gobbler.remove()
-    }, 500)
+    }, 420)
   }
 
   // Close event listeners

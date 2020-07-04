@@ -42,7 +42,7 @@ const start = {
   },
 }
 
-async function init() {
+export default async function gobble() {
   try {
     const hasGobbles = document.querySelector('.gob')
     if (hasGobbles) {
@@ -66,4 +66,4 @@ async function init() {
   }
 }
 
-init()
+gobble()
