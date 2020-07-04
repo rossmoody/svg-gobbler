@@ -68,7 +68,7 @@
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prettier": "^2.0.5",
-    "sass-loader": "^7.3.1",
+    "sass-loader": "^9.0.1",
     "terser-webpack-plugin": "^3.0.3",
     "transform-loader": "^0.2.4",
     "webpack": "^4.43.0",

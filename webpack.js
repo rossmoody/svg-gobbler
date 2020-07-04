@@ -16,7 +16,7 @@ module.exports = {
   node: {
     fs: 'empty', // webpack doesn't like fs or require modules and errors without this
   },
-  stats: 'minimal',
+  // stats: 'minimal',
   optimization: {
     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
@@ -33,7 +33,7 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.s?css$/,
+        test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader, // creates a separate css file

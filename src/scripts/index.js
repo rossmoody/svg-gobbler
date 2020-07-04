@@ -2,6 +2,8 @@ import findSVGs from './find-svgs'
 import createUI from './create-ui'
 import download from './download'
 
+require('../styles/index.scss')
+
 const start = {
   noGobbles() {
     const doc = document.querySelector('body')

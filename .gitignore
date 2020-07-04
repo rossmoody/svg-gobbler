@@ -1,5 +1,5 @@
 node_modules
-extension/dist
+public/extension/dist
 .DS_Store
 
 
