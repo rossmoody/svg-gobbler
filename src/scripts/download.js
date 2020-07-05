@@ -1,22 +1,9 @@
 import FileSaver from 'file-saver'
 
-function fileName() {
-  let site = document.domain
-  // prefixes
-  site = site.replace(/https|www|http/g, '')
-  // suffixes
-  site = site.replace(
-    /\.|com|gov|com|net|org|info|coop|int|co\.uk|org\.uk|ac\.uk|uk/g,
-    ''
-  )
-  return `icon-${site}`
-}
-
 const download = {
   createRegDownload(i) {
-    const filename = fileName()
     const blob = new Blob([i.svgString], { type: 'text/xml' })
-    FileSaver.saveAs(blob, `${filename}.svg`)
+    FileSaver.saveAs(blob, 'gobbler-icon.svg')
   },
 
   copyRegClipboard(i) {
