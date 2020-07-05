@@ -34,11 +34,21 @@ async function findSVGs() {
       return result
     })
 
-  let finals = await Promise.all(filteredSVGs)
+  await Promise.all(filteredSVGs)
+    .then(result => {
+      return removeDups(result, 'origEleString')
+    })
+    .then(result => {
+      // console.log(result)
 
-  finals = removeDups(finals, 'origEleString')
-
-  return finals
+      // I spent two days trying to get asynchronous functions to work in chrome.tabs.sendMessage
+      // It's very difficult and I'm resorting to timeout for now
+      // https://stackoverflow.com/questions/20077487/chrome-extension-message-passing-response-not-sent
+      setTimeout(() => {
+        // eslint-disable-next-line
+        chrome.runtime.sendMessage(result)
+      }, 200)
+    })
 }
 
-export default findSVGs
+findSVGs()
