@@ -45,13 +45,10 @@ export default async function gobble(data) {
       document.querySelector('svg')
     ) {
       start.oneGobble()
+    } else if (data.length === 0) {
+      start.noGobbles()
     } else {
-      const allSVGs = data
-      if (allSVGs.length === 0) {
-        start.noGobbles()
-      } else {
-        start.theGobbles(allSVGs)
-      }
+      start.theGobbles(data)
     }
   } catch (error) {
     start.errorGobbles(error)

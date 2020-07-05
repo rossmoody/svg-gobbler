@@ -8,14 +8,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   const viewTabUrl = chrome.extension.getURL('index.html?id=' + id++)
   let targetId = null
 
-  const data = request.message.data
-
   chrome.tabs.onUpdated.addListener(function listener(tabId, changedProps) {
     if (tabId != targetId || changedProps.status != 'complete') return
-
-    chrome.tabs.onUpdated.removeListener(listener)
-
     const views = chrome.extension.getViews()
+    const data = request.message.data
+
     for (const view of views) {
       if (view.location.href == viewTabUrl) {
         view.gobble(data)
@@ -24,7 +21,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
   })
 
-  if (data.length > 0) {
+  if (request.message.type === 'open_new_tab') {
     chrome.tabs.create({ url: viewTabUrl }, function (tab) {
       targetId = tab.id
     })

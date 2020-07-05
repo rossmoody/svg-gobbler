@@ -22,8 +22,8 @@ async function findSVGs() {
 
   const pageSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 
-  let filteredSVGs = pageSVGs
-    .map((ele, i) => new SVG(ele, i))
+  const filteredSVGs = pageSVGs
+    .map(ele => new SVG(ele))
     .map(ele => ele.determineType())
     .filter(ele => ele.type)
     .map(ele => ele.serialize())
@@ -34,9 +34,11 @@ async function findSVGs() {
       return result
     })
 
-  filteredSVGs = await Promise.all(filteredSVGs)
+  let finals = await Promise.all(filteredSVGs)
 
-  return removeDups(filteredSVGs, 'origEleString')
+  finals = removeDups(finals, 'origEleString')
+
+  return finals
 }
 
 export default findSVGs

@@ -1,7 +1,6 @@
 class SVG {
-  constructor(el, index) {
+  constructor(el) {
     this.origEle = el
-    this.id = index
     this.origEleString = undefined
     this.url = undefined
     this.type = undefined
@@ -83,44 +82,42 @@ class SVG {
   }
 
   async fetchSvg() {
-    let response
     const serializer = new XMLSerializer()
+    const clone = this.origEle.cloneNode(true)
 
-    this.presentationSvg = this.origEleString
+    clone.setAttribute('class', 'gob__card__svg__trick')
+    clone.removeAttribute('height')
+    clone.removeAttribute('width')
+    clone.removeAttribute('style')
+    clone.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+
+    if (!clone.hasAttribute('viewBox')) {
+      clone.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
+    }
+
+    if (clone.getAttribute('viewBox') === '0 0 0 0') {
+      clone.setAttribute('viewBox', `0 0 24 24`)
+    }
+
+    this.svgString = this.origEleString
+    this.presentationSvg = serializer.serializeToString(clone)
 
     if (this.url) {
       try {
-        response = await fetch(this.url, { mode: 'no-cors' })
+        const response = await fetch(this.url, { mode: 'no-cors' })
         if (response.type === 'opaque') {
           this.cors = true
         } else {
           response.text().then(text => {
             // Would love to optimize this but not sure
-            // how to conver it to element
+            // how to conver it to elements
+            this.presentationSvg = text
             this.svgString = text
           })
         }
       } catch (error) {
         console.log(`Some things aren't meant to be. This is why: ${error}`)
       }
-    } else {
-      const clone = this.origEle.cloneNode(true)
-      clone.setAttribute('class', 'gob__card__svg__trick')
-      clone.removeAttribute('height')
-      clone.removeAttribute('width')
-      clone.removeAttribute('style')
-      clone.setAttribute('preserveAspectRatio', 'xMidYMid meet')
-
-      if (!clone.hasAttribute('viewBox')) {
-        clone.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
-      }
-
-      if (clone.getAttribute('viewBox') === '0 0 0 0') {
-        clone.setAttribute('viewBox', `0 0 24 24`)
-      }
-
-      this.svgString = serializer.serializeToString(this.origEle)
-      this.presentationSvg = serializer.serializeToString(clone)
     }
     return this
   }
