@@ -4,10 +4,13 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
-  entry: './src/scripts/index.js',
+  entry: {
+    main: './src/scripts/index.js',
+    gather: './src/scripts/find-svgs.js',
+  },
   mode: 'production',
   output: {
-    filename: './index.js',
+    filename: './[name].js',
     path: path.resolve(__dirname, 'public/extension/dist'),
     library: 'gobble',
     libraryTarget: 'window',

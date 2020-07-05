@@ -22,21 +22,33 @@ async function findSVGs() {
 
   const pageSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 
-  let filteredSVGs = pageSVGs
+  const filteredSVGs = pageSVGs
     .map(ele => new SVG(ele))
     .map(ele => ele.determineType())
     .filter(ele => ele.type)
+    .map(ele => ele.serialize())
+    .map(ele => ele.determineSize())
     .map(async svg => {
       const result = await svg.fetchSvg()
-      result.cleanupClone()
-      result.determineSize()
       result.checkForWhite()
       return result
     })
 
-  filteredSVGs = await Promise.all(filteredSVGs)
+  await Promise.all(filteredSVGs)
+    .then(result => {
+      return removeDups(result, 'origEleString')
+    })
+    .then(result => {
+      // console.log(result)
 
-  return removeDups(filteredSVGs, 'uniqueIdentifier')
+      // I spent two days trying to get asynchronous functions to work in chrome.tabs.sendMessage
+      // It's very difficult and I'm resorting to timeout for now
+      // https://stackoverflow.com/questions/20077487/chrome-extension-message-passing-response-not-sent
+      setTimeout(() => {
+        // eslint-disable-next-line
+        chrome.runtime.sendMessage(result)
+      }, 200)
+    })
 }
 
-export default findSVGs
+findSVGs()

@@ -1,24 +1,25 @@
 class SVG {
   constructor(el) {
     this.origEle = el
-    this.cloneEle = el.cloneNode(true)
-    this.svgString = undefined
+    this.origEleString = undefined
     this.url = undefined
     this.type = undefined
-    this.cors = false
-    this.hasWhite = false
     this.size = undefined
     this.height = 48
     this.width = 48
-    this.uniqueIdentifier = undefined
+    this.svgString = undefined
+    this.presentationSvg = undefined
+    this.cors = false
+    this.hasWhite = false
+    this.spriteId = undefined
   }
 
   determineType() {
-    if (this.cloneEle.tagName === 'svg') {
-      const firstChild = this.cloneEle.firstElementChild
+    if (this.origEle.tagName === 'svg') {
+      const firstChild = this.origEle.firstElementChild
       if (firstChild && firstChild.tagName === 'symbol') {
         this.type = 'symbol'
-        this.spriteId = this.cloneEle.getAttribute('id')
+        this.spriteId = this.origEle.getAttribute('id')
       } else if (firstChild && firstChild.tagName === 'use') {
         this.type = 'sprite'
         this.spriteId = firstChild.getAttributeNS(
@@ -47,41 +48,10 @@ class SVG {
     return this
   }
 
-  async fetchSvg() {
-    let response
+  serialize() {
     const serializer = new XMLSerializer()
-    const string = serializer.serializeToString(this.origEle)
-
-    if (this.url) {
-      try {
-        response = await fetch(this.url, { mode: 'no-cors' })
-        if (response.type === 'opaque') {
-          this.uniqueIdentifier = this.url
-          this.cors = true
-        } else {
-          response.text().then(text => {
-            this.svgString = text
-            this.uniqueIdentifier = text
-          })
-        }
-      } catch (error) {
-        console.log(`Some things aren't meant to be. This is why: ${error}`)
-      }
-    } else {
-      this.svgString = string
-      this.uniqueIdentifier = string
-    }
+    this.origEleString = serializer.serializeToString(this.origEle)
     return this
-  }
-
-  checkForWhite() {
-    const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
-
-    for (const string of whiteStrings) {
-      if (this.svgString && this.svgString.includes(string)) {
-        this.hasWhite = true
-      }
-    }
   }
 
   determineSize() {
@@ -108,21 +78,57 @@ class SVG {
         this.height = height
       }
     }
+    return this
   }
 
-  cleanupClone() {
-    this.cloneEle.setAttribute('class', 'gob__card__svg__trick')
-    this.cloneEle.removeAttribute('height')
-    this.cloneEle.removeAttribute('width')
-    this.cloneEle.removeAttribute('style')
-    this.cloneEle.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+  async fetchSvg() {
+    const serializer = new XMLSerializer()
+    const clone = this.origEle.cloneNode(true)
 
-    if (!this.cloneEle.hasAttribute('viewBox')) {
-      this.cloneEle.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
+    clone.setAttribute('class', 'gob__card__svg__trick')
+    clone.removeAttribute('height')
+    clone.removeAttribute('width')
+    clone.removeAttribute('style')
+    clone.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+
+    if (!clone.hasAttribute('viewBox')) {
+      clone.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
     }
 
-    if (this.cloneEle.getAttribute('viewBox') === '0 0 0 0') {
-      this.cloneEle.setAttribute('viewBox', `0 0 24 24`)
+    if (clone.getAttribute('viewBox') === '0 0 0 0') {
+      clone.setAttribute('viewBox', `0 0 24 24`)
+    }
+
+    this.svgString = this.origEleString
+    this.presentationSvg = serializer.serializeToString(clone)
+
+    if (this.url) {
+      try {
+        const response = await fetch(this.url, { mode: 'no-cors' })
+        if (response.type === 'opaque') {
+          this.cors = true
+        } else {
+          response.text().then(text => {
+            // Would love to optimize this but not sure
+            // how to conver it to elements
+            this.presentationSvg = text
+            this.svgString = text
+          })
+        }
+      } catch (error) {
+        console.log(`Some things aren't meant to be. This is why: ${error}`)
+      }
+    }
+    return this
+  }
+
+  checkForWhite() {
+    const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
+
+    for (const string of whiteStrings) {
+      if (this.svgString && this.svgString.includes(string)) {
+        this.hasWhite = true
+      }
     }
   }
 }

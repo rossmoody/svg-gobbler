@@ -1,4 +1,3 @@
-import findSVGs from './find-svgs'
 import createUI from './create-ui'
 import download from './download'
 
@@ -32,19 +31,11 @@ const start = {
   },
 
   theGobbles(i) {
-    function scrollToTop() {
-      const c = document.documentElement.scrollTop || document.body.scrollTop
-      if (c > 0) {
-        window.requestAnimationFrame(scrollToTop)
-        window.scrollTo(0, c - c / 8)
-      }
-    }
-    scrollToTop()
     createUI(i)
   },
 }
 
-export default async function gobble() {
+export default async function gobble(data) {
   try {
     const hasGobbles = document.querySelector('.gob')
     if (hasGobbles) {
@@ -54,18 +45,12 @@ export default async function gobble() {
       document.querySelector('svg')
     ) {
       start.oneGobble()
+    } else if (data.length === 0) {
+      start.noGobbles()
     } else {
-      const allSVGs = await findSVGs()
-      // console.log(allSVGs)
-      if (allSVGs.length === 0) {
-        start.noGobbles()
-      } else {
-        start.theGobbles(allSVGs)
-      }
+      start.theGobbles(data)
     }
   } catch (error) {
     start.errorGobbles(error)
   }
 }
-
-gobble()
