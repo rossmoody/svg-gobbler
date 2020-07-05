@@ -1,27 +1,18 @@
 class SVG {
-  constructor(el) {
-    // The element swiped from the dom
+  constructor(el, index) {
     this.origEle = el
-    // Serialized version of the original elements
-    // Used to filter duplicates
+    this.id = index
     this.origEleString = undefined
     this.url = undefined
     this.type = undefined
-    // The string that gets rendered in the card.
-    // Concat by height and width
     this.size = undefined
-    // This is determined by rects
     this.height = 48
     this.width = 48
-    // This is what is downloaded or copied
     this.svgString = undefined
-    // This is what is rendered in the card
     this.presentationSvg = undefined
-    // Boolean if fetch fails
     this.cors = false
-    // Boolean for if we should render the icon
-    // with a grey background
     this.hasWhite = false
+    this.spriteId = undefined
   }
 
   determineType() {
@@ -113,7 +104,6 @@ class SVG {
         console.log(`Some things aren't meant to be. This is why: ${error}`)
       }
     } else {
-      console.log(this.origEleString, '<- orig')
       const clone = this.origEle.cloneNode(true)
       clone.setAttribute('class', 'gob__card__svg__trick')
       clone.removeAttribute('height')
@@ -131,7 +121,6 @@ class SVG {
 
       this.svgString = serializer.serializeToString(this.origEle)
       this.presentationSvg = serializer.serializeToString(clone)
-      console.log(this.presentationSvg, '<- clone')
     }
     return this
   }

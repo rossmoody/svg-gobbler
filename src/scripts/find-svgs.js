@@ -23,10 +23,10 @@ async function findSVGs() {
   const pageSVGs = [...svgTags, ...imgSrcs, ...objDatas, ...pageDivs]
 
   let filteredSVGs = pageSVGs
-    .map(ele => new SVG(ele))
+    .map((ele, i) => new SVG(ele, i))
     .map(ele => ele.determineType())
-    .map(ele => ele.serialize())
     .filter(ele => ele.type)
+    .map(ele => ele.serialize())
     .map(ele => ele.determineSize())
     .map(async svg => {
       const result = await svg.fetchSvg()
