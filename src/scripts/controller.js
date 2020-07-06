@@ -1,4 +1,4 @@
-import findSVGs from './find-svgs'
+import processSVGs from './process-svgs'
 
 require('../styles/index.scss')
 
@@ -59,7 +59,7 @@ function noGobbles() {
 }
 
 async function init() {
-  const data = await findSVGs()
+  const data = await processSVGs()
   try {
     if (data.length === 0) {
       noGobbles()

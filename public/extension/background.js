@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     for (const view of views) {
       if (view.location.href == viewTabUrl) {
-        // This function is firing from the window object
+        // This function is running from the window object
         // It is being imported from the index.html script src
         view.gobble(message)
         break
