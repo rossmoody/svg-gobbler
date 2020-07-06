@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   entry: {
-    main: './src/scripts/index.js',
+    main: './src/scripts/create-ui.js',
     gather: './src/scripts/find-svgs.js',
   },
   mode: 'production',

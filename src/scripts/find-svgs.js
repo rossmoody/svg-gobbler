@@ -10,6 +10,17 @@ function removeDups(arr, comp) {
   return unique
 }
 
+function noGobbles() {
+  const doc = document.querySelector('body')
+  const noGobbler = document.createElement('div')
+  noGobbler.classList.add('gob__noGobbler')
+  noGobbler.innerHTML = `😢 Drats, no SVGs to gobble `
+  doc.insertAdjacentElement('beforebegin', noGobbler)
+  setTimeout(() => {
+    noGobbler.remove()
+  }, 3000)
+}
+
 function findSVGs() {
   const svgTags = Array.from(window.document.querySelectorAll('svg'))
   const objDatas = Array.from(
@@ -39,15 +50,14 @@ function findSVGs() {
       return removeDups(result, 'origEleString')
     })
     .then(result => {
-      // console.log(result)
-
-      // I spent two days trying to get asynchronous functions to work in chrome.tabs.sendMessage
-      // It's very difficult and I'm resorting to timeout for now
-      // https://stackoverflow.com/questions/20077487/chrome-extension-message-passing-response-not-sent
-      setTimeout(() => {
-        // eslint-disable-next-line
-        chrome.runtime.sendMessage(result)
-      }, 100)
+      if (result.length === 0) {
+        noGobbles()
+      } else {
+        setTimeout(() => {
+          // eslint-disable-next-line
+          chrome.runtime.sendMessage(result)
+        }, 100)
+      }
     })
 }
 
