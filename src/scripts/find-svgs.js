@@ -10,7 +10,7 @@ function removeDups(arr, comp) {
   return unique
 }
 
-async function findSVGs() {
+function findSVGs() {
   const svgTags = Array.from(window.document.querySelectorAll('svg'))
   const objDatas = Array.from(
     window.document.querySelectorAll('object[data*=".svg"]')
@@ -34,7 +34,7 @@ async function findSVGs() {
       return result
     })
 
-  await Promise.all(filteredSVGs)
+  Promise.all(filteredSVGs)
     .then(result => {
       return removeDups(result, 'origEleString')
     })

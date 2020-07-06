@@ -104,18 +104,16 @@ class SVG {
 
     if (this.url) {
       try {
-        const response = await fetch(this.url, { mode: 'no-cors' })
-        if (response.type === 'opaque') {
-          this.cors = true
-        } else {
+        await fetch(this.url).then(response => {
           response.text().then(text => {
             // Would love to optimize this but not sure
             // how to conver it to elements
             this.presentationSvg = text
             this.svgString = text
           })
-        }
+        })
       } catch (error) {
+        this.cors = true
         console.log(`Some things aren't meant to be. This is why: ${error}`)
       }
     }
