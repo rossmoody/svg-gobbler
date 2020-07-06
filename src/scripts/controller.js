@@ -1,5 +1,7 @@
 import findSVGs from './find-svgs'
 
+require('../styles/index.scss')
+
 function noGobbles() {
   const style = document.createElement('style')
   style.innerHTML = `

@@ -1,8 +1,6 @@
 import createCards from './create-card'
 import download from './download'
 
-require('../styles/index.scss')
-
 const createUI = data => {
   const container = document.querySelector('.gob__container')
   const countCont = document.querySelector('.gob__countCont')
