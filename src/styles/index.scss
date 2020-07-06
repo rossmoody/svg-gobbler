@@ -13,15 +13,11 @@ body {
 }
 
 .gob {
-  position: absolute;
-  width: 100%;
-  z-index: 1000000000;
-
   &__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     grid-gap: 24px;
-    margin: 0 72px;
+    margin: 48px 72px;
   }
 
   &__overlay {
@@ -37,23 +33,17 @@ body {
   }
 
   &__header {
-    visibility: hidden;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 32px;
     height: 64px;
-    margin: 0 0 32px;
+    margin: 0;
     position: -webkit-sticky;
     position: sticky;
     top: -1px;
     z-index: 2;
     background: $gray5;
-
-    &--show {
-      visibility: visible;
-      animation: loadCards 0.5s ease-in-out 1;
-    }
   }
 
   &__logoCont {
@@ -247,14 +237,6 @@ body {
       content: 'Download';
     }
 
-    &--pngdownload::before {
-      content: 'Export PNG';
-    }
-
-    &--jpgdownload::before {
-      content: 'Export JPG';
-    }
-
     &--copy::before {
       content: 'Copy';
     }
@@ -276,18 +258,8 @@ body {
         transition: all 0.2s ease-in-out;
       }
 
-      &--pngdownload::before {
-        content: 'Exported';
-        transition: all 0.2s ease-in-out;
-      }
-
-      &--jpgdownload::before {
-        content: 'Exported';
-        transition: all 0.2s ease-in-out;
-      }
-
       &--copy::before {
-        content: 'Copied!';
+        content: 'Copied';
         transition: all 0.2s ease-in-out;
       }
     }

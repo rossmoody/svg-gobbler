@@ -60,14 +60,17 @@ function noGobbles() {
 
 async function init() {
   const data = await findSVGs()
-
-  if (data.length === 0) {
-    noGobbles()
-  } else {
-    setTimeout(() => {
-      // eslint-disable-next-line
-      chrome.runtime.sendMessage(data)
-    }, 100)
+  try {
+    if (data.length === 0) {
+      noGobbles()
+    } else {
+      setTimeout(() => {
+        // eslint-disable-next-line
+        chrome.runtime.sendMessage(data)
+      }, 100)
+    }
+  } catch (e) {
+    console.log(e)
   }
 }
 
