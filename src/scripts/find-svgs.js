@@ -47,7 +47,7 @@ async function findSVGs() {
       setTimeout(() => {
         // eslint-disable-next-line
         chrome.runtime.sendMessage(result)
-      }, 200)
+      }, 100)
     })
 }
 

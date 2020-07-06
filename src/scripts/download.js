@@ -1,4 +1,5 @@
 import FileSaver from 'file-saver'
+import JSZip from 'jszip'
 
 const download = {
   createRegDownload(i) {
@@ -15,17 +16,14 @@ const download = {
     document.body.removeChild(el)
   },
 
-  copyIsolatedSVG() {
-    const docEl = document.documentElement
-    const string = new XMLSerializer().serializeToString(docEl)
-    navigator.clipboard.writeText(string).then(
-      () => {
-        alert('The SVG was copied to your clipboard.')
-      },
-      err => {
-        alert('Could not copy:', err)
-      }
-    )
+  downloadAll(i) {
+    const zip = new JSZip()
+    i.forEach((svg, index) => {
+      zip.file(`svg-${index}.svg`, svg.svgString)
+    })
+    zip.generateAsync({ type: 'blob' }).then(content => {
+      FileSaver.saveAs(content, 'gobbled_svgs.zip')
+    })
   },
 }
 

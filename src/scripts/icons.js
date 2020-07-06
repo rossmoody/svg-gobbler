@@ -1,3 +1,0 @@
-const gobLogo = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><rect fill="#FB575E" fill-rule="nonzero" width="32" height="32" rx="4"/><g transform="translate(2 7)"><path d="M2 3h24M6 13C6 6.333 8.667 3 14 3s8 3.333 8 10" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><circle fill="#FFF" cx="2" cy="3" r="2"/><circle fill="#FFF" cx="26" cy="3" r="2"/> <rect stroke="#2D3341" fill="#2D3341" stroke-linecap="round" x="2.5" y="11.5" width="7" height="7" rx="1"/><rect stroke="#2D3341" fill="#2D3341" stroke-linecap="round" x="18.5" y="11.5" width="7" height="7" rx="1"/><rect stroke="#2D3341" fill="#2D3341" stroke-linecap="round" x="10.5" y="-.5" width="7" height="7" rx="1"/></g></g></svg>`
-
-export default gobLogo

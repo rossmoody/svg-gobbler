@@ -1,9 +1,9 @@
 import createUI from './create-ui'
-import download from './download'
 
 require('../styles/index.scss')
 
 const start = {
+  // this doesn't work at the moment. no styles being injected.
   noGobbles() {
     const doc = document.querySelector('body')
     const noGobbler = document.createElement('div')
@@ -13,10 +13,6 @@ const start = {
     setTimeout(() => {
       noGobbler.remove()
     }, 3000)
-  },
-
-  oneGobble() {
-    download.copyIsolatedSVG()
   },
 
   errorGobbles(error) {
@@ -37,15 +33,7 @@ const start = {
 
 export default async function gobble(data) {
   try {
-    const hasGobbles = document.querySelector('.gob')
-    if (hasGobbles) {
-      console.log('There are already Gobblers about...')
-    } else if (
-      !document.querySelector('body') &&
-      document.querySelector('svg')
-    ) {
-      start.oneGobble()
-    } else if (data.length === 0) {
+    if (data.length === 0) {
       start.noGobbles()
     } else {
       start.theGobbles(data)
