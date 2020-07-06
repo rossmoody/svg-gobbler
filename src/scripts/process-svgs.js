@@ -19,7 +19,6 @@ function processSVGs() {
     .filter(ele => ele.type)
     .map(ele => ele.serialize())
     .map(ele => ele.determineSize())
-    .map(ele => ele.test())
     .map(async svg => {
       const result = await svg.fetchSvg()
       result.checkForWhite()
