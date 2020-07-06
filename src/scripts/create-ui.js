@@ -3,13 +3,6 @@ import download from './download'
 
 require('../styles/index.scss')
 
-// Element creation helper
-function createElement(el, elClass) {
-  const i = document.createElement(el)
-  i.className = elClass
-  return i
-}
-
 const createUI = data => {
   const container = document.querySelector('.gob__container')
   const countCont = document.querySelector('.gob__countCont')
@@ -21,12 +14,15 @@ const createUI = data => {
       : `Download ${data.length} SVGs`
   }
 
-  const gobCount = createElement('button', 'gob__count--svg')
+  const gobCount = document.createElement('button')
+
+  gobCount.className = 'gob__count--svg'
   gobCount.innerHTML = isPlural()
-  countCont.appendChild(gobCount)
   gobCount.addEventListener('click', () => {
     download.downloadAll(data)
   })
+
+  countCont.appendChild(gobCount)
 
   createCards(data, container)
 }

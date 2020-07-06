@@ -328,22 +328,6 @@ body {
     }
   }
 
-  &__noGobbler {
-    z-index: 5000;
-    padding: 16px 24px;
-    background: $white;
-    @include font-family();
-    font-size: 20px;
-    color: $gray4;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    line-height: 20px;
-    border-radius: 60px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-    animation: 3s loadSadness ease-in-out 1;
-  }
-
   &__display-none {
     display: none;
   }
