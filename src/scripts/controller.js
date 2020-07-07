@@ -64,10 +64,13 @@ async function init() {
     if (data.length === 0) {
       noGobbles()
     } else {
+      // Weird little hack I stumbled upon so that
+      // sendMessage waits for return of Promise
+      // before sending message
       setTimeout(() => {
         // eslint-disable-next-line
         chrome.runtime.sendMessage(data)
-      }, 100)
+      }, 1)
     }
   } catch (e) {
     console.log(e)

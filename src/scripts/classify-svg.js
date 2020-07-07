@@ -2,10 +2,10 @@ const classify = {
   determineType() {
     if (this.origEle.tagName === 'svg') {
       const firstChild = this.origEle.firstElementChild
+
       if (firstChild && firstChild.tagName === 'symbol') {
         this.type = 'symbol'
-        this.spriteId = this.origEle.getAttribute('id')
-        console.log(this, 'symbol example')
+        this.spriteMaster = true
       } else if (firstChild && firstChild.tagName === 'use') {
         this.type = 'sprite'
         this.spriteId = firstChild.getAttributeNS(
@@ -34,28 +34,35 @@ const classify = {
     return this
   },
 
-  serialize() {
-    const serializer = new XMLSerializer()
-    this.origEleString = serializer.serializeToString(this.origEle)
+  buildSpriteString() {
+    if (this.spriteId) {
+      const symbolLink = document.querySelector(this.spriteId).cloneNode(true)
+      if (symbolLink) {
+        this.origEle.prepend(symbolLink)
+      }
+    }
     return this
   },
 
-  determineSize() {
-    const rects = this.origEle.getBoundingClientRect()
+  getRects(el) {
+    const rects = el.getBoundingClientRect()
     this.height = Math.ceil(rects.height)
     this.width = Math.ceil(rects.width)
+  },
+
+  determineSize() {
     this.size = `${this.width}x${this.height}`
 
     if (this.width === 0 && this.height === 0) {
-      this.size = 'N/A'
+      this.size = 'Hidden'
     } else if (
       this.origEle.hasAttribute('width') &&
       this.origEle.hasAttribute('height')
     ) {
       const width = this.origEle.getAttribute('width')
       const height = this.origEle.getAttribute('height')
-      if (width.includes('%')) {
-        this.size = '100%'
+      if (width.includes('%' || 'em')) {
+        this.size = ''
       } else if (width.includes('px')) {
         this.size = `${width.slice(0, -2)}x${height.slice(0, -2)}`
       } else {
@@ -69,6 +76,7 @@ const classify = {
 
   async fetchSvg() {
     const serializer = new XMLSerializer()
+    this.svgString = serializer.serializeToString(this.origEle)
 
     this.origEle.setAttribute('class', 'gob__card__svg__trick')
     this.origEle.removeAttribute('height')
@@ -84,7 +92,6 @@ const classify = {
       this.origEle.setAttribute('viewBox', `0 0 24 24`)
     }
 
-    this.svgString = this.origEleString
     this.presentationSvg = serializer.serializeToString(this.origEle)
 
     if (this.url) {
@@ -99,7 +106,6 @@ const classify = {
         })
       } catch (error) {
         this.cors = true
-        console.log(`${this} wasn't meant to be. This is why: ${error}`)
       }
     }
     return this
