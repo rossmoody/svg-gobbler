@@ -48,10 +48,7 @@ const createCards = (svgInfo, cont) => {
     }, 60 * i)
 
     // Create card warnings
-    if (el.type === 'sprite') {
-      const newTag = createElement('div', 'gob__tag--sprite')
-      gobblerCard.appendChild(newTag)
-    } else if (el.type === 'symbol') {
+    if (el.type === 'symbol') {
       const newTag = createElement('div', 'gob__tag--symbol')
       gobblerCard.appendChild(newTag)
     }

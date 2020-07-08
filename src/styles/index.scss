@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 0;
+  @include font-family;
 }
 
 .gob {
@@ -36,13 +37,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 80px;
     padding: 0 32px;
-    height: 64px;
     margin: 0;
     position: -webkit-sticky;
     position: sticky;
-    top: -1px;
-    z-index: 2;
+    z-index: 100;
     background: $gray5;
   }
 
@@ -52,8 +52,7 @@ body {
   }
 
   &__logo {
-    height: 32px;
-    width: 32px;
+    width: 180px;
   }
 
   &__countCont {
@@ -65,19 +64,15 @@ body {
     &--svg {
       background: $primary;
       color: $white;
-      @include font-family();
-      font-size: 14px;
+      font-family: inherit;
+      font-size: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 6px;
-      margin: 0 8px;
       font-weight: 500;
-      min-width: 24px;
-      padding: 8px 16px;
+      padding: 12px 16px;
       border: none;
-      letter-spacing: normal;
-      text-transform: none;
 
       &:hover {
         box-shadow: 4px 4px rgba(0, 0, 0, 0.15);
@@ -97,7 +92,7 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     height: fit-content;
-    @include font-family();
+    font-family: inherit;
 
     &--show {
       display: flex;
@@ -119,8 +114,10 @@ body {
       overflow: hidden;
 
       &--white {
-        background: $gray4;
-        border-radius: 12px 12px 0 0;
+        background: $gray2;
+        padding: -16px;
+        margin: 16px;
+        border-radius: 12px;
       }
 
       &__wrapper {
@@ -144,13 +141,12 @@ body {
       margin: 0 20px;
       line-height: 1.4;
       padding: 12px 0 20px;
-      min-height: 60px;
       border-top: 1px solid $gray2;
       position: relative;
       overflow: hidden;
       display: grid;
       align-items: start;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       grid-gap: 8px;
       align-content: start;
 
@@ -158,12 +154,12 @@ body {
       h4 {
         margin: 0;
         padding: 0;
-        @include font-family();
+        font-family: inherit;
       }
 
       & h3 {
-        color: $gray4;
-        font-size: 16px;
+        color: $gray5;
+        font-size: 18px;
         font-weight: 500;
         text-transform: capitalize;
       }
@@ -172,9 +168,9 @@ body {
         text-transform: uppercase;
         letter-spacing: 0.6px;
         font-weight: 600;
-        color: $gray3;
+        color: $gray4;
         margin: 0 0 2px;
-        font-size: 11px;
+        font-size: 12px;
       }
     }
   }
@@ -211,18 +207,18 @@ body {
   }
 
   &__btn {
-    padding: 6px;
+    padding: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    border: 1px solid $gray2;
-    color: $gray4;
+    border: 1px solid $gray3;
+    color: $gray5;
     background: white;
     cursor: pointer;
     outline: none;
-    font-size: 13px !important;
-    font-weight: 400 !important;
+    font-size: 13px;
+    font-weight: 500;
     text-decoration: none;
     letter-spacing: normal;
     text-transform: none;
@@ -248,8 +244,8 @@ body {
     }
 
     &--success {
-      background: $success !important;
-      border: 1px solid $success !important;
+      background: $success;
+      border: 1px solid $success;
       color: white;
       transition: all 0.2s ease-in-out;
 
@@ -266,15 +262,6 @@ body {
   }
 
   &__tag {
-    &--sprite {
-      @include special-tag();
-
-      &:hover::after {
-        @include special-tag-hover();
-        content: 'Output from SVG sprites hit or miss. I am working on improving it.';
-      }
-    }
-
     &--symbol {
       @include special-tag();
 

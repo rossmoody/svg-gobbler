@@ -1,9 +1,9 @@
 /* Colors */
 $white: #ffffff;
-$gray1: #f0f3f9;
-$gray2: #e5e8ee;
-$gray3: #9a9da8;
-$gray4: #4a5162;
-$gray5: #2d3341;
+$gray5: #333948;
+$gray4: rgba($gray5, 0.7);
+$gray3: rgba($gray5, 0.3);
+$gray2: rgba($gray5, 0.2);
+$gray1: rgba($gray5, 0.1);
 $primary: #fa555d;
 $success: #10d173;

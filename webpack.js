@@ -6,9 +6,11 @@ const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
   entry: {
     main: './src/scripts/create-ui.js',
-    gather: './src/scripts/controller.js',
+    gather: './src/scripts/process-svgs.js',
   },
   mode: 'production',
+  // devtool: 'cheap-module-source-map',
+  stats: 'minimal',
   output: {
     filename: './[name].js',
     path: path.resolve(__dirname, 'public/extension/dist'),

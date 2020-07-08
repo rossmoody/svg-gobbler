@@ -11,7 +11,7 @@ function removeDups(arr, comp) {
   return unique
 }
 
-function processSVGs() {
+async function processSVGs() {
   const pageEles = findSVGs()
   const filteredSVGs = pageEles
     .map(ele => new SVG(ele))
@@ -26,9 +26,10 @@ function processSVGs() {
       return result
     })
 
-  const data = Promise.all(filteredSVGs).then(result => {
+  const data = await Promise.all(filteredSVGs).then(result => {
     return removeDups(result, 'svgString')
   })
+  console.log(data)
 
   return data
 }
