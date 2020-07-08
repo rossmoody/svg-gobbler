@@ -14,30 +14,23 @@ function removeDups(arr, comp) {
 function processSVGs() {
   const pageEles = findSVGs()
   const filteredSVGs = pageEles
-    // Runs each element through class creation
-    // Clones the original element
     .map(ele => new SVG(ele))
-    // Determines what type of SVG it is
-    // Also if it has a url to fetch
     .map(ele => ele.determineType())
-    // Filters out any elements that don't have
-    // a type property on the class
     .filter(ele => ele.type)
     .map(ele => ele.buildSpriteString())
-    // Determines size of orig ele
     .map(ele => ele.determineSize())
     .map(async svg => {
       const result = await svg.fetchSvg()
       result.checkForWhite()
+      delete result.origEle
       return result
     })
 
-  const uniqueSvgs = Promise.all(filteredSVGs).then(result => {
+  const data = Promise.all(filteredSVGs).then(result => {
     return removeDups(result, 'svgString')
   })
 
-  console.log(uniqueSvgs)
-  return uniqueSvgs
+  return data
 }
 
 export default processSVGs

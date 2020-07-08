@@ -1,7 +1,5 @@
 import processSVGs from './process-svgs'
 
-require('../styles/index.scss')
-
 function noGobbles() {
   const style = document.createElement('style')
   style.innerHTML = `
@@ -27,17 +25,17 @@ function noGobbles() {
           opacity: 0;
           top: 0;
         }
-      
+
         20% {
           opacity: 1;
           top: 90px;
         }
-      
+
         90% {
           opacity: 1;
           top: 90px;
         }
-      
+
         100% {
           opacity: 0;
           top: 0px;
@@ -58,23 +56,16 @@ function noGobbles() {
   }, 2900)
 }
 
-async function init() {
-  const data = await processSVGs()
-  try {
-    if (data.length === 0) {
-      noGobbles()
-    } else {
-      // Weird little hack I stumbled upon so that
-      // sendMessage waits for return of Promise
-      // before sending message
-      setTimeout(() => {
-        // eslint-disable-next-line
-        chrome.runtime.sendMessage(data)
-      }, 1)
-    }
-  } catch (e) {
-    console.log(e)
+// eslint-disable-next-line
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === 'start_gobbling') {
+    processSVGs().then(result => {
+      if (result.length === 0) {
+        noGobbles()
+      } else {
+        sendResponse({ complete: true, data: result })
+      }
+    })
+    return true
   }
-}
-
-init()
+})
