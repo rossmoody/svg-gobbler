@@ -10,13 +10,27 @@ Currently, if you would like to modify this extension you will need to install i
 
 ### Installation
 
-1. Clone the repo and `cd` into the root folder
+1. Clone the repo
+
+```
+cd svg-gobbler
+```
+
 2. Run `npm install` to install necessary dependencies
-3. Run `npm start` to bundle and build the latest `style.css` file and `index.js` file into the `public/extension/dist` folder. This also tells webpack to watch for edits and also start Prettier to automatically format the code.
+
+```
+npm install
+```
+
+3. Run `npm start` to tell Webpack to build files into the `public/extension/dist` folder. This also tells webpack to watch for edits.
+
+```
+npm start
+```
 
 ### Side load extension
 
-1. Open Chrome or Brave Browser
+1. Open Chrome
 2. In the address bar, navigate to `chrome://extensions`
 3. In the top right of the screen, flip the toggle to enable `Developer Mode`
 4. Click the button to `Load unpacked` and select the `public/extension` folder inside the SVG Gobbler repo
@@ -39,6 +53,14 @@ Unique attributes for each SVG element will be shown within the card. The attrib
    - symbol
 
 2. The size of the SVG in the DOM
+
+### Testing
+
+There is a testing `index.html` file inside the `public` folder. It houses various different SVG placement methods to use for testing. To serve the site using `live-server` run:
+
+```
+npm run serve
+```
 
 ## Contribute
 
