@@ -36,7 +36,6 @@ function processSVGs() {
     return removeDups(finals, 'svgString')
   })
 
-  console.log(data)
   return data
 }
 
