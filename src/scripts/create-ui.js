@@ -7,7 +7,6 @@ const createUI = data => {
   const container = document.querySelector('.gob__container')
   const countCont = document.querySelector('.gob__countCont')
 
-  // Create SVG Counter
   function isPlural() {
     return data.length === 1
       ? `Download ${data.length} SVG`

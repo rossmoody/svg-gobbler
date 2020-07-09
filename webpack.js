@@ -6,10 +6,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
   entry: {
     main: './src/scripts/create-ui.js',
-    gather: './src/scripts/process-svgs.js',
+    gather: './src/scripts/controller.js',
   },
   mode: 'production',
-  // devtool: 'cheap-module-source-map',
   stats: 'minimal',
   output: {
     filename: './[name].js',
@@ -21,7 +20,6 @@ module.exports = {
   node: {
     fs: 'empty', // webpack doesn't like fs or require modules and errors without this
   },
-  // stats: 'minimal',
   optimization: {
     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },

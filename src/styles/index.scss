@@ -115,7 +115,7 @@ body {
 
       &--white {
         background: $gray2;
-        padding: -16px;
+        padding: 8px 32px;
         margin: 16px;
         border-radius: 12px;
       }
@@ -267,14 +267,14 @@ body {
 
       &:hover::after {
         @include special-tag-hover();
-        content: 'Output from SVG symbols are unreliable and will likely contain several nested XML icons inside.';
+        content: "This is a sprite master symbol. Content from this SVG will likely contain several nested XML icons inside and won't render by itself.";
       }
     }
 
     &--cors {
       @include special-tag();
-      height: 28px;
-      width: 28px;
+      height: 40px;
+      width: 40px;
 
       &::before {
         content: $cors-alert-icon;

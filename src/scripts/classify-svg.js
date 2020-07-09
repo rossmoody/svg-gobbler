@@ -5,7 +5,6 @@ const classify = {
 
       if (firstChild && firstChild.tagName === 'symbol') {
         this.type = 'symbol'
-        this.spriteMaster = true
       } else if (firstChild && firstChild.tagName === 'use') {
         this.type = 'sprite'
         this.spriteId = firstChild.getAttributeNS(
@@ -16,8 +15,12 @@ const classify = {
         this.type = 'inline'
       }
     } else if (this.origEle.tagName === 'IMG') {
-      this.url = this.origEle.src
-      this.type = 'img src'
+      const suffix = this.origEle.src.split('.').pop()
+
+      if (suffix === 'svg') {
+        this.url = this.origEle.src
+        this.type = 'img src'
+      }
     } else if (this.origEle.tagName === 'OBJECT') {
       this.url = this.data
       this.type = 'object'
@@ -76,37 +79,19 @@ const classify = {
 
   async fetchSvg() {
     const serializer = new XMLSerializer()
-    this.svgString = serializer.serializeToString(this.origEle)
-
-    this.origEle.setAttribute('class', 'gob__card__svg__trick')
-    this.origEle.removeAttribute('height')
-    this.origEle.removeAttribute('width')
-    this.origEle.removeAttribute('style')
-    this.origEle.setAttribute('preserveAspectRatio', 'xMidYMid meet')
-
-    if (!this.origEle.hasAttribute('viewBox')) {
-      this.origEle.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
-    }
-
-    if (this.origEle.getAttribute('viewBox') === '0 0 0 0') {
-      this.origEle.setAttribute('viewBox', `0 0 24 24`)
-    }
-
-    this.presentationSvg = serializer.serializeToString(this.origEle)
 
     if (this.url) {
       try {
         await fetch(this.url).then(response => {
           response.text().then(text => {
-            // Would love to optimize this but not sure
-            // how to conver it to elements
-            this.presentationSvg = text
             this.svgString = text
           })
         })
       } catch (error) {
         this.cors = true
       }
+    } else {
+      this.svgString = serializer.serializeToString(this.origEle)
     }
     return this
   },
@@ -115,10 +100,34 @@ const classify = {
     const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
 
     for (const string of whiteStrings) {
-      if (this.svgString && this.svgString.includes(string)) {
+      if (this.presentationSvg && this.presentationSvg.includes(string)) {
         this.hasWhite = true
       }
     }
+
+    return this
+  },
+
+  fixupString() {
+    const doc = new DOMParser().parseFromString(this.svgString, 'image/svg+xml')
+    const ele = doc.documentElement
+
+    if (ele.nodeName === 'svg') {
+      if (!ele.hasAttribute('viewBox')) {
+        ele.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
+      }
+
+      ele.removeAttribute('height')
+      ele.removeAttribute('width')
+      ele.removeAttribute('style')
+      ele.removeAttribute('class')
+      ele.removeAttribute('fill')
+    }
+
+    ele.setAttribute('class', 'gob__card__svg__trick')
+    ele.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+
+    this.presentationSvg = new XMLSerializer().serializeToString(ele)
 
     return this
   },

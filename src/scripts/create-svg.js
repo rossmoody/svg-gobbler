@@ -19,6 +19,7 @@ class SVG {
   }
 }
 
+SVG.prototype.fixupString = classify.fixupString
 SVG.prototype.determineType = classify.determineType
 SVG.prototype.determineSize = classify.determineSize
 SVG.prototype.fetchSvg = classify.fetchSvg

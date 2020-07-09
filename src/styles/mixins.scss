@@ -1,12 +1,12 @@
 /* Mixins */
 @mixin special-tag {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   left: auto;
   cursor: help;
-  height: 20px;
-  width: 20px;
+  height: 32px;
+  width: 32px;
   background: $white;
   border-radius: 20px;
 
@@ -29,16 +29,6 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   animation: 0.3s ease-in fadeIn;
   color: $white;
-}
-
-@mixin header-icon {
-  height: 32px;
-  width: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 100px;
 }
 
 @mixin font-family {

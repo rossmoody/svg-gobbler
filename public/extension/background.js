@@ -1,29 +1,6 @@
 let id = 1
 let viewTabUrl = null
 
-function sendMessagePromise(tabId, item) {
-  viewTabUrl = chrome.runtime.getURL('index.html?id=' + id++)
-
-  return new Promise((resolve, reject) => {
-    chrome.tabs.sendMessage(tabId, item, response => {
-      if (response && response.complete) {
-        buildTab(response.data)
-        resolve()
-      } else {
-        reject('Something wrong')
-      }
-    })
-  })
-}
-
-chrome.browserAction.onClicked.addListener(function () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    sendMessagePromise(tabs[0].id, {
-      message: 'start_gobbling',
-    })
-  })
-})
-
 function buildTab(data) {
   chrome.tabs.create({ url: viewTabUrl })
 
@@ -42,3 +19,26 @@ function buildTab(data) {
     }
   })
 }
+
+function sendMessagePromise(tabId, item) {
+  return new Promise((resolve, reject) => {
+    chrome.tabs.sendMessage(tabId, item, response => {
+      if (response.complete) {
+        buildTab(response.data)
+        resolve()
+      } else {
+        reject('Something wrong')
+      }
+    })
+  })
+}
+
+chrome.browserAction.onClicked.addListener(function () {
+  viewTabUrl = chrome.runtime.getURL('index.html?id=' + id++)
+
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    sendMessagePromise(tabs[0].id, {
+      message: 'start_gobbling',
+    })
+  })
+})
