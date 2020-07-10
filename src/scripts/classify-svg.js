@@ -114,7 +114,7 @@ const classify = {
 
     if (ele.nodeName === 'svg') {
       if (!ele.hasAttribute('viewBox')) {
-        ele.setAttribute('viewBox', `0 0 ${this.height} ${this.width}`)
+        ele.setAttribute('viewBox', `0 0 ${this.width} ${this.height}`)
       }
 
       ele.removeAttribute('height')
