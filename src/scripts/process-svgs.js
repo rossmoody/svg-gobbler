@@ -22,9 +22,15 @@ async function processSVGs() {
     .map(ele => ele.determineSize())
     .map(ele => ele.fetchSvg())
 
-  const results = await Promise.all(svgs.map(p => p.catch(e => e)))
+  const results = await Promise.allSettled(svgs)
 
-  const validResults = results.filter(result => !(result instanceof Error))
+  const validResults = results.map(i => {
+    if (i.status === 'fulfilled') {
+      return i.value
+    }
+    console.log('Not fulfilled ->', i)
+    return i.value
+  })
 
   const uniqueSVGs = removeDups(validResults, 'svgString')
 

@@ -36,6 +36,8 @@ function sendMessagePromise(tabId, item) {
 chrome.browserAction.onClicked.addListener(function () {
   viewTabUrl = chrome.runtime.getURL('index.html?id=' + id++)
 
+  chrome.tabs.insertCSS({ file: './dist/gather.css' })
+
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     sendMessagePromise(tabs[0].id, {
       message: 'start_gobbling',
