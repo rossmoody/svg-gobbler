@@ -1,87 +1,89 @@
 import processSVGs from './process-svgs'
 
-// function noGobbles() {
-//   const style = document.createElement('style')
-//   style.innerHTML = `
-//   .gob__noGobbler {
-//     font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”,
-//     “Helvetica Neue”, Helvetica, Arial, sans-serif;
-//     z-index: 5000;
-//     padding: 16px 24px;
-//     background: white;
-//     font-size: 20px;
-//     color: #2d3341;
-//     position: fixed;
-//     left: 50%;
-//     transform: translateX(-50%);
-//     line-height: 20px;
-//     border-radius: 60px;
-//     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-//     animation: 3s loadSadness ease-in-out 1;
-//     }
+function noGobbles() {
+  const style = document.createElement('style')
+  style.innerHTML = `
+  .gob__noGobbler {
+    font-family: -apple-system, BlinkMacSystemFont, “Roboto”, “Droid Sans”,
+    “Helvetica Neue”, Helvetica, Arial, sans-serif;
+    z-index: 5000;
+    padding: 16px 24px;
+    background: white;
+    font-size: 20px;
+    color: #2d3341;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 20px;
+    border-radius: 60px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    animation: 3s loadSadness ease-in-out 1;
+    }
 
-//     @keyframes loadSadness {
-//         0% {
-//           opacity: 0;
-//           top: 0;
-//         }
+    @keyframes loadSadness {
+        0% {
+          opacity: 0;
+          top: 0;
+        }
 
-//         20% {
-//           opacity: 1;
-//           top: 90px;
-//         }
+        20% {
+          opacity: 1;
+          top: 90px;
+        }
 
-//         90% {
-//           opacity: 1;
-//           top: 90px;
-//         }
+        90% {
+          opacity: 1;
+          top: 90px;
+        }
 
-//         100% {
-//           opacity: 0;
-//           top: 0px;
-//         }
-//       }
-//   `
-//   document.head.appendChild(style)
+        100% {
+          opacity: 0;
+          top: 0px;
+        }
+      }
+  `
+  document.head.appendChild(style)
 
-//   const noGobbler = document.createElement('div')
-//   noGobbler.classList.add('gob__noGobbler')
-//   noGobbler.innerHTML = `😢 Drats, couldn't find any SVGs to gobble`
+  const noGobbler = document.createElement('div')
+  noGobbler.classList.add('gob__noGobbler')
+  noGobbler.innerHTML = `😢 Drats, couldn't find any SVGs to gobble`
 
-//   document.body.insertAdjacentElement('beforebegin', noGobbler)
+  document.body.insertAdjacentElement('beforebegin', noGobbler)
 
-//   setTimeout(() => {
-//     noGobbler.remove()
-//     style.remove()
-//   }, 2900)
+  setTimeout(() => {
+    noGobbler.remove()
+    style.remove()
+  }, 2900)
+}
+
+// eslint-disable-next-line
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === 'start_gobbling') {
+    processSVGs().then(result => {
+      if (result.length === 0) {
+        noGobbles()
+      } else {
+        console.log(result)
+        sendResponse({ complete: true, data: result })
+      }
+    })
+    return true
+  }
+})
+
+// import download from './download'
+// // For testing
+// function string(arr) {
+//   for (const a of arr) {
+//     console.log(a.svgString)
+//     download.createOptiDownload(a)
+//   }
 // }
 
-// // eslint-disable-next-line
-// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-//   if (request.message === 'start_gobbling') {
-//     processSVGs().then(result => {
-//       if (result.length === 0) {
-//         noGobbles()
-//       } else {
-//         console.log(result)
-//         sendResponse({ complete: true, data: result })
-//       }
-//     })
-//     return true
-//   }
-// })
+// function gob() {
+//   processSVGs().then(result => {
+//     string(result)
+//   })
+// }
 
-// For testing
-function string(arr, prop) {
-  for (const a of arr) {
-    console.log(a[prop])
-  }
-}
-
-function gob() {
-  processSVGs().then(result => {
-    console.log(string(result, 'svgString'))
-  })
-}
-
-export default gob
+// export default gob

@@ -79,19 +79,19 @@ const classify = {
 
   async fetchSvg() {
     const serializer = new XMLSerializer()
+    this.svgString = serializer.serializeToString(this.origEle)
 
     if (this.url) {
-      try {
-        await fetch(this.url).then(response => {
+      fetch(this.url)
+        .then(response => {
           response.text().then(text => {
             this.svgString = text
           })
         })
-      } catch (error) {
-        this.cors = true
-      }
-    } else {
-      this.svgString = serializer.serializeToString(this.origEle)
+        .catch(error => {
+          this.cors = true
+          throw error
+        })
     }
     return this
   },

@@ -25,5 +25,6 @@ SVG.prototype.determineSize = classify.determineSize
 SVG.prototype.fetchSvg = classify.fetchSvg
 SVG.prototype.checkForWhite = classify.checkForWhite
 SVG.prototype.buildSpriteString = classify.buildSpriteString
+SVG.prototype.serialize = classify.serialize
 
 export default SVG

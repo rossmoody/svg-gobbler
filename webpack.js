@@ -10,6 +10,7 @@ module.exports = {
   },
   mode: 'production',
   stats: 'minimal',
+  devtool: 'cheap-module-source-map',
   output: {
     filename: './[name].js',
     path: path.resolve(__dirname, 'public/extension/dist'),
@@ -18,18 +19,23 @@ module.exports = {
     libraryExport: 'default',
   },
   node: {
-    fs: 'empty', // webpack doesn't like fs or require modules and errors without this
+    fs: 'empty',
   },
   optimization: {
     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css', // needed to export separate css file to inject
+      filename: 'style.css',
     }),
   ],
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve('node_modules', 'svgo'),
+        loader: 'transform-loader?brfs',
+      },
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src/scripts'),
@@ -39,10 +45,10 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader, // creates a separate css file
+            loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader', // translates CSS
-          'sass-loader', // compiles Sass to CSS, using Node Sass by default
+          'css-loader',
+          'sass-loader',
         ],
       },
     ],

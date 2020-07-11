@@ -13,30 +13,22 @@ function removeDups(arr, comp) {
 
 function processSVGs() {
   const pageEles = findSVGs()
-  const filteredSVGs = pageEles
+  const svgs = pageEles
     .map(ele => new SVG(ele))
     .map(ele => ele.determineType())
     .filter(ele => ele.type)
     .map(ele => ele.buildSpriteString())
     .map(ele => ele.determineSize())
     .map(async svg => {
-      const result = await svg.fetchSvg()
-      return result
+      const fetch = await svg.fetchSvg()
+      fetch.fixupString()
+      fetch.checkForWhite()
+      return fetch
     })
 
-  const data = Promise.all(filteredSVGs).then(result => {
-    const finals = result.map(svg => {
-      svg.fixupString()
-      svg.checkForWhite()
-      // eslint-disable-next-line
-      delete svg.origEle
-      return svg
-    })
-
-    return removeDups(finals, 'svgString')
+  return Promise.all(svgs).then(result => {
+    return removeDups(result, 'svgString')
   })
-
-  return data
 }
 
 export default processSVGs
