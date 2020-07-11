@@ -11,24 +11,28 @@ function removeDups(arr, comp) {
   return unique
 }
 
-function processSVGs() {
+async function processSVGs() {
   const pageEles = findSVGs()
+
   const svgs = pageEles
     .map(ele => new SVG(ele))
     .map(ele => ele.determineType())
     .filter(ele => ele.type)
     .map(ele => ele.buildSpriteString())
     .map(ele => ele.determineSize())
-    .map(async svg => {
-      const fetch = await svg.fetchSvg()
-      fetch.fixupString()
-      fetch.checkForWhite()
-      return fetch
-    })
+    .map(ele => ele.fetchSvg())
 
-  return Promise.all(svgs).then(result => {
-    return removeDups(result, 'svgString')
+  const promiseResults = await Promise.all(svgs).catch(console.log)
+
+  const uniqueSVGs = removeDups(promiseResults, 'svgString')
+
+  const finals = uniqueSVGs.map(svg => {
+    svg.fixupString()
+    svg.checkForWhite()
+    return svg
   })
+
+  return finals
 }
 
 export default processSVGs

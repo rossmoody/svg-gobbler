@@ -78,21 +78,22 @@ const classify = {
   },
 
   async fetchSvg() {
+    let content
     const serializer = new XMLSerializer()
-    this.svgString = serializer.serializeToString(this.origEle)
 
     if (this.url) {
-      fetch(this.url)
-        .then(response => {
-          response.text().then(text => {
-            this.svgString = text
-          })
-        })
-        .catch(error => {
-          this.cors = true
-          throw error
-        })
+      const response = await fetch(this.url)
+      if (!response.ok) {
+        this.cors = true
+        content = serializer.serializeToString(this.origEle)
+      } else {
+        content = await response.text()
+      }
+    } else {
+      content = serializer.serializeToString(this.origEle)
     }
+
+    this.svgString = content
     return this
   },
 
