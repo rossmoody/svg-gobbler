@@ -85,7 +85,7 @@ const createCards = (svgInfo, cont) => {
       copyButton.classList.add('gob__btn--copy')
       copyButton.addEventListener('click', () => {
         toggleSuccess(copyButton, 'gob__btn--success--copy')
-        download.createOptiDownload(el)
+        download.copyRegClipboard(el)
       })
       gobblerCardBtns.appendChild(copyButton)
     } else {

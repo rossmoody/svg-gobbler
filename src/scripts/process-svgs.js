@@ -22,13 +22,18 @@ async function processSVGs() {
     .map(ele => ele.determineSize())
     .map(ele => ele.fetchSvg())
 
-  const promiseResults = await Promise.all(svgs).catch(console.log)
+  const results = await Promise.all(svgs.map(p => p.catch(e => e)))
 
-  const uniqueSVGs = removeDups(promiseResults, 'svgString')
+  const validResults = results.filter(result => !(result instanceof Error))
+
+  const uniqueSVGs = removeDups(validResults, 'svgString')
 
   const finals = uniqueSVGs.map(svg => {
     svg.fixupString()
     svg.checkForWhite()
+    // Must delete reference to dom node for Firefox
+    // eslint-disable-next-line
+    delete svg.origEle
     return svg
   })
 

@@ -84,7 +84,6 @@ const classify = {
     if (this.url) {
       const response = await fetch(this.url)
       if (!response.ok) {
-        this.cors = true
         content = serializer.serializeToString(this.origEle)
       } else {
         content = await response.text()

@@ -70,20 +70,3 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     return true
   }
 })
-
-// import download from './download'
-// // For testing
-// function string(arr) {
-//   for (const a of arr) {
-//     console.log(a.svgString)
-//     download.createOptiDownload(a)
-//   }
-// }
-
-// function gob() {
-//   processSVGs().then(result => {
-//     string(result)
-//   })
-// }
-
-// export default gob
