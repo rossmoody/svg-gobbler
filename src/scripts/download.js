@@ -20,23 +20,37 @@ const download = {
     document.body.removeChild(el)
   },
 
-  all(i) {
-    const zip = new JSZip()
-    i.forEach((svg, index) => {
-      zip.file(`svg-${index}.svg`, svg.svgString)
-    })
-    zip.generateAsync({ type: 'blob' }).then(content => {
-      FileSaver.saveAs(content, 'gobbled_svgs.zip')
+  optimized(i) {
+    svgo.optimize(i.svgString).then(result => {
+      const blob = new Blob([result.data], { type: 'text/xml' })
+      FileSaver.saveAs(blob, 'gobbler-icon.svg')
+      console.log(result.data)
     })
   },
 
-  optimized(i) {
-    // const blob = new Blob([i.svgString], { type: 'text/xml' })
-    // FileSaver.saveAs(blob, 'gobbler-icon.svg')
+  copyOptimized(i) {
+    const el = document.createElement('textarea')
     svgo.optimize(i.svgString).then(result => {
-      // const blob = new Blob([result.data], { type: 'text/xml' })
-      // FileSaver.saveAs(blob, 'gobbler-icon.svg')
-      console.log(result.data)
+      el.value = result.data
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+    })
+  },
+
+  all(i) {
+    const zip = new JSZip()
+    const optiArr = i.map(async svg => {
+      const o = await svgo.optimize(svg.svgString)
+      return o.data
+    })
+
+    optiArr.forEach((svg, index) => {
+      zip.file(`svg-${index}.svg`, svg)
+    })
+    zip.generateAsync({ type: 'blob' }).then(content => {
+      FileSaver.saveAs(content, 'gobbled_svgs.zip')
     })
   },
 }

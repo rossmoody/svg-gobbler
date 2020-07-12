@@ -69,7 +69,7 @@ const createCards = (svgInfo, cont) => {
       downloadButton.classList.add('gob__btn--download')
       downloadButton.addEventListener('click', () => {
         toggleSuccess(downloadButton, 'gob__btn--success--download')
-        download.original(svg)
+        download.optimized(svg)
       })
       btnCont.appendChild(downloadButton)
 
@@ -78,7 +78,7 @@ const createCards = (svgInfo, cont) => {
       copyButton.classList.add('gob__btn--copy')
       copyButton.addEventListener('click', () => {
         toggleSuccess(copyButton, 'gob__btn--success--copy')
-        download.copyOriginal(svg)
+        download.copyOptimized(svg)
       })
       btnCont.appendChild(copyButton)
     } else {
