@@ -22,7 +22,7 @@ p {
 .gob {
   &__container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     grid-gap: 24px;
     margin: 12px 72px 48px;
   }
@@ -187,7 +187,7 @@ p {
   &__btns {
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr 40px;
     background: $white;
     padding: 0 0 10px;
     grid-gap: 8px;
@@ -221,6 +221,7 @@ p {
     text-decoration: none;
     letter-spacing: normal;
     text-transform: none;
+    max-height: 40px;
 
     &:hover {
       background: $primary;
@@ -234,6 +235,11 @@ p {
 
     &--copy::before {
       content: 'Copy';
+    }
+
+    &--more svg {
+      width: 16px;
+      height: 16px;
     }
 
     &--cors-btn {
