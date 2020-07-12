@@ -4,23 +4,36 @@ import download from './download'
 require('../styles/index.scss')
 
 const createUI = data => {
+  const nonCors = data.filter(svg => !svg.cors)
+
   const container = document.querySelector('.gob__container')
   const countCont = document.querySelector('.gob__countCont')
 
-  function isPlural() {
-    return data.length === 1
-      ? `Download ${data.length} SVG`
-      : `Download ${data.length} SVGs`
+  function isPlural(i) {
+    return i === 1 ? '' : 's'
+  }
+
+  function getAvailable() {
+    return `Download ${nonCors.length} available SVG${isPlural(nonCors.length)}`
+  }
+
+  function buildShowingString() {
+    return `Showing ${data.length} SVG${isPlural(data.length)} found on ${
+      data[0].location
+    }`
   }
 
   const gobCount = document.createElement('button')
-
   gobCount.className = 'gob__count--svg'
-  gobCount.innerHTML = isPlural()
+  gobCount.innerHTML = getAvailable()
   gobCount.addEventListener('click', () => {
-    download.downloadAll(data)
+    download.downloadAll(nonCors)
   })
 
+  const svgCount = document.createElement('p')
+  svgCount.innerHTML = buildShowingString()
+
+  window.document.querySelector('.gob__mast').appendChild(svgCount)
   countCont.appendChild(gobCount)
 
   createCards(data, container)

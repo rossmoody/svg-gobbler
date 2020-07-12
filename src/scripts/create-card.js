@@ -98,10 +98,9 @@ const createCards = (svgInfo, cont) => {
 
       // Same-origin policies button. opens svg in new window
       const corsBtn = createElement('a', 'gob__btn')
-      corsBtn.classList
-        .add('gob__btn--cors-btn')
-        .setAttribute('target', '_blank')
-        .setAttribute('href', el.url)
+      corsBtn.classList.add('gob__btn--cors-btn')
+      corsBtn.setAttribute('target', '_blank')
+      corsBtn.setAttribute('href', el.url)
 
       gobblerCardBtns.appendChild(corsBtn)
     }

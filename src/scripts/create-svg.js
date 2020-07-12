@@ -16,6 +16,7 @@ class SVG {
     this.spriteMaster = false
     this.height = Math.ceil(rects.height)
     this.width = Math.ceil(rects.width)
+    this.location = window.document.location.host
   }
 }
 

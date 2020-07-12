@@ -82,8 +82,10 @@ const classify = {
     const serializer = new XMLSerializer()
 
     if (this.url) {
-      const response = await fetch(this.url)
-      if (!response.ok) {
+      const response = await fetch(this.url, { mode: 'no-cors' })
+
+      if (response.type === 'opaque') {
+        this.cors = true
         content = serializer.serializeToString(this.origEle)
       } else {
         content = await response.text()
