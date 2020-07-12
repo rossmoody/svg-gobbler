@@ -1,17 +1,17 @@
 import FileSaver from 'file-saver'
 import JSZip from 'jszip'
 
-// import SVGO from 'svgo'
+import SVGO from 'svgo'
 
-// const svgo = new SVGO({ removeViewBox: false, removeDimensions: true })
+const svgo = new SVGO({ removeViewBox: false, removeDimensions: true })
 
 const download = {
-  createRegDownload(i) {
+  original(i) {
     const blob = new Blob([i.svgString], { type: 'text/xml' })
     FileSaver.saveAs(blob, 'gobbler-icon.svg')
   },
 
-  copyRegClipboard(i) {
+  copyOriginal(i) {
     const el = document.createElement('textarea')
     el.value = i.svgString
     document.body.appendChild(el)
@@ -20,7 +20,7 @@ const download = {
     document.body.removeChild(el)
   },
 
-  downloadAll(i) {
+  all(i) {
     const zip = new JSZip()
     i.forEach((svg, index) => {
       zip.file(`svg-${index}.svg`, svg.svgString)
@@ -30,15 +30,15 @@ const download = {
     })
   },
 
-  // createOptiDownload(i) {
-  //   // const blob = new Blob([i.svgString], { type: 'text/xml' })
-  //   // FileSaver.saveAs(blob, 'gobbler-icon.svg')
-  //   svgo.optimize(i.svgString).then(result => {
-  //     // const blob = new Blob([result.data], { type: 'text/xml' })
-  //     // FileSaver.saveAs(blob, 'gobbler-icon.svg')
-  //     console.log(result.data)
-  //   })
-  // },
+  optimized(i) {
+    // const blob = new Blob([i.svgString], { type: 'text/xml' })
+    // FileSaver.saveAs(blob, 'gobbler-icon.svg')
+    svgo.optimize(i.svgString).then(result => {
+      // const blob = new Blob([result.data], { type: 'text/xml' })
+      // FileSaver.saveAs(blob, 'gobbler-icon.svg')
+      console.log(result.data)
+    })
+  },
 }
 
 export default download

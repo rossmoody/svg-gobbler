@@ -243,8 +243,8 @@ p {
     }
 
     &--success {
-      background: $success;
-      border: 1px solid $success;
+      background: $success !important;
+      border: 1px solid $success !important;
       color: white;
       transition: all 0.2s ease-in-out;
 

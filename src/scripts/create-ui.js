@@ -27,7 +27,7 @@ const createUI = data => {
   gobCount.className = 'gob__count--svg'
   gobCount.innerHTML = getAvailable()
   gobCount.addEventListener('click', () => {
-    download.downloadAll(nonCors)
+    download.all(nonCors)
   })
 
   const svgCount = document.createElement('p')
