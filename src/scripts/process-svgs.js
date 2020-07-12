@@ -31,7 +31,7 @@ async function processSVGs() {
   const finals = uniqueSVGs.map(svg => {
     svg.fixupString()
     svg.checkForWhite()
-    // Must delete reference to dom node for Firefox
+    // Must delete reference to dom node for Firefox messages
     // eslint-disable-next-line
     delete svg.origEle
     return svg
