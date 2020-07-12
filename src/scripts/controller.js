@@ -1,5 +1,7 @@
 import processSVGs from './process-svgs'
 
+require('../styles/no-gobbler.scss')
+
 function noGobbles() {
   const noGobbler = document.createElement('div')
   noGobbler.classList.add('gob__noGobbler')

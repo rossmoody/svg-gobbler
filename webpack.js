@@ -10,7 +10,6 @@ module.exports = {
   },
   mode: 'production',
   stats: 'minimal',
-  devtool: 'cheap-module-source-map',
   output: {
     filename: './[name].js',
     path: path.resolve(__dirname, 'public/extension/dist'),
