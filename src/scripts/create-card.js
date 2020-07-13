@@ -1,16 +1,5 @@
 import download from './download'
 
-// Toggle success class
-function toggleSuccess(el, btnClass) {
-  el.classList.add('gob__btn--success')
-  el.classList.add(btnClass)
-  setTimeout(() => {
-    el.classList.remove('gob__btn--success')
-    el.classList.remove(btnClass)
-  }, 1500)
-}
-
-// Create element helper
 const make = {
   element(el, cName) {
     const result = window.document.createElement(el)
@@ -22,8 +11,8 @@ const make = {
     const btn = make.element('button', 'gob__btn')
     btn.classList.add('gob__btn--download')
     btn.addEventListener('click', () => {
-      toggleSuccess(btn, 'gob__btn--success--download')
-      download.optimized(svg)
+      make.success(btn, 'gob__btn--success--download')
+      download.optimized(svg.svgString)
     })
 
     return btn
@@ -33,49 +22,90 @@ const make = {
     const copyBtn = make.element('button', 'gob__btn')
     copyBtn.classList.add('gob__btn--copy')
     copyBtn.addEventListener('click', () => {
-      toggleSuccess(copyBtn, 'gob__btn--success--copy')
-      download.copyOptimized(svg)
+      make.success(copyBtn, 'gob__btn--success--copy')
+      download.copyOptimized(svg.svgString)
     })
 
     return copyBtn
   },
 
-  moreBtn() {
+  moreBtn(svg) {
     const moreBtn = make.element('button', 'gob__btn')
-    const moreIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 15a3 3 0 100-6 3 3 0 000 6zm9 0a3 3 0 100-6 3 3 0 000 6zm12-3a3 3 0 11-6 0 3 3 0 016 0z" fill="currentColor"/></svg>`
+    const moreIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>`
     moreBtn.classList.add('gob__btn--more')
     moreBtn.insertAdjacentHTML('afterbegin', moreIcon)
 
+    moreBtn.appendChild(make.menu(svg))
+
     return moreBtn
+  },
+
+  menu(svg) {
+    const originalSVG = svg.svgString
+    const menu = make.element('div', 'gob__menu')
+    const menuUl = make.element('ul', 'gob__menu-ul')
+    menuUl.setAttribute('role', 'menu')
+
+    function makeItem(string) {
+      const li = document.createElement('li')
+      li.setAttribute('role', 'none')
+
+      const btn = document.createElement('button')
+      btn.setAttribute('role', 'menuitem')
+      btn.textContent = string
+      li.appendChild(btn)
+      return li
+    }
+
+    const downloadBtn = makeItem('Download original')
+    const copyBtn = makeItem('Copy original')
+
+    downloadBtn.addEventListener('click', () => {
+      download.original(originalSVG)
+    })
+
+    copyBtn.addEventListener('click', () => {
+      download.copyOriginal(originalSVG)
+    })
+
+    menu.appendChild(menuUl)
+    menuUl.appendChild(downloadBtn)
+    menuUl.appendChild(copyBtn)
+
+    return menu
+  },
+
+  corsTag() {
+    const newTag = make.element('div', 'gob__tag--cors')
+    return newTag
+  },
+
+  newTabBtn(svg) {
+    const corsBtn = make.element('a', 'gob__btn')
+    corsBtn.classList.add('gob__btn--cors-btn')
+    corsBtn.setAttribute('target', '_blank')
+    corsBtn.setAttribute('href', svg.url)
+    return corsBtn
+  },
+
+  success(el, cName) {
+    el.classList.add('gob__btn--success')
+    el.classList.add(cName)
+    setTimeout(() => {
+      el.classList.remove('gob__btn--success')
+      el.classList.remove(cName)
+    }, 1500)
   },
 }
 
-function createMenu() {
-  const listItems = ['Download original', 'Copy original']
-  const menu = make.element('div', 'gob__menu')
-  const menuUl = make.element('ul', 'gob__menu-ul')
-
-  for (const item of listItems) {
-    console.log(item)
-    const li = document.createElement('li')
-    li.textContent = item
-    menuUl.appendChild(li)
-  }
-
-  menu.appendChild(menuUl)
-  return menu
-}
-
 const createCards = (svgInfo, cont) => {
-  // Create cards`
   svgInfo.forEach((svg, index) => {
-    // Create dom elements
     const card = make.element('div', 'gob__card')
     cont.appendChild(card)
 
     const svgCont = make.element('div', 'gob__card__svg')
-    if (svg.hasWhite) svgCont.classList.add('gob__card__svg--white')
     card.appendChild(svgCont)
+    if (svg.hasWhite) svgCont.classList.add('gob__card__svg--white')
 
     const svgWrapper = make.element('div', 'gob__card__svg__wrapper')
     svgWrapper.insertAdjacentHTML('afterbegin', svg.presentationSvg)
@@ -109,23 +139,11 @@ const createCards = (svgInfo, cont) => {
     if (!svg.cors) {
       btnCont.appendChild(make.downloadBtn(svg))
       btnCont.appendChild(make.copyBtn(svg))
-      btnCont.appendChild(make.moreBtn())
-      btnCont.appendChild(createMenu())
+      btnCont.appendChild(make.moreBtn(svg))
     } else {
-      // Adds alert to card
-      const newTag = make.element('div', 'gob__tag--cors')
-      card.appendChild(newTag)
-
-      // Adds full width to button
+      btnCont.appendChild(make.newTabBtn(svg))
       btnCont.classList.add('gob__btns--block')
-
-      // Same-origin policies button. opens svg in new window
-      const corsBtn = make.element('a', 'gob__btn')
-      corsBtn.classList.add('gob__btn--cors-btn')
-      corsBtn.setAttribute('target', '_blank')
-      corsBtn.setAttribute('href', svg.url)
-
-      btnCont.appendChild(corsBtn)
+      card.appendChild(make.corsTag())
     }
   })
 }

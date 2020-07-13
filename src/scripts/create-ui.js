@@ -18,7 +18,7 @@ const createUI = data => {
   }
 
   function buildShowingString() {
-    return `Showing ${data.length} SVG${isPlural(data.length)} found on ${
+    return `Found ${data.length} SVG${isPlural(data.length)} on ${
       data[0].location
     }`
   }
@@ -30,10 +30,15 @@ const createUI = data => {
     download.all(nonCors)
   })
 
-  const svgCount = document.createElement('p')
+  const svgCount = document.createElement('span')
+  svgCount.className = 'gob__mast__count'
   svgCount.innerHTML = buildShowingString()
 
+  const exportNotice = document.createElement('span')
+  exportNotice.textContent = `Exported SVGS are optimized using SVGO`
+
   window.document.querySelector('.gob__mast').appendChild(svgCount)
+  window.document.querySelector('.gob__mast').appendChild(exportNotice)
   countCont.appendChild(gobCount)
 
   createCards(data, container)

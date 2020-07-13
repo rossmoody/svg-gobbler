@@ -10,13 +10,14 @@ html {
 
 body {
   margin: 0;
-  @include font-family;
+  @include font-family();
   background-color: $gray1;
   color: $gray5;
+  font-size: 14px;
 }
 
-p {
-  font-size: 14px;
+button {
+  @include font-family();
 }
 
 .gob {
@@ -24,11 +25,20 @@ p {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     grid-gap: 24px;
-    margin: 12px 72px 48px;
+    margin: 24px 72px 48px;
   }
+
   &__mast {
     margin: 32px 72px 0;
     display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: $gray5;
+
+    &__count {
+      font-size: 19px;
+      padding: 8px 0;
+    }
   }
 
   &__header {
@@ -142,7 +152,6 @@ p {
       padding: 12px 0 20px;
       border-top: 1px solid $gray2;
       position: relative;
-      overflow: hidden;
       display: grid;
       align-items: start;
       grid-template-columns: 1fr 1fr;
@@ -197,7 +206,7 @@ p {
     right: 0;
     left: 0;
     opacity: 0;
-    transform: translateY(20%);
+    transform: translateY(5%);
     transition: all 0.25s ease-in-out;
 
     &--block {
@@ -237,9 +246,17 @@ p {
       content: 'Copy';
     }
 
-    &--more svg {
-      width: 16px;
-      height: 16px;
+    &--more {
+      padding: 8px;
+
+      &:hover .gob__menu {
+        display: flex;
+      }
+
+      & svg {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     &--cors-btn {
@@ -262,6 +279,44 @@ p {
       &--copy::before {
         content: 'Copied';
         transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+
+  &__menu {
+    background: $white;
+    position: absolute;
+    top: -80px;
+    right: 0;
+    width: max-content;
+    z-index: 100;
+    padding: 0;
+    border-radius: 6px;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: 0.3s ease-in fadeIn;
+    border: 1px solid $gray2;
+
+    & ul {
+      list-style: none;
+      padding: 0;
+      float: left;
+      text-align: start;
+    }
+
+    & button {
+      padding: 8px 16px;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: start;
+      color: $gray5;
+      font-size: 14px;
+
+      &:hover {
+        cursor: pointer;
+        background: $primary;
+        color: $white;
       }
     }
   }
