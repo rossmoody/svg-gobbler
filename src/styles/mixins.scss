@@ -55,17 +55,5 @@
 
     /* Position the tooltip */
     position: absolute;
-
-    &--row {
-      display: flex;
-      align-items: center;
-      margin: 4px 0;
-
-      & svg {
-        height: 20px !important;
-        width: 20px !important;
-        margin: 0 8px 0 0 !important;
-      }
-    }
   }
 }
