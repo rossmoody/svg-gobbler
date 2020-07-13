@@ -35,7 +35,7 @@ const createUI = data => {
   svgCount.innerHTML = buildShowingString()
 
   const exportNotice = document.createElement('span')
-  exportNotice.textContent = `Exported SVGS are optimized using SVGO`
+  exportNotice.textContent = `Exported SVGS are automatically optimized using SVGO`
 
   window.document.querySelector('.gob__mast').appendChild(svgCount)
   window.document.querySelector('.gob__mast').appendChild(exportNotice)

@@ -18,6 +18,10 @@ body {
 
 button {
   @include font-family();
+
+  &:focus {
+    border: 3px solid $primary;
+  }
 }
 
 .gob {
