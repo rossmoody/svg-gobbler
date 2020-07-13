@@ -7,13 +7,13 @@ const svgo = new SVGO({ removeViewBox: false, removeDimensions: true })
 
 const download = {
   original(i) {
-    const blob = new Blob([i.svgString], { type: 'text/xml' })
-    FileSaver.saveAs(blob, 'gobbler-icon.svg')
+    const blob = new Blob([i], { type: 'text/xml' })
+    FileSaver.saveAs(blob, 'gobbler-original.svg')
   },
 
   copyOriginal(i) {
     const el = document.createElement('textarea')
-    el.value = i.svgString
+    el.value = i
     document.body.appendChild(el)
     el.select()
     document.execCommand('copy')
@@ -21,7 +21,7 @@ const download = {
   },
 
   optimized(i) {
-    svgo.optimize(i.svgString).then(result => {
+    svgo.optimize(i).then(result => {
       const blob = new Blob([result.data], { type: 'text/xml' })
       FileSaver.saveAs(blob, 'gobbler-icon.svg')
       console.log(result.data)
@@ -30,7 +30,7 @@ const download = {
 
   copyOptimized(i) {
     const el = document.createElement('textarea')
-    svgo.optimize(i.svgString).then(result => {
+    svgo.optimize(i).then(result => {
       el.value = result.data
       document.body.appendChild(el)
       el.select()
