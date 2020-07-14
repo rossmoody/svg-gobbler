@@ -34,11 +34,7 @@ const createUI = data => {
   svgCount.className = 'gob__mast__count'
   svgCount.innerHTML = buildShowingString()
 
-  const exportNotice = document.createElement('span')
-  exportNotice.textContent = `Exported SVGS are automatically optimized using SVGO`
-
   window.document.querySelector('.gob__mast').appendChild(svgCount)
-  window.document.querySelector('.gob__mast').appendChild(exportNotice)
   countCont.appendChild(gobCount)
 
   createCards(data, container)

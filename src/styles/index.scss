@@ -24,12 +24,47 @@ button {
   }
 }
 
+a {
+  color: $primary;
+  text-decoration: none;
+}
+
+a:visited {
+  color: $primary;
+}
+
 .gob {
   &__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     grid-gap: 24px;
     margin: 24px 72px 48px;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 72px 24px;
+
+    & ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      padding: 0;
+      font-size: 16px;
+
+      & li {
+        margin: 4px 8px 4px 0;
+
+        & span {
+          padding: 0 4px 0 0;
+        }
+      }
+    }
+  }
+
+  &__legal {
+    color: $gray4;
   }
 
   &__mast {
