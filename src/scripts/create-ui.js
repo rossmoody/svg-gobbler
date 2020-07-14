@@ -44,4 +44,5 @@ const createUI = data => {
   createCards(data, container)
 }
 
-export default createUI
+// eslint-disable-next-line
+export { createUI }

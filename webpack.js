@@ -13,9 +13,8 @@ module.exports = {
   output: {
     filename: './[name].js',
     path: path.resolve(__dirname, 'public/extension/dist'),
+    libraryTarget: 'umd',
     library: 'gobble',
-    libraryTarget: 'window',
-    libraryExport: 'default',
   },
   node: {
     fs: 'empty',

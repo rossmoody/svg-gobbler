@@ -13,7 +13,7 @@ function buildTab(data) {
 
     for (const view of views) {
       if (view.location.href == viewTabUrl) {
-        view.gobble(data)
+        view.gobble.createUI(data)
         break
       }
     }
