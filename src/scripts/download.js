@@ -30,6 +30,7 @@ const download = {
 
   copyOptimized(i) {
     const el = document.createElement('textarea')
+
     svgo.optimize(i).then(result => {
       el.value = result.data
       document.body.appendChild(el)
@@ -49,9 +50,20 @@ const download = {
     optiArr.forEach((svg, index) => {
       zip.file(`svg-${index}.svg`, svg)
     })
+
     zip.generateAsync({ type: 'blob' }).then(content => {
       FileSaver.saveAs(content, 'gobbled_svgs.zip')
     })
+  },
+
+  img(i, width, height) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    canvas.width = width
+    canvas.height = height
+    ctx.drawImage(i, 0, 0)
+    const dataUri = canvas.toDataURL('image/png', 0.9)
+    FileSaver.saveAs(dataUri, 'gobbler-image.png')
   },
 }
 

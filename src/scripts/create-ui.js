@@ -1,6 +1,8 @@
 import createCards from './create-card'
 import download from './download'
 
+require('./export-image.js')
+require('./modal.js')
 require('../styles/index.scss')
 
 const createUI = data => {
@@ -24,7 +26,7 @@ const createUI = data => {
   }
 
   const gobCount = document.createElement('button')
-  gobCount.className = 'gob__count--svg'
+  gobCount.className = 'gob__btn--primary'
   gobCount.innerHTML = getAvailable()
   gobCount.addEventListener('click', () => {
     download.all(nonCors)
