@@ -2,6 +2,7 @@
 @import './icons';
 @import './mixins';
 @import './motion';
+@import './modal';
 
 /* Styles */
 html {
@@ -18,9 +19,11 @@ body {
 
 button {
   @include font-family();
+  border: none;
 
   &:focus {
-    border: 3px solid $primary;
+    border: 2px solid lighten($primary, 10%);
+    outline: none;
   }
 }
 
@@ -44,27 +47,26 @@ a:visited {
   &__footer {
     display: flex;
     flex-direction: column;
-    margin: 0 72px 24px;
+    margin: 0 72px 48px;
+    border-top: 1px solid $gray2;
 
     & ul {
       display: flex;
       flex-wrap: wrap;
       list-style: none;
       padding: 0;
-      font-size: 16px;
+      font-size: 14px;
+      margin: 20px 0 8px;
 
       & li {
         margin: 4px 8px 4px 0;
-
-        & span {
-          padding: 0 4px 0 0;
-        }
       }
     }
-  }
 
-  &__legal {
-    color: $gray4;
+    & span {
+      padding: 0 4px 0 0;
+      margin: 0 0 12px 0;
+    }
   }
 
   &__mast {
@@ -105,30 +107,6 @@ a:visited {
   &__countCont {
     display: flex;
     align-items: center;
-  }
-
-  &__count {
-    &--svg {
-      background: $primary;
-      color: $white;
-      font-family: inherit;
-      font-size: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 6px;
-      font-weight: 500;
-      padding: 16px 20px;
-      line-height: 1;
-      border: none;
-
-      &:hover {
-        box-shadow: 4px 4px rgba(0, 0, 0, 0.15);
-        background: $primary;
-        color: $white;
-        cursor: pointer;
-      }
-    }
   }
 
   &__card {
@@ -246,10 +224,31 @@ a:visited {
     left: 0;
     opacity: 0;
     transform: translateY(5%);
-    transition: all 0.25s ease-in-out;
+    transition: all 0.15s ease-in-out;
 
     &--block {
       grid-template-columns: 1fr;
+    }
+  }
+
+  &__btn--primary {
+    background: $primary;
+    color: $white;
+    font-family: inherit;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 16px 20px;
+    line-height: 1;
+    border: 2px solid $primary;
+
+    &:hover {
+      background: darken($primary, 3%);
+      color: $white;
+      cursor: pointer;
     }
   }
 
@@ -274,7 +273,7 @@ a:visited {
     &:hover {
       background: $primary;
       color: $white;
-      border: 1px solid $primary;
+      border: none;
     }
 
     &--download::before {
@@ -325,7 +324,7 @@ a:visited {
   &__menu {
     background: $white;
     position: absolute;
-    top: -80px;
+    top: -110px;
     right: 0;
     width: max-content;
     z-index: 100;
@@ -333,8 +332,7 @@ a:visited {
     border-radius: 6px;
     display: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: 0.3s ease-in fadeIn;
-    border: 1px solid $gray2;
+    animation: 0.1s ease-in fadeIn;
 
     & ul {
       list-style: none;
@@ -357,6 +355,12 @@ a:visited {
         background: $primary;
         color: $white;
       }
+    }
+
+    & hr {
+      border-top: 1px solid $gray2;
+      border-style: solid;
+      color: transparent;
     }
   }
 

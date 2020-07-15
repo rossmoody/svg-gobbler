@@ -37,6 +37,8 @@
     "rules": {
       "no-console": "off",
       "no-restricted-syntax": "off",
+      "no-use-before-define": "off",
+      "no-unused-expressions": "off",
       "prettier/prettier": [
         "error",
         {

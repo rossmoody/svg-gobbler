@@ -53,6 +53,19 @@ const download = {
       FileSaver.saveAs(content, 'gobbled_svgs.zip')
     })
   },
+
+  img(i, width, height) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    console.log(width, height)
+    canvas.width = width
+    canvas.height = height
+
+    ctx.drawImage(i, 0, 0)
+
+    const dataUri = canvas.toDataURL('image/png', 0.9)
+    FileSaver.saveAs(dataUri, 'gobbler-image.png')
+  },
 }
 
 export default download

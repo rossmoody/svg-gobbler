@@ -1,136 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SVG Gobbler</title>
-    <link rel="stylesheet" href="./dist/main.css" />
-    <link rel="shortcut icon" href="./icons/favicon.ico" type="image/x-icon" />
-  </head>
-  <body>
-    <div class="gob">
-      <div class="gob__header">
-        <div class="gob__logoCont">
-          <div class="gob__logo">
-            <svg
-              viewBox="0 0 148 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M48.144 21.925c3.193 0 5.116-1.551 5.116-3.992v-.009c0-2.041-1.188-3.148-3.91-3.71l-1.415-.29c-1.578-.327-2.295-.871-2.295-1.797v-.009c0-1.043.953-1.76 2.486-1.769 1.47 0 2.476.68 2.63 1.824l.019.108h2.24l-.009-.154c-.136-2.24-2.005-3.746-4.862-3.746-2.822 0-4.845 1.56-4.854 3.864v.01c0 1.95 1.27 3.147 3.847 3.682l1.406.29c1.687.355 2.368.88 2.368 1.86v.01c0 1.124-1.035 1.86-2.686 1.86-1.642 0-2.794-.7-2.966-1.824l-.018-.109H43l.01.136c.153 2.35 2.131 3.765 5.134 3.765zM58.197 21.698h2.712l4.546-13.09h-2.55l-3.329 10.595h-.045L56.21 8.607h-2.55l4.536 13.091zM72.04 21.925c3.584 0 5.707-2.132 5.707-5.688v-1.415h-5.443v1.823h3.157l-.01.2c-.044 1.832-1.405 3.048-3.383 3.048-2.359 0-3.837-1.806-3.837-4.808v-.01c0-2.939 1.415-4.662 3.773-4.662 1.606 0 2.74.816 3.24 2.222l.026.1h2.377l-.036-.145c-.499-2.413-2.513-4.21-5.616-4.21-3.773 0-6.15 2.559-6.15 6.714v.009c0 4.227 2.377 6.822 6.196 6.822zM89.459 21.925c3.583 0 5.706-2.132 5.706-5.688v-1.415h-5.443v1.823h3.157l-.01.2c-.044 1.832-1.405 3.048-3.383 3.048-2.359 0-3.837-1.806-3.837-4.808v-.01c0-2.939 1.415-4.662 3.774-4.662 1.605 0 2.74.816 3.238 2.222l.028.1h2.376l-.036-.145c-.499-2.413-2.513-4.21-5.615-4.21-3.774 0-6.151 2.559-6.151 6.714v.009c0 4.227 2.377 6.822 6.196 6.822zM100.98 21.889c2.822 0 4.654-1.878 4.654-4.999v-.018c0-3.103-1.86-4.99-4.663-4.99-2.794 0-4.645 1.905-4.645 4.99v.018c0 3.112 1.824 4.999 4.654 4.999zm.009-1.824c-1.442 0-2.358-1.152-2.358-3.175v-.018c0-1.996.934-3.157 2.34-3.157 1.434 0 2.359 1.152 2.359 3.157v.018c0 2.014-.916 3.175-2.341 3.175zM112.093 21.889c2.432 0 3.974-1.905 3.974-4.999v-.01c0-3.102-1.551-4.998-3.965-4.998-1.36 0-2.458.699-3.002 1.851h-.055V8.607h-2.259v13.091h2.259v-1.633h.055c.544 1.134 1.605 1.824 2.993 1.824zm-.68-1.905c-1.397 0-2.368-1.207-2.368-3.094v-.01c0-1.877.98-3.093 2.368-3.093 1.442 0 2.35 1.18 2.35 3.094v.009c0 1.914-.899 3.093-2.35 3.093zM122.544 21.889c2.431 0 3.974-1.905 3.974-4.999v-.01c0-3.102-1.552-4.998-3.965-4.998-1.361 0-2.458.699-3.003 1.851h-.054V8.607h-2.259v13.091h2.259v-1.633h.054c.545 1.134 1.606 1.824 2.994 1.824zm-.68-1.905c-1.397 0-2.368-1.207-2.368-3.094v-.01c0-1.877.98-3.093 2.368-3.093 1.442 0 2.349 1.18 2.349 3.094v.009c0 1.914-.898 3.093-2.349 3.093zM128.259 21.698h2.259V8.608h-2.259v13.09zM136.669 21.889c2.513 0 3.928-1.488 4.228-2.967l.027-.1h-2.114l-.018.064c-.218.644-.953 1.243-2.077 1.243-1.47 0-2.395-.998-2.432-2.686h6.732v-.725c0-2.903-1.706-4.836-4.455-4.836-2.748 0-4.518 1.996-4.518 5.026v.01c0 3.056 1.742 4.97 4.627 4.97zm-.081-8.238c1.197 0 2.068.762 2.231 2.287h-4.509c.182-1.48 1.08-2.287 2.278-2.287zM142.775 21.698h2.258v-5.634c0-1.351.772-2.177 2.051-2.177.381 0 .725.055.916.127v-2.041a2.94 2.94 0 00-.717-.09c-1.134 0-1.977.68-2.268 1.805h-.045v-1.606h-2.195v9.616z"
-                fill="#fff"
-              />
-              <rect width="31.73" height="31.73" rx="3.208" fill="#FB575E" />
-              <path
-                d="M4.722 9.93h22.183M8.688 20.113s0-10.103 7.177-10.103 7.177 10.103 7.177 10.103"
-                stroke="#fff"
-                stroke-width="1.768"
-                stroke-linecap="round"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M4.89 11.973c1.136 0 2.057-.904 2.057-2.02s-.921-2.02-2.057-2.02-2.057.904-2.057 2.02.92 2.02 2.057 2.02zM26.799 11.973c1.135 0 2.056-.904 2.056-2.02s-.92-2.02-2.056-2.02c-1.136 0-2.057.904-2.057 2.02s.92 2.02 2.056 2.02z"
-                fill="#fff"
-              />
-              <rect
-                x="4.657"
-                y="18.067"
-                width="7.054"
-                height="6.946"
-                rx="1.326"
-                fill="#333948"
-                stroke="#333948"
-                stroke-width=".884"
-                stroke-linecap="round"
-              />
-              <rect
-                x="19.767"
-                y="17.914"
-                width="7.054"
-                height="6.946"
-                rx="1.326"
-                fill="#333948"
-                stroke="#333948"
-                stroke-width=".884"
-                stroke-linecap="round"
-              />
-              <rect
-                x="12.401"
-                y="6.546"
-                width="7.054"
-                height="6.946"
-                rx="1.326"
-                fill="#333948"
-                stroke="#333948"
-                stroke-width=".884"
-                stroke-linecap="round"
-              />
-            </svg>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVG Gobbler</title>
+  <link rel="stylesheet" href="./dist/main.css" />
+  <link rel="shortcut icon" href="./icons/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="gob">
+    <div class="gob__header">
+      <div class="gob__logoCont">
+        <div class="gob__logo">
+          <svg viewBox="0 0 148 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M48.144 21.925c3.193 0 5.116-1.551 5.116-3.992v-.009c0-2.041-1.188-3.148-3.91-3.71l-1.415-.29c-1.578-.327-2.295-.871-2.295-1.797v-.009c0-1.043.953-1.76 2.486-1.769 1.47 0 2.476.68 2.63 1.824l.019.108h2.24l-.009-.154c-.136-2.24-2.005-3.746-4.862-3.746-2.822 0-4.845 1.56-4.854 3.864v.01c0 1.95 1.27 3.147 3.847 3.682l1.406.29c1.687.355 2.368.88 2.368 1.86v.01c0 1.124-1.035 1.86-2.686 1.86-1.642 0-2.794-.7-2.966-1.824l-.018-.109H43l.01.136c.153 2.35 2.131 3.765 5.134 3.765zM58.197 21.698h2.712l4.546-13.09h-2.55l-3.329 10.595h-.045L56.21 8.607h-2.55l4.536 13.091zM72.04 21.925c3.584 0 5.707-2.132 5.707-5.688v-1.415h-5.443v1.823h3.157l-.01.2c-.044 1.832-1.405 3.048-3.383 3.048-2.359 0-3.837-1.806-3.837-4.808v-.01c0-2.939 1.415-4.662 3.773-4.662 1.606 0 2.74.816 3.24 2.222l.026.1h2.377l-.036-.145c-.499-2.413-2.513-4.21-5.616-4.21-3.773 0-6.15 2.559-6.15 6.714v.009c0 4.227 2.377 6.822 6.196 6.822zM89.459 21.925c3.583 0 5.706-2.132 5.706-5.688v-1.415h-5.443v1.823h3.157l-.01.2c-.044 1.832-1.405 3.048-3.383 3.048-2.359 0-3.837-1.806-3.837-4.808v-.01c0-2.939 1.415-4.662 3.774-4.662 1.605 0 2.74.816 3.238 2.222l.028.1h2.376l-.036-.145c-.499-2.413-2.513-4.21-5.615-4.21-3.774 0-6.151 2.559-6.151 6.714v.009c0 4.227 2.377 6.822 6.196 6.822zM100.98 21.889c2.822 0 4.654-1.878 4.654-4.999v-.018c0-3.103-1.86-4.99-4.663-4.99-2.794 0-4.645 1.905-4.645 4.99v.018c0 3.112 1.824 4.999 4.654 4.999zm.009-1.824c-1.442 0-2.358-1.152-2.358-3.175v-.018c0-1.996.934-3.157 2.34-3.157 1.434 0 2.359 1.152 2.359 3.157v.018c0 2.014-.916 3.175-2.341 3.175zM112.093 21.889c2.432 0 3.974-1.905 3.974-4.999v-.01c0-3.102-1.551-4.998-3.965-4.998-1.36 0-2.458.699-3.002 1.851h-.055V8.607h-2.259v13.091h2.259v-1.633h.055c.544 1.134 1.605 1.824 2.993 1.824zm-.68-1.905c-1.397 0-2.368-1.207-2.368-3.094v-.01c0-1.877.98-3.093 2.368-3.093 1.442 0 2.35 1.18 2.35 3.094v.009c0 1.914-.899 3.093-2.35 3.093zM122.544 21.889c2.431 0 3.974-1.905 3.974-4.999v-.01c0-3.102-1.552-4.998-3.965-4.998-1.361 0-2.458.699-3.003 1.851h-.054V8.607h-2.259v13.091h2.259v-1.633h.054c.545 1.134 1.606 1.824 2.994 1.824zm-.68-1.905c-1.397 0-2.368-1.207-2.368-3.094v-.01c0-1.877.98-3.093 2.368-3.093 1.442 0 2.349 1.18 2.349 3.094v.009c0 1.914-.898 3.093-2.349 3.093zM128.259 21.698h2.259V8.608h-2.259v13.09zM136.669 21.889c2.513 0 3.928-1.488 4.228-2.967l.027-.1h-2.114l-.018.064c-.218.644-.953 1.243-2.077 1.243-1.47 0-2.395-.998-2.432-2.686h6.732v-.725c0-2.903-1.706-4.836-4.455-4.836-2.748 0-4.518 1.996-4.518 5.026v.01c0 3.056 1.742 4.97 4.627 4.97zm-.081-8.238c1.197 0 2.068.762 2.231 2.287h-4.509c.182-1.48 1.08-2.287 2.278-2.287zM142.775 21.698h2.258v-5.634c0-1.351.772-2.177 2.051-2.177.381 0 .725.055.916.127v-2.041a2.94 2.94 0 00-.717-.09c-1.134 0-1.977.68-2.268 1.805h-.045v-1.606h-2.195v9.616z"
+              fill="#fff" />
+            <rect width="31.73" height="31.73" rx="3.208" fill="#FB575E" />
+            <path d="M4.722 9.93h22.183M8.688 20.113s0-10.103 7.177-10.103 7.177 10.103 7.177 10.103" stroke="#fff"
+              stroke-width="1.768" stroke-linecap="round" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M4.89 11.973c1.136 0 2.057-.904 2.057-2.02s-.921-2.02-2.057-2.02-2.057.904-2.057 2.02.92 2.02 2.057 2.02zM26.799 11.973c1.135 0 2.056-.904 2.056-2.02s-.92-2.02-2.056-2.02c-1.136 0-2.057.904-2.057 2.02s.92 2.02 2.056 2.02z"
+              fill="#fff" />
+            <rect x="4.657" y="18.067" width="7.054" height="6.946" rx="1.326" fill="#333948" stroke="#333948"
+              stroke-width=".884" stroke-linecap="round" />
+            <rect x="19.767" y="17.914" width="7.054" height="6.946" rx="1.326" fill="#333948" stroke="#333948"
+              stroke-width=".884" stroke-linecap="round" />
+            <rect x="12.401" y="6.546" width="7.054" height="6.946" rx="1.326" fill="#333948" stroke="#333948"
+              stroke-width=".884" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="gob__countCont"></div>
+    </div>
+    <div class="gob__mast"></div>
+    <div class="gob__container">
+    </div>
+    <div class="gob__footer">
+      <ul>
+        <li>
+          <span>Share the love on
+            <a href="https://www.producthunt.com/posts/svg-gobbler" target="_blank">Product Hunt</a></span>
+        </li>
+        <li>
+          <span>•</span><span>
+            Submit a bug on
+            <a href="https://github.com/rossmoody/svg-gobbler/issues/new/choose" target="_blank">GitHub</a>
+          </span>
+        </li>
+        <li>
+          <span>•</span>
+          <span>
+            Submit a
+            <a href="https://github.com/rossmoody/svg-gobbler/issues/new/choose" target="_blank">feature request</a>
+          </span>
+        </li>
+
+      </ul>
+      <span>
+        Leave a review on the
+        <a href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en"
+          target="_blank">Chrome Web Store</a>
+        or
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/svg-gobbler/" target="_blank">Addon Marketplace</a>
+      </span>
+    </div>
+
+    <!-- Modal start -->
+    <div class="modal" style="display: none;">
+      <div class="overlay"></div>
+      <div class="modal_content">
+        <!-- Dynamic Section -->
+        <div class="modal_image_wrap">
+          <div id="img-container">
+            <img></img>
           </div>
         </div>
-        <div class="gob__countCont"></div>
-      </div>
-      <div class="gob__mast"></div>
-      <div class="gob__container"></div>
-      <div class="gob__footer">
-        <ul>
-          <li>
-            <span
-              >Share the love on
-              <a
-                href="https://www.producthunt.com/posts/svg-gobbler"
-                target="_blank"
-                >Product Hunt</a
-              ></span
-            >
-          </li>
-          <li>
-            <span>•</span
-            ><span>
-              Submit a bug on
-              <a
-                href="https://github.com/rossmoody/svg-gobbler/issues/new/choose"
-                target="_blank"
-                >GitHub</a
-              >
-            </span>
-          </li>
-          <li>
-            <span>•</span>
-            <span>
-              Submit a
-              <a
-                href="https://github.com/rossmoody/svg-gobbler/issues/new/choose"
-                target="_blank"
-                >feature request</a
-              >
-            </span>
-          </li>
-          <li>
-            <span>•</span
-            ><span>
-              Leave a review on the
-              <a
-                href="https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en"
-                target="_blank"
-                >Chrome Webstore</a
-              >
-              or
-              <a
-                href="https://addons.mozilla.org/en-US/firefox/addon/svg-gobbler/"
-                target="_blank"
-                >Addon Marketplace</a
-              >
-            </span>
-          </li>
-        </ul>
-        <span class="gob__legal"
-          >Exported SVGS are automatically optimized using SVGO</span
-        >
+        <div class="export-size">
+          <label>Export size:</label>
+          <span id="canvas-sizes"></span>
+        </div>
+        <div class="img-controls">
+          <div class='modal-select'>
+            <select id="canvas-select">
+              <option value="1">1x</option>
+              <option value="2">2x</option>
+              <option value="3">3x</option>
+              <option value="4">4x</option>
+              <option value="5">5x</option>
+              <option value="6">6x</option>
+              <option value="7">7x</option>
+              <option value="8">8x</option>
+              <option value="9">9x</option>
+              <option value="10">10x</option>
+            </select>
+            <svg xmlns="http://www.w3.org/2000/svg" class="select-chevron" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <button class="gob__btn--primary" id='export-button'>Export PNG</button>
+        </div>
+        <!-- End of Dynamic Section -->
+        <button title="Close" class="close_modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
-  </body>
-  <script src="./dist/main.js"></script>
+  </div>
+</body>
+<script src="/dist/main.js"></script>
+
 </html>

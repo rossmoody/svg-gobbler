@@ -9,7 +9,6 @@ module.exports = {
     gather: './src/scripts/controller.js',
   },
   mode: 'production',
-  stats: 'minimal',
   output: {
     filename: './[name].js',
     path: path.resolve(__dirname, 'public/extension/dist'),
@@ -20,6 +19,7 @@ module.exports = {
     fs: 'empty',
   },
   optimization: {
+    minimize: true,
     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
   plugins: [

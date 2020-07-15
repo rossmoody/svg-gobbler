@@ -1,4 +1,6 @@
 import download from './download'
+import toggleModal from './modal'
+import buildModal from './export-image'
 
 const make = {
   element(el, cName) {
@@ -31,17 +33,15 @@ const make = {
 
   moreBtn(svg) {
     const moreBtn = make.element('button', 'gob__btn')
-    const moreIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>`
+    const moreIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`
     moreBtn.classList.add('gob__btn--more')
     moreBtn.insertAdjacentHTML('afterbegin', moreIcon)
-
     moreBtn.appendChild(make.menu(svg))
 
     return moreBtn
   },
 
   menu(svg) {
-    const originalSVG = svg.svgString
     const menu = make.element('div', 'gob__menu')
     const menuUl = make.element('ul', 'gob__menu-ul')
     menuUl.setAttribute('role', 'menu')
@@ -57,18 +57,26 @@ const make = {
       return li
     }
 
-    const downloadBtn = makeItem('Download original')
-    const copyBtn = makeItem('Copy original')
+    const downloadBtn = makeItem('Download unoptimized')
+    const copyBtn = makeItem('Copy unoptimized')
+    const exportBtn = makeItem('Export PNG')
 
     downloadBtn.addEventListener('click', () => {
-      download.original(originalSVG)
+      download.original(svg.svgString)
     })
 
     copyBtn.addEventListener('click', () => {
-      download.copyOriginal(originalSVG)
+      download.copyOriginal(svg.svgString)
+    })
+
+    exportBtn.addEventListener('click', () => {
+      buildModal(svg.svgString)
+      toggleModal()
     })
 
     menu.appendChild(menuUl)
+    menuUl.appendChild(exportBtn)
+    menuUl.insertAdjacentHTML('beforeend', `<hr>`)
     menuUl.appendChild(downloadBtn)
     menuUl.appendChild(copyBtn)
 
