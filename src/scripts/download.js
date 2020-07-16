@@ -24,7 +24,6 @@ const download = {
     svgo.optimize(i).then(result => {
       const blob = new Blob([result.data], { type: 'text/xml' })
       FileSaver.saveAs(blob, 'gobbler-icon.svg')
-      console.log(result.data)
     })
   },
 

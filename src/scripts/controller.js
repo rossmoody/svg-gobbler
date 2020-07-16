@@ -21,7 +21,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       if (result.length === 0) {
         noGobbles()
       } else {
-        console.log(result)
         sendResponse({ complete: true, data: result })
       }
     })
