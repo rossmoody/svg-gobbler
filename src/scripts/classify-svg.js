@@ -15,11 +15,15 @@ const classify = {
         this.type = 'inline'
       }
     } else if (this.origEle.tagName === 'IMG') {
-      const suffix = this.origEle.src.split('.').pop()
+      const imgSrc = this.origEle.src
 
-      if (suffix === 'svg') {
-        this.url = this.origEle.src
-        this.type = 'img src'
+      if (imgSrc) {
+        const suffix = imgSrc.split('.').pop()
+
+        if (suffix === 'svg' || imgSrc.includes('data:image/svg+xml;base64')) {
+          this.url = this.origEle.src
+          this.type = 'img src'
+        }
       }
     } else if (this.origEle.tagName === 'OBJECT') {
       this.url = this.data
