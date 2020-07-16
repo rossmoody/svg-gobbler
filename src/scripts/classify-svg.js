@@ -21,7 +21,7 @@ const classify = {
         const suffix = imgSrc.split('.').pop()
 
         if (suffix === 'svg' || imgSrc.includes('data:image/svg+xml;base64')) {
-          this.url = this.origEle.src
+          this.url = imgSrc
           this.type = 'img src'
         }
       }
