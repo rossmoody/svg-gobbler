@@ -37,7 +37,7 @@ async function processSVGs() {
     return svg
   })
 
-  console.log(finals)
+  // console.log(finals)
   return finals
 }
 

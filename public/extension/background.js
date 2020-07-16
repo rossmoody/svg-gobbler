@@ -44,3 +44,6 @@ chrome.browserAction.onClicked.addListener(function () {
     })
   })
 })
+
+// For development icon
+chrome.browserAction.setIcon({ path: 'icons/dev-icon128.png' })

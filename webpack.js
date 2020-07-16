@@ -18,6 +18,7 @@ module.exports = {
   node: {
     fs: 'empty',
   },
+  stats: 'minimal',
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
