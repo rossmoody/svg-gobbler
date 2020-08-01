@@ -3,7 +3,10 @@ const classify = {
     if (this.origEle.tagName === 'svg') {
       const firstChild = this.origEle.firstElementChild
 
-      if (firstChild && firstChild.tagName === 'symbol') {
+      if (
+        (firstChild && firstChild.tagName === 'symbol') ||
+        firstChild.tagName === 'defs'
+      ) {
         this.type = 'symbol'
       } else if (firstChild && firstChild.tagName === 'use') {
         this.type = 'sprite'
@@ -106,7 +109,10 @@ const classify = {
     const whiteStrings = ['white', '#FFF', '#FFFFFF', '#fff', '#ffffff']
 
     for (const string of whiteStrings) {
-      if (this.presentationSvg && this.presentationSvg.includes(string)) {
+      if (
+        (this.presentationSvg && this.presentationSvg.includes(string)) ||
+        this.cors
+      ) {
         this.hasWhite = true
       }
     }
@@ -120,7 +126,8 @@ const classify = {
 
     if (ele.nodeName === 'svg') {
       if (!ele.hasAttribute('viewBox')) {
-        ele.setAttribute('viewBox', `0 0 ${this.width} ${this.height}`)
+        if (!this.width === 0 && !this.height === 0)
+          ele.setAttribute('viewBox', `0 0 ${this.width} ${this.height}`)
       }
 
       ele.removeAttribute('height')
