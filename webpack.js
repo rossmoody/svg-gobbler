@@ -11,7 +11,7 @@ module.exports = {
   mode: 'production',
   output: {
     filename: './[name].js',
-    path: path.resolve(__dirname, 'public/extension/dist'),
+    path: path.resolve(__dirname, 'extension/dist'),
     libraryTarget: 'umd',
     library: 'gobble',
   },
