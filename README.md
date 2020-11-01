@@ -54,14 +54,6 @@ Unique attributes for each SVG element will be shown within the card. The attrib
 
 2. The size of the SVG in the DOM
 
-### Testing
-
-There is a testing `index.html` file inside the `public` folder. It houses various different SVG placement methods to use for testing. To serve the site using `live-server` run:
-
-```
-npm run serve
-```
-
 ## Contribute
 
 Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and I'm not very good at javascript.
