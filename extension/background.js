@@ -27,6 +27,7 @@ function sendMessagePromise(tabId, item) {
         buildTab(response.data)
         resolve()
       } else {
+        chrome.runtime.Port.disconnect()
         reject('Something wrong')
       }
     })
