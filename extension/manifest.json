@@ -18,7 +18,8 @@
     "default_title": "SVG Gobbler"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "permissions": ["activeTab", "tabs"],
   "content_scripts": [
