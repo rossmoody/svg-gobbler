@@ -28,7 +28,6 @@ function sendMessagePromise(tabId, item) {
         resolve()
       } else {
         chrome.runtime.Port.disconnect()
-        reject('Something wrong')
       }
     })
   })
