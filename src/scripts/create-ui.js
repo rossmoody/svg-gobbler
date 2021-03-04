@@ -1,5 +1,6 @@
 import createCards from './create-card'
 import download from './download'
+import themeSwitcher from './theme-switcher'
 
 require('./export-image.js')
 require('./modal.js')
@@ -39,6 +40,7 @@ const createUI = data => {
   window.document.querySelector('.gob__mast').appendChild(svgCount)
   countCont.appendChild(gobCount)
 
+  themeSwitcher()
   createCards(data, container)
 }
 

@@ -1,9 +1,23 @@
-/* Colors */
 $white: #ffffff;
 $gray5: #333948;
-$gray4: rgba($gray5, 0.7);
 $gray3: rgba($gray5, 0.3);
-$gray2: rgba($gray5, 0.2);
-$gray1: rgba($gray5, 0.1);
+$gray2: #c5c6cb;
+$gray1: #d1d2d8;
 $primary: #fa555d;
 $success: #10d173;
+
+:root {
+  --background: #3339481a;
+  --card-surface: #ffffff;
+  --divider: #c5c6cb;
+  --text: #333948;
+  --text-subdued: #70757f;
+}
+
+[data-theme='dark'] {
+  --background: #1e2025;
+  --card-surface: #333948;
+  --divider: #595f6f;
+  --text: #fff;
+  --text-subdued: #cecece;
+}

@@ -12,7 +12,7 @@ html {
 body {
   margin: 0;
   @include font-family();
-  background-color: $gray1;
+  background-color: var(--background);
   color: $gray5;
   font-size: 14px;
 }
@@ -46,9 +46,10 @@ a:visited {
 
   &__footer {
     display: flex;
+    color: var(--text);
     flex-direction: column;
     margin: 0 72px 48px;
-    border-top: 1px solid $gray2;
+    border-top: 1px solid var(--divider);
 
     & ul {
       display: flex;
@@ -69,12 +70,20 @@ a:visited {
     }
   }
 
+  &__theme {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 14px;
+  }
+
   &__mast {
     margin: 32px 72px 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     font-size: 13px;
-    color: $gray5;
+    color: var(--text);
 
     &__count {
       font-size: 19px;
@@ -113,7 +122,7 @@ a:visited {
     display: none;
     flex-direction: column;
     z-index: 1;
-    background: $white;
+    background: var(--card-surface);
     border-radius: 12px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -167,7 +176,7 @@ a:visited {
       margin: 0 20px;
       line-height: 1.4;
       padding: 12px 0 20px;
-      border-top: 1px solid $gray2;
+      border-top: 1px solid var(--divider);
       position: relative;
       display: grid;
       align-items: start;
@@ -183,7 +192,7 @@ a:visited {
       }
 
       & h3 {
-        color: $gray5;
+        color: var(--text);
         font-size: 18px;
         font-weight: 500;
         text-transform: capitalize;
@@ -193,7 +202,7 @@ a:visited {
         text-transform: uppercase;
         letter-spacing: 0.6px;
         font-weight: 600;
-        color: $gray4;
+        color: var(--text-subdued);
         margin: 0 0 2px;
         font-size: 12px;
       }
@@ -214,7 +223,7 @@ a:visited {
     display: grid;
     align-items: center;
     grid-template-columns: 3fr 2fr 40px;
-    background: $white;
+    background: var(--card-surface);
     padding: 0 0 10px;
     grid-gap: 8px;
     position: absolute;
@@ -241,7 +250,7 @@ a:visited {
     align-items: center;
     border-radius: 6px;
     font-weight: 500;
-    padding: 16px 20px;
+    padding: 12px 16px;
     line-height: 1;
     border: 2px solid $primary;
 

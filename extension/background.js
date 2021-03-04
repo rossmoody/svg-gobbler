@@ -1,7 +1,9 @@
 let id = 1
-let viewTabUrl = null
+let viewTabUrl
 
 function buildTab(data) {
+  viewTabUrl = chrome.runtime.getURL('index.html?id=' + id++)
+
   chrome.tabs.create({ url: viewTabUrl })
 
   chrome.tabs.onUpdated.addListener(function listener(tabId, changedProps) {
@@ -34,10 +36,6 @@ function sendMessagePromise(tabId, item) {
 }
 
 chrome.browserAction.onClicked.addListener(function () {
-  viewTabUrl = chrome.runtime.getURL('index.html?id=' + id++)
-
-  chrome.tabs.insertCSS({ file: './dist/gather.css' })
-
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     sendMessagePromise(tabs[0].id, {
       message: 'start_gobbling',
