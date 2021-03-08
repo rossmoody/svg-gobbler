@@ -4,8 +4,8 @@ const classify = {
       const firstChild = this.origEle.firstElementChild
 
       if (
-        (firstChild && firstChild.tagName === 'symbol') ||
-        firstChild.tagName === 'defs'
+        firstChild &&
+        (firstChild.tagName === 'symbol' || firstChild.tagName === 'defs')
       ) {
         this.type = 'symbol'
       } else if (firstChild && firstChild.tagName === 'use') {
