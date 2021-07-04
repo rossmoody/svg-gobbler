@@ -10,25 +10,31 @@ Currently, if you would like to modify this extension you will need to install i
 
 ### Installation
 
-1. Clone the repo
+#### 1. Clone the repo
+
+Clone the repo to your local machine and navigate into the root directory.
 
 ```bash
 cd svg-gobbler
 ```
 
-2. Run `yarn` to install necessary dependencies
+#### 2. Install dependencies
+
+SVG Gobbler uses `yarn` to build the necessary dependencies. 
 
 ```bash
 yarn
 ```
 
-3. Run `yarn start` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits.
+#### 3. Bundle the extension
+
+Run `yarn start` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits. 
 
 ```bash
 yarn start
 ```
 
-### Side load extension
+#### 4. Side load extension
 
 1. Open Chrome
 2. In the address bar, navigate to `chrome://extensions`
@@ -37,10 +43,9 @@ yarn start
 
 Once this is complete you can start hacking. Editing content in the `src` directory will automatically build and update the extension folder which will feed the extension in the browser the latest code.
 
+### Development notes
 
-#### Notes
-
-If you are editing anything within the `src/find` directory you will need to manually press the `Update` button in the extensions page. 
+If you are editing anything within the `src/find` directory you will need to manually press the `Update` button in the extensions page to refresh your latest code changes.
 
 Code changed within the `src/build` directory will automatically update on page refresh but code that is injected into the client's tab (code within `src/find`) needs manually refreshed from within the extensions page.
 
@@ -63,7 +68,7 @@ Unique attributes for each SVG element will be shown within the card. The attrib
 
 ## Contribute
 
-Feel free to submit a pull request if you've made an improvement of some kind. This is a small hobby project and I'm not very good at javascript.
+Feel free to submit a pull request if you've made an improvement of some kind. This is an open source project and any help is very appreciated.
 
 ### About
 
