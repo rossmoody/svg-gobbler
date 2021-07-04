@@ -13,18 +13,18 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { FaChevronDown } from 'react-icons/fa'
+
 import { handle } from '../utils/actions'
 
-interface ICardActionFooter {
+interface CardActionFooter {
   svgString: string
 }
 
-const CardActionFooter = ({ svgString }: ICardActionFooter) => {
+const CardActionFooter = ({ svgString }: CardActionFooter) => {
   const toast = useToast({
     status: 'success',
     duration: 5000,
     isClosable: true,
-    position: 'top-right',
   })
 
   return (

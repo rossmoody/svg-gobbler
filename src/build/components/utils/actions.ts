@@ -39,9 +39,12 @@ export const handle = {
       zip.file(`svg-${index}.svg`, svg)
     })
 
-    zip.generateAsync({ type: 'blob' }).then((content) => {
-      FileSaver.saveAs(content, 'gobbled_svgs.zip')
-    })
+    zip
+      .generateAsync({ type: 'blob' })
+      .then((content) => {
+        FileSaver.saveAs(content, 'gobbled_svgs.zip')
+      })
+      .catch((error) => {})
   },
 
   copyToClipboard(svgString: string) {

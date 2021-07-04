@@ -1,14 +1,16 @@
 import React from 'react'
-import theme from './theme/theme'
 import { ChakraProvider, Divider } from '@chakra-ui/react'
-import { Toolbar, Footer, Gallery, Navbar } from './components'
+
 import { SVG } from '../find/scripts/create-svg'
+
+import theme from './theme/theme'
+import { Toolbar, Footer, Gallery, Navbar } from './components'
 
 export type AppData = SVG[] | undefined
 
 const getSessionStorageData = (): AppData => {
   const windowId = window.location.host
-  let data = sessionStorage.getItem(windowId)
+  const data = sessionStorage.getItem(windowId)
   if (data) return JSON.parse(data)
 }
 
@@ -27,11 +29,11 @@ const Layout = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      {console.log(data)}
       <Navbar />
       <Divider />
       <Toolbar data={data} />
       <Gallery data={data} />
+      <Divider />
       <Footer />
     </ChakraProvider>
   )

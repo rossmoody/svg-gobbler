@@ -1,6 +1,4 @@
 import React from 'react'
-import CardFooter from './card-footer'
-import CardActionFooter from './card-action-footer'
 import {
   Center,
   Box,
@@ -8,11 +6,28 @@ import {
   Divider,
   SlideFade,
 } from '@chakra-ui/react'
-import SVG from '../../../find/scripts/create-svg'
+
+import SVGInterface from '../../../find/scripts/create-svg'
+
+import CardFooter from './card-footer'
+import CardActionFooter from './card-action-footer'
 import CardActionCors from './card-action-cors'
 
+interface CardActions {
+  svgString: string
+  cors: boolean
+}
+
+const CardActions = ({ svgString, cors }: CardActions) => {
+  if (cors) {
+    return <CardActionCors />
+  } else {
+    return <CardActionFooter svgString={svgString} />
+  }
+}
+
 interface CardData {
-  data: SVG
+  data: SVGInterface
 }
 
 const Card = ({ data }: CardData) => {
@@ -52,11 +67,7 @@ const Card = ({ data }: CardData) => {
       <Divider mx={5} width="auto" />
       <Box pt={2} pb={4} mx={5} position="relative">
         <SlideFade in={showActions} offsetY="12px">
-          {cors ? (
-            <CardActionCors />
-          ) : (
-            <CardActionFooter svgString={svgString} />
-          )}
+          <CardActions cors={cors} svgString={svgString} />
         </SlideFade>
         <CardFooter size={size} type={type} />
       </Box>

@@ -1,11 +1,11 @@
-import SVG from './create-svg'
+import SVGInterface from './create-svg'
 import findSVGs from './find-svgs'
 
 async function processSVGs() {
   const pageElements = findSVGs()
 
   const initialSvgs = pageElements
-    .map((ele) => new SVG(ele))
+    .map((ele) => new SVGInterface(ele))
     .filter((ele) => ele.isValidSvg())
 
   const promiseResults = await Promise.all(
@@ -31,6 +31,7 @@ async function processSVGs() {
   const finals = uniqueSVGs.map((svg) => {
     svg.createPresentationSvg()
     // Must delete reference to dom node for sending messages
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete svg.originalElementRef
     return svg

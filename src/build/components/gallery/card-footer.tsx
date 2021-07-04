@@ -18,12 +18,12 @@ const Body: React.FC = ({ children }) => (
   </Text>
 )
 
-interface ICardFooter {
+interface CardFooter {
   size: string
   type: string
 }
 
-const CardFooter = ({ size, type }: ICardFooter) => {
+const CardFooter = ({ size, type }: CardFooter) => {
   return (
     <SimpleGrid minChildWidth="30px" spacing={2}>
       <Box>

@@ -8,10 +8,12 @@ import {
   Flex,
   useColorModeValue as mode,
 } from '@chakra-ui/react'
-import { handle } from '../utils/actions'
-import LoadingToolbar from './loading-toolbar'
-import { AppData } from '../../layout'
 import React from 'react'
+
+import { handle } from '../utils/actions'
+import { AppData } from '../../layout'
+
+import LoadingToolbar from './loading-toolbar'
 
 function isPlural(num: number): string {
   return num === 1 ? '' : 's'

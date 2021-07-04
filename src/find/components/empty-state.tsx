@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom'
  * to limit the amount of code being injected into tab
  */
 const Empty = () => {
+  const ariaLabel = 'Sad smiley'
+
   setTimeout(() => {
     document.getElementById('gobbler')?.remove()
   }, 4000)
@@ -29,7 +31,12 @@ const Empty = () => {
         boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px',
       }}
     >
-      <p>😢 No available SVGs to gobble on this page</p>
+      <p>
+        <span role="img" aria-label={ariaLabel}>
+          😢
+        </span>{' '}
+        No available SVGs to gobble on this page
+      </p>
     </div>
   )
 }

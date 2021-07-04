@@ -1,6 +1,7 @@
 import React from 'react'
-import Logo from './logo'
 import { Box, Stack, useColorModeValue } from '@chakra-ui/react'
+
+import Logo from './logo'
 import { Copyright } from './copyright'
 import { SocialMediaLinks } from './social-media-links'
 

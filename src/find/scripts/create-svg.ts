@@ -30,7 +30,7 @@ export class SVG {
 
   determineType() {
     switch (this.originalElementRef.tagName) {
-      case 'svg':
+      case 'svg': {
         this.type = 'inline'
 
         const firstChild = this.originalElementRef.firstElementChild
@@ -49,11 +49,12 @@ export class SVG {
         }
 
         break
+      }
 
-      case 'IMG':
-        const imgSrc: string | null = (<HTMLImageElement>(
-          this.originalElementRef
-        )).src
+      case 'IMG': {
+        const imgSrc: string | null = (
+          this.originalElementRef as HTMLImageElement
+        ).src
 
         if (!imgSrc) return
 
@@ -68,16 +69,18 @@ export class SVG {
         }
 
         break
+      }
 
-      case 'OBJECT':
-        this.url = (<HTMLObjectElement>this.originalElementRef).data
+      case 'OBJECT': {
+        this.url = (this.originalElementRef as HTMLObjectElement).data
         this.type = 'object'
 
         break
+      }
 
-      case 'DIV':
+      case 'DIV': {
         const style = window.getComputedStyle(
-          <HTMLDivElement>this.originalElementRef,
+          this.originalElementRef as HTMLDivElement,
           null
         )
         const url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
@@ -89,6 +92,7 @@ export class SVG {
         }
 
         break
+      }
 
       default:
         this.type = 'invalid'
@@ -104,7 +108,7 @@ export class SVG {
   buildSpriteString() {
     if (!this.spriteId) return
 
-    const parentSvg = <SVGElement>this.originalElementRef.cloneNode(true)
+    const parentSvg = this.originalElementRef.cloneNode(true) as SVGElement
     const useSvgElement = parentSvg.querySelector('use')
     const symbolElement = window.document.querySelector(
       `[id='${this.spriteId}']`
@@ -129,9 +133,7 @@ export class SVG {
   async fetchSvg() {
     const serializer = new XMLSerializer()
 
-    if (!this.url) {
-      this.svgString = serializer.serializeToString(this.originalElementRef)
-    } else {
+    if (this.url) {
       try {
         const response = await fetch(this.url)
         this.svgString = await response.text()
@@ -139,6 +141,8 @@ export class SVG {
         this.cors = true
         this.svgString = serializer.serializeToString(this.originalElementRef)
       }
+    } else {
+      this.svgString = serializer.serializeToString(this.originalElementRef)
     }
 
     return this
