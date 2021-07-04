@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./extension",
+    "noImplicitAny": true,
+    "strict": true,
+    "module": "ES6",
+    "target": "ESNext",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  }
+}
