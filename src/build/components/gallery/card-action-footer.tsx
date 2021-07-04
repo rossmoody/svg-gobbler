@@ -23,7 +23,7 @@ interface CardActionFooter {
 const CardActionFooter = ({ svgString }: CardActionFooter) => {
   const toast = useToast({
     status: 'success',
-    duration: 5000,
+    duration: 3000,
     isClosable: true,
   })
 
