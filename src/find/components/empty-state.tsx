@@ -18,17 +18,17 @@ const Empty = () => {
         position: 'fixed',
         left: '0',
         right: '0',
-        top: '24px',
+        top: '28px',
         marginLeft: 'auto',
         marginRight: 'auto',
         width: 'max-content',
         background: 'white',
         zIndex: 10000,
         textAlign: 'center',
-        fontSize: '16px',
+        fontSize: '18px',
         padding: '12px 24px',
         borderRadius: '48px',
-        boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px',
+        boxShadow: 'rgba(0, 0, 0, 0.25) 0px 12px 25px -12px',
       }}
     >
       <p>
