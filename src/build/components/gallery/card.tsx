@@ -16,6 +16,7 @@ import CardActionCors from './card-action-cors'
 interface CardActions {
   svgString: string
   cors: boolean
+  presentationSvg: string
 }
 
 const CardActions = ({ svgString, cors }: CardActions) => {
@@ -67,7 +68,11 @@ const Card = ({ data }: CardData) => {
       <Divider mx={5} width="auto" />
       <Box pt={2} pb={4} mx={5} position="relative">
         <SlideFade in={showActions} offsetY="12px">
-          <CardActions cors={cors} svgString={svgString} />
+          <CardActions
+            cors={cors}
+            svgString={svgString}
+            presentationSvg={presentationSvg}
+          />
         </SlideFade>
         <CardFooter size={size} type={type} />
       </Box>

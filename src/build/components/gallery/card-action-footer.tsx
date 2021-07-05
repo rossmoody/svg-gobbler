@@ -16,6 +16,8 @@ import { FaChevronDown } from 'react-icons/fa'
 
 import { handle } from '../utils/actions'
 
+import ImageModal from './image-modal'
+
 interface CardActionFooter {
   svgString: string
 }
@@ -97,7 +99,7 @@ const CardActionFooter = ({ svgString }: CardActionFooter) => {
           </MenuGroup>
           <MenuDivider />
           <MenuGroup defaultValue="asc" title="Image" type="radio">
-            <MenuItem>Export as PNG</MenuItem>
+            <ImageModal svgString={svgString} />
           </MenuGroup>
         </MenuList>
       </Menu>

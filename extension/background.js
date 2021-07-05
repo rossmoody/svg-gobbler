@@ -28,7 +28,6 @@ chrome.browserAction.onClicked.addListener(function () {
       message: 'start_gobbling',
     })
       .then((results) => {
-        console.log(results)
         if (results) buildTab(results)
       })
       // eslint-disable-next-line no-console

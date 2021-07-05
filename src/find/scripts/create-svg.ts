@@ -3,7 +3,6 @@ import { PageElement } from './find-svgs'
 export class SVG {
   originalElementRef: PageElement
   id: number
-  location: string
   cors: boolean
   svgString: string
   presentationSvg: string
@@ -11,8 +10,10 @@ export class SVG {
   size: string
   height?: number
   width?: number
-  url?: string
-  spriteId?: string
+
+  private url?: string
+  private spriteId?: string
+  private location: string
 
   constructor(element: PageElement) {
     this.originalElementRef = element

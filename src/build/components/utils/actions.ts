@@ -60,15 +60,14 @@ export const handle = {
     const { data } = optimize(svgString, svgoConfig)
     handle.copyToClipboard(data)
   },
-}
 
-//   img(i, width, height) {
-//     const canvas = document.createElement('canvas')
-//     const ctx = canvas.getContext('2d')
-//     canvas.width = width
-//     canvas.height = height
-//     ctx.drawImage(i, 0, 0)
-//     const dataUri = canvas.toDataURL('image/png', 0.9)
-//     FileSaver.saveAs(dataUri, 'gobbler-image.png')
-//   },
-// }
+  exportPNG(i, width, height) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    canvas.width = width
+    canvas.height = height
+    ctx.drawImage(i, 0, 0)
+    const dataUri = canvas.toDataURL('image/png', 0.9)
+    FileSaver.saveAs(dataUri, 'gobbler-image.png')
+  },
+}
