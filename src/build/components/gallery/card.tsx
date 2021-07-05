@@ -62,6 +62,9 @@ const Card = ({ data }: CardData) => {
               top: '0',
               overflow: 'visible',
             },
+            '& > img': {
+              width: '100%',
+            },
           }}
         />
       </Center>

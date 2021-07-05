@@ -10,10 +10,9 @@ export class SVG {
   size: string
   height?: number
   width?: number
-
-  private url?: string
-  private spriteId?: string
-  private location: string
+  url?: string
+  spriteId?: string
+  location: string
 
   constructor(element: PageElement) {
     this.originalElementRef = element

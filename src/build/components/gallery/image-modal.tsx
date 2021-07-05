@@ -14,7 +14,8 @@ import {
   Center,
 } from '@chakra-ui/react'
 
-import { SVGImage } from '../utils/export-image'
+import { SVGImage } from '../utils/image-class'
+import { handle } from '../utils/actions'
 
 interface ImageModalProps {
   svgString: string
@@ -23,9 +24,8 @@ interface ImageModalProps {
 const ImageModal = ({ svgString }: ImageModalProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const svg = new SVGImage(svgString)
-
-  if (!svg.svgElement.hasAttribute('viewBox')) console.log(svg)
+  const imageClass = new SVGImage(svgString)
+  console.log(imageClass)
 
   return (
     <>
@@ -38,17 +38,28 @@ const ImageModal = ({ svgString }: ImageModalProps) => {
           <ModalCloseButton />
           <ModalBody>
             <Center padding={8}>
-              <Box as="img" src={svg.htmlImageElementSrc} />
+              <Box as="img" src={imageClass.htmlImageElementSrc} />
             </Center>
           </ModalBody>
 
           <ModalFooter>
             <Select placeholder="Select size" marginRight={2} width="auto">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="option1">1x</option>
+              <option value="option2">2x</option>
+              <option value="option3">3x</option>
             </Select>
-            <Button colorScheme="red">Export PNG</Button>
+            <Button
+              colorScheme="red"
+              onClick={() => {
+                handle.exportPNG(
+                  imageClass.htmlImageElementSrc,
+                  Number(imageClass.width),
+                  Number(imageClass.height)
+                )
+              }}
+            >
+              Export PNG
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -1,31 +1,10 @@
-import { handle } from './actions'
-
-// function buildModal(i) {
-//   // Download function
-//   function exportImg() {
-//     const select = document.getElementById('canvas-select')
-//     const { value } = select
-
-//     const width = specs.width * value
-//     const height = specs.height * value
-
-//     // Need to set explicit width and height or Firefox exports empty PNG
-//     svgElement.setAttribute('width', width)
-//     svgElement.setAttribute('height', height)
-
-//     const img = buildImg(svgElement)
-
-//     img.addEventListener('load', () => download.img(img, width, height))
-//   }
-// }
-
 export class SVGImage {
-  svgString: string
   svgElement: HTMLElement
   viewBox: string
-  htmlImageElementSrc: string
   width: string
   height: string
+  htmlImageElementSrc: string
+  svgString: string
 
   constructor(presentationSvg: string) {
     this.svgString = presentationSvg
@@ -36,15 +15,14 @@ export class SVGImage {
     this.height = '24'
 
     this.createSvgElementFromString()
-    this.getViewBox()
-    this.setClassHeightWidth()
+    this.setViewBox()
     this.removeHeightWidth()
     this.createImgSrc()
   }
 
   setSvgElementWidthHeight(value: number) {
-    const width = parseInt(this.width, 10) * value
-    const height = parseInt(this.height, 10) * value
+    const width = String(parseInt(this.width, 10) * value)
+    const height = String(parseInt(this.height, 10) * value)
 
     this.svgElement.setAttribute('width', width)
     this.svgElement.setAttribute('height', height)
@@ -59,20 +37,21 @@ export class SVGImage {
     this.svgElement = iDoc.documentElement
   }
 
-  private getViewBox() {
+  private setViewBox() {
     const attributeNames = this.svgElement.getAttributeNames()
+
+    if (attributeNames.includes('height'))
+      this.height = this.svgElement.getAttribute('height')!
+
+    if (attributeNames.includes('width'))
+      this.width = this.svgElement.getAttribute('width')!
+
+    this.viewBox = `0 0 ${this.width} ${this.height}`
 
     if (attributeNames.includes('viewBox'))
       this.viewBox = this.svgElement.getAttribute('viewBox')!
-  }
 
-  private setClassHeightWidth() {
-    const sizeArr: string[] = this.viewBox.split(' ')
-
-    const [, , width, height] = sizeArr
-
-    this.width = width
-    this.height = height
+    this.svgElement.setAttribute('viewBox', this.viewBox)
   }
 
   private removeHeightWidth() {

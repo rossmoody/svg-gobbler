@@ -61,13 +61,19 @@ export const handle = {
     handle.copyToClipboard(data)
   },
 
-  exportPNG(i, width, height) {
+  exportPNG(imgSrc: any, width: number, height: number) {
+    const imageElement = document.createElement('img')
+    imageElement.setAttribute('src', imgSrc)
+
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
+
     canvas.width = width
     canvas.height = height
-    ctx.drawImage(i, 0, 0)
+
+    ctx!.drawImage(imageElement, 0, 0)
     const dataUri = canvas.toDataURL('image/png', 0.9)
+
     FileSaver.saveAs(dataUri, 'gobbler-image.png')
   },
 }
