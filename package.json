@@ -16,7 +16,10 @@
     ],
     "ignorePatterns": [
       "*.config.js"
-    ]
+    ],
+    "env": {
+      "webextensions": true
+    }
   },
   "devDependencies": {
     "@chakra-ui/react": "^1.6.4",
