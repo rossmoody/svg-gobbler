@@ -2,6 +2,7 @@ import { PageElement } from './find-svgs'
 
 export class SVG {
   originalElementRef: PageElement
+  id: number
   location: string
   cors: boolean
   svgString: string
@@ -17,6 +18,7 @@ export class SVG {
     this.originalElementRef = element
     this.location = window.document.location.host
     this.cors = false
+    this.id = Math.random()
     this.svgString = ''
     this.presentationSvg = ''
     this.size = 'N/A'

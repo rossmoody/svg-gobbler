@@ -21,7 +21,7 @@ const Gallery = ({ data }: GalleryData) => {
         <ScaleFade in initialScale={0.9}>
           <SimpleGrid minChildWidth="240px" spacing="24px">
             {data.map((svg) => (
-              <Card key={svg.size} data={svg} />
+              <Card key={svg.id} data={svg} />
             ))}
           </SimpleGrid>
         </ScaleFade>
