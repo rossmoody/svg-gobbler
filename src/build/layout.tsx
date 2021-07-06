@@ -31,9 +31,16 @@ const Layout = () => {
    * Occassionally a message doesn't resolve when being sent by the tab.
    * This forces a state update to render the appropriate error communication.
    */
-  setTimeout(() => {
-    if (data === undefined) setData([] as SVG[])
-  }, 4000)
+  const timeout = React.useRef<NodeJS.Timeout | undefined>()
+
+  React.useEffect(() => {
+    if (timeout.current !== undefined) clearTimeout(timeout.current)
+
+    if (data === undefined)
+      timeout.current = setTimeout(() => {
+        setData([])
+      }, 3000)
+  }, [data, timeout])
 
   console.log(data)
 
