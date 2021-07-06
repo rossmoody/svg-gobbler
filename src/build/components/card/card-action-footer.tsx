@@ -23,6 +23,8 @@ interface CardActionFooter {
 }
 
 const CardActionFooter = ({ svgString }: CardActionFooter) => {
+  const [showModal, setShowModal] = React.useState(false)
+
   const toast = useToast({
     status: 'success',
     duration: 3000,
@@ -99,7 +101,12 @@ const CardActionFooter = ({ svgString }: CardActionFooter) => {
           </MenuGroup>
           <MenuDivider />
           <MenuGroup defaultValue="asc" title="Image" type="radio">
-            <ImageModal svgString={svgString} />
+            <MenuItem onClick={() => setShowModal(true)}>
+              Export as PNG
+            </MenuItem>
+            {showModal && (
+              <ImageModal callback={setShowModal} svgString={svgString} />
+            )}
           </MenuGroup>
         </MenuList>
       </Menu>

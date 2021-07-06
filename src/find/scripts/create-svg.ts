@@ -103,13 +103,13 @@ export class SVG {
             (element) => element.tagName === 'use' || element.tagName === 'img'
           )
         ) {
+          this.type = 'sprite instance'
           const useElement = this.originalElementRef.querySelector('use')!
           const spriteHref = useElement.getAttribute('href')
 
           if (!spriteHref) return
 
           if (spriteHref.includes('.svg')) this.spriteHref = spriteHref
-          this.type = 'sprite instance'
         }
 
         if (elementChildren.some((element) => element.tagName === 'symbol'))

@@ -6,8 +6,8 @@ export class SVGImage {
   htmlImageElementSrc: string
   svgString: string
 
-  constructor(presentationSvg: string) {
-    this.svgString = presentationSvg
+  constructor(svgString: string) {
+    this.svgString = svgString
     this.svgElement = document.createElement('svg')
     this.htmlImageElementSrc = ''
     this.viewBox = '0 0 24 24'

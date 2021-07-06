@@ -61,15 +61,15 @@ export const handle = {
     handle.copyToClipboard(data)
   },
 
-  exportPNG(imgSrc: any, width: number, height: number) {
+  exportPNG(imgSrc: string, width: number, height: number, multiplier: number) {
     const imageElement = document.createElement('img')
     imageElement.setAttribute('src', imgSrc)
 
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
 
-    canvas.width = width
-    canvas.height = height
+    canvas.width = width * multiplier
+    canvas.height = height * multiplier
 
     ctx!.drawImage(imageElement, 0, 0)
     const dataUri = canvas.toDataURL('image/png', 0.9)
