@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Grid, useColorModeValue, Tooltip } from '@chakra-ui/react'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 
-const CardActionCors = () => {
+const CardActionCors = ({ forwardingUrl }: { forwardingUrl: string }) => {
   return (
     <Grid
       position="absolute"
@@ -17,12 +17,12 @@ const CardActionCors = () => {
         hasArrow
         borderRadius="md"
         padding={4}
-        label="This SVG is protected by cross-origin requests and must be opened in a new tab to download or copy to clipboard."
+        label="This SVG is protected by cross-origin requests and must be opened in a new tab to download."
       >
         <Button
           as="a"
-          href="#"
-          onClick={() => {}}
+          href={forwardingUrl}
+          target="_blank"
           rightIcon={<FaExternalLinkAlt />}
         >
           Open in new tab

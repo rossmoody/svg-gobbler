@@ -19,7 +19,7 @@ interface CardData {
 const Card = ({ data }: CardData) => {
   const [showActions, setShowActions] = React.useState(false)
 
-  const { presentationSvg, size, type, svgString, cors } = data
+  const { presentationSvg, size, type } = data
 
   return (
     <Box
@@ -56,11 +56,7 @@ const Card = ({ data }: CardData) => {
       <Divider mx={5} width="auto" />
       <Box pt={2} pb={4} mx={5} position="relative">
         <SlideFade in={showActions} offsetY="12px">
-          <CardActions
-            cors={cors}
-            svgString={svgString}
-            presentationSvg={presentationSvg}
-          />
+          <CardActions data={data} />
         </SlideFade>
         <CardFooter size={size} type={type} />
       </Box>
