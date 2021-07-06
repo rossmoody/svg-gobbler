@@ -1,10 +1,10 @@
 import React from 'react'
-import { ChakraProvider, Divider } from '@chakra-ui/react'
+import { Divider } from '@chakra-ui/react'
 
 import { SVG } from '../find/scripts/create-svg'
 
-import theme from './theme/theme'
 import { Toolbar, Footer, Gallery, Navbar } from './components'
+import ThemeProvider from './theme/theme-provider'
 
 export type AppData = SVG[] | undefined
 
@@ -27,6 +27,10 @@ const Layout = () => {
     }
   })
 
+  /**
+   * Occassionally a message doesn't resolve when being sent by the tab.
+   * This forces a state update to render the appropriate error communication.
+   */
   setTimeout(() => {
     if (data === undefined) setData([] as SVG[])
   }, 4000)
@@ -34,14 +38,14 @@ const Layout = () => {
   console.log(data)
 
   return (
-    <ChakraProvider theme={theme}>
+    <ThemeProvider>
       <Navbar />
       <Divider />
       <Toolbar data={data} />
       <Gallery data={data} />
       <Divider />
       <Footer />
-    </ChakraProvider>
+    </ThemeProvider>
   )
 }
 
