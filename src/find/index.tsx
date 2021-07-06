@@ -1,5 +1,4 @@
 import processSVGs from './scripts/process-svgs'
-// import emptyState from './components/empty-state'
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'start_gobbling') {

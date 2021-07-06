@@ -25,7 +25,7 @@ export class SVG {
   spriteHref?: string
 
   constructor(element: PageElement) {
-    this.originalElementRef = element
+    this.originalElementRef = element.cloneNode(true) as HTMLElement
     this.location = window.document.location.host
     this.cors = false
     this.id = Math.random()
