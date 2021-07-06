@@ -26,9 +26,9 @@ interface ToolbarData {
 const Toolbar = ({ data }: ToolbarData) => {
   if (!data) return <LoadingToolbar />
 
-  const refAddress: string = data[0].location || ''
-  const svgQuantity: number = data.length
-  const svgStrings: string[] = data.map((svg) => svg.svgString)
+  const refAddress: string = data[0]?.location || 'Not available'
+  const svgQuantity: number = data?.length || 0
+  const svgStrings: string[] = data?.map((svg) => svg.svgString)
 
   return (
     <Box p="8" bg={mode('white', 'gray.800')} as="section">
@@ -53,13 +53,15 @@ const Toolbar = ({ data }: ToolbarData) => {
             w={{ base: 'full', md: 'auto' }}
             spacing={{ base: '2', md: '4' }}
           >
-            <Button
-              size="lg"
-              colorScheme="red"
-              onClick={() => handle.downloadAllSVGs(svgStrings)}
-            >
-              Download all SVGs
-            </Button>
+            {svgQuantity && (
+              <Button
+                size="lg"
+                colorScheme="red"
+                onClick={() => handle.downloadAllSVGs(svgStrings)}
+              >
+                Download all SVGs
+              </Button>
+            )}
           </HStack>
         </Stack>
       </Box>

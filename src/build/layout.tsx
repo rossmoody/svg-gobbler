@@ -27,7 +27,10 @@ const Layout = () => {
     }
   })
 
-  // TODO: Create general error case when data is === 0 or false
+  setTimeout(() => {
+    if (data === undefined) setData([] as SVG[])
+  }, 4000)
+
   console.log(data)
 
   return (
