@@ -27,6 +27,9 @@ const Layout = () => {
     }
   })
 
+  // TODO: Create general error case when data is === 0 or false
+  console.log(data)
+
   return (
     <ChakraProvider theme={theme}>
       <Navbar />

@@ -6,11 +6,11 @@ export type PageElement =
   | SVGSymbolElement
 
 function findSVGs(): PageElement[] {
-  const svgTags = [...window.document.querySelectorAll('svg')]
-  const objDatas = [...window.document.querySelectorAll('object[data*=".svg"]')]
-  const symbolElements = [...window.document.querySelectorAll('symbol')]
-  const imgSrcs = [...window.document.querySelectorAll('img')]
-  const pageDivs = [...window.document.querySelectorAll('div')]
+  const svgTags = [...document.querySelectorAll('svg')]
+  const objDatas = [...document.querySelectorAll('object[data*=".svg"]')]
+  const symbolElements = [...document.querySelectorAll('symbol')]
+  const imgSrcs = [...document.querySelectorAll('img')]
+  const pageDivs = [...document.querySelectorAll('div')]
 
   const pageSVGs = [
     ...svgTags,

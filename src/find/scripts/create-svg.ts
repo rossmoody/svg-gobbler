@@ -39,6 +39,7 @@ export class SVG {
 
     this.buildSymbolElement()
     this.removeFillNone()
+    this.removeClassName()
     this.setClassWidthHeight()
     this.setSizeString()
   }
@@ -175,6 +176,12 @@ export class SVG {
 
     if (fillAttribute && fillAttribute.includes('none'))
       this.originalElementRef.removeAttribute('fill')
+  }
+
+  private removeClassName() {
+    const className = this.originalElementRef.getAttribute('class')
+
+    if (className) this.originalElementRef.removeAttribute('class')
   }
 
   private buildSymbolElement() {
