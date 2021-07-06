@@ -1,22 +1,8 @@
 import React from 'react'
-import { Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, SimpleGrid } from '@chakra-ui/react'
 
-const Subhead: React.FC = ({ children }) => (
-  <Text
-    fontSize="xs"
-    textTransform="uppercase"
-    fontWeight="bold"
-    color="gray.500"
-  >
-    {children}
-  </Text>
-)
-
-const Body: React.FC = ({ children }) => (
-  <Text fontSize="xl" fontWeight="medium">
-    {children}
-  </Text>
-)
+import Subhead from './card-footer-subhead'
+import Body from './card-footer-body'
 
 interface CardFooter {
   size: string

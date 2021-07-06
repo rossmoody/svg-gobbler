@@ -24,8 +24,7 @@ interface ImageModalProps {
 const ImageModal = ({ svgString }: ImageModalProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const imageClass = new SVGImage(svgString)
-  console.log(imageClass)
+  // const imageClass = new SVGImage(svgString)
 
   return (
     <>
@@ -38,7 +37,7 @@ const ImageModal = ({ svgString }: ImageModalProps) => {
           <ModalCloseButton />
           <ModalBody>
             <Center padding={8}>
-              <Box as="img" src={imageClass.htmlImageElementSrc} />
+              {/* <Box as="img" src={imageClass.htmlImageElementSrc} /> */}
             </Center>
           </ModalBody>
 
@@ -50,13 +49,13 @@ const ImageModal = ({ svgString }: ImageModalProps) => {
             </Select>
             <Button
               colorScheme="red"
-              onClick={() => {
-                handle.exportPNG(
-                  imageClass.htmlImageElementSrc,
-                  Number(imageClass.width),
-                  Number(imageClass.height)
-                )
-              }}
+              // onClick={() => {
+              //   handle.exportPNG(
+              //     imageClass.htmlImageElementSrc,
+              //     Number(imageClass.width),
+              //     Number(imageClass.height)
+              //   )
+              // }}
             >
               Export PNG
             </Button>

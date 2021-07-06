@@ -1,18 +1,28 @@
 import { PageElement } from './find-svgs'
 
+type SvgType =
+  | 'inline'
+  | 'object'
+  | 'sprite master'
+  | 'sprite instance'
+  | 'img src'
+  | 'object'
+  | 'bg img'
+  | 'invalid'
+
 export class SVG {
   originalElementRef: PageElement
+  type: SvgType
+  location: string
   id: number
   cors: boolean
   svgString: string
   presentationSvg: string
-  type: string
   size: string
   height?: number
   width?: number
-  url?: string
-  spriteId?: string
-  location: string
+  imgSrcHref?: string
+  spriteHref?: string
 
   constructor(element: PageElement) {
     this.originalElementRef = element
@@ -25,9 +35,11 @@ export class SVG {
     this.type = 'invalid'
 
     this.determineType()
-    this.getRects()
-    this.determineSize()
-    this.buildSpriteString()
+    if (this.type === 'invalid') return
+    this.buildSymbolElement()
+    this.removeFillNone()
+    this.setWidthHeight()
+    this.setSizeString()
   }
 
   determineType() {
@@ -35,28 +47,36 @@ export class SVG {
       case 'svg': {
         this.type = 'inline'
 
-        const firstChild = this.originalElementRef.firstElementChild
+        const elementChildren = [...this.originalElementRef.children]
 
-        if (!firstChild) return
+        if (elementChildren.some((element) => element.tagName === 'symbol'))
+          this.type = 'sprite master'
 
-        if (firstChild.tagName === 'use') {
-          this.type = 'sprite'
-
-          const spriteId = firstChild.getAttributeNS(
-            'http://www.w3.org/1999/xlink',
-            'href'
+        if (
+          elementChildren.some(
+            (element) => element.tagName === 'use' || element.tagName === 'img'
           )
+        ) {
+          const useElement = this.originalElementRef.querySelector('use')!
+          const spriteHref = useElement.getAttribute('href')
 
-          if (spriteId) this.spriteId = spriteId
+          if (!spriteHref) return
+
+          if (spriteHref.includes('.svg')) this.spriteHref = spriteHref
+          this.type = 'sprite instance'
         }
 
         break
       }
 
+      case 'symbol': {
+        this.type = 'sprite instance'
+
+        break
+      }
+
       case 'IMG': {
-        const imgSrc: string | null = (
-          this.originalElementRef as HTMLImageElement
-        ).src
+        const imgSrc = (this.originalElementRef as HTMLImageElement).src
 
         if (!imgSrc) return
 
@@ -66,7 +86,7 @@ export class SVG {
           imgSrcFileType === 'svg' ||
           imgSrc.includes('data:image/svg+xml;base64')
         ) {
-          this.url = imgSrc
+          this.imgSrcHref = imgSrc
           this.type = 'img src'
         }
 
@@ -74,7 +94,7 @@ export class SVG {
       }
 
       case 'OBJECT': {
-        this.url = (this.originalElementRef as HTMLObjectElement).data
+        this.imgSrcHref = (this.originalElementRef as HTMLObjectElement).data
         this.type = 'object'
 
         break
@@ -89,7 +109,7 @@ export class SVG {
         const fileType = url.substr(url.lastIndexOf('.') + 1)
 
         if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
-          this.url = url
+          this.imgSrcHref = url
           this.type = 'bg img'
         }
 
@@ -101,50 +121,82 @@ export class SVG {
     }
   }
 
-  getRects() {
+  removeFillNone() {
+    const fillAttribute = this.originalElementRef.getAttribute('fill')
+    if (fillAttribute && fillAttribute.includes('none'))
+      this.originalElementRef.removeAttribute('fill')
+  }
+
+  buildSymbolElement() {
+    if (this.type !== 'sprite instance') return
+
+    const symbolElement = this.originalElementRef.cloneNode(
+      true
+    ) as SVGSymbolElement
+
+    symbolElement.removeAttribute('fill')
+
+    const svgElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'svg'
+    )
+
+    svgElement.setAttributeNS(
+      'http://www.w3.org/2000/xmlns/',
+      'xmlns',
+      'http://www.w3.org/2000/svg'
+    )
+
+    const useElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'use'
+    )
+
+    useElement.setAttributeNS(
+      'http://www.w3.org/1999/xlink',
+      'xlink:href',
+      `#${this.originalElementRef.id}`
+    )
+
+    svgElement.appendChild(symbolElement)
+    svgElement.appendChild(useElement)
+
+    this.originalElementRef = svgElement
+  }
+
+  setWidthHeight() {
     const rects = this.originalElementRef.getBoundingClientRect()
     this.height = Math.ceil(rects.height)
     this.width = Math.ceil(rects.width)
   }
 
-  buildSpriteString() {
-    if (!this.spriteId) return
+  setSizeString() {
+    if (this.width === 0 || this.height === 0) return
 
-    const parentSvg = this.originalElementRef.cloneNode(true) as SVGElement
-    const useSvgElement = parentSvg.querySelector('use')
-    const symbolElement = window.document.querySelector(
-      `[id='${this.spriteId}']`
-    )
-
-    if (useSvgElement && symbolElement) {
-      const clonedSymbolElement = symbolElement.cloneNode(true)
-      useSvgElement.appendChild(clonedSymbolElement)
-    }
-
-    this.originalElementRef = parentSvg
-  }
-
-  determineSize() {
     this.size = `${this.width}x${this.height}`
-
-    if (this.width === 0 || this.height === 0) {
-      this.size = 'N/A'
-    }
   }
 
   async fetchSvg() {
     const serializer = new XMLSerializer()
 
-    if (this.url) {
+    this.svgString = serializer.serializeToString(this.originalElementRef)
+
+    if (this.imgSrcHref) {
       try {
-        const response = await fetch(this.url)
+        const response = await fetch(this.imgSrcHref)
         this.svgString = await response.text()
       } catch (error) {
         this.cors = true
-        this.svgString = serializer.serializeToString(this.originalElementRef)
       }
-    } else {
-      this.svgString = serializer.serializeToString(this.originalElementRef)
+    }
+
+    if (this.spriteHref) {
+      try {
+        const response = await fetch(this.spriteHref)
+        this.svgString = await response.text()
+      } catch (error) {
+        return this
+      }
     }
 
     return this
@@ -158,16 +210,6 @@ export class SVG {
     presentationSvg.removeAttribute('width')
     presentationSvg.removeAttribute('style')
     presentationSvg.removeAttribute('class')
-
-    if (
-      presentationSvg.nodeName === 'svg' &&
-      !presentationSvg.hasAttribute('viewBox')
-    ) {
-      presentationSvg.setAttribute(
-        'viewBox',
-        `0 0 ${this.width} ${this.height}`
-      )
-    }
 
     this.presentationSvg = new XMLSerializer().serializeToString(
       presentationSvg

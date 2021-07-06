@@ -27,6 +27,8 @@ const Layout = () => {
     }
   })
 
+  data?.forEach((svg) => console.log(svg.svgString))
+
   return (
     <ChakraProvider theme={theme}>
       <Navbar />

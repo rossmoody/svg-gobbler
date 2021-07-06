@@ -10,22 +10,7 @@ import {
 import SVGInterface from '../../../find/scripts/create-svg'
 
 import CardFooter from './card-footer'
-import CardActionFooter from './card-action-footer'
-import CardActionCors from './card-action-cors'
-
-interface CardActions {
-  svgString: string
-  cors: boolean
-  presentationSvg: string
-}
-
-const CardActions = ({ svgString, cors }: CardActions) => {
-  if (cors) {
-    return <CardActionCors />
-  } else {
-    return <CardActionFooter svgString={svgString} />
-  }
-}
+import CardActions from './card-actions'
 
 interface CardData {
   data: SVGInterface
