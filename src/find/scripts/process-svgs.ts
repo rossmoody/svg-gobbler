@@ -2,42 +2,42 @@ import SVGClass from './create-svg'
 import findSVGs from './find-svgs'
 
 async function processSVGs() {
-  const pageElements = findSVGs()
-
-  const initialSvgs = pageElements
+  const initialSvgs = findSVGs()
     .map((ele) => new SVGClass(ele))
     .filter((ele) => ele.isValidSvg())
 
   const promiseResults = await Promise.all(
     initialSvgs.map((ele) => {
       try {
-        return ele.fetchSvg()
+        return ele.setSvgString()
       } catch (error) {
         return ele
       }
     })
   )
 
-  const uniqueSVGs = promiseResults.filter((svg, index, originalArray) => {
-    const stringToCompare = svg.svgString
+  const deduplicatedSVGs = promiseResults.filter(
+    (svg, index, originalArray) => {
+      const stringToCompare = svg.svgString
 
-    const firstIndexFound = originalArray.findIndex(
-      (currentSvg) => currentSvg.svgString === stringToCompare
-    )
+      const firstIndexFound = originalArray.findIndex(
+        (currentSvg) => currentSvg.svgString === stringToCompare
+      )
 
-    return firstIndexFound === index
-  })
+      return firstIndexFound === index
+    }
+  )
 
-  const finals = uniqueSVGs.map((svg) => {
+  const finalSVGArray = deduplicatedSVGs.map((svg) => {
     svg.createPresentationSvg()
-    // Must delete reference to dom node for sending messages
+    // Must delete reference to DOM element for sending messages
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete svg.originalElementRef
     return svg
   })
 
-  return finals
+  return finalSVGArray
 }
 
 export default processSVGs
