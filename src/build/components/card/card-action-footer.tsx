@@ -20,9 +20,11 @@ import ImageModal from './image-modal'
 
 interface CardActionFooter {
   svgString: string
+  height: number
+  width: number
 }
 
-const CardActionFooter = ({ svgString }: CardActionFooter) => {
+const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
   const [showModal, setShowModal] = React.useState(false)
 
   const toast = useToast({
@@ -105,7 +107,12 @@ const CardActionFooter = ({ svgString }: CardActionFooter) => {
               Export as PNG
             </MenuItem>
             {showModal && (
-              <ImageModal callback={setShowModal} svgString={svgString} />
+              <ImageModal
+                callback={setShowModal}
+                svgString={svgString}
+                height={height}
+                width={width}
+              />
             )}
           </MenuGroup>
         </MenuList>

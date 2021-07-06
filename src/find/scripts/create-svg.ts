@@ -40,8 +40,6 @@ export class SVG {
     this.buildSymbolElement()
     this.removeFillNone()
     this.removeClassName()
-    this.setClassWidthHeight()
-    this.setSizeString()
   }
 
   async setSvgString() {
@@ -53,6 +51,11 @@ export class SVG {
       try {
         const response = await fetch(this.imgSrcHref)
         this.svgString = await response.text()
+        const iDoc = new DOMParser().parseFromString(
+          this.svgString,
+          'image/svg+xml'
+        )
+        this.originalElementRef = iDoc.documentElement
       } catch (error) {
         this.cors = true
       }
@@ -62,6 +65,11 @@ export class SVG {
       try {
         const response = await fetch(this.spriteHref)
         this.svgString = await response.text()
+        const iDoc = new DOMParser().parseFromString(
+          this.svgString,
+          'image/svg+xml'
+        )
+        this.originalElementRef = iDoc.documentElement
       } catch (error) {
         this.cors = true
         return this
@@ -90,6 +98,36 @@ export class SVG {
 
   isValidSvg() {
     return this.type !== 'invalid'
+  }
+
+  setClassWidthHeight() {
+    const viewBox = this.originalElementRef.getAttribute('viewBox')
+    const height = this.originalElementRef.getAttribute('height')
+    const width = this.originalElementRef.getAttribute('width')
+    const rects = this.originalElementRef.getBoundingClientRect()
+
+    this.height = Math.ceil(rects.height)
+    this.width = Math.ceil(rects.width)
+
+    if (height && width) {
+      this.height = Number(height)
+      this.width = Number(width)
+    }
+
+    if (viewBox) {
+      const sizeArr = viewBox.split(' ')
+
+      const [, , width, height] = sizeArr
+
+      this.width = Number(width)
+      this.height = Number(height)
+    }
+  }
+
+  setSizeString() {
+    if (this.width === 0 || this.height === 0) return
+
+    this.size = `${this.width}x${this.height}`
   }
 
   private determineType() {
@@ -213,30 +251,6 @@ export class SVG {
     svgElement.appendChild(useElement)
 
     this.originalElementRef = svgElement
-  }
-
-  private setClassWidthHeight() {
-    const viewBox = this.originalElementRef.getAttribute('viewBox')
-
-    if (viewBox) {
-      const sizeArr = viewBox.split(' ')
-
-      const [, , width, height] = sizeArr
-
-      this.width = Number(width)
-      this.height = Number(height)
-    } else {
-      const rects = this.originalElementRef.getBoundingClientRect()
-
-      this.height = Math.ceil(rects.height)
-      this.width = Math.ceil(rects.width)
-    }
-  }
-
-  private setSizeString() {
-    if (this.width === 0 || this.height === 0) return
-
-    this.size = `${this.width}x${this.height}`
   }
 }
 

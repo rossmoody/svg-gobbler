@@ -13,7 +13,13 @@ const CardActions = ({ data }: CardActions) => {
   if (data.cors && data.imgSrcHref) {
     return <CardActionCors forwardingUrl={data.imgSrcHref} />
   } else {
-    return <CardActionFooter svgString={data.svgString} />
+    return (
+      <CardActionFooter
+        svgString={data.svgString}
+        height={data.height}
+        width={data.width}
+      />
+    )
   }
 }
 

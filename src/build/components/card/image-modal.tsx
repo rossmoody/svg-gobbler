@@ -20,14 +20,21 @@ import { handle } from '../utils/actions'
 interface ImageModalProps {
   callback: (arg: boolean) => void
   svgString: string
+  height: number
+  width: number
 }
 
-const ImageModal = ({ callback, svgString }: ImageModalProps) => {
+const ImageModal = ({
+  callback,
+  svgString,
+  height,
+  width,
+}: ImageModalProps) => {
   const [multiplier, setMultiplier] = React.useState(1)
 
   const state = React.useMemo(() => {
-    return new SVGImage(svgString)
-  }, [svgString])
+    return new SVGImage(svgString, height, width)
+  }, [svgString, height, width])
 
   return (
     <Modal isOpen onClose={() => callback(false)}>

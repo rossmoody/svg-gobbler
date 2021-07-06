@@ -1,18 +1,18 @@
 export class SVGImage {
   svgElement: HTMLElement
   viewBox: string
-  width: string
-  height: string
+  width: number
+  height: number
   htmlImageElementSrc: string
   svgString: string
 
-  constructor(svgString: string) {
+  constructor(svgString: string, height: number, width: number) {
     this.svgString = svgString
     this.svgElement = document.createElement('svg')
     this.htmlImageElementSrc = ''
     this.viewBox = '0 0 24 24'
-    this.width = '24'
-    this.height = '24'
+    this.width = width
+    this.height = height
 
     this.createSvgElementFromString()
     this.setViewBox()
@@ -21,11 +21,11 @@ export class SVGImage {
   }
 
   setSvgElementWidthHeight(value: number) {
-    const width = String(parseInt(this.width, 10) * value)
-    const height = String(parseInt(this.height, 10) * value)
+    const width = this.width * value
+    const height = this.height * value
 
-    this.svgElement.setAttribute('width', width)
-    this.svgElement.setAttribute('height', height)
+    this.svgElement.setAttribute('width', String(width))
+    this.svgElement.setAttribute('height', String(height))
   }
 
   private createSvgElementFromString() {
@@ -39,12 +39,6 @@ export class SVGImage {
 
   private setViewBox() {
     const attributeNames = this.svgElement.getAttributeNames()
-
-    if (attributeNames.includes('height'))
-      this.height = this.svgElement.getAttribute('height')!
-
-    if (attributeNames.includes('width'))
-      this.width = this.svgElement.getAttribute('width')!
 
     this.viewBox = `0 0 ${this.width} ${this.height}`
 

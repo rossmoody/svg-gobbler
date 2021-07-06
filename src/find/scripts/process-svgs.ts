@@ -29,6 +29,8 @@ async function processSVGs() {
   )
 
   const finalSVGArray = deduplicatedSVGs.map((svg) => {
+    svg.setClassWidthHeight()
+    svg.setSizeString()
     svg.createPresentationSvg()
     // Must delete reference to DOM element for sending messages
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
