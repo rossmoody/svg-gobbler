@@ -2,8 +2,8 @@ import React from 'react'
 import { Box, SimpleGrid, useColorModeValue, ScaleFade } from '@chakra-ui/react'
 
 import { AppData } from '../../layout'
+import Card from '../card'
 
-import Card from './card'
 import LoadingGallery from './loading-gallery'
 
 interface GalleryData {
