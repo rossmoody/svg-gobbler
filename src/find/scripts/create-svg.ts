@@ -19,8 +19,8 @@ export class SVG {
   svgString: string
   presentationSvg: string
   size: string
-  height?: number
-  width?: number
+  height: number
+  width: number
   imgSrcHref?: string
   spriteHref?: string
 
@@ -33,6 +33,8 @@ export class SVG {
     this.presentationSvg = ''
     this.size = 'N/A'
     this.type = 'invalid'
+    this.height = 24
+    this.width = 24
 
     this.determineType()
     if (this.type === 'invalid') return
@@ -109,9 +111,9 @@ export class SVG {
     this.height = Math.ceil(rects.height)
     this.width = Math.ceil(rects.width)
 
-    if (height && width) {
-      this.height = Number(height)
-      this.width = Number(width)
+    if (height && width && !height.includes('%')) {
+      this.height = Math.ceil(Number(height))
+      this.width = Math.ceil(Number(width))
     }
 
     if (viewBox) {
@@ -119,8 +121,8 @@ export class SVG {
 
       const [, , width, height] = sizeArr
 
-      this.width = Number(width)
-      this.height = Number(height)
+      this.width = Math.ceil(Number(width))
+      this.height = Math.ceil(Number(height))
     }
   }
 
@@ -233,12 +235,20 @@ export class SVG {
 
     symbolElement.removeAttribute('fill')
 
+    const viewBox = symbolElement.getAttribute('viewBox')
+    const height = symbolElement.getAttribute('height')
+    const width = symbolElement.getAttribute('width')
+
     const svgElement = document.createElementNS(nameSpace, 'svg')
     svgElement.setAttributeNS(
       'http://www.w3.org/2000/xmlns/',
       'xmlns',
       nameSpace
     )
+
+    if (viewBox) svgElement.setAttribute('viewBox', viewBox)
+    if (height) svgElement.setAttribute('height', height)
+    if (width) svgElement.setAttribute('width', width)
 
     const useElement = document.createElementNS(nameSpace, 'use')
     useElement.setAttributeNS(
