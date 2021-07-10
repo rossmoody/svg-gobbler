@@ -42,8 +42,6 @@ const Layout = () => {
       }, 3000)
   }, [data, timeout])
 
-  console.log(data)
-
   return (
     <ThemeProvider>
       <Navbar />

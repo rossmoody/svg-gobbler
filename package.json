@@ -20,8 +20,7 @@
       "*.config.js"
     ],
     "env": {
-      "webextensions": true,
-      "jest/globals": true
+      "webextensions": true
     }
   },
   "devDependencies": {
