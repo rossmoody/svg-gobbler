@@ -5,7 +5,6 @@ module.exports = {
         build: './src/build/index.tsx',
         find: './src/find/index.tsx'
     },
-    devtool: 'cheap-module-source-map',
     module: {
         rules: [
             {
