@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "SVG Gobbler",
-  "version": "2.5",
+  "version": "3.0",
   "description": "Download SVGs from the web",
   "icons": {
     "16": "icons/icon16.png",
@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://*/*"],
-      "js": ["./dist/gather.js"]
+      "js": ["./dist/find.js"]
     }
   ]
 }
