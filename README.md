@@ -36,18 +36,26 @@ yarn start
 
 #### 4. Side load extension
 
-1. Open Chrome
-2. In the address bar, navigate to `chrome://extensions`
-3. In the top right of the screen, flip the toggle to enable `Developer Mode`
-4. Click the button to `Load unpacked` and select the `extension` folder inside the SVG Gobbler repo
+#### Chrome
+
+1. In the address bar, navigate to `chrome://extensions`
+1. In the top right of the screen, flip the toggle to enable `Developer Mode`
+1. Click the button to `Load unpacked` and select the `extension` folder inside the SVG Gobbler repo
 
 Once this is complete you can start hacking. Editing content in the `src` directory will automatically build and update the extension folder which will feed the extension in the browser the latest code.
 
+#### Firefox
+
+1. After running the `yarn start` command to build and watch changes...
+1. Run `yarn firefox:run` to build the extension in a Firefox testing environment
+
 ### Development notes
 
-If you are editing anything within the `src/find` directory you will need to manually press the `Update` button in the extensions page to refresh your latest code changes.
+In **Chrome or Brave** if you are editing anything within the `src/find` directory you will need to manually press the `Update` button in the extensions page to refresh your latest code changes.
 
 Code changed within the `src/build` directory will automatically update on page refresh but code that is injected into the client's tab (code within `src/find`) needs manually refreshed from within the extensions page.
+
+In **Firefox** everything works and auto refreshes. It's super pleasant and I do all my extension testing in Firefox.
 
 ## 🎉 How to use the extension
 
@@ -61,7 +69,8 @@ Unique attributes for each SVG element will be shown within the card. The attrib
    - image source
    - inline svg
    - object data
-   - sprite
+   - sprite instance
+   - master sprite sheet
    - symbol
 
 2. The size of the SVG in the DOM
