@@ -44,10 +44,13 @@ export class SVG {
     this.removeClassName()
   }
 
-  async setSvgString() {
+  serializeToString(element: PageElement) {
     const serializer = new XMLSerializer()
+    return serializer.serializeToString(element)
+  }
 
-    this.svgString = serializer.serializeToString(this.originalElementRef)
+  async setSvgString() {
+    this.svgString = this.serializeToString(this.originalElementRef)
 
     if (this.imgSrcHref) {
       try {
@@ -132,82 +135,85 @@ export class SVG {
     this.size = `${this.width}x${this.height}`
   }
 
+  private classifySpriteType() {
+    const elementChildren = [...this.originalElementRef.children]
+
+    if (
+      elementChildren.some(
+        (element) => element.tagName === 'use' || element.tagName === 'img'
+      )
+    ) {
+      this.type = 'sprite instance'
+      const useElement = this.originalElementRef.querySelector('use')!
+      const spriteHref = useElement.getAttribute('href')
+      if (!spriteHref) return
+      if (spriteHref.includes('.svg')) this.spriteHref = spriteHref
+    }
+
+    if (elementChildren.some((element) => element.tagName === 'symbol'))
+      this.type = 'sprite master'
+  }
+
+  private classifyImageElement() {
+    const imgSrc = (this.originalElementRef as HTMLImageElement).src
+    if (!imgSrc) return
+
+    const imgSrcFileType = imgSrc.split('.').pop()
+
+    if (
+      imgSrcFileType === 'svg' ||
+      imgSrc.includes('data:image/svg+xml;base64')
+    ) {
+      this.imgSrcHref = imgSrc
+      this.type = 'img src'
+    }
+  }
+
   private determineType() {
     switch (this.originalElementRef.tagName) {
       case 'svg': {
         this.type = 'inline'
-
-        const elementChildren = [...this.originalElementRef.children]
-
-        if (
-          elementChildren.some(
-            (element) => element.tagName === 'use' || element.tagName === 'img'
-          )
-        ) {
-          this.type = 'sprite instance'
-          const useElement = this.originalElementRef.querySelector('use')!
-          const spriteHref = useElement.getAttribute('href')
-
-          if (!spriteHref) return
-
-          if (spriteHref.includes('.svg')) this.spriteHref = spriteHref
-        }
-
-        if (elementChildren.some((element) => element.tagName === 'symbol'))
-          this.type = 'sprite master'
-
+        this.classifySpriteType()
         break
       }
 
       case 'symbol': {
         this.type = 'sprite instance'
-
         break
       }
 
       case 'IMG': {
-        const imgSrc = (this.originalElementRef as HTMLImageElement).src
-
-        if (!imgSrc) return
-
-        const imgSrcFileType = imgSrc.split('.').pop()
-
-        if (
-          imgSrcFileType === 'svg' ||
-          imgSrc.includes('data:image/svg+xml;base64')
-        ) {
-          this.imgSrcHref = imgSrc
-          this.type = 'img src'
-        }
-
+        this.classifyImageElement()
         break
       }
 
       case 'OBJECT': {
         this.imgSrcHref = (this.originalElementRef as HTMLObjectElement).data
         this.type = 'object'
-
         break
       }
 
       case 'DIV': {
-        const style = window.getComputedStyle(
-          this.originalElementRef as HTMLDivElement,
-          null
-        )
-        const url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
-        const fileType = url.substr(url.lastIndexOf('.') + 1)
-
-        if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
-          this.imgSrcHref = url
-          this.type = 'bg img'
-        }
-
+        this.checkDivBackgroundImage()
         break
       }
 
       default:
         this.type = 'invalid'
+    }
+  }
+
+  private checkDivBackgroundImage() {
+    const style = window.getComputedStyle(
+      this.originalElementRef as HTMLDivElement,
+      null
+    )
+    const url = style.backgroundImage.slice(4, -1).replace(/"/g, '')
+    const fileType = url.substr(url.lastIndexOf('.') + 1)
+
+    if (style.backgroundImage !== 'none' && /(svg)$/gi.test(fileType)) {
+      this.imgSrcHref = url
+      this.type = 'bg img'
     }
   }
 

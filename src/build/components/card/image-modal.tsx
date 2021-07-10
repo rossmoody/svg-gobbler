@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React from 'react'
 import {
   Button,
@@ -8,10 +9,14 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Select,
+  FormControl,
+  FormLabel,
   Box,
   Center,
-  Text,
+  InputRightAddon,
+  Input,
+  HStack,
+  InputGroup,
 } from '@chakra-ui/react'
 
 import { SVGImage } from '../utils/image-class'
@@ -30,7 +35,7 @@ const ImageModal = ({
   height,
   width,
 }: ImageModalProps) => {
-  const [multiplier, setMultiplier] = React.useState(1)
+  const [size, setSize] = React.useState({ height, width })
 
   const state = new SVGImage(svgString, height, width)
 
@@ -40,12 +45,12 @@ const ImageModal = ({
       <ModalContent>
         <ModalHeader>Export PNG</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody marginBottom={4}>
           <Center width="100%" height="100%">
             <Center
               padding={8}
               maxWidth="360px"
-              maxHeight="360px"
+              maxHeight="260px"
               width="100%"
               height="100%"
               stroke="red.100"
@@ -59,48 +64,88 @@ const ImageModal = ({
               />
             </Center>
           </Center>
-          <Center marginBottom={4}>
-            <Text fontWeight="bold" marginRight={2}>
-              Exported size:
-            </Text>
-            <Text>
-              {Number(state.width) * multiplier} x{' '}
-              {Number(state.height) * multiplier}
-            </Text>
-          </Center>
         </ModalBody>
 
         <ModalFooter>
-          <Select
-            marginRight={2}
-            width="auto"
-            flex={1}
-            defaultValue={1}
-            onChange={(event) => {
-              setMultiplier(Number(event.target.value))
-            }}
-          >
-            <option value={1}>1x</option>
-            <option value={2}>2x</option>
-            <option value={3}>3x</option>
-            <option value={4}>4x</option>
-            <option value={5}>5x</option>
-            <option value={10}>10x</option>
-          </Select>
-          <Button
-            colorScheme="red"
-            onClick={() => {
-              state.setSvgElementWidthHeight(multiplier)
-              state.createImgSrc()
-              handle.exportPNG(
-                state.htmlImageElementSrc,
-                state.width,
-                state.height
-              )
-            }}
-          >
-            Export PNG
-          </Button>
+          <FormControl>
+            <HStack marginBottom={5}>
+              <FormLabel margin={0}>
+                Height
+                <InputGroup>
+                  <Input
+                    type="number"
+                    value={size.height}
+                    onChange={(event) => {
+                      const value = Number(event.target.value)
+                      if (!value) {
+                        setTimeout(() => {
+                          event.target.select()
+                        }, 100)
+                      }
+
+                      const newHeight = value
+                      const originalHeight = state.height
+                      const originalWidth = state.width
+
+                      const newWidth = Math.ceil(
+                        (originalWidth / originalHeight) * newHeight
+                      )
+
+                      setSize({ height: newHeight, width: newWidth })
+                    }}
+                  />
+                  <InputRightAddon children="px" />
+                </InputGroup>
+              </FormLabel>
+              <FormLabel>
+                Width
+                <InputGroup>
+                  <Input
+                    type="number"
+                    value={size.width}
+                    onChange={(event) => {
+                      const value = Number(event.target.value)
+
+                      if (!value) {
+                        setTimeout(() => {
+                          event.target.select()
+                        }, 100)
+                      }
+
+                      const newWidth = value
+                      const originalHeight = state.height
+                      const originalWidth = state.width
+
+                      const newHeight = Math.ceil(
+                        (originalHeight / originalWidth) * newWidth
+                      )
+
+                      setSize({ height: newHeight, width: newWidth })
+                    }}
+                  />
+                  <InputRightAddon children="px" />
+                </InputGroup>
+              </FormLabel>
+            </HStack>
+
+            <Button
+              colorScheme="red"
+              marginBottom={4}
+              isFullWidth
+              onClick={() => {
+                state.setClassWidthHeight(size.height, size.width)
+                state.setSvgElementWidthHeight()
+                state.createImgSrc()
+                handle.exportPNG(
+                  state.htmlImageElementSrc,
+                  size.width,
+                  size.height
+                )
+              }}
+            >
+              Export PNG
+            </Button>
+          </FormControl>
         </ModalFooter>
       </ModalContent>
     </Modal>
