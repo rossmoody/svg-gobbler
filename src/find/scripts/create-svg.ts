@@ -5,6 +5,7 @@ type SvgType =
   | 'object'
   | 'sprite master'
   | 'sprite instance'
+  | 'symbol'
   | 'img src'
   | 'object'
   | 'bg img'
@@ -106,15 +107,20 @@ export class SVG {
   }
 
   setClassWidthHeight() {
+    let height = this.originalElementRef.getAttribute('height')
+    let width = this.originalElementRef.getAttribute('width')
     const viewBox = this.originalElementRef.getAttribute('viewBox')
-    const height = this.originalElementRef.getAttribute('height')
-    const width = this.originalElementRef.getAttribute('width')
     const rects = this.originalElementRef.getBoundingClientRect()
 
     this.height = Math.ceil(rects.height)
     this.width = Math.ceil(rects.width)
 
     if (height && width && !height.includes('%')) {
+      if (height.includes('px') || width.includes('px')) {
+        height = height.replace('px', '')
+        width = width.replace('px', '')
+      }
+
       this.height = Math.ceil(Number(height))
       this.width = Math.ceil(Number(width))
     }
@@ -178,7 +184,7 @@ export class SVG {
       }
 
       case 'symbol': {
-        this.type = 'sprite instance'
+        this.type = 'symbol'
         break
       }
 
@@ -231,7 +237,7 @@ export class SVG {
   }
 
   private buildSymbolElement() {
-    if (this.type !== 'sprite instance') return
+    if (this.type !== 'symbol') return
 
     const nameSpace = 'http://www.w3.org/2000/svg'
 
