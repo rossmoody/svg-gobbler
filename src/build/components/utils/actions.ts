@@ -61,19 +61,22 @@ export const handle = {
     handle.copyToClipboard(data)
   },
 
-  exportPNG(imgSrc: string, width: number, height: number, multiplier: number) {
-    const imageElement = document.createElement('img')
-    imageElement.setAttribute('src', imgSrc)
+  exportPNG(imgSource: string, width: number, height: number) {
+    const imageElement = new Image()
 
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
+    imageElement.src = imgSource
 
-    canvas.width = width * multiplier
-    canvas.height = height * multiplier
+    imageElement.onload = () => {
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
 
-    ctx!.drawImage(imageElement, 0, 0)
-    const dataUri = canvas.toDataURL('image/png', 0.9)
+      canvas.width = width
+      canvas.height = height
 
-    FileSaver.saveAs(dataUri, 'gobbler-image.png')
+      ctx!.drawImage(imageElement, 0, 0)
+      const dataUri = canvas.toDataURL('image/png', 0.9)
+
+      FileSaver.saveAs(dataUri, 'gobbler-image.png')
+    }
   },
 }

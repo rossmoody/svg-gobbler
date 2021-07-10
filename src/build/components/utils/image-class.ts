@@ -16,7 +16,7 @@ export class SVGImage {
 
     this.createSvgElementFromString()
     this.setViewBox()
-    this.removeHeightWidth()
+    this.setSvgElementWidthHeight(1)
     this.createImgSrc()
   }
 
@@ -26,6 +26,21 @@ export class SVGImage {
 
     this.svgElement.setAttribute('width', String(width))
     this.svgElement.setAttribute('height', String(height))
+
+    this.width = width
+    this.height = height
+  }
+
+  createImgSrc() {
+    const svgCanvasString = new XMLSerializer().serializeToString(
+      this.svgElement
+    )
+
+    const decoded = unescape(encodeURIComponent(svgCanvasString))
+    const base64 = btoa(decoded)
+    const imgSource = `data:image/svg+xml;base64,${base64}`
+
+    this.htmlImageElementSrc = imgSource
   }
 
   private createSvgElementFromString() {
@@ -46,22 +61,5 @@ export class SVGImage {
       this.viewBox = this.svgElement.getAttribute('viewBox')!
 
     this.svgElement.setAttribute('viewBox', this.viewBox)
-  }
-
-  private removeHeightWidth() {
-    this.svgElement.removeAttribute('height')
-    this.svgElement.removeAttribute('width')
-  }
-
-  private createImgSrc() {
-    const svgCanvasString = new XMLSerializer().serializeToString(
-      this.svgElement
-    )
-
-    const decoded = unescape(encodeURIComponent(svgCanvasString))
-    const base64 = btoa(decoded)
-    const imgSource = `data:image/svg+xml;base64,${base64}`
-
-    this.htmlImageElementSrc = imgSource
   }
 }

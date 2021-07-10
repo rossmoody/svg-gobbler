@@ -32,9 +32,7 @@ const ImageModal = ({
 }: ImageModalProps) => {
   const [multiplier, setMultiplier] = React.useState(1)
 
-  const state = React.useMemo(() => {
-    return new SVGImage(svgString, height, width)
-  }, [svgString, height, width])
+  const state = new SVGImage(svgString, height, width)
 
   return (
     <Modal isOpen onClose={() => callback(false)}>
@@ -48,6 +46,8 @@ const ImageModal = ({
               padding={8}
               maxWidth="360px"
               maxHeight="360px"
+              width="100%"
+              height="100%"
               stroke="red.100"
               marginBottom={4}
             >
@@ -90,11 +90,12 @@ const ImageModal = ({
           <Button
             colorScheme="red"
             onClick={() => {
+              state.setSvgElementWidthHeight(multiplier)
+              state.createImgSrc()
               handle.exportPNG(
                 state.htmlImageElementSrc,
-                Number(state.width),
-                Number(state.height),
-                multiplier
+                state.width,
+                state.height
               )
             }}
           >
