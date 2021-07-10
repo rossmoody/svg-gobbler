@@ -23,7 +23,7 @@
     "persistent": false
   },
   "permissions": ["activeTab", "tabs"],
-  "content_security_policy": "script-src 'self' https://feedback.fish/ff.js; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'script-src-elem' https://feedback.fish/ff.js; object-src 'self'",
   "content_scripts": [
     {
       "matches": ["https://*/*"],
