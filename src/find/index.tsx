@@ -9,7 +9,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           alert('No available SVGs to gobble')
           sendResponse({ data: false })
         } else {
-          sendResponse({ data })
+          // sendResponse({ data })
+          data.forEach((svg) => if(svg.cors) console.log(svg.originalElementRef))
         }
       })
       .catch(() => {

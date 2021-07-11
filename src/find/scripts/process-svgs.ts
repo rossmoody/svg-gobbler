@@ -1,45 +1,34 @@
-import SVGClass from './create-svg'
+import SVG from './svg-class'
 import findSVGs from './find-svgs'
+import { fetchSVGContent } from './fetch-svg'
+import { dedupSVGs, convertElementRefToSVGString } from './utils'
 
 async function processSVGs() {
-  const initialSvgs = findSVGs()
-    .map((ele) => new SVGClass(ele))
-    .filter((ele) => ele.isValidSvg())
+  const pageElements = findSVGs()
 
-  const promiseResults = await Promise.all(
-    initialSvgs.map((ele) => {
-      try {
-        return ele.setSvgString()
-      } catch (error) {
-        return ele
-      }
-    })
+  const validSVGs = await Promise.all(
+    pageElements
+      .map((ele) => new SVG(ele))
+      .filter((ele) => ele.type !== 'invalid')
+      .map((ele) => fetchSVGContent.call(ele))
   )
 
-  const deduplicatedSVGs = promiseResults.filter(
-    (svg, index, originalArray) => {
-      const stringToCompare = svg.svgString
+  const deduplicatedSVGs = validSVGs
+    .map(convertElementRefToSVGString)
+    .filter(dedupSVGs)
 
-      const firstIndexFound = originalArray.findIndex(
-        (currentSvg) => currentSvg.svgString === stringToCompare
-      )
+  // const finalSVGArray = deduplicatedSVGs.map((svg) => {
+  //   svg.setClassWidthHeight()
+  //   svg.setSizeString()
+  //   svg.createPresentationSvg()
+  //   // Must delete reference to DOM element for sending messages
+  //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //   // @ts-ignore
+  //   delete svg.originalElementRef
+  //   return svg
+  // })
 
-      return firstIndexFound === index
-    }
-  )
-
-  const finalSVGArray = deduplicatedSVGs.map((svg) => {
-    svg.setClassWidthHeight()
-    svg.setSizeString()
-    svg.createPresentationSvg()
-    // Must delete reference to DOM element for sending messages
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    delete svg.originalElementRef
-    return svg
-  })
-
-  return finalSVGArray
+  return deduplicatedSVGs
 }
 
 export default processSVGs
