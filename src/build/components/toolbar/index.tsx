@@ -28,7 +28,7 @@ const Toolbar = ({ data }: ToolbarData) => {
 
   const refAddress: string = data[0]?.location || 'Not available'
   const svgQuantity: number = data?.length || 0
-  const svgStrings: string[] = data?.map((svg) => svg.svgString)
+  const svgStrings: string[] = data?.map((svg) => svg.svgString!)
 
   return (
     <Box p="8" bg={mode('white', 'gray.800')} as="section">

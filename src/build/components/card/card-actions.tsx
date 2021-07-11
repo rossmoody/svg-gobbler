@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SVGInterface from '../../../find/scripts/create-svg'
+import SVGInterface from '../../../find/scripts/svg-class'
 
 import CardActionFooter from './card-action-footer'
 import CardActionCors from './card-action-cors'
@@ -15,9 +15,9 @@ const CardActions = ({ data }: CardActions) => {
   } else {
     return (
       <CardActionFooter
-        svgString={data.svgString}
-        height={data.height}
-        width={data.width}
+        svgString={data.svgString!}
+        height={data.height || 24}
+        width={data.width || 24}
       />
     )
   }

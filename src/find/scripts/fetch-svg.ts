@@ -15,7 +15,7 @@ async function fetchFromUrl(url: string): Promise<HTMLElement | false> {
   }
 }
 
-async function fetchSVGContent(this: SVG) {
+async function fetchSVGContent(this: SVG): Promise<SVG> {
   const { imgSrcHref, spriteHref, dataSrcHref } = this
 
   if (imgSrcHref) {

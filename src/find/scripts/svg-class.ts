@@ -20,6 +20,11 @@ export class SVGClass {
   imgSrcHref?: string
   dataSrcHref?: string
   svgString?: string
+  viewBox?: string
+  width?: number
+  height?: number
+  size?: string
+  presentationSvg?: string
 
   readonly location = window.document.location.host
   readonly id = Math.random()

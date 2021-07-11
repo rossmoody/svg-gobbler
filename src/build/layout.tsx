@@ -1,7 +1,7 @@
 import React from 'react'
 import { Divider } from '@chakra-ui/react'
 
-import { SVG } from '../find/scripts/create-svg'
+import SVG from '../find/scripts/svg-class'
 
 import { Toolbar, Footer, Gallery, Navbar } from './components'
 import ThemeProvider from './theme/theme-provider'

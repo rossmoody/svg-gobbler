@@ -1,7 +1,16 @@
 import SVG from './svg-class'
 import findSVGs from './find-svgs'
 import { fetchSVGContent } from './fetch-svg'
-import { dedupSVGs, convertElementRefToSVGString } from './utils'
+import {
+  dedupSVGs,
+  setWidthHeight,
+  convertElementRefToSVGString,
+  setViewBox,
+  setSize,
+  removeFillNone,
+  removeClass,
+  createPresentationSvg,
+} from './utils'
 
 async function processSVGs() {
   const pageElements = findSVGs()
@@ -13,22 +22,24 @@ async function processSVGs() {
       .map((ele) => fetchSVGContent.call(ele))
   )
 
-  const deduplicatedSVGs = validSVGs
+  const processedSVGs = validSVGs
     .map(convertElementRefToSVGString)
     .filter(dedupSVGs)
+    .map((svg) => {
+      removeFillNone.call(svg)
+      removeClass.call(svg)
+      setViewBox.call(svg)
+      setWidthHeight.call(svg)
+      setSize.call(svg)
+      createPresentationSvg.call(svg)
+      // Must delete reference to DOM Node for sending messages
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      delete svg.originalElementRef
+      return svg
+    })
 
-  // const finalSVGArray = deduplicatedSVGs.map((svg) => {
-  //   svg.setClassWidthHeight()
-  //   svg.setSizeString()
-  //   svg.createPresentationSvg()
-  //   // Must delete reference to DOM element for sending messages
-  //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //   // @ts-ignore
-  //   delete svg.originalElementRef
-  //   return svg
-  // })
-
-  return deduplicatedSVGs
+  return processedSVGs
 }
 
 export default processSVGs

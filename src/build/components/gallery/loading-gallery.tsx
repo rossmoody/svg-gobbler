@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  Center,
-  Box,
-  SimpleGrid,
-  useColorModeValue,
-  Spinner,
-} from '@chakra-ui/react'
+import { Center, Box, useColorModeValue, Spinner } from '@chakra-ui/react'
 
 const LoadingGallery = () => {
   return (
