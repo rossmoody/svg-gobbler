@@ -6,9 +6,9 @@
   "license": "apache-2.0",
   "scripts": {
     "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "build": "rm -rf ./extension/dist && webpack --mode 'production'",
+    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
-    "firefox:build": "web-ext build --source-dir ./extension --overwrite-dest",
+    "package": "web-ext build --source-dir ./extension --overwrite-dest",
     "firefox:run": "web-ext run --source-dir ./extension"
   },
   "prettier": "prettier-config-rossmoody",
