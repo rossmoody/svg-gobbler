@@ -16,13 +16,18 @@ export class SVGImage {
 
     this.createSvgElementFromString()
     this.setViewBox()
-    this.setSvgElementWidthHeight(1)
+    this.setSvgElementWidthHeight()
     this.createImgSrc()
   }
 
-  setSvgElementWidthHeight(value: number) {
-    const width = this.width * value
-    const height = this.height * value
+  setClassWidthHeight(height: number, width: number) {
+    this.width = width
+    this.height = height
+  }
+
+  setSvgElementWidthHeight() {
+    const width = this.width
+    const height = this.height
 
     this.svgElement.setAttribute('width', String(width))
     this.svgElement.setAttribute('height', String(height))

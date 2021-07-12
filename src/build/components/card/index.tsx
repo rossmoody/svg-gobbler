@@ -7,7 +7,7 @@ import {
   SlideFade,
 } from '@chakra-ui/react'
 
-import SVGInterface from '../../../find/scripts/create-svg'
+import SVGInterface from '../../../find/scripts/svg-class'
 
 import CardFooter from './card-footer'
 import CardActions from './card-actions'
@@ -36,7 +36,7 @@ const Card = ({ data }: CardData) => {
           height="0"
           width="100%"
           padding="0 0 100%"
-          dangerouslySetInnerHTML={{ __html: presentationSvg }}
+          dangerouslySetInnerHTML={{ __html: presentationSvg! }}
           overflow="hidden"
           sx={{
             '& > svg': {
@@ -58,7 +58,7 @@ const Card = ({ data }: CardData) => {
         <SlideFade in={showActions} offsetY="12px">
           <CardActions data={data} />
         </SlideFade>
-        <CardFooter size={size} type={type} />
+        <CardFooter size={size!} type={type} />
       </Box>
     </Box>
   )
