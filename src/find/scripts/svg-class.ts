@@ -3,8 +3,7 @@ import { PageElement } from './find-svgs'
 type SVGType =
   | 'inline'
   | 'object'
-  | 'sprite master'
-  | 'sprite instance'
+  | 'sprite'
   | 'symbol'
   | 'img src'
   | 'object'
@@ -53,8 +52,8 @@ export class SVGClass {
           (element) => element.tagName === 'symbol'
         )
 
-        if (hasUseOrImgTag) this.type = 'sprite instance'
-        if (hasSymbolChildren) this.type = 'sprite master'
+        if (hasUseOrImgTag) this.type = 'sprite'
+        if (hasSymbolChildren) this.type = 'invalid'
 
         break
       }
@@ -152,12 +151,12 @@ export class SVGClass {
     svgElement.appendChild(useElement)
 
     // Reassign type to sprite instance so it can be processed
-    this.type = 'sprite instance'
+    this.type = 'sprite'
     this.originalElementRef = svgElement
   }
 
   private setSpriteHref() {
-    const isSpriteInstance = this.type === 'sprite instance'
+    const isSpriteInstance = this.type === 'sprite'
 
     if (!isSpriteInstance) return
 

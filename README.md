@@ -20,7 +20,7 @@ cd svg-gobbler
 
 #### 2. Install dependencies
 
-SVG Gobbler uses `yarn` to build the necessary dependencies. 
+SVG Gobbler uses `yarn` to build the necessary dependencies.
 
 ```bash
 yarn
@@ -28,7 +28,7 @@ yarn
 
 #### 3. Bundle the extension
 
-Run `yarn start` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits. 
+Run `yarn start` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits.
 
 ```bash
 yarn start
@@ -69,8 +69,7 @@ Unique attributes for each SVG element will be shown within the card. The attrib
    - image source
    - inline svg
    - object data
-   - sprite instance
-   - master sprite sheet
+   - sprite
    - symbol
 
 2. The size of the SVG in the DOM

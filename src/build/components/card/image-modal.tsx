@@ -49,8 +49,8 @@ const ImageModal = ({
           <Center width="100%" height="100%">
             <Center
               padding={8}
-              maxWidth="360px"
-              maxHeight="260px"
+              maxWidth="280px"
+              maxHeight="280px"
               width="100%"
               height="100%"
               stroke="red.100"
