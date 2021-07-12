@@ -31,8 +31,8 @@ export class SVGClass {
   constructor(element: PageElement) {
     this.originalElementRef = element.cloneNode(true) as HTMLElement
     this.determineType()
-    this.buildSymbolElement()
     this.setSpriteHref()
+    this.buildSymbolElement()
   }
 
   private determineType() {
@@ -150,20 +150,22 @@ export class SVGClass {
     svgElement.appendChild(symbolElement)
     svgElement.appendChild(useElement)
 
-    // Reassign type to sprite instance so it can be processed
     this.type = 'sprite'
     this.originalElementRef = svgElement
   }
 
   private setSpriteHref() {
     const isSpriteInstance = this.type === 'sprite'
-
     if (!isSpriteInstance) return
 
     const useElement = this.originalElementRef.querySelector('use')!
     const spriteHref = useElement.getAttribute('href')
 
-    if (spriteHref && spriteHref.includes('.svg')) this.spriteHref = spriteHref
+    if (spriteHref && spriteHref.includes('.svg')) {
+      this.spriteHref = spriteHref
+    } else {
+      this.type = 'invalid'
+    }
   }
 }
 
