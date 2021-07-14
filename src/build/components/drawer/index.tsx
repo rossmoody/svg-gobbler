@@ -8,7 +8,11 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
+  Divider,
 } from '@chakra-ui/react'
+
+import { DrawerTabs } from './drawer-tabs'
+import { prettifySvg, optimizeSvg } from './process-strings'
 
 function CodeDrawer({
   callback,
@@ -17,19 +21,24 @@ function CodeDrawer({
   callback: any
   svgString: string
 }) {
+  const processedSVGString = {
+    prettySVG: prettifySvg(svgString),
+    optimizedSVG: optimizeSvg(svgString),
+  }
+
   return (
-    <Drawer isOpen placement="right" onClose={() => callback(false)}>
+    <Drawer isOpen placement="right" size="lg" onClose={() => callback(false)}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>SVG Code Details</DrawerHeader>
+        <DrawerHeader>SVG Markup</DrawerHeader>
+        <Divider />
 
-        <DrawerBody>{svgString}</DrawerBody>
+        <DrawerBody>
+          <DrawerTabs svgString={processedSVGString} />
+        </DrawerBody>
 
         <DrawerFooter>
-          <Button variant="outline" mr={3} onClick={() => callback(false)}>
-            Cancel
-          </Button>
           <Button colorScheme="red" onClick={() => callback(false)}>
             Done
           </Button>
