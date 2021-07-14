@@ -10,11 +10,9 @@ function dedupSVGs(svg: SVG, index: number, originalArray: SVG[]) {
   return firstIndexFound === index
 }
 
-function convertElementRefToSVGString(svg: SVG): SVG {
+function convertElementRefToSVGString(this: SVG) {
   const serializer = new XMLSerializer()
-  svg.svgString = serializer.serializeToString(svg.originalElementRef)
-
-  return svg
+  this.svgString = serializer.serializeToString(this.originalElementRef)
 }
 
 function removeFillNone(this: SVG) {

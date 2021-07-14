@@ -24,6 +24,7 @@ export class SVGClass {
   height?: number
   size?: string
   presentationSvg?: string
+  spriteSymbolArray?: SVGSymbolElement[]
 
   readonly location = window.document.location.host
   readonly id = Math.random()
@@ -163,8 +164,6 @@ export class SVGClass {
 
     if (spriteHref && spriteHref.includes('.svg')) {
       this.spriteHref = spriteHref
-    } else {
-      this.type = 'invalid'
     }
   }
 }

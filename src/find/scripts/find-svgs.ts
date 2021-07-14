@@ -8,10 +8,9 @@ export type PageElement =
 function findSVGs(): PageElement[] {
   const svgTags = [...document.querySelectorAll('svg')]
   const objDatas = [...document.querySelectorAll('object[data*=".svg"]')]
-  const symbolElements = [...document.querySelectorAll('symbol')]
+  const symbolElements = [...document.getElementsByTagName('symbol')]
   const imgSrcs = [...document.querySelectorAll('img')]
   const pageDivs = [...document.querySelectorAll('div')]
-
   const pageSVGs = [
     ...svgTags,
     ...imgSrcs,
