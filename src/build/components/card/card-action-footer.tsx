@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { FaChevronDown } from 'react-icons/fa'
 
+import Drawer from '../drawer'
 import { handle } from '../utils/actions'
 
 import ImageModal from './image-modal'
@@ -26,6 +27,7 @@ interface CardActionFooter {
 
 const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
   const [showModal, setShowModal] = React.useState(false)
+  const [showDrawer, setShowDrawer] = React.useState(false)
 
   const toast = useToast({
     status: 'success',
@@ -67,7 +69,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
       >
         Copy
       </Button>
-      <Menu>
+      <Menu placement="top">
         <MenuButton
           as={IconButton}
           icon={<FaChevronDown />}
@@ -75,7 +77,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
           borderRadius="md"
         />
         <MenuList>
-          <MenuGroup title="Optimized SVG">
+          <MenuGroup title="SVGO Optimized">
             <MenuItem
               onClick={() => {
                 handle.downloadOptimized(svgString)
@@ -113,6 +115,13 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
                 height={height}
                 width={width}
               />
+            )}
+          </MenuGroup>
+          <MenuDivider />
+          <MenuGroup defaultValue="asc" title="Code" type="radio">
+            <MenuItem onClick={() => setShowDrawer(true)}>View code</MenuItem>
+            {showDrawer && (
+              <Drawer svgString={svgString} callback={setShowDrawer} />
             )}
           </MenuGroup>
         </MenuList>
