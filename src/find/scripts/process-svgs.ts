@@ -26,10 +26,10 @@ async function processSVGs() {
 
   // this needs improved
   // The symbols can't be built until the result of the spriteHref
-  // fetch call is made. This also results in exponential duplicate symbol builds.
+  // fetch call is made. This also results in exponential duplicate symbol builds
+  // that need immediately deduped
   const validSVGs = preliminarySVGs.flatMap((svg) => {
     const hasSpriteSymbolArray = Boolean(svg.spriteSymbolArray)
-
     if (!hasSpriteSymbolArray) return svg
 
     const symbolSvgs = svg.spriteSymbolArray!.map((symbol) => {

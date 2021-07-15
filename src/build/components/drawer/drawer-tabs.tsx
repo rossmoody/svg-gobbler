@@ -36,7 +36,7 @@ function DrawerTabs({ svgString }: DrawerTabsProps) {
             <Button
               size="xs"
               position="absolute"
-              top={6}
+              bottom={6}
               right={6}
               onClick={() => handle.copyToClipboard(prettySVG)}
             >
@@ -51,7 +51,7 @@ function DrawerTabs({ svgString }: DrawerTabsProps) {
             <Button
               size="xs"
               position="absolute"
-              top={6}
+              bottom={6}
               right={6}
               onClick={() => handle.copyToClipboard(optimizedSVG)}
             >

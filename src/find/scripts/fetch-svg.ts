@@ -32,7 +32,7 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
     const spriteResponse = await fetchFromUrl(spriteHref)
 
     if (spriteResponse) {
-      const children = [...spriteResponse.children]
+      const children = Array.from(spriteResponse.children)
       const hasSymbolChildren = children.some(
         (element) => element.tagName === 'symbol'
       )
@@ -57,7 +57,7 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
     if (dataResponse) {
       this.originalElementRef = dataResponse
     } else {
-      this.cors = true
+      this.type = 'invalid'
     }
   }
 

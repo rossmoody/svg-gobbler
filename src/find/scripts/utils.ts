@@ -17,10 +17,14 @@ function convertElementRefToSVGString(this: SVG) {
 
 function removeFillNone(this: SVG) {
   const svgElement = this.originalElementRef
-  const fill = svgElement.getAttribute('fill')
-  const hasFillNone = fill === 'none'
 
-  if (hasFillNone) svgElement.removeAttribute('fill')
+  const fill = svgElement.getAttribute('fill')
+  const stroke = svgElement.getAttribute('stroke')
+
+  const hasFillNone = fill === 'none'
+  const hasStroke = Boolean(stroke)
+
+  if (hasFillNone && !hasStroke) svgElement.removeAttribute('fill')
 }
 
 function removeClass(this: SVG) {
