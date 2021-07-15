@@ -10,19 +10,21 @@ function dedupSVGs(svg: SVG, index: number, originalArray: SVG[]) {
   return firstIndexFound === index
 }
 
-function convertElementRefToSVGString(svg: SVG): SVG {
+function convertElementRefToSVGString(this: SVG) {
   const serializer = new XMLSerializer()
-  svg.svgString = serializer.serializeToString(svg.originalElementRef)
-
-  return svg
+  this.svgString = serializer.serializeToString(this.originalElementRef)
 }
 
 function removeFillNone(this: SVG) {
   const svgElement = this.originalElementRef
-  const fill = svgElement.getAttribute('fill')
-  const hasFillNone = fill === 'none'
 
-  if (hasFillNone) svgElement.removeAttribute('fill')
+  const fill = svgElement.getAttribute('fill')
+  const stroke = svgElement.getAttribute('stroke')
+
+  const hasFillNone = fill === 'none'
+  const hasStroke = Boolean(stroke)
+
+  if (hasFillNone && !hasStroke) svgElement.removeAttribute('fill')
 }
 
 function removeClass(this: SVG) {

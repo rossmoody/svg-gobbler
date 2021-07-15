@@ -29,10 +29,23 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
   }
 
   if (spriteHref) {
-    const spriteReponse = await fetchFromUrl(spriteHref)
+    const spriteResponse = await fetchFromUrl(spriteHref)
 
-    if (spriteReponse) {
-      this.originalElementRef = spriteReponse
+    if (spriteResponse) {
+      const children = Array.from(spriteResponse.children)
+      const hasSymbolChildren = children.some(
+        (element) => element.tagName === 'symbol'
+      )
+
+      if (hasSymbolChildren) {
+        const symbols = children.filter(
+          (elements) => elements.tagName === 'symbol'
+        )
+
+        this.spriteSymbolArray = symbols as SVGSymbolElement[]
+      } else {
+        this.originalElementRef = spriteResponse
+      }
     } else {
       this.cors = true
     }
@@ -44,7 +57,7 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
     if (dataResponse) {
       this.originalElementRef = dataResponse
     } else {
-      this.cors = true
+      this.type = 'invalid'
     }
   }
 

@@ -8,12 +8,18 @@ import {
   MenuItem,
   IconButton,
   MenuDivider,
-  MenuGroup,
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
-import { FaChevronDown } from 'react-icons/fa'
+import {
+  FiChevronDown,
+  FiCode,
+  FiImage,
+  FiDownload,
+  FiCopy,
+} from 'react-icons/fi'
 
+import Drawer from '../drawer'
 import { handle } from '../utils/actions'
 
 import ImageModal from './image-modal'
@@ -26,6 +32,7 @@ interface CardActionFooter {
 
 const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
   const [showModal, setShowModal] = React.useState(false)
+  const [showDrawer, setShowDrawer] = React.useState(false)
 
   const toast = useToast({
     status: 'success',
@@ -67,54 +74,59 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
       >
         Copy
       </Button>
-      <Menu>
+      <Menu placement="top">
         <MenuButton
           as={IconButton}
-          icon={<FaChevronDown />}
+          icon={<FiChevronDown />}
           aria-label="Options"
           borderRadius="md"
         />
         <MenuList>
-          <MenuGroup title="Optimized SVG">
-            <MenuItem
-              onClick={() => {
-                handle.downloadOptimized(svgString)
-                toast({
-                  title: 'Download successful',
-                  description:
-                    'The SVG has been successfully optimized using SVGO and is downloading now.',
-                })
-              }}
-            >
-              Download
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handle.copyOptimized(svgString)
-                toast({
-                  title: 'Copied to clipboard',
-                  description:
-                    'The SVG has been successfully optimized using SVGO and is available in your clipboard.',
-                })
-              }}
-            >
-              Copy to clipboard
-            </MenuItem>
-          </MenuGroup>
+          <MenuItem
+            icon={<FiDownload />}
+            onClick={() => {
+              handle.downloadOptimized(svgString)
+              toast({
+                title: 'Download successful',
+                description:
+                  'The SVG has been successfully optimized using SVGO and is downloading now.',
+              })
+            }}
+          >
+            Download optimized
+          </MenuItem>
+          <MenuItem
+            icon={<FiCopy />}
+            onClick={() => {
+              handle.copyOptimized(svgString)
+              toast({
+                title: 'Copied to clipboard',
+                description:
+                  'The SVG has been successfully optimized using SVGO and is available in your clipboard.',
+              })
+            }}
+          >
+            Copy optimized
+          </MenuItem>
           <MenuDivider />
-          <MenuGroup defaultValue="asc" title="Image" type="radio">
-            <MenuItem onClick={() => setShowModal(true)}>
-              Export as PNG
-            </MenuItem>
-            {showModal && (
-              <ImageModal
-                callback={setShowModal}
-                svgString={svgString}
-                height={height}
-                width={width}
-              />
-            )}
-          </MenuGroup>
+          <MenuItem icon={<FiImage />} onClick={() => setShowModal(true)}>
+            Export as PNG…
+          </MenuItem>
+          {showModal && (
+            <ImageModal
+              callback={setShowModal}
+              svgString={svgString}
+              height={height}
+              width={width}
+            />
+          )}
+          <MenuDivider />
+          <MenuItem icon={<FiCode />} onClick={() => setShowDrawer(true)}>
+            View code…
+          </MenuItem>
+          {showDrawer && (
+            <Drawer svgString={svgString} callback={setShowDrawer} />
+          )}
         </MenuList>
       </Menu>
     </Grid>

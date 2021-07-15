@@ -12,18 +12,39 @@ import {
   createPresentationSvg,
 } from './utils'
 
+const filterInvalid = (svg: SVG) => svg.type !== 'invalid'
+
 async function processSVGs() {
   const pageElements = findSVGs()
 
-  const validSVGs = await Promise.all(
+  const preliminarySVGs = await Promise.all(
     pageElements
       .map((ele) => new SVG(ele))
-      .filter((ele) => ele.type !== 'invalid')
+      .filter(filterInvalid)
       .map((ele) => fetchSVGContent.call(ele))
   )
 
+  // this needs improved
+  // The symbols can't be built until the result of the spriteHref
+  // fetch call is made. This also results in exponential duplicate symbol builds
+  // that need immediately deduped
+  const validSVGs = preliminarySVGs.flatMap((svg) => {
+    const hasSpriteSymbolArray = Boolean(svg.spriteSymbolArray)
+    if (!hasSpriteSymbolArray) return svg
+
+    const symbolSvgs = svg.spriteSymbolArray!.map((symbol) => {
+      return new SVG(symbol)
+    })
+
+    return symbolSvgs
+  })
+
   const processedSVGs = validSVGs
-    .map(convertElementRefToSVGString)
+    .filter(filterInvalid)
+    .map((svg) => {
+      convertElementRefToSVGString.call(svg)
+      return svg
+    })
     .filter(dedupSVGs)
     .map((svg) => {
       removeFillNone.call(svg)
@@ -31,6 +52,7 @@ async function processSVGs() {
       setViewBox.call(svg)
       setWidthHeight.call(svg)
       setSize.call(svg)
+      convertElementRefToSVGString.call(svg)
       createPresentationSvg.call(svg)
       // Must delete reference to DOM Node for sending messages
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

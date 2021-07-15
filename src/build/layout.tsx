@@ -37,7 +37,7 @@ const Layout = () => {
     if (timeout.current !== undefined) clearTimeout(timeout.current)
 
     if (data === undefined)
-      timeout.current = setTimeout(() => {
+      timeout.current = global.setTimeout(() => {
         setData([])
       }, 3000)
   }, [data, timeout])

@@ -3,6 +3,7 @@ import JSZip from 'jszip'
 import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
 
 const svgoConfig = {
+  multipass: true,
   plugins: extendDefaultPlugins([
     {
       name: 'removeViewBox',
@@ -15,7 +16,7 @@ const svgoConfig = {
   ]),
 }
 
-export const handle = {
+const handle = {
   downloadOriginal(svgString: string) {
     const blob = new Blob([svgString], { type: 'text/xml' })
     FileSaver.saveAs(blob, 'gobbler-original.svg')
@@ -48,12 +49,7 @@ export const handle = {
   },
 
   copyToClipboard(svgString: string) {
-    const el = document.createElement('textarea')
-    el.value = svgString
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
+    navigator.clipboard.writeText(svgString)
   },
 
   copyOptimized(svgString: string) {
@@ -80,3 +76,5 @@ export const handle = {
     }
   },
 }
+
+export { handle }
