@@ -40,10 +40,6 @@ const plugins = [
 const prettyConfig = {
   multipass: true,
   plugins: extendDefaultPlugins(plugins),
-  js2svg: {
-    indent: 2,
-    pretty: true,
-  },
 }
 
 const defaultConfig = {
