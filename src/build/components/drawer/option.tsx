@@ -2,30 +2,28 @@ import React from 'react'
 import { Box, Flex, FormLabel, Switch } from '@chakra-ui/react'
 
 import { svgoConfig } from './process-strings'
-import { ConfigState } from './plugin-types'
+import { PluginNames, SVGOConfig } from './svgo-types'
 
 interface OptionProps {
   title: string
-  children?: React.ReactNode
-  setConfig: React.Dispatch<React.SetStateAction<ConfigState>>
+  description: React.ReactNode
+  setConfig: React.Dispatch<React.SetStateAction<SVGOConfig>>
   pluginName: string
 }
 
 const Option = (props: OptionProps) => {
-  const { title, children, pluginName, setConfig } = props
+  const { title, description, pluginName, setConfig } = props
 
   return (
     <Flex align="center" justify="space-between">
-      <FormLabel htmlFor={title}>
+      <FormLabel htmlFor={pluginName}>
         <Box flex="1">
-          <Box as="h4" fontWeight="medium">
+          <Box as="h4" fontWeight="medium" fontSize="md">
             {title}
           </Box>
-          {children && (
-            <Box color="gray.500" fontSize="sm">
-              {children}
-            </Box>
-          )}
+          <Box color="gray.500" fontSize="sm">
+            {description}
+          </Box>
         </Box>
       </FormLabel>
       <Switch
@@ -33,18 +31,14 @@ const Option = (props: OptionProps) => {
         id={pluginName}
         onChange={(event) => {
           const eventState = {
-            name: event.target.id,
+            name: event.target.id as PluginNames,
             value: event.target.checked,
           }
 
-          setConfig((prevConfig: any) => {
-            const updated = !prevConfig.updated
-            const config = svgoConfig(prevConfig.config, eventState)
-
-            return {
-              updated,
-              config,
-            }
+          setConfig((prevConfig) => {
+            const newConfig = { ...prevConfig }
+            const config = svgoConfig(newConfig, eventState)
+            return config
           })
         }}
       />

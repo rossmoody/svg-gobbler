@@ -18,7 +18,14 @@ function CodeDrawer({
   svgString: string
 }) {
   return (
-    <Drawer isOpen placement="right" size="xl" onClose={() => callback(false)}>
+    <Drawer
+      isOpen
+      placement="right"
+      size="xl"
+      onClose={() => {
+        callback(false)
+      }}
+    >
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />

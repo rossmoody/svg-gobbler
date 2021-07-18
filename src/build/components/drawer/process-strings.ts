@@ -1,6 +1,6 @@
 import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
 
-import { PluginObject, SVGOConfig } from './plugin-types'
+import { PluginObject, PluginEventObject, SVGOConfig } from './svgo-types'
 
 const pluginsList: PluginObject[] = [
   { name: 'removeDimensions', active: false },
@@ -52,11 +52,14 @@ const defaultConfig: SVGOConfig = {
   },
 }
 
-const initialPluginState = { name: '', value: false }
+const defaultPluginState: PluginEventObject = {
+  name: '',
+  value: false,
+}
 
 const svgoConfig = (
   config = defaultConfig,
-  pluginState = initialPluginState
+  pluginState = defaultPluginState
 ) => {
   const plugin = config.plugins.find(
     (plugin) => plugin.name === pluginState.name
@@ -74,4 +77,4 @@ function runSvgo(svgString: string, config = svgoConfig()): string {
   return data
 }
 
-export { runSvgo, svgoConfig }
+export { runSvgo, svgoConfig, defaultConfig }

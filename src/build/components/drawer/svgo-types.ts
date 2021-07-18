@@ -35,6 +35,10 @@ export type PluginNames =
   | 'removeTitle'
   | 'removeDesc'
   | 'sortAttrs'
+  | 'removeXMLNS'
+  | 'convertStyletoAttrs'
+  | 'prefixIds'
+  | 'removeRasterImages'
 
 export interface PluginObject {
   name: PluginNames
@@ -50,7 +54,13 @@ export interface SVGOConfig {
   }
 }
 
-export interface ConfigState {
-  updated: boolean
-  config: SVGOConfig
+export interface PluginEventObject {
+  name: PluginNames | 'pretty' | ''
+  value: boolean
+}
+
+export interface Option {
+  title: string
+  description: string
+  pluginName: PluginNames | 'pretty'
 }
