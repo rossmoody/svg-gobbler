@@ -17,7 +17,8 @@
       "eslint-config-rossmoody"
     ],
     "ignorePatterns": [
-      "*.config.js"
+      "*.config.js",
+      "*.d.ts"
     ],
     "env": {
       "webextensions": true

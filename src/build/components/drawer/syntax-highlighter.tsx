@@ -14,6 +14,7 @@ const SVGHighlighter: React.FC = ({ children }) => {
         borderRadius: 0,
         padding: '24px 32px',
         paddingBottom: '120px',
+        minHeight: '100%',
       }}
     >
       {children}

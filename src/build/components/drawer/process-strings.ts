@@ -1,6 +1,9 @@
 import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
 
-const plugins = [
+import { PluginObject, SVGOConfig } from './plugin-types'
+
+const pluginsList: PluginObject[] = [
+  { name: 'removeDimensions', active: false },
   { name: 'removeDoctype', active: false },
   { name: 'removeXMLProcInst', active: false },
   { name: 'removeComments', active: false },
@@ -35,43 +38,40 @@ const plugins = [
   { name: 'sortDefsChildren', active: false },
   { name: 'removeTitle', active: false },
   { name: 'removeDesc', active: false },
+  { name: 'sortAttrs', active: false },
 ]
 
-const prettyConfig = {
-  multipass: true,
-  plugins: extendDefaultPlugins(plugins),
-}
+const plugins: PluginObject[] = extendDefaultPlugins(pluginsList)
 
-const defaultConfig = {
+const defaultConfig: SVGOConfig = {
   multipass: true,
-  plugins: extendDefaultPlugins([
-    {
-      name: 'removeDimensions',
-      active: true,
-    },
-    {
-      name: 'removeViewBox',
-      active: false,
-    },
-    {
-      name: 'sortAttrs',
-      active: true,
-    },
-  ]),
+  plugins,
   js2svg: {
     indent: 2,
-    pretty: true,
+    pretty: false,
   },
 }
 
-function prettifySvg(svgString: string): string {
-  const { data } = optimize(svgString, prettyConfig)
+const initialPluginState = { name: '', value: false }
+
+const svgoConfig = (
+  config = defaultConfig,
+  pluginState = initialPluginState
+) => {
+  const plugin = config.plugins.find(
+    (plugin) => plugin.name === pluginState.name
+  )
+  if (plugin) plugin.active = pluginState.value
+
+  const iAmPretty = pluginState.name === 'pretty'
+  if (iAmPretty) config.js2svg.pretty = pluginState.value
+
+  return config
+}
+
+function runSvgo(svgString: string, config = svgoConfig()): string {
+  const { data } = optimize(svgString, config)
   return data
 }
 
-function optimizeSvg(svgString: string): string {
-  const { data } = optimize(svgString, defaultConfig)
-  return data
-}
-
-export { prettifySvg, optimizeSvg }
+export { runSvgo, svgoConfig }

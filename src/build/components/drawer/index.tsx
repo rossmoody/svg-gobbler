@@ -8,7 +8,7 @@ import {
   Divider,
 } from '@chakra-ui/react'
 
-import { CodeView } from './code-view'
+import { DrawerContent as DrawerCodeContent } from './drawer-content'
 
 function CodeDrawer({
   callback,
@@ -24,7 +24,7 @@ function CodeDrawer({
         <DrawerCloseButton />
         <DrawerHeader>Code details</DrawerHeader>
         <Divider />
-        <CodeView svgString={svgString} />
+        <DrawerCodeContent svgString={svgString} />
       </DrawerContent>
     </Drawer>
   )
