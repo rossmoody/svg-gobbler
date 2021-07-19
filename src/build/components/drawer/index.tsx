@@ -1,18 +1,14 @@
 import React from 'react'
 import {
   Drawer,
-  DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Button,
   Divider,
 } from '@chakra-ui/react'
 
-import { DrawerTabs } from './drawer-tabs'
-import { prettifySvg, optimizeSvg } from './process-strings'
+import { DrawerContent as DrawerCodeContent } from './drawer-content'
 
 function CodeDrawer({
   callback,
@@ -21,28 +17,21 @@ function CodeDrawer({
   callback: any
   svgString: string
 }) {
-  const processedSVGString = {
-    prettySVG: prettifySvg(svgString),
-    optimizedSVG: optimizeSvg(svgString),
-  }
-
   return (
-    <Drawer isOpen placement="right" size="lg" onClose={() => callback(false)}>
+    <Drawer
+      isOpen
+      placement="right"
+      size="2xl"
+      onClose={() => {
+        callback(false)
+      }}
+    >
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>SVG Markup</DrawerHeader>
+        <DrawerHeader>Code details</DrawerHeader>
         <Divider />
-
-        <DrawerBody>
-          <DrawerTabs svgString={processedSVGString} />
-        </DrawerBody>
-
-        <DrawerFooter>
-          <Button colorScheme="red" onClick={() => callback(false)}>
-            Done
-          </Button>
-        </DrawerFooter>
+        <DrawerCodeContent svgString={svgString} />
       </DrawerContent>
     </Drawer>
   )

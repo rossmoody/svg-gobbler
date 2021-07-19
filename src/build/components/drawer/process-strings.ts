@@ -1,6 +1,9 @@
 import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
 
-const plugins = [
+import { PluginObject, PluginEventObject, SVGOConfig } from './svgo-types'
+
+const pluginsList: PluginObject[] = [
+  { name: 'removeDimensions', active: false },
   { name: 'removeDoctype', active: false },
   { name: 'removeXMLProcInst', active: false },
   { name: 'removeComments', active: false },
@@ -35,47 +38,59 @@ const plugins = [
   { name: 'sortDefsChildren', active: false },
   { name: 'removeTitle', active: false },
   { name: 'removeDesc', active: false },
+  { name: 'sortAttrs', active: false },
 ]
 
-const prettyConfig = {
+const falsePlugins: PluginObject[] = extendDefaultPlugins(pluginsList)
+
+const allFalseConfig: SVGOConfig = {
   multipass: true,
-  plugins: extendDefaultPlugins(plugins),
+  plugins: falsePlugins,
+  js2svg: {
+    indent: 2,
+    pretty: false,
+  },
+}
+
+const defaultPlugins: PluginObject[] = extendDefaultPlugins([
+  {
+    name: 'removeViewBox',
+    active: false,
+  },
+])
+
+const defaultConfig: SVGOConfig = {
+  multipass: true,
+  plugins: defaultPlugins,
   js2svg: {
     indent: 2,
     pretty: true,
   },
 }
 
-const defaultConfig = {
-  multipass: true,
-  plugins: extendDefaultPlugins([
-    {
-      name: 'removeDimensions',
-      active: true,
-    },
-    {
-      name: 'removeViewBox',
-      active: false,
-    },
-    {
-      name: 'sortAttrs',
-      active: true,
-    },
-  ]),
-  js2svg: {
-    indent: 2,
-    pretty: true,
-  },
+const defaultPluginState: PluginEventObject = {
+  name: '',
+  value: false,
 }
 
-function prettifySvg(svgString: string): string {
-  const { data } = optimize(svgString, prettyConfig)
+const svgoConfig = (
+  config = defaultConfig,
+  pluginState = defaultPluginState
+) => {
+  const plugin = config.plugins.find(
+    (plugin) => plugin.name === pluginState.name
+  )
+  if (plugin) plugin.active = pluginState.value
+
+  const iAmPretty = pluginState.name === 'pretty'
+  if (iAmPretty) config.js2svg.pretty = pluginState.value
+
+  return config
+}
+
+function runSvgo(svgString: string, config = svgoConfig()): string {
+  const { data } = optimize(svgString, config)
   return data
 }
 
-function optimizeSvg(svgString: string): string {
-  const { data } = optimize(svgString, defaultConfig)
-  return data
-}
-
-export { prettifySvg, optimizeSvg }
+export { runSvgo, svgoConfig, defaultConfig, allFalseConfig }

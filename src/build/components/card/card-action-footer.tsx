@@ -54,10 +54,6 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
       <Button
         onClick={() => {
           handle.downloadOriginal(svgString)
-          toast({
-            title: 'Download successful',
-            description: 'The SVG is downloading now.',
-          })
         }}
       >
         Download
@@ -89,7 +85,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
               toast({
                 title: 'Download successful',
                 description:
-                  'The SVG has been successfully optimized using SVGO and is downloading now.',
+                  "The SVG has been successfully optimized using SVGO's default settings and is downloading now.",
               })
             }}
           >
@@ -102,7 +98,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
               toast({
                 title: 'Copied to clipboard',
                 description:
-                  'The SVG has been successfully optimized using SVGO and is available in your clipboard.',
+                  "The SVG has been successfully optimized using SVGO's default settings and is available in your clipboard.",
               })
             }}
           >

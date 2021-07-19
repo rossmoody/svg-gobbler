@@ -10,8 +10,12 @@ function findSVGs(): PageElement[] {
   const svgTags = Array.from(document.querySelectorAll('svg'))
   const objDatas = Array.from(document.querySelectorAll('object[data*=".svg"]'))
   const symbolElements = Array.from(document.getElementsByTagName('symbol'))
-  const imgSrcs = Array.from(document.querySelectorAll('img'))
-  const pageDivs = Array.from(document.querySelectorAll('div'))
+  const imgSrcs = Array.from(document.querySelectorAll('img')).filter(
+    (element) => element.src
+  )
+  const pageDivs = Array.from(document.querySelectorAll('div')).filter(
+    (element) => element.style.backgroundImage
+  )
   const gElements = Array.from(document.getElementsByTagName('g')).filter(
     (element) => element.id
   )

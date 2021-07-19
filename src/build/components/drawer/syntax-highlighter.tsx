@@ -9,7 +9,13 @@ const SVGHighlighter: React.FC = ({ children }) => {
       wrapLongLines
       style={dracula}
       language="markup"
-      customStyle
+      customStyle={{
+        margin: 0,
+        borderRadius: 0,
+        padding: '24px 32px',
+        paddingBottom: '120px',
+        minHeight: '100%',
+      }}
     >
       {children}
     </SyntaxHighlighter>

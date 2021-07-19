@@ -11,7 +11,7 @@ import {
 import React from 'react'
 
 import { handle } from '../utils/actions'
-import { AppData } from '../../layout'
+import SVG from '../../../find/scripts/svg-class'
 
 import LoadingToolbar from './loading-toolbar'
 
@@ -20,7 +20,7 @@ function isPlural(num: number): string {
 }
 
 interface ToolbarData {
-  data: AppData
+  data: SVG[] | undefined
 }
 
 const Toolbar = ({ data }: ToolbarData) => {

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Box, SimpleGrid, useColorModeValue, ScaleFade } from '@chakra-ui/react'
 
-import { AppData } from '../../layout'
+import SVG from '../../../find/scripts/svg-class'
 import Card from '../card'
 
 import LoadingGallery from './loading-gallery'
 import NoResultsError from './no-results-error'
 
 interface GalleryData {
-  data: AppData
+  data: SVG[] | undefined
 }
 
 const Gallery = ({ data }: GalleryData) => {

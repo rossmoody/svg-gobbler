@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "SVG Gobbler",
-  "version": "3.2",
+  "version": "3.3",
   "description": "Download and optimize icons, logos, and vector SVGs from websites.",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
   "icons": {
@@ -23,7 +23,7 @@
     "persistent": false
   },
   "permissions": ["activeTab", "tabs"],
-  "content_security_policy": "script-src 'self' 'script-src-elem' https://feedback.fish/ff.js; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://feedback.fish/ff.js; object-src 'self'",
   "content_scripts": [
     {
       "matches": ["https://*/*"],
