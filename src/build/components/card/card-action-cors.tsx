@@ -17,13 +17,15 @@ function sendMessage(callback: any) {
       if (changeInfo.status !== 'complete') return
       chrome.tabs.onUpdated.removeListener(listener)
 
-      chrome.tabs.sendMessage(
-        tab,
-        { message: 'start_gobbling' },
-        ({ data }) => {
-          callback(data, tab)
-        }
-      )
+      setTimeout(() => {
+        chrome.tabs.sendMessage(
+          tab,
+          { message: 'start_gobbling' },
+          ({ data }) => {
+            callback(data, tab)
+          }
+        )
+      }, 200)
     })
   })
 }
