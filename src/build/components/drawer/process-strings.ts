@@ -41,14 +41,30 @@ const pluginsList: PluginObject[] = [
   { name: 'sortAttrs', active: false },
 ]
 
-const plugins: PluginObject[] = extendDefaultPlugins(pluginsList)
+const falsePlugins: PluginObject[] = extendDefaultPlugins(pluginsList)
 
-const defaultConfig: SVGOConfig = {
+const allFalseConfig: SVGOConfig = {
   multipass: true,
-  plugins,
+  plugins: falsePlugins,
   js2svg: {
     indent: 2,
     pretty: false,
+  },
+}
+
+const defaultPlugins: PluginObject[] = extendDefaultPlugins([
+  {
+    name: 'removeViewBox',
+    active: false,
+  },
+])
+
+const defaultConfig: SVGOConfig = {
+  multipass: true,
+  plugins: defaultPlugins,
+  js2svg: {
+    indent: 2,
+    pretty: true,
   },
 }
 
@@ -77,4 +93,4 @@ function runSvgo(svgString: string, config = svgoConfig()): string {
   return data
 }
 
-export { runSvgo, svgoConfig, defaultConfig }
+export { runSvgo, svgoConfig, defaultConfig, allFalseConfig }

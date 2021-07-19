@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Center, Flex, Text, Stack, StackDivider } from '@chakra-ui/react'
+import { Box, Center, Flex, Stack, Divider } from '@chakra-ui/react'
 
 import { SVGHighlighter } from './syntax-highlighter'
 import { runSvgo, defaultConfig } from './process-strings'
@@ -7,19 +7,23 @@ import { SVGOConfig } from './svgo-types'
 import { Option } from './option'
 import { optionsData } from './options-data'
 import { CodeViewHeader } from './code-view-header'
+import { Subhead } from './form-category-subhead'
+import { QuickConfiguration } from './quick-configurations'
 
 interface DrawerContent {
   svgString: string
 }
 
 function DrawerContent({ svgString }: DrawerContent) {
-  const initialConfig: SVGOConfig = React.useMemo(
+  const svgoDefault: SVGOConfig = React.useMemo(
     () => JSON.parse(JSON.stringify(defaultConfig)),
     []
   )
+
   const [originalString] = React.useState(svgString)
   const [string, setString] = React.useState(svgString)
-  const [config, setConfig] = React.useState<SVGOConfig>(initialConfig)
+  const [config, setConfig] = React.useState<SVGOConfig>(svgoDefault)
+  const [radioGroup, setRadioGroup] = React.useState('default')
 
   React.useEffect(() => {
     const newString = runSvgo(originalString, config)
@@ -60,15 +64,15 @@ function DrawerContent({ svgString }: DrawerContent) {
               overflow="auto"
             >
               <Box px={5} paddingTop={4} paddingBottom={6} marginBottom={12}>
-                <Box mb="8">
-                  <Text as="h3" fontWeight="bold" fontSize="lg">
-                    Optimize
-                  </Text>
-                  <Text color="gray.500" fontSize="sm">
-                    Configure the available optimization options from SVGO.
-                  </Text>
-                </Box>
-                <Stack spacing="4" divider={<StackDivider />}>
+                <Subhead>Quick Configuration</Subhead>
+                <QuickConfiguration
+                  setConfig={setConfig}
+                  setRadioGroup={setRadioGroup}
+                  radioGroup={radioGroup}
+                />
+                <Divider my={8} />
+                <Subhead>Optimizations</Subhead>
+                <Stack spacing="4">
                   {optionsData.map((option) => (
                     <Option
                       key={option.pluginName}
@@ -76,6 +80,8 @@ function DrawerContent({ svgString }: DrawerContent) {
                       pluginName={option.pluginName}
                       description={option.description}
                       setConfig={setConfig}
+                      config={config}
+                      setRadioGroup={setRadioGroup}
                     />
                   ))}
                 </Stack>

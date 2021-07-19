@@ -1,44 +1,74 @@
 import React from 'react'
-import { Box, Flex, FormLabel, Switch } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  FormLabel,
+  Switch,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
 
 import { svgoConfig } from './process-strings'
-import { PluginNames, SVGOConfig } from './svgo-types'
+import { PluginNames, PluginObject, SVGOConfig } from './svgo-types'
 
 interface OptionProps {
   title: string
   description: React.ReactNode
   setConfig: React.Dispatch<React.SetStateAction<SVGOConfig>>
   pluginName: string
+  config: SVGOConfig
+  setRadioGroup: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Option = (props: OptionProps) => {
-  const { title, description, pluginName, setConfig } = props
+  const { title, description, pluginName, setConfig, config, setRadioGroup } =
+    props
+
+  const pluginState = () => {
+    let result: boolean
+
+    if (pluginName === 'pretty') {
+      result = config.js2svg.pretty
+    } else {
+      const currentPlugin = config.plugins.find(
+        (plugin) => plugin.name === pluginName
+      )
+
+      result = Boolean(currentPlugin?.active)
+    }
+
+    return result
+  }
+
+  const subduedText = useColorModeValue('gray.500', 'gray.400')
 
   return (
     <Flex align="center" justify="space-between">
       <FormLabel htmlFor={pluginName}>
         <Box flex="1">
-          <Box as="h4" fontWeight="medium" fontSize="md">
+          <Text as="h4" fontWeight="medium" fontSize="md">
             {title}
-          </Box>
-          <Box color="gray.500" fontSize="sm">
+          </Text>
+          <Text color={subduedText} fontSize="sm">
             {description}
-          </Box>
+          </Text>
         </Box>
       </FormLabel>
       <Switch
         colorScheme="red"
         id={pluginName}
+        isChecked={pluginState()}
         onChange={(event) => {
           const eventState = {
             name: event.target.id as PluginNames,
             value: event.target.checked,
           }
 
+          setRadioGroup('custom')
+
           setConfig((prevConfig) => {
-            const newConfig = { ...prevConfig }
-            const config = svgoConfig(newConfig, eventState)
-            return config
+            const config = svgoConfig(prevConfig, eventState)
+            return JSON.parse(JSON.stringify(config))
           })
         }}
       />
