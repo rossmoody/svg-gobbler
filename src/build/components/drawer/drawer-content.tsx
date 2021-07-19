@@ -1,25 +1,12 @@
 import React from 'react'
-import {
-  Button,
-  Box,
-  Center,
-  Flex,
-  Text,
-  Stack,
-  StackDivider,
-} from '@chakra-ui/react'
-import prettyBytes from 'pretty-bytes'
+import { Box, Center, Flex, Text, Stack, StackDivider } from '@chakra-ui/react'
 
 import { SVGHighlighter } from './syntax-highlighter'
 import { runSvgo, defaultConfig } from './process-strings'
 import { SVGOConfig } from './svgo-types'
 import { Option } from './option'
 import { optionsData } from './options-data'
-
-const stringSize = (string: string) => {
-  const bytes = new Blob([string]).size
-  return prettyBytes(bytes)
-}
+import { CodeViewHeader } from './code-view-header'
 
 interface DrawerContent {
   svgString: string
@@ -42,14 +29,8 @@ function DrawerContent({ svgString }: DrawerContent) {
   return (
     <Box display="block" height="100%" width="100%">
       <Flex height="100%">
-        <Flex flex={6} flexDir="column" maxW="50%" bg="rgb(40, 42, 54)" p={2}>
-          <Flex justifyContent="space-between" p={3} alignItems="center">
-            <Box w="32px" />
-            <Text color="gray.400" size="11px">
-              {stringSize(string)}
-            </Text>
-            <Button size="xs">Copy</Button>
-          </Flex>
+        <Flex flex={8} flexDir="column" maxW="65%" bg="rgb(40, 42, 54)">
+          <CodeViewHeader originalString={originalString} newString={string} />
           <Box minHeight="100%" height="50px" overflow="auto">
             <SVGHighlighter>{string}</SVGHighlighter>
           </Box>

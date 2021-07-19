@@ -21,7 +21,7 @@ function CodeDrawer({
     <Drawer
       isOpen
       placement="right"
-      size="xl"
+      size="2xl"
       onClose={() => {
         callback(false)
       }}
