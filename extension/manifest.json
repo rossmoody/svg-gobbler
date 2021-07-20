@@ -22,7 +22,7 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["activeTab", "tabs"],
+  "permissions": ["tabs"],
   "content_security_policy": "script-src 'self' https://feedback.fish/ff.js; object-src 'self'",
   "content_scripts": [
     {
