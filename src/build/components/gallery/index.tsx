@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppData } from '../../layout'
+import { AppData } from '../../types'
 
 import LoadingGallery from './loading-gallery'
 import EmptyGallery from './empty-gallery'

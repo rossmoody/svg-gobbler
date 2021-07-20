@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-import { AppData } from '../../layout'
+import { AppData } from '../../types'
 import { handle } from '../utils/actions'
 
 interface ToolbarData {

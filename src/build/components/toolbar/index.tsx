@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppData } from '../../layout'
+import { AppData } from '../../types'
 
 import LoadingToolbar from './loading-toolbar'
 import DataToolbar from './data-toolbar'

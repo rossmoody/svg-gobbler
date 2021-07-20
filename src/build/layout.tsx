@@ -4,6 +4,7 @@ import { Divider } from '@chakra-ui/react'
 import SVG from '../find/scripts/svg-class'
 
 import { Toolbar, Footer, Gallery, Navbar } from './components'
+import { AppData } from './types'
 import ThemeProvider from './theme/theme-provider'
 
 const sessionStorageData = (): SVG[] | undefined => {
@@ -11,8 +12,6 @@ const sessionStorageData = (): SVG[] | undefined => {
   const data = sessionStorage.getItem(windowId)
   if (data) return JSON.parse(data)
 }
-
-export type AppData = SVG[] | 'system' | 'empty' | undefined
 
 const Layout = () => {
   const [data, setData] = React.useState<AppData>(sessionStorageData())

@@ -1,3 +1,5 @@
+import SVG from '../find/scripts/svg-class'
+
 export type PluginNames =
   | 'removeDimensions'
   | 'removeDoctype'
@@ -40,11 +42,17 @@ export type PluginNames =
   | 'prefixIds'
   | 'removeRasterImages'
 
+/**
+ * The SVGO plugin object syntax.
+ */
 export interface PluginObject {
   name: PluginNames
   active: boolean
 }
 
+/**
+ * The full SVGO config object.
+ */
 export interface SVGOConfig {
   multipass: true
   plugins: PluginObject[]
@@ -59,8 +67,17 @@ export interface PluginEventObject {
   value: boolean
 }
 
+/**
+ * The data schema that creates the switch options in the Drawer.
+ */
 export interface Option {
   title: string
   description: string
   pluginName: PluginNames | 'pretty'
 }
+
+/**
+ * The global data type that gets passed into SVG Gobbler from the
+ * chrome message resolution.
+ */
+export type AppData = SVG[] | 'system' | 'empty' | undefined

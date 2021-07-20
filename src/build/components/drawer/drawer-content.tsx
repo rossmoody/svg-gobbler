@@ -3,7 +3,7 @@ import { Box, Center, Flex, Stack, Divider } from '@chakra-ui/react'
 
 import { SVGHighlighter } from './syntax-highlighter'
 import { runSvgo, defaultConfig } from './process-strings'
-import { SVGOConfig } from './svgo-types'
+import { SVGOConfig } from '../../types'
 import { Option } from './option'
 import { optionsData } from './options-data'
 import { CodeViewHeader } from './code-view-header'

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 import { svgoConfig } from './process-strings'
-import { PluginNames, SVGOConfig } from './svgo-types'
+import { PluginNames, SVGOConfig } from '../../types'
 
 interface OptionProps {
   title: string
