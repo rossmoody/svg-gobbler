@@ -1,36 +1,44 @@
 import React from 'react'
-import { Box, SimpleGrid, useColorModeValue, ScaleFade } from '@chakra-ui/react'
 
 import { AppData } from '../../layout'
-import Card from '../card'
 
 import LoadingGallery from './loading-gallery'
-import NoResultsError from './no-results-error'
+import EmptyGallery from './empty-gallery'
+import DataGallery from './data-gallery'
 
 interface GalleryData {
   data: AppData
 }
 
 const Gallery = ({ data }: GalleryData) => {
-  const backgroundColor = useColorModeValue('gray.100', 'gray.800')
+  switch (data) {
+    case undefined: {
+      return <LoadingGallery />
+    }
 
-  if (data === undefined) return <LoadingGallery />
-  if (data === 'empty') return <NoResultsError />
-  if (data === 'system') return <div>System page pleazeeee</div>
+    case 'empty': {
+      return (
+        <EmptyGallery
+          headline="Shucks, couldn't find any SVGs to gobble"
+          description="No worries. Upload your own SVGs to this page and optimize them
+      using SVGO."
+        />
+      )
+    }
 
-  return (
-    <Box p="8" bg={backgroundColor} as="main">
-      <Box maxW="7xl" mx="auto">
-        <ScaleFade in initialScale={0.9}>
-          <SimpleGrid minChildWidth="240px" spacing="24px">
-            {data.map((svg) => (
-              <Card key={svg.id} data={svg} />
-            ))}
-          </SimpleGrid>
-        </ScaleFade>
-      </Box>
-    </Box>
-  )
+    case 'system': {
+      return (
+        <EmptyGallery
+          headline="Upload an SVG"
+          description="Drag an SVG to this page to optimize it."
+        />
+      )
+    }
+
+    default: {
+      return <DataGallery data={data} />
+    }
+  }
 }
 
 export default Gallery
