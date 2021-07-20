@@ -42,8 +42,8 @@ const Layout = () => {
     <ThemeProvider>
       <Navbar />
       <Divider />
-      <Toolbar data={data} />
-      <Gallery data={data} />
+      <Toolbar data={data} setData={setData} />
+      <Gallery data={data} setData={setData} />
       <Divider />
       <Footer />
     </ThemeProvider>

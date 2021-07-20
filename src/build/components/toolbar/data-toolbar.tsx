@@ -9,12 +9,14 @@ import {
   useColorModeValue as mode,
 } from '@chakra-ui/react'
 import React from 'react'
+import { FaDownload, FaPlus } from 'react-icons/fa'
 
 import { AppData } from '../../types'
 import { handle } from '../utils/actions'
 
 interface ToolbarData {
   data: AppData
+  setData: React.Dispatch<React.SetStateAction<AppData>>
 }
 
 function isPlural(num: number): string {
@@ -36,7 +38,7 @@ function getSvgStrings(data: AppData) {
   return svgStrings ? svgStrings : ['']
 }
 
-const DataToolbar = ({ data }: ToolbarData) => {
+const DataToolbar = ({ data, setData }: ToolbarData) => {
   const moreThanOneString = getSvgStrings(data).length > 1
 
   return (
@@ -65,13 +67,17 @@ const DataToolbar = ({ data }: ToolbarData) => {
           >
             {moreThanOneString && (
               <Button
+                leftIcon={<FaDownload />}
                 size="lg"
                 colorScheme="red"
                 onClick={() => handle.downloadAllSVGs(getSvgStrings(data))}
               >
-                Download all SVGs
+                Download all
               </Button>
             )}
+            <Button leftIcon={<FaPlus />} size="lg" onClick={() => {}}>
+              Upload
+            </Button>
           </HStack>
         </Stack>
       </Box>

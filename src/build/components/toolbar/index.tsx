@@ -7,24 +7,17 @@ import DataToolbar from './data-toolbar'
 
 interface ToolbarData {
   data: AppData
+  setData: React.Dispatch<React.SetStateAction<AppData>>
 }
 
-const Toolbar = ({ data }: ToolbarData) => {
+const Toolbar = ({ data, setData }: ToolbarData) => {
   switch (data) {
     case undefined: {
       return <LoadingToolbar />
     }
 
-    case 'empty': {
-      return <DataToolbar data={data} />
-    }
-
-    case 'system': {
-      return <DataToolbar data={data} />
-    }
-
     default: {
-      return <DataToolbar data={data} />
+      return <DataToolbar data={data} setData={setData} />
     }
   }
 }

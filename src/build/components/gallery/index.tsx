@@ -8,9 +8,10 @@ import DataGallery from './data-gallery'
 
 interface GalleryData {
   data: AppData
+  setData: React.Dispatch<React.SetStateAction<AppData>>
 }
 
-const Gallery = ({ data }: GalleryData) => {
+const Gallery = ({ data, setData }: GalleryData) => {
   switch (data) {
     case undefined: {
       return <LoadingGallery />
