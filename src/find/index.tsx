@@ -5,15 +5,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     processSVGs()
       .then((data) => {
         if (data.length === 0) {
-          // eslint-disable-next-line no-alert
-          alert('No available SVGs to gobble')
-          sendResponse({ data: false })
+          sendResponse({ data: 'empty' })
         } else {
           sendResponse({ data })
         }
       })
       .catch(() => {
-        sendResponse({ data: false })
+        sendResponse({ data: 'empty' })
       })
   }
   // Must return true to keep runtime port open between

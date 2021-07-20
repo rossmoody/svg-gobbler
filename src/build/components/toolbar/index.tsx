@@ -11,7 +11,7 @@ import {
 import React from 'react'
 
 import { handle } from '../utils/actions'
-import SVG from '../../../find/scripts/svg-class'
+import { AppData } from '../../layout'
 
 import LoadingToolbar from './loading-toolbar'
 
@@ -20,11 +20,13 @@ function isPlural(num: number): string {
 }
 
 interface ToolbarData {
-  data: SVG[] | undefined
+  data: AppData
 }
 
 const Toolbar = ({ data }: ToolbarData) => {
-  if (!data) return <LoadingToolbar />
+  if (data === undefined) return <LoadingToolbar />
+  if (data === 'empty') return <div>Empty nest</div>
+  if (data === 'system') return <div>System</div>
 
   const refAddress: string = data[0]?.location || 'Not available'
   const svgQuantity: number = data?.length || 0
