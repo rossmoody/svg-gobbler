@@ -1,11 +1,10 @@
 import React from 'react'
 import { Divider } from '@chakra-ui/react'
 
-import SVG from '../find/scripts/svg-class'
-
-import { Toolbar, Footer, Gallery, Navbar } from './components'
-import { AppData } from './types'
-import ThemeProvider from './theme/theme-provider'
+import SVG from '../../find/scripts/svg-class'
+import { Toolbar, Footer, Gallery, Navbar } from '../components'
+import { AppData } from '../types'
+import ThemeProvider from '../theme/theme-provider'
 
 const sessionStorageData = (): SVG[] | undefined => {
   const windowId = window.location.host
