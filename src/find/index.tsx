@@ -3,20 +3,27 @@ import processSVGs from './scripts/process-svgs'
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'start_gobbling') {
     processSVGs()
-      .then((data) => {
-        if (data.length === 0) {
-          // eslint-disable-next-line no-alert
-          alert('No available SVGs to gobble')
-          sendResponse({ data: false })
+      .then((svgData) => {
+        if (svgData.length === 0) {
+          sendResponse({
+            data: 'empty',
+          })
         } else {
-          sendResponse({ data })
+          sendResponse({
+            data: {
+              location: document.location.host,
+              content: svgData,
+            },
+          })
         }
       })
       .catch(() => {
-        sendResponse({ data: false })
+        sendResponse({
+          data: 'empty',
+        })
       })
   }
-  // Must return true to keep runtime port open between
-  // tabs open during async promise resolution
+  // * Must return true to keep runtime port open between
+  // * tabs open during async promise resolution
   return true
 })

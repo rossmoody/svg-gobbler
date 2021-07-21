@@ -1,6 +1,6 @@
 import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
 
-import { PluginObject, PluginEventObject, SVGOConfig } from './svgo-types'
+import { PluginObject, PluginEventObject, SVGOConfig } from '../../types'
 
 const pluginsList: PluginObject[] = [
   { name: 'removeDimensions', active: false },
@@ -64,7 +64,7 @@ const defaultConfig: SVGOConfig = {
   plugins: defaultPlugins,
   js2svg: {
     indent: 2,
-    pretty: true,
+    pretty: false,
   },
 }
 

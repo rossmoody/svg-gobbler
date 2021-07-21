@@ -1,16 +1,23 @@
-let id = 1
+function checkIfSystemTab(tab) {
+  let result = false
 
-function buildTab(data) {
-  id++
-  const url = chrome.runtime.getURL(`index.html?id=${id}`)
+  const currentTabUrl = tab.url
+  const isFirefoxSystemPage = currentTabUrl.includes('about:')
+  const isChromeSystemPage = currentTabUrl.includes('chrome:')
 
-  chrome.tabs.create({ url })
+  if (isChromeSystemPage || isFirefoxSystemPage) result = true
+
+  return result
+}
+
+function buildTab(message) {
+  chrome.tabs.create({ url: `index.html?id=${Math.random()}` })
 
   chrome.tabs.onUpdated.addListener(function listener(tabId, changedProps) {
     if (changedProps.status !== 'complete') return
     chrome.tabs.onUpdated.removeListener(listener)
 
-    chrome.tabs.sendMessage(tabId, { data })
+    chrome.tabs.sendMessage(tabId, { data: message })
   })
 }
 
@@ -24,13 +31,23 @@ function sendMessagePromise(tabId, item) {
 
 chrome.browserAction.onClicked.addListener(function () {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    sendMessagePromise(tabs[0].id, {
+    const currentTab = tabs[0]
+    const isSystemPage = checkIfSystemTab(currentTab)
+
+    if (isSystemPage) return buildTab({ content: 'system' })
+
+    sendMessagePromise(currentTab.id, {
       message: 'start_gobbling',
     })
-      .then((results) => {
-        if (results) buildTab(results)
+      .then((data) => {
+        if (data === 'empty') {
+          buildTab({ content: 'empty' })
+        } else {
+          buildTab(data)
+        }
       })
-      // eslint-disable-next-line no-console
-      .catch((error) => console.log(error))
+      .catch(() => {
+        buildTab({ content: 'system' })
+      })
   })
 })

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Box, Center, Flex, Stack, Divider } from '@chakra-ui/react'
 
+import { SVGOConfig } from '../../types'
+
 import { SVGHighlighter } from './syntax-highlighter'
 import { runSvgo, defaultConfig } from './process-strings'
-import { SVGOConfig } from './svgo-types'
 import { Option } from './option'
 import { optionsData } from './options-data'
 import { CodeViewHeader } from './code-view-header'

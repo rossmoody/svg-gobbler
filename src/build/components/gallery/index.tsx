@@ -1,40 +1,44 @@
 import React from 'react'
-import { Box, SimpleGrid, useColorModeValue, ScaleFade } from '@chakra-ui/react'
 
-import SVG from '../../../find/scripts/svg-class'
-import Card from '../card'
+import { AppData } from '../../types'
 
 import LoadingGallery from './loading-gallery'
-import NoResultsError from './no-results-error'
+import EmptyGallery from './empty-gallery'
+import DataGallery from './data-gallery'
 
 interface GalleryData {
-  data: SVG[] | undefined
+  data: AppData
+  setData: React.Dispatch<React.SetStateAction<AppData>>
 }
 
-const Gallery = ({ data }: GalleryData) => {
-  const backgroundColor = useColorModeValue('gray.100', 'gray.800')
+const Gallery = ({ data, setData }: GalleryData) => {
+  switch (data) {
+    case undefined: {
+      return <LoadingGallery />
+    }
 
-  if (!data) return <LoadingGallery />
+    case 'empty': {
+      return (
+        <EmptyGallery
+          headline="No available SVGs to gobble"
+          description="Upload your own SVGs to this page and optimize them using SVGO."
+        />
+      )
+    }
 
-  /**
-   * If Gobbler is prompted immediately on page load sometimes it sends empty
-   * data object that doesn't resolve. This handles that. Likely a better solve.
-   */
-  if (data.length === 0) return <NoResultsError />
+    case 'system': {
+      return (
+        <EmptyGallery
+          headline="Upload an SVG"
+          description="Drag an SVG to this page to optimize it."
+        />
+      )
+    }
 
-  return (
-    <Box p="8" bg={backgroundColor} as="main">
-      <Box maxW="7xl" mx="auto">
-        <ScaleFade in initialScale={0.9}>
-          <SimpleGrid minChildWidth="240px" spacing="24px">
-            {data.map((svg) => (
-              <Card key={svg.id} data={svg} />
-            ))}
-          </SimpleGrid>
-        </ScaleFade>
-      </Box>
-    </Box>
-  )
+    default: {
+      return <DataGallery data={data} />
+    }
+  }
 }
 
 export default Gallery

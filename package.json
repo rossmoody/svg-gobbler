@@ -1,6 +1,6 @@
 {
   "name": "svg-gobbler",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "author": "rossmoody <ross@rossmoody.com>",
   "description": "SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it.",
   "license": "apache-2.0",
