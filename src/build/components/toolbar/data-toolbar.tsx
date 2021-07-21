@@ -66,7 +66,6 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
               display="none"
               accept="image/svg+xml"
               onChange={(event) => {
-                // ! Error handling needs improved
                 util
                   .handleUpload(event)
                   .then((result) => {

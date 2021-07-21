@@ -6,24 +6,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then((svgData) => {
         if (svgData.length === 0) {
           sendResponse({
-            data: {
-              content: 'empty',
-            },
+            data: 'empty',
           })
         } else {
           sendResponse({
             data: {
-              content: svgData,
               location: document.location.host,
+              content: svgData,
             },
           })
         }
       })
       .catch(() => {
         sendResponse({
-          data: {
-            content: 'empty',
-          },
+          data: 'empty',
         })
       })
   }

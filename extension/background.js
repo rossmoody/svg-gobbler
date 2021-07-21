@@ -40,7 +40,7 @@ chrome.browserAction.onClicked.addListener(function () {
       message: 'start_gobbling',
     })
       .then((data) => {
-        if (data.content === 'empty') {
+        if (data === 'empty') {
           buildTab({ content: 'empty' })
         } else {
           buildTab(data)

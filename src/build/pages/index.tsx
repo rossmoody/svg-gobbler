@@ -6,6 +6,7 @@ import { Toolbar, Footer, Gallery, Navbar } from '../components'
 import { AppData, MessageData } from '../types'
 import ThemeProvider from '../theme/theme-provider'
 
+// * Stores data as a session coookie for data persistence on page refresh
 const sessionStorageData = (): SVG[] | undefined => {
   const windowId = window.location.host
   const data = sessionStorage.getItem(windowId)

@@ -10,6 +10,8 @@ import {
 } from '@chakra-ui/react'
 import { FaPlus } from 'react-icons/fa'
 
+import { util } from '../utils/upload'
+
 interface EmptyGallery {
   headline: string
   description: string
@@ -53,7 +55,12 @@ const EmptyGallery = ({ headline, description }: EmptyGallery) => {
               <Text mt="5" mb="6" maxW="sm" mx="auto">
                 {description}
               </Text>
-              <Button variant="solid" colorScheme="red" leftIcon={<FaPlus />}>
+              <Button
+                variant="solid"
+                colorScheme="red"
+                leftIcon={<FaPlus />}
+                onClick={util.handleUploadClick}
+              >
                 Upload SVG
               </Button>
             </Box>
