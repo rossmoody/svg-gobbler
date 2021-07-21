@@ -64,7 +64,7 @@ const defaultConfig: SVGOConfig = {
   plugins: defaultPlugins,
   js2svg: {
     indent: 2,
-    pretty: true,
+    pretty: false,
   },
 }
 
