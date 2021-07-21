@@ -8,8 +8,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { svgoConfig } from './process-strings'
 import { PluginNames, SVGOConfig } from '../../types'
+
+import { svgoConfig } from './process-strings'
 
 interface OptionProps {
   title: string

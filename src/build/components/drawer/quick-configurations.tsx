@@ -1,8 +1,9 @@
 import React from 'react'
 import { RadioGroup, Radio, Stack } from '@chakra-ui/react'
 
-import { defaultConfig, allFalseConfig } from './process-strings'
 import { SVGOConfig } from '../../types'
+
+import { defaultConfig, allFalseConfig } from './process-strings'
 
 interface QuickConfigurationProps {
   setConfig: React.Dispatch<React.SetStateAction<SVGOConfig>>
