@@ -17,6 +17,7 @@ interface GalleryData {
 const DataGallery = ({ data }: GalleryData) => {
   const [page, setPage] = React.useState(0)
   const [displayData, setDisplayData] = React.useState(data[0])
+  const [loading, setLoading] = React.useState(false)
 
   const pageQuantity = data.length
   const morePagesToShow = page < pageQuantity - 1
@@ -44,7 +45,16 @@ const DataGallery = ({ data }: GalleryData) => {
 
         {morePagesToShow && (
           <Center padding={12}>
-            <Button colorScheme="red" onClick={handleShowMore}>
+            <Button
+              colorScheme="red"
+              onClick={() => {
+                setLoading(true)
+                setTimeout(handleShowMore, 1)
+                setTimeout(setLoading, 5000, false)
+              }}
+              loadingText="Loading SVGs"
+              isLoading={loading}
+            >
               Show more
             </Button>
           </Center>
