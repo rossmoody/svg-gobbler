@@ -14,13 +14,29 @@ export const util = {
   },
 
   getSvgQuantity(data: AppData) {
-    const quantity = data instanceof Array && data.length
-    return quantity ? quantity : 0
+    const isArray = data instanceof Array
+
+    if (isArray) {
+      const array = data as SVG[][]
+      const quantity = array.reduce(
+        (finalLength: number, currentArray: SVG[]) => {
+          const length = currentArray.length
+          const newLength = finalLength + length
+          return newLength
+        },
+        0
+      )
+
+      return quantity
+    }
+
+    return 0
   },
 
   getSvgStrings(data: AppData) {
     const svgStrings =
-      data instanceof Array && data.map((svg) => svg.svgString!)
+      data instanceof Array &&
+      data.flatMap((svgArray) => svgArray.map((svg) => svg.svgString!))
     return svgStrings ? svgStrings : ['']
   },
 

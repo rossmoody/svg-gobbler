@@ -6,8 +6,27 @@ import { Toolbar, Footer, Gallery, Navbar } from '../components'
 import { AppData, MessageData } from '../types'
 import ThemeProvider from '../theme/theme-provider'
 
+function paginateContent(content: SVG[]) {
+  const perPage = 100
+
+  if (content.length <= perPage) return [content]
+
+  const result = content.reduce((resultArray, item, index) => {
+    const chunkIndex = Math.floor(index / perPage)
+    if (!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = []
+    }
+
+    resultArray[chunkIndex].push(item)
+
+    return resultArray
+  }, [] as SVG[][])
+
+  return result
+}
+
 // * Stores data as a session coookie for data persistence on page refresh
-const sessionStorageData = (): SVG[] | undefined => {
+const sessionStorageData = (): SVG[][] | undefined => {
   const windowId = window.location.host
   const data = sessionStorage.getItem(windowId)
   if (data) return JSON.parse(data)
@@ -39,8 +58,8 @@ const Layout = () => {
       }
 
       default: {
-        setData(content)
         setLocation(message.data.location)
+        setData(paginateContent(content!))
         break
       }
     }

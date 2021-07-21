@@ -71,9 +71,11 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
                   .then((result) => {
                     setData((prevData) => {
                       if (prevData instanceof Array) {
-                        return [...result, ...prevData]
+                        const newArray = [...prevData]
+                        newArray[0].unshift(...result)
+                        return newArray
                       } else {
-                        return result
+                        return [result]
                       }
                     })
                   })
