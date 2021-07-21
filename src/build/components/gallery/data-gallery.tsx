@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, SimpleGrid, useColorModeValue, ScaleFade } from '@chakra-ui/react'
+import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react'
 
 import Card from '../card'
 import SVG from '../../../find/scripts/svg-class'
@@ -14,13 +14,11 @@ const DataGallery = ({ data }: GalleryData) => {
   return (
     <Box p="8" bg={backgroundColor} as="main">
       <Box maxW="7xl" mx="auto">
-        <ScaleFade in initialScale={0.9}>
-          <SimpleGrid minChildWidth="240px" spacing="24px">
-            {data.map((svg) => (
-              <Card key={svg.id} data={svg} />
-            ))}
-          </SimpleGrid>
-        </ScaleFade>
+        <SimpleGrid minChildWidth="240px" spacing="24px">
+          {data.map((svg) => (
+            <Card key={svg.id} data={svg} />
+          ))}
+        </SimpleGrid>
       </Box>
     </Box>
   )

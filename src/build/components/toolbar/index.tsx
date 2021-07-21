@@ -8,16 +8,17 @@ import DataToolbar from './data-toolbar'
 interface ToolbarData {
   data: AppData
   setData: React.Dispatch<React.SetStateAction<AppData>>
+  location: string
 }
 
-const Toolbar = ({ data, setData }: ToolbarData) => {
+const Toolbar = ({ data, setData, location }: ToolbarData) => {
   switch (data) {
     case undefined: {
       return <LoadingToolbar />
     }
 
     default: {
-      return <DataToolbar data={data} setData={setData} />
+      return <DataToolbar data={data} setData={setData} location={location} />
     }
   }
 }

@@ -41,10 +41,10 @@ const EmptyGallery = ({ headline, description }: EmptyGallery) => {
           >
             <Box>
               <Text
-                maxW="md"
+                maxW="lg"
                 mx="auto"
                 fontWeight="extrabold"
-                fontSize={{ base: '4xl', lg: '5xl' }}
+                fontSize={{ base: '3xl', lg: '4xl' }}
                 letterSpacing="tight"
                 lineHeight="normal"
               >

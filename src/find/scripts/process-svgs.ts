@@ -10,7 +10,7 @@ import {
   removeFillNone,
   removeClass,
   createPresentationSvg,
-} from './utils'
+} from './helpers'
 
 const filterInvalid = (svg: SVG) => svg.type !== 'invalid'
 
@@ -24,7 +24,7 @@ async function processSVGs() {
       .map((ele) => fetchSVGContent.call(ele))
   )
 
-  // this needs improved
+  // ! this needs improved
   // The symbols can't be built until the result of the spriteHref
   // fetch call is made. This also results in exponential duplicate symbol builds
   // that need immediately deduped

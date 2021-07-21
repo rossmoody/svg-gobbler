@@ -34,20 +34,20 @@ chrome.browserAction.onClicked.addListener(function () {
     const currentTab = tabs[0]
     const isSystemPage = checkIfSystemTab(currentTab)
 
-    if (isSystemPage) return buildTab('system')
+    if (isSystemPage) return buildTab({ content: 'system' })
 
     sendMessagePromise(currentTab.id, {
       message: 'start_gobbling',
     })
       .then((data) => {
-        if (data === 'empty') {
-          buildTab('empty')
+        if (data.content === 'empty') {
+          buildTab({ content: 'empty' })
         } else {
           buildTab(data)
         }
       })
       .catch(() => {
-        buildTab('system')
+        buildTab({ content: 'system' })
       })
   })
 })

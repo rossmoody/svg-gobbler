@@ -7,39 +7,23 @@ import {
   Text,
   Flex,
   useColorModeValue as mode,
+  Input,
 } from '@chakra-ui/react'
 import React from 'react'
 import { FaDownload, FaPlus } from 'react-icons/fa'
 
 import { AppData } from '../../types'
 import { handle } from '../utils/actions'
+import { util } from '../utils/upload'
 
 interface ToolbarData {
   data: AppData
   setData: React.Dispatch<React.SetStateAction<AppData>>
+  location: string
 }
 
-function isPlural(num: number): string {
-  return num === 1 ? '' : 's'
-}
-
-function getRefAddress(data: AppData) {
-  const location = data instanceof Array && data[0].location
-  return location ? location : 'Dashboard'
-}
-
-function getSvgQuantity(data: AppData) {
-  const quantity = data instanceof Array && data.length
-  return quantity ? quantity : 0
-}
-
-function getSvgStrings(data: AppData) {
-  const svgStrings = data instanceof Array && data.map((svg) => svg.svgString!)
-  return svgStrings ? svgStrings : ['']
-}
-
-const DataToolbar = ({ data, setData }: ToolbarData) => {
-  const moreThanOneString = getSvgStrings(data).length > 1
+const DataToolbar = ({ data, setData, location }: ToolbarData) => {
+  const moreThanOneString = util.getSvgStrings(data).length > 1
 
   return (
     <Box p="8" bg={mode('white', 'gray.800')} as="section">
@@ -51,11 +35,11 @@ const DataToolbar = ({ data, setData }: ToolbarData) => {
         >
           <Stack>
             <Flex alignItems="center">
-              <Heading size="lg">{getRefAddress(data)}</Heading>
+              <Heading size="lg">{location}</Heading>
             </Flex>
             <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
-              Showing {getSvgQuantity(data)} available SVG
-              {isPlural(getSvgQuantity(data))}
+              Showing {util.getSvgQuantity(data)} available SVG
+              {util.isPlural(util.getSvgQuantity(data))}
             </Text>
           </Stack>
 
@@ -70,12 +54,38 @@ const DataToolbar = ({ data, setData }: ToolbarData) => {
                 leftIcon={<FaDownload />}
                 size="lg"
                 colorScheme="red"
-                onClick={() => handle.downloadAllSVGs(getSvgStrings(data))}
+                onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}
               >
                 Download all
               </Button>
             )}
-            <Button leftIcon={<FaPlus />} size="lg" onClick={() => {}}>
+            <Input
+              multiple
+              type="file"
+              id="upload"
+              display="none"
+              accept="image/svg+xml"
+              onChange={(event) => {
+                // ! Error handling needs improved
+                util
+                  .handleUpload(event)
+                  .then((result) => {
+                    setData((prevData) => {
+                      if (prevData instanceof Array) {
+                        return [...result, ...prevData]
+                      } else {
+                        return result
+                      }
+                    })
+                  })
+                  .catch(() => {})
+              }}
+            />
+            <Button
+              leftIcon={<FaPlus />}
+              size="lg"
+              onClick={util.handleUploadClick}
+            >
               Upload
             </Button>
           </HStack>

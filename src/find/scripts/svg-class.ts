@@ -28,7 +28,6 @@ export class SVGClass {
   spriteSymbolArray?: SVGSymbolElement[]
   gChildren?: SVGGElement
 
-  readonly location = window.document.location.host
   readonly id = Math.random()
 
   constructor(element: PageElement) {

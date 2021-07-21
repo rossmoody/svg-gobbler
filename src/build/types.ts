@@ -77,7 +77,16 @@ export interface Option {
 }
 
 /**
- * The global data type that gets passed into SVG Gobbler from the
- * chrome message resolution.
+ * The data property that gets leveraged from the Chrome message
  */
 export type AppData = SVG[] | 'system' | 'empty' | undefined
+
+/**
+ * The object that gets sent from Chrome when extension is pressed
+ */
+export interface MessageData {
+  data: {
+    content: AppData
+    location: string
+  }
+}

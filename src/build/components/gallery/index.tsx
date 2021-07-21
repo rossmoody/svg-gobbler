@@ -20,9 +20,8 @@ const Gallery = ({ data, setData }: GalleryData) => {
     case 'empty': {
       return (
         <EmptyGallery
-          headline="Shucks, couldn't find any SVGs to gobble"
-          description="No worries. Upload your own SVGs to this page and optimize them
-      using SVGO."
+          headline="No available SVGs to gobble"
+          description="Upload your own SVGs to this page and optimize them using SVGO."
         />
       )
     }

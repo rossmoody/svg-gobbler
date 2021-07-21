@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Divider } from '@chakra-ui/react'
 
 import SVG from '../../find/scripts/svg-class'
 import { Toolbar, Footer, Gallery, Navbar } from '../components'
-import { AppData } from '../types'
+import { AppData, MessageData } from '../types'
 import ThemeProvider from '../theme/theme-provider'
 
 const sessionStorageData = (): SVG[] | undefined => {
@@ -14,11 +14,19 @@ const sessionStorageData = (): SVG[] | undefined => {
 
 const Layout = () => {
   const [data, setData] = React.useState<AppData>(sessionStorageData())
+  const [location, setLocation] = React.useState<string>('Dashboard')
 
-  chrome.runtime.onMessage.addListener((message) => {
-    const data: AppData = message.data
+  useEffect(() => {
+    if (data instanceof Array) {
+      const json = JSON.stringify(data)
+      sessionStorage.setItem(window.location.host, json)
+    }
+  }, [data])
 
-    switch (data) {
+  chrome.runtime.onMessage.addListener((message: MessageData) => {
+    const content = message.data.content
+
+    switch (content) {
       case 'system': {
         setData('system')
         break
@@ -30,9 +38,8 @@ const Layout = () => {
       }
 
       default: {
-        setData(data)
-        const json = JSON.stringify(data)
-        sessionStorage.setItem(window.location.host, json)
+        setData(content)
+        setLocation(message.data.location)
         break
       }
     }
@@ -42,7 +49,7 @@ const Layout = () => {
     <ThemeProvider>
       <Navbar />
       <Divider />
-      <Toolbar data={data} setData={setData} />
+      <Toolbar data={data} setData={setData} location={location} />
       <Gallery data={data} setData={setData} />
       <Divider />
       <Footer />
