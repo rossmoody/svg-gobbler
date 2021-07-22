@@ -50,17 +50,42 @@ export const util = {
     return localSvg
   },
 
+  handleDragOver(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    const dropzone = document.getElementById('dropzone')!
+    if (dropzone) dropzone.style.background = 'rgba(255, 255, 255, 0.4)'
+  },
+
+  handleDragOut(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    const dropzone = document.getElementById('dropzone')!
+    if (dropzone) dropzone.style.background = ''
+  },
+
+  handleDrop(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    this.handleDragOut(event)
+    return this.handleUpload(event)
+  },
+
   handleUploadClick() {
     const uploadInput = document.getElementById('upload')!
     uploadInput.click()
   },
 
   async handleUpload(event: any) {
+    const isDropEvent = event.type === 'drop'
+
     const promises: Promise<SVG>[] = []
 
-    const files: Blob[] = Array.from(event.target.files)
+    const files: Blob[] = isDropEvent
+      ? Array.from(event.dataTransfer.files)
+      : Array.from(event.target.files)
 
     files.forEach((file) => {
+      const isSVGFileType = file.type === 'image/svg+xml'
+      if (!isSVGFileType) return
+
       const filePromise: Promise<SVG> = new Promise((resolve) => {
         const reader = new FileReader()
         reader.readAsText(file)
