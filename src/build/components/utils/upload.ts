@@ -76,11 +76,11 @@ export const util = {
   async handleUpload(event: any) {
     const isDropEvent = event.type === 'drop'
 
-    const promises: Promise<SVG>[] = []
-
     const files: Blob[] = isDropEvent
       ? Array.from(event.dataTransfer.files)
       : Array.from(event.target.files)
+
+    const promises: Promise<SVG>[] = []
 
     files.forEach((file) => {
       const isSVGFileType = file.type === 'image/svg+xml'

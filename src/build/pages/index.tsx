@@ -25,11 +25,11 @@ function paginateContent(content: SVG[]) {
   return result
 }
 
-// * Stores data as a session coookie for data persistence on page refresh
 const sessionStorageData = (): SVG[][] | undefined => {
   const windowId = window.location.host
   const data = sessionStorage.getItem(windowId)
   if (data) return JSON.parse(data)
+  return undefined
 }
 
 const Layout = () => {
@@ -64,6 +64,22 @@ const Layout = () => {
       }
     }
   })
+
+  /**
+   * This forces a state update to render a system page when a user
+   * navigates back to a page and there is no session storage
+   * or message to prompt a re-render.
+   */
+  const timeout = React.useRef<NodeJS.Timeout | undefined>()
+
+  React.useEffect(() => {
+    if (timeout.current !== undefined) clearTimeout(timeout.current)
+
+    if (data === undefined)
+      timeout.current = global.setTimeout(() => {
+        setData('system')
+      }, 3000)
+  }, [data, timeout])
 
   return (
     <ThemeProvider>
