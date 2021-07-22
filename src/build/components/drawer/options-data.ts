@@ -56,11 +56,6 @@ const optionsData: Option[] = [
     pluginName: 'convertShapeToPath',
   },
   {
-    title: 'Convert styles to attributes',
-    description: 'Convert styles into attributes',
-    pluginName: 'convertStyletoAttrs',
-  },
-  {
     title: 'Convert transform',
     description: 'Collapse multiple transforms into one',
     pluginName: 'convertTransform',
