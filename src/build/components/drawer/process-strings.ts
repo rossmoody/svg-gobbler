@@ -39,6 +39,8 @@ const pluginsList: PluginObject[] = [
   { name: 'removeTitle', active: false },
   { name: 'removeDesc', active: false },
   { name: 'sortAttrs', active: false },
+  { name: 'prefixIds', active: false },
+  { name: 'removeRasterImages', active: false },
 ]
 
 const falsePlugins: PluginObject[] = extendDefaultPlugins(pluginsList)

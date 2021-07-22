@@ -38,7 +38,6 @@ export type PluginNames =
   | 'removeDesc'
   | 'sortAttrs'
   | 'removeXMLNS'
-  | 'convertStyletoAttrs'
   | 'prefixIds'
   | 'removeRasterImages'
 
