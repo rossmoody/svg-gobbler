@@ -6,10 +6,11 @@
   "license": "apache-2.0",
   "scripts": {
     "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package",
+    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package && yarn zip",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
+    "zip": "zip -vr firefox.zip ./ -x 'node_modules/*' 'web-ext-artifacts/*'",
     "package": "web-ext build --source-dir ./extension --overwrite-dest",
-    "firefox:run": "web-ext run --source-dir ./extension"
+    "firefox": "web-ext run --source-dir ./extension"
   },
   "prettier": "prettier-config-rossmoody",
   "eslintConfig": {
