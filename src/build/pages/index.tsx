@@ -33,8 +33,13 @@ const sessionStorageData = (): SVG[][] | undefined => {
 }
 
 const Layout = () => {
-  const [data, setData] = React.useState<AppData>(sessionStorageData())
+  const [data, setData] = React.useState<AppData>()
   const [location, setLocation] = React.useState<string>('Dashboard')
+
+  useEffect(() => {
+    const sessionData = sessionStorageData()
+    if (sessionData) setData(sessionData)
+  }, [])
 
   useEffect(() => {
     if (data instanceof Array) {
