@@ -34,7 +34,7 @@ function DrawerContent({ svgString }: DrawerContent) {
   return (
     <Box display="block" height="100%" width="100%">
       <Flex height="100%">
-        <Flex flex={8} flexDir="column" maxW="65%" bg="rgb(40, 42, 54)">
+        <Flex flex={8} flexDir="column" maxW="60%" bg="rgb(40, 42, 54)">
           <CodeViewHeader originalString={originalString} newString={string} />
           <Box minHeight="100%" height="50px" overflow="auto">
             <SVGHighlighter>{string}</SVGHighlighter>

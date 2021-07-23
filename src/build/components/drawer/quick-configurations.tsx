@@ -1,9 +1,10 @@
 import React from 'react'
-import { RadioGroup, Radio, Stack } from '@chakra-ui/react'
+import { RadioGroup, Radio, Stack, FormLabel } from '@chakra-ui/react'
 
 import { SVGOConfig } from '../../types'
 
 import { defaultConfig, allFalseConfig } from './svgo-configs'
+import { RadioOption } from './radio-option'
 
 interface QuickConfigurationProps {
   setConfig: React.Dispatch<React.SetStateAction<SVGOConfig>>
@@ -42,9 +43,9 @@ export function QuickConfiguration({
       colorScheme="red"
     >
       <Stack direction="row" spacing={4}>
-        <Radio value="none">None</Radio>
-        <Radio value="default">SVGO Default</Radio>
-        <Radio value="custom">Custom</Radio>
+        <RadioOption label="None" value="none" />
+        <RadioOption label="SVGO Default" value="default" />
+        <RadioOption label="Custom" value="custom" />
       </Stack>
     </RadioGroup>
   )

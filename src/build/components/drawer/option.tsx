@@ -45,7 +45,7 @@ const Option = (props: OptionProps) => {
 
   return (
     <Flex align="center" justify="space-between">
-      <FormLabel htmlFor={pluginName}>
+      <FormLabel htmlFor={pluginName} _hover={{ cursor: 'pointer' }}>
         <Box flex="1">
           <Text as="h4" fontWeight="medium" fontSize="md">
             {title}
