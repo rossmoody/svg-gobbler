@@ -10,7 +10,7 @@ import {
 
 import { PluginNames, SVGOConfig } from '../../types'
 
-import { svgoConfig } from './process-strings'
+import { svgoConfig } from './svgo-configs'
 
 interface OptionProps {
   title: string
