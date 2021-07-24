@@ -10,7 +10,8 @@
     "lint": "npx eslint . --ext .tsx,.ts --fix",
     "zip": "zip -vr firefox.zip ./ -x 'node_modules/*' 'web-ext-artifacts/*'",
     "package": "web-ext build --source-dir ./extension --overwrite-dest",
-    "firefox": "web-ext run --source-dir ./extension"
+    "firefox": "web-ext run --source-dir ./extension",
+    "pretty": "prettier --write ./src"
   },
   "prettier": "prettier-config-rossmoody",
   "eslintConfig": {

@@ -12,6 +12,7 @@ export async function reactify(svgString: string) {
       body: svgString,
     }
   )
+
   const json = await res.json()
 
   return format(json, {
