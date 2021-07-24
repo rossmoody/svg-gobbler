@@ -4,12 +4,12 @@ import { Box, Center, Flex, Stack, Divider } from '@chakra-ui/react'
 import { SVGOConfig } from '../../types'
 
 import { SVGHighlighter } from './syntax-highlighter'
-import { runSvgo, defaultConfig } from './svgo-configs'
-import { Option } from './option'
-import { optionsData } from './svgo-plugins'
+import { runSvgo, defaultConfig } from './svgo/svgo-configs'
+import { Option } from './svgo/option'
+import { optionsData } from './svgo/svgo-plugins'
 import { CodeViewHeader } from './code-view-header'
 import { Subhead } from './form-category-subhead'
-import { QuickConfiguration } from './quick-configurations'
+import { QuickConfiguration } from './svgo/quick-configurations'
 
 interface DrawerContent {
   svgString: string

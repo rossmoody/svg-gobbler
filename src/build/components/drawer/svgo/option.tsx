@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { PluginNames, SVGOConfig } from '../../types'
+import { PluginNames, SVGOConfig } from '../../../types'
 
 import { svgoConfig } from './svgo-configs'
 

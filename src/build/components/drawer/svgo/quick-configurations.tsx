@@ -1,7 +1,7 @@
 import React from 'react'
 import { RadioGroup, Radio, Stack, FormLabel } from '@chakra-ui/react'
 
-import { SVGOConfig } from '../../types'
+import { SVGOConfig } from '../../../types'
 
 import { defaultConfig, allFalseConfig } from './svgo-configs'
 import { RadioOption } from './radio-option'
