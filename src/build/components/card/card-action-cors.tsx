@@ -1,6 +1,8 @@
 import React from 'react'
-import { Button, Grid, useColorModeValue, Tooltip } from '@chakra-ui/react'
+import { Button, Grid, useColorModeValue } from '@chakra-ui/react'
 import { FaExternalLinkAlt } from 'react-icons/fa'
+
+import { Tooltip } from '..'
 
 function openSvgInNewTab(url: string) {
   chrome.tabs.create({ url })
@@ -64,12 +66,7 @@ const CardActionCors = ({ forwardingUrl }: { forwardingUrl: string }) => {
       right={0}
       bg={useColorModeValue('white', 'gray.700')}
     >
-      <Tooltip
-        hasArrow
-        borderRadius="md"
-        padding={4}
-        label="This SVG is protected by cross-origin requests and must be opened in a new tab to download."
-      >
+      <Tooltip label="This SVG is protected by cross-origin requests and must be opened in a new tab to download.">
         <Button
           onClick={() => handleCorsTab(forwardingUrl)}
           rightIcon={<FaExternalLinkAlt />}

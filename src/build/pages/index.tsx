@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Divider } from '@chakra-ui/react'
 
 import SVG from '../../find/scripts/svg-class'
-import { Toolbar, Footer, Gallery, Navbar } from '../components'
+import { Toolbar, Footer, Gallery, Navbar, DropZone } from '../components'
 import { AppData, MessageData } from '../types'
 import ThemeProvider from '../theme/theme-provider'
 
@@ -88,12 +88,14 @@ const Layout = () => {
 
   return (
     <ThemeProvider>
-      <Navbar />
-      <Divider />
-      <Toolbar data={data} setData={setData} location={location} />
-      <Gallery data={data} setData={setData} />
-      <Divider />
-      <Footer />
+      <DropZone setData={setData}>
+        <Navbar />
+        <Divider />
+        <Toolbar data={data} setData={setData} location={location} />
+        <Gallery data={data} setData={setData} />
+        <Divider />
+        <Footer />
+      </DropZone>
     </ThemeProvider>
   )
 }

@@ -15,6 +15,7 @@ import { FaDownload, FaPlus } from 'react-icons/fa'
 import { AppData } from '../../types'
 import { handle } from '../utils/actions'
 import { util } from '../utils/upload'
+import { Tooltip } from '..'
 
 interface ToolbarData {
   data: AppData
@@ -82,13 +83,15 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
                   .catch(() => {})
               }}
             />
-            <Button
-              leftIcon={<FaPlus />}
-              size="lg"
-              onClick={util.handleUploadClick}
-            >
-              Upload
-            </Button>
+            <Tooltip label="You can also drag SVGs anywhere on this page to upload">
+              <Button
+                leftIcon={<FaPlus />}
+                size="lg"
+                onClick={util.handleUploadClick}
+              >
+                Upload
+              </Button>
+            </Tooltip>
           </HStack>
         </Stack>
       </Box>
