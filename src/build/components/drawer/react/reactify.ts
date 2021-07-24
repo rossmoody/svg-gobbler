@@ -1,6 +1,3 @@
-import { format } from 'prettier/standalone'
-import parserBabel from 'prettier/parser-babel'
-
 export async function reactify(svgString: string) {
   const res = await fetch(
     'https://www.svggobbler.com/.netlify/functions/svgr',
@@ -14,9 +11,5 @@ export async function reactify(svgString: string) {
   )
 
   const json = await res.json()
-
-  return format(json, {
-    parser: 'babel',
-    plugins: [parserBabel],
-  })
+  return json
 }

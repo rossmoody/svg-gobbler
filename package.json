@@ -6,9 +6,8 @@
   "license": "apache-2.0",
   "scripts": {
     "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package && yarn zip",
+    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
-    "zip": "zip -vr firefox.zip ./ -x 'node_modules/*' 'web-ext-artifacts/*'",
     "package": "web-ext build --source-dir ./extension --overwrite-dest",
     "firefox": "web-ext run --source-dir ./extension",
     "pretty": "prettier --write ./src"
