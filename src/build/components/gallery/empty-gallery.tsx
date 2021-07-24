@@ -16,10 +16,9 @@ import { util } from '../utils/upload'
 interface EmptyGallery {
   headline: string
   description: string
-  setData: React.Dispatch<React.SetStateAction<AppData>>
 }
 
-const EmptyGallery = ({ headline, description, setData }: EmptyGallery) => {
+const EmptyGallery = ({ headline, description }: EmptyGallery) => {
   const backgroundColor = useColorModeValue('gray.100', 'gray.800')
   const lightThemeOutline = useToken('colors', ['gray.400'])
   const darkThemeOutline = useToken('colors', ['gray.500'])
@@ -34,16 +33,6 @@ const EmptyGallery = ({ headline, description, setData }: EmptyGallery) => {
         mx="auto"
         outline={`2px dashed ${outlineColor}`}
         borderRadius="24px"
-        onDragOver={util.handleDragOver}
-        onDragLeave={util.handleDragOut}
-        onDrop={(event) => {
-          util
-            .handleDrop(event)
-            .then((result) => {
-              if (result.length > 0) setData([result])
-            })
-            .catch(() => {})
-        }}
       >
         <Box>
           <Flex

@@ -8,7 +8,7 @@ const SVGHighlighter: React.FC = ({ children }) => {
       wrapLines
       wrapLongLines
       style={dracula}
-      language="markup"
+      language="jsx"
       customStyle={{
         margin: 0,
         borderRadius: 0,

@@ -78,8 +78,17 @@ Unique attributes for each SVG element will be shown within the card. The attrib
 
 Feel free to submit a pull request if you've made an improvement of some kind. This is an open source project and any help is very appreciated.
 
+### Friends
+
+This project leverages code and value from some incredibly talented folks. Most notably and predominantly are:
+
+- Design System Toolkit: [Chakra UI](https://chakra-ui.com/)
+- React Component SVG Transformation: [SVGR](https://react-svgr.com/)
+- SVG Optimization: [SVGO](https://github.com/svg/svgo)
+- Feedback widget: [Feedback Fish](https://feedback.fish/)
+
 ### About
 
 This started as a pet project to improve the [SVG Crowbar](http://nytimes.github.com/svg-crowbar/) tool that is no longer being maintained by NY Times.
 
-The codebase has been completely rewritten 4 times and the latest iteration leverages [Chakra UI](https://chakra-ui.com/) and React.
+The codebase has been completely rewritten 4 times.

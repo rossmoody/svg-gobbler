@@ -8,9 +8,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { PluginNames, SVGOConfig } from '../../types'
+import { PluginNames, SVGOConfig } from '../../../types'
 
-import { svgoConfig } from './process-strings'
+import { svgoConfig } from './svgo-configs'
 
 interface OptionProps {
   title: string
@@ -45,7 +45,7 @@ const Option = (props: OptionProps) => {
 
   return (
     <Flex align="center" justify="space-between">
-      <FormLabel htmlFor={pluginName}>
+      <FormLabel htmlFor={pluginName} _hover={{ cursor: 'pointer' }}>
         <Box flex="1">
           <Text as="h4" fontWeight="medium" fontSize="md">
             {title}

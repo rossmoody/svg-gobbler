@@ -1,16 +1,16 @@
 {
   "name": "svg-gobbler",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "author": "rossmoody <ross@rossmoody.com>",
-  "description": "SVG Gobbler is a simple browser extension that highlights any available SVG content in your current window and lets you download it.",
+  "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",
   "scripts": {
     "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package && yarn zip",
+    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
-    "zip": "zip -vr firefox.zip ./ -x 'node_modules/*' 'web-ext-artifacts/*'",
     "package": "web-ext build --source-dir ./extension --overwrite-dest",
-    "firefox": "web-ext run --source-dir ./extension"
+    "firefox": "web-ext run --source-dir ./extension",
+    "pretty": "prettier --write ./src"
   },
   "prettier": "prettier-config-rossmoody",
   "eslintConfig": {
@@ -32,6 +32,7 @@
     "@feedback-fish/react": "^1.2.1",
     "@types/chrome": "^0.0.145",
     "@types/file-saver": "^2.0.2",
+    "@types/prettier": "^2.3.2",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "@types/react-syntax-highlighter": "^13.5.2",

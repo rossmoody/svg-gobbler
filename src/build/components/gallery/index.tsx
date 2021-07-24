@@ -22,7 +22,6 @@ const Gallery = ({ data, setData }: GalleryData) => {
         <EmptyGallery
           headline="No available SVGs to gobble"
           description="Upload your own SVGs to this page and optimize them using SVGO."
-          setData={setData}
         />
       )
     }
@@ -32,7 +31,6 @@ const Gallery = ({ data, setData }: GalleryData) => {
         <EmptyGallery
           headline="Upload an SVG"
           description="Drag an SVG to this page to optimize it."
-          setData={setData}
         />
       )
     }

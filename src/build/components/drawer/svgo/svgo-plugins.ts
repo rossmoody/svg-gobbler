@@ -1,4 +1,4 @@
-import { Option } from '../../types'
+import { Option } from '../../../types'
 
 const optionsData: Option[] = [
   {

@@ -10,7 +10,6 @@ import {
 import Card from '../card'
 import { AppData } from '../../types'
 import SVG from '../../../find/scripts/svg-class'
-import { util } from '../utils/upload'
 
 interface GalleryData {
   data: SVG[][]
@@ -38,29 +37,7 @@ const DataGallery = ({ data, setData }: GalleryData) => {
   const backgroundColor = useColorModeValue('gray.100', 'gray.800')
 
   return (
-    <Box
-      p="8"
-      bg={backgroundColor}
-      as="main"
-      onDragOver={util.handleDragOver}
-      onDragLeave={util.handleDragOut}
-      onDrop={(event) => {
-        util
-          .handleDrop(event)
-          .then((result) => {
-            setData((prevData) => {
-              if (prevData instanceof Array) {
-                const newArray = [...prevData]
-                newArray[0].unshift(...result)
-                return newArray
-              } else {
-                return [result]
-              }
-            })
-          })
-          .catch(() => {})
-      }}
-    >
+    <Box p="8" bg={backgroundColor} as="main">
       <Box maxW="7xl" mx="auto">
         <SimpleGrid minChildWidth="240px" spacing="24px" mb={4}>
           {displayData.map((svg) => (
