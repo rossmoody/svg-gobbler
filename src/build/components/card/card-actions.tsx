@@ -10,14 +10,16 @@ interface CardActions {
 }
 
 const CardActions = ({ data }: CardActions) => {
-  if (data.cors && data.imgSrcHref) {
-    return <CardActionCors forwardingUrl={data.imgSrcHref} />
+  const { cors, imgSrcHref, svgString, height, width } = data
+
+  if (cors && imgSrcHref) {
+    return <CardActionCors forwardingUrl={imgSrcHref} />
   } else {
     return (
       <CardActionFooter
-        svgString={data.svgString!}
-        height={data.height || 24}
-        width={data.width || 24}
+        svgString={svgString!}
+        height={height || 24}
+        width={width || 24}
       />
     )
   }

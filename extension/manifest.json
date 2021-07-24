@@ -22,7 +22,7 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "https://www.svggobbler.com/.netlify/functions/svgr"],
   "content_security_policy": "script-src 'self' https://feedback.fish/ff.js; object-src 'self'",
   "content_scripts": [
     {

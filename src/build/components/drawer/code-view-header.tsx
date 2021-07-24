@@ -1,5 +1,12 @@
 import React from 'react'
-import { Button, Box, Flex, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Box,
+  Flex,
+  Text,
+  ButtonGroup,
+  DarkMode,
+} from '@chakra-ui/react'
 import prettyBytes from 'pretty-bytes'
 
 const getStringSize = (string: string) => {
@@ -10,9 +17,16 @@ const getStringSize = (string: string) => {
 interface CodeViewHeaderProps {
   originalString: string
   newString: string
+  isReact: boolean
+  setIsReact: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function CodeViewHeader({ originalString, newString }: CodeViewHeaderProps) {
+function CodeViewHeader({
+  originalString,
+  newString,
+  isReact,
+  setIsReact,
+}: CodeViewHeaderProps) {
   const originalSize = getStringSize(originalString)
   const newSize = getStringSize(newString)
 
@@ -20,10 +34,31 @@ function CodeViewHeader({ originalString, newString }: CodeViewHeaderProps) {
     originalSize === newSize ? originalSize : `${originalSize} -> ${newSize}`
 
   return (
-    <Flex justifyContent="space-between" p={3} alignItems="center">
-      <Box w="32px" />
+    <Flex justifyContent="space-between" py="4" px="6" alignItems="center">
+      <DarkMode>
+        <Box>
+          <ButtonGroup isAttached>
+            <Button
+              size="xs"
+              isActive={!isReact}
+              onClick={() => setIsReact(false)}
+              variant="outline"
+            >
+              SVG
+            </Button>
+            <Button
+              size="xs"
+              isActive={isReact}
+              onClick={() => setIsReact(true)}
+              variant="outline"
+            >
+              React
+            </Button>
+          </ButtonGroup>
+        </Box>
+      </DarkMode>
       <Text color="gray.400" fontSize="12px">
-        {sizeString}
+        {!isReact && sizeString}
       </Text>
       <Button
         size="xs"

@@ -10,6 +10,7 @@ import { optionsData } from './svgo/svgo-plugins'
 import { CodeViewHeader } from './code-view-header'
 import { Subhead } from './form-category-subhead'
 import { QuickConfiguration } from './svgo/quick-configurations'
+import { reactify } from './react/reactify'
 
 interface DrawerContent {
   svgString: string
@@ -25,17 +26,29 @@ function DrawerContent({ svgString }: DrawerContent) {
   const [string, setString] = React.useState(svgString)
   const [config, setConfig] = React.useState<SVGOConfig>(svgoDefault)
   const [radioGroup, setRadioGroup] = React.useState('default')
+  const [isReact, setIsReact] = React.useState(false)
 
   React.useEffect(() => {
     const newString = runSvgo(originalString, config)
-    setString(newString)
-  }, [originalString, config])
+    if (isReact) {
+      reactify(newString)
+        .then(setString)
+        .catch(() => {})
+    } else {
+      setString(newString)
+    }
+  }, [originalString, config, isReact])
 
   return (
     <Box display="block" height="100%" width="100%">
       <Flex height="100%">
         <Flex flex={8} flexDir="column" maxW="60%" bg="rgb(40, 42, 54)">
-          <CodeViewHeader originalString={originalString} newString={string} />
+          <CodeViewHeader
+            originalString={originalString}
+            newString={string}
+            isReact={isReact}
+            setIsReact={setIsReact}
+          />
           <Box minHeight="100%" height="50px" overflow="auto">
             <SVGHighlighter>{string}</SVGHighlighter>
           </Box>
@@ -45,7 +58,7 @@ function DrawerContent({ svgString }: DrawerContent) {
             minHeight="140px"
             maxHeight="140px"
             p={4}
-            dangerouslySetInnerHTML={{ __html: string }}
+            dangerouslySetInnerHTML={{ __html: originalString }}
             overflow="hidden"
             sx={{
               '& > svg': {
