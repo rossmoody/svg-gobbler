@@ -9,8 +9,7 @@
     "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
     "package": "web-ext build --source-dir ./extension --overwrite-dest",
-    "firefox": "web-ext run --source-dir ./extension",
-    "pretty": "prettier --write ./src"
+    "firefox": "web-ext run --source-dir ./extension"
   },
   "prettier": "prettier-config-rossmoody",
   "eslintConfig": {
@@ -18,8 +17,7 @@
       "eslint-config-rossmoody"
     ],
     "ignorePatterns": [
-      "*.config.js",
-      "*.d.ts"
+      "*.config.js"
     ],
     "env": {
       "webextensions": true
@@ -32,7 +30,6 @@
     "@feedback-fish/react": "^1.2.1",
     "@types/chrome": "^0.0.145",
     "@types/file-saver": "^2.0.2",
-    "@types/prettier": "^2.3.2",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "@types/react-syntax-highlighter": "^13.5.2",
@@ -40,9 +37,7 @@
     "eslint-config-rossmoody": "^1.1.6",
     "file-saver": "^2.0.5",
     "framer-motion": "^4",
-    "html-webpack-plugin": "^5.3.2",
     "jszip": "^3.6.0",
-    "prettier": "^2.3.2",
     "prettier-config-rossmoody": "^1.0.2",
     "pretty-bytes": "^5.6.0",
     "react": "^17.0.2",
