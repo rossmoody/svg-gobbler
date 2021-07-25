@@ -64,7 +64,12 @@ const Layout = () => {
 
       default: {
         setLocation(message.data.location)
-        setData(paginateContent(content!))
+        if (Array.isArray(content)) {
+          setData(paginateContent(content))
+        } else {
+          setData('error')
+        }
+
         break
       }
     }
@@ -82,7 +87,7 @@ const Layout = () => {
 
     if (data === undefined)
       timeout.current = global.setTimeout(() => {
-        setData('system')
+        setData('error')
       }, 3000)
   }, [data, timeout])
 

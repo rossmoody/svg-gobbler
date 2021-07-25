@@ -4,10 +4,6 @@ import { FaExternalLinkAlt } from 'react-icons/fa'
 
 import { Tooltip } from '..'
 
-function openSvgInNewTab(url: string) {
-  chrome.tabs.create({ url })
-}
-
 function sendMessage(callback: any) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabArray) => {
     const currentTabId = tabArray[0].id!
@@ -51,7 +47,7 @@ function buildPage(data: any, prevTabId: number) {
 }
 
 function handleCorsTab(forwardingUrl: string) {
-  openSvgInNewTab(forwardingUrl)
+  chrome.tabs.create({ url: forwardingUrl })
   sendMessage(buildPage)
 }
 
@@ -66,7 +62,7 @@ const CardActionCors = ({ forwardingUrl }: { forwardingUrl: string }) => {
       right={0}
       bg={useColorModeValue('white', 'gray.700')}
     >
-      <Tooltip label="This SVG is protected by cross-origin requests and must be opened in a new tab to download.">
+      <Tooltip label="This SVG is protected by cross-origin requests and must be opened in a new tab to gobble.">
         <Button
           onClick={() => handleCorsTab(forwardingUrl)}
           rightIcon={<FaExternalLinkAlt />}

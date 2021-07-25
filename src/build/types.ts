@@ -78,14 +78,14 @@ export interface Option {
 /**
  * The data property that gets leveraged from the Chrome message
  */
-export type AppData = SVG[][] | 'system' | 'empty' | undefined
+export type AppData = SVG[][] | 'system' | 'empty' | 'error' | undefined
 
 /**
  * The object that gets sent from Chrome when extension is pressed
  */
 export interface MessageData {
   data: {
-    content: SVG[] | 'system' | 'empty' | undefined
+    content: SVG[] | 'system' | 'empty' | 'error' | undefined
     location: string
   }
 }

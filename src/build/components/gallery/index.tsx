@@ -21,7 +21,7 @@ const Gallery = ({ data, setData }: GalleryData) => {
       return (
         <EmptyGallery
           headline="No available SVGs to gobble"
-          description="Upload your own SVGs to this page and optimize them using SVGO."
+          description="Upload your own SVGs to this page and optimize them using SVGO"
         />
       )
     }
@@ -30,7 +30,16 @@ const Gallery = ({ data, setData }: GalleryData) => {
       return (
         <EmptyGallery
           headline="Upload an SVG"
-          description="Drag an SVG to this page to optimize it."
+          description="Drag SVGs onto this page to optimize it"
+        />
+      )
+    }
+
+    case 'error': {
+      return (
+        <EmptyGallery
+          headline="Shucks, something went wrong"
+          description="Close this page and try again or upload your own SVGs"
         />
       )
     }
