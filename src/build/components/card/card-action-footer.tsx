@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   Grid,
@@ -23,6 +23,7 @@ import Drawer from '../drawer'
 import { handle } from '../utils/actions'
 
 import ImageModal from './image-modal'
+import { FilenameModal } from './filename-modal'
 
 interface CardActionFooter {
   svgString: string
@@ -31,8 +32,10 @@ interface CardActionFooter {
 }
 
 const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
-  const [showModal, setShowModal] = React.useState(false)
-  const [showDrawer, setShowDrawer] = React.useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false)
+  const [showOgModal, setShowOgModal] = useState(false)
+  const [showOptimizedModal, setShowOptimizedModal] = useState(false)
 
   const toast = useToast({
     status: 'success',
@@ -51,13 +54,16 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
       right={0}
       bg={useColorModeValue('white', 'gray.700')}
     >
-      <Button
-        onClick={() => {
-          handle.downloadOriginal(svgString)
-        }}
-      >
-        Download
-      </Button>
+      <Button onClick={() => setShowOgModal(true)}>Download</Button>
+      {showOgModal && (
+        <FilenameModal
+          title="Download original"
+          download={handle.downloadOriginal}
+          svgString={svgString}
+          callback={setShowOgModal}
+        />
+      )}
+
       <Button
         onClick={() => {
           handle.copyToClipboard(svgString)
@@ -70,6 +76,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
       >
         Copy
       </Button>
+
       <Menu placement="top">
         <MenuButton
           as={IconButton}
@@ -80,17 +87,19 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
         <MenuList>
           <MenuItem
             icon={<FiDownload />}
-            onClick={() => {
-              handle.downloadOptimized(svgString)
-              toast({
-                title: 'Download successful',
-                description:
-                  "The SVG has been successfully optimized using SVGO's default settings and is downloading now.",
-              })
-            }}
+            onClick={() => setShowOptimizedModal(true)}
           >
             Download optimized
           </MenuItem>
+          {showOptimizedModal && (
+            <FilenameModal
+              title="Download optimized"
+              download={handle.downloadOptimized}
+              svgString={svgString}
+              callback={setShowOptimizedModal}
+            />
+          )}
+
           <MenuItem
             icon={<FiCopy />}
             onClick={() => {
@@ -104,10 +113,13 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
           >
             Copy optimized
           </MenuItem>
+
           <MenuDivider />
+
           <MenuItem icon={<FiImage />} onClick={() => setShowModal(true)}>
             Export as PNG…
           </MenuItem>
+
           {showModal && (
             <ImageModal
               callback={setShowModal}

@@ -16,16 +16,18 @@ const svgoConfig = {
   ]),
 }
 
+const defaultFilename = 'svg-gobbler'
+
 const handle = {
-  downloadOriginal(svgString: string) {
+  downloadOriginal(svgString: string, filename = defaultFilename) {
     const blob = new Blob([svgString], { type: 'text/xml' })
-    FileSaver.saveAs(blob, 'gobbler-original.svg')
+    FileSaver.saveAs(blob, `${filename}.svg`)
   },
 
-  downloadOptimized(svgString: string) {
+  downloadOptimized(svgString: string, filename = defaultFilename) {
     const { data } = optimize(svgString, svgoConfig)
     const blob = new Blob([data], { type: 'text/xml' })
-    FileSaver.saveAs(blob, 'gobbler-icon.svg')
+    FileSaver.saveAs(blob, `${filename}.svg`)
   },
 
   downloadAllSVGs(svgs: string[]) {
@@ -43,7 +45,7 @@ const handle = {
     zip
       .generateAsync({ type: 'blob' })
       .then((content) => {
-        FileSaver.saveAs(content, 'gobbled_svgs.zip')
+        FileSaver.saveAs(content, 'gobbled-svgs.zip')
       })
       .catch((error) => {})
   },
@@ -57,7 +59,12 @@ const handle = {
     handle.copyToClipboard(data)
   },
 
-  exportPNG(imgSource: string, width: number, height: number) {
+  exportPNG(
+    imgSource: string,
+    width: number,
+    height: number,
+    filename = defaultFilename
+  ) {
     const imageElement = new Image()
 
     imageElement.src = imgSource
@@ -72,7 +79,7 @@ const handle = {
       ctx!.drawImage(imageElement, 0, 0)
       const dataUri = canvas.toDataURL('image/png', 0.9)
 
-      FileSaver.saveAs(dataUri, 'gobbler-image.png')
+      FileSaver.saveAs(dataUri, `${filename}.png`)
     }
   },
 }
