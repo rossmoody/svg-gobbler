@@ -31,23 +31,20 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
   if (spriteHref) {
     const spriteResponse = await fetchFromUrl(spriteHref)
 
-    if (spriteResponse) {
-      const children = Array.from(spriteResponse.children)
-      const hasSymbolChildren = children.some(
-        (element) => element.tagName === 'symbol'
-      )
-
-      if (hasSymbolChildren) {
-        const symbols = children.filter(
-          (elements) => elements.tagName === 'symbol'
-        )
-
-        this.spriteSymbolArray = symbols as SVGSymbolElement[]
-      } else {
-        this.originalElementRef = spriteResponse
-      }
-    } else {
+    // Guard for is response fails to return cors svg with cors flag
+    if (!spriteResponse) {
       this.cors = true
+      return this
+    }
+
+    // Query all symbol elements from response
+    const symbolElements = Array.from(spriteResponse.querySelectorAll('symbol'))
+    const hasSymbolElements = Boolean(symbolElements)
+
+    if (hasSymbolElements) {
+      this.spriteSymbolArray = symbolElements
+    } else {
+      this.originalElementRef = spriteResponse
     }
   }
 

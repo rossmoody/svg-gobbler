@@ -1,6 +1,6 @@
 {
   "name": "svg-gobbler",
-  "version": "3.6.1",
+  "version": "3.7.0",
   "author": "rossmoody <ross@rossmoody.com>",
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",

@@ -40,33 +40,24 @@ export class SVGClass {
 
   private determineType() {
     const tagName = this.originalElementRef.tagName
+    const svgElement = this.originalElementRef
+
+    const querySvgTag = (tag: keyof SVGElementTagNameMap) =>
+      Array.from(svgElement.querySelectorAll(tag))
 
     switch (tagName) {
       case 'svg': {
         this.type = 'inline'
 
-        const children = Array.from(this.originalElementRef.children)
+        const symbolElements = querySvgTag('symbol')
+        const useTags = querySvgTag('use')
+        const defsTags = querySvgTag('defs')
 
-        const hasUseOrImgTag = children.some(
-          (child) => child.tagName === 'use' || child.tagName === 'img'
-        )
+        const hasSymbolOrDefs = symbolElements.length > 0 || defsTags.length > 0
+        const hasUseTags = useTags.length > 0
 
-        const hasSymbolChildren = children.some(
-          (element) => element.tagName === 'symbol'
-        )
-
-        const hasImgChildren = children.some(
-          (element) => element.tagName === 'image' || element.tagName === 'IMG'
-        )
-
-        const hasDefs = children.some((element) => element.tagName === 'defs')
-
-        if (hasUseOrImgTag) this.type = 'sprite'
-        if (hasSymbolChildren) this.type = 'invalid'
-        if (hasDefs) this.type = 'invalid'
-        // This needs improved. Fetch calls can be made to
-        // images embedded in svgs with hrefs
-        if (hasImgChildren) this.type = 'invalid'
+        if (hasSymbolOrDefs) this.type = 'invalid' // Filter out. Symbols are manually built
+        if (hasUseTags) this.type = 'sprite'
 
         break
       }
@@ -90,7 +81,6 @@ export class SVGClass {
         if (!imageSourceHref) return
 
         const imgSrcFileType = imageSourceHref.split('.').pop()
-
         const hasSVGFileType = imgSrcFileType === 'svg'
         const hasBase64 = imageSourceHref.includes('data:image/svg+xml;base64')
 
@@ -105,6 +95,7 @@ export class SVGClass {
       case 'OBJECT': {
         this.type = 'object'
         this.dataSrcHref = (this.originalElementRef as HTMLObjectElement).data
+
         break
       }
 
@@ -136,18 +127,18 @@ export class SVGClass {
   private buildSymbolElement() {
     if (this.type !== 'symbol') return
 
-    const nameSpace = 'http://www.w3.org/2000/svg'
     const symbolElement = this.originalElementRef.cloneNode(
       true
     ) as SVGSymbolElement
 
     symbolElement.removeAttribute('fill')
 
+    const nameSpace = 'http://www.w3.org/2000/svg'
     const viewBox = symbolElement.getAttribute('viewBox')
     const height = symbolElement.getAttribute('height')
     const width = symbolElement.getAttribute('width')
-
     const svgElement = document.createElementNS(nameSpace, 'svg')
+
     svgElement.setAttributeNS(
       'http://www.w3.org/2000/xmlns/',
       'xmlns',
@@ -213,7 +204,10 @@ export class SVGClass {
     if (!isSpriteInstance) return
 
     const useElement = this.originalElementRef.querySelector('use')!
-    const spriteHref = useElement.getAttribute('href')
+    const ownerDocument = document.URL
+
+    const xlinkHref = useElement.getAttribute('xlink:href')
+    const spriteHref = `${ownerDocument}${xlinkHref}`
 
     /**
      * If the sprite is being made via a call to a remote svg sheet

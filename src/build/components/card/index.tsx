@@ -28,6 +28,7 @@ const Card = ({ data }: CardData) => {
         bg={useColorModeValue('white', 'gray.700')}
         rounded="xl"
         shadow="md"
+        onFocus={() => setShowActions(true)}
         onMouseEnter={() => setShowActions(true)}
         onMouseLeave={() => setShowActions(false)}
         maxWidth="280px"

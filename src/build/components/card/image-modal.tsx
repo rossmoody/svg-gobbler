@@ -17,6 +17,8 @@ import {
   Input,
   HStack,
   InputGroup,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
 import { SVGImage } from '../utils/image-class'
@@ -40,10 +42,10 @@ const ImageModal = ({
   const state = new SVGImage(svgString, height, width)
 
   return (
-    <Modal isOpen onClose={() => callback(false)}>
+    <Modal isOpen onClose={() => callback(false)} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Export PNG</ModalHeader>
+        <ModalHeader>Export image</ModalHeader>
         <ModalCloseButton />
         <ModalBody marginBottom={4}>
           <Center width="100%" height="100%">
@@ -66,10 +68,20 @@ const ImageModal = ({
           </Center>
         </ModalBody>
 
-        <ModalFooter>
+        <ModalFooter flexDir="column" alignItems="flex-start">
+          <Box marginBottom={5}>
+            <Text fontWeight="semibold">Resize</Text>
+            <Text
+              color={useColorModeValue('gray.600', 'gray.400')}
+              fontSize="sm"
+            >
+              Specify height or width to resize the SVG proportionally before
+              export.
+            </Text>
+          </Box>
           <FormControl>
-            <HStack marginBottom={5}>
-              <FormLabel margin={0}>
+            <HStack>
+              <FormLabel margin={0} fontSize="sm">
                 Height
                 <InputGroup>
                   <Input
@@ -97,7 +109,7 @@ const ImageModal = ({
                   <InputRightAddon children="px" />
                 </InputGroup>
               </FormLabel>
-              <FormLabel>
+              <FormLabel fontSize="sm">
                 Width
                 <InputGroup>
                   <Input
@@ -131,6 +143,7 @@ const ImageModal = ({
             <Button
               colorScheme="red"
               marginBottom={4}
+              marginTop={8}
               isFullWidth
               onClick={() => {
                 state.setClassWidthHeight(size.height, size.width)

@@ -83,7 +83,7 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
                   .catch(() => {})
               }}
             />
-            <Tooltip label="You can also drag SVGs anywhere on this page to upload">
+            <Tooltip label="Drop SVGs anywhere on this page to upload">
               <Button
                 leftIcon={<FaPlus />}
                 size="lg"
