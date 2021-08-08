@@ -90,7 +90,7 @@ const CardActionFooter = ({
           aria-label="Options"
           borderRadius="md"
         />
-        <MenuList>
+        <MenuList zIndex={100}>
           <MenuItem
             icon={<FiDownload />}
             onClick={() => setShowOptimizedModal(true)}
