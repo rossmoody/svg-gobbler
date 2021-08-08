@@ -99,6 +99,12 @@ function createPresentationSvg(this: SVG) {
   this.presentationSvg = new XMLSerializer().serializeToString(htmlElement)
 }
 
+function hasWhiteFill(this: SVG) {
+  const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
+  const svgOuterHtml = this.originalElementRef.outerHTML
+  this.whiteFill = whiteFills.some((fill) => svgOuterHtml.includes(fill))
+}
+
 export {
   dedupSVGs,
   removeFillNone,
@@ -108,4 +114,5 @@ export {
   setSize,
   removeClass,
   createPresentationSvg,
+  hasWhiteFill,
 }

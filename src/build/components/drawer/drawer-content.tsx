@@ -1,5 +1,12 @@
 import React from 'react'
-import { Box, Center, Flex, Stack, Divider } from '@chakra-ui/react'
+import {
+  Box,
+  Center,
+  Flex,
+  Stack,
+  Divider,
+  useColorModeValue,
+} from '@chakra-ui/react'
 
 import { SVGOConfig } from '../../types'
 
@@ -26,6 +33,8 @@ function DrawerContent({ svgString }: DrawerContent) {
   const [config, setConfig] = React.useState<SVGOConfig>(svgoDefault)
   const [radioGroup, setRadioGroup] = React.useState('default')
   const [isReact, setIsReact] = React.useState(false)
+
+  const whiteFillBg = useColorModeValue('gray.100', 'null')
 
   React.useEffect(() => {
     const newString = runSvgo(svgString, config)
@@ -59,14 +68,16 @@ function DrawerContent({ svgString }: DrawerContent) {
             p={4}
             dangerouslySetInnerHTML={{ __html: svgString }}
             overflow="hidden"
+            bg={whiteFillBg}
             sx={{
               '& > svg': {
-                height: '90%',
-                width: '90%',
+                height: '80%',
+                width: '80%',
                 overflow: 'visible',
               },
             }}
           />
+
           <Box position="relative" width="100%" height="100%">
             <Box
               position="absolute"

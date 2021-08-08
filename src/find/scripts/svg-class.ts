@@ -15,6 +15,7 @@ export class SVGClass {
   originalElementRef: PageElement
   type: SVGType = 'invalid'
   cors = false
+  whiteFill = false
 
   spriteHref?: string
   imgSrcHref?: string

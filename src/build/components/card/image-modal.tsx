@@ -29,6 +29,7 @@ interface ImageModalProps {
   svgString: string
   height: number
   width: number
+  whiteFill: boolean
 }
 
 const ImageModal = ({
@@ -36,10 +37,12 @@ const ImageModal = ({
   svgString,
   height,
   width,
+  whiteFill,
 }: ImageModalProps) => {
   const [size, setSize] = React.useState({ height, width })
 
   const state = new SVGImage(svgString, height, width)
+  const whiteFillBg = useColorModeValue('gray.100', 'null')
 
   return (
     <Modal isOpen onClose={() => callback(false)} size="lg">
@@ -48,7 +51,7 @@ const ImageModal = ({
         <ModalHeader>Export image</ModalHeader>
         <ModalCloseButton />
         <ModalBody marginBottom={4}>
-          <Center width="100%" height="100%">
+          <Center width="100%" height="100%" position="relative">
             <Center
               padding={8}
               maxWidth="280px"
@@ -63,8 +66,18 @@ const ImageModal = ({
                 src={state.htmlImageElementSrc}
                 width="100%"
                 height="100%"
+                zIndex={1}
               />
             </Center>
+            {whiteFill && (
+              <Box
+                bg={whiteFillBg}
+                borderRadius="lg"
+                position="absolute"
+                width="100%"
+                height="100%"
+              />
+            )}
           </Center>
         </ModalBody>
 
