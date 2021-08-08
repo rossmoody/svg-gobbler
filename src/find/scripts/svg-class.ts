@@ -56,7 +56,8 @@ export class SVGClass {
         const hasSymbolOrDefs = symbolElements.length > 0 || defsTags.length > 0
         const hasUseTags = useTags.length > 0
 
-        if (hasSymbolOrDefs) this.type = 'invalid' // Filter out. Symbols are manually built
+        // Filter out. Symbols are manually built
+        if (hasSymbolOrDefs) this.type = 'invalid'
         if (hasUseTags) this.type = 'sprite'
 
         break

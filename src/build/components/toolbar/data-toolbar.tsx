@@ -1,21 +1,21 @@
+import React from 'react'
 import {
   Box,
   Button,
   Heading,
-  HStack,
   Stack,
+  HStack,
   Text,
   Flex,
-  useColorModeValue as mode,
+  useColorModeValue,
   Input,
 } from '@chakra-ui/react'
-import React from 'react'
 import { FaDownload, FaPlus } from 'react-icons/fa'
 
+import handle from '../utils/actions'
+import Tooltip from '../generic/tooltip'
 import { AppData } from '../../types'
-import { handle } from '../utils/actions'
 import { util } from '../utils/upload'
-import { Tooltip } from '..'
 
 interface ToolbarData {
   data: AppData
@@ -27,7 +27,7 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
   const moreThanOneString = util.getSvgStrings(data).length > 1
 
   return (
-    <Box p="8" bg={mode('white', 'gray.800')} as="section">
+    <Box p="8" bg={useColorModeValue('white', 'gray.800')} as="section">
       <Box maxW="7xl" mx="auto">
         <Stack
           spacing="5"
@@ -38,7 +38,10 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
             <Flex alignItems="center">
               <Heading size="lg">{location}</Heading>
             </Flex>
-            <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
+            <Text
+              color={useColorModeValue('gray.600', 'gray.400')}
+              fontSize="sm"
+            >
               Showing {util.getSvgQuantity(data)} available SVG
               {util.isPlural(util.getSvgQuantity(data))}
             </Text>

@@ -16,15 +16,15 @@ const svgoConfig = {
   ]),
 }
 
-const defaultFilename = 'svg-gobbler'
+const FILENAME = 'svg-gobbler'
 
 const handle = {
-  downloadOriginal(svgString: string, filename = defaultFilename) {
+  downloadOriginal(svgString: string, filename = FILENAME) {
     const blob = new Blob([svgString], { type: 'text/xml' })
     FileSaver.saveAs(blob, `${filename}.svg`)
   },
 
-  downloadOptimized(svgString: string, filename = defaultFilename) {
+  downloadOptimized(svgString: string, filename = FILENAME) {
     const { data } = optimize(svgString, svgoConfig)
     const blob = new Blob([data], { type: 'text/xml' })
     FileSaver.saveAs(blob, `${filename}.svg`)
@@ -63,7 +63,7 @@ const handle = {
     imgSource: string,
     width: number,
     height: number,
-    filename = defaultFilename
+    filename = FILENAME
   ) {
     const imageElement = new Image()
 
@@ -84,4 +84,4 @@ const handle = {
   },
 }
 
-export { handle }
+export default handle

@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { ReactNode, SetStateAction, Dispatch } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { AppData } from '../../types'
 import { util } from '../utils/upload'
 
 interface DropZone {
-  children: React.ReactNode
-  setData: React.Dispatch<React.SetStateAction<AppData>>
+  children: ReactNode
+  setData: Dispatch<SetStateAction<AppData>>
 }
 
-export const DropZone = ({ children, setData }: DropZone) => (
+const DropZone = ({ children, setData }: DropZone) => (
   <Box
     onDragOver={util.handleDragOver}
     onDragLeave={util.handleDragOut}
@@ -33,3 +33,5 @@ export const DropZone = ({ children, setData }: DropZone) => (
     {children}
   </Box>
 )
+
+export default DropZone

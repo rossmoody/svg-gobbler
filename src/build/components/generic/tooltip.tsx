@@ -6,8 +6,10 @@ interface Tooltip {
   label: string
 }
 
-export const Tooltip = ({ children, label }: Tooltip) => (
+const Tooltip = ({ children, label }: Tooltip) => (
   <ChakraTooltip hasArrow borderRadius="md" padding={4} label={label}>
     {children}
   </ChakraTooltip>
 )
+
+export default Tooltip

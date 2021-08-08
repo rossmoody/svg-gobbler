@@ -22,7 +22,7 @@ interface PopoverFormTypes {
   callback: (arg: boolean) => void
 }
 
-export const FilenameModal = ({
+const FilenameModal = ({
   title,
   svgString,
   callback,
@@ -54,7 +54,7 @@ export const FilenameModal = ({
                 defaultValue={filename}
                 onChange={(event) => setFilename(event.target.value)}
               />
-              <InputRightAddon children=".svg" />
+              <InputRightAddon>.svg</InputRightAddon>
             </InputGroup>
           </FormControl>
         </ModalBody>
@@ -76,3 +76,5 @@ export const FilenameModal = ({
     </Modal>
   )
 }
+
+export default FilenameModal
