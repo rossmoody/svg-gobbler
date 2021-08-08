@@ -9,7 +9,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormControl,
   FormLabel,
   Box,
   Center,
@@ -19,6 +18,7 @@ import {
   InputGroup,
   Text,
   useColorModeValue,
+  FormControl,
 } from '@chakra-ui/react'
 
 import handle from '../utils/actions'
@@ -40,6 +40,7 @@ const ImageModal = ({
   whiteFill,
 }: ImageModalProps) => {
   const [size, setSize] = React.useState({ height, width })
+  const [filename, setFilename] = React.useState('svg-image')
 
   const state = new SVGImage(svgString, height, width)
   const whiteFillBg = useColorModeValue('gray.100', 'null')
@@ -83,15 +84,16 @@ const ImageModal = ({
 
         <ModalFooter flexDir="column" alignItems="flex-start">
           <Box marginBottom={5}>
-            <Text fontWeight="semibold">Resize</Text>
+            <Text fontWeight="semibold">Configure</Text>
             <Text
               color={useColorModeValue('gray.600', 'gray.400')}
               fontSize="sm"
             >
-              Specify height or width to resize the SVG proportionally before
-              export.
+              Specify height, width, or filename before export. The SVG will
+              proportionally resize based on height or width.
             </Text>
           </Box>
+
           <FormControl>
             <HStack>
               <FormLabel margin={0} fontSize="sm">
@@ -152,26 +154,38 @@ const ImageModal = ({
                 </InputGroup>
               </FormLabel>
             </HStack>
-
-            <Button
-              colorScheme="red"
-              marginBottom={4}
-              marginTop={8}
-              isFullWidth
-              onClick={() => {
-                state.setClassWidthHeight(size.height, size.width)
-                state.setSvgElementWidthHeight()
-                state.createImgSrc()
-                handle.exportPNG(
-                  state.htmlImageElementSrc,
-                  size.width,
-                  size.height
-                )
-              }}
-            >
-              Export PNG
-            </Button>
           </FormControl>
+          <FormControl marginTop={4}>
+            <FormLabel htmlFor="image-filename">Filename</FormLabel>
+            <InputGroup>
+              <Input
+                id="image-filename"
+                defaultValue={filename}
+                onChange={(event) => setFilename(event.target.value)}
+              />
+              <InputRightAddon>.png</InputRightAddon>
+            </InputGroup>
+          </FormControl>
+
+          <Button
+            colorScheme="red"
+            marginBottom={4}
+            marginTop={8}
+            isFullWidth
+            onClick={() => {
+              state.setClassWidthHeight(size.height, size.width)
+              state.setSvgElementWidthHeight()
+              state.createImgSrc()
+              handle.exportPNG(
+                state.htmlImageElementSrc,
+                size.width,
+                size.height,
+                filename
+              )
+            }}
+          >
+            Export PNG
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
