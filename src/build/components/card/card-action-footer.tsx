@@ -20,10 +20,10 @@ import {
 } from 'react-icons/fi'
 
 import Drawer from '../drawer'
-import { handle } from '../utils/actions'
+import handle from '../utils/actions'
 
 import ImageModal from './image-modal'
-import { FilenameModal } from './filename-modal'
+import FilenameModal from './filename-modal'
 
 interface CardActionFooter {
   svgString: string

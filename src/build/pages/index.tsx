@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { Divider } from '@chakra-ui/react'
 
 import SVG from '../../find/scripts/svg-class'
+import ThemeProvider from '../theme/theme-provider'
 import { Toolbar, Footer, Gallery, Navbar, DropZone } from '../components'
 import { AppData, MessageData } from '../types'
-import ThemeProvider from '../theme/theme-provider'
 
 function paginateContent(content: SVG[]) {
   const perPage = 100
@@ -97,7 +97,7 @@ const Layout = () => {
         <Navbar />
         <Divider />
         <Toolbar data={data} setData={setData} location={location} />
-        <Gallery data={data} setData={setData} />
+        <Gallery data={data} />
         <Divider />
         <Footer />
       </DropZone>

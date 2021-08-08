@@ -21,8 +21,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
+import handle from '../utils/actions'
 import { SVGImage } from '../utils/image-class'
-import { handle } from '../utils/actions'
 
 interface ImageModalProps {
   callback: (arg: boolean) => void

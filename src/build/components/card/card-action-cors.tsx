@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Grid, useColorModeValue } from '@chakra-ui/react'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 
-import { Tooltip } from '..'
+import Tooltip from '../generic/tooltip'
 
 function sendMessage(callback: any) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabArray) => {

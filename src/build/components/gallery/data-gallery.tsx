@@ -8,15 +8,13 @@ import {
 } from '@chakra-ui/react'
 
 import Card from '../card'
-import { AppData } from '../../types'
 import SVG from '../../../find/scripts/svg-class'
 
 interface GalleryData {
   data: SVG[][]
-  setData: React.Dispatch<React.SetStateAction<AppData>>
 }
 
-const DataGallery = ({ data, setData }: GalleryData) => {
+const DataGallery = ({ data }: GalleryData) => {
   const [page, setPage] = React.useState(0)
   const [displayData, setDisplayData] = React.useState(data[0])
   const [loading, setLoading] = React.useState(false)
