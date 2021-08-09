@@ -156,7 +156,9 @@ const ImageModal = ({
             </HStack>
           </FormControl>
           <FormControl marginTop={4}>
-            <FormLabel htmlFor="image-filename">Filename</FormLabel>
+            <FormLabel htmlFor="image-filename" fontSize="sm">
+              Filename
+            </FormLabel>
             <InputGroup>
               <Input
                 id="image-filename"
