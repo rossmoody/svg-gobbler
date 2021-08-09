@@ -56,7 +56,10 @@ async function processSVGs() {
       // Must delete reference to DOM Node for sending messages
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      delete svg.originalElementRef
+      delete svg.elementClone
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      delete svg.originalElementReference
       return svg
     })
 
