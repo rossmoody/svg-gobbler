@@ -29,9 +29,15 @@ interface CardActionFooter {
   svgString: string
   height: number
   width: number
+  whiteFill: boolean
 }
 
-const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
+const CardActionFooter = ({
+  svgString,
+  height,
+  width,
+  whiteFill,
+}: CardActionFooter) => {
   const [showModal, setShowModal] = useState(false)
   const [showDrawer, setShowDrawer] = useState(false)
   const [showOgModal, setShowOgModal] = useState(false)
@@ -84,7 +90,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
           aria-label="Options"
           borderRadius="md"
         />
-        <MenuList>
+        <MenuList zIndex={100}>
           <MenuItem
             icon={<FiDownload />}
             onClick={() => setShowOptimizedModal(true)}
@@ -126,6 +132,7 @@ const CardActionFooter = ({ svgString, height, width }: CardActionFooter) => {
               svgString={svgString}
               height={height}
               width={width}
+              whiteFill={whiteFill}
             />
           )}
           <MenuDivider />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Center,
   Box,
@@ -18,14 +18,16 @@ interface CardData {
 }
 
 const Card = ({ data }: CardData) => {
-  const [showActions, setShowActions] = React.useState(false)
+  const [showActions, setShowActions] = useState(false)
+  const { presentationSvg, size, type, whiteFill } = data
 
-  const { presentationSvg, size, type } = data
+  const cardFillBg = useColorModeValue('white', 'gray.700')
+  const whiteFillBg = useColorModeValue('gray.200', 'null')
 
   return (
     <ScaleFade in initialScale={0.9}>
       <Box
-        bg={useColorModeValue('white', 'gray.700')}
+        bg={cardFillBg}
         rounded="xl"
         shadow="md"
         onFocus={() => setShowActions(true)}
@@ -33,7 +35,7 @@ const Card = ({ data }: CardData) => {
         onMouseLeave={() => setShowActions(false)}
         maxWidth="280px"
       >
-        <Center px={8} py={12} minHeight="140px">
+        <Center px={8} py={12} minHeight="140px" position="relative">
           <Box
             position="relative"
             height="0"
@@ -41,6 +43,7 @@ const Card = ({ data }: CardData) => {
             padding="0 0 100%"
             dangerouslySetInnerHTML={{ __html: presentationSvg! }}
             overflow="hidden"
+            zIndex={1}
             sx={{
               '& > svg': {
                 position: 'absolute',
@@ -55,6 +58,15 @@ const Card = ({ data }: CardData) => {
               },
             }}
           />
+          {whiteFill && (
+            <Box
+              bg={whiteFillBg}
+              borderRadius="lg"
+              position="absolute"
+              width="90%"
+              height="90%"
+            />
+          )}
         </Center>
         <Divider mx={5} width="auto" />
         <Box pt={2} pb={4} mx={5} position="relative">

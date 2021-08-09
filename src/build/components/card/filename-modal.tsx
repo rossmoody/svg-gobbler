@@ -29,7 +29,6 @@ const FilenameModal = ({
   download,
 }: PopoverFormTypes) => {
   const [filename, setFilename] = useState('svg-gobbler')
-
   const firstFieldRef = useRef(null)
 
   return (
@@ -41,38 +40,37 @@ const FilenameModal = ({
       isCentered
     >
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{title}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <FormControl>
-            <FormLabel htmlFor="filename">Filename</FormLabel>
-            <InputGroup>
-              <Input
-                id="filename"
-                ref={firstFieldRef}
-                defaultValue={filename}
-                onChange={(event) => setFilename(event.target.value)}
-              />
-              <InputRightAddon>.svg</InputRightAddon>
-            </InputGroup>
-          </FormControl>
-        </ModalBody>
+      <form
+        onSubmit={() => {
+          download(svgString, filename)
+          callback(false)
+        }}
+      >
+        <ModalContent>
+          <ModalHeader>{title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl>
+              <FormLabel htmlFor="filename">Filename</FormLabel>
+              <InputGroup>
+                <Input
+                  id="filename"
+                  ref={firstFieldRef}
+                  defaultValue={filename}
+                  onChange={(event) => setFilename(event.target.value)}
+                />
+                <InputRightAddon>.svg</InputRightAddon>
+              </InputGroup>
+            </FormControl>
+          </ModalBody>
 
-        <ModalFooter>
-          <Button
-            colorScheme="red"
-            isFullWidth
-            onClick={() => {
-              download(svgString, filename)
-              callback(false)
-            }}
-            type="submit"
-          >
-            Save
-          </Button>
-        </ModalFooter>
-      </ModalContent>
+          <ModalFooter>
+            <Button colorScheme="red" isFullWidth type="submit">
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </form>
     </Modal>
   )
 }

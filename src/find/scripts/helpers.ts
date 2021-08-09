@@ -12,11 +12,11 @@ function dedupSVGs(svg: SVG, index: number, originalArray: SVG[]) {
 
 function convertElementRefToSVGString(this: SVG) {
   const serializer = new XMLSerializer()
-  this.svgString = serializer.serializeToString(this.originalElementRef)
+  this.svgString = serializer.serializeToString(this.elementClone)
 }
 
 function removeFillNone(this: SVG) {
-  const svgElement = this.originalElementRef
+  const svgElement = this.elementClone
 
   const fill = svgElement.getAttribute('fill')
   const stroke = svgElement.getAttribute('stroke')
@@ -28,19 +28,19 @@ function removeFillNone(this: SVG) {
 }
 
 function removeClass(this: SVG) {
-  const svgElement = this.originalElementRef
+  const svgElement = this.elementClone
   svgElement.removeAttribute('class')
 }
 
 function setViewBox(this: SVG) {
-  const svgElement = this.originalElementRef
+  const svgElement = this.elementClone
   const hasViewbox = svgElement.hasAttribute('viewBox')
 
   if (hasViewbox) this.viewBox = svgElement.getAttribute('viewBox')!
 }
 
 function setWidthHeight(this: SVG) {
-  const svgElement = this.originalElementRef
+  const svgElement = this.elementClone
 
   let width: string | undefined
   let height: string | undefined
@@ -87,7 +87,7 @@ function setSize(this: SVG) {
 }
 
 function createPresentationSvg(this: SVG) {
-  const htmlElement = this.originalElementRef.cloneNode(true) as HTMLElement
+  const htmlElement = this.elementClone.cloneNode(true) as HTMLElement
 
   const isCorsRestricted = this.cors
 
@@ -99,6 +99,12 @@ function createPresentationSvg(this: SVG) {
   this.presentationSvg = new XMLSerializer().serializeToString(htmlElement)
 }
 
+function hasWhiteFill(this: SVG) {
+  const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
+  const svgOuterHtml = this.elementClone.outerHTML
+  this.whiteFill = whiteFills.some((fill) => svgOuterHtml.includes(fill))
+}
+
 export {
   dedupSVGs,
   removeFillNone,
@@ -108,4 +114,5 @@ export {
   setSize,
   removeClass,
   createPresentationSvg,
+  hasWhiteFill,
 }
