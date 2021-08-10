@@ -50,7 +50,9 @@ export class SVGClass {
   }
 
   private hasSvgFilename(string: string) {
-    return string.includes('.svg')
+    const hasPng = string.includes('.png')
+    const hasSvg = string.includes('.svg')
+    return hasSvg && !hasPng
   }
 
   private parseStringToElement(string: string) {
@@ -103,20 +105,24 @@ export class SVGClass {
 
       case 'IMG': {
         const imgSrc = (this.elementClone as HTMLImageElement).src
+        const hasSvgFilename = this.hasSvgFilename(imgSrc)
+        const hasDataUriBgImg = this.hasDataUriBgImg(imgSrc)
+        const hasBase64BgImg = this.hasBase64BgImg(imgSrc)
 
-        if (this.hasBase64BgImg(imgSrc) || this.hasSvgFilename(imgSrc)) {
+        if (hasSvgFilename || hasDataUriBgImg || hasBase64BgImg)
           this.type = 'img src'
+
+        if (hasBase64BgImg || hasSvgFilename) {
           this.imgSrcHref = imgSrc
         }
 
-        if (this.hasDataUriBgImg(imgSrc)) {
+        if (hasDataUriBgImg) {
           const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
           const svgString = regex.exec(imgSrc)
 
           if (svgString) {
             const svgElement = this.parseStringToElement(svgString[0])
             this.elementClone = svgElement
-            this.type = 'img src'
           }
         }
         break
@@ -124,22 +130,33 @@ export class SVGClass {
 
       case 'DIV': {
         const divElement = this.originalElementReference as HTMLDivElement
-        const backgroundImageUrl = window
-          .getComputedStyle(divElement)
-          .backgroundImage.slice(5, -2)
+        const computedStyle = window.getComputedStyle(divElement)
+        const backgroundImageUrl = computedStyle.backgroundImage
 
-        if (this.hasBase64BgImg(backgroundImageUrl)) {
+        const hasBase64BgImg = this.hasBase64BgImg(backgroundImageUrl)
+        const hasSvgFilename = this.hasSvgFilename(backgroundImageUrl)
+        const hasDataUriBgImg = this.hasDataUriBgImg(backgroundImageUrl)
+
+        if (hasBase64BgImg || hasSvgFilename || hasDataUriBgImg)
+          this.type = 'bg img'
+
+        if (hasBase64BgImg) {
           const svgString = atob(
             backgroundImageUrl.replace(/data:image\/svg\+xml;base64,/, '')
           )
           const svgElement = this.parseStringToElement(svgString)
-          this.type = 'bg img'
           this.elementClone = svgElement
         }
 
-        if (this.hasSvgFilename(backgroundImageUrl)) {
-          this.type = 'bg img'
-          this.imgSrcHref = backgroundImageUrl
+        if (hasSvgFilename) {
+          const urlRegex = /(?<=url\(")(.*)(?<=.svg)/
+          const regexResult = urlRegex.exec(backgroundImageUrl)
+          const validRegex = Boolean(regexResult && regexResult[0])
+
+          if (validRegex) {
+            const url = regexResult![0]
+            this.imgSrcHref = url
+          }
         }
 
         if (this.hasDataUriBgImg(backgroundImageUrl)) {
@@ -150,7 +167,6 @@ export class SVGClass {
           if (validRegex) {
             const string = regexResult![0].replace(/\\/g, '')
             const svgElement = this.parseStringToElement(string)
-            this.type = 'bg img'
             this.elementClone = svgElement
           }
         }
