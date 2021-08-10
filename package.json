@@ -1,12 +1,12 @@
 {
   "name": "svg-gobbler",
-  "version": "3.8.1",
+  "version": "3.8.2",
   "author": "rossmoody <ross@rossmoody.com>",
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",
   "scripts": {
     "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "package": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package && yarn zip",
+    "package": "rm -rf ./extension/dist && webpack --mode 'production' && yarn build && yarn zip",
     "zip": "zip -r -9 ./web-ext-artifacts/package.zip ./ -x 'node_modules**' 'web-ext-artifacts**' 'extension/dist**'",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
     "build": "web-ext build --source-dir ./extension --overwrite-dest",
