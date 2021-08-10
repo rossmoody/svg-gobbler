@@ -6,9 +6,10 @@
   "license": "apache-2.0",
   "scripts": {
     "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "build": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package",
+    "package": "rm -rf ./extension/dist && webpack --mode 'production' && yarn package && yarn zip",
+    "zip": "zip -r -9 ./web-ext-artifacts/package.zip ./ -x 'node_modules**' 'web-ext-artifacts**' 'extension/dist**'",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
-    "package": "web-ext build --source-dir ./extension --overwrite-dest",
+    "build": "web-ext build --source-dir ./extension --overwrite-dest",
     "firefox": "web-ext run --source-dir ./extension"
   },
   "prettier": "prettier-config-rossmoody",

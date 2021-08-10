@@ -94,7 +94,7 @@ const Layout = () => {
   return (
     <ThemeProvider>
       <DropZone setData={setData}>
-        <Navbar />
+        <Navbar data={data} location={location} />
         <Divider />
         <Toolbar data={data} setData={setData} location={location} />
         <Gallery data={data} />
