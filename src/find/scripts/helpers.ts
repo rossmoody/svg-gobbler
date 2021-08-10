@@ -56,7 +56,6 @@ function setWidthHeight(this: SVG) {
 
   if (hasViewbox) {
     const viewBoxStringArray = this.viewBox!.split(' ')
-
     const [, , viewBoxWidth, viewBoxHeight] = viewBoxStringArray
 
     width = viewBoxWidth
@@ -79,16 +78,13 @@ function setWidthHeight(this: SVG) {
 }
 
 function setSize(this: SVG) {
-  const hasHeightWidth = Boolean(this.width) && Boolean(this.height)
-
   this.size = 'N/A'
-
+  const hasHeightWidth = Boolean(this.width) && Boolean(this.height)
   if (hasHeightWidth) this.size = `${this.width}x${this.height}`
 }
 
 function createPresentationSvg(this: SVG) {
   const htmlElement = this.elementClone.cloneNode(true) as HTMLElement
-
   const isCorsRestricted = this.cors
 
   if (!isCorsRestricted) {

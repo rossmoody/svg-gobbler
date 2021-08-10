@@ -1,4 +1,4 @@
-import { PageElement } from './find-svgs'
+import { PageElement } from './gather-elements'
 
 type SVGType =
   | 'inline'
@@ -94,7 +94,8 @@ export class SVGClass {
       }
 
       case 'g': {
-        this.type = 'g'
+        const hasId = this.elementClone.id
+        if (hasId) this.type = 'g'
         break
       }
 
@@ -143,20 +144,26 @@ export class SVGClass {
           this.type = 'bg img'
 
         if (hasBase64BgImg) {
-          const svgString = atob(
-            backgroundImageUrl.replace(/data:image\/svg\+xml;base64,/, '')
-          )
-          const svgElement = this.parseStringToElement(svgString)
-          this.elementClone = svgElement
+          try {
+            const base64RegEx = /(?<=,)(.*)(?=")/
+            const base64String = base64RegEx.exec(backgroundImageUrl)
+
+            if (base64String) {
+              const svgString = atob(base64String[0])
+              const svgElement = this.parseStringToElement(svgString)
+              this.elementClone = svgElement
+            }
+          } catch (error) {
+            this.cors = true
+          }
         }
 
         if (hasSvgFilename) {
           const urlRegex = /(?<=url\(")(.*)(?<=.svg)/
           const regexResult = urlRegex.exec(backgroundImageUrl)
-          const validRegex = Boolean(regexResult && regexResult[0])
 
-          if (validRegex) {
-            const url = regexResult![0]
+          if (regexResult) {
+            const url = regexResult[0]
             this.divBgUrl = url
           }
         }
@@ -164,10 +171,9 @@ export class SVGClass {
         if (this.hasDataUriBgImg(backgroundImageUrl)) {
           const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
           const regexResult = regex.exec(backgroundImageUrl)
-          const validRegex = Boolean(regexResult && regexResult[0])
 
-          if (validRegex) {
-            const string = regexResult![0].replace(/\\/g, '')
+          if (regexResult) {
+            const string = regexResult[0].replace(/\\/g, '')
             const svgElement = this.parseStringToElement(string)
             this.elementClone = svgElement
           }

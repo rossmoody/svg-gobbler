@@ -1,5 +1,5 @@
 import SVG from './svg-class'
-import findSVGs from './find-svgs'
+import findSVGs from './gather-elements'
 import { fetchSVGContent } from './fetch-svg'
 import {
   dedupSVGs,
