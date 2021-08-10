@@ -15,6 +15,7 @@ function findSVGs(): PageElement[] {
   const gElements = Array.from(document.getElementsByTagName('g')).filter(
     (element) => element.id
   )
+
   const pageSVGs = [
     ...svgTags,
     ...imgSrcs,
