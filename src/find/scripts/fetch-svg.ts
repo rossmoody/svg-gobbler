@@ -16,13 +16,25 @@ async function fetchFromUrl(url: string): Promise<HTMLElement | false> {
 }
 
 async function fetchSVGContent(this: SVG): Promise<SVG> {
-  const { imgSrcHref, spriteHref, dataSrcHref } = this
+  const { imgSrcHref, spriteHref, dataSrcHref, divBgUrl } = this
 
   if (imgSrcHref) {
     const imgSrcResponse = await fetchFromUrl(imgSrcHref)
 
     if (imgSrcResponse) {
       this.elementClone = imgSrcResponse
+    } else {
+      // Set the src url explicitly so it isn't broken with relative //
+      ;(this.elementClone as HTMLImageElement).src = this.imgSrcHref!
+      this.cors = true
+    }
+  }
+
+  if (divBgUrl) {
+    const bgUrlResponse = await fetchFromUrl(divBgUrl)
+
+    if (bgUrlResponse) {
+      this.elementClone = bgUrlResponse
     } else {
       this.cors = true
     }

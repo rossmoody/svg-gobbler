@@ -31,6 +31,7 @@ const Card = ({ data }: CardData) => {
         rounded="xl"
         shadow="md"
         onFocus={() => setShowActions(true)}
+        onBlur={() => setShowActions(false)}
         onMouseEnter={() => setShowActions(true)}
         onMouseLeave={() => setShowActions(false)}
         maxWidth="280px"

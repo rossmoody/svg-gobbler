@@ -21,6 +21,7 @@ export class SVGClass {
   spriteHref?: string
   imgSrcHref?: string
   dataSrcHref?: string
+  divBgUrl?: string
   svgString?: string
   viewBox?: string
   width?: number
@@ -109,8 +110,9 @@ export class SVGClass {
         const hasDataUriBgImg = this.hasDataUriBgImg(imgSrc)
         const hasBase64BgImg = this.hasBase64BgImg(imgSrc)
 
-        if (hasSvgFilename || hasDataUriBgImg || hasBase64BgImg)
+        if (hasSvgFilename || hasDataUriBgImg || hasBase64BgImg) {
           this.type = 'img src'
+        }
 
         if (hasBase64BgImg || hasSvgFilename) {
           this.imgSrcHref = imgSrc
@@ -155,7 +157,7 @@ export class SVGClass {
 
           if (validRegex) {
             const url = regexResult![0]
-            this.imgSrcHref = url
+            this.divBgUrl = url
           }
         }
 
