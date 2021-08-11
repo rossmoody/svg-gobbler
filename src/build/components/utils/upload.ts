@@ -1,11 +1,5 @@
 import SVG from '../../../find/scripts/svg-class'
-import {
-  convertElementRefToSVGString,
-  setWidthHeight,
-  setViewBox,
-  setSize,
-  createPresentationSvg,
-} from '../../../find/scripts/helpers'
+import process from '../../../find/scripts/process-svg'
 import { AppData } from '../../types'
 
 export const util = {
@@ -42,11 +36,11 @@ export const util = {
 
   processUploadedSVG(svg: HTMLElement) {
     const localSvg = new SVG(svg)
-    setViewBox.call(localSvg)
-    setWidthHeight.call(localSvg)
-    setSize.call(localSvg)
-    convertElementRefToSVGString.call(localSvg)
-    createPresentationSvg.call(localSvg)
+    process.setViewBox.call(localSvg)
+    process.setWidthHeight.call(localSvg)
+    process.setSize.call(localSvg)
+    process.convertElementRefToSVGString.call(localSvg)
+    process.createPresentationSvg.call(localSvg)
     return localSvg
   },
 

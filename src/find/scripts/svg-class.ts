@@ -68,8 +68,9 @@ export class SVGClass {
     const tagName = this.elementClone.tagName
     const svgElement = this.elementClone
 
-    const querySvgTag = (tag: keyof SVGElementTagNameMap) =>
-      Array.from(svgElement.querySelectorAll(tag))
+    const querySvgTag = (tag: keyof SVGElementTagNameMap) => [
+      ...svgElement.querySelectorAll(tag),
+    ]
 
     switch (tagName) {
       case 'svg': {
@@ -260,8 +261,7 @@ export class SVGClass {
   }
 
   private setSpriteHref() {
-    const isSpriteInstance = this.type === 'sprite'
-    if (!isSpriteInstance) return
+    if (this.type !== 'sprite') return
 
     const useElement = this.elementClone.querySelector('use')!
     const ownerDocument = document.URL

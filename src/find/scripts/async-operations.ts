@@ -73,4 +73,4 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
   return this
 }
 
-export { fetchSVGContent }
+export default fetchSVGContent

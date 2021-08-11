@@ -1,8 +1,8 @@
-import processSVGs from './scripts/process-svgs'
+import processElements from './scripts/process-elements'
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'start_gobbling') {
-    processSVGs()
+    processElements()
       .then((svgData) => {
         if (svgData.length === 0) {
           sendResponse({
