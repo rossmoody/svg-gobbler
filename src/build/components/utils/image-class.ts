@@ -1,16 +1,14 @@
 export class SVGImage {
   svgElement: HTMLElement
-  viewBox: string
   width: number
   height: number
-  htmlImageElementSrc: string
+  base64: string
   svgString: string
 
   constructor(svgString: string, height: number, width: number) {
     this.svgString = svgString
     this.svgElement = document.createElement('svg')
-    this.htmlImageElementSrc = ''
-    this.viewBox = '0 0 24 24'
+    this.base64 = ''
     this.width = width
     this.height = height
 
@@ -45,26 +43,20 @@ export class SVGImage {
     const base64 = btoa(decoded)
     const imgSource = `data:image/svg+xml;base64,${base64}`
 
-    this.htmlImageElementSrc = imgSource
+    this.base64 = imgSource
   }
 
   private createSvgElementFromString() {
-    const iDoc = new DOMParser().parseFromString(
+    const { documentElement } = new DOMParser().parseFromString(
       this.svgString,
       'image/svg+xml'
     )
-
-    this.svgElement = iDoc.documentElement
+    this.svgElement = documentElement
   }
 
   private setViewBox() {
-    const attributeNames = this.svgElement.getAttributeNames()
-
-    this.viewBox = `0 0 ${this.width} ${this.height}`
-
-    if (attributeNames.includes('viewBox'))
-      this.viewBox = this.svgElement.getAttribute('viewBox')!
-
-    this.svgElement.setAttribute('viewBox', this.viewBox)
+    const manualViewbox = `0 0 ${this.width} ${this.height}`
+    const viewBox = this.svgElement.getAttribute('viewBox')
+    if (!viewBox) this.svgElement.setAttribute('viewBox', manualViewbox)
   }
 }

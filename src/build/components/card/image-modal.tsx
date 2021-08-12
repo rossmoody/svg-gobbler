@@ -64,7 +64,7 @@ const ImageModal = ({
             >
               <Box
                 as="img"
-                src={state.htmlImageElementSrc}
+                src={state.base64}
                 width="100%"
                 height="100%"
                 zIndex={1}
@@ -84,14 +84,7 @@ const ImageModal = ({
 
         <ModalFooter flexDir="column" alignItems="flex-start">
           <Box marginBottom={5}>
-            <Text fontWeight="semibold">Configure</Text>
-            <Text
-              color={useColorModeValue('gray.600', 'gray.400')}
-              fontSize="sm"
-            >
-              Specify height, width, or filename before export. The SVG will
-              proportionally resize based on height or width.
-            </Text>
+            <Text fontWeight="semibold">Settings</Text>
           </Box>
 
           <FormControl>
@@ -178,15 +171,10 @@ const ImageModal = ({
               state.setClassWidthHeight(size.height, size.width)
               state.setSvgElementWidthHeight()
               state.createImgSrc()
-              handle.exportPNG(
-                state.htmlImageElementSrc,
-                size.width,
-                size.height,
-                filename
-              )
+              handle.exportPNG(state.base64, size.width, size.height, filename)
             }}
           >
-            Export PNG
+            Export avif
           </Button>
         </ModalFooter>
       </ModalContent>

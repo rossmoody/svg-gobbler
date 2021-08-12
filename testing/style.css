@@ -18,23 +18,13 @@
   margin: 20px;
 }
 
-article {
+.article {
   background: white;
   width: 40%;
   padding: 20px;
   position: relative;
-}
-
-article::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  height: 20px;
-  width: 100%;
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/rip.svg) bottom
     center;
-  background-size: 150%;
 }
 
 .icon-basketball {

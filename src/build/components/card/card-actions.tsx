@@ -10,20 +10,27 @@ interface CardActions {
 }
 
 const CardActions = ({ data }: CardActions) => {
-  const { cors, imgSrcHref, svgString, height, width, whiteFill } = data
+  const { cors, imgSrcHref, divBgUrl, svgString, height, width, whiteFill } =
+    data
+  const corsDiv = cors && divBgUrl
+  const corsImg = cors && imgSrcHref
 
-  if (cors && imgSrcHref) {
-    return <CardActionCors forwardingUrl={imgSrcHref} />
-  } else {
-    return (
-      <CardActionFooter
-        svgString={svgString!}
-        height={height || 24}
-        width={width || 24}
-        whiteFill={whiteFill}
-      />
-    )
+  if (corsImg) {
+    return <CardActionCors forwardingUrl={imgSrcHref!} />
   }
+
+  if (corsDiv) {
+    return <CardActionCors forwardingUrl={divBgUrl!} />
+  }
+
+  return (
+    <CardActionFooter
+      svgString={svgString!}
+      height={height || 24}
+      width={width || 24}
+      whiteFill={whiteFill}
+    />
+  )
 }
 
 export default CardActions
