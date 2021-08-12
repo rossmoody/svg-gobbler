@@ -24,15 +24,19 @@ const Card = ({ data }: CardData) => {
   const cardFillBg = useColorModeValue('white', 'gray.700')
   const whiteFillBg = useColorModeValue('gray.200', 'null')
 
+  const handleHoverAndFocus = () => {
+    if (showActions) return
+    setShowActions(true)
+  }
+
   return (
     <ScaleFade in initialScale={0.9}>
       <Box
         bg={cardFillBg}
         rounded="xl"
         shadow="md"
-        onFocus={() => setShowActions(true)}
-        onBlur={() => setShowActions(false)}
-        onMouseEnter={() => setShowActions(true)}
+        onFocus={handleHoverAndFocus}
+        onMouseEnter={handleHoverAndFocus}
         onMouseLeave={() => setShowActions(false)}
         maxWidth="280px"
       >
