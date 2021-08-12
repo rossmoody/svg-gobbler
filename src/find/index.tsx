@@ -1,7 +1,10 @@
 import processElements from './scripts/process-elements'
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === 'start_gobbling') {
+  if (
+    request.message === 'start_gobbling' &&
+    document.readyState === 'complete'
+  ) {
     processElements()
       .then((svgData) => {
         if (svgData.length === 0) {

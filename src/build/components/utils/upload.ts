@@ -41,6 +41,7 @@ export const util = {
     process.setSize.call(localSvg)
     process.convertElementRefToSVGString.call(localSvg)
     process.createPresentationSvg.call(localSvg)
+    localSvg.type = 'inline'
     return localSvg
   },
 

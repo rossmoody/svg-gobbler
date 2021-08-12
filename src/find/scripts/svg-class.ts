@@ -132,6 +132,8 @@ export class SVGClass {
         break
       }
 
+      // Getting css styles from divs vs imgs is tricky. We must reference the
+      // original DOM node to getComputedStyle because cloning strips the attributes
       case 'DIV': {
         const divElement = this.originalElementReference as HTMLDivElement
         const computedStyle = window.getComputedStyle(divElement)
