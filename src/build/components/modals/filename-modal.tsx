@@ -19,7 +19,8 @@ interface PopoverFormTypes {
   title: string
   svgString: string
   download: (svg: string, filename: string) => void
-  callback: (arg: boolean) => void
+  callback: React.Dispatch<React.SetStateAction<boolean>>
+  showModal: boolean
 }
 
 const FilenameModal = ({
@@ -27,21 +28,24 @@ const FilenameModal = ({
   svgString,
   callback,
   download,
+  showModal,
 }: PopoverFormTypes) => {
   const [filename, setFilename] = useState('svg-gobbler')
+
   const firstFieldRef = useRef(null)
 
   return (
     <Modal
       size="xs"
-      isOpen
+      isOpen={showModal}
       onClose={() => callback(false)}
       initialFocusRef={firstFieldRef}
       isCentered
     >
       <ModalOverlay />
       <form
-        onSubmit={() => {
+        onSubmit={(event) => {
+          event.preventDefault()
           download(svgString, filename)
           callback(false)
         }}

@@ -1,29 +1,12 @@
 import React, { useState } from 'react'
-import {
-  Button,
-  Grid,
-  Menu,
-  MenuList,
-  MenuButton,
-  MenuItem,
-  IconButton,
-  MenuDivider,
-  useColorModeValue,
-  useToast,
-} from '@chakra-ui/react'
-import {
-  FiChevronDown,
-  FiCode,
-  FiImage,
-  FiDownload,
-  FiCopy,
-} from 'react-icons/fi'
+import { Button, Grid, useColorModeValue, useToast } from '@chakra-ui/react'
 
 import Drawer from '../drawer'
+import FilenameModal from '../modals/filename-modal'
+import ImageModal from '../modals/image-modal'
 import handle from '../utils/actions'
 
-import ImageModal from './image-modal'
-import FilenameModal from './filename-modal'
+import CardActionMenu from './card-action-menu'
 
 interface CardActionFooter {
   svgString: string
@@ -61,15 +44,6 @@ const CardActionFooter = ({
       bg={useColorModeValue('white', 'gray.700')}
     >
       <Button onClick={() => setShowOgModal(true)}>Download</Button>
-      {showOgModal && (
-        <FilenameModal
-          title="Download original"
-          download={handle.downloadOriginal}
-          svgString={svgString}
-          callback={setShowOgModal}
-        />
-      )}
-
       <Button
         onClick={() => {
           handle.copyToClipboard(svgString)
@@ -83,67 +57,43 @@ const CardActionFooter = ({
         Copy
       </Button>
 
-      <Menu placement="top">
-        <MenuButton
-          as={IconButton}
-          icon={<FiChevronDown />}
-          aria-label="Options"
-          borderRadius="md"
-        />
-        <MenuList zIndex={100}>
-          <MenuItem
-            icon={<FiDownload />}
-            onClick={() => setShowOptimizedModal(true)}
-          >
-            Download optimized
-          </MenuItem>
-          {showOptimizedModal && (
-            <FilenameModal
-              title="Download optimized"
-              download={handle.downloadOptimized}
-              svgString={svgString}
-              callback={setShowOptimizedModal}
-            />
-          )}
+      <CardActionMenu
+        setShowOptimizedModal={setShowOptimizedModal}
+        setShowDrawer={setShowDrawer}
+        svgString={svgString}
+        setShowModal={setShowModal}
+      />
 
-          <MenuItem
-            icon={<FiCopy />}
-            onClick={() => {
-              handle.copyOptimized(svgString)
-              toast({
-                title: 'Copied to clipboard',
-                description:
-                  "The SVG has been successfully optimized using SVGO's default settings and is available in your clipboard.",
-              })
-            }}
-          >
-            Copy optimized
-          </MenuItem>
+      <FilenameModal
+        title="Download original"
+        download={handle.downloadOriginal}
+        svgString={svgString}
+        callback={setShowOgModal}
+        showModal={showOgModal}
+      />
 
-          <MenuDivider />
+      <FilenameModal
+        title="Download optimized"
+        download={handle.downloadOptimized}
+        svgString={svgString}
+        callback={setShowOptimizedModal}
+        showModal={showOptimizedModal}
+      />
 
-          <MenuItem icon={<FiImage />} onClick={() => setShowModal(true)}>
-            Export as PNG…
-          </MenuItem>
+      <Drawer
+        svgString={svgString}
+        callback={setShowDrawer}
+        showDrawer={showDrawer}
+      />
 
-          {showModal && (
-            <ImageModal
-              callback={setShowModal}
-              svgString={svgString}
-              height={height}
-              width={width}
-              whiteFill={whiteFill}
-            />
-          )}
-          <MenuDivider />
-          <MenuItem icon={<FiCode />} onClick={() => setShowDrawer(true)}>
-            View code…
-          </MenuItem>
-          {showDrawer && (
-            <Drawer svgString={svgString} callback={setShowDrawer} />
-          )}
-        </MenuList>
-      </Menu>
+      <ImageModal
+        callback={setShowModal}
+        svgString={svgString}
+        height={height}
+        width={width}
+        whiteFill={whiteFill}
+        showModal={showModal}
+      />
     </Grid>
   )
 }

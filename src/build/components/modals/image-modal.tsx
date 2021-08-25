@@ -25,11 +25,12 @@ import handle from '../utils/actions'
 import { SVGImage } from '../utils/image-class'
 
 interface ImageModalProps {
-  callback: (arg: boolean) => void
+  callback: React.Dispatch<React.SetStateAction<boolean>>
   svgString: string
   height: number
   width: number
   whiteFill: boolean
+  showModal: boolean
 }
 
 const ImageModal = ({
@@ -38,6 +39,7 @@ const ImageModal = ({
   height,
   width,
   whiteFill,
+  showModal,
 }: ImageModalProps) => {
   const [size, setSize] = useState({ height, width })
   const [filename, setFilename] = useState('svg-image')
@@ -48,7 +50,7 @@ const ImageModal = ({
 
   return (
     <Modal
-      isOpen
+      isOpen={showModal}
       onClose={() => callback(false)}
       size="lg"
       initialFocusRef={firstFieldRef}

@@ -10,16 +10,16 @@ import {
 
 import { DrawerContent as DrawerCodeContent } from './drawer-content'
 
-function CodeDrawer({
-  callback,
-  svgString,
-}: {
-  callback: any
+interface CodeDrawer {
+  callback: React.Dispatch<React.SetStateAction<boolean>>
   svgString: string
-}) {
+  showDrawer: boolean
+}
+
+function CodeDrawer({ callback, svgString, showDrawer }: CodeDrawer) {
   return (
     <Drawer
-      isOpen
+      isOpen={showDrawer}
       placement="right"
       size="2xl"
       onClose={() => {
