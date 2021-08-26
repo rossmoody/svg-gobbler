@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { AppData } from '../../types'
-import { loc } from '..'
+import loc from '../utils/localization'
 
 import LoadingGallery from './loading-gallery'
-import EmptyGallery from './empty-gallery'
 import DataGallery from './data-gallery'
+import EmptyGallery from './empty-gallery'
 
 interface GalleryData {
   data: AppData

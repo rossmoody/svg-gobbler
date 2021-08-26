@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 import { SVGOConfig } from '../../types'
+import loc from '../utils/localization'
 
 import { SVGHighlighter } from './syntax-highlighter'
 import { runSvgo, defaultConfig } from './svgo/svgo-configs'
@@ -88,14 +89,14 @@ function DrawerContent({ svgString }: DrawerContent) {
               overflow="auto"
             >
               <Box px={5} paddingTop={4} paddingBottom={6} marginBottom={12}>
-                <Subhead>Quick Configuration</Subhead>
+                <Subhead>{loc('drawer_quick')}</Subhead>
                 <QuickConfiguration
                   setConfig={setConfig}
                   setRadioGroup={setRadioGroup}
                   radioGroup={radioGroup}
                 />
                 <Divider my={8} />
-                <Subhead>Optimizations</Subhead>
+                <Subhead>{loc('drawer_optim')}</Subhead>
                 <Stack spacing="4">
                   {optionsData.map((option) => (
                     <Option

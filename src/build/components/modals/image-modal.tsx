@@ -16,13 +16,13 @@ import {
   Input,
   HStack,
   InputGroup,
-  Text,
   useColorModeValue,
   FormControl,
 } from '@chakra-ui/react'
 
 import handle from '../utils/actions'
 import { SVGImage } from '../utils/image-class'
+import loc from '../utils/localization'
 
 interface ImageModalProps {
   callback: React.Dispatch<React.SetStateAction<boolean>>
@@ -57,7 +57,7 @@ const ImageModal = ({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Export image</ModalHeader>
+        <ModalHeader>{loc('modals_exportImage')}</ModalHeader>
         <ModalCloseButton />
         <ModalBody marginBottom={4}>
           <Center width="100%" height="100%" position="relative">
@@ -103,7 +103,7 @@ const ImageModal = ({
             <FormControl>
               <HStack>
                 <FormLabel margin={0} fontSize="sm" htmlFor="height">
-                  Height
+                  {loc('modals_height')}
                   <InputGroup>
                     <Input
                       ref={firstFieldRef}
@@ -123,11 +123,11 @@ const ImageModal = ({
                         setSize({ height: newHeight, width: newWidth })
                       }}
                     />
-                    <InputRightAddon children="px" />
+                    <InputRightAddon children={loc('modals_px')} />
                   </InputGroup>
                 </FormLabel>
                 <FormLabel fontSize="sm" htmlFor="width">
-                  Width
+                  {loc('modals_width')}
                   <InputGroup>
                     <Input
                       id="width"
@@ -146,14 +146,14 @@ const ImageModal = ({
                         setSize({ height: newHeight, width: newWidth })
                       }}
                     />
-                    <InputRightAddon children="px" />
+                    <InputRightAddon children={loc('modals_px')} />
                   </InputGroup>
                 </FormLabel>
               </HStack>
             </FormControl>
             <FormControl marginTop={4}>
               <FormLabel htmlFor="image-filename" fontSize="sm">
-                Filename
+                {loc('modals_filename')}
               </FormLabel>
               <InputGroup>
                 <Input
@@ -161,7 +161,7 @@ const ImageModal = ({
                   defaultValue={filename}
                   onChange={(event) => setFilename(event.target.value)}
                 />
-                <InputRightAddon>.png</InputRightAddon>
+                <InputRightAddon>{loc('modals_fileType_png')}</InputRightAddon>
               </InputGroup>
             </FormControl>
 
@@ -172,7 +172,7 @@ const ImageModal = ({
               isFullWidth
               type="submit"
             >
-              Export PNG
+              {loc('modals_exportImage')}
             </Button>
           </form>
         </ModalFooter>

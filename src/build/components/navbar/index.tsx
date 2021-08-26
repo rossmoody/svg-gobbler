@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Flex, useColorModeValue, Button } from '@chakra-ui/react'
 import { FeedbackFish } from '@feedback-fish/react'
 
-import { loc } from '..'
+import loc from '../utils/localization'
 
 import Logo from './logo'
 import ThemeToggle from './theme-toggle'

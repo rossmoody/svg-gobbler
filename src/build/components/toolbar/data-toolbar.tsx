@@ -16,7 +16,7 @@ import handle from '../utils/actions'
 import Tooltip from '../generic/tooltip'
 import { AppData } from '../../types'
 import { util } from '../utils/upload'
-import { loc } from '..'
+import loc from '../utils/localization'
 
 interface ToolbarData {
   data: AppData

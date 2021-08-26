@@ -11,7 +11,7 @@ import {
 import { FaPlus } from 'react-icons/fa'
 
 import { util } from '../utils/upload'
-import { loc } from '..'
+import loc from '../utils/localization'
 
 interface EmptyGallery {
   headline: string

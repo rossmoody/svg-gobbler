@@ -7,9 +7,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { loc } from '..'
 import Card from '../card'
 import SVG from '../../../find/scripts/svg-class'
+import loc from '../utils/localization'
 
 interface GalleryData {
   data: SVG[][]

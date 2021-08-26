@@ -15,6 +15,8 @@ import {
   ModalFooter,
 } from '@chakra-ui/react'
 
+import loc from '../utils/localization'
+
 interface PopoverFormTypes {
   title: string
   svgString: string
@@ -55,7 +57,7 @@ const FilenameModal = ({
           <ModalCloseButton />
           <ModalBody>
             <FormControl>
-              <FormLabel htmlFor="filename">Filename</FormLabel>
+              <FormLabel htmlFor="filename">{loc('modals_filename')}</FormLabel>
               <InputGroup>
                 <Input
                   id="filename"
@@ -63,14 +65,14 @@ const FilenameModal = ({
                   defaultValue={filename}
                   onChange={(event) => setFilename(event.target.value)}
                 />
-                <InputRightAddon>.svg</InputRightAddon>
+                <InputRightAddon>{loc('modals_fileType')}</InputRightAddon>
               </InputGroup>
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="red" isFullWidth type="submit">
-              Save
+              {loc('modals_save')}
             </Button>
           </ModalFooter>
         </ModalContent>
