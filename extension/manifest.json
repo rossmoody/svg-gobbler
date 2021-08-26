@@ -26,7 +26,7 @@
   "content_security_policy": "script-src 'self' https://feedback.fish/ff.js; object-src",
   "content_scripts": [
     {
-      "matches": ["https://*/*"],
+      "matches": ["https://*/*", "http://*/*"],
       "js": ["./dist/find.js"]
     }
   ]
