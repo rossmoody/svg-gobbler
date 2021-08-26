@@ -91,10 +91,6 @@ const ImageModal = ({
         </ModalBody>
 
         <ModalFooter flexDir="column" alignItems="flex-start">
-          <Box marginBottom={5}>
-            <Text fontWeight="semibold">Settings</Text>
-          </Box>
-
           <form
             onSubmit={(event) => {
               event.preventDefault()
