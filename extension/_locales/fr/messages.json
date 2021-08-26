@@ -1,0 +1,419 @@
+{
+  "appName": {
+    "message": "SVG Gobbler"
+  },
+  "appDesc": {
+    "message": "Download and optimize icons, logos, and vector SVGs."
+  },
+  "nav_fb": {
+    "message": "Poop"
+  },
+  "nav_theme": {
+    "message": "Theme toggle"
+  },
+  "toolbar_qty": {
+    "message": "available SVG"
+  },
+  "toolbar_download": {
+    "message": "Download all"
+  },
+  "toolbar_tooltip": {
+    "message": "Drop SVGs anywhere on this page to upload"
+  },
+  "toolbar_upload": {
+    "message": "Upload"
+  },
+  "gallery_load": {
+    "message": "Loading SVGs"
+  },
+  "gallery_show": {
+    "message": "Show more"
+  },
+  "gallery_upload": {
+    "message": "Upload SVG"
+  },
+  "gallery_noAvailTitle": {
+    "message": "No available SVGs to gobble"
+  },
+  "gallery_noAvailDesc": {
+    "message": "Upload your own SVGs to this page to optimize them using SVGO"
+  },
+  "gallery_uploadTitle": {
+    "message": "Upload an SVG"
+  },
+  "gallery_uploadDesc": {
+    "message": "Upload SVGs onto this page to optimize"
+  },
+  "gallery_errorTitle": {
+    "message": "Shucks, something went wrong"
+  },
+  "gallery_errorDesc": {
+    "message": "Close this page and give it another try or upload your own SVGs"
+  },
+  "modals_save": {
+    "message": "Save"
+  },
+  "modals_filename": {
+    "message": "Filename"
+  },
+  "modals_fileType": {
+    "message": ".svg"
+  },
+  "modals_fileType_png": {
+    "message": ".png"
+  },
+  "modals_exportImage": {
+    "message": "Export image"
+  },
+  "modals_height": {
+    "message": "Height"
+  },
+  "modals_width": {
+    "message": "Width"
+  },
+  "modals_px": {
+    "message": "px"
+  },
+  "footer_title": {
+    "message": "SVG Gobbler is an open source initiative by "
+  },
+  "footer_titleName": {
+    "message": "Ross Moody"
+  },
+  "footer_desc": {
+    "message": "If you find it helpful, please leave a review on the "
+  },
+  "footer_portfolio": {
+    "message": "https://rossmoody.com/"
+  },
+  "footer_or": {
+    "message": "or "
+  },
+  "footer_chrome": {
+    "message": "Chrome Web Store"
+  },
+  "footer_chromeLink": {
+    "message": "https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en"
+  },
+  "footer_firefox": {
+    "message": "Firefox Addon Marketplace"
+  },
+  "footer_firefoxLink": {
+    "message": "https://addons.mozilla.org/en-US/firefox/addon/svg-gobbler/"
+  },
+  "footer_twitter": {
+    "message": "http://www.twitter.com/_rossmoody"
+  },
+  "footer_github": {
+    "message": "https://github.com/rossmoody/svg-gobbler"
+  },
+  "drawer_details": {
+    "message": "Code details"
+  },
+  "drawer_labelNone": {
+    "message": "None"
+  },
+  "drawer_labelSvgo": {
+    "message": "SVGO default"
+  },
+  "drawer_labelCustom": {
+    "message": "Custom"
+  },
+  "drawer_quick": {
+    "message": "Quick configuration"
+  },
+  "drawer_optim": {
+    "message": "Optimizations"
+  },
+  "drawer_svg": {
+    "message": "SVG"
+  },
+  "drawer_react": {
+    "message": "React"
+  },
+  "drawer_copy": {
+    "message": "Copy"
+  },
+  "card_open": {
+    "message": "Open in new tab"
+  },
+  "card_copy_title": {
+    "message": "Copied to clipboard"
+  },
+  "card_copy_desc": {
+    "message": "The SVG has been copied to your clipboard and is ready to be pasted."
+  },
+  "card_copy_action": {
+    "message": "Copy"
+  },
+  "card_dl_orig": {
+    "message": "Download original"
+  },
+  "card_dl_opt": {
+    "message": "Download optimized"
+  },
+  "card_menu_exportPng": {
+    "message": "Export as PNG…"
+  },
+  "card_menu_viewCode": {
+    "message": "View code…"
+  },
+  "card_menu_dl_opt": {
+    "message": "Download optimized"
+  },
+  "card_menu_copy_opt": {
+    "message": "Copy optimized"
+  },
+  "card_menu_toast_optTitle": {
+    "message": "Copied to clipboard"
+  },
+  "card_menu_toast_optDesc": {
+    "message": "The SVG has been successfully optimized using SVGO's default settings and is available in your clipboard."
+  },
+  "card_menu_type": {
+    "message": "type"
+  },
+  "card_menu_size": {
+    "message": "Size"
+  },
+  "svgo_title_beaut": {
+    "message": "Beautify markup"
+  },
+  "svgo_desc_beaut": {
+    "message": "Format and indent markup"
+  },
+  "svgo_title_cleanAtt": {
+    "message": "Cleanup attributes"
+  },
+  "svgo_desc_cleanAtt": {
+    "message": "Cleanup attributes from new lines, trailing, and repeating spaces"
+  },
+  "svgo_title_cleanBg": {
+    "message": "Cleanup enable-background"
+  },
+  "svgo_desc_cleanBg": {
+    "message": "Remove or cleanup enable-background attribute when it coincides with width and height"
+  },
+  "svgo_title_cleanId": {
+    "message": "Cleanup id attributes"
+  },
+  "svgo_desc_cleanId": {
+    "message": "Remove unused and minify used IDs"
+  },
+  "svgo_title_cleanNum": {
+    "message": "Cleanup numeric values"
+  },
+  "svgo_desc_cleanNum": {
+    "message": "Round numeric values to the fixed precision and remove default px units"
+  },
+  "svgo_title_coll": {
+    "message": "Collapse groups"
+  },
+  "svgo_desc_coll": {
+    "message": "Collapse redundant groups"
+  },
+  "svgo_title_convCol": {
+    "message": "Convert colors"
+  },
+  "svgo_desc_convCol": {
+    "message": "Convert colors from rgb() to #rrggbb and #rrggbb to #rgb)"
+  },
+  "svgo_title_convEllip": {
+    "message": "Convert ellipsis to circle"
+  },
+  "svgo_desc_convEllip": {
+    "message": "Convert non-eccentric <ellipse> to <circle>"
+  },
+  "svgo_title_convPath": {
+    "message": "Convert path data"
+  },
+  "svgo_desc_convPath": {
+    "message": "Convert and optimize path data to relative or absolute - whichever is shorter"
+  },
+  "svgo_title_convShape": {
+    "message": "Convert shape to path"
+  },
+  "svgo_desc_convShape": {
+    "message": "Optimize and combine basic shapes to <path>"
+  },
+  "svgo_title_convTran": {
+    "message": "Convert transform"
+  },
+  "svgo_desc_convTran": {
+    "message": "Collapse multiple transforms into one"
+  },
+  "svgo_title_inl": {
+    "message": "Inline styles"
+  },
+  "svgo_desc_inl": {
+    "message": "Move and merge styles from <style> elements to element style attributes"
+  },
+  "svgo_title_mergePath": {
+    "message": "Merge paths"
+  },
+  "svgo_desc_mergePath": {
+    "message": "Merge multiple paths into one"
+  },
+  "svgo_title_mergeStyle": {
+    "message": "Merge styles"
+  },
+  "svgo_desc_mergeStyle": {
+    "message": "Merge multiple style elements into one"
+  },
+  "svgo_title_minStyles": {
+    "message": "Minify styles"
+  },
+  "svgo_desc_minStyles": {
+    "message": "Minify <style> elements with CSSO minifier"
+  },
+  "svgo_title_moveEl": {
+    "message": "Move element attributes to group"
+  },
+  "svgo_desc_moveEl": {
+    "message": "Move element attributes to their enclosing group"
+  },
+  "svgo_title_moveGroup": {
+    "message": "Move group attributes to elements"
+  },
+  "svgo_desc_moveGroup": {
+    "message": "Move group attributes to the contained elements"
+  },
+  "svgo_title_prefixId": {
+    "message": "Prefix id and class"
+  },
+  "svgo_desc_prefixId": {
+    "message": "Prefix IDs and classes with the SVG filename or an arbitrary string"
+  },
+  "svgo_title_removeComm": {
+    "message": "Remove comments"
+  },
+  "svgo_desc_removeComm": {
+    "message": "Remove comments inside the markup"
+  },
+  "svgo_title_removeDesc": {
+    "message": "Remove description"
+  },
+  "svgo_desc_removeDesc": {
+    "message": "Remove <desc> and content within"
+  },
+  "svgo_title_removeDim": {
+    "message": "Remove dimensions"
+  },
+  "svgo_desc_removeDim": {
+    "message": "Remove width/height and add viewBox if it's missing"
+  },
+  "svgo_title_removeDoc": {
+    "message": "Remove doctype"
+  },
+  "svgo_desc_removeDoc": {
+    "message": "Remove doctype declaration"
+  },
+  "svgo_title_removeEdit": {
+    "message": "Remove editor namespace data"
+  },
+  "svgo_desc_removeEdit": {
+    "message": "Remove editor namespaces, elements, and attributes"
+  },
+  "svgo_title_removeEmptyAtt": {
+    "message": "Remove empty attributes"
+  },
+  "svgo_desc_removeEmptyAtt": {
+    "message": "Remove empty attributes"
+  },
+  "svgo_title_removeCont": {
+    "message": "Remove empty containers"
+  },
+  "svgo_desc_removeCont": {
+    "message": "Remove empty containers elements"
+  },
+  "svgo_title_removeText": {
+    "message": "Remove empty text"
+  },
+  "svgo_desc_removeText": {
+    "message": "Remove empty text elements"
+  },
+  "svgo_title_removeHidden": {
+    "message": "Remove hidden elements"
+  },
+  "svgo_desc_removeHidden": {
+    "message": "Remove hiddent elements with disabled rendering"
+  },
+  "svgo_title_removeMeta": {
+    "message": "Remove metadata"
+  },
+  "svgo_desc_removeMeta": {
+    "message": "Remove <metadata> content within the markup"
+  },
+  "svgo_title_removeNon": {
+    "message": "Remove non-inheritable attributes"
+  },
+  "svgo_desc_removeNon": {
+    "message": "Remove non-inheritable group's \"presentation\" attributes"
+  },
+  "svgo_title_removeRaster": {
+    "message": "Remove raster images"
+  },
+  "svgo_desc_removeRaster": {
+    "message": "Remove raster images from within the markup"
+  },
+  "svgo_title_removeTitle": {
+    "message": "Remove title"
+  },
+  "svgo_desc_removeTitle": {
+    "message": "Remove <title> declaration"
+  },
+  "svgo_title_removeUnk": {
+    "message": "Remove unknown elements and defaults"
+  },
+  "svgo_desc_removeUnk": {
+    "message": "Remove unknown elements and remove attributes with default values"
+  },
+  "svgo_title_removeUnuse": {
+    "message": "Remove unused namespace"
+  },
+  "svgo_desc_removeUnuse": {
+    "message": "Remove unused namespaces declaration"
+  },
+  "svgo_title_removeUselessDef": {
+    "message": "Remove useless defs"
+  },
+  "svgo_desc_removeUselessDef": {
+    "message": "Remove elements inside <defs> without id"
+  },
+  "svgo_title_removeUselessStr": {
+    "message": "Remove useless stroke and fill"
+  },
+  "svgo_desc_removeUselessStr": {
+    "message": "Remove useless stroke and fill attributes"
+  },
+  "svgo_title_removeView": {
+    "message": "Remove viewBox attribute"
+  },
+  "svgo_desc_removeView": {
+    "message": "Remove viewBox attribute when it coincides with width and height attributes"
+  },
+  "svgo_title_removeXml": {
+    "message": "Remove XML instructions"
+  },
+  "svgo_desc_removeXml": {
+    "message": "Remove XML processing instructions"
+  },
+  "svgo_title_removeXmlAtt": {
+    "message": "Remove XMLNS attribute"
+  },
+  "svgo_desc_removeXmlAtt": {
+    "message": "Remove the xmlns attribute for inline SVG"
+  },
+  "svgo_title_sortAttr": {
+    "message": "Sort attributes"
+  },
+  "svgo_desc_sortAttr": {
+    "message": "Sort element attributes alphabetically"
+  },
+  "svgo_title_sortDefs": {
+    "message": "Sort defs children"
+  },
+  "svgo_desc_sortDefs": {
+    "message": "Sort children of <defs> in order to improve compression"
+  }
+}
