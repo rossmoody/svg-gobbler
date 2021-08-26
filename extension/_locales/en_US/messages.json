@@ -1,0 +1,53 @@
+{
+  "appName": {
+    "message": "SVG Gobbler"
+  },
+  "appDesc": {
+    "message": "Download and optimize icons, logos, and vector SVGs."
+  },
+  "nav_fb": {
+    "message": "Send feedback"
+  },
+  "nav_theme": {
+    "message": "Theme toggle"
+  },
+  "toolbar_qty": {
+    "message": "available SVG"
+  },
+  "toolbar_download": {
+    "message": "Download all"
+  },
+  "toolbar_tooltip": {
+    "message": "Drop SVGs anywhere on this page to upload"
+  },
+  "toolbar_upload": {
+    "message": "Upload"
+  },
+  "gallery_load": {
+    "message": "Loading SVGs"
+  },
+  "gallery_show": {
+    "message": "Show more"
+  },
+  "gallery_upload": {
+    "message": "Upload SVG"
+  },
+  "gallery_noAvailTitle": {
+    "message": "No available SVGs to gobble"
+  },
+  "gallery_noAvailDesc": {
+    "message": "Upload your own SVGs to this page to optimize them using SVGO"
+  },
+  "gallery_uploadTitle": {
+    "message": "Upload an SVG"
+  },
+  "gallery_uploadDesc": {
+    "message": "Upload SVGs onto this page to optimize"
+  },
+  "gallery_errorTitle": {
+    "message": "Shucks, something went wrong"
+  },
+  "gallery_errorDesc": {
+    "message": "Close this page and give it another try or upload your own SVGs"
+  }
+}

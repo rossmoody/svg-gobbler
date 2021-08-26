@@ -1,8 +1,9 @@
 {
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en_US",
   "manifest_version": 2,
-  "name": "SVG Gobbler",
-  "version": "3.8.3",
-  "description": "Download and optimize icons, logos, and vector SVGs.",
+  "version": "3.9.0",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
   "icons": {
     "16": "icons/icon16.png",

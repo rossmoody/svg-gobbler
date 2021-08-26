@@ -7,6 +7,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
+import { loc } from '..'
 import Card from '../card'
 import SVG from '../../../find/scripts/svg-class'
 
@@ -52,10 +53,10 @@ const DataGallery = ({ data }: GalleryData) => {
                 setTimeout(handleShowMore, 1)
                 setTimeout(setLoading, 5000, false)
               }}
-              loadingText="Loading SVGs"
+              loadingText={loc('gallery_load')}
               isLoading={loading}
             >
-              Show more
+              {loc('gallery_show')}
             </Button>
           </Center>
         )}

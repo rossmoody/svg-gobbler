@@ -2,6 +2,8 @@ import React from 'react'
 import { Box, Flex, useColorModeValue, Button } from '@chakra-ui/react'
 import { FeedbackFish } from '@feedback-fish/react'
 
+import { loc } from '..'
+
 import Logo from './logo'
 import ThemeToggle from './theme-toggle'
 
@@ -22,7 +24,7 @@ const Navbar = ({ data, location }: NavbarData) => {
             projectId="cc5d44e3563b88"
             metadata={{ data: stringData, location }}
           >
-            <Button marginRight={4}>Send feedback</Button>
+            <Button marginRight={4}>{loc('nav_fb')}</Button>
           </FeedbackFish>
           <ThemeToggle />
         </Flex>

@@ -16,6 +16,7 @@ import handle from '../utils/actions'
 import Tooltip from '../generic/tooltip'
 import { AppData } from '../../types'
 import { util } from '../utils/upload'
+import { loc } from '..'
 
 interface ToolbarData {
   data: AppData
@@ -42,7 +43,7 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
               color={useColorModeValue('gray.600', 'gray.400')}
               fontSize="sm"
             >
-              Showing {util.getSvgQuantity(data)} available SVG
+              {util.getSvgQuantity(data)} {loc('toolbar_qty')}
               {util.isPlural(util.getSvgQuantity(data))}
             </Text>
           </Stack>
@@ -60,7 +61,7 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
                 colorScheme="red"
                 onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}
               >
-                Download all
+                {loc('toolbar_download')}
               </Button>
             )}
             <Input
@@ -86,13 +87,13 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
                   .catch(() => {})
               }}
             />
-            <Tooltip label="Drop SVGs anywhere on this page to upload">
+            <Tooltip label={loc('toolbar_tooltip')}>
               <Button
                 leftIcon={<FaPlus />}
                 size="lg"
                 onClick={util.handleUploadClick}
               >
-                Upload
+                {loc('toolbar_upload')}
               </Button>
             </Tooltip>
           </HStack>
