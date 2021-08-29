@@ -1,4 +1,4 @@
-import strings from '../../../../extension/_locales/en_US/messages.json'
+import strings from '../../../../extension/_locales/en/messages.json'
 
 type StringKeys = keyof typeof strings
 
