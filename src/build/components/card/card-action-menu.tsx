@@ -17,6 +17,7 @@ import {
 } from 'react-icons/fi'
 
 import handle from '../utils/actions'
+import loc from '../utils/localization'
 
 interface CardActionMenu {
   setShowOptimizedModal: any
@@ -51,7 +52,7 @@ const CardActionMenu = ({
           icon={<FiDownload />}
           onClick={() => setShowOptimizedModal(true)}
         >
-          Download optimized
+          {loc('card_dl_opt')}
         </MenuItem>
 
         <MenuItem
@@ -59,24 +60,24 @@ const CardActionMenu = ({
           onClick={() => {
             handle.copyOptimized(svgString)
             toast({
-              title: 'Copied to clipboard',
-              description:
-                "The SVG has been successfully optimized using SVGO's default settings and is available in your clipboard.",
+              title: loc('card_menu_toast_optTitle'),
+              description: loc('card_menu_toast_optDesc'),
             })
           }}
         >
-          Copy optimized
+          {loc('card_menu_copy_opt')}
         </MenuItem>
 
         <MenuDivider />
 
         <MenuItem icon={<FiImage />} onClick={() => setShowModal(true)}>
-          Export as PNG…
+          {loc('card_menu_exportPng')}
         </MenuItem>
 
         <MenuDivider />
+
         <MenuItem icon={<FiCode />} onClick={() => setShowDrawer(true)}>
-          View code…
+          {loc('card_menu_viewCode')}
         </MenuItem>
       </MenuList>
     </Menu>

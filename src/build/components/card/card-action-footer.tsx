@@ -5,6 +5,7 @@ import Drawer from '../drawer'
 import FilenameModal from '../modals/filename-modal'
 import ImageModal from '../modals/image-modal'
 import handle from '../utils/actions'
+import loc from '../utils/localization'
 
 import CardActionMenu from './card-action-menu'
 
@@ -48,13 +49,12 @@ const CardActionFooter = ({
         onClick={() => {
           handle.copyToClipboard(svgString)
           toast({
-            title: 'Copied to clipboard',
-            description:
-              'The SVG has been copied to your clipboard and is ready to be pasted.',
+            title: loc('card_copy_title'),
+            description: loc('card_copy_desc'),
           })
         }}
       >
-        Copy
+        {loc('card_copy_action')}
       </Button>
 
       <CardActionMenu
@@ -65,7 +65,7 @@ const CardActionFooter = ({
       />
 
       <FilenameModal
-        title="Download original"
+        title={loc('card_dl_orig')}
         download={handle.downloadOriginal}
         svgString={svgString}
         callback={setShowOgModal}
@@ -73,7 +73,7 @@ const CardActionFooter = ({
       />
 
       <FilenameModal
-        title="Download optimized"
+        title={loc('card_dl_opt')}
         download={handle.downloadOptimized}
         svgString={svgString}
         callback={setShowOptimizedModal}

@@ -1,7 +1,8 @@
 import React from 'react'
-import { RadioGroup, Radio, Stack, FormLabel } from '@chakra-ui/react'
+import { RadioGroup, Stack } from '@chakra-ui/react'
 
 import { SVGOConfig } from '../../../types'
+import loc from '../../utils/localization'
 
 import { defaultConfig, allFalseConfig } from './svgo-configs'
 import { RadioOption } from './radio-option'
@@ -43,9 +44,9 @@ export function QuickConfiguration({
       colorScheme="red"
     >
       <Stack direction="row" spacing={4}>
-        <RadioOption label="None" value="none" />
-        <RadioOption label="SVGO Default" value="default" />
-        <RadioOption label="Custom" value="custom" />
+        <RadioOption label={loc('drawer_labelNone')} value="none" />
+        <RadioOption label={loc('drawer_labelSvgo')} value="default" />
+        <RadioOption label={loc('drawer_labelCustom')} value="custom" />
       </Stack>
     </RadioGroup>
   )

@@ -3,6 +3,7 @@ import { Button, Grid, useColorModeValue } from '@chakra-ui/react'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 
 import Tooltip from '../generic/tooltip'
+import loc from '../utils/localization'
 
 function sendMessage(callback: any) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabArray) => {
@@ -67,7 +68,7 @@ const CardActionCors = ({ forwardingUrl }: { forwardingUrl: string }) => {
           onClick={() => handleCorsTab(forwardingUrl)}
           rightIcon={<FaExternalLinkAlt />}
         >
-          Open in new tab
+          {loc('card_open')}
         </Button>
       </Tooltip>
     </Grid>

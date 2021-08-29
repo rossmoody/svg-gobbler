@@ -9,6 +9,8 @@ import {
 } from '@chakra-ui/react'
 import prettyBytes from 'pretty-bytes'
 
+import loc from '../utils/localization'
+
 const getStringSize = (string: string) => {
   const bytes = new Blob([string]).size
   return prettyBytes(bytes)
@@ -44,7 +46,7 @@ function CodeViewHeader({
               onClick={() => setIsReact(false)}
               variant="outline"
             >
-              SVG
+              {loc('drawer_svg')}
             </Button>
             <Button
               size="xs"
@@ -52,7 +54,7 @@ function CodeViewHeader({
               onClick={() => setIsReact(true)}
               variant="outline"
             >
-              React
+              {loc('drawer_react')}
             </Button>
           </ButtonGroup>
         </Box>
@@ -71,7 +73,7 @@ function CodeViewHeader({
           }, 1500)
         }}
       >
-        Copy
+        {loc('drawer_copy')}
       </Button>
     </Flex>
   )
