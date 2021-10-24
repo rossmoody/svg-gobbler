@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         })
       })
   }
-  // * Must return true to keep runtime port open between
-  // * tabs open during async promise resolution
+  // Must return true to keep runtime port open between
+  // tabs open during async promise resolution
   return true
 })
