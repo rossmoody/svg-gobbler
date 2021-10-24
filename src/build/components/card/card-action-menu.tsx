@@ -39,7 +39,7 @@ const CardActionMenu = ({
   })
 
   return (
-    <Menu placement="top" isLazy closeOnSelect={false}>
+    <Menu placement="top" isLazy>
       <MenuButton
         as={IconButton}
         icon={<FiChevronDown />}
