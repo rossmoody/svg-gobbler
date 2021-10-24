@@ -3,7 +3,7 @@
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "manifest_version": 2,
-  "version": "3.9.0",
+  "version": "3.10.0",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
   "icons": {
     "16": "icons/icon16.png",
@@ -23,7 +23,10 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": ["tabs", "https://www.svggobbler.com/.netlify/functions/svgr"],
+  "permissions": [
+    "activeTab",
+    "https://www.svggobbler.com/.netlify/functions/svgr"
+  ],
   "content_security_policy": "script-src 'self' https://feedback.fish/ff.js; object-src",
   "content_scripts": [
     {
