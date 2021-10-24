@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TextProps, Link } from '@chakra-ui/react'
+import { Link, Text, TextProps } from '@chakra-ui/react'
 
 import loc from '../utils/localization'
 
@@ -16,7 +16,7 @@ export const Copyright = (props: TextProps) => (
       {loc('footer_desc')}
       <Link href={loc('footer_chromeLink')} color="red">
         {loc('footer_chrome')}
-      </Link>
+      </Link>{' '}
       {loc('footer_or')}
       <Link href={loc('footer_firefoxLink')} color="red">
         {loc('footer_firefox')}

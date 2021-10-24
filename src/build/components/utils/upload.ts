@@ -1,5 +1,5 @@
-import SVG from '../../../find/scripts/svg-class'
-import process from '../../../find/scripts/process-svg'
+import React from 'react'
+import SVG from '../../../find/SVG'
 import { AppData } from '../../types'
 
 export const util = {
@@ -12,16 +12,10 @@ export const util = {
 
     if (isArray) {
       const array = data as SVG[][]
-      const quantity = array.reduce(
-        (finalLength: number, currentArray: SVG[]) => {
-          const length = currentArray.length
-          const newLength = finalLength + length
-          return newLength
-        },
-        0
-      )
-
-      return quantity
+      return array.reduce((finalLength: number, currentArray: SVG[]) => {
+        const length = currentArray.length
+        return finalLength + length
+      }, 0)
     }
 
     return 0
@@ -30,42 +24,26 @@ export const util = {
   getSvgStrings(data: AppData) {
     const svgStrings =
       data instanceof Array &&
-      data.flatMap((svgArray) => svgArray.map((svg) => svg.svgString!))
+      data.flatMap((svgArray) => svgArray.map((svg) => svg.elementAsString))
     return svgStrings ? svgStrings : ['']
   },
 
-  processUploadedSVG(svg: HTMLElement) {
-    const localSvg = new SVG(svg)
-    process.setViewBox.call(localSvg)
-    process.setWidthHeight.call(localSvg)
-    process.setSize.call(localSvg)
-    process.convertElementRefToSVGString.call(localSvg)
-    process.createPresentationSvg.call(localSvg)
-    localSvg.type = 'inline'
-    return localSvg
-  },
-
-  handleDragOver(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault()
-    const dropzone = document.getElementById('dropzone')!
-    if (dropzone) dropzone.style.background = 'rgba(255, 255, 255, 0.4)'
-  },
-
-  handleDragOut(event: React.DragEvent<HTMLDivElement>) {
-    event.preventDefault()
-    const dropzone = document.getElementById('dropzone')!
-    if (dropzone) dropzone.style.background = ''
+  processUploadedSVG(svg: string) {
+    return new SVG(svg, '')
   },
 
   handleDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault()
-    this.handleDragOut(event)
     return this.handleUpload(event)
   },
 
   handleUploadClick() {
     const uploadInput = document.getElementById('upload')!
     uploadInput.click()
+  },
+
+  handlePaste(svgString: string) {
+    return this.processUploadedSVG(svgString)
   },
 
   async handleUpload(event: any) {
@@ -87,12 +65,7 @@ export const util = {
         reader.onload = () => {
           const svgString = reader.result
           if (typeof svgString === 'string') {
-            const iDoc = new DOMParser().parseFromString(
-              svgString,
-              'image/svg+xml'
-            )
-            const svgElement = iDoc.documentElement
-            const processedSvg = this.processUploadedSVG(svgElement)
+            const processedSvg = this.processUploadedSVG(svgString)
             resolve(processedSvg)
           }
         }
@@ -101,8 +74,6 @@ export const util = {
       promises.push(filePromise)
     })
 
-    const finals = await Promise.all(promises)
-
-    return finals
+    return await Promise.all(promises)
   },
 }

@@ -1,14 +1,13 @@
-import React from 'react'
 import {
-  Button,
   Box,
-  Flex,
-  Text,
+  Button,
   ButtonGroup,
   DarkMode,
+  Flex,
+  Text,
 } from '@chakra-ui/react'
 import prettyBytes from 'pretty-bytes'
-
+import React from 'react'
 import loc from '../utils/localization'
 
 const getStringSize = (string: string) => {
@@ -62,19 +61,7 @@ function CodeViewHeader({
       <Text color="gray.400" fontSize="12px">
         {!isReact && sizeString}
       </Text>
-      <Button
-        size="xs"
-        onClick={(event) => {
-          navigator.clipboard.writeText(newString)
-          ;(event.target as HTMLButtonElement).textContent = 'Copied'
-
-          setTimeout(() => {
-            ;(event.target as HTMLButtonElement).textContent = 'Copy'
-          }, 1500)
-        }}
-      >
-        {loc('drawer_copy')}
-      </Button>
+      <Button size="xs">{loc('drawer_copy')}</Button>
     </Flex>
   )
 }

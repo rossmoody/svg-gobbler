@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "outDir": "./extension",
-    "noImplicitAny": true,
-    "strict": true,
-    "module": "ES6",
-    "target": "ES6",
-    "jsx": "react",
-    "allowJs": true,
-    "lib": ["es2019", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node",
+    "baseUrl": "",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["dom", "es2019"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "target": "es2018",
     "resolveJsonModule": true
   }
 }

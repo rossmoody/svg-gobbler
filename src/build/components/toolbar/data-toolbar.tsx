@@ -1,30 +1,34 @@
-import React from 'react'
 import {
   Box,
   Button,
-  Heading,
-  Stack,
-  HStack,
-  Text,
   Flex,
-  useColorModeValue,
+  Heading,
+  HStack,
   Input,
+  Stack,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
-import { FaDownload, FaPlus } from 'react-icons/fa'
-
-import handle from '../utils/actions'
-import Tooltip from '../generic/tooltip'
+import React, { useState } from 'react'
+import { Copy, Download, Plus } from 'react-feather'
+import { useLocation } from '../../providers/location-provider'
 import { AppData } from '../../types'
-import { util } from '../utils/upload'
+import Tooltip from '../generic/tooltip'
+import PasteModal from '../modals/paste-modal'
+import handle from '../utils/actions'
 import loc from '../utils/localization'
+import { util } from '../utils/upload'
 
 interface ToolbarData {
   data: AppData
   setData: React.Dispatch<React.SetStateAction<AppData>>
-  location: string
 }
 
-const DataToolbar = ({ data, setData, location }: ToolbarData) => {
+const DataToolbar = ({ data, setData }: ToolbarData) => {
+  const [pasteModal, setPasteModal] = useState(false)
+
+  const { location } = useLocation()
+
   const moreThanOneString = util.getSvgStrings(data).length > 1
 
   return (
@@ -54,16 +58,6 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
             w={{ base: 'full', md: 'auto' }}
             spacing={{ base: '2', md: '4' }}
           >
-            {moreThanOneString && (
-              <Button
-                leftIcon={<FaDownload />}
-                size="lg"
-                colorScheme="red"
-                onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}
-              >
-                {loc('toolbar_download')}
-              </Button>
-            )}
             <Input
               multiple
               type="file"
@@ -71,34 +65,54 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
               display="none"
               accept="image/svg+xml"
               onChange={(event) => {
-                util
-                  .handleUpload(event)
-                  .then((result) => {
-                    setData((prevData) => {
-                      if (prevData instanceof Array) {
-                        const newArray = [...prevData]
-                        newArray[0].unshift(...result)
-                        return newArray
-                      } else {
-                        return [result]
-                      }
-                    })
+                util.handleUpload(event).then((result) => {
+                  setData((prevData) => {
+                    if (prevData instanceof Array) {
+                      const newArray = [...prevData]
+                      newArray[0].unshift(...result)
+                      return newArray
+                    } else {
+                      return [result]
+                    }
                   })
-                  .catch(() => {})
+                })
               }}
             />
             <Tooltip label={loc('toolbar_tooltip')}>
               <Button
-                leftIcon={<FaPlus />}
+                leftIcon={<Plus size={24} />}
                 size="lg"
                 onClick={util.handleUploadClick}
               >
                 {loc('toolbar_upload')}
               </Button>
             </Tooltip>
+            <Button
+              leftIcon={<Copy size={24} />}
+              size="lg"
+              onClick={() => setPasteModal(true)}
+            >
+              {loc('toolbar_paste')}
+            </Button>
+            {moreThanOneString && (
+              <Button
+                leftIcon={<Download size={24} />}
+                size="lg"
+                colorScheme="red"
+                onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}
+              >
+                {loc('toolbar_download')}
+              </Button>
+            )}
           </HStack>
         </Stack>
       </Box>
+
+      <PasteModal
+        callback={setPasteModal}
+        showModal={pasteModal}
+        setData={setData}
+      />
     </Box>
   )
 }

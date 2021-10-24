@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Button,
   FormControl,
@@ -7,12 +7,12 @@ import {
   InputGroup,
   InputRightAddon,
   Modal,
-  ModalOverlay,
-  ModalContent,
   ModalBody,
   ModalCloseButton,
-  ModalHeader,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react'
 
 import loc from '../utils/localization'

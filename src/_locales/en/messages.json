@@ -6,7 +6,7 @@
     "message": "Download and optimize icons, logos, and vector SVGs."
   },
   "nav_fb": {
-    "message": "Send feedback"
+    "message": "Feedback"
   },
   "nav_theme": {
     "message": "Theme toggle"
@@ -22,6 +22,9 @@
   },
   "toolbar_upload": {
     "message": "Upload"
+  },
+  "toolbar_paste": {
+    "message": "Paste"
   },
   "gallery_load": {
     "message": "Loading SVGs"
@@ -74,6 +77,15 @@
   "modals_px": {
     "message": "px"
   },
+  "modals_paste_headline": {
+    "message": "Paste SVG"
+  },
+  "modals_error_headline": {
+    "message": "Error parsing provided SVG string"
+  },
+  "modals_error_description": {
+    "message": "There is a problem within your SVG code and it can't be processed."
+  },
   "footer_title": {
     "message": "SVG Gobbler is an open source initiative by "
   },
@@ -93,7 +105,7 @@
     "message": "Chrome Web Store"
   },
   "footer_chromeLink": {
-    "message": "https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en"
+    "message": "https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch"
   },
   "footer_firefox": {
     "message": "Firefox Addon Marketplace"

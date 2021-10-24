@@ -1,15 +1,15 @@
 export async function reactify(svgString: string) {
   const res = await fetch(
-    'https://www.svggobbler.com/.netlify/functions/svgr',
+    'https://us-central1-svg-gobbler.cloudfunctions.net/SVGR',
     {
       headers: {
-        'content-type': 'application/json',
+        'content-type': 'text/html',
       },
       method: 'post',
       body: svgString,
     }
   )
 
-  const json = await res.json()
+  const json = await res.text()
   return json
 }

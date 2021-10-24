@@ -1,62 +1,30 @@
 export class SVGImage {
-  svgElement: HTMLElement
-  width: number
-  height: number
-  base64: string
-  svgString: string
+  svgElement!: HTMLElement
 
-  constructor(svgString: string, height: number, width: number) {
-    this.svgString = svgString
-    this.svgElement = document.createElement('svg')
-    this.base64 = ''
-    this.width = width
-    this.height = height
-
-    this.createSvgElementFromString()
+  constructor(
+    public svgString: string,
+    public height: number,
+    public width: number,
+  ) {
+    this.setSvgElement()
     this.setViewBox()
     this.setSvgElementWidthHeight()
-    this.createImgSrc()
   }
 
-  setClassWidthHeight(height: number, width: number) {
-    this.width = width
-    this.height = height
+  setSvgElement() {
+    const parser = new DOMParser()
+    const element = parser.parseFromString(this.svgString, 'image/svg+xml')
+    this.svgElement = element.documentElement
   }
 
   setSvgElementWidthHeight() {
-    const width = this.width
-    const height = this.height
-
-    this.svgElement.setAttribute('width', String(width))
-    this.svgElement.setAttribute('height', String(height))
-
-    this.width = width
-    this.height = height
-  }
-
-  createImgSrc() {
-    const svgCanvasString = new XMLSerializer().serializeToString(
-      this.svgElement
-    )
-
-    const decoded = unescape(encodeURIComponent(svgCanvasString))
-    const base64 = btoa(decoded)
-    const imgSource = `data:image/svg+xml;base64,${base64}`
-
-    this.base64 = imgSource
-  }
-
-  private createSvgElementFromString() {
-    const { documentElement } = new DOMParser().parseFromString(
-      this.svgString,
-      'image/svg+xml'
-    )
-    this.svgElement = documentElement
+    this.svgElement.setAttribute('width', String(this.width))
+    this.svgElement.setAttribute('height', String(this.height))
   }
 
   private setViewBox() {
     const manualViewbox = `0 0 ${this.width} ${this.height}`
     const viewBox = this.svgElement.getAttribute('viewBox')
-    if (!viewBox) this.svgElement.setAttribute('viewBox', manualViewbox)
+    if (viewBox === null) this.svgElement.setAttribute('viewBox', manualViewbox)
   }
 }

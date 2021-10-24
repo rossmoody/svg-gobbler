@@ -1,13 +1,12 @@
-import React from 'react'
 import { IconButton, useColorMode } from '@chakra-ui/react'
-import { FaMoon, FaSun } from 'react-icons/fa'
-
+import React from 'react'
+import { Moon, Sun } from 'react-feather'
 import loc from '../utils/localization'
 
 function ThemeToggle() {
   const { colorMode, toggleColorMode } = useColorMode()
 
-  const Icon = () => (colorMode === 'light' ? <FaMoon /> : <FaSun />)
+  const Icon = () => (colorMode === 'light' ? <Moon /> : <Sun />)
 
   return (
     <IconButton

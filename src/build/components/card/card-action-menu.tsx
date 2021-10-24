@@ -1,21 +1,14 @@
-import React from 'react'
 import {
+  IconButton,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuItem,
   MenuList,
-  MenuDivider,
-  IconButton,
   useToast,
 } from '@chakra-ui/react'
-import {
-  FiChevronDown,
-  FiCode,
-  FiImage,
-  FiDownload,
-  FiCopy,
-} from 'react-icons/fi'
-
+import React from 'react'
+import { ChevronDown, Clipboard, Code, Download, Image } from 'react-feather'
 import handle from '../utils/actions'
 import loc from '../utils/localization'
 
@@ -39,24 +32,24 @@ const CardActionMenu = ({
   })
 
   return (
-    <Menu placement="top" isLazy closeOnSelect={false}>
+    <Menu placement="top" isLazy>
       <MenuButton
         as={IconButton}
-        icon={<FiChevronDown />}
+        icon={<ChevronDown />}
         aria-label="Options"
         borderRadius="md"
       />
 
-      <MenuList width="auto" height="auto">
+      <MenuList width="auto" height="auto" zIndex={100}>
         <MenuItem
-          icon={<FiDownload />}
+          icon={<Download size={20} />}
           onClick={() => setShowOptimizedModal(true)}
         >
           {loc('card_dl_opt')}
         </MenuItem>
 
         <MenuItem
-          icon={<FiCopy />}
+          icon={<Clipboard size={20} />}
           onClick={() => {
             handle.copyOptimized(svgString)
             toast({
@@ -70,13 +63,13 @@ const CardActionMenu = ({
 
         <MenuDivider />
 
-        <MenuItem icon={<FiImage />} onClick={() => setShowModal(true)}>
+        <MenuItem icon={<Image size={20} />} onClick={() => setShowModal(true)}>
           {loc('card_menu_exportPng')}
         </MenuItem>
 
         <MenuDivider />
 
-        <MenuItem icon={<FiCode />} onClick={() => setShowDrawer(true)}>
+        <MenuItem icon={<Code size={20} />} onClick={() => setShowDrawer(true)}>
           {loc('card_menu_viewCode')}
         </MenuItem>
       </MenuList>

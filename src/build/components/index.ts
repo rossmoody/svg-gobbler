@@ -1,5 +1,4 @@
 export { default as DropZone } from './generic/drop-zone'
-export { default as Tooltip } from './generic/tooltip'
 export { default as Footer } from './footer'
 export { default as Navbar } from './navbar'
 export { default as Toolbar } from './toolbar'
