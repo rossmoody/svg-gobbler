@@ -47,7 +47,7 @@ const CardActionMenu = ({
         borderRadius="md"
       />
 
-      <MenuList width="auto" height="auto">
+      <MenuList width="auto" height="auto" zIndex={100}>
         <MenuItem
           icon={<FiDownload />}
           onClick={() => setShowOptimizedModal(true)}

@@ -1,16 +1,14 @@
 {
   "name": "svg-gobbler",
-  "version": "3.9.0",
+  "version": "3.11.1",
   "author": "rossmoody <ross@rossmoody.com>",
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",
   "scripts": {
-    "start": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "package": "rm -rf ./extension/dist && webpack --mode 'production' && yarn build && yarn zip",
-    "zip": "zip -r -9 ./web-ext-artifacts/package.zip ./ -x 'node_modules**' 'web-ext-artifacts**' 'extension/dist**'",
+    "build": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
     "lint": "npx eslint . --ext .tsx,.ts --fix",
-    "build": "web-ext build --source-dir ./extension --overwrite-dest",
-    "firefox": "web-ext run --source-dir ./extension"
+    "package": "rm -rf ./extension/dist && webpack --mode 'production' && web-ext build --source-dir ./extension --overwrite-dest",
+    "serve": "web-ext run --source-dir ./extension"
   },
   "prettier": "prettier-config-rossmoody",
   "eslintConfig": {

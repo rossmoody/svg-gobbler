@@ -4,7 +4,7 @@ Download this extension on the [Chrome Web store](https://chrome.google.com/webs
 
 SVG Gobbler is a simple browser extension that finds SVG content in your current window and lets you download, copy to clipboard, or export as a PNG.
 
-## Build locally
+## Build
 
 Currently, if you would like to modify this extension you will need to install it manually. Before making edits you will need to build it locally and side load SVG Gobbler as a developer extension to test any changes.
 
@@ -28,10 +28,10 @@ yarn
 
 #### 3. Bundle the extension
 
-Run `yarn start` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits.
+Run `yarn build` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits.
 
 ```bash
-yarn start
+yarn build
 ```
 
 #### 4. Side load extension
@@ -46,8 +46,8 @@ Once this is complete you can start hacking. Editing content in the `src` direct
 
 #### Firefox
 
-1. After running the `yarn start` command to build and watch changes...
-1. Run `yarn firefox:run` to build the extension in a Firefox testing environment
+1. After running the `yarn build` command to build and watch changes...
+1. Run `yarn serve` to build the extension in a Firefox testing environment
 
 ### Development notes
 
