@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Button,
@@ -10,13 +10,14 @@ import {
   useColorModeValue,
   Input,
 } from '@chakra-ui/react'
-import { FaDownload, FaPlus } from 'react-icons/fa'
+import { FaDownload, FaPlus, FaPaste } from 'react-icons/fa'
 
 import handle from '../utils/actions'
 import Tooltip from '../generic/tooltip'
 import { AppData } from '../../types'
 import { util } from '../utils/upload'
 import loc from '../utils/localization'
+import PasteModal from '../modals/paste-modal'
 
 interface ToolbarData {
   data: AppData
@@ -25,6 +26,7 @@ interface ToolbarData {
 }
 
 const DataToolbar = ({ data, setData, location }: ToolbarData) => {
+  const [pasteModal, setPasteModal] = useState(false)
   const moreThanOneString = util.getSvgStrings(data).length > 1
 
   return (
@@ -54,16 +56,6 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
             w={{ base: 'full', md: 'auto' }}
             spacing={{ base: '2', md: '4' }}
           >
-            {moreThanOneString && (
-              <Button
-                leftIcon={<FaDownload />}
-                size="lg"
-                colorScheme="red"
-                onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}
-              >
-                {loc('toolbar_download')}
-              </Button>
-            )}
             <Input
               multiple
               type="file"
@@ -96,9 +88,32 @@ const DataToolbar = ({ data, setData, location }: ToolbarData) => {
                 {loc('toolbar_upload')}
               </Button>
             </Tooltip>
+            <Button
+              leftIcon={<FaPaste />}
+              size="lg"
+              onClick={() => setPasteModal(true)}
+            >
+              {loc('toolbar_paste')}
+            </Button>
+            {moreThanOneString && (
+              <Button
+                leftIcon={<FaDownload />}
+                size="lg"
+                colorScheme="red"
+                onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}
+              >
+                {loc('toolbar_download')}
+              </Button>
+            )}
           </HStack>
         </Stack>
       </Box>
+
+      <PasteModal
+        callback={setPasteModal}
+        showModal={pasteModal}
+        setData={setData}
+      />
     </Box>
   )
 }

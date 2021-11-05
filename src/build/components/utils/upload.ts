@@ -48,7 +48,9 @@ export const util = {
   handleDragOver(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault()
     const dropzone = document.getElementById('dropzone')!
-    if (dropzone) dropzone.style.background = 'rgba(255, 255, 255, 0.4)'
+    if (dropzone) {
+      dropzone.style.background = 'rgba(255, 255, 255, 0.4)'
+    }
   },
 
   handleDragOut(event: React.DragEvent<HTMLDivElement>) {
@@ -66,6 +68,17 @@ export const util = {
   handleUploadClick() {
     const uploadInput = document.getElementById('upload')!
     uploadInput.click()
+  },
+
+  handlePaste(svgString: string) {
+    const iDoc = new DOMParser().parseFromString(svgString, 'image/svg+xml')
+
+    const error = iDoc.querySelector('parsererror')
+    if (error) return false
+
+    const svgElement = iDoc.documentElement
+    const processedSvg = this.processUploadedSVG(svgElement)
+    return processedSvg
   },
 
   async handleUpload(event: any) {
