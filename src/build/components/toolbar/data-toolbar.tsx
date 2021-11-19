@@ -18,15 +18,18 @@ import { AppData } from '../../types'
 import { util } from '../utils/upload'
 import loc from '../utils/localization'
 import PasteModal from '../modals/paste-modal'
+import { useLocation } from '../../providers/location-provider'
 
 interface ToolbarData {
   data: AppData
   setData: React.Dispatch<React.SetStateAction<AppData>>
-  location: string
 }
 
-const DataToolbar = ({ data, setData, location }: ToolbarData) => {
+const DataToolbar = ({ data, setData }: ToolbarData) => {
   const [pasteModal, setPasteModal] = useState(false)
+
+  const { location } = useLocation()
+
   const moreThanOneString = util.getSvgStrings(data).length > 1
 
   return (

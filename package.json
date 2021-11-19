@@ -6,7 +6,7 @@
   "license": "apache-2.0",
   "scripts": {
     "build": "rm -rf ./extension/dist && webpack --mode 'development' --watch --devtool 'cheap-module-source-map'",
-    "lint": "npx eslint . --ext .tsx,.ts --fix",
+    "lint": "eslint . --ext .ts,.tsx --fix",
     "package": "rm -rf ./extension/dist && webpack --mode 'production' && web-ext build --source-dir ./extension --overwrite-dest",
     "serve": "web-ext run --source-dir ./extension"
   },

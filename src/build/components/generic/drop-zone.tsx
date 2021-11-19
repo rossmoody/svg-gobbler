@@ -1,37 +1,31 @@
-import React, { ReactNode, SetStateAction, Dispatch } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Box } from '@chakra-ui/react'
 
-import { AppData } from '../../types'
-import { util } from '../utils/upload'
+import { useData } from '../../providers/data-provider'
 
-interface DropZone {
-  children: ReactNode
-  setData: Dispatch<SetStateAction<AppData>>
+import DropZoneTarget from './drop-zone-target'
+
+const DropZone: React.FC = ({ children }) => {
+  const [dropzone, setDropzone] = useState(false)
+
+  const dropzoneMemo = useMemo(() => dropzone, [dropzone])
+
+  const { setData } = useData()
+
+  function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    event.stopPropagation()
+    setDropzone(true)
+  }
+
+  return (
+    <>
+      <Box onDragOver={handleDragOver}>{children}</Box>
+      {dropzoneMemo && (
+        <DropZoneTarget setDropzone={setDropzone} setData={setData} />
+      )}
+    </>
+  )
 }
-
-const DropZone = ({ children, setData }: DropZone) => (
-  <Box
-    onDragOver={util.handleDragOver}
-    onDragLeave={util.handleDragOut}
-    onDrop={(event) => {
-      util
-        .handleDrop(event)
-        .then((result) => {
-          setData((prevData) => {
-            if (prevData instanceof Array) {
-              const newArray = [...prevData]
-              newArray[0].unshift(...result)
-              return newArray
-            } else {
-              return [result]
-            }
-          })
-        })
-        .catch(() => {})
-    }}
-  >
-    {children}
-  </Box>
-)
 
 export default DropZone

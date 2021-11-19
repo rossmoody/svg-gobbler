@@ -1,17 +1,15 @@
 import React from 'react'
 
-import { AppData } from '../../types'
 import loc from '../utils/localization'
+import { useData } from '../../providers/data-provider'
 
 import LoadingGallery from './loading-gallery'
 import DataGallery from './data-gallery'
 import EmptyGallery from './empty-gallery'
 
-interface GalleryData {
-  data: AppData
-}
+const Gallery = () => {
+  const { data } = useData()
 
-const Gallery = ({ data }: GalleryData) => {
   switch (data) {
     case undefined: {
       return <LoadingGallery />

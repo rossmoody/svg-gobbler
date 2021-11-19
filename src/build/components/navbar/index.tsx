@@ -3,16 +3,16 @@ import { Box, Flex, useColorModeValue, Button } from '@chakra-ui/react'
 import { FeedbackFish } from '@feedback-fish/react'
 
 import loc from '../utils/localization'
+import { useLocation } from '../../providers/location-provider'
+import { useData } from '../../providers/data-provider'
 
 import Logo from './logo'
 import ThemeToggle from './theme-toggle'
 
-interface NavbarData {
-  data: any
-  location: string
-}
+const Navbar = () => {
+  const { location } = useLocation()
+  const { data } = useData()
 
-const Navbar = ({ data, location }: NavbarData) => {
   const stringData = JSON.stringify(data)
 
   return (
