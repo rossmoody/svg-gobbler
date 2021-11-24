@@ -29,7 +29,7 @@ export const LocationProvider: React.FC = ({ children }) => {
 
   chrome.runtime.onMessage.addListener((message: MessageData) => {
     const location = message.data.location
-    setLocation(location)
+    if (location) setLocation(location)
   })
 
   return (

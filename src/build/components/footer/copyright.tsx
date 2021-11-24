@@ -16,7 +16,7 @@ export const Copyright = (props: TextProps) => (
       {loc('footer_desc')}
       <Link href={loc('footer_chromeLink')} color="red">
         {loc('footer_chrome')}
-      </Link>
+      </Link>{' '}
       {loc('footer_or')}
       <Link href={loc('footer_firefoxLink')} color="red">
         {loc('footer_firefox')}
