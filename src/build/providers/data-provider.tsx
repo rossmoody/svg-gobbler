@@ -30,8 +30,12 @@ export const DataProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (data instanceof Array) {
+      const sessionStorageCharacterLimit = 4500000
       const json = JSON.stringify(data)
-      sessionStorage.setItem(window.location.host, json)
+
+      if (json.length < sessionStorageCharacterLimit) {
+        sessionStorage.setItem(window.location.host, json)
+      }
     }
   }, [data])
 
