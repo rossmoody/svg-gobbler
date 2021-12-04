@@ -76,15 +76,10 @@ export class SVGClass {
       case 'svg': {
         this.type = 'inline'
 
-        const symbolElements = querySvgTag('symbol')
         const useTags = querySvgTag('use')
-        const defsTags = querySvgTag('defs')
-
-        const hasSymbolOrDefs = symbolElements.length > 0 || defsTags.length > 0
         const hasUseTags = useTags.length > 0
 
         // Filter out. Symbols are manually built
-        if (hasSymbolOrDefs) this.type = 'invalid'
         if (hasUseTags) this.type = 'sprite'
         break
       }
