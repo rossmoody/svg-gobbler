@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./extension",
     "noImplicitAny": true,
     "strict": true,

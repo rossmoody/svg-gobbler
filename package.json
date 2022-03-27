@@ -1,6 +1,6 @@
 {
   "name": "svg-gobbler",
-  "version": "3.16.0",
+  "version": "3.17.0",
   "author": "rossmoody <ross@rossmoody.com>",
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",
@@ -26,7 +26,6 @@
     "@chakra-ui/react": "^1.6.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@feedback-fish/react": "^1.2.1",
     "@types/chrome": "^0.0.145",
     "@types/file-saver": "^2.0.2",
     "@types/react": "^17.0.11",

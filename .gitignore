@@ -3,3 +3,4 @@ extension/dist
 web-ext-artifacts
 .DS_Store
 yarn-error.log
+.idea

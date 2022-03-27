@@ -13,7 +13,7 @@ async function processElements() {
       .map((ele) => fetchSVGContent.call(ele))
   )
 
-  const processedSVGs = preliminarySVGs
+  return preliminarySVGs
     .flatMap((svg) => process.processSvgSymbolsFromFetchCall.call(svg))
     .filter(process.filterInvalid)
     .map((svg) => {
@@ -32,8 +32,6 @@ async function processElements() {
       process.hasWhiteFill.call(svg)
       return process.removeDomNodes.call(svg)
     })
-
-  return processedSVGs
 }
 
 export default processElements

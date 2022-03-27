@@ -2,7 +2,6 @@ import { PageElement } from './gather-elements'
 
 type SVGType =
   | 'inline'
-  | 'object'
   | 'sprite'
   | 'symbol'
   | 'img src'
@@ -29,7 +28,6 @@ export class SVGClass {
   size?: string
   presentationSvg?: string
   spriteSymbolArray?: SVGSymbolElement[]
-  gChildren?: SVGGElement
 
   readonly id = Math.random()
 

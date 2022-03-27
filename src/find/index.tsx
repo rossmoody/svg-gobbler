@@ -1,24 +1,25 @@
 import processElements from './scripts/process-elements'
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (
-    request.message === 'start_gobbling' &&
-    document.readyState === 'complete'
-  ) {
+  const isValidRequest =
+    request.message === 'start_gobbling' && document.readyState === 'complete'
+
+  if (isValidRequest) {
     processElements()
       .then((svgData) => {
-        if (svgData.length === 0) {
-          sendResponse({
+        const isEmpty = svgData.length === 0
+
+        if (isEmpty)
+          return sendResponse({
             data: 'empty',
           })
-        } else {
-          sendResponse({
-            data: {
-              location: document.location.host,
-              content: svgData,
-            },
-          })
-        }
+
+        return sendResponse({
+          data: {
+            location: document.location.host,
+            content: svgData,
+          },
+        })
       })
       .catch(() => {
         sendResponse({
