@@ -10,7 +10,6 @@
     "package": "rm -rf ./extension/dist && webpack --mode 'production' && web-ext build --source-dir ./extension --overwrite-dest",
     "serve": "web-ext run --source-dir ./extension"
   },
-  "prettier": "prettier-config-rossmoody",
   "eslintConfig": {
     "extends": [
       "eslint-config-rossmoody"
