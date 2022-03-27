@@ -1,11 +1,11 @@
 import React from 'react'
 import {
+  Divider,
   Drawer,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Divider,
 } from '@chakra-ui/react'
 
 import loc from '../utils/localization'

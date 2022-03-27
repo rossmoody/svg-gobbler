@@ -1,23 +1,23 @@
 /* eslint-disable react/no-children-prop */
 import React, { useRef, useState } from 'react'
 import {
+  Box,
   Button,
+  Center,
+  FormControl,
+  FormLabel,
+  HStack,
+  Input,
+  InputGroup,
+  InputRightAddon,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormLabel,
-  Box,
-  Center,
-  InputRightAddon,
-  Input,
-  HStack,
-  InputGroup,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useColorModeValue,
-  FormControl,
 } from '@chakra-ui/react'
 
 import handle from '../utils/actions'

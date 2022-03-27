@@ -1,6 +1,6 @@
 import FileSaver from 'file-saver'
 import JSZip from 'jszip'
-import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
+import { extendDefaultPlugins, optimize } from 'svgo/dist/svgo.browser'
 
 const svgoConfig = {
   multipass: true,

@@ -1,11 +1,11 @@
 import React from 'react'
 import {
-  Button,
   Box,
-  Flex,
-  Text,
+  Button,
   ButtonGroup,
   DarkMode,
+  Flex,
+  Text,
 } from '@chakra-ui/react'
 import prettyBytes from 'pretty-bytes'
 

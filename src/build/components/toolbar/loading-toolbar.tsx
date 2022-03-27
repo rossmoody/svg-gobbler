@@ -1,13 +1,13 @@
 import {
   Box,
   Button,
+  Flex,
   Heading,
   HStack,
+  Skeleton,
   Stack,
   Text,
-  Flex,
   useColorModeValue as mode,
-  Skeleton,
 } from '@chakra-ui/react'
 import React from 'react'
 

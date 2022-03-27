@@ -1,6 +1,6 @@
-import { optimize, extendDefaultPlugins } from 'svgo/dist/svgo.browser'
+import { extendDefaultPlugins, optimize } from 'svgo/dist/svgo.browser'
 
-import { PluginObject, PluginEventObject, SVGOConfig } from '../../../types'
+import { PluginEventObject, PluginObject, SVGOConfig } from '../../../types'
 
 const pluginsList: PluginObject[] = [
   { name: 'removeDimensions', active: false },

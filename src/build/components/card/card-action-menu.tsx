@@ -1,19 +1,19 @@
 import React from 'react'
 import {
+  IconButton,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuItem,
   MenuList,
-  MenuDivider,
-  IconButton,
   useToast,
 } from '@chakra-ui/react'
 import {
   FiChevronDown,
   FiCode,
-  FiImage,
-  FiDownload,
   FiCopy,
+  FiDownload,
+  FiImage,
 } from 'react-icons/fi'
 
 import handle from '../utils/actions'

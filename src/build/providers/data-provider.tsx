@@ -1,15 +1,15 @@
 import React, {
   createContext,
-  useState,
   useContext,
-  useMemo,
   useEffect,
+  useMemo,
   useRef,
+  useState,
 } from 'react'
 
 import { AppData, MessageData } from '../types'
 
-import { sessionStorageData, paginateContent } from './utils'
+import { paginateContent, sessionStorageData } from './utils'
 
 interface DataContextProps {
   data: AppData

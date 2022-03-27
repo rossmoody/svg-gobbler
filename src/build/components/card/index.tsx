@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import {
-  Center,
   Box,
-  useColorModeValue,
+  Center,
   Divider,
-  SlideFade,
   ScaleFade,
+  SlideFade,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
 import SVGInterface from '../../../find/scripts/svg-class'

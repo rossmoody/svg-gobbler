@@ -2,9 +2,9 @@ import React from 'react'
 import {
   Box,
   Center,
+  Divider,
   Flex,
   Stack,
-  Divider,
   useColorModeValue,
 } from '@chakra-ui/react'
 
@@ -12,7 +12,7 @@ import { SVGOConfig } from '../../types'
 import loc from '../utils/localization'
 
 import { SVGHighlighter } from './syntax-highlighter'
-import { runSvgo, defaultConfig } from './svgo/svgo-configs'
+import { defaultConfig, runSvgo } from './svgo/svgo-configs'
 import { Option } from './svgo/option'
 import { optionsData } from './svgo/svgo-plugins'
 import { CodeViewHeader } from './code-view-header'

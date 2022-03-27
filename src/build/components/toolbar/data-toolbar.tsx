@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import {
   Box,
   Button,
-  Heading,
-  Stack,
-  HStack,
-  Text,
   Flex,
-  useColorModeValue,
+  Heading,
+  HStack,
   Input,
+  Stack,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
-import { FaDownload, FaPlus, FaPaste } from 'react-icons/fa'
+import { FaDownload, FaPaste, FaPlus } from 'react-icons/fa'
 
 import handle from '../utils/actions'
 import Tooltip from '../generic/tooltip'

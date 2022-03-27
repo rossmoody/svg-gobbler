@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TextProps, Link } from '@chakra-ui/react'
+import { Link, Text, TextProps } from '@chakra-ui/react'
 
 import loc from '../utils/localization'
 

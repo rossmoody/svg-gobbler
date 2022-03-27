@@ -4,7 +4,7 @@ import { RadioGroup, Stack } from '@chakra-ui/react'
 import { SVGOConfig } from '../../../types'
 import loc from '../../utils/localization'
 
-import { defaultConfig, allFalseConfig } from './svgo-configs'
+import { allFalseConfig, defaultConfig } from './svgo-configs'
 import { RadioOption } from './radio-option'
 
 interface QuickConfigurationProps {

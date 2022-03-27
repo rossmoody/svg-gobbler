@@ -1,7 +1,7 @@
 import React from 'react'
 import { Divider } from '@chakra-ui/react'
 
-import { Toolbar, Footer, Gallery, Navbar, DropZone } from '../components'
+import { DropZone, Footer, Gallery, Navbar, Toolbar } from '../components'
 import { ThemeProvider } from '../providers/theme-provider'
 import { DataProvider } from '../providers/data-provider'
 import { LocationProvider } from '../providers/location-provider'

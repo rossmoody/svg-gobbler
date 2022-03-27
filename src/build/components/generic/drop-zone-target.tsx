@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import {
-  Portal,
   Box,
-  Heading,
   Center,
+  Heading,
+  Portal,
+  Text,
   useColorModeValue,
   useToken,
-  Text,
 } from '@chakra-ui/react'
 import { FaUpload } from 'react-icons/fa'
 
@@ -50,6 +50,7 @@ const DropZoneTarget = ({ setDropzone, setData }: DropZoneTargetProps) => {
       })
       .catch(() => {})
   }
+
   return (
     <Portal>
       <Box

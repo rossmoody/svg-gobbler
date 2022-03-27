@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { useData } from '../../providers/data-provider'
