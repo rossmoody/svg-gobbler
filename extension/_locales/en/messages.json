@@ -105,7 +105,7 @@
     "message": "Chrome Web Store"
   },
   "footer_chromeLink": {
-    "message": "https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en"
+    "message": "https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch"
   },
   "footer_firefox": {
     "message": "Firefox Addon Marketplace"
