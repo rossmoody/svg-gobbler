@@ -37,7 +37,7 @@ export const DataProvider: React.FC = ({ children }) => {
     }
   }, [data])
 
-  chrome.runtime.onMessage.addListener((message, sender) => {
+  chrome.runtime.onMessage.addListener((message) => {
     if (message.action === 'gobble') {
       setData([])
       processElements(message.data).then((result) => {
@@ -46,10 +46,6 @@ export const DataProvider: React.FC = ({ children }) => {
     }
 
     return true
-  })
-
-  chrome.tabs.onRemoved.addListener(() => {
-    setData([])
   })
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>

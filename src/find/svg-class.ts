@@ -1,5 +1,3 @@
-import { PageElement } from './gather-elements'
-
 type SVGType =
   | 'inline'
   | 'sprite'
@@ -11,8 +9,8 @@ type SVGType =
   | 'g'
 
 export class SVGClass {
-  originalElementReference: PageElement
-  elementClone: PageElement
+  originalElementReference: Element
+  elementClone: Element
   type: SVGType = 'invalid'
   cors = false
   whiteFill = false
@@ -31,7 +29,7 @@ export class SVGClass {
 
   readonly id = Math.random()
 
-  constructor(element: PageElement) {
+  constructor(element: Element) {
     this.originalElementReference = element
     this.elementClone = element.cloneNode(true) as HTMLElement
     this.determineType()

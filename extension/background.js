@@ -22,7 +22,7 @@ function findSVGs() {
 }
 
 chrome.action.onClicked.addListener(async () => {
-  const { id, url } = (
+  const { id } = (
     await chrome.tabs.query({ active: true, currentWindow: true })
   )[0]
 
@@ -30,6 +30,13 @@ chrome.action.onClicked.addListener(async () => {
     await chrome.scripting.executeScript({
       target: { tabId: id },
       func: findSVGs,
+    })
+  )[0].result
+
+  const url = (
+    await chrome.scripting.executeScript({
+      target: { tabId: id },
+      func: () => document.location.host,
     })
   )[0].result
 

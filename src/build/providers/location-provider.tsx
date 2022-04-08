@@ -7,8 +7,6 @@ import React, {
   useState,
 } from 'react'
 
-import { MessageData } from '../types'
-
 interface LocationContextProps {
   location: string
   setLocation: Dispatch<SetStateAction<string>>
@@ -27,9 +25,13 @@ export const LocationProvider: React.FC = ({ children }) => {
     [location]
   )
 
-  chrome.runtime.onMessage.addListener((message: MessageData) => {
-    const location = message.data.location
-    if (location) setLocation(location)
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.action === 'gobble') {
+      const location = message.url
+      if (location) setLocation(location)
+    }
+
+    return true
   })
 
   return (
