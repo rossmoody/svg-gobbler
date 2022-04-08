@@ -7,7 +7,7 @@ async function processElements(strings: string[]) {
   const pageElements = strings.map(
     (string) =>
       parser.parseFromString(string, 'image/svg+xml').firstElementChild
-  )
+  ) as Element[]
 
   const preliminarySVGs = await Promise.all(
     pageElements

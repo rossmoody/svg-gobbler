@@ -12,16 +12,10 @@ export const util = {
 
     if (isArray) {
       const array = data as SVG[][]
-      const quantity = array.reduce(
-        (finalLength: number, currentArray: SVG[]) => {
-          const length = currentArray.length
-          const newLength = finalLength + length
-          return newLength
-        },
-        0
-      )
-
-      return quantity
+      return array.reduce((finalLength: number, currentArray: SVG[]) => {
+        const length = currentArray.length
+        return finalLength + length
+      }, 0)
     }
 
     return 0
@@ -62,8 +56,7 @@ export const util = {
     if (error) return false
 
     const svgElement = iDoc.documentElement
-    const processedSvg = this.processUploadedSVG(svgElement)
-    return processedSvg
+    return this.processUploadedSVG(svgElement)
   },
 
   async handleUpload(event: any) {
@@ -99,8 +92,6 @@ export const util = {
       promises.push(filePromise)
     })
 
-    const finals = await Promise.all(promises)
-
-    return finals
+    return await Promise.all(promises)
   },
 }

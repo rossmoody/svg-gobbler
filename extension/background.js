@@ -40,7 +40,7 @@ chrome.action.onClicked.addListener(async () => {
     })
   )[0].result
 
-  chrome.tabs.create({ url: `./index.html` }, () => {
+  chrome.tabs.create({ url: `index.html` }, () => {
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       if (changeInfo.status === 'complete') {
         chrome.tabs.sendMessage(tab.id, { data, action: 'gobble', url })
@@ -49,8 +49,8 @@ chrome.action.onClicked.addListener(async () => {
   })
 })
 
-chrome.runtime.onInstalled.addListener((details) => {
+chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === 'install') {
-    chrome.tabs.create({ url: './welcome.html' })
+    await chrome.tabs.create({ url: './welcome.html' })
   }
 })

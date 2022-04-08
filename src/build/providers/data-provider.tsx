@@ -1,14 +1,8 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, { createContext, useContext, useMemo, useState } from 'react'
 
 import { AppData } from '../types'
 
-import { paginateContent, sessionStorageData } from './utils'
+import { paginateContent } from './utils'
 import processElements from '../../find/process-elements'
 
 interface DataContextProps {
@@ -23,29 +17,16 @@ export const DataProvider: React.FC = ({ children }) => {
 
   const value = useMemo(() => ({ data, setData }), [data])
 
-  useEffect(() => {
-    const sessionData = sessionStorageData()
-    if (sessionData) setData(sessionData)
-  }, [])
-
-  useEffect(() => {
-    const sessionStorageCharacterLimit = 4500000
-    const json = JSON.stringify(data)
-
-    if (json.length < sessionStorageCharacterLimit) {
-      sessionStorage.setItem(window.location.host, json)
-    }
-  }, [data])
-
-  chrome.runtime.onMessage.addListener((message) => {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'gobble') {
       setData([])
       processElements(message.data).then((result) => {
+        if (result.length < 1) return setData('empty')
         setData(paginateContent(result))
       })
     }
 
-    return true
+    sendResponse('')
   })
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>

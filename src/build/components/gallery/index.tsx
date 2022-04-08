@@ -5,13 +5,16 @@ import { useData } from '../../providers/data-provider'
 import DataGallery from './data-gallery'
 import EmptyGallery from './empty-gallery'
 import SVGClass from '../../../find/svg-class'
+import LoadingGallery from './loading-gallery'
 
 const Gallery = () => {
   const { data } = useData()
 
-  console.log(data)
-
   if (!data || data.length < 1) {
+    return <LoadingGallery />
+  }
+
+  if (data === 'empty') {
     return (
       <EmptyGallery
         headline={loc('gallery_noAvailTitle')}

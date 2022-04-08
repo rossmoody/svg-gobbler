@@ -5,7 +5,7 @@ export function paginateContent(content: SVG[]) {
 
   if (content.length <= perPage) return [content]
 
-  const result = content.reduce((resultArray, item, index) => {
+  return content.reduce((resultArray, item, index) => {
     const chunkIndex = Math.floor(index / perPage)
     if (!resultArray[chunkIndex]) {
       resultArray[chunkIndex] = []
@@ -15,13 +15,4 @@ export function paginateContent(content: SVG[]) {
 
     return resultArray
   }, [] as SVG[][])
-
-  return result
-}
-
-export const sessionStorageData = (): SVG[][] | undefined => {
-  const windowId = window.location.host
-  const data = sessionStorage.getItem(windowId)
-  if (data) return JSON.parse(data)
-  return undefined
 }
