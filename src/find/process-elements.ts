@@ -1,9 +1,14 @@
 import SVG, { SVGClass } from './svg-class'
-import { PageElement } from './gather-elements'
 import process from './process-svg'
 import fetchSVGContent from './async-operations'
 
-async function processElements(pageElements: PageElement[]) {
+async function processElements(strings: string[]) {
+  const parser = new DOMParser()
+  const pageElements = strings.map(
+    (string) =>
+      parser.parseFromString(string, 'image/svg+xml').firstElementChild
+  )
+
   const preliminarySVGs = await Promise.all(
     pageElements
       .map((ele) => new SVG(ele))

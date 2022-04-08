@@ -7,8 +7,6 @@ import React, {
 } from 'react'
 
 import { AppData } from '../types'
-import { executeScript, getActiveTab } from '../../find/chrome-helpers'
-import gatherElements from '../../find/gather-elements'
 
 import { paginateContent, sessionStorageData } from './utils'
 import processElements from '../../find/process-elements'
@@ -31,29 +29,28 @@ export const DataProvider: React.FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (data instanceof Array) {
-      const sessionStorageCharacterLimit = 4500000
-      const json = JSON.stringify(data)
+    const sessionStorageCharacterLimit = 4500000
+    const json = JSON.stringify(data)
 
-      if (json.length < sessionStorageCharacterLimit) {
-        sessionStorage.setItem(window.location.host, json)
-      }
+    if (json.length < sessionStorageCharacterLimit) {
+      sessionStorage.setItem(window.location.host, json)
     }
   }, [data])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { id } = await getActiveTab()
-
-      if (id) {
-        const elements = await executeScript(id, gatherElements)
-        const processed = await processElements(elements)
-        setData(paginateContent(processed))
-      }
+  chrome.runtime.onMessage.addListener((message, sender) => {
+    if (message.action === 'gobble') {
+      setData([])
+      processElements(message.data).then((result) => {
+        setData(paginateContent(result))
+      })
     }
 
-    fetchData().catch(console.error)
-  }, [])
+    return true
+  })
+
+  chrome.tabs.onRemoved.addListener(() => {
+    setData([])
+  })
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }
