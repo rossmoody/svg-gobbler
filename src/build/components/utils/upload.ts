@@ -1,5 +1,5 @@
-import SVG from '../../../find/scripts/svg-class'
-import process from '../../../find/scripts/process-svg'
+import SVG from '../../../find/svg-class'
+import process from '../../../find/process-svg'
 import { AppData } from '../../types'
 
 export const util = {

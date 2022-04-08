@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SVGInterface from '../../../find/scripts/svg-class'
+import SVGInterface from '../../../find/svg-class'
 
 import CardActionFooter from './card-action-footer'
 import CardActionCors from './card-action-cors'

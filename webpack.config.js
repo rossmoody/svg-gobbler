@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   entry: {
     build: './src/build/index.tsx',
-    find: './src/find/index.tsx',
+    // find: './src/find/index.tsx',
   },
   module: {
     rules: [

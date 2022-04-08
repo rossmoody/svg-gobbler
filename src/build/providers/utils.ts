@@ -1,4 +1,4 @@
-import SVG from '../../find/scripts/svg-class'
+import SVG from '../../find/svg-class'
 
 export function paginateContent(content: SVG[]) {
   const perPage = 100

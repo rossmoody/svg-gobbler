@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 
 import Card from '../card'
-import SVG from '../../../find/scripts/svg-class'
+import SVG from '../../../find/svg-class'
 import loc from '../utils/localization'
 
 interface GalleryData {

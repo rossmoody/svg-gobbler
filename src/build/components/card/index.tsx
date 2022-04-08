@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import SVGInterface from '../../../find/scripts/svg-class'
+import SVGInterface from '../../../find/svg-class'
 
 import CardFooter from './card-footer'
 import CardActions from './card-actions'

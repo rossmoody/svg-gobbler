@@ -1,11 +1,9 @@
-import SVG from './svg-class'
-import findSVGs from './gather-elements'
+import SVG, { SVGClass } from './svg-class'
+import { PageElement } from './gather-elements'
 import process from './process-svg'
 import fetchSVGContent from './async-operations'
 
-async function processElements() {
-  const pageElements = findSVGs()
-
+async function processElements(pageElements: PageElement[]) {
   const preliminarySVGs = await Promise.all(
     pageElements
       .map((ele) => new SVG(ele))
@@ -31,7 +29,7 @@ async function processElements() {
       process.createPresentationSvg.call(svg)
       process.hasWhiteFill.call(svg)
       return process.removeDomNodes.call(svg)
-    })
+    }) as SVGClass[]
 }
 
 export default processElements

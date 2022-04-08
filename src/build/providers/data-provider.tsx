@@ -3,13 +3,15 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react'
 
-import { AppData, MessageData } from '../types'
+import { AppData } from '../types'
+import { executeScript, getActiveTab } from '../../find/chrome-helpers'
+import gatherElements from '../../find/gather-elements'
 
 import { paginateContent, sessionStorageData } from './utils'
+import processElements from '../../find/process-elements'
 
 interface DataContextProps {
   data: AppData
@@ -19,7 +21,7 @@ interface DataContextProps {
 const DataContext = createContext({} as DataContextProps)
 
 export const DataProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AppData>()
+  const [data, setData] = useState<AppData>([])
 
   const value = useMemo(() => ({ data, setData }), [data])
 
@@ -39,47 +41,19 @@ export const DataProvider: React.FC = ({ children }) => {
     }
   }, [data])
 
-  /**
-   * This forces a state update to render a system page when a user
-   * navigates back to a page and there is no session storage
-   * or message to prompt a re-render.
-   */
-  const timeout = useRef<NodeJS.Timeout | undefined>()
-
   useEffect(() => {
-    if (timeout.current !== undefined) clearTimeout(timeout.current)
+    const fetchData = async () => {
+      const { id } = await getActiveTab()
 
-    if (data === undefined)
-      timeout.current = global.setTimeout(() => {
-        setData('error')
-      }, 3000)
-  }, [data, timeout])
-
-  chrome.runtime.onMessage.addListener((message: MessageData) => {
-    const content = message.data.content
-
-    switch (content) {
-      case 'system': {
-        setData('system')
-        break
-      }
-
-      case 'empty': {
-        setData('empty')
-        break
-      }
-
-      default: {
-        if (Array.isArray(content)) {
-          setData(paginateContent(content))
-        } else {
-          setData('error')
-        }
-
-        break
+      if (id) {
+        const elements = await executeScript(id, gatherElements)
+        const processed = await processElements(elements)
+        setData(paginateContent(processed))
       }
     }
-  })
+
+    fetchData().catch(console.error)
+  }, [])
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }
