@@ -1,4 +1,4 @@
-import SVG, { SVGClass } from './svg-class'
+import SVG from './svg-class'
 import process from './process-svg'
 import fetchSVGContent from './async-operations'
 
@@ -34,7 +34,7 @@ async function processElements(strings: string[]) {
       process.createPresentationSvg.call(svg)
       process.hasWhiteFill.call(svg)
       return process.removeDomNodes.call(svg)
-    }) as SVGClass[]
+    }) as SVG[]
 }
 
 export default processElements

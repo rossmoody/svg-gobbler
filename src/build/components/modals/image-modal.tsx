@@ -1,4 +1,3 @@
-/* eslint-disable react/no-children-prop */
 import React, { useRef, useState } from 'react'
 import {
   Box,
@@ -111,8 +110,7 @@ const ImageModal = ({
                       value={size.height}
                       id="height"
                       onChange={(event) => {
-                        const value = Number(event.target.value)
-                        const newHeight = value
+                        const newHeight = Number(event.target.value)
                         const originalHeight = state.height
                         const originalWidth = state.width
 
@@ -134,8 +132,7 @@ const ImageModal = ({
                       type="number"
                       value={size.width}
                       onChange={(event) => {
-                        const value = Number(event.target.value)
-                        const newWidth = value
+                        const newWidth = Number(event.target.value)
                         const originalHeight = state.height
                         const originalWidth = state.width
 
