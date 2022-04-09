@@ -849,11 +849,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@feedback-fish/react@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@feedback-fish/react/-/react-1.2.1.tgz#b4d226f310df936517e9e5e82397806a5df4e2d8"
-  integrity sha512-4YFD2hE93xBIT/Ko0x0l6UB0OyaxJcWKLGrnznsUVoLE5Q9vB8I1LEbMySYyuvbU9ul3yM3FjGkVZhYVPdwEyA==
-
 "@graphql-tools/batch-execute@^7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/batch-execute/-/batch-execute-7.1.2.tgz#35ba09a1e0f80f34f1ce111d23c40f039d4403a0"
@@ -4539,9 +4534,9 @@ mkdirp@~0.5.1:
     minimist "^1.2.5"
 
 moment@^2.19.3:
-  version "2.29.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
-  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
+  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
 
 ms@2.0.0:
   version "2.0.0"
@@ -5070,11 +5065,6 @@ prepend-http@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
-
-prettier-config-rossmoody@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/prettier-config-rossmoody/-/prettier-config-rossmoody-1.0.2.tgz#f96ce36c66a5ffc3d282ae28b651e1973cd2040e"
-  integrity sha512-cHFyoQGIRQfzBg7Pv1teXRh+HM2oNmc9ki/Cijki3PAF/gH1z5iyMAZyIO6E6wGCjjgwVgMJiGpLQdiIVyxH0w==
 
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
