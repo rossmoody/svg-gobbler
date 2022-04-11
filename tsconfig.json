@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./extension",
     "noImplicitAny": true,
     "strict": true,
     "module": "ES6",
@@ -11,7 +10,6 @@
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "types": ["chrome"]
+    "resolveJsonModule": true
   }
 }

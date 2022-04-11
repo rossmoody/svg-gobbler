@@ -3,7 +3,7 @@
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "manifest_version": 3,
-  "version": "4.0.0",
+  "version": "4.0.1",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
   "permissions": ["activeTab", "scripting", "tabs"],
   "background": {
