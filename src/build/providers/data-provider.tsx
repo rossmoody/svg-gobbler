@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
-
 import { AppData } from '../types'
-
-import { paginateContent } from './utils'
 import processElements from '../../find/process-elements'
+import SVG from '../../find/svg-class'
 
 interface DataContextProps {
   data: AppData
@@ -33,3 +31,20 @@ export const DataProvider: React.FC = ({ children }) => {
 }
 
 export const useData = () => useContext(DataContext)
+
+function paginateContent(content: SVG[]) {
+  const perPage = 100
+
+  if (content.length <= perPage) return [content]
+
+  return content.reduce((resultArray, item, index) => {
+    const chunkIndex = Math.floor(index / perPage)
+    if (!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = []
+    }
+
+    resultArray[chunkIndex].push(item)
+
+    return resultArray
+  }, [] as SVG[][])
+}

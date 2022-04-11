@@ -2,8 +2,6 @@ import React from 'react'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 const config = extendTheme({
-  initialColorMode: 'light',
-  useSystemColorMode: false,
   styles: {
     global: {
       body: {

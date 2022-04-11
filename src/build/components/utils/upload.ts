@@ -1,3 +1,4 @@
+import React from 'react'
 import SVG from '../../../find/svg-class'
 import process from '../../../find/process-svg'
 import { AppData } from '../../types'

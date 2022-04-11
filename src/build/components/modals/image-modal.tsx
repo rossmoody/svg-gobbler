@@ -18,10 +18,8 @@ import {
   ModalOverlay,
   useColorModeValue,
 } from '@chakra-ui/react'
-
-import handle from '../utils/actions'
-import { SVGImage } from '../utils/image-class'
 import loc from '../utils/localization'
+import handle from '../utils/actions'
 
 interface ImageModalProps {
   callback: React.Dispatch<React.SetStateAction<boolean>>
@@ -44,7 +42,6 @@ const ImageModal = ({
   const [filename, setFilename] = useState('svg-image')
   const firstFieldRef = useRef(null)
 
-  const state = new SVGImage(svgString, height, width)
   const whiteFillBg = useColorModeValue('gray.100', 'null')
 
   return (
@@ -66,15 +63,29 @@ const ImageModal = ({
               maxHeight="280px"
               width="100%"
               height="100%"
-              stroke="red.100"
               marginBottom={4}
             >
               <Box
-                as="img"
-                src={state.base64}
+                position="relative"
+                height="0"
                 width="100%"
-                height="100%"
+                padding="0 0 100%"
+                dangerouslySetInnerHTML={{ __html: svgString }}
+                overflow="hidden"
                 zIndex={1}
+                sx={{
+                  '& > svg': {
+                    position: 'absolute',
+                    height: '100%',
+                    width: '100%',
+                    left: '0',
+                    top: '0',
+                    overflow: 'visible',
+                  },
+                  '& > img': {
+                    width: '100%',
+                  },
+                }}
               />
             </Center>
             {whiteFill && (
@@ -90,88 +101,76 @@ const ImageModal = ({
         </ModalBody>
 
         <ModalFooter flexDir="column" alignItems="flex-start">
-          <form
-            onSubmit={(event) => {
-              event.preventDefault()
-              state.setClassWidthHeight(size.height, size.width)
-              state.setSvgElementWidthHeight()
-              state.createImgSrc()
-              handle.exportPNG(state.base64, size.width, size.height, filename)
+          <FormControl>
+            <HStack>
+              <FormLabel margin={0} fontSize="sm" htmlFor="height">
+                {loc('modals_height')}
+                <InputGroup>
+                  <Input
+                    ref={firstFieldRef}
+                    type="number"
+                    value={size.height}
+                    id="height"
+                    onChange={(event) => {
+                      let newHeight = Number(event.target.value)
+                      if (!newHeight || newHeight < 1) newHeight = 1
+
+                      const newWidth = Math.ceil(
+                        (size.width / size.height) * newHeight
+                      )
+                      setSize({ height: newHeight, width: newWidth })
+                    }}
+                  />
+                  <InputRightAddon children={loc('modals_px')} />
+                </InputGroup>
+              </FormLabel>
+              <FormLabel fontSize="sm" htmlFor="width">
+                {loc('modals_width')}
+                <InputGroup>
+                  <Input
+                    id="width"
+                    type="number"
+                    value={size.width}
+                    onChange={(event) => {
+                      let newWidth = Number(event.target.value)
+                      if (!newWidth || newWidth < 1) newWidth = 1
+                      const newHeight = Math.ceil(
+                        (size.height / size.width) * newWidth
+                      )
+                      setSize({ height: newHeight, width: newWidth })
+                    }}
+                  />
+                  <InputRightAddon children={loc('modals_px')} />
+                </InputGroup>
+              </FormLabel>
+            </HStack>
+          </FormControl>
+          <FormControl marginTop={4}>
+            <FormLabel htmlFor="image-filename" fontSize="sm">
+              {loc('modals_filename')}
+            </FormLabel>
+            <InputGroup>
+              <Input
+                id="image-filename"
+                defaultValue={filename}
+                onChange={(event) => setFilename(event.target.value)}
+              />
+              <InputRightAddon>{loc('modals_fileType_png')}</InputRightAddon>
+            </InputGroup>
+          </FormControl>
+
+          <Button
+            colorScheme="red"
+            marginBottom={4}
+            marginTop={8}
+            isFullWidth
+            onClick={() => {
+              console.log('this worked')
+              handle.exportPNG(svgString, size.width, size.height, filename)
             }}
           >
-            <FormControl>
-              <HStack>
-                <FormLabel margin={0} fontSize="sm" htmlFor="height">
-                  {loc('modals_height')}
-                  <InputGroup>
-                    <Input
-                      ref={firstFieldRef}
-                      type="number"
-                      value={size.height}
-                      id="height"
-                      onChange={(event) => {
-                        const newHeight = Number(event.target.value)
-                        const originalHeight = state.height
-                        const originalWidth = state.width
-
-                        const newWidth = Math.ceil(
-                          (originalWidth / originalHeight) * newHeight
-                        )
-
-                        setSize({ height: newHeight, width: newWidth })
-                      }}
-                    />
-                    <InputRightAddon children={loc('modals_px')} />
-                  </InputGroup>
-                </FormLabel>
-                <FormLabel fontSize="sm" htmlFor="width">
-                  {loc('modals_width')}
-                  <InputGroup>
-                    <Input
-                      id="width"
-                      type="number"
-                      value={size.width}
-                      onChange={(event) => {
-                        const newWidth = Number(event.target.value)
-                        const originalHeight = state.height
-                        const originalWidth = state.width
-
-                        const newHeight = Math.ceil(
-                          (originalHeight / originalWidth) * newWidth
-                        )
-
-                        setSize({ height: newHeight, width: newWidth })
-                      }}
-                    />
-                    <InputRightAddon children={loc('modals_px')} />
-                  </InputGroup>
-                </FormLabel>
-              </HStack>
-            </FormControl>
-            <FormControl marginTop={4}>
-              <FormLabel htmlFor="image-filename" fontSize="sm">
-                {loc('modals_filename')}
-              </FormLabel>
-              <InputGroup>
-                <Input
-                  id="image-filename"
-                  defaultValue={filename}
-                  onChange={(event) => setFilename(event.target.value)}
-                />
-                <InputRightAddon>{loc('modals_fileType_png')}</InputRightAddon>
-              </InputGroup>
-            </FormControl>
-
-            <Button
-              colorScheme="red"
-              marginBottom={4}
-              marginTop={8}
-              isFullWidth
-              type="submit"
-            >
-              {loc('modals_exportImage')}
-            </Button>
-          </form>
+            {loc('modals_exportImage')}
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

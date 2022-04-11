@@ -1,6 +1,7 @@
 import FileSaver from 'file-saver'
 import JSZip from 'jszip'
 import { extendDefaultPlugins, optimize } from 'svgo/dist/svgo.browser'
+import { SVGImage } from './image-class'
 
 const svgoConfig = {
   multipass: true,
@@ -60,27 +61,35 @@ const handle = {
   },
 
   exportPNG(
-    imgSource: string,
+    svgString: string,
     width: number,
     height: number,
     filename = FILENAME
   ) {
-    const imageElement = new Image()
+    const image = new SVGImage(svgString, height, width)
+    image.svgElement.setAttribute('width', String(width))
+    image.svgElement.setAttribute('height', String(height))
+    const data = new XMLSerializer().serializeToString(image.svgElement)
 
-    imageElement.src = imgSource
+    const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+    document.body.appendChild(canvas)
+    const ctx = canvas.getContext('2d')
+    const dom = window.URL || window.webkitURL || window
 
-    imageElement.onload = () => {
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
+    const img = new Image(width, height)
+    const svg = new Blob([data], { type: 'image/svg+xml' })
+    const url = dom.createObjectURL(svg)
 
-      canvas.width = width
-      canvas.height = height
-
-      ctx!.drawImage(imageElement, 0, 0)
-      const dataUri = canvas.toDataURL('image/png', 0.9)
-
-      FileSaver.saveAs(dataUri, `${filename}.png`)
+    img.onload = function () {
+      ctx?.drawImage(img, 0, 0)
+      dom.revokeObjectURL(url)
+      const png_img = canvas.toDataURL('image/png')
+      FileSaver.saveAs(png_img, `${filename}.png`)
     }
+
+    img.src = url
   },
 }
 

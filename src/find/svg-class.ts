@@ -38,21 +38,21 @@ export class SVGClass {
     this.buildGElement()
   }
 
-  private hasBase64BgImg(string: string) {
+  hasBase64BgImg(string: string) {
     return string.includes('data:image/svg+xml;base64')
   }
 
-  private hasDataUriBgImg(string: string) {
+  hasDataUriBgImg(string: string) {
     return string.includes('data:image/svg+xml;utf8')
   }
 
-  private hasSvgFilename(string: string) {
+  hasSvgFilename(string: string) {
     const hasPng = string.includes('.png')
     const hasSvg = string.includes('.svg')
     return hasSvg && !hasPng
   }
 
-  private parseStringToElement(string: string) {
+  parseStringToElement(string: string) {
     const { documentElement } = new DOMParser().parseFromString(
       string,
       'image/svg+xml'
