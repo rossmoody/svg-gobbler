@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
-import { AppData } from '../types'
 import processElements from '../../find/process-elements'
 import SVG from '../../find/svg-class'
+import { AppData } from '../types'
 
 interface DataContextProps {
   data: AppData
@@ -15,9 +15,18 @@ export const DataProvider: React.FC = ({ children }) => {
 
   const value = useMemo(() => ({ data, setData }), [data])
 
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setData((prevData) => {
+        return prevData.length < 1 ? 'empty' : prevData
+      })
+    }, 2000)
+
+    return () => clearTimeout(timeout)
+  }, [])
+
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'gobble') {
-      setData([])
       processElements(message.data).then((result) => {
         if (result.length < 1) return setData('empty')
         setData(paginateContent(result))

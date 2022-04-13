@@ -25,6 +25,6 @@ export class SVGImage {
   private setViewBox() {
     const manualViewbox = `0 0 ${this.width} ${this.height}`
     const viewBox = this.svgElement.getAttribute('viewBox')
-    if (!viewBox) this.svgElement.setAttribute('viewBox', manualViewbox)
+    if (viewBox === null) this.svgElement.setAttribute('viewBox', manualViewbox)
   }
 }

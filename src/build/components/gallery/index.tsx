@@ -1,10 +1,9 @@
 import React from 'react'
-
-import loc from '../utils/localization'
+import SVGClass from '../../../find/svg-class'
 import { useData } from '../../providers/data-provider'
+import loc from '../utils/localization'
 import DataGallery from './data-gallery'
 import EmptyGallery from './empty-gallery'
-import SVGClass from '../../../find/svg-class'
 import LoadingGallery from './loading-gallery'
 
 const Gallery = () => {

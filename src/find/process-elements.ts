@@ -1,19 +1,28 @@
-import SVG from './svg-class'
-import process from './process-svg'
 import fetchSVGContent from './async-operations'
+import process from './process-svg'
+import SVG from './svg-class'
 
 async function processElements(strings: string[]) {
   const parser = new DOMParser()
-  const pageElements = strings.map(
-    (string) =>
-      parser.parseFromString(string, 'image/svg+xml').firstElementChild
-  ) as Element[]
+  const pageElements = strings.map((string) => {
+    const doc = parser.parseFromString(string, 'image/svg+xml')
+    const error = doc.querySelector('parsererror')
+
+    if (error) {
+      const newDoc = parser.parseFromString(string, 'text/html')
+      return newDoc.body.firstElementChild
+    } else {
+      return doc.firstElementChild
+    }
+  }) as Element[]
 
   const preliminarySVGs = await Promise.all(
     pageElements
       .map((ele) => new SVG(ele))
       .filter(process.filterInvalid)
-      .map((ele) => fetchSVGContent.call(ele))
+      .map((ele) => {
+        return fetchSVGContent.call(ele)
+      })
   )
 
   return preliminarySVGs
