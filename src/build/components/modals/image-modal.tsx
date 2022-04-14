@@ -1,4 +1,3 @@
-import React, { useRef, useState } from 'react'
 import {
   Box,
   Button,
@@ -18,8 +17,9 @@ import {
   ModalOverlay,
   useColorModeValue,
 } from '@chakra-ui/react'
-import loc from '../utils/localization'
+import React, { useRef, useState } from 'react'
 import handle from '../utils/actions'
+import loc from '../utils/localization'
 
 interface ImageModalProps {
   callback: React.Dispatch<React.SetStateAction<boolean>>
@@ -165,7 +165,6 @@ const ImageModal = ({
             marginTop={8}
             isFullWidth
             onClick={() => {
-              console.log('this worked')
               handle.exportPNG(svgString, size.width, size.height, filename)
             }}
           >

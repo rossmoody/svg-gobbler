@@ -20,7 +20,6 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
 
   if (imgSrcHref) {
     const imgSrcResponse = await fetchFromUrl(imgSrcHref)
-    console.log(imgSrcResponse)
     if (imgSrcResponse) {
       this.originalElementReference = imgSrcResponse
     } else {

@@ -103,7 +103,9 @@ const process = {
 
   processSvgSymbolsFromFetchCall(this: SVG) {
     if (this.spriteSymbolArray) {
-      return this.spriteSymbolArray.map((symbol) => new SVG(symbol))
+      return this.spriteSymbolArray.map(
+        (symbol) => new SVG(symbol, this.location)
+      )
     } else {
       return this
     }

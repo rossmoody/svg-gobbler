@@ -8,26 +8,12 @@ async function processElements(strings: string[], location: string) {
 
   strings.forEach((string) => {
     const { body } = parser.parseFromString(string, 'text/html')
-
-    if (string.includes('img')) {
-      const src =
-        (body.firstElementChild as HTMLImageElement).src &&
-        (body.firstElementChild as HTMLImageElement).src.replace(
-          'chrome-extension://hghbphamkebpljkdjgbipkafbldcpmof/',
-          ''
-        )
-
-      const img = new Image()
-      img.src = location + src
-      return results.push(img)
-    }
-
     if (body.firstElementChild) results.push(body.firstElementChild)
   })
 
   const preliminarySVGs = await Promise.all(
     results
-      .map((ele) => new SVG(ele))
+      .map((ele) => new SVG(ele, location))
       .filter(process.filterInvalid)
       .map((ele) => {
         return fetchSVGContent.call(ele)

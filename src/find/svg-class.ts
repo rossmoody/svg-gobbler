@@ -27,7 +27,10 @@ export class SVGClass {
 
   readonly id = Math.random()
 
-  constructor(public originalElementReference: Element) {
+  constructor(
+    public originalElementReference: Element,
+    public location: string
+  ) {
     this.determineType()
     this.setSpriteHref()
     this.buildSymbolElement()
@@ -95,6 +98,8 @@ export class SVGClass {
         const hasSvgFilename = this.hasSvgFilename(imgSrc)
         const hasDataUriBgImg = this.hasDataUriBgImg(imgSrc)
         const hasBase64BgImg = this.hasBase64BgImg(imgSrc)
+
+        console.log(this, imgSrc)
 
         if (hasSvgFilename || hasDataUriBgImg || hasBase64BgImg) {
           this.type = 'img src'
