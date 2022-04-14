@@ -1,6 +1,6 @@
 import React from 'react'
-import SVG from '../../../find/svg-class'
 import process from '../../../find/process-svg'
+import SVG from '../../../find/svg-class'
 import { AppData } from '../../types'
 
 export const util = {
@@ -30,7 +30,7 @@ export const util = {
   },
 
   processUploadedSVG(svg: HTMLElement) {
-    const localSvg = new SVG(svg)
+    const localSvg = new SVG(svg, 'local')
     process.setViewBox.call(localSvg)
     process.setWidthHeight.call(localSvg)
     process.setSize.call(localSvg)
