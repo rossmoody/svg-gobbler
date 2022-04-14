@@ -7,8 +7,6 @@ async function processElements(strings: string[], location: string) {
   const results = [] as Element[]
 
   strings.forEach((string) => {
-    if (!string.includes('svg')) return
-
     const { body } = parser.parseFromString(string, 'text/html')
 
     if (string.includes('img')) {

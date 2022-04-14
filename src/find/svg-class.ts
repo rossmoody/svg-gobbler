@@ -9,7 +9,6 @@ type SVGType =
   | 'g'
 
 export class SVGClass {
-  originalElementReference: Element
   elementClone: Element
   type: SVGType = 'invalid'
   cors = false
@@ -29,9 +28,10 @@ export class SVGClass {
 
   readonly id = Math.random()
 
-  constructor(element: Element) {
-    this.originalElementReference = element
-    this.elementClone = element.cloneNode(true) as HTMLElement
+  constructor(public originalElementReference: Element) {
+    this.elementClone = this.originalElementReference.cloneNode(
+      true
+    ) as HTMLElement
     this.determineType()
     this.setSpriteHref()
     this.buildSymbolElement()
