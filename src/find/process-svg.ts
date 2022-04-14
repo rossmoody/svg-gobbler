@@ -15,11 +15,11 @@ const process = {
 
   convertElementRefToSVGString(this: SVG) {
     const serializer = new XMLSerializer()
-    this.svgString = serializer.serializeToString(this.elementClone)
+    this.svgString = serializer.serializeToString(this.originalElementReference)
   },
 
   removeFillNone(this: SVG) {
-    const svgElement = this.elementClone
+    const svgElement = this.originalElementReference
 
     const fill = svgElement.getAttribute('fill')
     const stroke = svgElement.getAttribute('stroke')
@@ -31,21 +31,22 @@ const process = {
   },
 
   removeClass(this: SVG) {
-    const svgElement = this.elementClone
+    const svgElement = this.originalElementReference
     svgElement.removeAttribute('class')
   },
 
   setViewBox(this: SVG) {
-    const svgElement = this.elementClone
+    const svgElement = this.originalElementReference
     const classViewBox = this.viewBox
     const elementViewBox = svgElement.getAttribute('viewBox')
 
     if (elementViewBox) this.viewBox = elementViewBox
-    if (classViewBox) this.elementClone.setAttribute('viewBox', classViewBox)
+    if (classViewBox)
+      this.originalElementReference.setAttribute('viewBox', classViewBox)
   },
 
   setWidthHeight(this: SVG) {
-    const svgElement = this.elementClone
+    const svgElement = this.originalElementReference
     const viewBox = this.viewBox
     const width: string | null = svgElement.getAttribute('width')
     const height: string | null = svgElement.getAttribute('height')
@@ -81,7 +82,9 @@ const process = {
   },
 
   createPresentationSvg(this: SVG) {
-    const htmlElement = this.elementClone.cloneNode(true) as HTMLElement
+    const htmlElement = this.originalElementReference.cloneNode(
+      true
+    ) as HTMLElement
     const isCorsRestricted = this.cors
 
     if (!isCorsRestricted) {
@@ -94,7 +97,7 @@ const process = {
 
   hasWhiteFill(this: SVG) {
     const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
-    const svgOuterHtml = this.elementClone.outerHTML
+    const svgOuterHtml = this.originalElementReference.outerHTML
     this.whiteFill = whiteFills.some((fill) => svgOuterHtml.includes(fill))
   },
 
@@ -104,11 +107,6 @@ const process = {
     } else {
       return this
     }
-  },
-
-  removeDomNodes(this: SVG) {
-    const { elementClone, originalElementReference, ...res } = this
-    return res
   },
 }
 

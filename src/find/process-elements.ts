@@ -51,7 +51,7 @@ async function processElements(strings: string[], location: string) {
       process.convertElementRefToSVGString.call(svg)
       process.createPresentationSvg.call(svg)
       process.hasWhiteFill.call(svg)
-      return process.removeDomNodes.call(svg)
+      return svg
     }) as SVG[]
 }
 

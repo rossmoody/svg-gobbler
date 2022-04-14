@@ -9,7 +9,6 @@ type SVGType =
   | 'g'
 
 export class SVGClass {
-  elementClone: Element
   type: SVGType = 'invalid'
   cors = false
   whiteFill = false
@@ -29,9 +28,6 @@ export class SVGClass {
   readonly id = Math.random()
 
   constructor(public originalElementReference: Element) {
-    this.elementClone = this.originalElementReference.cloneNode(
-      true
-    ) as HTMLElement
     this.determineType()
     this.setSpriteHref()
     this.buildSymbolElement()
@@ -61,22 +57,16 @@ export class SVGClass {
   }
 
   private determineType() {
-    const tagName = this.elementClone.tagName
-    const svgElement = this.elementClone
-
-    const querySvgTag = (tag: keyof SVGElementTagNameMap) => [
-      ...svgElement.querySelectorAll(tag),
-    ]
+    const tagName = this.originalElementReference.tagName
+    const svgElement = this.originalElementReference
 
     switch (tagName) {
       case 'svg': {
-        this.type = 'inline'
-
-        const useTags = querySvgTag('use')
-        const hasUseTags = useTags.length > 0
-
-        // Filter out. Symbols are manually built
-        if (hasUseTags) this.type = 'sprite'
+        if ([...svgElement.querySelectorAll('use')].length > 0) {
+          this.type = 'sprite'
+        } else {
+          this.type = 'inline'
+        }
         break
       }
 
@@ -86,19 +76,21 @@ export class SVGClass {
       }
 
       case 'g': {
-        const hasId = this.elementClone.id
+        const hasId = this.originalElementReference.id
         if (hasId) this.type = 'g'
         break
       }
 
       case 'OBJECT': {
         this.type = 'object'
-        this.dataSrcHref = (this.elementClone as HTMLObjectElement).data
+        this.dataSrcHref = (
+          this.originalElementReference as HTMLObjectElement
+        ).data
         break
       }
 
       case 'IMG': {
-        const imgSrc = (this.elementClone as HTMLImageElement).src
+        const imgSrc = (this.originalElementReference as HTMLImageElement).src
         const hasSvgFilename = this.hasSvgFilename(imgSrc)
         const hasDataUriBgImg = this.hasDataUriBgImg(imgSrc)
         const hasBase64BgImg = this.hasBase64BgImg(imgSrc)
@@ -117,7 +109,7 @@ export class SVGClass {
 
           if (svgString) {
             const svgElement = this.parseStringToElement(svgString[0])
-            this.elementClone = svgElement
+            this.originalElementReference = svgElement
           }
         }
         break
@@ -145,7 +137,7 @@ export class SVGClass {
             if (base64String) {
               const svgString = atob(base64String[0])
               const svgElement = this.parseStringToElement(svgString)
-              this.elementClone = svgElement
+              this.originalElementReference = svgElement
             }
           } catch (error) {
             this.cors = true
@@ -169,7 +161,7 @@ export class SVGClass {
           if (regexResult) {
             const string = regexResult[0].replace(/\\/g, '')
             const svgElement = this.parseStringToElement(string)
-            this.elementClone = svgElement
+            this.originalElementReference = svgElement
           }
         }
         break
@@ -183,7 +175,9 @@ export class SVGClass {
   private buildSymbolElement() {
     if (this.type !== 'symbol') return
 
-    const symbolElement = this.elementClone.cloneNode(true) as SVGSymbolElement
+    const symbolElement = this.originalElementReference.cloneNode(
+      true
+    ) as SVGSymbolElement
 
     symbolElement.removeAttribute('fill')
 
@@ -207,20 +201,22 @@ export class SVGClass {
     useElement.setAttributeNS(
       'http://www.w3.org/1999/xlink',
       'xlink:href',
-      `#${this.elementClone.id}`
+      `#${this.originalElementReference.id}`
     )
 
     svgElement.appendChild(symbolElement)
     svgElement.appendChild(useElement)
 
     this.type = 'sprite'
-    this.elementClone = svgElement
+    this.originalElementReference = svgElement
   }
 
   private buildGElement() {
     if (this.type !== 'g') return
 
-    const gElement = this.elementClone.cloneNode(true) as SVGGElement
+    const gElement = this.originalElementReference.cloneNode(
+      true
+    ) as SVGGElement
     const gId = gElement.id
 
     const viewBox = gElement.getAttribute('viewBox')
@@ -250,13 +246,13 @@ export class SVGClass {
     svgElement.appendChild(useElement)
 
     this.type = 'sprite'
-    this.elementClone = svgElement
+    this.originalElementReference = svgElement
   }
 
   private setSpriteHref() {
     if (this.type !== 'sprite') return
 
-    const useElement = this.elementClone.querySelector('use')!
+    const useElement = this.originalElementReference.querySelector('use')!
     const ownerDocument = document.URL
 
     const xlinkHref = useElement.getAttribute('xlink:href')
