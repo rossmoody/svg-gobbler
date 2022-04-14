@@ -16,7 +16,6 @@ export class SVGClass {
   spriteHref?: string
   imgSrcHref?: string
   dataSrcHref?: string
-  divBgUrl?: string
   svgString?: string
   viewBox?: string
   width?: number
@@ -98,8 +97,6 @@ export class SVGClass {
         const hasSvgFilename = this.hasSvgFilename(imgSrc)
         const hasDataUriBgImg = this.hasDataUriBgImg(imgSrc)
         const hasBase64BgImg = this.hasBase64BgImg(imgSrc)
-
-        console.log(this, imgSrc)
 
         if (hasSvgFilename || hasDataUriBgImg || hasBase64BgImg) {
           this.type = 'img src'
