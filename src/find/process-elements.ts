@@ -2,22 +2,33 @@ import fetchSVGContent from './async-operations'
 import process from './process-svg'
 import SVG from './svg-class'
 
-async function processElements(strings: string[]) {
+async function processElements(strings: string[], location: string) {
   const parser = new DOMParser()
-  const pageElements = strings.map((string) => {
-    const doc = parser.parseFromString(string, 'image/svg+xml')
-    const error = doc.querySelector('parsererror')
+  const results = [] as Element[]
 
-    if (error) {
-      const newDoc = parser.parseFromString(string, 'text/html')
-      return newDoc.body.firstElementChild
-    } else {
-      return doc.firstElementChild
+  strings.forEach((string) => {
+    if (!string.includes('svg')) return
+
+    const { body } = parser.parseFromString(string, 'text/html')
+
+    if (string.includes('img')) {
+      const src =
+        (body.firstElementChild as HTMLImageElement).src &&
+        (body.firstElementChild as HTMLImageElement).src.replace(
+          'chrome-extension://hghbphamkebpljkdjgbipkafbldcpmof/',
+          ''
+        )
+
+      const img = new Image()
+      img.src = location + src
+      return results.push(img)
     }
-  }) as Element[]
+
+    if (body.firstElementChild) results.push(body.firstElementChild)
+  })
 
   const preliminarySVGs = await Promise.all(
-    pageElements
+    results
       .map((ele) => new SVG(ele))
       .filter(process.filterInvalid)
       .map((ele) => {

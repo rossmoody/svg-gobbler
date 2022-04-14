@@ -20,14 +20,14 @@ export const DataProvider: React.FC = ({ children }) => {
       setData((prevData) => {
         return prevData.length < 1 ? 'empty' : prevData
       })
-    }, 2000)
+    }, 10000)
 
     return () => clearTimeout(timeout)
   }, [])
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'gobble') {
-      processElements(message.data).then((result) => {
+      processElements(message.data, message.location).then((result) => {
         if (result.length < 1) return setData('empty')
         setData(paginateContent(result))
       })

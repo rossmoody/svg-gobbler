@@ -31,12 +31,20 @@ chrome.action.onClicked.addListener(async function systemPage({ url }) {
       })
     )[0].result
 
+    const location = (
+      await chrome.scripting.executeScript({
+        target: { tabId: id },
+        func: () => document.location.href,
+      })
+    )[0].result
+
     chrome.tabs.create({ url: `index.html`, active: true }, () => {
       chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
         if (changeInfo.status === 'complete') {
           chrome.tabs.sendMessage(tabId, {
             data,
             action: 'gobble',
+            location,
             url: host,
           })
           chrome.tabs.onUpdated.removeListener(listener)

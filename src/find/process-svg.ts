@@ -7,11 +7,9 @@ const process = {
 
   dedupSVGs(svg: SVG, index: number, originalArray: SVG[]) {
     const stringToCompare = svg.svgString
-
     const firstIndexFound = originalArray.findIndex(
       (currentSvg) => currentSvg.svgString === stringToCompare
     )
-
     return firstIndexFound === index
   },
 
