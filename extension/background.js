@@ -79,7 +79,6 @@ function findSVGs() {
   const objectElements = getElementsByTag('object[data*=".svg"]')
   const symbolElements = getElementsByTag('symbol')
   const imageElements = getElementsByTag('img')
-  const divElements = getElementsByTag('div')
   const gElements = getElementsByTag('g')
 
   return [
@@ -87,7 +86,6 @@ function findSVGs() {
     ...objectElements,
     ...symbolElements,
     ...imageElements,
-    ...divElements,
     ...gElements,
   ]
 }

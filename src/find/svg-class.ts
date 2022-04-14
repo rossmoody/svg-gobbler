@@ -76,8 +76,9 @@ export class SVGClass {
       }
 
       case 'g': {
-        const hasId = this.originalElementReference.id
-        if (hasId) this.type = 'g'
+        if (svgElement.id) {
+          this.type = 'g'
+        }
         break
       }
 
@@ -114,61 +115,6 @@ export class SVGClass {
         }
         break
       }
-
-      // Getting css styles from divs vs imgs is tricky. We must reference the
-      // original DOM node to getComputedStyle because cloning strips the attributes
-      case 'DIV': {
-        const divElement = this.originalElementReference as HTMLDivElement
-        const computedStyle = window.getComputedStyle(divElement)
-        const backgroundImageUrl = computedStyle.backgroundImage
-
-        const hasBase64BgImg = this.hasBase64BgImg(backgroundImageUrl)
-        const hasSvgFilename = this.hasSvgFilename(backgroundImageUrl)
-        const hasDataUriBgImg = this.hasDataUriBgImg(backgroundImageUrl)
-
-        if (hasBase64BgImg || hasSvgFilename || hasDataUriBgImg)
-          this.type = 'bg img'
-
-        if (hasBase64BgImg) {
-          try {
-            const base64RegEx = /(?<=,)(.*)(?=")/
-            const base64String = base64RegEx.exec(backgroundImageUrl)
-
-            if (base64String) {
-              const svgString = atob(base64String[0])
-              const svgElement = this.parseStringToElement(svgString)
-              this.originalElementReference = svgElement
-            }
-          } catch (error) {
-            this.cors = true
-          }
-        }
-
-        if (hasSvgFilename) {
-          const urlRegex = /(?<=url\(")(.*)(?<=.svg)/
-          const regexResult = urlRegex.exec(backgroundImageUrl)
-
-          if (regexResult) {
-            const url = regexResult[0]
-            this.divBgUrl = url
-          }
-        }
-
-        if (this.hasDataUriBgImg(backgroundImageUrl)) {
-          const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
-          const regexResult = regex.exec(backgroundImageUrl)
-
-          if (regexResult) {
-            const string = regexResult[0].replace(/\\/g, '')
-            const svgElement = this.parseStringToElement(string)
-            this.originalElementReference = svgElement
-          }
-        }
-        break
-      }
-
-      default:
-        this.type = 'invalid'
     }
   }
 
