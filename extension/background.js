@@ -60,10 +60,19 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   }
 })
 
+/**
+ * Returns an array of unique element strings that
+ * include 'svg' somewhere in the string
+ */
 function findSVGs() {
   function getElementsByTag(tag) {
-    const elements = Array.from(document.querySelectorAll(tag))
-    return elements.map((element) => element.outerHTML)
+    return [
+      ...new Set(
+        Array.from(document.querySelectorAll(tag))
+          .map((element) => element.outerHTML)
+          .filter((element) => element.includes('svg'))
+      ),
+    ]
   }
 
   const svgElements = getElementsByTag('svg')
