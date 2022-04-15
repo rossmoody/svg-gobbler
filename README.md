@@ -8,6 +8,8 @@ SVG Gobbler is a browser extension that finds SVG content in your current window
 
 Currently, if you would like to modify this extension you will need to install it manually. Before making edits you will need to build it locally and side load SVG Gobbler as a developer extension to test any changes.
 
+> This extension is in a strange middle ground with the v3 manifest updates coming from Chrome. Firefox extension is pinned to version 3.17 for Firefox but the extension is being refactored to comply with v3 Manifest changes.
+
 ### Installation
 
 #### 1. Clone the repo
@@ -28,10 +30,10 @@ yarn
 
 #### 3. Bundle the extension
 
-Run `yarn build` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits.
+Run `yarn start` to tell Webpack to build files into the `extension/dist` folder. This also tells webpack to watch for edits.
 
 ```bash
-yarn build
+yarn start
 ```
 
 #### 4. Side load extension
@@ -43,19 +45,6 @@ yarn build
 1. Click the button to `Load unpacked` and select the `extension` folder inside the SVG Gobbler repo
 
 Once this is complete you can start hacking. Editing content in the `src` directory will automatically build and update the extension folder which will feed the extension in the browser the latest code.
-
-#### Firefox
-
-1. After running the `yarn build` command to build and watch changes...
-1. Run `yarn serve` to build the extension in a Firefox testing environment
-
-### Development notes
-
-In **Chrome or Brave** if you are editing anything within the `src/find` directory you will need to manually press the `Update` button in the extensions page to refresh your latest code changes.
-
-Code changed within the `src/build` directory will automatically update on page refresh but code that is injected into the client's tab (code within `src/find`) needs manually refreshed from within the extensions page.
-
-In **Firefox** everything works and auto refreshes. It's super pleasant and I do all my extension testing in Firefox.
 
 ## 🎉 How to use the extension
 
