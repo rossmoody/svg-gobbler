@@ -1,4 +1,4 @@
-import SVG from './svg-class'
+import SVG from './SVG'
 
 async function fetchFromUrl(url: string): Promise<HTMLElement | false> {
   try {

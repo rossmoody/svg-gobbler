@@ -1,6 +1,6 @@
 import React from 'react'
 import process from '../../../find/process-svg'
-import SVG from '../../../find/svg-class'
+import SVG from '../../../find/SVG'
 import { AppData } from '../../types'
 
 export const util = {
@@ -34,7 +34,6 @@ export const util = {
     process.setViewBox.call(localSvg)
     process.setWidthHeight.call(localSvg)
     process.setSize.call(localSvg)
-    process.convertElementRefToSVGString.call(localSvg)
     process.createPresentationSvg.call(localSvg)
     localSvg.type = 'inline'
     return localSvg

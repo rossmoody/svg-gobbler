@@ -1,6 +1,6 @@
 import fetchSVGContent from './async-operations'
 import process from './process-svg'
-import SVG from './svg-class'
+import SVG from './SVG'
 
 async function processElements(strings: string[], location: string) {
   const elements = [] as Element[]

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
 import processElements from '../../find/process-elements'
-import SVG from '../../find/svg-class'
+import SVG from '../../find/SVG'
 import { AppData } from '../types'
 
 interface DataContextProps {

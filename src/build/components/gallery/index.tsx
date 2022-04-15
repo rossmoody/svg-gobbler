@@ -1,5 +1,5 @@
 import React from 'react'
-import SVGClass from '../../../find/svg-class'
+import SVG from '../../../find/SVG'
 import { useData } from '../../providers/data-provider'
 import loc from '../utils/localization'
 import DataGallery from './data-gallery'
@@ -22,7 +22,7 @@ const Gallery = () => {
     )
   }
 
-  return <DataGallery data={data as SVGClass[][]} />
+  return <DataGallery data={data as SVG[][]} />
 }
 
 export default Gallery

@@ -8,7 +8,7 @@ type SVGType =
   | 'invalid'
   | 'g'
 
-export class SVGClass {
+class SVG {
   type: SVGType = 'invalid'
   cors = false
   whiteFill = false
@@ -167,4 +167,4 @@ export class SVGClass {
   }
 }
 
-export default SVGClass
+export default SVG

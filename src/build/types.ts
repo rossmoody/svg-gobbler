@@ -1,4 +1,4 @@
-import SVG from '../find/svg-class'
+import SVG from '../find/SVG'
 
 export type PluginNames =
   | 'removeDimensions'

@@ -6,7 +6,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import SVG from '../../../find/svg-class'
+import SVG from '../../../find/SVG'
 import Card from '../card'
 import loc from '../utils/localization'
 

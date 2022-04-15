@@ -1,10 +1,10 @@
 import React from 'react'
-import SVGInterface from '../../../find/svg-class'
+import SVG from '../../../find/SVG'
 import CardActionCors from './card-action-cors'
 import CardActionFooter from './card-action-footer'
 
 interface CardActions {
-  data: SVGInterface
+  data: SVG
 }
 
 const CardActions = ({ data }: CardActions) => {

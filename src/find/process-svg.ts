@@ -1,4 +1,4 @@
-import SVG from './svg-class'
+import SVG from './SVG'
 
 const process = {
   removeFillNone(this: SVG) {
