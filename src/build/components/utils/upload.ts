@@ -32,8 +32,6 @@ export const util = {
   processUploadedSVG(svg: HTMLElement) {
     const localSvg = new SVG(svg, 'local')
     process.setWidthHeight.call(localSvg)
-    process.setSize.call(localSvg)
-    process.createPresentationSvg.call(localSvg)
     localSvg.type = 'inline'
     return localSvg
   },

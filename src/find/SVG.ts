@@ -17,8 +17,6 @@ class SVG {
   viewBox?: string
   width?: number
   height?: number
-  size?: string
-  presentationSvg?: string
   spriteSymbolArray?: SVGSymbolElement[]
 
   readonly id = Math.random()
@@ -150,6 +148,22 @@ class SVG {
     const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
     const svgOuterHtml = this.element.outerHTML
     return whiteFills.some((fill) => svgOuterHtml.includes(fill))
+  }
+
+  get size() {
+    if (Boolean(this.width) && Boolean(this.height)) {
+      return `${this.width}x${this.height}`
+    } else {
+      return 'N/A'
+    }
+  }
+
+  get presentationSvg() {
+    const attributes = ['height', 'width', 'style', 'class']
+    const htmlElement = this.element.cloneNode(true) as HTMLElement
+    if (!this.cors)
+      attributes.forEach((attr) => htmlElement.removeAttribute(attr))
+    return new XMLSerializer().serializeToString(htmlElement)
   }
 }
 

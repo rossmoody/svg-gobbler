@@ -31,24 +31,6 @@ const process = {
     }
   },
 
-  setSize(this: SVG) {
-    this.size = 'N/A'
-    const hasHeightWidth = Boolean(this.width) && Boolean(this.height)
-    if (hasHeightWidth) this.size = `${this.width}x${this.height}`
-  },
-
-  createPresentationSvg(this: SVG) {
-    const htmlElement = this.element.cloneNode(true) as HTMLElement
-    const isCorsRestricted = this.cors
-
-    if (!isCorsRestricted) {
-      const attributes = ['height', 'width', 'style', 'class']
-      attributes.forEach((attr) => htmlElement.removeAttribute(attr))
-    }
-
-    this.presentationSvg = new XMLSerializer().serializeToString(htmlElement)
-  },
-
   processSvgSymbolsFromFetchCall(this: SVG) {
     if (this.spriteSymbolArray) {
       console.log(this.spriteSymbolArray, 'sprite symbol array!')

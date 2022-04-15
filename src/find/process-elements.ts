@@ -26,8 +26,6 @@ async function processElements(strings: string[], location: string) {
       svg.removeFillNone()
       svg.removeClass()
       process.setWidthHeight.call(svg)
-      process.setSize.call(svg)
-      process.createPresentationSvg.call(svg)
       return svg
     }) as SVG[]
 }
