@@ -1,15 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
-
-import { AppData, MessageData } from '../types'
-
-import { paginateContent, sessionStorageData } from './utils'
+import React, { createContext, useContext, useMemo, useState } from 'react'
+import processElements from '../../find/process-elements'
+import SVG from '../../find/SVG'
+import { AppData } from '../types'
 
 interface DataContextProps {
   data: AppData
@@ -19,69 +11,49 @@ interface DataContextProps {
 const DataContext = createContext({} as DataContextProps)
 
 export const DataProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AppData>()
+  const [data, setData] = useState<AppData>([])
 
   const value = useMemo(() => ({ data, setData }), [data])
 
-  useEffect(() => {
-    const sessionData = sessionStorageData()
-    if (sessionData) setData(sessionData)
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setData((prevData) => {
+        return prevData.length < 1 ? 'empty' : prevData
+      })
+    }, 10000)
+
+    return () => clearTimeout(timeout)
   }, [])
 
-  useEffect(() => {
-    if (data instanceof Array) {
-      const sessionStorageCharacterLimit = 4500000
-      const json = JSON.stringify(data)
-
-      if (json.length < sessionStorageCharacterLimit) {
-        sessionStorage.setItem(window.location.host, json)
-      }
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'gobble') {
+      processElements(message.data, message.location).then((result) => {
+        if (result.length < 1) return setData('empty')
+        setData(paginateContent(result))
+      })
     }
-  }, [data])
 
-  /**
-   * This forces a state update to render a system page when a user
-   * navigates back to a page and there is no session storage
-   * or message to prompt a re-render.
-   */
-  const timeout = useRef<NodeJS.Timeout | undefined>()
-
-  useEffect(() => {
-    if (timeout.current !== undefined) clearTimeout(timeout.current)
-
-    if (data === undefined)
-      timeout.current = global.setTimeout(() => {
-        setData('error')
-      }, 3000)
-  }, [data, timeout])
-
-  chrome.runtime.onMessage.addListener((message: MessageData) => {
-    const content = message.data.content
-
-    switch (content) {
-      case 'system': {
-        setData('system')
-        break
-      }
-
-      case 'empty': {
-        setData('empty')
-        break
-      }
-
-      default: {
-        if (Array.isArray(content)) {
-          setData(paginateContent(content))
-        } else {
-          setData('error')
-        }
-
-        break
-      }
-    }
+    sendResponse('')
   })
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }
 
 export const useData = () => useContext(DataContext)
+
+function paginateContent(content: SVG[]) {
+  const perPage = 100
+
+  if (content.length <= perPage) return [content]
+
+  return content.reduce((resultArray, item, index) => {
+    const chunkIndex = Math.floor(index / perPage)
+    if (!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = []
+    }
+
+    resultArray[chunkIndex].push(item)
+
+    return resultArray
+  }, [] as SVG[][])
+}

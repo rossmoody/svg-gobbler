@@ -2,43 +2,25 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "manifest_version": 2,
-  "version": "3.17.0",
+  "manifest_version": 3,
+  "version": "4.2.1",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
-  "icons": {
-    "16": "icons/icon16.png",
-    "32": "icons/icon32.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
-  "browser_action": {
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "24": "icons/icon24.png",
-      "32": "icons/icon32.png"
-    },
-    "default_title": "SVG Gobbler"
-  },
+  "permissions": ["activeTab", "scripting", "tabs"],
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "permissions": [
-    "activeTab",
-    "https://us-central1-svg-gobbler.cloudfunctions.net/SVGR"
-  ],
-  "content_security_policy": "script-src 'self'",
-  "content_scripts": [
-    {
-      "matches": [
-        "https://*/*",
-        "http://*/*"
-      ],
-      "js": [
-        "./dist/find.js"
-      ]
+  "action": {
+    "default_icon": {
+      "16": "./icons/icon16.png",
+      "32": "./icons/icon32.png",
+      "48": "./icons/icon48.png"
     }
+  },
+  "icons": {
+    "48": "./icons/icon48.png",
+    "128": "./icons/icon128.png"
+  },
+  "host_permissions": [
+    "https://us-central1-svg-gobbler.cloudfunctions.net/SVGR"
   ]
 }

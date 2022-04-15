@@ -1,59 +1,91 @@
-function checkIfSystemTab(tab) {
-  let result = false
-
-  const currentTabUrl = tab.url
-  const isFirefoxSystemPage = currentTabUrl.includes('about:')
-  const isChromeSystemPage = currentTabUrl.includes('chrome:')
-
-  if (isChromeSystemPage || isFirefoxSystemPage) result = true
-
-  return result
-}
-
-function buildTab(message) {
-  chrome.tabs.create({ url: `index.html?id=${Math.random()}` })
-
-  chrome.tabs.onUpdated.addListener(function listener(tabId, changedProps) {
-    if (changedProps.status !== 'complete') return
-    chrome.tabs.onUpdated.removeListener(listener)
-
-    chrome.tabs.sendMessage(tabId, { data: message })
-  })
-}
-
-function sendMessagePromise(tabId, item) {
-  return new Promise((resolve) => {
-    chrome.tabs.sendMessage(tabId, item, (response) => {
-      if (response) resolve(response.data)
-    })
-  })
-}
-
-chrome.browserAction.onClicked.addListener(function () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    const currentTab = tabs[0]
-    const isSystemPage = checkIfSystemTab(currentTab)
-
-    if (isSystemPage) return buildTab({ content: 'system' })
-
-    sendMessagePromise(currentTab.id, {
-      message: 'start_gobbling',
-    })
-      .then((data) => {
-        if (data === 'empty') {
-          buildTab({ content: 'empty' })
-        } else {
-          buildTab(data)
+chrome.action.onClicked.addListener(async function systemPage({ url }) {
+  if (url.includes('chrome://')) {
+    chrome.tabs.create({ url: `index.html`, active: true }, () => {
+      chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
+        if (changeInfo.status === 'complete') {
+          chrome.tabs.sendMessage(tabId, {
+            data: [],
+            action: 'gobble',
+            url: 'Dashboard',
+          })
+          chrome.tabs.onUpdated.removeListener(systemPage)
         }
       })
-      .catch(() => {
-        buildTab({ content: 'system' })
-      })
-  })
-})
+    })
+  } else {
+    const { id } = (
+      await chrome.tabs.query({ active: true, currentWindow: true })
+    )[0]
 
-chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === 'install') {
-    chrome.tabs.create({ url: 'welcome.html' })
+    const data = (
+      await chrome.scripting.executeScript({
+        target: { tabId: id },
+        func: findSVGs,
+      })
+    )[0].result
+
+    const host = (
+      await chrome.scripting.executeScript({
+        target: { tabId: id },
+        func: () => document.location.host,
+      })
+    )[0].result
+
+    const location = (
+      await chrome.scripting.executeScript({
+        target: { tabId: id },
+        func: () => document.location.href,
+      })
+    )[0].result
+
+    chrome.tabs.create({ url: `index.html`, active: true }, () => {
+      chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
+        if (changeInfo.status === 'complete') {
+          chrome.tabs.sendMessage(tabId, {
+            data,
+            action: 'gobble',
+            location,
+            url: host,
+          })
+          chrome.tabs.onUpdated.removeListener(listener)
+        }
+      })
+    })
   }
 })
+
+chrome.runtime.onInstalled.addListener(async (details) => {
+  if (details.reason === 'install') {
+    await chrome.tabs.create({ url: './welcome.html' })
+  }
+})
+
+/**
+ * Returns an array of unique element strings that
+ * include 'svg' somewhere in the string
+ */
+function findSVGs() {
+  function getElementsByTag(tag) {
+    return [
+      ...new Set(
+        Array.from(document.querySelectorAll(tag))
+          .map((element) => element.outerHTML)
+          .filter((element) => element.includes('svg'))
+      ),
+    ]
+  }
+
+  const svgElements = getElementsByTag('svg')
+  const objectElements = getElementsByTag('object[data*=".svg"]')
+  const symbolElements = getElementsByTag('symbol')
+  const imageElements = getElementsByTag('img')
+  const gElements = getElementsByTag('g')
+
+  return [
+    ...svgElements,
+    ...objectElements,
+    ...symbolElements,
+    ...imageElements,
+    ...gElements,
+  ]
+}

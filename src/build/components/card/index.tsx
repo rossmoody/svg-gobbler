@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import {
   Box,
   Center,
@@ -7,14 +6,13 @@ import {
   SlideFade,
   useColorModeValue,
 } from '@chakra-ui/react'
-
-import SVGInterface from '../../../find/scripts/svg-class'
-
-import CardFooter from './card-footer'
+import React, { useState } from 'react'
+import SVG from '../../../find/SVG'
 import CardActions from './card-actions'
+import CardFooter from './card-footer'
 
 interface CardData {
-  data: SVGInterface
+  data: SVG
 }
 
 const Card = ({ data }: CardData) => {

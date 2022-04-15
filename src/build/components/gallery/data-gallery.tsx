@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Box,
   Button,
@@ -6,9 +5,9 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from '@chakra-ui/react'
-
+import React from 'react'
+import SVG from '../../../find/SVG'
 import Card from '../card'
-import SVG from '../../../find/scripts/svg-class'
 import loc from '../utils/localization'
 
 interface GalleryData {

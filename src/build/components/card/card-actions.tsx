@@ -1,33 +1,26 @@
 import React from 'react'
-
-import SVGInterface from '../../../find/scripts/svg-class'
-
-import CardActionFooter from './card-action-footer'
+import SVG from '../../../find/SVG'
 import CardActionCors from './card-action-cors'
+import CardActionFooter from './card-action-footer'
 
 interface CardActions {
-  data: SVGInterface
+  data: SVG
 }
 
 const CardActions = ({ data }: CardActions) => {
-  const { cors, imgSrcHref, divBgUrl, svgString, height, width, whiteFill } =
-    data
-  const corsDiv = cors && divBgUrl
+  const { cors, imgSrcHref, svgString, height, width, whiteFill } = data
+
   const corsImg = cors && imgSrcHref
 
   if (corsImg) {
     return <CardActionCors forwardingUrl={imgSrcHref!} />
   }
 
-  if (corsDiv) {
-    return <CardActionCors forwardingUrl={divBgUrl!} />
-  }
-
   return (
     <CardActionFooter
       svgString={svgString!}
-      height={height || 24}
-      width={width || 24}
+      height={Number(height) || 24}
+      width={Number(width) || 24}
       whiteFill={whiteFill}
     />
   )
