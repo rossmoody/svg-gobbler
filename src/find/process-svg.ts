@@ -49,14 +49,9 @@ const process = {
     this.presentationSvg = new XMLSerializer().serializeToString(htmlElement)
   },
 
-  hasWhiteFill(this: SVG) {
-    const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
-    const svgOuterHtml = this.element.outerHTML
-    this.whiteFill = whiteFills.some((fill) => svgOuterHtml.includes(fill))
-  },
-
   processSvgSymbolsFromFetchCall(this: SVG) {
     if (this.spriteSymbolArray) {
+      console.log(this.spriteSymbolArray, 'sprite symbol array!')
       return this.spriteSymbolArray.map(
         (symbol) => new SVG(symbol, this.location)
       )

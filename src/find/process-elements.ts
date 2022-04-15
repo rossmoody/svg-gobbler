@@ -28,7 +28,6 @@ async function processElements(strings: string[], location: string) {
       process.setWidthHeight.call(svg)
       process.setSize.call(svg)
       process.createPresentationSvg.call(svg)
-      process.hasWhiteFill.call(svg)
       return svg
     }) as SVG[]
 }

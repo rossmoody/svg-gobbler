@@ -11,7 +11,6 @@ type SVGType =
 class SVG {
   type: SVGType = 'invalid'
   cors = false
-  whiteFill = false
   spriteHref?: string
   imgSrcHref?: string
   dataSrcHref?: string
@@ -145,6 +144,12 @@ class SVG {
 
   get svgString() {
     return new XMLSerializer().serializeToString(this.element)
+  }
+
+  get whiteFill() {
+    const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
+    const svgOuterHtml = this.element.outerHTML
+    return whiteFills.some((fill) => svgOuterHtml.includes(fill))
   }
 }
 
