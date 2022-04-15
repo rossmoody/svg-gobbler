@@ -23,9 +23,8 @@ async function processElements(strings: string[], location: string) {
     .flatMap((svg) => process.processSvgSymbolsFromFetchCall.call(svg))
     .filter((ele) => ele.isValid)
     .map((svg) => {
-      process.removeFillNone.call(svg)
-      process.removeClass.call(svg)
-      process.setViewBox.call(svg)
+      svg.removeFillNone()
+      svg.removeClass()
       process.setWidthHeight.call(svg)
       process.setSize.call(svg)
       process.createPresentationSvg.call(svg)

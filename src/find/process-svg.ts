@@ -1,32 +1,6 @@
 import SVG from './SVG'
 
 const process = {
-  removeFillNone(this: SVG) {
-    const svgElement = this.element
-
-    const fill = svgElement.getAttribute('fill')
-    const stroke = svgElement.getAttribute('stroke')
-
-    const hasFillNone = fill === 'none'
-    const hasStroke = Boolean(stroke)
-
-    if (hasFillNone && !hasStroke) svgElement.removeAttribute('fill')
-  },
-
-  removeClass(this: SVG) {
-    const svgElement = this.element
-    svgElement.removeAttribute('class')
-  },
-
-  setViewBox(this: SVG) {
-    const svgElement = this.element
-    const classViewBox = this.viewBox
-    const elementViewBox = svgElement.getAttribute('viewBox')
-
-    if (elementViewBox) this.viewBox = elementViewBox
-    if (classViewBox) this.element.setAttribute('viewBox', classViewBox)
-  },
-
   setWidthHeight(this: SVG) {
     const svgElement = this.element
     const viewBox = this.viewBox

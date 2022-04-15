@@ -26,9 +26,7 @@ class SVG {
 
   constructor(public element: Element, public location: string) {
     this.determineType()
-    this.setSpriteHref()
-    this.buildSymbolElement()
-    this.buildGElement()
+    this.buildSpriteElement()
   }
 
   private stringToElement(string: string) {
@@ -42,11 +40,7 @@ class SVG {
 
     switch (this.element.tagName) {
       case 'svg': {
-        if ([...svgElement.querySelectorAll('use')].length > 0) {
-          this.type = 'sprite'
-        } else {
-          this.type = 'inline'
-        }
+        this.type = 'inline'
         break
       }
 
@@ -93,8 +87,8 @@ class SVG {
     }
   }
 
-  private createSvgElement(element: SVGSymbolElement | SVGGElement) {
-    const clone = element.cloneNode(true) as SVGSymbolElement
+  private createSvgElement() {
+    const clone = this.element.cloneNode(true) as SVGSymbolElement
 
     const nameSpace = 'http://www.w3.org/2000/svg'
     const viewBox = clone.getAttribute('viewBox')
@@ -124,38 +118,25 @@ class SVG {
     return svgElement
   }
 
-  private buildSymbolElement() {
-    if (this.type === 'symbol') {
+  private buildSpriteElement() {
+    if (this.type === 'symbol' || this.type === 'g') {
       this.type = 'sprite'
-      this.element = this.createSvgElement(this.element as SVGSymbolElement)
+      this.element = this.createSvgElement()
     }
   }
 
-  private buildGElement() {
-    if (this.type === 'g') {
-      this.type = 'sprite'
-      this.element = this.createSvgElement(this.element as SVGGElement)
+  removeFillNone() {
+    const fill = this.element.getAttribute('fill')
+    const stroke = this.element.getAttribute('stroke')
+    const hasFillNone = fill === 'none'
+    const hasStroke = Boolean(stroke)
+    if (hasFillNone && !hasStroke) {
+      this.element.removeAttribute('fill')
     }
   }
 
-  private setSpriteHref() {
-    if (this.type === 'sprite') {
-      const useElement = this.element.querySelector('use')!
-      const ownerDocument = document.URL
-      const xlinkHref = useElement.getAttribute('xlink:href')
-      const spriteHref = `${ownerDocument}${xlinkHref}`
-
-      /**
-       * If the sprite is being made via a call to a remote svg sheet
-       * then try to get it via fetch. Otherwise the symbol is likely in the DOM
-       * and it will be built via the symbol function.
-       */
-      if (spriteHref && spriteHref.includes('.svg')) {
-        this.spriteHref = spriteHref
-      } else {
-        this.type = 'invalid'
-      }
-    }
+  removeClass() {
+    this.element.removeAttribute('class')
   }
 
   get isValid() {

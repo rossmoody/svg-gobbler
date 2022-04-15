@@ -31,7 +31,6 @@ export const util = {
 
   processUploadedSVG(svg: HTMLElement) {
     const localSvg = new SVG(svg, 'local')
-    process.setViewBox.call(localSvg)
     process.setWidthHeight.call(localSvg)
     process.setSize.call(localSvg)
     process.createPresentationSvg.call(localSvg)
