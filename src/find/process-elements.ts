@@ -1,4 +1,3 @@
-import fetchSVGContent from './async-operations'
 import SVG from './SVG'
 
 async function processElements(strings: string[], location: string) {
@@ -9,22 +8,16 @@ async function processElements(strings: string[], location: string) {
     if (body.firstElementChild) elements.push(body.firstElementChild)
   })
 
-  const promises = await Promise.all(
+  return await Promise.all(
     elements
       .map((ele) => new SVG(ele, location))
       .filter((ele) => ele.isValid)
-      .map((ele) => {
-        return fetchSVGContent.call(ele)
+      .map((svg) => {
+        svg.removeFillNone()
+        svg.removeClass()
+        return svg
       })
   )
-
-  return promises
-    .filter((ele) => ele.isValid)
-    .map((svg) => {
-      svg.removeFillNone()
-      svg.removeClass()
-      return svg
-    }) as SVG[]
 }
 
 export default processElements

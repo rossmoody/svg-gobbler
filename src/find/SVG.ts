@@ -22,6 +22,7 @@ class SVG {
   constructor(public element: Element, public location: string) {
     this.determineType()
     this.buildSpriteElement()
+    this.fetchSvgContent()
   }
 
   private stringToElement(string: string) {
@@ -184,6 +185,43 @@ class SVG {
     }
 
     return height.replace('px', '')
+  }
+
+  private async fetch(url: string) {
+    try {
+      const response = await fetch(url, { method: 'GET', mode: 'cors' })
+      const svgString = await response.text()
+      return this.stringToElement(svgString)
+    } catch (error) {
+      return false
+    }
+  }
+
+  private async fetchSvgContent() {
+    if (this.imgSrcHref) {
+      const imgSrcResponse = await this.fetch(this.imgSrcHref)
+      imgSrcResponse ? (this.element = imgSrcResponse) : (this.cors = true)
+    }
+
+    if (this.spriteHref) {
+      const spriteResponse = await this.fetch(this.spriteHref)
+      if (spriteResponse) {
+        const symbolElements = Array.from(
+          spriteResponse.querySelectorAll('symbol')
+        )
+
+        if (Boolean(symbolElements)) {
+          this.element = spriteResponse
+        } else {
+          this.cors = true
+        }
+      }
+
+      if (this.dataSrcHref) {
+        const dataResponse = await this.fetch(this.dataSrcHref)
+        dataResponse ? (this.element = dataResponse) : this.type === 'invalid'
+      }
+    }
   }
 }
 
