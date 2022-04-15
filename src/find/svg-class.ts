@@ -15,7 +15,6 @@ export class SVGClass {
   spriteHref?: string
   imgSrcHref?: string
   dataSrcHref?: string
-  svgString?: string
   viewBox?: string
   width?: number
   height?: number
@@ -157,6 +156,14 @@ export class SVGClass {
         this.type = 'invalid'
       }
     }
+  }
+
+  get isValid() {
+    return this.type !== 'invalid'
+  }
+
+  get svgString() {
+    return new XMLSerializer().serializeToString(this.element)
   }
 }
 

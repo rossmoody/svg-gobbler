@@ -1,23 +1,6 @@
 import SVG from './svg-class'
 
 const process = {
-  filterInvalid(svg: SVG) {
-    return svg.type !== 'invalid'
-  },
-
-  dedupSVGs(svg: SVG, index: number, originalArray: SVG[]) {
-    const stringToCompare = svg.svgString
-    const firstIndexFound = originalArray.findIndex(
-      (currentSvg) => currentSvg.svgString === stringToCompare
-    )
-    return firstIndexFound === index
-  },
-
-  convertElementRefToSVGString(this: SVG) {
-    const serializer = new XMLSerializer()
-    this.svgString = serializer.serializeToString(this.element)
-  },
-
   removeFillNone(this: SVG) {
     const svgElement = this.element
 
