@@ -5,19 +5,27 @@ async function processElements(strings: string[], location: string) {
 
   strings.forEach((string) => {
     const { body } = new DOMParser().parseFromString(string, 'text/html')
-    if (body.firstElementChild) elements.push(body.firstElementChild)
+    if (body.firstElementChild) {
+      elements.push(body.firstElementChild)
+    }
   })
 
-  return await Promise.all(
+  const promises = await Promise.all(
     elements
       .map((ele) => new SVG(ele, location))
-      .filter((ele) => ele.isValid)
-      .map((svg) => {
-        svg.removeFillNone()
-        svg.removeClass()
-        return svg
+      .map(async (ele) => {
+        await ele.fetchSvgContent()
+        return ele
       })
   )
+
+  return promises
+    .filter((ele) => ele.isValid)
+    .map((svg) => {
+      svg.removeFillNone()
+      svg.removeClass()
+      return svg
+    })
 }
 
 export default processElements

@@ -12,17 +12,16 @@ class SVG {
   type: SVGType = 'invalid'
   cors = false
   spriteHref?: string
-  imgSrcHref?: string
   dataSrcHref?: string
   viewBox?: string
   spriteSymbolArray?: SVGSymbolElement[]
+  _imgSrcHref: string
 
   readonly id = Math.random()
 
   constructor(public element: Element, public location: string) {
     this.determineType()
     this.buildSpriteElement()
-    this.fetchSvgContent()
   }
 
   private stringToElement(string: string) {
@@ -135,6 +134,21 @@ class SVG {
     this.element.removeAttribute('class')
   }
 
+  set imgSrcHref(url: string) {
+    if (url[0] === '/') {
+      this._imgSrcHref = this.location + url
+    } else {
+      this._imgSrcHref = url.replace(
+        'chrome-extension://hghbphamkebpljkdjgbipkafbldcpmof/',
+        this.location
+      )
+    }
+  }
+
+  get imgSrcHref() {
+    return this._imgSrcHref
+  }
+
   get isValid() {
     return this.type !== 'invalid'
   }
@@ -197,7 +211,7 @@ class SVG {
     }
   }
 
-  private async fetchSvgContent() {
+  async fetchSvgContent() {
     if (this.imgSrcHref) {
       const imgSrcResponse = await this.fetch(this.imgSrcHref)
       imgSrcResponse ? (this.element = imgSrcResponse) : (this.cors = true)
