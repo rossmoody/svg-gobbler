@@ -21,11 +21,10 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
   if (imgSrcHref) {
     const imgSrcResponse = await fetchFromUrl(imgSrcHref)
     if (imgSrcResponse) {
-      this.originalElementReference = imgSrcResponse
+      this.element = imgSrcResponse
     } else {
       // Set the src url explicitly so it isn't broken with relative //
-      ;(this.originalElementReference as HTMLImageElement).src =
-        this.imgSrcHref!
+      ;(this.element as HTMLImageElement).src = this.imgSrcHref!
       this.cors = true
     }
   }
@@ -43,7 +42,7 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
       if (hasSymbolElements) {
         this.spriteSymbolArray = symbolElements
       } else {
-        this.originalElementReference = spriteResponse
+        this.element = spriteResponse
       }
     } else {
       this.cors = true
@@ -54,7 +53,7 @@ async function fetchSVGContent(this: SVG): Promise<SVG> {
     const dataResponse = await fetchFromUrl(dataSrcHref)
 
     if (dataResponse) {
-      this.originalElementReference = dataResponse
+      this.element = dataResponse
     } else {
       this.type = 'invalid'
     }

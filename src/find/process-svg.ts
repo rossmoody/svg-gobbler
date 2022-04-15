@@ -15,11 +15,11 @@ const process = {
 
   convertElementRefToSVGString(this: SVG) {
     const serializer = new XMLSerializer()
-    this.svgString = serializer.serializeToString(this.originalElementReference)
+    this.svgString = serializer.serializeToString(this.element)
   },
 
   removeFillNone(this: SVG) {
-    const svgElement = this.originalElementReference
+    const svgElement = this.element
 
     const fill = svgElement.getAttribute('fill')
     const stroke = svgElement.getAttribute('stroke')
@@ -31,22 +31,21 @@ const process = {
   },
 
   removeClass(this: SVG) {
-    const svgElement = this.originalElementReference
+    const svgElement = this.element
     svgElement.removeAttribute('class')
   },
 
   setViewBox(this: SVG) {
-    const svgElement = this.originalElementReference
+    const svgElement = this.element
     const classViewBox = this.viewBox
     const elementViewBox = svgElement.getAttribute('viewBox')
 
     if (elementViewBox) this.viewBox = elementViewBox
-    if (classViewBox)
-      this.originalElementReference.setAttribute('viewBox', classViewBox)
+    if (classViewBox) this.element.setAttribute('viewBox', classViewBox)
   },
 
   setWidthHeight(this: SVG) {
-    const svgElement = this.originalElementReference
+    const svgElement = this.element
     const viewBox = this.viewBox
     const width: string | null = svgElement.getAttribute('width')
     const height: string | null = svgElement.getAttribute('height')
@@ -82,9 +81,7 @@ const process = {
   },
 
   createPresentationSvg(this: SVG) {
-    const htmlElement = this.originalElementReference.cloneNode(
-      true
-    ) as HTMLElement
+    const htmlElement = this.element.cloneNode(true) as HTMLElement
     const isCorsRestricted = this.cors
 
     if (!isCorsRestricted) {
@@ -97,7 +94,7 @@ const process = {
 
   hasWhiteFill(this: SVG) {
     const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
-    const svgOuterHtml = this.originalElementReference.outerHTML
+    const svgOuterHtml = this.element.outerHTML
     this.whiteFill = whiteFills.some((fill) => svgOuterHtml.includes(fill))
   },
 

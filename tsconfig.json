@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "",
     "noImplicitAny": true,
     "strict": true,
     "module": "ES6",
