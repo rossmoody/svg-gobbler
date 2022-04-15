@@ -12,7 +12,6 @@ export class SVGClass {
   type: SVGType = 'invalid'
   cors = false
   whiteFill = false
-
   spriteHref?: string
   imgSrcHref?: string
   dataSrcHref?: string
@@ -23,6 +22,7 @@ export class SVGClass {
   size?: string
   presentationSvg?: string
   spriteSymbolArray?: SVGSymbolElement[]
+
   readonly id = Math.random()
 
   constructor(public element: Element, public location: string) {
@@ -32,25 +32,9 @@ export class SVGClass {
     this.buildGElement()
   }
 
-  hasBase64BgImg(string: string) {
-    return string.includes('data:image/svg+xml;base64')
-  }
-
-  hasDataUriBgImg(string: string) {
-    return string.includes('data:image/svg+xml;utf8')
-  }
-
-  hasSvgFilename(string: string) {
-    const hasPng = string.includes('.png')
-    const hasSvg = string.includes('.svg')
-    return hasSvg && !hasPng
-  }
-
-  parseStringToElement(string: string) {
-    const { documentElement } = new DOMParser().parseFromString(
-      string,
-      'image/svg+xml'
-    )
+  private stringToElement(string: string) {
+    const parser = new DOMParser()
+    const { documentElement } = parser.parseFromString(string, 'image/svg+xml')
     return documentElement
   }
 
@@ -86,14 +70,12 @@ export class SVGClass {
       }
 
       case 'IMG': {
-        const imgSrc = (this.element as HTMLImageElement).src
-        const hasSvgFilename = this.hasSvgFilename(imgSrc)
-        const hasDataUriBgImg = this.hasDataUriBgImg(imgSrc)
-        const hasBase64BgImg = this.hasBase64BgImg(imgSrc)
+        this.type = 'img src'
 
-        if (hasSvgFilename || hasDataUriBgImg || hasBase64BgImg) {
-          this.type = 'img src'
-        }
+        const imgSrc = (this.element as HTMLImageElement).src
+        const hasSvgFilename = imgSrc.includes('.svg')
+        const hasDataUriBgImg = imgSrc.includes('data:image/svg+xml;utf8')
+        const hasBase64BgImg = imgSrc.includes('data:image/svg+xml;base64')
 
         if (hasBase64BgImg || hasSvgFilename) {
           this.imgSrcHref = imgSrc
@@ -104,8 +86,7 @@ export class SVGClass {
           const svgString = regex.exec(imgSrc)
 
           if (svgString) {
-            const svgElement = this.parseStringToElement(svgString[0])
-            this.element = svgElement
+            this.element = this.stringToElement(svgString[0])
           }
         }
         break
@@ -113,17 +94,13 @@ export class SVGClass {
     }
   }
 
-  private buildSymbolElement() {
-    if (this.type !== 'symbol') return
-
-    const symbolElement = this.element.cloneNode(true) as SVGSymbolElement
-
-    symbolElement.removeAttribute('fill')
+  private createSvgElement(element: SVGSymbolElement | SVGGElement) {
+    const clone = element.cloneNode(true) as SVGSymbolElement
 
     const nameSpace = 'http://www.w3.org/2000/svg'
-    const viewBox = symbolElement.getAttribute('viewBox')
-    const height = symbolElement.getAttribute('height')
-    const width = symbolElement.getAttribute('width')
+    const viewBox = clone.getAttribute('viewBox')
+    const height = clone.getAttribute('height')
+    const width = clone.getAttribute('width')
     const svgElement = document.createElementNS(nameSpace, 'svg')
 
     svgElement.setAttributeNS(
@@ -140,70 +117,45 @@ export class SVGClass {
     useElement.setAttributeNS(
       'http://www.w3.org/1999/xlink',
       'xlink:href',
-      `#${this.element.id}`
+      `#${clone.id}`
     )
 
-    svgElement.appendChild(symbolElement)
+    svgElement.appendChild(clone)
     svgElement.appendChild(useElement)
+    return svgElement
+  }
 
-    this.type = 'sprite'
-    this.element = svgElement
+  private buildSymbolElement() {
+    if (this.type === 'symbol') {
+      this.type = 'sprite'
+      this.element = this.createSvgElement(this.element as SVGSymbolElement)
+    }
   }
 
   private buildGElement() {
-    if (this.type !== 'g') return
-
-    const gElement = this.element.cloneNode(true) as SVGGElement
-    const gId = gElement.id
-
-    const viewBox = gElement.getAttribute('viewBox')
-    const height = gElement.getAttribute('height')
-    const width = gElement.getAttribute('width')
-
-    const nameSpace = 'http://www.w3.org/2000/svg'
-    const svgElement = document.createElementNS(nameSpace, 'svg')
-    svgElement.setAttributeNS(
-      'http://www.w3.org/2000/xmlns/',
-      'xmlns',
-      nameSpace
-    )
-
-    if (viewBox) svgElement.setAttribute('viewBox', viewBox)
-    if (height) svgElement.setAttribute('height', height)
-    if (width) svgElement.setAttribute('width', width)
-
-    const useElement = document.createElementNS(nameSpace, 'use')
-    useElement.setAttributeNS(
-      'http://www.w3.org/1999/xlink',
-      'xlink:href',
-      `#${gId}`
-    )
-
-    svgElement.appendChild(gElement)
-    svgElement.appendChild(useElement)
-
-    this.type = 'sprite'
-    this.element = svgElement
+    if (this.type === 'g') {
+      this.type = 'sprite'
+      this.element = this.createSvgElement(this.element as SVGGElement)
+    }
   }
 
   private setSpriteHref() {
-    if (this.type !== 'sprite') return
+    if (this.type === 'sprite') {
+      const useElement = this.element.querySelector('use')!
+      const ownerDocument = document.URL
+      const xlinkHref = useElement.getAttribute('xlink:href')
+      const spriteHref = `${ownerDocument}${xlinkHref}`
 
-    const useElement = this.element.querySelector('use')!
-    const ownerDocument = document.URL
-
-    const xlinkHref = useElement.getAttribute('xlink:href')
-    const spriteHref = `${ownerDocument}${xlinkHref}`
-
-    /**
-     * If the sprite is being made via a call to a remote svg sheet
-     * then try to get it via fetch. Otherwise the symbol is likely in the DOM
-     * and it will be built via the symbol function.
-     */
-    if (spriteHref && spriteHref.includes('.svg')) {
-      this.spriteHref = spriteHref
-    } else {
-      this.type = 'invalid'
+      /**
+       * If the sprite is being made via a call to a remote svg sheet
+       * then try to get it via fetch. Otherwise the symbol is likely in the DOM
+       * and it will be built via the symbol function.
+       */
+      if (spriteHref && spriteHref.includes('.svg')) {
+        this.spriteHref = spriteHref
+      } else {
+        this.type = 'invalid'
+      }
     }
   }
 }
