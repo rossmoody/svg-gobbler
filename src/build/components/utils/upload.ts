@@ -1,5 +1,4 @@
 import React from 'react'
-import process from '../../../find/process-svg'
 import SVG from '../../../find/SVG'
 import { AppData } from '../../types'
 
@@ -31,7 +30,6 @@ export const util = {
 
   processUploadedSVG(svg: HTMLElement) {
     const localSvg = new SVG(svg, 'local')
-    process.setWidthHeight.call(localSvg)
     localSvg.type = 'inline'
     return localSvg
   },

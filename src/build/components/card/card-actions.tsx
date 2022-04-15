@@ -19,8 +19,8 @@ const CardActions = ({ data }: CardActions) => {
   return (
     <CardActionFooter
       svgString={svgString!}
-      height={height || 24}
-      width={width || 24}
+      height={Number(height) || 24}
+      width={Number(width) || 24}
       whiteFill={whiteFill}
     />
   )

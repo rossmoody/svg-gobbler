@@ -1,5 +1,4 @@
 import fetchSVGContent from './async-operations'
-import process from './process-svg'
 import SVG from './SVG'
 
 async function processElements(strings: string[], location: string) {
@@ -20,12 +19,10 @@ async function processElements(strings: string[], location: string) {
   )
 
   return promises
-    .flatMap((svg) => process.processSvgSymbolsFromFetchCall.call(svg))
     .filter((ele) => ele.isValid)
     .map((svg) => {
       svg.removeFillNone()
       svg.removeClass()
-      process.setWidthHeight.call(svg)
       return svg
     }) as SVG[]
 }

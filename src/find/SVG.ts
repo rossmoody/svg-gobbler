@@ -15,8 +15,6 @@ class SVG {
   imgSrcHref?: string
   dataSrcHref?: string
   viewBox?: string
-  width?: number
-  height?: number
   spriteSymbolArray?: SVGSymbolElement[]
 
   readonly id = Math.random()
@@ -164,6 +162,28 @@ class SVG {
     if (!this.cors)
       attributes.forEach((attr) => htmlElement.removeAttribute(attr))
     return new XMLSerializer().serializeToString(htmlElement)
+  }
+
+  get width() {
+    let width = this.element.getAttribute('width') ?? ''
+
+    if (!width && this.viewBox) {
+      const [, , viewBoxWidth] = this.viewBox.split(' ')
+      return Math.ceil(parseInt(viewBoxWidth, 10))
+    }
+
+    return width.replace('px', '')
+  }
+
+  get height() {
+    let height = this.element.getAttribute('height') ?? ''
+
+    if (!height && this.viewBox) {
+      const [, , , viewBoxHeight] = this.viewBox.split(' ')
+      return Math.ceil(parseInt(viewBoxHeight, 10))
+    }
+
+    return height.replace('px', '')
   }
 }
 
