@@ -9,7 +9,6 @@ function findSVGs() {
       .filter((element) => element.includes('svg'))
 
   const svgElements = getElementsByTag('svg')
-  const objectElements = getElementsByTag('object[data*=".svg"]')
   const symbolElements = getElementsByTag('symbol')
   const imageElements = getElementsByTag('img')
   const gElements = getElementsByTag('g')
@@ -17,7 +16,6 @@ function findSVGs() {
   return [
     ...new Set([
       ...svgElements,
-      ...objectElements,
       ...symbolElements,
       ...imageElements,
       ...gElements,

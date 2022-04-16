@@ -1,11 +1,4 @@
-type SVGType =
-  | 'inline'
-  | 'sprite'
-  | 'symbol'
-  | 'img src'
-  | 'bg img'
-  | 'invalid'
-  | 'g'
+type SVGType = 'inline' | 'sprite' | 'symbol' | 'img src' | 'invalid' | 'g'
 
 class SVG {
   type: SVGType = 'invalid'
@@ -17,7 +10,12 @@ class SVG {
     this.buildSpriteElement()
   }
 
-  private stringToElement(string: string) {
+  parseFromStringTextHtml(string: string) {
+    const { body } = new DOMParser().parseFromString(string, 'text/html')
+    return body.firstElementChild ?? new Element()
+  }
+
+  private parseFromStringImageXml(string: string) {
     const parser = new DOMParser()
     const { documentElement } = parser.parseFromString(string, 'image/svg+xml')
     return documentElement
@@ -53,7 +51,11 @@ class SVG {
         if (hasDataUriBgImg) {
           const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
           const svgString = regex.exec(imgSrc)
-          if (svgString) this.element = this.stringToElement(svgString[0])
+
+          if (svgString) {
+            const result = this.parseFromStringImageXml(svgString[0])
+            console.log(result, 'hasDataUriBgImg')
+          }
         }
         break
       }
@@ -113,27 +115,21 @@ class SVG {
   }
 
   get imgSrcHref() {
-    let imgSrc = (this.element as HTMLImageElement).src
+    const imgSrc = this.element.getAttribute('src')
+    const dataSrc = this.element.getAttribute('data-src')
 
-    if (!imgSrc) return imgSrc
-
-    if (
-      imgSrc.includes('svg') ||
-      imgSrc.includes('data:image/svg+xml;base64')
-    ) {
-      if (imgSrc[0] === '/') {
-        imgSrc = this.location + imgSrc
-      } else {
-        imgSrc = imgSrc.replace(
-          'chrome-extension://bpbmgilhmadhacbbpgjfcfogagiakbhh/',
-          this.location,
-        )
-      }
+    if (imgSrc?.includes('.svg')) {
+      return imgSrc?.startsWith('/')
+        ? this.location.replace(/\/$/, '') + imgSrc
+        : imgSrc
+    }
+    if (dataSrc?.includes('.svg')) {
+      return dataSrc?.startsWith('/')
+        ? this.location.replace(/\/$/, '') + dataSrc
+        : dataSrc
     }
 
-    console.log(imgSrc, 'imgsrc')
-
-    return imgSrc
+    return ''
   }
 
   get viewBox() {
@@ -196,7 +192,7 @@ class SVG {
     try {
       const response = await fetch(url, { method: 'GET', mode: 'cors' })
       const svgString = await response.text()
-      return this.stringToElement(svgString)
+      return this.parseFromStringImageXml(svgString)
     } catch (error) {
       return false
     }
@@ -204,6 +200,7 @@ class SVG {
 
   async fetchSvgContent() {
     if (this.imgSrcHref) {
+      console.log(this.imgSrcHref)
       const imgSrcResponse = await this.fetch(this.imgSrcHref)
       imgSrcResponse ? (this.element = imgSrcResponse) : (this.cors = true)
     }
