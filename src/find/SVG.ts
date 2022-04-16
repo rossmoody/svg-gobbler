@@ -13,11 +13,8 @@ class SVG {
   cors = false
   spriteHref = ''
   dataSrcHref = ''
-  viewBox = ''
   spriteSymbolArray = []
-  _imgSrcHref = ''
-
-  readonly id = Math.random()
+  id = Math.random()
 
   constructor(public element: Element, public location: string) {
     this.determineType()
@@ -61,21 +58,15 @@ class SVG {
         this.type = 'img src'
 
         const imgSrc = (this.element as HTMLImageElement).src
-        const hasSvgFilename = imgSrc.includes('.svg')
         const hasDataUriBgImg = imgSrc.includes('data:image/svg+xml;utf8')
-        const hasBase64BgImg = imgSrc.includes('data:image/svg+xml;base64')
 
-        if (hasBase64BgImg || hasSvgFilename) {
-          this.imgSrcHref = imgSrc
-        } else if (hasDataUriBgImg) {
+        if (hasDataUriBgImg) {
           const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
           const svgString = regex.exec(imgSrc)
 
           if (svgString) {
             this.element = this.stringToElement(svgString[0])
           }
-        } else {
-          this.type = 'invalid'
         }
 
         break
@@ -135,19 +126,30 @@ class SVG {
     this.element.removeAttribute('class')
   }
 
-  set imgSrcHref(url: string) {
-    if (url[0] === '/') {
-      this._imgSrcHref = this.location + url
-    } else {
-      this._imgSrcHref = url.replace(
-        'chrome-extension://hghbphamkebpljkdjgbipkafbldcpmof/',
-        this.location,
-      )
+  get imgSrcHref() {
+    let imgSrc = (this.element as HTMLImageElement).src
+
+    if (!imgSrc) return imgSrc
+
+    if (
+      imgSrc.includes('.svg') ||
+      imgSrc.includes('data:image/svg+xml;base64')
+    ) {
+      if (imgSrc[0] === '/') {
+        imgSrc = this.location + imgSrc
+      } else {
+        imgSrc = imgSrc.replace(
+          'chrome-extension://hghbphamkebpljkdjgbipkafbldcpmof/',
+          this.location,
+        )
+      }
     }
+
+    return imgSrc
   }
 
-  get imgSrcHref() {
-    return this._imgSrcHref
+  get viewBox() {
+    return this.element.getAttribute('viewBox')
   }
 
   get isValid() {
@@ -219,6 +221,7 @@ class SVG {
     }
 
     if (this.spriteHref) {
+      console.log(this, 'sprite href')
       const spriteResponse = await this.fetch(this.spriteHref)
       if (spriteResponse) {
         const symbolElements = Array.from(
