@@ -1,27 +1,18 @@
-import React, { useState } from 'react'
 import { Button, Grid, useColorModeValue, useToast } from '@chakra-ui/react'
-
+import React, { useState } from 'react'
+import SVG from 'src/find/SVG'
 import Drawer from '../drawer'
 import FilenameModal from '../modals/filename-modal'
 import ImageModal from '../modals/image-modal'
 import handle from '../utils/actions'
 import loc from '../utils/localization'
-
 import CardActionMenu from './card-action-menu'
 
-interface CardActionFooter {
-  svgString: string
-  height: number
-  width: number
-  whiteFill: boolean
+type Props = {
+  data: SVG
 }
 
-const CardActionFooter = ({
-  svgString,
-  height,
-  width,
-  whiteFill,
-}: CardActionFooter) => {
+const CardActionFooter = ({ data }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [showDrawer, setShowDrawer] = useState(false)
   const [showOgModal, setShowOgModal] = useState(false)
@@ -47,7 +38,7 @@ const CardActionFooter = ({
       <Button onClick={() => setShowOgModal(true)}>Download</Button>
       <Button
         onClick={() => {
-          handle.copyToClipboard(svgString)
+          handle.copyToClipboard(data.elementAsString)
           toast({
             title: loc('card_copy_title'),
             description: loc('card_copy_desc'),
@@ -60,14 +51,14 @@ const CardActionFooter = ({
       <CardActionMenu
         setShowOptimizedModal={setShowOptimizedModal}
         setShowDrawer={setShowDrawer}
-        svgString={svgString}
+        svgString={data.elementAsString}
         setShowModal={setShowModal}
       />
 
       <FilenameModal
         title={loc('card_dl_orig')}
         download={handle.downloadOriginal}
-        svgString={svgString}
+        svgString={data.elementAsString}
         callback={setShowOgModal}
         showModal={showOgModal}
       />
@@ -75,23 +66,23 @@ const CardActionFooter = ({
       <FilenameModal
         title={loc('card_dl_opt')}
         download={handle.downloadOptimized}
-        svgString={svgString}
+        svgString={data.elementAsString}
         callback={setShowOptimizedModal}
         showModal={showOptimizedModal}
       />
 
       <Drawer
-        svgString={svgString}
+        svgString={data.elementAsString}
         callback={setShowDrawer}
         showDrawer={showDrawer}
       />
 
       <ImageModal
         callback={setShowModal}
-        svgString={svgString}
-        height={height}
-        width={width}
-        whiteFill={whiteFill}
+        svgString={data.elementAsString}
+        height={Number(data.height)}
+        width={Number(data.width)}
+        whiteFill={data.whiteFill}
         showModal={showModal}
       />
     </Grid>
