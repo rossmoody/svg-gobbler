@@ -24,7 +24,7 @@ export const util = {
   getSvgStrings(data: AppData) {
     const svgStrings =
       data instanceof Array &&
-      data.flatMap((svgArray) => svgArray.map((svg) => svg.svgString!))
+      data.flatMap((svgArray) => svgArray.map((svg) => svg.elementAsString!))
     return svgStrings ? svgStrings : ['']
   },
 
@@ -75,7 +75,7 @@ export const util = {
           if (typeof svgString === 'string') {
             const iDoc = new DOMParser().parseFromString(
               svgString,
-              'image/svg+xml'
+              'image/svg+xml',
             )
             const svgElement = iDoc.documentElement
             const processedSvg = this.processUploadedSVG(svgElement)

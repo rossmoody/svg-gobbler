@@ -8,7 +8,14 @@ interface CardActions {
 }
 
 const CardActions = ({ data }: CardActions) => {
-  const { cors, imgSrcHref, svgString, height, width, whiteFill } = data
+  const {
+    cors,
+    imgSrcHref,
+    elementAsString: svgString,
+    height,
+    width,
+    whiteFill,
+  } = data
 
   const corsImg = cors && imgSrcHref
 

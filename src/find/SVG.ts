@@ -4,59 +4,36 @@ class SVG {
   type: SVGType = 'invalid'
   cors = false
   id = Math.random()
+  element!: Element
 
-  constructor(public element: Element, public location: string) {
+  constructor(public originalString: string, public location: string) {
     this.determineType()
     this.buildSpriteElement()
   }
 
-  parseFromStringTextHtml(string: string) {
-    const { body } = new DOMParser().parseFromString(string, 'text/html')
-    return body.firstElementChild ?? new Element()
-  }
-
-  private parseFromStringImageXml(string: string) {
-    const parser = new DOMParser()
-    const { documentElement } = parser.parseFromString(string, 'image/svg+xml')
-    return documentElement
-  }
-
   private determineType() {
-    const svgElement = this.element
-
-    switch (this.element.tagName) {
-      case 'svg': {
+    switch (true) {
+      case this.originalString.includes('<svg'): {
         this.type = 'inline'
+        this.parseFromStringXmlMime()
         break
       }
 
-      case 'symbol': {
+      case this.originalString.includes('<symbol'): {
         this.type = 'symbol'
+        this.parseFromStringXmlMime()
         break
       }
 
-      case 'g': {
-        if (svgElement.id) {
-          this.type = 'g'
-        }
+      case this.originalString.includes('<g'): {
+        this.type = 'g'
+        this.parseFromStringXmlMime()
         break
       }
 
-      case 'IMG': {
+      case this.originalString.includes('<img'): {
         this.type = 'img src'
-
-        const imgSrc = (this.element as HTMLImageElement).src
-        const hasDataUriBgImg = imgSrc.includes('data:image/svg+xml;utf8')
-
-        if (hasDataUriBgImg) {
-          const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
-          const svgString = regex.exec(imgSrc)
-
-          if (svgString) {
-            const result = this.parseFromStringImageXml(svgString[0])
-            console.log(result, 'hasDataUriBgImg')
-          }
-        }
+        this.parseFromStringTextMime()
         break
       }
     }
@@ -69,17 +46,16 @@ class SVG {
     const viewBox = clone.getAttribute('viewBox')
     const height = clone.getAttribute('height')
     const width = clone.getAttribute('width')
-    const svgElement = document.createElementNS(nameSpace, 'svg')
 
+    const svgElement = document.createElementNS(nameSpace, 'svg')
     svgElement.setAttributeNS(
       'http://www.w3.org/2000/xmlns/',
       'xmlns',
       nameSpace,
     )
-
-    if (viewBox) svgElement.setAttribute('viewBox', viewBox)
-    if (height) svgElement.setAttribute('height', height)
-    if (width) svgElement.setAttribute('width', width)
+    viewBox && svgElement.setAttribute('viewBox', viewBox)
+    height && svgElement.setAttribute('height', height)
+    width && svgElement.setAttribute('width', width)
 
     const useElement = document.createElementNS(nameSpace, 'use')
     useElement.setAttributeNS(
@@ -90,28 +66,60 @@ class SVG {
 
     svgElement.appendChild(clone)
     svgElement.appendChild(useElement)
-    return svgElement
+    console.log(svgElement, 'created element')
+    this.element = svgElement
   }
 
   private buildSpriteElement() {
     if (this.type === 'symbol' || this.type === 'g') {
+      console.log(this, 'build sprite element')
       this.type = 'sprite'
-      this.element = this.createSvgElement()
+      this.createSvgElement()
     }
   }
 
+  private get htmlSource() {
+    return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <base href=${this.location}>
+      </head>
+      <body>
+        ${this.originalString}
+      </body>
+    </html>
+    `
+  }
+
   removeFillNone() {
-    const fill = this.element.getAttribute('fill')
+    const fillNone = this.element.getAttribute('fill') === 'none'
     const stroke = this.element.getAttribute('stroke')
-    const hasFillNone = fill === 'none'
-    const hasStroke = Boolean(stroke)
-    if (hasFillNone && !hasStroke) {
-      this.element.removeAttribute('fill')
-    }
+    if (fillNone && !stroke) this.element.removeAttribute('fill')
   }
 
   removeClass() {
     this.element.removeAttribute('class')
+  }
+
+  parseFromStringTextMime() {
+    const { body } = new DOMParser().parseFromString(
+      this.htmlSource,
+      'text/html',
+    )
+    const errorNode = body.querySelector('parsererror')
+    if (errorNode) this.type === 'invalid'
+    this.element = body.firstElementChild ?? new Element()
+  }
+
+  parseFromStringXmlMime() {
+    const { documentElement } = new DOMParser().parseFromString(
+      this.originalString,
+      'image/svg+xml',
+    )
+    const errorNode = documentElement.querySelector('parsererror')
+    if (errorNode) this.type === 'invalid'
+    this.element = documentElement
   }
 
   get imgSrcHref() {
@@ -119,14 +127,14 @@ class SVG {
     const dataSrc = this.element.getAttribute('data-src')
 
     if (imgSrc?.includes('.svg')) {
-      return imgSrc?.startsWith('/')
-        ? this.location.replace(/\/$/, '') + imgSrc
-        : imgSrc
+      return imgSrc?.startsWith('http')
+        ? imgSrc
+        : this.location.replace(/\/$/, '') + imgSrc
     }
     if (dataSrc?.includes('.svg')) {
-      return dataSrc?.startsWith('/')
-        ? this.location.replace(/\/$/, '') + dataSrc
-        : dataSrc
+      return dataSrc?.startsWith('http')
+        ? dataSrc
+        : this.location.replace(/\/$/, '') + dataSrc
     }
 
     return ''
@@ -140,7 +148,7 @@ class SVG {
     return this.type !== 'invalid'
   }
 
-  get svgString() {
+  get elementAsString() {
     return new XMLSerializer().serializeToString(this.element)
   }
 
@@ -160,9 +168,17 @@ class SVG {
 
   get presentationSvg() {
     const attributes = ['height', 'width', 'style', 'class']
-    const htmlElement = this.element.cloneNode(true) as HTMLElement
-    if (!this.cors)
+    const htmlElement = this.element.cloneNode(true) as HTMLElement &
+      HTMLImageElement
+
+    if (!this.cors) {
       attributes.forEach((attr) => htmlElement.removeAttribute(attr))
+    }
+
+    if (this.type === 'img src') {
+      htmlElement.src = this.imgSrcHref
+    }
+
     return new XMLSerializer().serializeToString(htmlElement)
   }
 
@@ -188,21 +204,20 @@ class SVG {
     return height.replace('px', '')
   }
 
-  private async fetch(url: string) {
-    try {
-      const response = await fetch(url, { method: 'GET', mode: 'cors' })
-      const svgString = await response.text()
-      return this.parseFromStringImageXml(svgString)
-    } catch (error) {
-      return false
-    }
-  }
-
   async fetchSvgContent() {
     if (this.imgSrcHref) {
-      console.log(this.imgSrcHref)
-      const imgSrcResponse = await this.fetch(this.imgSrcHref)
-      imgSrcResponse ? (this.element = imgSrcResponse) : (this.cors = true)
+      console.log('Image src href before fetch', '\n', this.imgSrcHref)
+
+      try {
+        const response = await fetch(this.imgSrcHref, {
+          method: 'GET',
+          mode: 'cors',
+        })
+        this.originalString = await response.text()
+        this.parseFromStringXmlMime()
+      } catch (error) {
+        this.cors = true
+      }
     }
   }
 }
