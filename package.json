@@ -1,0 +1,61 @@
+{
+  "name": "svg-gobbler",
+  "description": "Download and optimize icons, logos, and vector SVGs.",
+  "license": "apache-2.0",
+  "author": "Ross Moody<@_rossmoody>",
+  "scripts": {
+    "release": "cross-env NODE_ENV=production rollup -c",
+    "start": "rollup -c -w"
+  },
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "pretty-bytes": "^6.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-feather": "^2.0.9",
+    "react-syntax-highlighter": "^15.4.3",
+    "readable-stream": "npm:readable-stream-no-circular",
+    "svgo": "^2.3.1",
+    "webextension-polyfill": "^0.9.0"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^1.8.0",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-commonjs": "^22.0.0-14",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-replace": "^3.0.0",
+    "@rollup/plugin-typescript": "^8.1.0",
+    "@types/chrome": "^0.0.180",
+    "@types/file-saver": "^2.0.2",
+    "@types/firefox-webext-browser": "^82.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-syntax-highlighter": "^13.5.2",
+    "@types/svgo": "^2.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.16.0",
+    "eslint-plugin-react": "^7.21.5",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^4",
+    "jszip": "^3.9.1",
+    "prettier": "^2.6.2",
+    "rollup": "^2.56.3",
+    "rollup-plugin-chrome-extension": "^3.6.1",
+    "rollup-plugin-empty-dir": "^1.0.5",
+    "rollup-plugin-zip": "^1.0.3",
+    "tslib": "^2.0.3",
+    "typescript": "^4.6.0"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "arrowParens": "always",
+    "proseWrap": "always"
+  }
+}
