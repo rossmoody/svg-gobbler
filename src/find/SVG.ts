@@ -3,7 +3,6 @@ type SVGType =
   | 'sprite'
   | 'symbol'
   | 'img src'
-  | 'object'
   | 'bg img'
   | 'invalid'
   | 'g'
@@ -11,9 +10,6 @@ type SVGType =
 class SVG {
   type: SVGType = 'invalid'
   cors = false
-  spriteHref = ''
-  dataSrcHref = ''
-  spriteSymbolArray = []
   id = Math.random()
 
   constructor(public element: Element, public location: string) {
@@ -48,12 +44,6 @@ class SVG {
         break
       }
 
-      case 'OBJECT': {
-        this.type = 'object'
-        this.dataSrcHref = (this.element as HTMLObjectElement).data
-        break
-      }
-
       case 'IMG': {
         this.type = 'img src'
 
@@ -63,12 +53,8 @@ class SVG {
         if (hasDataUriBgImg) {
           const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
           const svgString = regex.exec(imgSrc)
-
-          if (svgString) {
-            this.element = this.stringToElement(svgString[0])
-          }
+          if (svgString) this.element = this.stringToElement(svgString[0])
         }
-
         break
       }
     }
@@ -132,18 +118,20 @@ class SVG {
     if (!imgSrc) return imgSrc
 
     if (
-      imgSrc.includes('.svg') ||
+      imgSrc.includes('svg') ||
       imgSrc.includes('data:image/svg+xml;base64')
     ) {
       if (imgSrc[0] === '/') {
         imgSrc = this.location + imgSrc
       } else {
         imgSrc = imgSrc.replace(
-          'chrome-extension://hghbphamkebpljkdjgbipkafbldcpmof/',
+          'chrome-extension://bpbmgilhmadhacbbpgjfcfogagiakbhh/',
           this.location,
         )
       }
     }
+
+    console.log(imgSrc, 'imgsrc')
 
     return imgSrc
   }
@@ -218,27 +206,6 @@ class SVG {
     if (this.imgSrcHref) {
       const imgSrcResponse = await this.fetch(this.imgSrcHref)
       imgSrcResponse ? (this.element = imgSrcResponse) : (this.cors = true)
-    }
-
-    if (this.spriteHref) {
-      console.log(this, 'sprite href')
-      const spriteResponse = await this.fetch(this.spriteHref)
-      if (spriteResponse) {
-        const symbolElements = Array.from(
-          spriteResponse.querySelectorAll('symbol'),
-        )
-
-        if (symbolElements) {
-          this.element = spriteResponse
-        } else {
-          this.cors = true
-        }
-      }
-
-      if (this.dataSrcHref) {
-        const dataResponse = await this.fetch(this.dataSrcHref)
-        dataResponse ? (this.element = dataResponse) : this.type === 'invalid'
-      }
     }
   }
 }

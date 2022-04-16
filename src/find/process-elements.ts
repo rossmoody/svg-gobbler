@@ -14,8 +14,8 @@ async function processElements(strings: string[], location: string) {
   const promises = await Promise.all(
     elements
       .map((ele) => new SVG(ele, location))
-      .map((ele) => {
-        ele.fetchSvgContent()
+      .map(async (ele) => {
+        await ele.fetchSvgContent()
         return ele
       }),
   )
