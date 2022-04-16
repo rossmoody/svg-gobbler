@@ -5,6 +5,7 @@ async function processElements(strings: string[], location: string) {
 
   strings.forEach((string) => {
     const { body } = new DOMParser().parseFromString(string, 'text/html')
+
     if (body.firstElementChild) {
       elements.push(body.firstElementChild)
     }
@@ -13,10 +14,10 @@ async function processElements(strings: string[], location: string) {
   const promises = await Promise.all(
     elements
       .map((ele) => new SVG(ele, location))
-      .map(async (ele) => {
-        await ele.fetchSvgContent()
+      .map((ele) => {
+        ele.fetchSvgContent()
         return ele
-      })
+      }),
   )
 
   return promises
