@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Box,
   Center,
@@ -7,18 +6,17 @@ import {
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react'
-
+import React from 'react'
 import { SVGOConfig } from '../../types'
 import loc from '../utils/localization'
-
-import { SVGHighlighter } from './syntax-highlighter'
-import { defaultConfig, runSvgo } from './svgo/svgo-configs'
-import { Option } from './svgo/option'
-import { optionsData } from './svgo/svgo-plugins'
 import { CodeViewHeader } from './code-view-header'
-import { Subhead } from './svgo/form-category-subhead'
-import { QuickConfiguration } from './svgo/quick-configurations'
 import { reactify } from './react/reactify'
+import { Subhead } from './svgo/form-category-subhead'
+import { Option } from './svgo/option'
+import { QuickConfiguration } from './svgo/quick-configurations'
+import { defaultConfig, runSvgo } from './svgo/svgo-configs'
+import { optionsData } from './svgo/svgo-plugins'
+import { SVGHighlighter } from './syntax-highlighter'
 
 interface DrawerContent {
   svgString: string
@@ -27,7 +25,7 @@ interface DrawerContent {
 function DrawerContent({ svgString }: DrawerContent) {
   const svgoDefault: SVGOConfig = React.useMemo(
     () => JSON.parse(JSON.stringify(defaultConfig)),
-    []
+    [],
   )
 
   const [string, setString] = React.useState(svgString)
@@ -39,10 +37,9 @@ function DrawerContent({ svgString }: DrawerContent) {
 
   React.useEffect(() => {
     const newString = runSvgo(svgString, config)
+
     if (isReact) {
-      reactify(newString)
-        .then(setString)
-        .catch(() => {})
+      reactify(newString).then(setString)
     } else {
       setString(newString)
     }

@@ -80,7 +80,7 @@ const DataToolbar = ({ data, setData }: ToolbarData) => {
             />
             <Tooltip label={loc('toolbar_tooltip')}>
               <Button
-                leftIcon={<Plus />}
+                leftIcon={<Plus size={24} />}
                 size="lg"
                 onClick={util.handleUploadClick}
               >
@@ -88,7 +88,7 @@ const DataToolbar = ({ data, setData }: ToolbarData) => {
               </Button>
             </Tooltip>
             <Button
-              leftIcon={<Copy />}
+              leftIcon={<Copy size={24} />}
               size="lg"
               onClick={() => setPasteModal(true)}
             >
@@ -96,7 +96,7 @@ const DataToolbar = ({ data, setData }: ToolbarData) => {
             </Button>
             {moreThanOneString && (
               <Button
-                leftIcon={<Download />}
+                leftIcon={<Download size={24} />}
                 size="lg"
                 colorScheme="red"
                 onClick={() => handle.downloadAllSVGs(util.getSvgStrings(data))}

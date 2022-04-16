@@ -42,14 +42,14 @@ const CardActionMenu = ({
 
       <MenuList width="auto" height="auto" zIndex={100}>
         <MenuItem
-          icon={<Download />}
+          icon={<Download size={20} />}
           onClick={() => setShowOptimizedModal(true)}
         >
           {loc('card_dl_opt')}
         </MenuItem>
 
         <MenuItem
-          icon={<Clipboard />}
+          icon={<Clipboard size={20} />}
           onClick={() => {
             handle.copyOptimized(svgString)
             toast({
@@ -63,13 +63,13 @@ const CardActionMenu = ({
 
         <MenuDivider />
 
-        <MenuItem icon={<Image />} onClick={() => setShowModal(true)}>
+        <MenuItem icon={<Image size={20} />} onClick={() => setShowModal(true)}>
           {loc('card_menu_exportPng')}
         </MenuItem>
 
         <MenuDivider />
 
-        <MenuItem icon={<Code />} onClick={() => setShowDrawer(true)}>
+        <MenuItem icon={<Code size={20} />} onClick={() => setShowDrawer(true)}>
           {loc('card_menu_viewCode')}
         </MenuItem>
       </MenuList>

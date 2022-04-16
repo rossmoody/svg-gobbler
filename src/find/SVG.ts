@@ -1,9 +1,9 @@
 type SVGType = 'inline' | 'sprite' | 'symbol' | 'img src' | 'invalid' | 'g'
 
 class SVG {
-  type: SVGType = 'invalid'
   cors = false
-  id = Math.random()
+  id = String(Math.floor(Math.random() * 100000))
+  type: SVGType = 'invalid'
   element!: Element
 
   constructor(public originalString: string, public location: string) {
@@ -39,42 +39,72 @@ class SVG {
     }
   }
 
-  private createSvgElement() {
-    const clone = this.element.cloneNode(true) as SVGSymbolElement
-
-    const nameSpace = 'http://www.w3.org/2000/svg'
-    const viewBox = clone.getAttribute('viewBox')
-    const height = clone.getAttribute('height')
-    const width = clone.getAttribute('width')
-
-    const svgElement = document.createElementNS(nameSpace, 'svg')
+  private buildEmptySvgElement() {
+    const svgElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'svg',
+    )
     svgElement.setAttributeNS(
       'http://www.w3.org/2000/xmlns/',
       'xmlns',
-      nameSpace,
+      'http://www.w3.org/2000/svg',
     )
-    viewBox && svgElement.setAttribute('viewBox', viewBox)
-    height && svgElement.setAttribute('height', height)
-    width && svgElement.setAttribute('width', width)
+    return svgElement
+  }
 
-    const useElement = document.createElementNS(nameSpace, 'use')
+  private buildEmptyUseElement(id: string) {
+    const useElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'use',
+    )
     useElement.setAttributeNS(
       'http://www.w3.org/1999/xlink',
       'xlink:href',
-      `#${clone.id}`,
+      `#${id}`,
     )
+    return useElement
+  }
 
-    svgElement.appendChild(clone)
-    svgElement.appendChild(useElement)
-    console.log(svgElement, 'created element')
-    this.element = svgElement
+  private buildEmptySymbolElement(id: string) {
+    const symbolElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'symbol',
+    )
+    symbolElement.id = id
+    return symbolElement
   }
 
   private buildSpriteElement() {
-    if (this.type === 'symbol' || this.type === 'g') {
-      console.log(this, 'build sprite element')
+    const id = this.id
+
+    if (this.type === 'symbol') {
       this.type = 'sprite'
-      this.createSvgElement()
+      const svgElement = this.buildEmptySvgElement()
+      const elementClone = this.element.cloneNode(true) as SVGSymbolElement
+
+      const viewBox = elementClone.getAttribute('viewBox')
+      const height = elementClone.getAttribute('height')
+      const width = elementClone.getAttribute('width')
+
+      viewBox && svgElement.setAttribute('viewBox', viewBox)
+      height && svgElement.setAttribute('height', height)
+      width && svgElement.setAttribute('width', width)
+
+      svgElement.appendChild(elementClone)
+      this.element = svgElement
+    }
+
+    if (this.type === 'g') {
+      this.type = 'sprite'
+      const svgElement = this.buildEmptySvgElement()
+      const useElement = this.buildEmptyUseElement(id)
+      const symbolElement = this.buildEmptySymbolElement(id)
+      const gElement = this.element.cloneNode(true) as SVGGElement
+
+      symbolElement.appendChild(gElement)
+      svgElement.appendChild(symbolElement)
+      svgElement.appendChild(useElement)
+      this.element = svgElement
     }
   }
 
@@ -107,8 +137,7 @@ class SVG {
       this.htmlSource,
       'text/html',
     )
-    const errorNode = body.querySelector('parsererror')
-    if (errorNode) this.type === 'invalid'
+    if (body.querySelector('parsererror')) this.type === 'invalid'
     this.element = body.firstElementChild ?? new Element()
   }
 
@@ -117,8 +146,7 @@ class SVG {
       this.originalString,
       'image/svg+xml',
     )
-    const errorNode = documentElement.querySelector('parsererror')
-    if (errorNode) this.type === 'invalid'
+    if (documentElement.querySelector('parsererror')) this.type === 'invalid'
     this.element = documentElement
   }
 
@@ -149,7 +177,7 @@ class SVG {
   }
 
   get elementAsString() {
-    return new XMLSerializer().serializeToString(this.element)
+    return this.element.outerHTML
   }
 
   get whiteFill() {
@@ -171,6 +199,8 @@ class SVG {
     const htmlElement = this.element.cloneNode(true) as HTMLElement &
       HTMLImageElement
 
+    console.log(htmlElement, 'htmlElement')
+
     if (!this.cors) {
       attributes.forEach((attr) => htmlElement.removeAttribute(attr))
     }
@@ -179,7 +209,7 @@ class SVG {
       htmlElement.src = this.imgSrcHref
     }
 
-    return new XMLSerializer().serializeToString(htmlElement)
+    return htmlElement.outerHTML
   }
 
   get width() {
@@ -206,8 +236,6 @@ class SVG {
 
   async fetchSvgContent() {
     if (this.imgSrcHref) {
-      console.log('Image src href before fetch', '\n', this.imgSrcHref)
-
       try {
         const response = await fetch(this.imgSrcHref, {
           method: 'GET',

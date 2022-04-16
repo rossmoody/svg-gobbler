@@ -28,14 +28,14 @@ function findSVGs() {
 
   /**
    * Returns the outerhtml of a specified tag that includes
-   * 'svg' in the string.
+   * 'svg' or '<g ' in the string.
    */
   const getElementsByTag = (
     tag: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap,
   ) =>
     Array.from(document.querySelectorAll(tag))
       .map((element) => element.outerHTML)
-      .filter((element) => element.includes('svg'))
+      .filter((element) => element.includes('svg') || element.includes('<g '))
 
   return [
     ...new Set([

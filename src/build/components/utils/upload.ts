@@ -24,14 +24,12 @@ export const util = {
   getSvgStrings(data: AppData) {
     const svgStrings =
       data instanceof Array &&
-      data.flatMap((svgArray) => svgArray.map((svg) => svg.elementAsString!))
+      data.flatMap((svgArray) => svgArray.map((svg) => svg.elementAsString))
     return svgStrings ? svgStrings : ['']
   },
 
-  processUploadedSVG(svg: HTMLElement) {
-    const localSvg = new SVG(svg, 'local')
-    localSvg.type = 'inline'
-    return localSvg
+  processUploadedSVG(svg: string) {
+    return new SVG(svg, '')
   },
 
   handleDrop(event: React.DragEvent<HTMLDivElement>) {
@@ -45,13 +43,7 @@ export const util = {
   },
 
   handlePaste(svgString: string) {
-    const iDoc = new DOMParser().parseFromString(svgString, 'image/svg+xml')
-
-    const error = iDoc.querySelector('parsererror')
-    if (error) return false
-
-    const svgElement = iDoc.documentElement
-    return this.processUploadedSVG(svgElement)
+    return this.processUploadedSVG(svgString)
   },
 
   async handleUpload(event: any) {
@@ -73,12 +65,7 @@ export const util = {
         reader.onload = () => {
           const svgString = reader.result
           if (typeof svgString === 'string') {
-            const iDoc = new DOMParser().parseFromString(
-              svgString,
-              'image/svg+xml',
-            )
-            const svgElement = iDoc.documentElement
-            const processedSvg = this.processUploadedSVG(svgElement)
+            const processedSvg = this.processUploadedSVG(svgString)
             resolve(processedSvg)
           }
         }

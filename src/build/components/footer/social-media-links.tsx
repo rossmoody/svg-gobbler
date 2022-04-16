@@ -1,6 +1,6 @@
 import { ButtonGroup, ButtonGroupProps, IconButton } from '@chakra-ui/react'
 import React from 'react'
-import { GitCommit, Twitter } from 'react-feather'
+import { GitHub, Twitter } from 'react-feather'
 import loc from '../utils/localization'
 
 export const SocialMediaLinks = (props: ButtonGroupProps) => (
@@ -9,13 +9,13 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => (
       as="a"
       href={loc('footer_github')}
       aria-label="GitHub"
-      icon={<GitCommit fontSize="20px" />}
+      icon={<GitHub size={20} />}
     />
     <IconButton
       as="a"
       href={loc('footer_twitter')}
       aria-label="Twitter"
-      icon={<Twitter fontSize="20px" />}
+      icon={<Twitter size={20} />}
     />
   </ButtonGroup>
 )
