@@ -1,5 +1,4 @@
 import { extendDefaultPlugins, optimize } from 'svgo/dist/svgo.browser'
-
 import { PluginEventObject, PluginObject, SVGOConfig } from '../../../types'
 
 const pluginsList: PluginObject[] = [
@@ -77,10 +76,10 @@ const defaultPluginState: PluginEventObject = {
 
 const svgoConfig = (
   config = defaultConfig,
-  pluginState = defaultPluginState
+  pluginState = defaultPluginState,
 ) => {
   const plugin = config.plugins.find(
-    (plugin) => plugin.name === pluginState.name
+    (plugin) => plugin.name === pluginState.name,
   )
   if (plugin) plugin.active = pluginState.value
 

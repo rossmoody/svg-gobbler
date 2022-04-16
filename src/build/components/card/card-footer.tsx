@@ -1,26 +1,24 @@
-import React from 'react'
 import { Box, SimpleGrid } from '@chakra-ui/react'
-
+import React from 'react'
+import SVG from 'src/find/SVG'
 import loc from '../utils/localization'
-
-import Subhead from './card-footer-subhead'
 import Body from './card-footer-body'
+import Subhead from './card-footer-subhead'
 
-interface CardFooter {
-  size: string
-  type: string
+type Props = {
+  data: SVG
 }
 
-const CardFooter = ({ size, type }: CardFooter) => {
+const CardFooter = ({ data }: Props) => {
   return (
     <SimpleGrid minChildWidth="30px" spacing={2}>
       <Box>
         <Subhead>{loc('card_menu_type')}</Subhead>
-        <Body>{type.charAt(0).toUpperCase() + type.slice(1)}</Body>
+        <Body>{data.type.charAt(0).toUpperCase() + data.type.slice(1)}</Body>
       </Box>
       <Box>
         <Subhead>{loc('card_menu_size')}</Subhead>
-        <Body>{size}</Body>
+        <Body>{data.size}</Body>
       </Box>
     </SimpleGrid>
   )

@@ -11,13 +11,12 @@ import SVG from '../../../find/SVG'
 import CardActions from './card-actions'
 import CardFooter from './card-footer'
 
-interface CardData {
+type Props = {
   data: SVG
 }
 
-const Card = ({ data }: CardData) => {
+const Card = ({ data }: Props) => {
   const [showActions, setShowActions] = useState(false)
-  const { presentationSvg, size, type, whiteFill } = data
 
   const cardFillBg = useColorModeValue('white', 'gray.700')
   const whiteFillBg = useColorModeValue('gray.200', 'null')
@@ -44,7 +43,7 @@ const Card = ({ data }: CardData) => {
             height="0"
             width="100%"
             padding="0 0 100%"
-            dangerouslySetInnerHTML={{ __html: presentationSvg! }}
+            dangerouslySetInnerHTML={{ __html: data.presentationSvg }}
             overflow="hidden"
             zIndex={1}
             sx={{
@@ -61,7 +60,7 @@ const Card = ({ data }: CardData) => {
               },
             }}
           />
-          {whiteFill && (
+          {data.whiteFill && (
             <Box
               bg={whiteFillBg}
               borderRadius="lg"
@@ -76,7 +75,7 @@ const Card = ({ data }: CardData) => {
           <SlideFade in={showActions} offsetY="12px">
             <CardActions data={data} />
           </SlideFade>
-          <CardFooter size={size!} type={type} />
+          <CardFooter data={data} />
         </Box>
       </Box>
     </ScaleFade>
