@@ -1,3 +1,11 @@
+const executeScript = async <Type>(tabId: number, func: () => Type) =>
+  (
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      func,
+    })
+  )[0].result
+
 chrome.action.onClicked.addListener(async ({ url }) => {
   if (url?.includes('chrome://')) {
     chrome.tabs.create({ url: `./pages/index.html`, active: true }, () => {
@@ -17,26 +25,9 @@ chrome.action.onClicked.addListener(async ({ url }) => {
       await chrome.tabs.query({ active: true, currentWindow: true })
     )[0]
 
-    const data = (
-      await chrome.scripting.executeScript({
-        target: { tabId: id! },
-        func: findSVGs,
-      })
-    )[0].result
-
-    const host = (
-      await chrome.scripting.executeScript({
-        target: { tabId: id! },
-        func: () => document.location.host,
-      })
-    )[0].result
-
-    const location = (
-      await chrome.scripting.executeScript({
-        target: { tabId: id! },
-        func: () => document.location.href,
-      })
-    )[0].result
+    const data = await executeScript(id!, findSVGs)
+    const host = await executeScript(id!, () => document.location.host)
+    const location = await executeScript(id!, () => document.location.href)
 
     chrome.tabs.create({ url: `./pages/index.html`, active: true }, () => {
       chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
@@ -65,15 +56,10 @@ chrome.runtime.onInstalled.addListener(async (details) => {
  * include 'svg' somewhere in the string
  */
 function findSVGs() {
-  function getElementsByTag(tag: string) {
-    return [
-      ...new Set(
-        Array.from(document.querySelectorAll(tag))
-          .map((element) => element.outerHTML)
-          .filter((element) => element.includes('svg')),
-      ),
-    ]
-  }
+  const getElementsByTag = (tag: string) =>
+    Array.from(document.querySelectorAll(tag))
+      .map((element) => element.outerHTML)
+      .filter((element) => element.includes('svg'))
 
   const svgElements = getElementsByTag('svg')
   const objectElements = getElementsByTag('object[data*=".svg"]')
@@ -82,10 +68,12 @@ function findSVGs() {
   const gElements = getElementsByTag('g')
 
   return [
-    ...svgElements,
-    ...objectElements,
-    ...symbolElements,
-    ...imageElements,
-    ...gElements,
+    ...new Set([
+      ...svgElements,
+      ...objectElements,
+      ...symbolElements,
+      ...imageElements,
+      ...gElements,
+    ]),
   ]
 }
