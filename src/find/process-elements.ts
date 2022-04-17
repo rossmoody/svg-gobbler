@@ -11,13 +11,7 @@ async function processElements(strings: string[], location: string) {
       }),
   )
 
-  return promises
-    .filter((ele) => ele.isValid)
-    .map((svg) => {
-      svg.removeFillNone()
-      svg.removeClass()
-      return svg
-    })
+  return [...new Set(promises.filter((ele) => ele.isValid))]
 }
 
 export default processElements

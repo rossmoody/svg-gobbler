@@ -60,7 +60,7 @@ const Card = ({ data }: Props) => {
               },
             }}
           />
-          {data.whiteFill && (
+          {data.containsWhiteFill && (
             <Box
               bg={whiteFillBg}
               borderRadius="lg"
