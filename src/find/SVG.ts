@@ -13,7 +13,7 @@ class SVG {
 
   private determineType() {
     switch (true) {
-      case this.originalString.includes('<svg'): {
+      case this.originalString.includes('<svg '): {
         if (!this.originalString.includes('<use ')) {
           this.type = 'inline'
           this.parseFromStringXmlMime()
@@ -21,19 +21,19 @@ class SVG {
         break
       }
 
-      case this.originalString.includes('<symbol'): {
+      case this.originalString.includes('<symbol '): {
         this.type = 'symbol'
         this.parseFromStringXmlMime()
         break
       }
 
-      case this.originalString.includes('<g'): {
+      case this.originalString.includes('<g '): {
         this.type = 'g'
         this.parseFromStringXmlMime()
         break
       }
 
-      case this.originalString.includes('<img'): {
+      case this.originalString.includes('<img '): {
         this.type = 'img src'
         this.parseFromStringTextMime()
         break
@@ -83,6 +83,7 @@ class SVG {
       this.type = 'sprite'
       const svgElement = this.buildEmptySvgElement()
       const symbolElement = this.element.cloneNode(true) as SVGSymbolElement
+      const useElement = this.buildEmptyUseElement(id)
 
       const viewBox = symbolElement.getAttribute('viewBox')
       const height = symbolElement.getAttribute('height')
@@ -91,8 +92,10 @@ class SVG {
       viewBox && svgElement.setAttribute('viewBox', viewBox)
       height && svgElement.setAttribute('height', height)
       width && svgElement.setAttribute('width', width)
+      symbolElement.id = id
 
       svgElement.appendChild(symbolElement)
+      svgElement.appendChild(useElement)
       this.element = svgElement
     }
 
@@ -149,6 +152,7 @@ class SVG {
     }
 
     if (isBase64) {
+      console.log('hasBase64', this)
       try {
         const base64RegEx = /(?<=,)(.*)(?=")/
         const base64String = base64RegEx.exec(this.imgSrcHref)
