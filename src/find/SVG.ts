@@ -3,8 +3,8 @@ type SVGType = 'inline' | 'sprite' | 'symbol' | 'img src' | 'invalid' | 'g'
 class SVG {
   cors = false
   id = String(Math.floor(Math.random() * 100000))
+  element = document.createElement('div') as Element
   type: SVGType = 'invalid'
-  element!: Element
 
   constructor(public originalString: string, public location: string) {
     this.determineType()
@@ -14,8 +14,10 @@ class SVG {
   private determineType() {
     switch (true) {
       case this.originalString.includes('<svg'): {
-        this.type = 'inline'
-        this.parseFromStringXmlMime()
+        if (!this.originalString.includes('<use ')) {
+          this.type = 'inline'
+          this.parseFromStringXmlMime()
+        }
         break
       }
 
@@ -80,17 +82,17 @@ class SVG {
     if (this.type === 'symbol') {
       this.type = 'sprite'
       const svgElement = this.buildEmptySvgElement()
-      const elementClone = this.element.cloneNode(true) as SVGSymbolElement
+      const symbolElement = this.element.cloneNode(true) as SVGSymbolElement
 
-      const viewBox = elementClone.getAttribute('viewBox')
-      const height = elementClone.getAttribute('height')
-      const width = elementClone.getAttribute('width')
+      const viewBox = symbolElement.getAttribute('viewBox')
+      const height = symbolElement.getAttribute('height')
+      const width = symbolElement.getAttribute('width')
 
       viewBox && svgElement.setAttribute('viewBox', viewBox)
       height && svgElement.setAttribute('height', height)
       width && svgElement.setAttribute('width', width)
 
-      svgElement.appendChild(elementClone)
+      svgElement.appendChild(symbolElement)
       this.element = svgElement
     }
 
@@ -108,6 +110,16 @@ class SVG {
     }
   }
 
+  private b64DecodeUnicode(str: string) {
+    return decodeURIComponent(
+      Array.prototype.map
+        .call(atob(str), function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        })
+        .join(''),
+    )
+  }
+
   private get htmlSource() {
     return `
     <!DOCTYPE html>
@@ -122,32 +134,62 @@ class SVG {
     `
   }
 
-  removeFillNone() {
-    const fillNone = this.element.getAttribute('fill') === 'none'
-    const stroke = this.element.getAttribute('stroke')
-    if (fillNone && !stroke) this.element.removeAttribute('fill')
+  findUriAndBase64() {
+    const isDataUri = this.imgSrcHref.includes('data:image/svg+xml;utf8')
+    const isBase64 = this.imgSrcHref.includes('data:image/svg+xml;base64')
+
+    if (isDataUri) {
+      const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
+      const svgString = regex.exec(this.imgSrcHref)
+
+      if (svgString) {
+        this.originalString = svgString[0]
+        this.parseFromStringXmlMime()
+      }
+    }
+
+    if (isBase64) {
+      try {
+        const base64RegEx = /(?<=,)(.*)(?=")/
+        const base64String = base64RegEx.exec(this.imgSrcHref)
+
+        if (base64String) {
+          this.originalString = this.b64DecodeUnicode(base64String[0])
+          this.parseFromStringXmlMime()
+        }
+      } catch (error) {
+        this.cors = true
+      }
+    }
   }
 
-  removeClass() {
-    this.element.removeAttribute('class')
-  }
-
-  parseFromStringTextMime() {
-    const { body } = new DOMParser().parseFromString(
+  private parseFromStringTextMime() {
+    const element = new DOMParser().parseFromString(
       this.htmlSource,
       'text/html',
     )
-    if (body.querySelector('parsererror')) this.type === 'invalid'
-    this.element = body.firstElementChild ?? new Element()
+
+    const hasParsingError = Boolean(element.querySelector('parsererror'))
+    const hasFirstElementChild = Boolean(element.body.firstElementChild)
+
+    if (hasParsingError || !hasFirstElementChild) {
+      this.type === 'invalid'
+    } else {
+      this.element = element.body.firstElementChild!
+    }
   }
 
-  parseFromStringXmlMime() {
+  private parseFromStringXmlMime() {
     const { documentElement } = new DOMParser().parseFromString(
       this.originalString,
       'image/svg+xml',
     )
-    if (documentElement.querySelector('parsererror')) this.type === 'invalid'
-    this.element = documentElement
+
+    if (documentElement.querySelector('parsererror')) {
+      this.type === 'invalid'
+    } else {
+      this.element = documentElement
+    }
   }
 
   get imgSrcHref() {
@@ -180,7 +222,7 @@ class SVG {
     return this.element.outerHTML
   }
 
-  get whiteFill() {
+  get containsWhiteFill() {
     const whiteFills = ['#FFF', '#fff', '#FFFFFF', '#ffffff', 'white']
     const svgOuterHtml = this.element.outerHTML
     return whiteFills.some((fill) => svgOuterHtml.includes(fill))
@@ -195,20 +237,8 @@ class SVG {
   }
 
   get presentationSvg() {
-    const attributes = ['height', 'width', 'style', 'class']
-    const htmlElement = this.element.cloneNode(true) as HTMLElement &
-      HTMLImageElement
-
-    console.log(htmlElement, 'htmlElement')
-
-    if (!this.cors) {
-      attributes.forEach((attr) => htmlElement.removeAttribute(attr))
-    }
-
-    if (this.type === 'img src') {
-      htmlElement.src = this.imgSrcHref
-    }
-
+    const htmlElement = this.element.cloneNode(true) as HTMLImageElement
+    if (this.type === 'img src') htmlElement.src = this.imgSrcHref
     return htmlElement.outerHTML
   }
 

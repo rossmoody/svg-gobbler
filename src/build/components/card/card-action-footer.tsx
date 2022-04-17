@@ -82,7 +82,7 @@ const CardActionFooter = ({ data }: Props) => {
         svgString={data.elementAsString}
         height={Number(data.height)}
         width={Number(data.width)}
-        whiteFill={data.whiteFill}
+        whiteFill={data.containsWhiteFill}
         showModal={showModal}
       />
     </Grid>
