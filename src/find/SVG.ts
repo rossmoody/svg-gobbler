@@ -152,7 +152,6 @@ class SVG {
     }
 
     if (isBase64) {
-      console.log('hasBase64', this)
       try {
         const base64RegEx = /(?<=,)(.*)(?=")/
         const base64String = base64RegEx.exec(this.imgSrcHref)
@@ -242,7 +241,10 @@ class SVG {
 
   get presentationSvg() {
     const htmlElement = this.element.cloneNode(true) as HTMLImageElement
-    if (this.type === 'img src') htmlElement.src = this.imgSrcHref
+    if (this.type === 'img src') {
+      htmlElement.src = this.imgSrcHref
+    }
+
     return htmlElement.outerHTML
   }
 

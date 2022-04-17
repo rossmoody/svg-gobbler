@@ -6,6 +6,7 @@ async function processElements(strings: string[], location: string) {
       .map((string) => new SVG(string, location))
       .filter((ele) => ele.isValid)
       .map(async (ele) => {
+        ele.findUriAndBase64()
         await ele.fetchSvgContent()
         return ele
       }),
