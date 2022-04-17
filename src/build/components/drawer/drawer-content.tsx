@@ -22,6 +22,9 @@ interface DrawerContent {
   svgString: string
 }
 
+/**
+ * This component is a nightmare and I have no excuse.
+ */
 function DrawerContent({ svgString }: DrawerContent) {
   const svgoDefault: SVGOConfig = React.useMemo(
     () => JSON.parse(JSON.stringify(defaultConfig)),
