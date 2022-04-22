@@ -249,25 +249,25 @@ class SVG {
   }
 
   get width() {
-    const width = this.element.getAttribute('width') ?? ''
+    let width = Number(this.element.getAttribute('width'))
 
     if (!width && this.viewBox) {
       const [, , viewBoxWidth] = this.viewBox.split(' ')
-      return Math.ceil(parseInt(viewBoxWidth, 10))
+      width = Math.ceil(parseInt(viewBoxWidth, 10))
     }
 
-    return width.replace('px', '')
+    return width
   }
 
   get height() {
-    const height = this.element.getAttribute('height') ?? ''
+    let height = Number(this.element.getAttribute('height'))
 
     if (!height && this.viewBox) {
       const [, , , viewBoxHeight] = this.viewBox.split(' ')
-      return Math.ceil(parseInt(viewBoxHeight, 10))
+      height = Math.ceil(parseInt(viewBoxHeight, 10))
     }
 
-    return height.replace('px', '')
+    return height
   }
 
   async fetchSvgContent() {

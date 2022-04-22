@@ -1,4 +1,4 @@
-import FileSaver from 'file-saver'
+import { saveAs } from 'file-saver'
 //@ts-ignore
 import JSZip from 'jszip/dist/jszip'
 import { extendDefaultPlugins, optimize } from 'svgo/dist/svgo.browser'
@@ -23,13 +23,13 @@ const FILENAME = 'svg-gobbler'
 const handle = {
   downloadOriginal(svgString: string, filename = FILENAME) {
     const blob = new Blob([svgString], { type: 'text/xml' })
-    FileSaver.saveAs(blob, `${filename}.svg`)
+    saveAs(blob, `${filename}.svg`)
   },
 
   downloadOptimized(svgString: string, filename = FILENAME) {
     const { data } = optimize(svgString, svgoConfig)
     const blob = new Blob([data], { type: 'text/xml' })
-    FileSaver.saveAs(blob, `${filename}.svg`)
+    saveAs(blob, `${filename}.svg`)
   },
 
   downloadAllSVGs(svgs: string[]) {
@@ -45,7 +45,7 @@ const handle = {
     })
 
     zip.generateAsync({ type: 'blob' }).then((content: any) => {
-      FileSaver.saveAs(content, 'gobbled-svgs.zip')
+      saveAs(content, 'gobbled-svgs.zip')
     })
   },
 
@@ -70,8 +70,6 @@ const handle = {
     const data = new XMLSerializer().serializeToString(image.svgElement)
 
     const canvas = document.createElement('canvas')
-    canvas.width = width
-    canvas.height = height
     document.body.appendChild(canvas)
     const ctx = canvas.getContext('2d')
     const dom = window.URL || window.webkitURL || window
@@ -81,10 +79,13 @@ const handle = {
     const url = dom.createObjectURL(svg)
 
     img.onload = function () {
-      ctx?.drawImage(img, 0, 0)
+      canvas.width = width
+      canvas.height = height
+      ctx && ctx.drawImage(img, 0, 0)
       dom.revokeObjectURL(url)
       const png_img = canvas.toDataURL('image/png')
-      FileSaver.saveAs(png_img, `${filename}.png`)
+      saveAs(png_img, `${filename}.png`)
+      document.body.removeChild(canvas)
     }
 
     img.src = url
