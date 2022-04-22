@@ -17,6 +17,7 @@ export default {
     format: 'esm',
     chunkFileNames: path.join('chunks', '[name]-[hash].js'),
   },
+  preserveEntrySignatures: false,
   plugins: [
     replace({
       'process.env.NODE_ENV': isProduction
