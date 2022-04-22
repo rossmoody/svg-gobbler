@@ -13,8 +13,12 @@ export class SVGImage {
 
   setSvgElement() {
     const parser = new DOMParser()
-    const element = parser.parseFromString(this.svgString, 'image/svg+xml')
-    this.svgElement = element.documentElement
+    const { documentElement } = parser.parseFromString(
+      this.svgString,
+      'image/svg+xml',
+    )
+    documentElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    this.svgElement = documentElement
   }
 
   setSvgElementWidthHeight() {
