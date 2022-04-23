@@ -61,7 +61,19 @@ function CodeViewHeader({
       <Text color="gray.400" fontSize="12px">
         {!isReact && sizeString}
       </Text>
-      <Button size="xs">{loc('drawer_copy')}</Button>
+      <Button
+        size="xs"
+        onClick={(event) => {
+          navigator.clipboard.writeText(newString)
+          const target = event.target as HTMLButtonElement
+          target.textContent = 'Copied'
+          setTimeout(() => {
+            target.textContent = 'Copy'
+          }, 1500)
+        }}
+      >
+        {loc('drawer_copy')}
+      </Button>
     </Flex>
   )
 }
