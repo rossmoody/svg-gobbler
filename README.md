@@ -6,6 +6,8 @@ or in the
 [Add-On Marketplace](https://addons.mozilla.org/firefox/addon/svg-gobbler/) for
 Firefox.
 
+> Like browser extensions? Check out my other side project [Link Roamer](https://github.com/rossmoody/link-roamer).
+
 SVG Gobbler is a browser extension that finds SVG content in your current window
 and lets you download, copy to clipboard, or export as a PNG.
 
