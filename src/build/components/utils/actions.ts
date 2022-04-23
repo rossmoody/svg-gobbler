@@ -64,6 +64,7 @@ const handle = {
     height: number,
     filename = FILENAME,
   ) {
+    const dom = window.URL || window.webkitURL || window
     const image = new SVGImage(svgString, height, width)
     image.svgElement.setAttribute('width', String(width))
     image.svgElement.setAttribute('height', String(height))
@@ -71,9 +72,8 @@ const handle = {
 
     const canvas = document.createElement('canvas')
     document.body.appendChild(canvas)
-    const ctx = canvas.getContext('2d')
-    const dom = window.URL || window.webkitURL || window
 
+    const ctx = canvas.getContext('2d')
     const img = new Image(width, height)
     const svg = new Blob([data], { type: 'image/svg+xml' })
     const url = dom.createObjectURL(svg)
