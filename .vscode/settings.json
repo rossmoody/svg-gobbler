@@ -1,0 +1,9 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["manifest.json"],
+      "url": "https://json.schemastore.org/chrome-manifest.json"
+    }
+  ],
+  "css.customData": [".vscode/tailwind.json"]
+}
