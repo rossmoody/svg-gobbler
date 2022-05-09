@@ -14,21 +14,24 @@
       "resources": [
         "pages/index.html",
         "pages/welcome.html",
-        "pages/favicon.ico"
+        "pages/favicon.ico",
+        "assets/development/*.png"
       ],
       "matches": ["<all_urls>"]
     }
   ],
   "action": {
     "default_icon": {
-      "16": "./assets/16.png",
-      "32": "./assets/32.png",
-      "48": "./assets/48.png"
+      "16": "./assets/production/16.png",
+      "24": "./assets/production/24.png",
+      "32": "./assets/production/32.png"
     }
   },
   "icons": {
-    "48": "./assets/48.png",
-    "128": "./assets/128.png"
+    "16": "./assets/production/16.png",
+    "32": "./assets/production/32.png",
+    "48": "./assets/production/48.png",
+    "128": "./assets/production/128.png"
   },
   "host_permissions": [
     "https://us-central1-svg-gobbler.cloudfunctions.net/SVGR"
