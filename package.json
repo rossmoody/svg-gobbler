@@ -2,7 +2,7 @@
   "name": "svg-gobbler",
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",
-  "author": "Ross Moody<@_rossmoody>",
+  "author": "Ross Moody<ross@rossmoody.com>",
   "scripts": {
     "release": "cross-env NODE_ENV=production rollup -c",
     "start": "rollup -c -w"
@@ -14,7 +14,7 @@
     "react-feather": "^2.0.9",
     "react-syntax-highlighter": "^15.4.3",
     "readable-stream": "npm:readable-stream-no-circular",
-    "svgo": "^2.3.1",
+    "svgo": "^2.8.0",
     "webextension-polyfill": "^0.9.0"
   },
   "devDependencies": {
