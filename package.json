@@ -1,5 +1,6 @@
 {
   "name": "svg-gobbler",
+  "version": "4.4.0",
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "license": "apache-2.0",
   "author": "Ross Moody<ross@rossmoody.com>",
@@ -33,7 +34,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-syntax-highlighter": "^13.5.2",
-    "@types/svgo": "^2.3.0",
+    "@types/svgo": "^2.6.3",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "cross-env": "^7.0.3",
