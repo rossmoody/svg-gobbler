@@ -26,15 +26,14 @@ function DrawerContent({ svgString }: DrawerContent) {
   const whiteFillBg = useColorModeValue('gray.100', 'null')
 
   React.useEffect(() => {
-    console.log('', 'before the optimize function')
     const { data } = optimize(svgString, options.config)
 
     if (options.react) {
       reactify(data).then(setSvg)
+      return
     }
 
     setSvg(data)
-    console.log('', 'after set SVG')
   }, [options.react, options.config.plugins?.length])
 
   return (

@@ -36,14 +36,14 @@ const PluginOption = ({ name }: Props) => {
       <Switch
         colorScheme="red"
         id={plugin?.name}
-        onChange={(event) => {
-          const checked = event.target.checked
-          const plugins = options.config.plugins
+        isChecked={options.config.plugins?.includes(name)}
+        onChange={() => {
+          let plugins = options.config.plugins
 
-          if (checked) {
-            plugins?.push(name)
+          if (plugins?.includes(name)) {
+            plugins = plugins?.filter((plugin) => plugin !== name)
           } else {
-            plugins?.filter((plugin) => plugin === name)
+            plugins?.push(name)
           }
 
           setOptions((prevOptions) => ({

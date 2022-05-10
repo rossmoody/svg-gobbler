@@ -25,7 +25,27 @@ export const OptionsProvider: React.FC = ({ children }) => {
     react: false,
     config: {
       multipass: true,
-      plugins: [],
+      plugins: [
+        'cleanupIDs',
+        'cleanupListOfValues',
+        'cleanupListOfValues',
+        'cleanupNumericValues',
+        'cleanupAttrs',
+        'mergeStyles',
+        'inlineStyles',
+        'removeDoctype',
+        'removeXMLNS',
+        'removeXMLProcInst',
+        'removeComments',
+        'removeDesc',
+        'removeUselessDefs',
+        'removeUselessStrokeAndFill',
+        'removeEmptyAttrs',
+        'removeHiddenElems',
+        'removeEmptyContainers',
+        'sortAttrs',
+        'sortDefsChildren',
+      ],
       js2svg: {
         indent: 2,
         pretty: true,
@@ -38,7 +58,7 @@ export const OptionsProvider: React.FC = ({ children }) => {
       options,
       setOptions,
     }),
-    [options, options.config.plugins?.length],
+    [options],
   )
 
   return (
