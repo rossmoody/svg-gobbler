@@ -8,29 +8,19 @@ import {
 } from '@chakra-ui/react'
 import prettyBytes from 'pretty-bytes'
 import React from 'react'
+import { useOptions } from 'src/build/providers/options-provider'
 import loc from '../utils/localization'
 
-const getStringSize = (string: string) => {
-  const bytes = new Blob([string]).size
-  return prettyBytes(bytes)
+type Props = {
+  svgString: string
+  newSvgString: string
 }
 
-interface CodeViewHeaderProps {
-  originalString: string
-  newString: string
-  isReact: boolean
-  setIsReact: React.Dispatch<React.SetStateAction<boolean>>
-}
+function CodeViewHeader({ svgString, newSvgString }: Props) {
+  const { options, setOptions } = useOptions()
 
-function CodeViewHeader({
-  originalString,
-  newString,
-  isReact,
-  setIsReact,
-}: CodeViewHeaderProps) {
-  const originalSize = getStringSize(originalString)
-  const newSize = getStringSize(newString)
-
+  const originalSize = getStringSize(svgString)
+  const newSize = getStringSize(newSvgString)
   const sizeString =
     originalSize === newSize ? originalSize : `${originalSize} -> ${newSize}`
 
@@ -41,16 +31,20 @@ function CodeViewHeader({
           <ButtonGroup isAttached>
             <Button
               size="xs"
-              isActive={!isReact}
-              onClick={() => setIsReact(false)}
+              isActive={!options.react}
+              onClick={() =>
+                setOptions((prevOptions) => ({ ...prevOptions, react: false }))
+              }
               variant="outline"
             >
               {loc('drawer_svg')}
             </Button>
             <Button
               size="xs"
-              isActive={isReact}
-              onClick={() => setIsReact(true)}
+              isActive={options.react}
+              onClick={() =>
+                setOptions((prevOptions) => ({ ...prevOptions, react: true }))
+              }
               variant="outline"
             >
               {loc('drawer_react')}
@@ -59,12 +53,12 @@ function CodeViewHeader({
         </Box>
       </DarkMode>
       <Text color="gray.400" fontSize="12px">
-        {!isReact && sizeString}
+        {!options.react && sizeString}
       </Text>
       <Button
         size="xs"
         onClick={(event) => {
-          navigator.clipboard.writeText(newString)
+          navigator.clipboard.writeText(newSvgString)
           const target = event.target as HTMLButtonElement
           target.textContent = 'Copied'
           setTimeout(() => {
@@ -76,6 +70,11 @@ function CodeViewHeader({
       </Button>
     </Flex>
   )
+}
+
+function getStringSize(string: string) {
+  const bytes = new Blob([string]).size
+  return prettyBytes(bytes)
 }
 
 export { CodeViewHeader }

@@ -1,21 +1,16 @@
 import { saveAs } from 'file-saver'
 //@ts-ignore
 import JSZip from 'jszip/dist/jszip'
-import { extendDefaultPlugins, optimize } from 'svgo/dist/svgo.browser'
+import { optimize } from 'svgo/dist/svgo.browser'
 import { SVGImage } from './image-class'
 
 const svgoConfig = {
   multipass: true,
-  plugins: extendDefaultPlugins([
+  plugins: [
     {
-      name: 'removeViewBox',
-      active: false,
+      name: 'preset-default',
     },
-    {
-      name: 'removeDimensions',
-      active: true,
-    },
-  ]),
+  ],
 }
 
 const FILENAME = 'svg-gobbler'
