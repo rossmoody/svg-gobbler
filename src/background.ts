@@ -29,7 +29,10 @@ chrome.action.onClicked.addListener(async ({ url }) => {
 
     const data = await executeScript<string[]>(id!, findSVGs)
     const url = await executeScript<string>(id!, () => document.location.host)
-    const location = await executeScript<string>(id!, () => document.baseURI)
+    const location = await executeScript<string>(
+      id!,
+      () => document.location.origin,
+    )
 
     chrome.tabs.create({ url: `./pages/index.html`, active: true }, () => {
       chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {

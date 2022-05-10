@@ -3,6 +3,7 @@ import React from 'react'
 import { DropZone, Footer, Gallery, Navbar, Toolbar } from '../components'
 import { DataProvider } from '../providers/data-provider'
 import { LocationProvider } from '../providers/location-provider'
+import { OptionsProvider } from '../providers/options-provider'
 import { ThemeProvider } from '../providers/theme-provider'
 
 const Layout = () => {
@@ -14,7 +15,9 @@ const Layout = () => {
             <Navbar />
             <Divider />
             <Toolbar />
-            <Gallery />
+            <OptionsProvider>
+              <Gallery />
+            </OptionsProvider>
             <Divider />
             <Footer />
           </DropZone>

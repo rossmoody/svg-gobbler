@@ -204,6 +204,7 @@ class SVG {
         ? imgSrc
         : this.location.replace(/\/$/, '') + imgSrc
     }
+
     if (dataSrc?.includes('.svg')) {
       return dataSrc?.startsWith('http')
         ? dataSrc
