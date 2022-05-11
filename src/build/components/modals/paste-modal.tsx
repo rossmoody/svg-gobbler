@@ -1,4 +1,3 @@
-import React, { Dispatch, SetStateAction, useRef } from 'react'
 import {
   Button,
   FormControl,
@@ -12,18 +11,18 @@ import {
   Textarea,
   useToast,
 } from '@chakra-ui/react'
-
-import { AppData } from '../../types'
+import React, { Dispatch, SetStateAction, useRef } from 'react'
+import { useData } from 'src/build/providers/data-provider'
 import loc from '../utils/localization'
 import { util } from '../utils/upload'
 
 interface PasteTypes {
   callback: Dispatch<SetStateAction<boolean>>
   showModal: boolean
-  setData: Dispatch<SetStateAction<AppData>>
 }
 
-const PasteModal = ({ callback, showModal, setData }: PasteTypes) => {
+const PasteModal = ({ callback, showModal }: PasteTypes) => {
+  const { setData } = useData()
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const toast = useToast({

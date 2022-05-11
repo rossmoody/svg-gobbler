@@ -8,9 +8,9 @@ import { ThemeProvider } from '../providers/theme-provider'
 
 const Layout = () => {
   return (
-    <LocationProvider>
-      <DataProvider>
-        <ThemeProvider>
+    <ThemeProvider>
+      <LocationProvider>
+        <DataProvider>
           <DropZone>
             <Navbar />
             <Divider />
@@ -21,9 +21,9 @@ const Layout = () => {
             <Divider />
             <Footer />
           </DropZone>
-        </ThemeProvider>
-      </DataProvider>
-    </LocationProvider>
+        </DataProvider>
+      </LocationProvider>
+    </ThemeProvider>
   )
 }
 
