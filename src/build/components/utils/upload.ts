@@ -28,10 +28,6 @@ export const util = {
     return svgStrings ? svgStrings : ['']
   },
 
-  processUploadedSVG(svg: string) {
-    return new SVG(svg, '')
-  },
-
   handleDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault()
     return this.handleUpload(event)
@@ -43,7 +39,7 @@ export const util = {
   },
 
   handlePaste(svgString: string) {
-    return this.processUploadedSVG(svgString)
+    return new SVG(svgString, '')
   },
 
   async handleUpload(event: any) {
@@ -64,8 +60,9 @@ export const util = {
         reader.readAsText(file)
         reader.onload = () => {
           const svgString = reader.result
+
           if (typeof svgString === 'string') {
-            const processedSvg = this.processUploadedSVG(svgString)
+            const processedSvg = new SVG(svgString, '')
             resolve(processedSvg)
           }
         }

@@ -1,12 +1,12 @@
-import React from 'react'
 import { Tooltip as ChakraTooltip } from '@chakra-ui/react'
+import React from 'react'
 
-interface Tooltip {
+type Props = {
   children: React.ReactNode
   label: string
 }
 
-const Tooltip = ({ children, label }: Tooltip) => (
+const Tooltip = ({ children, label }: Props) => (
   <ChakraTooltip hasArrow borderRadius="md" padding={4} label={label}>
     {children}
   </ChakraTooltip>
