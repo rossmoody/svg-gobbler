@@ -77,10 +77,13 @@ attributes currently being shown are:
 
 2. The size of the SVG in the DOM
 
-## Other Projects
+---
 
-1. Like browser extensions? Check out my side project [Link Roamer](https://github.com/rossmoody/link-roamer).
-2. Like cryptocurrency and icons? Check out my side project [Cryptocons](https://github.com/rossmoody/cryptocons)
+## More apps by me
+
+I like making things. [Check out what I'm up to lately](https://rossmoody.com).
+
+---
 
 ## Contribute
 
