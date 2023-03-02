@@ -66,6 +66,4 @@ export const OptionsProvider: React.FC = ({ children }) => {
   )
 }
 
-export const useOptions = () => {
-  return useContext(OptionsContext)
-}
+export const useOptions = () => useContext(OptionsContext)
