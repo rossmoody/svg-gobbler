@@ -6,14 +6,13 @@ import loc from '../utils/localization'
 function ThemeToggle() {
   const { colorMode, toggleColorMode } = useColorMode()
 
-  const Icon = () => (colorMode === 'light' ? <Moon /> : <Sun />)
-
   return (
     <IconButton
       onClick={toggleColorMode}
       aria-label={loc('nav_theme')}
       borderRadius="md"
-      icon={<Icon />}
+      icon={colorMode === 'light' ? <Moon /> : <Sun />}
+      size="lg"
     />
   )
 }
