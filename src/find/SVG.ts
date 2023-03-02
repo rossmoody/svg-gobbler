@@ -1,10 +1,12 @@
-type SVGType = 'inline' | 'sprite' | 'symbol' | 'img src' | 'invalid' | 'g'
-
 class SVG {
   cors = false
   id = String(Math.floor(Math.random() * 100000))
   element = document.createElement('div') as Element
-  type: SVGType = 'invalid'
+  /**
+   * The type of SVG element. This is used to determine how to parse the SVG.
+   * Defaults to 'invalid' and is changed in the constructor if the SVG is valid.
+   */
+  type: 'inline' | 'sprite' | 'symbol' | 'img src' | 'invalid' | 'g' = 'invalid'
 
   constructor(public originalString: string, public location: string) {
     this.determineType()
@@ -39,41 +41,6 @@ class SVG {
         break
       }
     }
-  }
-
-  private buildEmptySvgElement() {
-    const svgElement = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'svg',
-    )
-    svgElement.setAttributeNS(
-      'http://www.w3.org/2000/xmlns/',
-      'xmlns',
-      'http://www.w3.org/2000/svg',
-    )
-    return svgElement
-  }
-
-  private buildEmptyUseElement(id: string) {
-    const useElement = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'use',
-    )
-    useElement.setAttributeNS(
-      'http://www.w3.org/1999/xlink',
-      'xlink:href',
-      `#${id}`,
-    )
-    return useElement
-  }
-
-  private buildEmptySymbolElement(id: string) {
-    const symbolElement = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'symbol',
-    )
-    symbolElement.id = id
-    return symbolElement
   }
 
   private buildSpriteElement() {
@@ -111,6 +78,41 @@ class SVG {
       svgElement.appendChild(useElement)
       this.element = svgElement
     }
+  }
+
+  private buildEmptySvgElement() {
+    const svgElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'svg',
+    )
+    svgElement.setAttributeNS(
+      'http://www.w3.org/2000/xmlns/',
+      'xmlns',
+      'http://www.w3.org/2000/svg',
+    )
+    return svgElement
+  }
+
+  private buildEmptyUseElement(id: string) {
+    const useElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'use',
+    )
+    useElement.setAttributeNS(
+      'http://www.w3.org/1999/xlink',
+      'xlink:href',
+      `#${id}`,
+    )
+    return useElement
+  }
+
+  private buildEmptySymbolElement(id: string) {
+    const symbolElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'symbol',
+    )
+    symbolElement.id = id
+    return symbolElement
   }
 
   private b64DecodeUnicode(str: string) {
