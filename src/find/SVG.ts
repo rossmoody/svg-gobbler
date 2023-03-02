@@ -164,6 +164,8 @@ class SVG {
         this.cors = true
       }
     }
+
+    return this
   }
 
   private parseFromStringTextMime() {
@@ -284,6 +286,8 @@ class SVG {
         this.cors = true
       }
     }
+
+    return this
   }
 }
 
