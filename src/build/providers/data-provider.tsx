@@ -1,21 +1,30 @@
-import React, { createContext, useContext, useMemo, useState } from 'react'
+import React, {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import processElements from '../../find/process-elements'
-import SVG from '../../find/SVG'
 import { AppData } from '../types'
+import { paginateContent } from './helpers'
 
 interface DataContextProps {
   data: AppData
-  setData: React.Dispatch<React.SetStateAction<AppData>>
+  setData: Dispatch<SetStateAction<AppData>>
 }
 
 const DataContext = createContext({} as DataContextProps)
 
-export const DataProvider: React.FC = ({ children }) => {
+export const DataProvider: FC = ({ children }) => {
   const [data, setData] = useState<AppData>([])
 
   const value = useMemo(() => ({ data, setData }), [data])
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       setData((prevData) => {
         return prevData.length < 1 ? 'empty' : prevData
@@ -26,34 +35,23 @@ export const DataProvider: React.FC = ({ children }) => {
   }, [])
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'gobble') {
-      processElements(message.data, message.location).then((result) => {
-        if (result.length < 1) return setData('empty')
+    const { action, data, location } = message
+
+    if (action === 'gobble') {
+      processElements(data, location).then((result) => {
+        if (result.length < 1) {
+          setData('empty')
+          return
+        }
+
         setData(paginateContent(result))
       })
     }
 
-    sendResponse('')
+    sendResponse('') // Send a response to keep the port open
   })
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }
 
 export const useData = () => useContext(DataContext)
-
-function paginateContent(content: SVG[]) {
-  const perPage = 100
-
-  if (content.length <= perPage) return [content]
-
-  return content.reduce((resultArray, item, index) => {
-    const chunkIndex = Math.floor(index / perPage)
-    if (!resultArray[chunkIndex]) {
-      resultArray[chunkIndex] = []
-    }
-
-    resultArray[chunkIndex].push(item)
-
-    return resultArray
-  }, [] as SVG[][])
-}

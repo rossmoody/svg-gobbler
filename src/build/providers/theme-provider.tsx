@@ -1,5 +1,5 @@
-import React from 'react'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import React from 'react'
 
 const config = extendTheme({
   styles: {
@@ -11,8 +11,8 @@ const config = extendTheme({
   },
 })
 
-const ThemeProvider: React.FC = ({ children }) => {
-  return <ChakraProvider theme={config}>{children}</ChakraProvider>
-}
+const ThemeProvider: React.FC = ({ children }) => (
+  <ChakraProvider theme={config}>{children}</ChakraProvider>
+)
 
 export { ThemeProvider }
