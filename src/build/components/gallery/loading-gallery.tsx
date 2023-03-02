@@ -1,14 +1,13 @@
+import { Center, Spinner } from '@chakra-ui/react'
 import React from 'react'
-import { Box, Center, Spinner, useColorModeValue } from '@chakra-ui/react'
+import { GalleryFrame } from './gallery-frame'
 
-const LoadingGallery = () => {
-  return (
-    <Box p="8" bg={useColorModeValue('gray.100', 'gray.800')}>
-      <Center maxW="7xl" minH="400px" mx="auto">
-        <Spinner size="xl" thickness="4px" emptyColor="white" color="red.500" />
-      </Center>
-    </Box>
-  )
-}
+const LoadingGallery = () => (
+  <GalleryFrame>
+    <Center maxW="7xl" minH="400px" mx="auto">
+      <Spinner size="xl" thickness="4px" emptyColor="white" color="red.500" />
+    </Center>
+  </GalleryFrame>
+)
 
 export default LoadingGallery

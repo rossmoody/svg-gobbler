@@ -11,6 +11,7 @@ import React from 'react'
 import { Plus } from 'react-feather'
 import loc from '../utils/localization'
 import { util } from '../utils/upload'
+import { GalleryFrame } from './gallery-frame'
 
 interface EmptyGallery {
   headline: string
@@ -18,13 +19,12 @@ interface EmptyGallery {
 }
 
 const EmptyGallery = ({ headline, description }: EmptyGallery) => {
-  const backgroundColor = useColorModeValue('gray.100', 'gray.800')
   const lightThemeOutline = useToken('colors', ['gray.400'])
   const darkThemeOutline = useToken('colors', ['gray.500'])
   const outlineColor = useColorModeValue(lightThemeOutline, darkThemeOutline)
 
   return (
-    <Box p="8" bg={backgroundColor}>
+    <GalleryFrame>
       <Center
         id="dropzone"
         maxW="7xl"
@@ -68,7 +68,7 @@ const EmptyGallery = ({ headline, description }: EmptyGallery) => {
           </Flex>
         </Box>
       </Center>
-    </Box>
+    </GalleryFrame>
   )
 }
 
