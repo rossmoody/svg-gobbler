@@ -5,37 +5,38 @@
  */
 function findSVGs() {
   /**
-   * Background image urls must be determined in the DOM where
+   * Background image urls must be parsed in the DOM window where
    * they are placed. This creates a new img with it set as the src.
    */
   const parseBgImageElements = () => {
-    const results: string[] = []
-    const elements = Array.from(document.querySelectorAll('div'))
+    const imagesWithSrc = [] as string[]
+    const documentElements = Array.from(document.querySelectorAll('div'))
 
-    elements.forEach((element) => {
+    documentElements.forEach((element) => {
       const style = window.getComputedStyle(element)
       const src = style.backgroundImage.slice(4, -1).replace(/"/g, '')
 
       if (src.includes('svg')) {
         const image = new Image()
         image.src = src
-        results.push(image.outerHTML)
+        imagesWithSrc.push(image.outerHTML)
       }
     })
 
-    return results
+    return imagesWithSrc
   }
 
+  type TagNameMap = keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
+
   /**
-   * Returns the outerhtml of a specified tag that includes
+   * Returns the outer html of a specified tag that includes
    * 'svg' or '<g ' in the string.
    */
-  const getElementsByTag = (
-    tag: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap,
-  ) =>
-    Array.from(document.querySelectorAll(tag))
+  function getElementsByTag(tag: TagNameMap) {
+    return Array.from(document.querySelectorAll(tag))
       .map((element) => element.outerHTML)
       .filter((element) => element.includes('svg') || element.includes('<g '))
+  }
 
   return [
     ...new Set([
