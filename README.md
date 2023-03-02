@@ -17,7 +17,8 @@ SVG Gobbler as a developer extension to test any changes.
 
 > This extension is in a strange middle ground with the v3 manifest updates
 > coming from Chrome. Firefox extension is pinned to version 3.17 for Firefox
-> but the extension is being refactored to comply with v3 Manifest changes.
+> but the extension is being refactored to comply with v3 Manifest changes for
+> Chrome.
 
 ### Installation
 

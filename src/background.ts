@@ -1,4 +1,6 @@
 import findSVGs from './find/find-svgs'
+import loadDevIcons from './scripts/load-dev-icon'
+import loadWelcomeScreen from './scripts/load-welcome-screen'
 
 const executeScript = async <Type>(tabId: number, func: () => Type) =>
   (
@@ -50,27 +52,5 @@ chrome.action.onClicked.addListener(async ({ url }) => {
   }
 })
 
-/**
- * Show the welcome screen on install
- */
-chrome.runtime.onInstalled.addListener(async (details) => {
-  if (details.reason === 'install') {
-    await chrome.tabs.create({ url: 'pages/welcome.html' })
-  }
-})
-
-/**
- * Switch to Dev icon if extension is loaded as unpacked
- */
-chrome.runtime.onInstalled.addListener(() => {
-  const isDevMode = !('update_url' in chrome.runtime.getManifest())
-
-  if (isDevMode)
-    chrome.action.setIcon({
-      path: {
-        '16': 'assets/development/16.png',
-        '24': 'assets/development/24.png',
-        '32': 'assets/development/32.png',
-      },
-    })
-})
+loadWelcomeScreen()
+loadDevIcons()
