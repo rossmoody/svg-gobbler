@@ -39,7 +39,6 @@ const CardActionMenu = ({
         aria-label="Options"
         borderRadius="md"
       />
-
       <MenuList width="auto" height="auto" zIndex={100}>
         <MenuItem
           icon={<Download size={20} />}
@@ -47,7 +46,6 @@ const CardActionMenu = ({
         >
           {loc('card_dl_opt')}
         </MenuItem>
-
         <MenuItem
           icon={<Clipboard size={20} />}
           onClick={() => {
@@ -60,15 +58,11 @@ const CardActionMenu = ({
         >
           {loc('card_menu_copy_opt')}
         </MenuItem>
-
         <MenuDivider />
-
         <MenuItem icon={<Image size={20} />} onClick={() => setShowModal(true)}>
           {loc('card_menu_exportPng')}
         </MenuItem>
-
         <MenuDivider />
-
         <MenuItem icon={<Code size={20} />} onClick={() => setShowDrawer(true)}>
           {loc('card_menu_viewCode')}
         </MenuItem>
