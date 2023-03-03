@@ -19,7 +19,6 @@ interface CodeDrawer {
 const CodeDrawer = ({ callback, svgString, showDrawer }: CodeDrawer) => (
   <Drawer
     isOpen={showDrawer}
-    placement="right"
     size="2xl"
     onClose={() => {
       callback(false)

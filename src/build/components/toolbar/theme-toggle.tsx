@@ -1,10 +1,19 @@
 import { IconButton, useColorMode } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Moon, Sun } from 'react-feather'
 import loc from '../utils/localization'
 
 function ThemeToggle() {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode, toggleColorMode, setColorMode } = useColorMode()
+
+  useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      setColorMode('dark')
+    }
+  }, [])
 
   return (
     <IconButton

@@ -1,4 +1,4 @@
-class SVG {
+export default class SVG {
   cors = false
   id = String(Math.floor(Math.random() * 100000))
   element = document.createElement('div') as Element
@@ -292,5 +292,3 @@ class SVG {
     return this
   }
 }
-
-export default SVG

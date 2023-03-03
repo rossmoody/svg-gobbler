@@ -2,13 +2,13 @@ import findSVGs from './find/find-svgs'
 import loadDevIcons from './scripts/load-dev-icon'
 import loadWelcomeScreen from './scripts/load-welcome-screen'
 
-const executeScript = async <Type>(tabId: number, func: () => Type) =>
+const executeScript = async <T>(tabId: number, func: () => T) =>
   (
     await chrome.scripting.executeScript({
       target: { tabId },
       func,
     })
-  )[0].result as Type
+  )[0].result as T
 
 chrome.action.onClicked.addListener(async ({ url }) => {
   if (url?.includes('chrome://')) {
