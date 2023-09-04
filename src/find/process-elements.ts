@@ -1,5 +1,8 @@
 import SVG from './SVG'
 
+/**
+ * The primary function for processing SVG elements and paths gathered from the active tab
+ */
 async function processElements(strings: string[], location: string) {
   const elements = await Promise.all(
     strings
