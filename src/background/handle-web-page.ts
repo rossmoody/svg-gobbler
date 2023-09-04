@@ -1,5 +1,5 @@
-import { executeScript } from './execute-script'
 import { findSVGs } from './find-svgs'
+import { createNewTab, executeScript } from './helpers'
 
 export const handleWebPage = () => {
   chrome.action.onClicked.addListener(async ({ url }) => {
@@ -15,19 +15,11 @@ export const handleWebPage = () => {
       const url = await executeScript(id, () => document.location.host)
       const location = await executeScript(id, () => document.location.origin)
 
-      chrome.tabs.create({ url: `./pages/index.html`, active: true }, () => {
-        chrome.tabs.onUpdated.addListener(function listener(tabId, changeInfo) {
-          if (changeInfo.status === 'complete') {
-            chrome.tabs.sendMessage(tabId, {
-              data,
-              action: 'gobble',
-              location,
-              url,
-            })
-
-            chrome.tabs.onUpdated.removeListener(listener)
-          }
-        })
+      createNewTab('./pages/index.html', {
+        data,
+        action: 'gobble',
+        location,
+        url,
       })
     }
   })
