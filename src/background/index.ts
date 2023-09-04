@@ -1,4 +1,6 @@
 export * from './execute-script'
 export * from './find-svgs'
+export * from './handle-system-page'
+export * from './handle-web-page'
 export * from './load-dev-icon'
 export * from './load-welcome-screen'
