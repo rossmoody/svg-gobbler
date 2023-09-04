@@ -1,5 +1,5 @@
 import React from 'react'
-import SVG from '../../../find/SVG'
+import SVG from '../../../process/SVG'
 import { useData } from '../../providers/data-provider'
 import loc from '../utils/localization'
 import DataGallery from './data-gallery'

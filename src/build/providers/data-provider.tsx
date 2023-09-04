@@ -8,7 +8,7 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import processElements from '../../find/process-elements'
+import processElements from '../../process/process-elements'
 import { AppData } from '../types'
 import { paginateContent } from './helpers'
 

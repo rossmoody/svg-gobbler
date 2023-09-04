@@ -1,5 +1,5 @@
 import React from 'react'
-import SVG from '../../../find/SVG'
+import SVG from '../../../process/SVG'
 import CardActionCors from './card-action-cors'
 import CardActionFooter from './card-action-footer'
 

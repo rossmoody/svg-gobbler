@@ -1,5 +1,5 @@
 import React from 'react'
-import SVG from '../../../find/SVG'
+import SVG from '../../../process/SVG'
 import { AppData } from '../../types'
 
 export const util = {

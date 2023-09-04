@@ -1,6 +1,6 @@
 import { Button, Center, SimpleGrid } from '@chakra-ui/react'
 import React from 'react'
-import SVG from '../../../find/SVG'
+import SVG from '../../../process/SVG'
 import Card from '../card'
 import loc from '../utils/localization'
 import { GalleryFrame } from './gallery-frame'

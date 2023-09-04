@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import SVG from '../../../find/SVG'
+import SVG from '../../../process/SVG'
 import CardActions from './card-actions'
 import CardFooter from './card-footer'
 

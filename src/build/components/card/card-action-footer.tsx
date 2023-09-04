@@ -1,6 +1,6 @@
 import { Button, Grid, useColorModeValue, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import SVG from 'src/find/SVG'
+import SVG from 'src/process/SVG'
 import Drawer from '../drawer'
 import FilenameModal from '../modals/filename-modal'
 import ImageModal from '../modals/image-modal'

@@ -1,4 +1,4 @@
-import SVG from 'src/find/SVG'
+import SVG from 'src/process/SVG'
 
 export function paginateContent(content: SVG[]) {
   const perPage = 100
