@@ -1,7 +1,7 @@
 /**
  * Load the development icon if the extension is running in development mode.
  */
-export default function loadDevIcons() {
+export function loadDevIcons() {
   const isDevMode = !('update_url' in chrome.runtime.getManifest())
 
   if (isDevMode)

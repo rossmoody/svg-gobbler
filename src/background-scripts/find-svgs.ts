@@ -3,13 +3,13 @@
  * include 'svg' somewhere in the string. Must be a single function
  * scope for v3 manifest security.
  */
-function findSVGs() {
+export function findSVGs() {
   /**
    * Background image urls must be parsed in the DOM window where
    * they are placed. This creates a new img with it set as the src.
    */
   const parseBgImageElements = () => {
-    const imagesWithSrc = [] as string[]
+    const imagesOuterHtml = [] as string[]
     const documentElements = Array.from(document.querySelectorAll('div'))
 
     documentElements.forEach((element) => {
@@ -19,11 +19,11 @@ function findSVGs() {
       if (src.includes('svg')) {
         const image = new Image()
         image.src = src
-        imagesWithSrc.push(image.outerHTML)
+        imagesOuterHtml.push(image.outerHTML)
       }
     })
 
-    return imagesWithSrc
+    return imagesOuterHtml
   }
 
   type TagNameMap = keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
@@ -48,5 +48,3 @@ function findSVGs() {
     ]),
   ]
 }
-
-export default findSVGs
