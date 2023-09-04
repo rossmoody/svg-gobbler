@@ -1,4 +1,4 @@
-import SVG from '../find/SVG'
+import SVG from '../process/SVG'
 
 /**
  * The data property that gets leveraged from the Chrome message

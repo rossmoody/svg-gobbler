@@ -1,6 +1,6 @@
 import { Box, SimpleGrid } from '@chakra-ui/react'
 import React from 'react'
-import SVG from 'src/find/SVG'
+import SVG from 'src/process/SVG'
 import loc from '../utils/localization'
 import Body from './card-footer-body'
 import Subhead from './card-footer-subhead'
