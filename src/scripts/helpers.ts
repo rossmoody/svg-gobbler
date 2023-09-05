@@ -1,12 +1,13 @@
 type ExecuteScript = <T>(tabId: number, func: () => T) => Promise<T>
 
 /**
- * Helper function for executing scripts in the active tab
+ * Helper function for executing scripts in the active tab. Returns the result
+ * of the callback function.
  */
-export const executeScript: ExecuteScript = async (tabId, func) => {
+export const executeScript: ExecuteScript = async (tabId, callBack) => {
   const result = await chrome.scripting.executeScript({
     target: { tabId },
-    func,
+    func: callBack,
   })
 
   return result[0].result
