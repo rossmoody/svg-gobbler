@@ -1,7 +1,7 @@
 /**
  * Returns an array of unique element strings that
- * include 'svg' somewhere in the string. Must be a single function
- * scope for v3 manifest security.
+ * include 'svg' somewhere in the string.
+ * Must be a single function scope for v3 manifest security.
  */
 export function findSVGs() {
   /**

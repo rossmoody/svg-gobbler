@@ -12,8 +12,7 @@ async function processElements(strings: string[], location: string) {
       .map((svg) => svg.fetchSvgContent()),
   )
     .then((svgs) => svgs.filter((svg) => svg.isValid))
-    .catch((error) => {
-      console.error(error)
+    .catch(() => {
       return [] as SVG[]
     })
 

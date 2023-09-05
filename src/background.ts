@@ -1,11 +1,5 @@
-import {
-  handleSystemPage,
-  handleWebPage,
-  loadDevIcons,
-  loadWelcomeScreen,
-} from './background/index'
+import { launchExtension, loadDevIcons, loadWelcomeScreen } from './scripts'
 
-handleSystemPage()
-handleWebPage()
+launchExtension()
 loadWelcomeScreen()
 loadDevIcons()
