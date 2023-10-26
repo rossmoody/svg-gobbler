@@ -1,4 +1,5 @@
-import { launchSvgGobbler, setExtensionIcons } from './scripts'
+import * as init from './scripts'
 
-setExtensionIcons()
-launchSvgGobbler()
+init.setExtensionIcons()
+init.launchSvgGobbler()
+init.launchOnboardingExperience()

@@ -1,3 +1,5 @@
+import { createNewTab } from './utils'
+
 /**
  * Initializes SVG Gobbler conditionally based on the type of page the user is
  * currently on. Responsible for getting data from the active tab and sending
@@ -11,9 +13,8 @@ export function launchSvgGobbler() {
     }
 
     try {
-      // Create a new tab with the SVG Gobbler page
       const tab = await createNewTab()
-      chrome.tabs.sendMessage(tab.id!, { type: 'SVG_GOBBLER_INIT' })
+      chrome.tabs.sendMessage(tab.id!, { data: 'foo' })
     } catch (error) {
       console.log('Error launching SVG Gobbler', error)
     }
@@ -21,25 +22,12 @@ export function launchSvgGobbler() {
 }
 
 /**
- * Awaits the loading of a newly created tab and return the tab information.
- * @param url The url to open relative to the extension. Defaults to the index page.
+ * If the extension is installed for the first time, open the onboarding page.
  */
-function createNewTab(url: string = './index.html'): Promise<chrome.tabs.Tab> {
-  return new Promise((resolve) => {
-    chrome.tabs.create({ url, active: true }, (tab) => {
-      const listener = (updatedTabId, changeInfo, updatedTab) => {
-        if (
-          tab.id &&
-          updatedTabId === tab.id &&
-          changeInfo.status === 'complete' &&
-          updatedTab.status === 'complete'
-        ) {
-          chrome.tabs.onUpdated.removeListener(listener)
-          resolve(updatedTab)
-        }
-      }
-
-      chrome.tabs.onUpdated.addListener(listener)
-    })
+export function launchOnboardingExperience() {
+  chrome.runtime.onInstalled.addListener((details) => {
+    if (details.reason === 'install') {
+      createNewTab('onboarding.html')
+    }
   })
 }
