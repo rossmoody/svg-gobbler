@@ -6,19 +6,18 @@
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
   "permissions": ["activeTab", "scripting"],
   "background": { "service_worker": "background.ts" },
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": {
-      "16": "assets/prod/16.png",
-      "24": "assets/prod/24.png",
-      "32": "assets/prod/32.png"
-    }
-  },
+  "action": { "default_popup": "index.html" },
   "icons": {
     "16": "assets/prod/16.png",
     "32": "assets/prod/32.png",
     "48": "assets/prod/48.png",
     "128": "assets/prod/128.png"
   },
-  "host_permissions": []
+  "host_permissions": [],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/prod/*.png", "assets/dev/*.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
