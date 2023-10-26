@@ -5,6 +5,15 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  chrome.runtime.onMessage.addListener(function (
+    message,
+    sender,
+    sendResponse,
+  ) {
+    console.log({ message, sender, note: 'This is in app' })
+    sendResponse('')
+  })
+
   return (
     <>
       <div>

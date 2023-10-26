@@ -1,3 +1,4 @@
-import { setExtensionIcons } from './scripts'
+import { launchSvgGobbler, setExtensionIcons } from './scripts'
 
 setExtensionIcons()
+launchSvgGobbler()
