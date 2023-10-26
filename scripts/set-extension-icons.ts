@@ -18,6 +18,11 @@ export function setExtensionIcons() {
         '16': 'assets/prod/16.png',
         '24': 'assets/prod/24.png',
         '32': 'assets/prod/32.png',
+        '48': 'assets/prod/48.png',
+        '64': 'assets/prod/64.png',
+        '128': 'assets/prod/128.png',
+        '256': 'assets/prod/256.png',
+        '300': 'assets/prod/300.png',
       },
     })
   }
