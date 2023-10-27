@@ -17,8 +17,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        index: 'pages/index.html',
-        onboarding: 'pages/onboarding.html',
+        index: 'index.html',
+        onboarding: 'onboarding.html',
       },
     },
   },

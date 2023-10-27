@@ -1,4 +1,4 @@
-import { createNewTab } from './utils'
+import * as utils from './utils'
 
 /**
  * Initializes SVG Gobbler conditionally based on the type of page the user is
@@ -9,13 +9,19 @@ export function launchSvgGobbler() {
   chrome.action.onClicked.addListener(async ({ url }) => {
     if (url?.includes('chrome://')) {
       // It's a systems or settings page. Launch empty
-      return chrome.tabs.create({ url: './index.html', active: true })
+      return utils.createNewTab()
     }
 
     try {
-      const tab = await createNewTab()
-      chrome.tabs.sendMessage(tab.id!, { data: 'foo' })
+      // Gather data from the active tab
+      // const id = await utils.getActiveTab()
+      // const url = await utils.executeScript(id, () => document.location.host)
+
+      // Create a new tab and send the data to the content script
+      const tab = await utils.createNewTab()
+      chrome.tabs.sendMessage(tab.id!, { url: 'test' })
     } catch (error) {
+      // TODO: Launch empty page with toast error message
       console.log('Error launching SVG Gobbler', error)
     }
   })
@@ -27,7 +33,7 @@ export function launchSvgGobbler() {
 export function launchOnboardingExperience() {
   chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
-      createNewTab('onboarding.html')
+      utils.createNewTab('onboarding.html')
     }
   })
 }
