@@ -1,16 +1,13 @@
-import { useEffect } from 'react'
 import svgFactory from 'scripts/svg-factory/svg-factory'
 import type { BackgroundMessage } from 'types'
 import logo from '../assets/prod/128.png'
 import './App.css'
 
 function App() {
-  useEffect(() => {
-    chrome.runtime.sendMessage('gobble', (response: BackgroundMessage) => {
-      const data = svgFactory.process(response.data)
-      console.log(data)
-    })
-  }, [])
+  chrome.runtime.sendMessage('gobble', (response: BackgroundMessage) => {
+    const data = svgFactory.process(response.data)
+    console.log(data)
+  })
 
   return (
     <>

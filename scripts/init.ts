@@ -29,8 +29,9 @@ class Init {
 
       // Open the SVG Gobbler page
       await Chrome.createNewTab()
-      chrome.runtime.onMessage.addListener((_, __, sendResponse) => {
+      chrome.runtime.onMessage.addListener(function listener(_, __, sendResponse) {
         sendResponse({ data })
+        chrome.runtime.onMessage.removeListener(listener)
       })
     }
 
