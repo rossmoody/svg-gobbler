@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import svgFactory from 'scripts/svg-factory/svg-factory'
 import type { BackgroundMessage, ContentMessage } from 'types'
 import logo from '../assets/prod/128.png'
 import './App.css'
@@ -10,8 +11,9 @@ function App() {
     chrome.runtime.sendMessage<ContentMessage>(
       { page: 'default' },
       (response: BackgroundMessage) => {
-        setResult(JSON.stringify(response))
-        console.log(response)
+        const data = svgFactory.process(response.data)
+        console.log(data)
+        setResult(JSON.stringify(data))
       },
     )
   }, [])

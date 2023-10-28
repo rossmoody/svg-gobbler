@@ -3,12 +3,12 @@ import { PageData } from 'types'
 /**
  * Gathers all relevant SVG data from the active tab. Must be isolated self containing
  * function to make Chrome Manifest V3 security happy.
- * @returns {PageData}
  */
 export function gatherPageData() {
   /**
    * Background image urls must be parsed in the DOM window where
-   * they are placed. This creates a new img with it set as the src.
+   * they are placed. Chrome strips them in the message.
+   * This creates a new img with it set as the src.
    */
   const parseBgImageElements = () => {
     const extractSvgUrl = (backgroundImage: string) => {

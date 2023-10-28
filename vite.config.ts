@@ -26,4 +26,9 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      scripts: '/scripts',
+    },
+  },
 })
