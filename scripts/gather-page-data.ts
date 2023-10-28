@@ -8,7 +8,7 @@ export function gatherPageData() {
   /**
    * Background image urls must be parsed in the DOM window where
    * they are placed. Chrome strips them in the message.
-   * This creates a new img with it set as the src.
+   * This creates a new img with it set as the src to strip any security considerations.
    */
   const parseBgImageElements = () => {
     const extractSvgUrl = (backgroundImage: string) => {
@@ -16,6 +16,11 @@ export function gatherPageData() {
       return match ? match[1] : null
     }
 
+    /**
+     * This intentionally only checks divs. It could check images for background images
+     * but it's so much more likely that it would be src that we don't want to waste
+     * the time checking.
+     */
     return Array.from(document.querySelectorAll('div'))
       .map((element) => {
         const style = window.getComputedStyle(element)
@@ -40,6 +45,8 @@ export function gatherPageData() {
       .filter(({ outerHTML }) => outerHTML.includes('svg') || outerHTML.includes('<g '))
       .map((element) => element.outerHTML)
   }
+
+  // TODO: Handle object, embed, and iframe tags
 
   const data = [
     ...new Set([

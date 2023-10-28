@@ -6,18 +6,6 @@ import { Svg } from './svg'
 export class Inline extends Svg {
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
-    this.asElement = this.parseFromStringXmlMime()
-  }
-
-  /**
-   * Rebuild the SVG element from the original string
-   */
-  private parseFromStringXmlMime() {
-    const parser = new DOMParser()
-    const { documentElement } = parser.parseFromString(this.originalString, 'image/svg+xml')
-
-    if (!documentElement.querySelector('parsererror')) {
-      return documentElement
-    }
+    this.asElement = this.parseFromString('image/svg+xml')
   }
 }

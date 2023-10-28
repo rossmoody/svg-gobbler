@@ -1,12 +1,7 @@
 /**
  * The message sent from the Content script to the Background script.
  */
-export type ContentMessage = {
-  /**
-   * The type of page the message is originating from.
-   */
-  page: 'default' | 'system'
-}
+export type ContentMessage = {}
 
 /**
  * The message sent from the Background script to the Content script.
