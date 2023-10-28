@@ -1,5 +1,6 @@
 import { PageData } from 'types'
 import { GElement } from './g-element'
+import { Image } from './image'
 import { Inline } from './inline'
 import { Svg } from './svg'
 import { Symbol } from './symbol'
@@ -14,9 +15,9 @@ class SvgFactory {
   process(pageData: PageData) {
     const processedData = [] as Svg[]
 
-    pageData.data.map((item) => {
+    pageData.data.forEach((item) => {
       switch (true) {
-        case item.includes('svg'): {
+        case item.includes('<svg '): {
           // Ensure it is an inline SVG and not a sprite via <use>
           // If it is a sprite, it will be processed as a symbol or g element
           if (!item.includes('<use ')) {
@@ -32,6 +33,11 @@ class SvgFactory {
 
         case item.includes('<g '): {
           processedData.push(new GElement(item, pageData.origin))
+          break
+        }
+
+        case item.includes('<img '): {
+          processedData.push(new Image(item, pageData.origin))
           break
         }
       }

@@ -2,7 +2,7 @@ export class Svg {
   /**
    * The original string of the SVG element in the DOM
    */
-  readonly originalString: string
+  public originalString: string
 
   /**
    * The document.location.origin of the SVG element in the DOM

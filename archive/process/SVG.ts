@@ -81,10 +81,7 @@ export default class SVG {
   }
 
   private buildEmptySvgElement() {
-    const svgElement = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'svg',
-    )
+    const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     svgElement.setAttributeNS(
       'http://www.w3.org/2000/xmlns/',
       'xmlns',
@@ -94,19 +91,13 @@ export default class SVG {
   }
 
   private buildEmptyUseElement(id: string) {
-    const useElement = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'use',
-    )
+    const useElement = document.createElementNS('http://www.w3.org/2000/svg', 'use')
     useElement.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#${id}`)
     return useElement
   }
 
   private buildEmptySymbolElement(id: string) {
-    const symbolElement = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'symbol',
-    )
+    const symbolElement = document.createElementNS('http://www.w3.org/2000/svg', 'symbol')
     symbolElement.id = id
     return symbolElement
   }
@@ -167,10 +158,7 @@ export default class SVG {
   }
 
   private parseFromStringTextMime() {
-    const element = new DOMParser().parseFromString(
-      this.htmlSource,
-      'text/html',
-    )
+    const element = new DOMParser().parseFromString(this.htmlSource, 'text/html')
 
     const hasParsingError = Boolean(element.querySelector('parsererror'))
     const hasFirstElementChild = Boolean(element.body.firstElementChild)
@@ -200,15 +188,11 @@ export default class SVG {
     const dataSrc = this.element.getAttribute('data-src')
 
     if (imgSrc?.includes('.svg')) {
-      return imgSrc?.startsWith('http')
-        ? imgSrc
-        : this.location.replace(/\/$/, '') + imgSrc
+      return imgSrc?.startsWith('http') ? imgSrc : this.location.replace(/\/$/, '') + imgSrc
     }
 
     if (dataSrc?.includes('.svg')) {
-      return dataSrc?.startsWith('http')
-        ? dataSrc
-        : this.location.replace(/\/$/, '') + dataSrc
+      return dataSrc?.startsWith('http') ? dataSrc : this.location.replace(/\/$/, '') + dataSrc
     }
 
     return ''

@@ -18,8 +18,8 @@ export function gatherPageData() {
 
     /**
      * This intentionally only checks divs. It could check images for background images
-     * but it's so much more likely that it would be src that we don't want to waste
-     * the time checking.
+     * but it's so much more likely that it would be src. Recreates every background image
+     * url to be an Image with a src for processing.
      */
     return Array.from(document.querySelectorAll('div'))
       .map((element) => {
