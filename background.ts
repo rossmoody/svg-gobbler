@@ -1,5 +1,5 @@
-import * as init from './scripts'
+import Init from './scripts/init'
 
-init.setExtensionIcons()
-init.launchSvgGobbler()
-init.launchOnboardingExperience()
+Init.launchOnboardingExperience()
+Init.setExtensionIcons()
+Init.launchSvgGobbler()

@@ -20,6 +20,10 @@ export default defineConfig({
         index: 'index.html',
         onboarding: 'onboarding.html',
       },
+      onwarn: (warning, warn) => {
+        if (warning.code === 'FILE_NAME_CONFLICT') return
+        warn(warning)
+      },
     },
   },
 })
