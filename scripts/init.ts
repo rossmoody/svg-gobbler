@@ -1,4 +1,4 @@
-import { PageData } from '../types'
+import type { PageData } from 'types'
 import Chrome from './chrome-utils'
 import { gatherPageData } from './gather-page-data'
 
@@ -31,7 +31,7 @@ class Init {
 
       // Open the SVG Gobbler page
       await Chrome.createNewTab()
-      chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      chrome.runtime.onMessage.addListener((_, __, sendResponse) => {
         sendResponse({ data })
       })
     }

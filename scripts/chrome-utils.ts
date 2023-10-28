@@ -6,7 +6,11 @@ class Chrome {
   createNewTab(url = 'index.html'): Promise<chrome.tabs.Tab> {
     return new Promise((resolve) => {
       chrome.tabs.create({ url, active: true }, (tab) => {
-        const listener = (updatedTabId, changeInfo, updatedTab) => {
+        const listener = (
+          updatedTabId: number,
+          changeInfo: chrome.tabs.TabChangeInfo,
+          updatedTab: chrome.tabs.Tab,
+        ) => {
           if (
             tab.id &&
             updatedTabId === tab.id &&

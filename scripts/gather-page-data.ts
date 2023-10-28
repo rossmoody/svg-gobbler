@@ -1,4 +1,4 @@
-import { PageData } from '../types'
+import { PageData } from 'types'
 
 /**
  * Gathers all relevant SVG data from the active tab. Must be isolated self containing
@@ -11,7 +11,7 @@ export function gatherPageData() {
    * they are placed. This creates a new img with it set as the src.
    */
   const parseBgImageElements = () => {
-    const extractSvgUrl = (backgroundImage) => {
+    const extractSvgUrl = (backgroundImage: string) => {
       const match = /url\("?(.*\.svg)"?\)/.exec(backgroundImage)
       return match ? match[1] : null
     }

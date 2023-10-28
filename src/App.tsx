@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import type { BackgroundMessage, ContentMessage } from 'types'
 import logo from '../assets/prod/128.png'
-import { BackgroundMessage, ContentMessage } from '../types'
 import './App.css'
 
 function App() {

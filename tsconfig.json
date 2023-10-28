@@ -8,7 +8,8 @@
     "baseUrl": "",
     "paths": {
       "src/*": ["src/*"],
-      "scripts/*": ["scripts/*"]
+      "scripts/*": ["scripts/*"],
+      "types": ["types.ts"]
     },
 
     /* Bundler mode */
@@ -25,6 +26,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "scripts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
