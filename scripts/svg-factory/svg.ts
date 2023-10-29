@@ -1,3 +1,6 @@
+/**
+ * The root SVG class. This is the base class for all SVG types.
+ */
 export class Svg {
   /**
    * The original string of the SVG element in the DOM

@@ -39,7 +39,6 @@ class SvgFactory {
         if (item instanceof Image) {
           return item.fetchSvgContent()
         }
-
         return item
       }),
     ).catch(() => {
