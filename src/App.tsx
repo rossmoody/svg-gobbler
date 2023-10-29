@@ -1,26 +1,13 @@
 import svgFactory from 'scripts/svg-factory/svg-factory'
 import type { BackgroundMessage } from 'types'
-import logo from '../assets/prod/128.png'
-import './App.css'
+import { Dashboard } from './layout/dashboard'
 
 function App() {
   chrome.runtime.sendMessage('gobble', (response: BackgroundMessage) => {
     svgFactory.process(response.data).then(console.log)
   })
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank"></a>
-        <a href="https://react.dev" target="_blank">
-          <img src={logo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card"></div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
-  )
+  return <Dashboard />
 }
 
 export default App
