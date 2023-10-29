@@ -5,8 +5,7 @@ import './App.css'
 
 function App() {
   chrome.runtime.sendMessage('gobble', (response: BackgroundMessage) => {
-    const data = svgFactory.process(response.data)
-    console.log(data)
+    svgFactory.process(response.data).then(console.log)
   })
 
   return (

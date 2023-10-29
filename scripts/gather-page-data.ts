@@ -12,6 +12,7 @@ export function gatherPageData() {
    */
   const parseBgImageElements = () => {
     const extractSvgUrl = (backgroundImage: string) => {
+      // base64, dataURI, or url all have svg in them
       const match = /url\("?(.*\.svg)"?\)/.exec(backgroundImage)
       return match ? match[1] : null
     }

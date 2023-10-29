@@ -2,7 +2,6 @@ import { PageData } from 'types'
 import { GElement } from './g-element'
 import { Image } from './image'
 import { Inline } from './inline'
-import { Svg } from './svg'
 import { Symbol } from './symbol'
 
 /**
@@ -12,38 +11,40 @@ class SvgFactory {
   /**
    * Process the page data and return an array of SVG objects.
    */
-  process(pageData: PageData) {
-    const processedData = [] as Svg[]
-
-    pageData.data.forEach((item) => {
-      switch (true) {
-        case item.includes('<svg '): {
-          // Ensure it is an inline SVG and not a sprite via <use>
-          // If it is a sprite, it will be processed as a symbol or g element
-          if (!item.includes('<use ')) {
-            processedData.push(new Inline(item, pageData.origin))
+  async process(message: PageData) {
+    const processedData = message.data
+      .map((item) => {
+        switch (true) {
+          case item.includes('<svg ') && !item.includes('<use '): {
+            return new Inline(item, message.origin)
           }
-          break
+
+          case item.includes('<symbol '): {
+            return new Symbol(item, message.origin)
+          }
+
+          case item.includes('<g '): {
+            return new GElement(item, message.origin)
+          }
+
+          case item.includes('<img '): {
+            return new Image(item, message.origin)
+          }
+        }
+      })
+      .filter((item) => item?.isValid)
+
+    return Promise.all(
+      processedData.map((item) => {
+        if (item instanceof Image) {
+          return item.fetchSvgContent()
         }
 
-        case item.includes('<symbol '): {
-          processedData.push(new Symbol(item, pageData.origin))
-          break
-        }
-
-        case item.includes('<g '): {
-          processedData.push(new GElement(item, pageData.origin))
-          break
-        }
-
-        case item.includes('<img '): {
-          processedData.push(new Image(item, pageData.origin))
-          break
-        }
-      }
+        return item
+      }),
+    ).catch(() => {
+      return processedData
     })
-
-    return processedData.filter((item) => item.isValid)
   }
 }
 

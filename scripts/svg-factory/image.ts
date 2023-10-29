@@ -4,7 +4,8 @@ export class Image extends Svg {
   /**
    * The absolute URL of the image source. If this is present, the SVG
    * is an image element with an external source. It will require a fetch
-   * to get the SVG source.
+   * to get the SVG source. If it fails, the image is retained with the cors
+   * src attribute.
    */
   absoluteImageUrl?: string
 
@@ -27,20 +28,17 @@ export class Image extends Svg {
 
     switch (true) {
       case src.includes('data:image/svg+xml;base64'): {
-        const base64RegEx = /(?<=,)(.*)(?=")/
-        const base64String = base64RegEx.exec(src)
-        if (!base64String) break
-
-        this.originalString = this.base64DecodeUnicode(base64String[0])
+        const base64Index = src.indexOf(',') + 1
+        const base64String = src.slice(base64Index, src.length - 1) // -1 to exclude the trailing quote
+        this.originalString = this.base64DecodeUnicode(base64String)
         this.asElement = this.parseFromString('image/svg+xml')
         break
       }
 
       case src.includes('data:image/svg+xml;utf8'): {
-        const regex = /(?=<svg)(.*\n?)(?<=<\/svg>)/
-        const svgString = regex.exec(src)
-        if (!svgString) break
-
+        const svgStart = src.indexOf('<svg')
+        const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
+        const svgString = src.slice(svgStart, svgEnd)
         this.originalString = svgString[0]
         this.asElement = this.parseFromString('image/svg+xml')
         break
@@ -48,16 +46,6 @@ export class Image extends Svg {
 
       case src.includes('.svg'): {
         this.absoluteImageUrl = this.getAbsoluteImageSrc(src)
-
-        // try {
-        //   const response = await fetch(absoluteImageSrc)
-        //   const text = await response.text()
-
-        //   this.originalString = text
-        //   this.asElement = this.parseFromString('image/svg+xml')
-        // } catch {
-        //   console.log(`Failed to fetch ${absoluteImageSrc}`)
-        // }
         break
       }
     }
@@ -105,5 +93,23 @@ export class Image extends Svg {
     }
 
     return element.body.firstElementChild as Element
+  }
+
+  /**
+   *
+   */
+  async fetchSvgContent() {
+    if (!this.absoluteImageUrl) return this
+
+    try {
+      const response = await fetch(this.absoluteImageUrl, { mode: 'cors' })
+      const text = await response.text()
+      this.originalString = text
+      this.asElement = this.parseFromString('image/svg+xml')
+      return this
+    } catch (error) {
+      console.log(error)
+      return this
+    }
   }
 }
