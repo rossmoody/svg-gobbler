@@ -1,5 +1,6 @@
 import { crx } from '@crxjs/vite-plugin'
 import react from '@vitejs/plugin-react-swc'
+import path from 'path'
 import { defineConfig } from 'vite'
 import manifest from './manifest.json'
 
@@ -28,7 +29,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      scripts: '/scripts',
+      scripts: path.resolve(__dirname, 'scripts'),
+      src: path.resolve(__dirname, 'src'),
     },
   },
 })
