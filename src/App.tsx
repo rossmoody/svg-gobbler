@@ -1,5 +1,6 @@
 import svgFactory from 'scripts/svg-factory/svg-factory'
 import type { BackgroundMessage } from 'types'
+import { EmptyState } from './components/empty-state'
 import { Dashboard } from './layout/dashboard'
 import { Providers } from './providers'
 
@@ -11,7 +12,9 @@ export default function App() {
 
   return (
     <Providers>
-      <Dashboard></Dashboard>
+      <Dashboard>
+        <EmptyState />
+      </Dashboard>
     </Providers>
   )
 }
