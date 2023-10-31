@@ -1,13 +1,15 @@
-import { Bars3Icon, BellIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { IconButton } from 'src/components'
 import Tooltip from 'src/components/tooltip'
+import { useColorMode } from 'src/hooks'
 import { useMainPanel } from 'src/providers/mainpanel'
 import { useSidebar } from 'src/providers/sidebar'
 
 export const TopBar = () => {
   const { dispatch: sidebarDispatch } = useSidebar()
   const { dispatch: mainPanelDispatch, state: mainPanelState } = useMainPanel()
+  const { colorMode, toggleColorMode } = useColorMode()
 
   function openSidebar() {
     sidebarDispatch({ type: 'set-open', payload: true })
@@ -28,12 +30,17 @@ export const TopBar = () => {
       <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
 
       <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        <div className="flex items-center gap-x-4 lg:gap-x-6 ml-auto">
+        <div className="flex items-center gap-x-2 lg:gap-x-4 ml-auto">
           <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
             <span className="sr-only">View notifications</span>
             <BellIcon className="h-6 w-6" aria-hidden="true" />
           </button>
           <div className="h-6 w-px bg-gray-200" aria-hidden="true" />
+          <Tooltip content="Color mode">
+            <IconButton variant="ghost" onClick={toggleColorMode}>
+              {colorMode === 'dark' ? <MoonIcon height={24} /> : <SunIcon height={24} />}
+            </IconButton>
+          </Tooltip>
           <Tooltip content="Export panel" side="left">
             <IconButton variant="ghost" onClick={toggleMainPanel}>
               <Bars3Icon

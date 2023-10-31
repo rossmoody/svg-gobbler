@@ -11,7 +11,7 @@ type TooltipProps = {
    * The side the tooltip will render in relation to the trigger element.
    * Defaults to 'bottom'
    */
-  side: 'top' | 'right' | 'bottom' | 'left'
+  side?: 'top' | 'right' | 'bottom' | 'left'
 }
 
 export default ({ children, content, side = 'bottom' }: PropsWithChildren<TooltipProps>) => (

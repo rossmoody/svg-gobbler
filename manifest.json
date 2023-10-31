@@ -4,7 +4,7 @@
   "description": "Download and optimize icons, logos, and vector SVGs.",
   "version": "5.0.0",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "background": { "service_worker": "background.ts" },
   "action": { "default_title": "SVG Gobbler" },
   "icons": {
