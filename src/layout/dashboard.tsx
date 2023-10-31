@@ -13,7 +13,7 @@ export function Dashboard({ children }: PropsWithChildren) {
         <div className="flex">
           <div className="flex-1">
             <Mainbar />
-            <main className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100vh-theme(space.28))]">
+            <main className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100dvh-theme(space.28))]">
               {children}
             </main>
           </div>
