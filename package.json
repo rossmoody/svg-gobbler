@@ -15,6 +15,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@types/node": "^20.8.9",
     "clsx": "^2.0.0",
     "nanoid": "^5.0.2",

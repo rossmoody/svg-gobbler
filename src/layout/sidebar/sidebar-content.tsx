@@ -27,7 +27,7 @@ const teams = [
 
 export const SidebarContent = () => {
   return (
-    <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+    <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
       <div className="flex h-16 shrink-0 items-center mt-2">
         <Logo className="h-8 w-auto" />
       </div>
@@ -41,16 +41,14 @@ export const SidebarContent = () => {
                     href={item.href}
                     className={clsx(
                       item.current
-                        ? 'bg-gray-50 text-indigo-600'
-                        : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                        ? 'bg-gray-50 text-red-600'
+                        : 'text-gray-700 hover:text-red-600 hover:bg-gray-50',
                       'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                     )}
                   >
                     <item.icon
                       className={clsx(
-                        item.current
-                          ? 'text-indigo-600'
-                          : 'text-gray-400 group-hover:text-indigo-600',
+                        item.current ? 'text-red-600' : 'text-gray-400 group-hover:text-red-600',
                         'h-6 w-6 shrink-0',
                       )}
                       aria-hidden="true"
@@ -70,16 +68,16 @@ export const SidebarContent = () => {
                     href={team.href}
                     className={clsx(
                       team.current
-                        ? 'bg-gray-50 text-indigo-600'
-                        : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                        ? 'bg-gray-50 text-red-600'
+                        : 'text-gray-700 hover:text-red-600 hover:bg-gray-50',
                       'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                     )}
                   >
                     <span
                       className={clsx(
                         team.current
-                          ? 'text-indigo-600 border-indigo-600'
-                          : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
+                          ? 'text-red-600 border-red-600'
+                          : 'text-gray-400 border-gray-200 group-hover:border-red-600 group-hover:text-red-600',
                         'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white',
                       )}
                     >
@@ -92,9 +90,9 @@ export const SidebarContent = () => {
             </ul>
           </li>
           <li className="mt-auto">
-            <button className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
+            <button className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-red-600">
               <Cog6ToothIcon
-                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-red-600"
                 aria-hidden="true"
               />
               Settings

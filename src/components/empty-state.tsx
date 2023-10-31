@@ -22,7 +22,7 @@ export function EmptyState() {
         </svg>
         <h3 className="mt-2 text-sm font-semibold text-gray-900">No SVGs found</h3>
         <p className="mt-1 text-sm text-gray-500">
-          Upload or drag SVGs into this area to manipulate or optimize
+          Select or drag SVGs into this area to upload into this collection
         </p>
         <div className="mt-6 flex justify-center">
           <Button size="lg">

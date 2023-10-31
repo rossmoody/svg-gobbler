@@ -1,11 +1,9 @@
-import { ButtonHTMLAttributes, forwardRef } from 'react'
+import { forwardRef } from 'react'
+import { ButtonProps } from '.'
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'primary' | 'secondary' | 'ghost'
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-}
+type IconButtonProps = ButtonProps
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   const { variant = 'primary', size = 'md', className, ...rest } = props
 
   const baseStyles =
@@ -18,11 +16,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
   }
 
   const sizeStyles = {
-    xs: 'px-2 py-1 text-xs',
-    sm: 'px-2 py-1 text-sm',
-    md: 'px-2.5 py-1.5 text-sm',
-    lg: 'px-3 py-2 text-sm',
-    xl: 'px-3.5 py-2.5 text-sm',
+    xs: 'px-1 py-1 text-xs',
+    sm: 'px-1 py-1 text-sm',
+    md: 'px-1.5 py-1.5 text-sm',
+    lg: 'px-2 py-2 text-sm',
+    xl: 'px-2.5 py-2.5 text-sm',
   }
 
   const combinedClassName = `${className} ${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`
