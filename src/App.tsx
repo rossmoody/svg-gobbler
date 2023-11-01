@@ -1,6 +1,8 @@
-import { RouterProvider, createMemoryRouter, defer } from 'react-router-dom'
+import { RouterProvider, createMemoryRouter } from 'react-router-dom'
+import { ErrorState } from 'src/components'
+import { Collection } from 'src/routes/collection'
+import { loader as collectionsLoader } from 'src/routes/collection/loader'
 import { Root } from 'src/routes/root'
-import { Collection } from './routes/collection'
 
 export default function App() {
   // if (chrome !== undefined)
@@ -16,13 +18,8 @@ export default function App() {
         {
           path: 'collection/:id',
           element: <Collection />,
-          errorElement: <div>Oops! There was an error.</div>,
-          loader: async ({ params }) => {
-            console.log({ params })
-            return defer({
-              foo: new Promise((resolve) => setTimeout(() => resolve([]), 4000)),
-            })
-          },
+          errorElement: <ErrorState />,
+          loader: collectionsLoader,
         },
       ],
     },

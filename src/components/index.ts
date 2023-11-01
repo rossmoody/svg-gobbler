@@ -1,5 +1,6 @@
 export * from './button.tsx'
 export * from './empty-state.tsx'
+export * from './error-state.tsx'
 export * from './icon-button.tsx'
 export * from './logo.tsx'
 export * from './tooltip.tsx'
