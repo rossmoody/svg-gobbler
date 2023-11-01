@@ -8,7 +8,7 @@ export function Dashboard({ children }: PropsWithChildren) {
   return (
     <>
       <Sidebar />
-      <div className="lg:pl-72 transition-all relative">
+      <div className="lg:pl-72 transition-all relative overflow-hidden">
         <TopBar />
         <div className="flex">
           <div className="flex-1">

@@ -8,11 +8,12 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 import { Logo } from 'src/components'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
+  { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
+  { name: 'Team', href: '/collection/1234', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
@@ -37,8 +38,8 @@ export const SidebarContent = () => {
             <ul role="list" className="-mx-2 space-y-1">
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className={clsx(
                       item.current
                         ? 'bg-gray-50 text-red-600'
@@ -54,7 +55,7 @@ export const SidebarContent = () => {
                       aria-hidden="true"
                     />
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
