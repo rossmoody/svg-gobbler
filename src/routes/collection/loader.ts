@@ -1,9 +1,15 @@
 import { LoaderFunctionArgs, defer } from 'react-router-dom'
+import svgFactory from 'scripts/svg-factory/svg-factory'
+import { PageData } from 'types'
 
-export async function loader({ params }: LoaderFunctionArgs) {
-  console.log(params)
+type CollectionParams = {
+  id: string
+}
+
+export async function loader({ params }: LoaderFunctionArgs<CollectionParams>) {
+  const [pageData] = Object.values(await chrome.storage.local.get(params.id)) as [PageData]
 
   return defer({
-    collection: new Promise((resolve) => setTimeout(() => resolve([]), 4000)),
+    data: svgFactory.process(pageData),
   })
 }

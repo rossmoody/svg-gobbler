@@ -1,9 +1,4 @@
 /**
- * The message sent from the Content script to the Background script.
- */
-export type ContentMessage = {}
-
-/**
  * The message sent from the Background script to the Content script.
  */
 export type BackgroundMessage = {
@@ -31,4 +26,15 @@ export type PageData = {
    * content script. Especially related to image sources and cors restrictions.
    */
   origin: string
+}
+
+export type Collection = {
+  /**
+   * The id of the collection.
+   */
+  id: string
+  /**
+   * The name of the collection.
+   */
+  name: string
 }

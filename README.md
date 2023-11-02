@@ -1,11 +1,6 @@
 # 👋 SVG Gobbler
 
 > The Chrome storage can handle roughly 8,000 svgs at 10mb storage limit. Store collections as a Map
-> with the schema:
-
-id: { index: 0, title: 'Dashboard', isFavorite: true }
-
-Page data should be stored
 
 Download this extension on the
 [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
