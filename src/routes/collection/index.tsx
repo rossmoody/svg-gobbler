@@ -20,7 +20,7 @@ export const Collection = () => {
           }
 
           return (
-            <ul className="list-disc whitespace-break-spaces">
+            <ul className="list-disc break-all">
               {resolvedData.map((svg, i) => (
                 <li key={svg.originalString + i}>{svg.originalString}</li>
               ))}

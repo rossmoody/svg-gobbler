@@ -1,7 +1,8 @@
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
-import { NavLink, useLoaderData } from 'react-router-dom'
+import { NavLink, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
 import { IconButton, Logo } from 'src/components'
 import { useSidebar } from 'src/providers'
 import { Collection } from 'types'
@@ -9,13 +10,28 @@ import { Collection } from 'types'
 export const SidebarContent = () => {
   const collections = useLoaderData() as Collection[]
   const { state, dispatch } = useSidebar()
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch({ type: 'set-collections', payload: collections })
   }, [collections, dispatch])
 
   function handleRemoveCollection(collection: Collection) {
-    dispatch({ type: 'remove-collection', payload: collection })
+    const isActiveCollection = pathname.includes(collection.id)
+    const filteredCollections = state.collections.filter(({ id }) => id !== collection.id)
+
+    // If there are no collections left, create an empty one
+    if (filteredCollections.length === 0) {
+      filteredCollections.push({ id: nanoid(), name: 'New Collection' })
+    }
+
+    dispatch({ type: 'set-collections', payload: filteredCollections })
+    chrome.storage.local.set({ collections: filteredCollections })
+
+    if (isActiveCollection) {
+      return navigate(`collection/${filteredCollections[0].id}`)
+    }
   }
 
   return (
@@ -41,14 +57,14 @@ export const SidebarContent = () => {
                     }}
                   >
                     {collection.name}
-                    <IconButton
-                      variant="ghost"
-                      size="xs"
-                      onClick={() => handleRemoveCollection(collection)}
-                    >
-                      <XMarkIcon className="h-3" />
-                    </IconButton>
                   </NavLink>
+                  <IconButton
+                    variant="ghost"
+                    size="xs"
+                    onClick={() => handleRemoveCollection(collection)}
+                  >
+                    <XMarkIcon className="h-3" />
+                  </IconButton>
                 </li>
               ))}
             </ul>

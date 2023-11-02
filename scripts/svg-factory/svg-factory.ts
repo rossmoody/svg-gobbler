@@ -12,6 +12,11 @@ class SvgFactory {
    * Process the page data and return an array of SVG objects.
    */
   async process(message: PageData) {
+    // Guard against empty data
+    if (!message) {
+      return []
+    }
+
     const processedData = message.data
       .map((item) => {
         switch (true) {

@@ -2,10 +2,11 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { ErrorState } from 'src/components'
 import { Collection } from 'src/routes/collection'
 import { loader as collectionsLoader } from 'src/routes/collection/loader'
+import { Dashboard } from 'src/routes/dashboard'
+import { loader as dashboardLoader } from 'src/routes/dashboard/loader'
 import { Details } from 'src/routes/details'
+import { Root } from 'src/routes/root'
 import { loader as rootLoader } from 'src/routes/root/loader'
-import { Dashboard } from './routes/dashboard'
-import { Root } from './routes/root'
 
 export default function App() {
   const router = createMemoryRouter([
@@ -19,10 +20,7 @@ export default function App() {
       path: '/dashboard',
       element: <Dashboard />,
       errorElement: <ErrorState />,
-      loader: async () => {
-        const { collections } = await chrome.storage.local.get('collections')
-        return collections
-      },
+      loader: dashboardLoader,
       children: [
         {
           path: 'collection/:id',
@@ -36,10 +34,6 @@ export default function App() {
       path: '/details/:id',
       element: <Details />,
       errorElement: <ErrorState />,
-      loader: () => {
-        console.log('Details loader called')
-        return null
-      },
     },
   ])
 

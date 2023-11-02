@@ -15,7 +15,6 @@ export type SidebarAction =
   | { type: 'reset' }
   | { type: 'set-open'; payload: boolean }
   | { type: 'set-collections'; payload: Collection[] }
-  | { type: 'remove-collection'; payload: Collection }
 
 export const initSidebarState: SidebarState = {
   isOpen: false,
@@ -24,12 +23,6 @@ export const initSidebarState: SidebarState = {
 
 export const sidebarReducer = (state: SidebarState, action: SidebarAction): SidebarState => {
   switch (action.type) {
-    case 'remove-collection': {
-      const collections = state.collections.filter(({ id }) => id !== action.payload.id)
-      chrome.storage.local.set({ collections })
-      return { ...state, collections }
-    }
-
     case 'set-collections': {
       return { ...state, collections: action.payload }
     }
