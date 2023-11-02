@@ -16,7 +16,9 @@ export const MainPanelButton = () => {
         <Bars3Icon
           height={24}
           className={clsx(mainPanelState.isOpen ? '-rotate-90' : 'rotate-0', 'transition-all')}
+          aria-hidden="true"
         />
+        <span className="sr-only">Toggle export panel view</span>
       </IconButton>
     </Tooltip>
   )

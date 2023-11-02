@@ -1,19 +1,8 @@
 import clsx from 'clsx'
-import { useEffect } from 'react'
-import { useMainPanel } from 'src/providers/mainpanel'
+import { useMainPanel } from 'src/providers'
 
 export const Mainpanel = () => {
-  const { state, dispatch } = useMainPanel()
-
-  useEffect(() => {
-    const listener = (event: KeyboardEvent) => {
-      if (event.key === 'k') {
-        dispatch({ type: 'set-open', payload: !state.isOpen })
-      }
-    }
-    document.addEventListener('keydown', listener)
-    return () => document.removeEventListener('keydown', listener)
-  }, [dispatch, state.isOpen])
+  const { state } = useMainPanel()
 
   return (
     <aside
