@@ -1,22 +1,13 @@
-import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
-import clsx from 'clsx'
-import { IconButton } from 'src/components'
-import Tooltip from 'src/components/tooltip'
-import { useColorMode } from 'src/hooks'
-import { useMainPanel } from 'src/providers/mainpanel'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useSidebar } from 'src/providers/sidebar'
+import { MainPanelButton } from './main-panel-btn'
+import { ThemeButton } from './theme-btn'
 
 export const TopBar = () => {
   const { dispatch: sidebarDispatch } = useSidebar()
-  const { dispatch: mainPanelDispatch, state: mainPanelState } = useMainPanel()
-  const { colorMode, toggleColorMode } = useColorMode()
 
   function openSidebar() {
     sidebarDispatch({ type: 'set-open', payload: true })
-  }
-
-  function toggleMainPanel() {
-    mainPanelDispatch({ type: 'set-open', payload: !mainPanelState.isOpen })
   }
 
   return (
@@ -31,23 +22,9 @@ export const TopBar = () => {
 
       <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <div className="flex items-center gap-x-2 lg:gap-x-4 ml-auto">
-          <Tooltip content="Color mode">
-            <IconButton variant="ghost" onClick={toggleColorMode}>
-              {colorMode === 'dark' ? <MoonIcon height={24} /> : <SunIcon height={24} />}
-            </IconButton>
-          </Tooltip>
+          <ThemeButton />
           <div className="h-6 w-px bg-gray-200" aria-hidden="true" />
-          <Tooltip content="Export panel" side="left">
-            <IconButton variant="ghost" onClick={toggleMainPanel}>
-              <Bars3Icon
-                height={24}
-                className={clsx(
-                  mainPanelState.isOpen ? '-rotate-90' : 'rotate-0',
-                  'transition-all',
-                )}
-              />
-            </IconButton>
-          </Tooltip>
+          <MainPanelButton />
         </div>
       </div>
     </section>

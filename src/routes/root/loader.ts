@@ -5,10 +5,10 @@ import { BackgroundMessage, Collection } from 'types'
 /**
  * The primary initialization function for the root route.
  * Adds the initial collection to storage and redirects to the collection created.
+ *
+ * The only time we see this is on refresh or when the extension is invoked from the browser action.
  */
 export async function loader() {
-  console.log('Root loader called')
-
   const collection: Collection = {
     id: nanoid(),
     name: 'Collection',

@@ -1,4 +1,4 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
+import * as RTooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 
@@ -14,12 +14,16 @@ type TooltipProps = {
   side?: 'top' | 'right' | 'bottom' | 'left'
 }
 
-export default ({ children, content, side = 'bottom' }: PropsWithChildren<TooltipProps>) => (
-  <Tooltip.Provider>
-    <Tooltip.Root>
-      <Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
-      <Tooltip.Portal>
-        <Tooltip.Content
+export const Tooltip = ({
+  children,
+  content,
+  side = 'bottom',
+}: PropsWithChildren<TooltipProps>) => (
+  <RTooltip.Provider>
+    <RTooltip.Root>
+      <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
+      <RTooltip.Portal>
+        <RTooltip.Content
           side={side}
           sideOffset={4}
           className={clsx(
@@ -32,9 +36,9 @@ export default ({ children, content, side = 'bottom' }: PropsWithChildren<Toolti
           )}
         >
           {content}
-          <Tooltip.Arrow className="fill-current text-gray-800" />
-        </Tooltip.Content>
-      </Tooltip.Portal>
-    </Tooltip.Root>
-  </Tooltip.Provider>
+          <RTooltip.Arrow className="fill-current text-gray-800" />
+        </RTooltip.Content>
+      </RTooltip.Portal>
+    </RTooltip.Root>
+  </RTooltip.Provider>
 )

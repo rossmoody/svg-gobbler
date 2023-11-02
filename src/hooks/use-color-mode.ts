@@ -6,7 +6,7 @@ export function useColorMode() {
   const [colorMode, setColorMode] = useState<ColorMode>('light')
 
   useEffect(() => {
-    chrome.storage.sync.get(['colorMode'], (result) => {
+    chrome.storage.local.get(['colorMode'], (result) => {
       const value = (result.colorMode || 'light') as ColorMode
       setColorMode(value)
       setColorModeClass(value)
@@ -16,7 +16,7 @@ export function useColorMode() {
   const toggleColorMode = () => {
     const value = colorMode === 'light' ? 'dark' : 'light'
 
-    chrome.storage.sync.set({ colorMode: value }, () => {
+    chrome.storage.local.set({ colorMode: value }, () => {
       setColorMode(value)
       setColorModeClass(value)
     })

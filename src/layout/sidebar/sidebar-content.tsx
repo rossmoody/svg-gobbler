@@ -1,38 +1,20 @@
 import { Cog6ToothIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
-import { NavLink, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLoaderData } from 'react-router-dom'
 import { IconButton, Logo } from 'src/components'
 import { useSidebar } from 'src/providers'
 import { Collection } from 'types'
+import { useRemoveCollection } from './hooks/use-remove-collection'
 
 export const SidebarContent = () => {
   const collections = useLoaderData() as Collection[]
   const { state, dispatch } = useSidebar()
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
+  const handleRemoveCollection = useRemoveCollection()
 
   useEffect(() => {
     dispatch({ type: 'set-collections', payload: collections })
   }, [collections, dispatch])
-
-  function handleRemoveCollection(collection: Collection) {
-    const isActiveCollection = pathname.includes(collection.id)
-    const filteredCollections = state.collections.filter(({ id }) => id !== collection.id)
-
-    // If there are no collections left, create an empty one
-    if (filteredCollections.length === 0) {
-      filteredCollections.push({ id: nanoid(), name: 'New Collection' })
-    }
-
-    dispatch({ type: 'set-collections', payload: filteredCollections })
-    chrome.storage.local.set({ collections: filteredCollections })
-
-    if (isActiveCollection) {
-      return navigate(`collection/${filteredCollections[0].id}`)
-    }
-  }
 
   return (
     <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
@@ -57,14 +39,18 @@ export const SidebarContent = () => {
                     }}
                   >
                     {collection.name}
+                    <IconButton
+                      variant="ghost"
+                      size="xs"
+                      onClick={(event) => {
+                        event.preventDefault()
+                        handleRemoveCollection(collection)
+                      }}
+                      className="z-10"
+                    >
+                      <XMarkIcon className="h-3" />
+                    </IconButton>
                   </NavLink>
-                  <IconButton
-                    variant="ghost"
-                    size="xs"
-                    onClick={() => handleRemoveCollection(collection)}
-                  >
-                    <XMarkIcon className="h-3" />
-                  </IconButton>
                 </li>
               ))}
             </ul>

@@ -11,8 +11,7 @@ class SvgFactory {
   /**
    * Process the page data and return an array of SVG objects.
    */
-  async process(message: PageData) {
-    // Guard against empty data
+  async process(message: PageData | null) {
     if (!message) {
       return []
     }

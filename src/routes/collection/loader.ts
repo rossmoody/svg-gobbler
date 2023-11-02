@@ -9,6 +9,7 @@ type CollectionParams = {
 export async function loader({ params }: LoaderFunctionArgs<CollectionParams>) {
   const [pageData] = Object.values(await chrome.storage.local.get(params.id)) as [PageData]
 
+  // We can always depend on an array from svgFactory, even if it's empty or if it fails
   return defer({
     data: svgFactory.process(pageData),
   })
