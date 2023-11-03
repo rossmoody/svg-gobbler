@@ -13,15 +13,15 @@ export const TopBar = () => {
   }
 
   return (
-    <section className="flex h-16 shrink-0 items-center border-b border-gray-200 bg-white px-4 gap-x-4 lg:gap-x-6 sm:px-6 lg:px-8">
+    <section className="flex h-16 shrink-0 items-center border-b px-4 gap-x-4 lg:gap-x-6 sm:px-6 lg:px-8 text-gray-900 dark:text-gray-50 border-gray-200 dark:border-gray-800">
       <Tooltip content="Collections" side="right">
         <IconButton variant="ghost" onClick={openSidebar} className="lg:hidden">
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           <span className="sr-only">Open collection panel</span>
         </IconButton>
       </Tooltip>
-      <CollectionTitle />
       <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
+      <CollectionTitle />
       <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">
         <div className="flex items-center gap-x-2 lg:gap-x-4 ml-auto">
           <ThemeButton />

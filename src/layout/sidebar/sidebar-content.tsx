@@ -17,7 +17,7 @@ export const SidebarContent = () => {
   }, [collections, dispatch])
 
   return (
-    <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+    <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r px-6 pb-4 border-gray-200 dark:border-gray-800">
       <div className="flex h-16 shrink-0 items-center mt-2">
         <Logo className="h-8 w-auto" />
       </div>

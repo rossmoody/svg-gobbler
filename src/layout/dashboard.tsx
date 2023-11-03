@@ -7,15 +7,13 @@ import { TopBar } from './top-bar'
 export const Dashboard = ({ children }: PropsWithChildren) => (
   <Fragment>
     <Sidebar />
-    <div className="lg:pl-72 transition-all relative overflow-hidden">
+    <div className="lg:pl-72 transition-all relative overflow-hidden bg-white dark:bg-gray-900">
       <TopBar />
       <div className="flex">
-        <div className="flex-1">
+        <main className="flex-1">
           <Mainbar />
-          <main className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100dvh-theme(space.28))] dark:bg-slate-900 transition-colors">
-            {children}
-          </main>
-        </div>
+          {children}
+        </main>
         <Mainpanel />
       </div>
     </div>

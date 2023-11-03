@@ -11,10 +11,12 @@ export const Collection = ({ data, collectionId }: CollectionData) => {
   }, [data, collectionId, dispatch])
 
   return (
-    <ul className="list-disc break-all">
-      {state.data.map((svg, i) => (
-        <li key={svg.originalString + i}>{svg.originalString}</li>
-      ))}
-    </ul>
+    <section className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100dvh-theme(space.28))] transition-colors bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 border-gray-200 dark:border-gray-800">
+      <ul className="list-disc break-all">
+        {state.data.map((svg, i) => (
+          <li key={svg.originalString + i}>{svg.originalString}</li>
+        ))}
+      </ul>
+    </section>
   )
 }
