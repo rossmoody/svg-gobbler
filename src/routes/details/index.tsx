@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'src/components'
 
-export const Details = () => {
+export const DetailsRoute = () => {
   const navigate = useNavigate()
 
   return (

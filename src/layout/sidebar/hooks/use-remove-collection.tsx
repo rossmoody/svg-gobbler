@@ -12,13 +12,16 @@ export function useRemoveCollection() {
     const isActiveCollection = pathname.includes(collection.id)
     const filteredCollections = state.collections.filter(({ id }) => id !== collection.id)
 
-    // If there are no collections left, create an empty one
     if (filteredCollections.length === 0) {
-      filteredCollections.push({ id: nanoid(), name: 'New Collection' })
+      // If there are no collections left, create an empty one
+      const emptyCollection = { id: nanoid(), name: 'New Collection' }
+      filteredCollections.push(emptyCollection)
+      chrome.storage.local.set({ [emptyCollection.id]: [] })
     }
 
     dispatch({ type: 'set-collections', payload: filteredCollections })
     chrome.storage.local.set({ collections: filteredCollections })
+    chrome.storage.local.remove(collection.id)
 
     if (isActiveCollection) {
       return navigate(`collection/${filteredCollections[0].id}`)

@@ -1,13 +1,17 @@
 import { Outlet } from 'react-router-dom'
 import { Dashboard as DashboardLayout } from 'src/layout/dashboard'
-import { MainPanelProvider, SidebarProvider } from 'src/providers'
+import { MainPanelProvider, MainProvider, SidebarProvider, TopBarProvider } from 'src/providers'
 
-export const Dashboard = () => (
+export const DashboardRoute = () => (
   <SidebarProvider>
     <MainPanelProvider>
-      <DashboardLayout>
-        <Outlet />
-      </DashboardLayout>
+      <MainProvider>
+        <TopBarProvider>
+          <DashboardLayout>
+            <Outlet />
+          </DashboardLayout>
+        </TopBarProvider>
+      </MainProvider>
     </MainPanelProvider>
   </SidebarProvider>
 )

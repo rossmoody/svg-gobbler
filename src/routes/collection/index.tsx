@@ -3,12 +3,13 @@ import { Await, useLoaderData } from 'react-router-dom'
 import { Svg } from 'scripts/svg-factory/svg'
 import { EmptyState } from 'src/components'
 import { SkeletonCollection } from 'src/components/skeleton-collection'
+import { Collection } from 'src/layout/collection'
 
 type LoaderData = {
   data: Promise<Svg[]>
 }
 
-export const Collection = () => {
+export const CollectionRoute = () => {
   const { data } = useLoaderData() as LoaderData
 
   return (
@@ -19,13 +20,7 @@ export const Collection = () => {
             return <EmptyState />
           }
 
-          return (
-            <ul className="list-disc break-all">
-              {resolvedData.map((svg, i) => (
-                <li key={svg.originalString + i}>{svg.originalString}</li>
-              ))}
-            </ul>
-          )
+          return <Collection data={resolvedData} />
         }}
       </Await>
     </React.Suspense>

@@ -1,3 +1,3 @@
 import { Outlet } from 'react-router-dom'
 
-export const Root = () => <Outlet />
+export const RootRoute = () => <Outlet />
