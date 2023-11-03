@@ -1,6 +1,7 @@
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { IconButton, Tooltip } from 'src/components'
 import { useSidebar } from 'src/providers/sidebar'
+import { CollectionTitle } from './collection-title'
 import { MainPanelButton } from './main-panel-btn'
 import { ThemeButton } from './theme-btn'
 
@@ -19,12 +20,8 @@ export const TopBar = () => {
           <span className="sr-only">Open collection panel</span>
         </IconButton>
       </Tooltip>
-
-      <h1></h1>
-
-      {/* Mobile separator */}
+      <CollectionTitle />
       <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
-
       <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">
         <div className="flex items-center gap-x-2 lg:gap-x-4 ml-auto">
           <ThemeButton />

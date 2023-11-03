@@ -1,17 +1,14 @@
 import { useEffect } from 'react'
-import { Svg } from 'scripts/svg-factory/svg'
 import { useMain } from 'src/providers'
+import { CollectionData } from 'types'
 
-type Props = {
-  data: Svg[]
-}
-
-export const Collection = ({ data }: Props) => {
+export const Collection = ({ data, collectionId }: CollectionData) => {
   const { state, dispatch } = useMain()
 
   useEffect(() => {
     dispatch({ type: 'set-data', payload: data })
-  }, [data, dispatch])
+    dispatch({ type: 'set-collection-id', payload: collectionId })
+  }, [data, collectionId, dispatch])
 
   return (
     <ul className="list-disc break-all">

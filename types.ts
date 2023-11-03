@@ -1,3 +1,5 @@
+import { Svg } from 'scripts/svg-factory/svg'
+
 /**
  * The message sent from the Background script to the Content script.
  */
@@ -28,6 +30,9 @@ export type PageData = {
   origin: string
 }
 
+/**
+ * The model of a collection that is stored in local storage.
+ */
 export type Collection = {
   /**
    * The id of the collection.
@@ -37,4 +42,15 @@ export type Collection = {
    * The name of the collection.
    */
   name: string
+}
+
+export type CollectionData = {
+  /**
+   * The id of the collection.
+   */
+  collectionId: string
+  /**
+   * The data gathered from the active tab.
+   */
+  data: Svg[]
 }

@@ -16,11 +16,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props,
   }
 
   const sizeStyles = {
-    xs: 'px-1 py-1 text-xs',
-    sm: 'px-1 py-1 text-sm',
-    md: 'px-1.5 py-1.5 text-sm',
-    lg: 'px-2 py-2 text-sm',
-    xl: 'px-2.5 py-2.5 text-sm',
+    xs: 'px-1 py-1',
+    sm: 'px-1 py-1',
+    md: 'px-1.5 py-1.5',
+    lg: 'px-2 py-2',
+    xl: 'px-2.5 py-2.5',
   }
 
   const combinedClassName = `${className} ${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`
