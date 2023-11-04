@@ -13,7 +13,7 @@ export class Svg {
   readonly origin: string
 
   /**
-   * The SVG element will be parsed and assigned to this property as an element.
+   * The original string is parsed and assigned to this property as an element.
    * If it is undefined, the SVG factory was unable to parse or
    * manually create the SVG element from parts.
    */

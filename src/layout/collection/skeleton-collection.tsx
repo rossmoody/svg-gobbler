@@ -1,3 +1,6 @@
+/**
+ * The placeholder content for the colleciton page that shares styles and layout.
+ */
 export const SkeletonCollection = () => (
   <div className="min-h-screen flex flex-col">
     <section className="top-bar">

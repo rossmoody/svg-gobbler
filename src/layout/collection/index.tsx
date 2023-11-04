@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
+import { PresentationSvg } from 'scripts/svg-factory/presentation-svg'
 import { useMain } from 'src/providers'
 import type { CollectionData } from 'types'
+import { Card } from './card'
 
 export const Collection = ({ data, collectionId }: CollectionData) => {
   const { state, dispatch } = useMain()
@@ -12,9 +14,9 @@ export const Collection = ({ data, collectionId }: CollectionData) => {
 
   return (
     <section className="transition-colors border-gray-200 dark:border-gray-800">
-      <ul className="list-disc break-all">
+      <ul className="grid grid-cols-4 gap-4">
         {state.data.map((svg, i) => (
-          <li key={svg.originalString + i}>{svg.originalString}</li>
+          <Card key={svg.originalString + i} data={new PresentationSvg(svg)} />
         ))}
       </ul>
     </section>
