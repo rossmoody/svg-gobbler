@@ -20,6 +20,7 @@ export async function rootLoader() {
     collections: Collection[]
   }
 
+  // Happens occassionaly when hacking storage in dev mode
   if (!prevCollections) {
     prevCollections = []
   }

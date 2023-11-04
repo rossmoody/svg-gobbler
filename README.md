@@ -90,6 +90,8 @@ source project and any help is very appreciated.
 
 ### Friends
 
+TODO: Update this to be current
+
 This project leverages code and value from some incredibly talented folks. Most notably and
 predominantly are:
 
@@ -98,6 +100,8 @@ predominantly are:
 - SVG Optimization: [SVGO](https://github.com/svg/svgo)
 
 ### About
+
+TODO: Show all the various versions over the years
 
 This started as a pet project to improve the [SVG Crowbar](http://nytimes.github.com/svg-crowbar/)
 tool that is no longer being maintained by NY Times.

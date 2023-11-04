@@ -17,7 +17,7 @@ export const CollectionTitle = () => {
       enterFrom="opacity-0 translate-y-1"
       enterTo="opacity-100 translate-y-0"
     >
-      <h1 className="text-lg font-medium">{title}</h1>
+      <h1 className="text-lg font-semibold">{title}</h1>
     </Transition>
   )
 }

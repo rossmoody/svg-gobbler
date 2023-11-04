@@ -12,9 +12,9 @@ export const MainPanelButton = () => {
 
   return (
     <Tooltip content="Export panel" side="left">
-      <IconButton variant="ghost" onClick={toggleMainPanel}>
+      <IconButton variant="ghost" onClick={toggleMainPanel} size="lg">
         <Bars3Icon
-          height={24}
+          height={20}
           className={clsx(mainPanelState.isOpen ? '-rotate-90' : 'rotate-0', 'transition-all')}
           aria-hidden="true"
         />
