@@ -4,7 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { useSidebar } from 'src/providers/sidebar'
-import { Collection } from 'types'
+import type { Collection } from 'types'
 import { SidebarContent } from './sidebar-content'
 
 export const Sidebar = () => {

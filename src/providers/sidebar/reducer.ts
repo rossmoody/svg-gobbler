@@ -1,4 +1,4 @@
-import { Collection } from 'types'
+import type { Collection } from 'types'
 
 export type SidebarState = {
   /**

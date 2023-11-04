@@ -1,6 +1,6 @@
 import { Image } from 'scripts/svg-factory/image'
 import svgFactory from 'scripts/svg-factory/svg-factory'
-import { PageData } from 'types'
+import type { PageData } from 'types'
 import { logger } from './logger'
 
 /**

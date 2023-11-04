@@ -4,7 +4,7 @@ import { Svg } from 'scripts/svg-factory/svg'
 import { EmptyState } from 'src/components'
 import { SkeletonCollection } from 'src/components/skeleton-collection'
 import { Collection } from 'src/layout/collection'
-import { CollectionData } from 'types'
+import type { CollectionData } from 'types'
 
 /**
  * This is really collection data with a promise we await for the svg data.

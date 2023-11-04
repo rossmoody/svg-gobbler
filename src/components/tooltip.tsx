@@ -20,7 +20,7 @@ export const Tooltip = ({
   side = 'bottom',
 }: PropsWithChildren<TooltipProps>) => (
   <RTooltip.Provider>
-    <RTooltip.Root>
+    <RTooltip.Root delayDuration={300}>
       <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
       <RTooltip.Portal>
         <RTooltip.Content
@@ -32,11 +32,12 @@ export const Tooltip = ({
             'radix-side-bottom:animate-slide-up-fade',
             'radix-side-left:animate-slide-right-fade',
             'inline-flex items-center rounded-md px-3 py-2',
-            'bg-gray-800 shadow-md text-xs text-gray-100',
+            'bg-gray-800 dark:bg-white shadow-md text-xs',
+            'text-white dark:text-gray-800',
           )}
         >
           {content}
-          <RTooltip.Arrow className="fill-current text-gray-800" />
+          <RTooltip.Arrow className="fill-current text-gray-800 dark:text-gray-200" />
         </RTooltip.Content>
       </RTooltip.Portal>
     </RTooltip.Root>

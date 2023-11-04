@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useMain } from 'src/providers'
-import { CollectionData } from 'types'
+import type { CollectionData } from 'types'
 
 export const Collection = ({ data, collectionId }: CollectionData) => {
   const { state, dispatch } = useMain()

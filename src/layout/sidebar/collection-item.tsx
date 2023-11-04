@@ -2,7 +2,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Collection } from 'types'
+import { useSidebar } from 'src/providers'
+import type { Collection } from 'types'
 import { useRemoveCollection } from './hooks/use-remove-collection'
 
 type Props = {
@@ -13,19 +14,22 @@ type Props = {
 }
 
 export const CollectionItem = ({ collection }: Props) => {
+  const { dispatch } = useSidebar()
   const handleRemoveCollection = useRemoveCollection()
 
   const faviconUrl = useMemo(() => {
+    if (!collection.origin) return ''
     return `https://s2.googleusercontent.com/s2/favicons?domain=${collection.origin}`
   }, [collection.origin])
 
   return (
     <NavLink
       to={`collection/${collection.id}`}
+      onClick={() => dispatch({ type: 'set-open', payload: false })}
       className={({ isActive }) => {
         return clsx(
           isActive ? 'bg-gray-100 dark:bg-gray-700' : 'hover:bg-gray-50 dark:hover:bg-gray-800',
-          'group flex items-center gap-x-2 text-gray-800 dark:text-gray-300 rounded-md px-2 py-1 text-sm leading-6 font-normal justify-between transition-all duration-300',
+          'group flex items-center gap-x-2 text-gray-800 dark:text-gray-200 rounded-md px-2 py-1 text-sm leading-6 font-normal justify-between transition-all duration-300',
         )
       }}
     >

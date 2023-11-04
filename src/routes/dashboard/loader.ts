@@ -1,4 +1,5 @@
 import type { Collection } from 'types'
+
 /**
  * The primary initialization function for sidebar collections context.
  */

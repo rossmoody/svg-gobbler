@@ -7,9 +7,6 @@ export const SkeletonCollection = () => (
     enter="transition-all ease-linear duration-300"
     enterFrom="opacity-0 translate-y-4"
     enterTo="opacity-100 translate-y-0"
-    leave="transition-all ease-linear duration-300"
-    leaveFrom="opacity-100 translate-y-0"
-    leaveTo="opacity-0 translate-y-4"
   >
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
       {Array.from({ length: 9 }).map((_, i) => (

@@ -1,4 +1,4 @@
-import { PageData } from 'types'
+import type { PageData } from 'types'
 
 /**
  * Gathers all relevant SVG data from the active tab. Must be isolated self containing

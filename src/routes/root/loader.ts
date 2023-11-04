@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { redirect } from 'react-router-dom'
 import lzString from 'src/utils/lz-string'
-import { BackgroundMessage, Collection } from 'types'
+import type { BackgroundMessage, Collection } from 'types'
 
 /**
  * The primary initialization function for the root route.
