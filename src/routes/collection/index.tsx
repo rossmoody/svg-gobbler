@@ -20,27 +20,29 @@ export const CollectionRoute = () => {
   const { data, collectionId } = useLoaderData() as LoaderData
 
   return (
-    <Fragment>
-      <TopBar />
-      <div className="flex">
-        <main className="flex-1">
-          <Mainbar />
-          <div className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100dvh-theme(space.28))] bg-gray-100 dark:bg-gray-900 texts">
-            <React.Suspense fallback={<SkeletonCollection />}>
-              <Await resolve={data}>
-                {(resolvedData: CollectionData['data']) => {
-                  if (resolvedData.length === 0) {
-                    return <EmptyState />
-                  }
-
-                  return <Collection data={resolvedData} collectionId={collectionId} />
-                }}
-              </Await>
-            </React.Suspense>
-          </div>
-        </main>
-        <Mainpanel />
-      </div>
-    </Fragment>
+    <React.Suspense fallback={<SkeletonCollection />}>
+      <Await resolve={data}>
+        {(resolvedData: CollectionData['data']) => {
+          return (
+            <Fragment>
+              <TopBar />
+              <div className="flex">
+                <main className="flex-1">
+                  <Mainbar />
+                  <div className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100dvh-theme(space.28))] bg-gray-100 dark:bg-gray-900 texts">
+                    {resolvedData.length === 0 ? (
+                      <EmptyState />
+                    ) : (
+                      <Collection data={resolvedData} collectionId={collectionId} />
+                    )}
+                  </div>
+                </main>
+                <Mainpanel />
+              </div>
+            </Fragment>
+          )
+        }}
+      </Await>
+    </React.Suspense>
   )
 }

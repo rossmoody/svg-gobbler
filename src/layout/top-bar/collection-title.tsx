@@ -35,6 +35,7 @@ export const CollectionTitle = () => {
 
   return (
     <Transition
+      appear
       show={!!title}
       enter="transition-all ease-linear duration-500"
       enterFrom="opacity-0 translate-y-1"
