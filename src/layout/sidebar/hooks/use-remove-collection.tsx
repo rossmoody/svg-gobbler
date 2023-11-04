@@ -14,7 +14,7 @@ export function useRemoveCollection() {
 
     if (filteredCollections.length === 0) {
       // If there are no collections left, create an empty one
-      const emptyCollection = { id: nanoid(), name: 'New Collection' }
+      const emptyCollection: Collection = { id: nanoid(), name: 'New Collection', origin: '' }
       filteredCollections.push(emptyCollection)
       chrome.storage.local.set({ [emptyCollection.id]: [] })
     }

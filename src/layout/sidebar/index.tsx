@@ -1,12 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react'
 
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
+import { useLoaderData } from 'react-router-dom'
 import { useSidebar } from 'src/providers/sidebar'
+import { Collection } from 'types'
 import { SidebarContent } from './sidebar-content'
 
 export const Sidebar = () => {
   const { state, dispatch } = useSidebar()
+  const collections = useLoaderData() as Collection[]
+
+  useEffect(() => {
+    dispatch({ type: 'set-collections', payload: collections })
+  }, [collections, dispatch])
 
   function closeSidebar() {
     dispatch({ type: 'set-open', payload: false })

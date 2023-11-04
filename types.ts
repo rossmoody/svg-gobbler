@@ -20,7 +20,7 @@ export type PageData = {
   data: string[]
   /**
    * The host URL of the site. This is used to label the tabs and
-   * dasbhoard in the extension.
+   * dashboard initially in the sidebar.
    */
   host: string
   /**
@@ -35,20 +35,25 @@ export type PageData = {
  */
 export type Collection = {
   /**
-   * The id of the collection.
+   * The id of the collection. Used to identify the collection in local storage
+   * and also as the id for routing to a given collection.
    */
   id: string
   /**
-   * The name of the collection.
+   * The name of the collection. Displayed in the sidebar and in the top bar when active.
    */
   name: string
+  /**
+   * The origin URL of the original source. This is used to create favicon links
+   */
+  origin: string
 }
 
 export type CollectionData = {
   /**
    * The id of the collection.
    */
-  collectionId: string
+  collectionId: Collection['id']
   /**
    * The data gathered from the active tab.
    */

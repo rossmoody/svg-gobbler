@@ -13,6 +13,7 @@ export async function rootLoader() {
   const collection: Collection = {
     id: nanoid(),
     name: 'Collection',
+    origin: '',
   }
 
   // Get all collections from storage for sidenav
@@ -29,6 +30,7 @@ export async function rootLoader() {
     const response = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
     // If message connection is successful, process the response, add the collection to storage
     collection.name = response.data.host
+    collection.origin = response.data.origin
     const compressed = lzString.compressToBase64(response.data)
     chrome.storage.local.set({ collections: [collection, ...prevCollections] })
     chrome.storage.local.set({ [collection.id]: compressed })
