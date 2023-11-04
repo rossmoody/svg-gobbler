@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'src/components'
 
-export const DetailsRoute = () => {
+export const SettingsRoute = () => {
   const navigate = useNavigate()
 
   return (
     <div>
-      Details
+      Settings
       <Button onClick={() => navigate(-1)}>Back</Button>
     </div>
   )

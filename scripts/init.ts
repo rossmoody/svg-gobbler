@@ -17,7 +17,7 @@ class Init {
       let data = {
         data: [],
         host: 'Settings',
-        origin: 'Settings',
+        origin: '',
       } as PageData
 
       const activeTab = await Chrome.getActiveTab()

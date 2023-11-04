@@ -1,0 +1,3 @@
+.collection-item {
+  @apply flex items-center gap-x-2 text-sm leading-6 font-normal px-2 py-1 rounded-md transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200;
+}

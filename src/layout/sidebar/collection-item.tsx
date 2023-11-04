@@ -27,13 +27,14 @@ export const CollectionItem = ({ collection }: Props) => {
       to={`collection/${collection.id}`}
       onClick={() => dispatch({ type: 'set-open', payload: false })}
       className={({ isActive }) => {
-        return clsx(
-          isActive ? 'bg-gray-100 dark:bg-gray-700' : 'hover:bg-gray-50 dark:hover:bg-gray-800',
-          'group flex items-center gap-x-2 text-gray-800 dark:text-gray-200 rounded-md px-2 py-1 text-sm leading-6 font-normal justify-between transition-all duration-300',
-        )
+        return clsx(isActive && 'bg-gray-100 dark:bg-gray-700', 'collection-item group')
       }}
     >
-      <img src={faviconUrl} className="h-4 w-4 flex-shrink-0 rounded-sm" alt="Favicon" />
+      {faviconUrl ? (
+        <img src={faviconUrl} className="h-4 w-4 flex-shrink-0 rounded-sm" alt="Favicon" />
+      ) : (
+        <div className="h-4 w-4 flex-shrink-0 rounded-md bg-slate-300" />
+      )}
       <span className="flex-1 whitespace-nowrap overflow-ellipsis overflow-hidden">
         {collection.name}
       </span>
