@@ -5,8 +5,8 @@ export const btnBaseStyles =
 
 export const btnVariantStyles = {
   primary: 'bg-red-600 hover:bg-red-500 text-white shadow-sm',
-  secondary: 'bg-white text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 shadow-sm',
-  ghost: 'bg-transparent text-gray-900 hover:bg-gray-100',
+  secondary: 'bg-white ring-1 ring-inset ring-gray-300 hover:bg-gray-100 shadow-sm text',
+  ghost: 'bg-transparent dark:hover:bg-gray-800 hover:bg-gray-100 text',
 }
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

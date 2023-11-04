@@ -18,7 +18,7 @@ export const SidebarContent = () => {
         <Logo className="h-8 w-auto" />
       </div>
       <nav className="flex flex-1 flex-col">
-        <ul role="list" className="flex flex-1 flex-col gap-1.5">
+        <ul role="list" className="flex flex-1 flex-col gap-1.5 -mx-2">
           <li>
             <NavLink to="/details/1" className="collection-item">
               <BuildingLibraryIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
@@ -33,7 +33,7 @@ export const SidebarContent = () => {
           </li>
           <hr className="border-gray-200 dark:border-gray-800 my-4" />
           <li>
-            <ul role="list" className="-mx-2 space-y-1.5">
+            <ul role="list" className="flex flex-col gap-1.5">
               {state.collections.map((collection) => (
                 <li key={collection.id}>
                   <CollectionItem collection={collection} />
@@ -42,7 +42,7 @@ export const SidebarContent = () => {
             </ul>
           </li>
           <li className="mt-auto">
-            <NavLink to="/details/1" className="collection-item">
+            <NavLink to="settings" className="collection-item">
               <Cog6ToothIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
               Settings
             </NavLink>

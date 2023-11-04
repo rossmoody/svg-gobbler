@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Dashboard } from 'src/layout/dashboard'
+import { Sidebar } from 'src/layout/sidebar'
 import { MainPanelProvider, MainProvider, SidebarProvider, TopBarProvider } from 'src/providers'
 
 export const DashboardRoute = () => (
@@ -7,9 +7,10 @@ export const DashboardRoute = () => (
     <MainPanelProvider>
       <MainProvider>
         <TopBarProvider>
-          <Dashboard>
+          <Sidebar />
+          <div className="lg:pl-72 transition-all relative overflow-hidden bg-white dark:bg-gray-900 min-h-screen">
             <Outlet />
-          </Dashboard>
+          </div>
         </TopBarProvider>
       </MainProvider>
     </MainPanelProvider>

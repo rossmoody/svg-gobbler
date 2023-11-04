@@ -9,6 +9,7 @@ import {
   dashboardLoader,
   rootLoader,
 } from 'src/routes'
+import { SettingsRoute } from './routes/settings'
 
 export default function App() {
   const router = createMemoryRouter([
@@ -29,6 +30,11 @@ export default function App() {
           element: <CollectionRoute />,
           errorElement: <ErrorState />,
           loader: collectionLoader,
+        },
+        {
+          path: 'settings',
+          element: <SettingsRoute />,
+          errorElement: <ErrorState />,
         },
       ],
     },

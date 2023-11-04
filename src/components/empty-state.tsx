@@ -2,11 +2,11 @@ import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Button } from '.'
 
 export const EmptyState = () => (
-  <div className="flex items-center justify-center w-full h-full rounded-lg border-2 border-dashed border-gray-300 p-12">
+  <div className="flex items-center justify-center w-full h-full rounded-lg border-2 border-dashed border-gray-200 dark:border-gray-600 p-12 bg-white/70 dark:bg-gray-800/70">
     <div className="text-center">
-      <MagnifyingGlassIcon className="mx-auto h-12 w-12 text-gray-400" aria-hidden={true} />
-      <h3 className="mt-2 text-sm font-semibold text-gray-900">No SVGs found</h3>
-      <p className="mt-1 text-sm text-gray-500">
+      <MagnifyingGlassIcon className="mx-auto h-12 w-12" aria-hidden={true} />
+      <h3 className="mt-2 text-sm font-semibold">No SVGs found</h3>
+      <p className="mt-1 text-sm">
         Select or drag SVGs into this area to upload into this collection
       </p>
       <div className="mt-6 flex justify-center">

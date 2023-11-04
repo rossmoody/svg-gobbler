@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const CollectionItem = ({ collection }: Props) => {
-  const { dispatch } = useSidebar()
+  const { dispatch: sidebarDispatch } = useSidebar()
   const handleRemoveCollection = useRemoveCollection()
 
   const faviconUrl = useMemo(() => {
@@ -25,7 +25,10 @@ export const CollectionItem = ({ collection }: Props) => {
   return (
     <NavLink
       to={`collection/${collection.id}`}
-      onClick={() => dispatch({ type: 'set-open', payload: false })}
+      onClick={() => {
+        // Set the sidebar to closed in mobile
+        sidebarDispatch({ type: 'set-open', payload: false })
+      }}
       className={({ isActive }) => {
         return clsx(isActive && 'bg-gray-100 dark:bg-gray-700', 'collection-item group')
       }}
@@ -33,7 +36,7 @@ export const CollectionItem = ({ collection }: Props) => {
       {faviconUrl ? (
         <img src={faviconUrl} className="h-4 w-4 flex-shrink-0 rounded-sm" alt="Favicon" />
       ) : (
-        <div className="h-4 w-4 flex-shrink-0 rounded-md bg-slate-300" />
+        <div className="h-4 w-4 flex-shrink-0 rounded-md bg-gray-300" />
       )}
       <span className="flex-1 whitespace-nowrap overflow-ellipsis overflow-hidden">
         {collection.name}

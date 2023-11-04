@@ -1,10 +1,13 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
+import { useNavigation } from 'react-router-dom'
 import { useMain, useSidebar } from 'src/providers'
 
 export const CollectionTitle = () => {
   const { state: mainState } = useMain()
   const { state: sidebarState, dispatch: sidebarDispatch } = useSidebar()
+  const navigation = useNavigation()
+  console.log(navigation)
 
   const title = useMemo(() => {
     return sidebarState.collections.find((c) => c.id === mainState.collectionId)?.name
@@ -18,16 +21,13 @@ export const CollectionTitle = () => {
 
   function handleBlur(event: React.FocusEvent<HTMLHeadingElement>) {
     const newTitle = event.target.textContent ?? 'Collection'
-
     if (newTitle !== title) {
       const newCollections = sidebarState.collections.map((c) => {
         if (c.id === mainState.collectionId) {
           return { ...c, name: newTitle }
         }
-
         return c
       })
-
       sidebarDispatch({ type: 'set-collections', payload: newCollections })
       chrome.storage.local.set({ collections: newCollections })
     }
