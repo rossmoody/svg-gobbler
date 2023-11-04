@@ -1,9 +1,11 @@
+import { Transition } from '@headlessui/react'
 import {
   BuildingLibraryIcon,
   Cog6ToothIcon,
   MegaphoneIcon,
   PlusIcon,
 } from '@heroicons/react/24/outline'
+import { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
 import { useSidebar } from 'src/providers'
@@ -34,10 +36,23 @@ export const SidebarContent = () => {
           <hr className="border-gray-200 dark:border-gray-800 my-4" />
           <li>
             <ul role="list" className="flex flex-col gap-1.5">
-              {state.collections.map((collection) => (
-                <li key={collection.id}>
-                  <CollectionItem collection={collection} />
-                </li>
+              {state.collections.map((collection, i) => (
+                <Transition
+                  show
+                  appear
+                  as={Fragment}
+                  key={collection.id}
+                  enter="transition-all duration-300 ease-in-out"
+                  enterFrom="opacity-0 translate-y-2 scale-95"
+                  enterTo="opacity-100 translate-y-0 scale-100"
+                  leave="transition-all duration-300 ease-in-out"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <li key={collection.id} style={{ transitionDelay: `${i * 15}ms` }}>
+                    <CollectionItem collection={collection} />
+                  </li>
+                </Transition>
               ))}
             </ul>
           </li>
