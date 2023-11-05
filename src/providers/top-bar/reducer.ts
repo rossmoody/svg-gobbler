@@ -1,6 +1,6 @@
 export type TopBarState = {
   /**
-   * Whether the mainbar is open or not
+   * Whether the mainpanel is open or not
    */
   isOpen: boolean
 }

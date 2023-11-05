@@ -15,7 +15,7 @@ export const Collection = ({ data, collectionId }: CollectionData) => {
 
   return (
     <section className="transition-colors border-gray-200 dark:border-gray-800">
-      <ul className="grid grid-cols-4 gap-4">
+      <ul className="flex flex-wrap gap-3">
         {state.data.map((svg, i) => (
           <Transition
             show
@@ -26,7 +26,7 @@ export const Collection = ({ data, collectionId }: CollectionData) => {
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
           >
-            <Card data={new PresentationSvg(svg)} style={{ transitionDelay: `${i * 15}ms` }} />
+            <Card data={new PresentationSvg(svg)} style={{ transitionDelay: `${i * 8}ms` }} />
           </Transition>
         ))}
       </ul>
