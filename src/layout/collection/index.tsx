@@ -23,11 +23,8 @@ export const Collection = ({ data, collectionId }: CollectionData) => {
             as={Fragment}
             key={svg.originalString + i}
             enter="transition-all duration-300 ease-in-out"
-            enterFrom="opacity-0 translate-y-2 scale-95"
-            enterTo="opacity-100 translate-y-0 scale-100"
-            leave="transition-all duration-300 ease-in-out"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enterFrom="opacity-0 scale-90"
+            enterTo="opacity-100 scale-100"
           >
             <Card data={new PresentationSvg(svg)} style={{ transitionDelay: `${i * 15}ms` }} />
           </Transition>

@@ -1,10 +1,5 @@
 import { Transition } from '@headlessui/react'
-import {
-  BuildingLibraryIcon,
-  Cog6ToothIcon,
-  MegaphoneIcon,
-  PlusIcon,
-} from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, MegaphoneIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
@@ -23,17 +18,11 @@ export const SidebarContent = () => {
         <ul role="list" className="flex flex-1 flex-col gap-1.5 -mx-2">
           <li>
             <NavLink to="/details/1" className="collection-item">
-              <BuildingLibraryIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
-              All
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/details/1" className="collection-item">
               <PlusIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
               New collection
             </NavLink>
           </li>
-          <hr className="border-gray-200 dark:border-gray-800 my-4" />
+          <hr className="border-gray-200 dark:border-gray-800 mt-2 mb-5" />
           <li>
             <ul role="list" className="flex flex-col gap-1.5">
               {state.collections.map((collection, i) => (

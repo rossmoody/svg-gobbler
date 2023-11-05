@@ -29,7 +29,7 @@ export const CollectionRoute = () => {
               <div className="flex">
                 <main className="flex-1">
                   <Mainbar />
-                  <div className="py-10 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[calc(100dvh-theme(space.28))] bg-gray-100 dark:bg-gray-900 texts">
+                  <div className="py-6 px-6 overflow-y-auto h-[calc(100dvh-theme(space.28))] bg-gray-100 dark:bg-gray-900 texts">
                     {resolvedData.length === 0 ? (
                       <EmptyState />
                     ) : (

@@ -39,7 +39,7 @@ export const CollectionTitle = () => {
       enterTo="opacity-100 translate-y-0"
     >
       <h1
-        className="text-lg font-semibold px-2 py-1 -ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md focus-within:outline-red-300 dark:focus-within:outline-red-500"
+        className="text-lg font-semibold px-2 py-1 -ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md focus-within:outline-red-300 dark:focus-within:outline-red-500 whitespace-nowrap"
         // @ts-ignore https://github.com/facebook/react/issues/27619
         contentEditable="plaintext-only"
         suppressContentEditableWarning

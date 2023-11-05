@@ -15,6 +15,7 @@ export async function collectionLoader({ params }: LoaderFunctionArgs<Collection
 
   return defer({
     collectionId: params.id,
-    data: new Promise((resolve) => setTimeout(() => resolve(svgFactory.process(pageData)), 1000)),
+    // data: new Promise((resolve) => setTimeout(() => resolve(svgFactory.process(pageData)), 1000)),
+    data: svgFactory.process(pageData),
   })
 }
