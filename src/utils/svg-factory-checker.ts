@@ -1,5 +1,5 @@
 import svgFactory from 'scripts/svg-factory/svg-factory'
-import type { PageData } from 'types'
+import type { PageData } from 'src/types'
 
 /**
  * A development utility to look for malformed SVGs in the collection and log them.

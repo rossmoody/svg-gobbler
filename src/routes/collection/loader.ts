@@ -1,21 +1,31 @@
 import { LoaderFunctionArgs, defer } from 'react-router-dom'
 import svgFactory from 'scripts/svg-factory/svg-factory'
+import { initCollectionState } from 'src/providers/collection/reducer'
+import type { Collection, PageData } from 'src/types'
 import lzString from 'src/utils/lz-string'
 import { svgFactoryChecker } from 'src/utils/svg-factory-checker'
-import { Collection, PageData } from 'types'
 
 type CollectionParams = {
   id: Collection['id']
 }
 
+/**
+ * @returns CollectionData
+ */
 export async function collectionLoader({ params }: LoaderFunctionArgs<CollectionParams>) {
   const [compressed] = Object.values(await chrome.storage.local.get(params.id)) as [string]
   const pageData = lzString.decompressFromBase64<PageData>(compressed)
-  svgFactoryChecker(pageData) // Look for malformed svgs
+  let { view } = await chrome.storage.local.get('view')
+
+  // Initialize database states if not exist
+  if (view === undefined) view = initCollectionState.view
+
+  // Dev logger to look for malformed svgs
+  svgFactoryChecker(pageData)
 
   return defer({
+    view,
     collectionId: params.id,
-    // data: new Promise((resolve) => setTimeout(() => resolve(svgFactory.process(pageData)), 1000)),
-    data: svgFactory.process(pageData),
+    data: svgFactory.process(pageData), // Returns [] if no data
   })
 }

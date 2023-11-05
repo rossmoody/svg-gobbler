@@ -1,4 +1,4 @@
-import type { Collection } from 'types'
+import type { Collection } from 'src/types'
 
 /**
  * The primary initialization function for sidebar collections context.

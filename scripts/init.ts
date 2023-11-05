@@ -1,4 +1,4 @@
-import type { PageData } from 'types'
+import type { PageData } from 'src/types'
 import Chrome from './chrome-utils'
 import { gatherPageData } from './gather-page-data'
 

@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useCollection } from 'src/providers'
 
 const sizes = [
   { value: 8, label: '8px' },
@@ -19,6 +20,13 @@ const sizes = [
 ]
 
 export const SizeSelect = () => {
+  const { state, dispatch } = useCollection()
+
+  function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    dispatch({ type: 'set-size', payload: Number(e.target.value) })
+    chrome.storage.local.set({ size: Number(e.target.value) })
+  }
+
   return (
     <>
       <label htmlFor="size" className="hidden">
@@ -26,8 +34,8 @@ export const SizeSelect = () => {
       </label>
       <select
         id="size"
-        name="size"
-        defaultValue="Canada"
+        value={state.size}
+        onChange={handleSizeChange}
         className={clsx(
           'text-sm border-none font-semibold rounded-md',
           'focus:ring-0 h-8 text-center bg-transparent',

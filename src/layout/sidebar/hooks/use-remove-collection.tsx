@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import type { Collection } from 'types'
+import type { Collection } from 'src/types'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()

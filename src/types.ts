@@ -49,6 +49,9 @@ export type Collection = {
   origin: string
 }
 
+/**
+ * The collection data gathered from storage and forwarded to client context
+ */
 export type CollectionData = {
   /**
    * The id of the collection.
@@ -58,4 +61,14 @@ export type CollectionData = {
    * The data gathered from the active tab.
    */
   data: Svg[]
+  /**
+   * The settings for how the collection is view. Primarily the state of the
+   * top bar in the collection view.
+   */
+  view: {
+    /**
+     * The size of the icons in the collection
+     */
+    size: number
+  }
 }

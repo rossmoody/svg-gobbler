@@ -1,4 +1,4 @@
-import type { Collection } from 'types'
+import type { Collection } from 'src/types'
 
 export type DashboardState = {
   /**

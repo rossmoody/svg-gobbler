@@ -1,31 +1,29 @@
 import { Svg } from 'scripts/svg-factory/svg'
-
-export type CollectionState = {
-  /**
-   * Whether the mainbar is open or not
-   */
-  data: Svg[]
-  /**
-   * The collection id
-   */
-  collectionId: string
-}
+import { CollectionData } from 'src/types'
 
 export type CollectionAction =
   | { type: 'reset' }
   | { type: 'set-data'; payload: Svg[] }
   | { type: 'set-collection-id'; payload: string }
+  | { type: 'set-view'; payload: CollectionData['view'] }
 
-export const initCollectionState: CollectionState = {
+export const initCollectionState: CollectionData = {
   data: [],
   collectionId: '',
+  view: {
+    size: 32,
+  },
 }
 
-export const sidebarReducer = (
-  state: CollectionState,
-  action: CollectionAction,
-): CollectionState => {
+export const sidebarReducer = (state: CollectionData, action: CollectionAction): CollectionData => {
   switch (action.type) {
+    case 'set-view': {
+      return {
+        ...state,
+        view: action.payload,
+      }
+    }
+
     case 'set-collection-id': {
       return {
         ...state,

@@ -9,7 +9,7 @@
     "paths": {
       "src/*": ["src/*"],
       "scripts/*": ["scripts/*"],
-      "types": ["types.ts"]
+      "types": ["src/types.ts"]
     },
 
     /* Bundler mode */

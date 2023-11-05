@@ -1,4 +1,4 @@
-import type { PageData } from 'types'
+import type { PageData } from 'src/types'
 import { GElement } from './g-element'
 import { Image } from './image'
 import { Inline } from './inline'

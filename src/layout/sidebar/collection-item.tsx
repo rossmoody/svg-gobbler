@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import type { Collection } from 'types'
+import type { Collection } from 'src/types'
 import { useRemoveCollection } from './hooks/use-remove-collection'
 
 type Props = {

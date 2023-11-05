@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'
 import { Svg } from 'scripts/svg-factory/svg'
 import { EmptyState } from 'src/components'
@@ -7,7 +7,8 @@ import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { Mainbar } from 'src/layout/main-bar'
 import { Mainpanel } from 'src/layout/main-panel'
 import { TopBar } from 'src/layout/top-bar'
-import type { CollectionData } from 'types'
+import { useCollection } from 'src/providers/collection'
+import type { CollectionData } from 'src/types'
 
 /**
  * This is really collection data with a promise we await for the svg data.
@@ -17,7 +18,13 @@ type LoaderData = CollectionData & {
 }
 
 export const CollectionRoute = () => {
-  const { data, collectionId } = useLoaderData() as LoaderData
+  const { data, collectionId, view } = useLoaderData() as LoaderData
+  const { dispatch } = useCollection()
+
+  useEffect(() => {
+    dispatch({ type: 'set-collection-id', payload: collectionId })
+    dispatch({ type: 'set-view', payload: view })
+  }, [data, collectionId, dispatch, view])
 
   return (
     <React.Suspense fallback={<SkeletonCollection />}>
@@ -33,7 +40,7 @@ export const CollectionRoute = () => {
                     {resolvedData.length === 0 ? (
                       <EmptyState />
                     ) : (
-                      <Collection data={resolvedData} collectionId={collectionId} />
+                      <Collection data={resolvedData} />
                     )}
                   </div>
                 </main>

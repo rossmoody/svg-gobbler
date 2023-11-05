@@ -2,16 +2,15 @@ import { Transition } from '@headlessui/react'
 import { Fragment, useEffect } from 'react'
 import { PresentationSvg } from 'scripts/svg-factory/presentation-svg'
 import { useCollection } from 'src/providers'
-import type { CollectionData } from 'types'
+import type { CollectionData } from 'src/types'
 import { Card } from './card'
 
-export const Collection = ({ data, collectionId }: CollectionData) => {
+export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { state, dispatch } = useCollection()
 
   useEffect(() => {
     dispatch({ type: 'set-data', payload: data })
-    dispatch({ type: 'set-collection-id', payload: collectionId })
-  }, [data, collectionId, dispatch])
+  }, [data, dispatch])
 
   return (
     <section className="transition-colors border-gray-200 dark:border-gray-800">

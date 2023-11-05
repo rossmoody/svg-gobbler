@@ -1,9 +1,10 @@
 import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
-import type { CollectionAction, CollectionState } from './reducer'
+import type { CollectionData } from 'src/types'
+import type { CollectionAction } from './reducer'
 import { initCollectionState, sidebarReducer } from './reducer'
 
 export type CollectionContextProps = {
-  state: CollectionState
+  state: CollectionData
   dispatch: Dispatch<CollectionAction>
 }
 
