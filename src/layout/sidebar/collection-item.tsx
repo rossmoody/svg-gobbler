@@ -26,7 +26,6 @@ export const CollectionItem = ({ collection }: Props) => {
     <NavLink
       to={`collection/${collection.id}`}
       onClick={() => {
-        // Set the sidebar to closed in mobile
         sidebarDispatch({ type: 'set-open', payload: false })
       }}
       className={({ isActive }) => {

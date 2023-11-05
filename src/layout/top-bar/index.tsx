@@ -30,7 +30,8 @@ export const TopBar = () => {
               <span className="sr-only">Change background color</span>
             </IconButton>
           </Tooltip>
-          <HorizontalRule />
+          <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden="true" />
+
           <Button variant="ghost">
             View
             <ChevronDownIcon className="h-4 w-4" />
@@ -43,7 +44,8 @@ export const TopBar = () => {
             24px
             <ChevronDownIcon className="h-4 w-4" />
           </Button>
-          <HorizontalRule />
+          <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden="true" />
+
           <Button variant="secondary">
             Upload
             <PlusIcon className="h-4 w-4" />
@@ -53,7 +55,3 @@ export const TopBar = () => {
     </section>
   )
 }
-
-const HorizontalRule = () => (
-  <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden="true" />
-)
