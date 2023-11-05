@@ -1,4 +1,4 @@
-import { Svg } from 'scripts/svg-factory/svg'
+import { Svg } from 'scripts/svg-classes/svg'
 
 /**
  * The message sent from the Background script to the Content script.
@@ -50,7 +50,8 @@ export type Collection = {
 }
 
 /**
- * The collection data gathered from storage and forwarded to client context
+ * The collection data gathered from storage and forwarded to client context.
+ * This is shared with client contex types for parity.
  */
 export type CollectionData = {
   /**
@@ -70,5 +71,9 @@ export type CollectionData = {
      * The size of the icons in the collection
      */
     size: number
+    /**
+     * The sort order of the collection
+     */
+    sort: 'none' | 'file-asc' | 'file-desc'
   }
 }

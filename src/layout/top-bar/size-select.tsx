@@ -23,8 +23,8 @@ export const SizeSelect = () => {
   const { state, dispatch } = useCollection()
 
   function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch({ type: 'set-view-size', payload: Number(e.target.value) })
     chrome.storage.local.set({ view: { size: Number(e.target.value) } })
+    dispatch({ type: 'set-view', payload: { ...state.view, size: Number(e.target.value) } })
   }
 
   return (

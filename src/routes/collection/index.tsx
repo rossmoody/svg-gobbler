@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'
-import { Svg } from 'scripts/svg-factory/svg'
+import { Svg } from 'scripts/svg-classes/svg'
 import { EmptyState } from 'src/components'
 import { Collection } from 'src/layout/collection'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
@@ -24,7 +24,7 @@ export const CollectionRoute = () => {
   useEffect(() => {
     dispatch({ type: 'set-collection-id', payload: collectionId })
     dispatch({ type: 'set-view', payload: view })
-  }, [data, collectionId, dispatch, view])
+  }, [collectionId, dispatch, view])
 
   return (
     <Fragment>

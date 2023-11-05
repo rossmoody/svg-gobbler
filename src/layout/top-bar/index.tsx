@@ -3,6 +3,7 @@ import { Button, IconButton, Tooltip } from 'src/components'
 import { useDashboard } from 'src/providers/dashboard'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
+import { SortMenu } from './sort-menu'
 import { ThemeButton } from './theme-btn'
 
 export const TopBar = () => {
@@ -23,7 +24,7 @@ export const TopBar = () => {
       <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden />
       <CollectionTitle />
       <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">
-        <div className="items-center gap-x-2 lg:gap-x-4 ml-auto hidden sm:flex">
+        <div className="items-center gap-x-3 lg:gap-x-4 ml-auto hidden sm:flex">
           <ThemeButton />
           <Tooltip content="Canvas color">
             <IconButton variant="ghost" onClick={openSidebar}>
@@ -37,10 +38,7 @@ export const TopBar = () => {
             View
             <ChevronDownIcon className="h-3 w-3" aria-hidden />
           </Button>
-          <Button variant="ghost">
-            Sort
-            <ChevronDownIcon className="h-3 w-3" aria-hidden />
-          </Button>
+          <SortMenu />
           <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
           <Button variant="secondary">
             Upload

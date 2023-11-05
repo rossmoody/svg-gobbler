@@ -1,8 +1,8 @@
 import type { PageData } from 'src/types'
-import { GElement } from './g-element'
-import { Image } from './image'
-import { Inline } from './inline'
-import { Symbol } from './symbol'
+import { GElement } from './svg-classes/g-element'
+import { Image } from './svg-classes/image'
+import { Inline } from './svg-classes/inline'
+import { Symbol } from './svg-classes/symbol'
 
 /**
  * The SVG factory will process the page data and return an array of SVG objects.

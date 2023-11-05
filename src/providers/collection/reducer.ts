@@ -1,30 +1,61 @@
-import { Svg } from 'scripts/svg-factory/svg'
+import { Svg } from 'scripts/svg-classes/svg'
 import { CollectionData } from 'src/types'
+
+export type CollectionState = CollectionData & {
+  /**
+   * Processed data is the collection data that is ready to be rendered
+   * after going through the filters and sorters and paginators.
+   */
+  processedData: Svg[]
+}
 
 export type CollectionAction =
   | { type: 'reset' }
+  | { type: 'process-data' }
   | { type: 'set-data'; payload: Svg[] }
   | { type: 'set-collection-id'; payload: string }
-  | { type: 'set-view'; payload: CollectionData['view'] }
-  | { type: 'set-view-size'; payload: CollectionData['view']['size'] }
+  | { type: 'set-view'; payload: CollectionState['view'] }
 
-export const initCollectionState: CollectionData = {
+export const initCollectionState: CollectionState = {
   data: [],
+  processedData: [],
   collectionId: '',
   view: {
-    size: 32,
+    size: 48,
+    sort: 'none',
   },
 }
 
-export const sidebarReducer = (state: CollectionData, action: CollectionAction): CollectionData => {
+export const sidebarReducer = (state: CollectionState, action: CollectionAction) => {
   switch (action.type) {
-    case 'set-view-size': {
+    case 'process-data': {
+      let processedData = [...state.data]
+      // TODO: Process filters
+
+      // Process sorting
+      switch (state.view.sort) {
+        case 'file-asc': {
+          processedData = processedData.sort((a, b) => {
+            const aSize = new Blob([a.originalString]).size
+            const bSize = new Blob([b.originalString]).size
+            return aSize - bSize
+          })
+          break
+        }
+
+        case 'file-desc': {
+          processedData = processedData.sort((a, b) => {
+            const aSize = new Blob([a.originalString]).size
+            const bSize = new Blob([b.originalString]).size
+            return bSize - aSize
+          })
+          break
+        }
+      }
+
       return {
         ...state,
-        view: {
-          ...state.view,
-          size: action.payload,
-        },
+        processedData,
       }
     }
 

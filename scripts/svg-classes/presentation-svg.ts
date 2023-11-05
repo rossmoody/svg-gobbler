@@ -61,6 +61,7 @@ export class PresentationSvg {
     element.removeAttribute('height')
     element.removeAttribute('width')
     element.removeAttribute('class') // Tailwind conflicts
+    element.removeAttribute('style') // Risky, may remove
 
     return element.outerHTML
   }

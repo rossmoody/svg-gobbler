@@ -10,7 +10,7 @@ export const btnVariantStyles = {
   ghost: 'bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800',
 }
 
-const sizeStyles = {
+export const btnSizeStyles = {
   xs: 'px-2 py-1 text-xs',
   sm: 'px-2 py-1 text-sm',
   md: 'px-2.5 py-1.5 text-sm',
@@ -20,7 +20,7 @@ const sizeStyles = {
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: keyof typeof btnVariantStyles
-  size?: keyof typeof sizeStyles
+  size?: keyof typeof btnSizeStyles
 }
 
 /**
@@ -32,7 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const combinedClassName = [
       btnBaseStyles,
       btnVariantStyles[variant],
-      sizeStyles[size],
+      btnSizeStyles[size],
       className,
     ]
       .join(' ')

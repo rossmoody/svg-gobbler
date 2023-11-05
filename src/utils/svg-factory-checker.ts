@@ -1,4 +1,4 @@
-import svgFactory from 'scripts/svg-factory/svg-factory'
+import svgFactory from 'scripts/svg-factory'
 import type { PageData } from 'src/types'
 
 /**

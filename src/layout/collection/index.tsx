@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react'
 import { Fragment, useEffect } from 'react'
-import { PresentationSvg } from 'scripts/svg-factory/presentation-svg'
+import { PresentationSvg } from 'scripts/svg-classes/presentation-svg'
 import { useCollection } from 'src/providers'
 import type { CollectionData } from 'src/types'
 import { Card } from './card'
@@ -10,12 +10,13 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
 
   useEffect(() => {
     dispatch({ type: 'set-data', payload: data })
+    dispatch({ type: 'process-data' })
   }, [data, dispatch])
 
   return (
     <section className="transition-colors border-gray-200 dark:border-gray-800">
       <ul className="flex flex-wrap gap-3">
-        {state.data.map((svg, i) => (
+        {state.processedData.map((svg, i) => (
           <Transition
             show
             appear

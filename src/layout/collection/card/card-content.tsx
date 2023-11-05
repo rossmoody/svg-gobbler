@@ -3,7 +3,7 @@ import { CardProps } from '.'
 /**
  * Conditionally renders a cors protected image element or the original svg string as html.
  */
-export const CardContent = ({ data }: CardProps) => {
+export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
   if (data.isCorsRestricted) {
     return <img src={data.corsRestrictedUrl} className="w-full" />
   }
@@ -11,7 +11,7 @@ export const CardContent = ({ data }: CardProps) => {
   return (
     <span
       dangerouslySetInnerHTML={{ __html: data.presentationSvg }}
-      className="[&>svg]:absolute [&>svg]:h-full [&>svg]:w-full [&>svg]:left-0 [&>svg]:top-0 [&>svg]:overflow-visible"
+      className="[& > svg]:absolute [& > svg]:h-full [& > svg]:w-full [& > svg]:left-0 [& > svg]:top-0 [& > svg]:overflow-visible"
     />
   )
 }
