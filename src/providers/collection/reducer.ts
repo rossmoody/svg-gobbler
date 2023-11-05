@@ -1,6 +1,6 @@
 import { Svg } from 'scripts/svg-factory/svg'
 
-export type MainState = {
+export type CollectionState = {
   /**
    * Whether the mainbar is open or not
    */
@@ -11,17 +11,20 @@ export type MainState = {
   collectionId: string
 }
 
-export type MainAction =
+export type CollectionAction =
   | { type: 'reset' }
   | { type: 'set-data'; payload: Svg[] }
   | { type: 'set-collection-id'; payload: string }
 
-export const initMainState: MainState = {
+export const initCollectionState: CollectionState = {
   data: [],
   collectionId: '',
 }
 
-export const sidebarReducer = (state: MainState, action: MainAction): MainState => {
+export const sidebarReducer = (
+  state: CollectionState,
+  action: CollectionAction,
+): CollectionState => {
   switch (action.type) {
     case 'set-collection-id': {
       return {
@@ -38,11 +41,11 @@ export const sidebarReducer = (state: MainState, action: MainAction): MainState 
     }
 
     case 'reset': {
-      return initMainState
+      return initCollectionState
     }
 
     default: {
-      return initMainState
+      return initCollectionState
     }
   }
 }

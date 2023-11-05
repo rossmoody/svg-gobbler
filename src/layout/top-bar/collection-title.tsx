@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
-import { useDashboard, useMain } from 'src/providers'
+import { useCollection, useDashboard } from 'src/providers'
 
 export const CollectionTitle = () => {
-  const { state: mainState } = useMain()
+  const { state: mainState } = useCollection()
   const { state: sidebarState, dispatch: sidebarDispatch } = useDashboard()
 
   const title = useMemo(() => {
