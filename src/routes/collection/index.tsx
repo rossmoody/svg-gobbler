@@ -27,29 +27,26 @@ export const CollectionRoute = () => {
   }, [data, collectionId, dispatch, view])
 
   return (
-    <React.Suspense fallback={<SkeletonCollection />}>
-      <Await resolve={data}>
-        {(resolvedData: CollectionData['data']) => {
-          return (
-            <Fragment>
-              <TopBar />
-              <div className="flex">
-                <main className="flex-1">
-                  <Mainbar />
-                  <div className="py-6 px-6 overflow-y-auto h-[calc(100dvh-theme(space.28))] bg-gray-100 dark:bg-gray-900 texts">
-                    {resolvedData.length === 0 ? (
-                      <EmptyState />
-                    ) : (
-                      <Collection data={resolvedData} />
-                    )}
-                  </div>
-                </main>
-                <Mainpanel />
-              </div>
-            </Fragment>
-          )
-        }}
-      </Await>
-    </React.Suspense>
+    <Fragment>
+      <TopBar />
+      <div className="flex">
+        <main className="flex-1">
+          <Mainbar />
+          <div className="py-6 px-6 overflow-y-auto h-[calc(100dvh-theme(space.28))] bg-gray-100 dark:bg-gray-900 texts">
+            <React.Suspense fallback={<SkeletonCollection />}>
+              <Await resolve={data}>
+                {(resolvedData: CollectionData['data']) => {
+                  if (resolvedData.length === 0) {
+                    return <EmptyState />
+                  }
+                  return <Collection data={resolvedData} />
+                }}
+              </Await>
+            </React.Suspense>
+          </div>
+        </main>
+        <Mainpanel />
+      </div>
+    </Fragment>
   )
 }

@@ -9,15 +9,12 @@ type CollectionParams = {
   id: Collection['id']
 }
 
-/**
- * @returns CollectionData
- */
 export async function collectionLoader({ params }: LoaderFunctionArgs<CollectionParams>) {
   const [compressed] = Object.values(await chrome.storage.local.get(params.id)) as [string]
   const pageData = lzString.decompressFromBase64<PageData>(compressed)
   let { view } = await chrome.storage.local.get('view')
 
-  // Initialize database states if not exist
+  // Initialize context states if not exist in DB
   if (view === undefined) view = initCollectionState.view
 
   // Dev logger to look for malformed svgs
@@ -26,6 +23,11 @@ export async function collectionLoader({ params }: LoaderFunctionArgs<Collection
   return defer({
     view,
     collectionId: params.id,
-    data: svgFactory.process(pageData), // Returns [] if no data
+    // data: svgFactory.process(pageData), // Returns [] if no data
+    data: new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(svgFactory.process(pageData))
+      }, 5000)
+    }),
   })
 }

@@ -23,8 +23,8 @@ export const SizeSelect = () => {
   const { state, dispatch } = useCollection()
 
   function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch({ type: 'set-size', payload: Number(e.target.value) })
-    chrome.storage.local.set({ size: Number(e.target.value) })
+    dispatch({ type: 'set-view-size', payload: Number(e.target.value) })
+    chrome.storage.local.set({ view: { size: Number(e.target.value) } })
   }
 
   return (
@@ -34,7 +34,7 @@ export const SizeSelect = () => {
       </label>
       <select
         id="size"
-        value={state.size}
+        value={state.view.size}
         onChange={handleSizeChange}
         className={clsx(
           'text-sm border-none font-semibold rounded-md',

@@ -6,6 +6,7 @@ export type CollectionAction =
   | { type: 'set-data'; payload: Svg[] }
   | { type: 'set-collection-id'; payload: string }
   | { type: 'set-view'; payload: CollectionData['view'] }
+  | { type: 'set-view-size'; payload: CollectionData['view']['size'] }
 
 export const initCollectionState: CollectionData = {
   data: [],
@@ -17,6 +18,16 @@ export const initCollectionState: CollectionData = {
 
 export const sidebarReducer = (state: CollectionData, action: CollectionAction): CollectionData => {
   switch (action.type) {
+    case 'set-view-size': {
+      return {
+        ...state,
+        view: {
+          ...state.view,
+          size: action.payload,
+        },
+      }
+    }
+
     case 'set-view': {
       return {
         ...state,
