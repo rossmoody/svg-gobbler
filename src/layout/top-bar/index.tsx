@@ -1,12 +1,12 @@
 import { Bars3Icon, ChevronDownIcon, PaintBrushIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Button, IconButton, Tooltip } from 'src/components'
-import { useSidebar } from 'src/providers/sidebar'
+import { useDashboard } from 'src/providers/dashboard'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { ThemeButton } from './theme-btn'
 
 export const TopBar = () => {
-  const { dispatch: sidebarDispatch } = useSidebar()
+  const { dispatch: sidebarDispatch } = useDashboard()
 
   function openSidebar() {
     sidebarDispatch({ type: 'set-open', payload: true })

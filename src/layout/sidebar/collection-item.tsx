@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useSidebar } from 'src/providers'
+import { useDashboard } from 'src/providers'
 import type { Collection } from 'types'
 import { useRemoveCollection } from './hooks/use-remove-collection'
 
@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const CollectionItem = ({ collection }: Props) => {
-  const { dispatch: sidebarDispatch } = useSidebar()
+  const { dispatch: sidebarDispatch } = useDashboard()
   const handleRemoveCollection = useRemoveCollection()
 
   const faviconUrl = useMemo(() => {

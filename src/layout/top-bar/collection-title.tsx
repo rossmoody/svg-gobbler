@@ -1,10 +1,10 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
-import { useMain, useSidebar } from 'src/providers'
+import { useDashboard, useMain } from 'src/providers'
 
 export const CollectionTitle = () => {
   const { state: mainState } = useMain()
-  const { state: sidebarState, dispatch: sidebarDispatch } = useSidebar()
+  const { state: sidebarState, dispatch: sidebarDispatch } = useDashboard()
 
   const title = useMemo(() => {
     return sidebarState.collections.find((c) => c.id === mainState.collectionId)?.name

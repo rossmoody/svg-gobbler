@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSidebar } from 'src/providers'
+import { useDashboard } from 'src/providers'
 import type { Collection } from 'types'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { state, dispatch } = useSidebar()
+  const { state, dispatch } = useDashboard()
 
   return function (collection: Collection) {
     const isActiveCollection = pathname.includes(collection.id)

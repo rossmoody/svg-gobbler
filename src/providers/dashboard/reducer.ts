@@ -1,6 +1,6 @@
 import type { Collection } from 'types'
 
-export type SidebarState = {
+export type DashboardState = {
   /**
    * Whether the sidebar is open or not in mobile contexts.
    */
@@ -11,17 +11,17 @@ export type SidebarState = {
   collections: Collection[]
 }
 
-export type SidebarAction =
+export type DashboardAction =
   | { type: 'reset' }
   | { type: 'set-open'; payload: boolean }
   | { type: 'set-collections'; payload: Collection[] }
 
-export const initSidebarState: SidebarState = {
+export const initDashboardState: DashboardState = {
   isOpen: false,
   collections: [],
 }
 
-export const sidebarReducer = (state: SidebarState, action: SidebarAction): SidebarState => {
+export const sidebarReducer = (state: DashboardState, action: DashboardAction): DashboardState => {
   switch (action.type) {
     case 'set-collections': {
       return { ...state, collections: action.payload }
@@ -32,11 +32,11 @@ export const sidebarReducer = (state: SidebarState, action: SidebarAction): Side
     }
 
     case 'reset': {
-      return initSidebarState
+      return initDashboardState
     }
 
     default: {
-      return initSidebarState
+      return initDashboardState
     }
   }
 }

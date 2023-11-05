@@ -3,11 +3,11 @@ import { Cog6ToothIcon, MegaphoneIcon, PlusIcon } from '@heroicons/react/24/outl
 import { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
-import { useSidebar } from 'src/providers'
+import { useDashboard } from 'src/providers'
 import { CollectionItem } from './collection-item'
 
 export const SidebarContent = () => {
-  const { state } = useSidebar()
+  const { state } = useDashboard()
 
   return (
     <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r px-6 pb-5 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
