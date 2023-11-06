@@ -5,7 +5,7 @@ import { CardProps } from '.'
  */
 export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
   if (data.isCorsRestricted) {
-    return <img src={data.corsRestrictedUrl} className="w-full absolute top-0 bottom-0" />
+    return <img src={data.corsRestrictedUrl} className="w-full absolute top-0 bottom-0 m-auto" />
   }
 
   return (

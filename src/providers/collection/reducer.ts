@@ -23,6 +23,9 @@ export const initCollectionState: CollectionState = {
   view: {
     size: 48,
     sort: 'none',
+    filters: {
+      'hide-cors': false,
+    },
   },
 }
 
@@ -30,7 +33,19 @@ export const sidebarReducer = (state: CollectionState, action: CollectionAction)
   switch (action.type) {
     case 'process-data': {
       let processedData = [...state.data]
-      // TODO: Process filters
+
+      // Process filters
+      Object.entries(state.view.filters).forEach(([filter, value]) => {
+        switch (filter) {
+          case 'hide-cors': {
+            if (!value) break
+            processedData = processedData.filter((svg) => {
+              return svg.asElement instanceof HTMLImageElement
+            })
+            break
+          }
+        }
+      })
 
       // Process sorting
       switch (state.view.sort) {

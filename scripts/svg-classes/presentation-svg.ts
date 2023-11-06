@@ -17,7 +17,7 @@ export class PresentationSvg {
   }
 
   /**
-   * Returns true if the SVG is an image element. We process all SVGs and try every method
+   * Returns true if the SVG is an image element that is cors restrictred. We process all SVGs and try every method
    * to get at the SVG string. If the SVG is still an image element, the fetch failed due to CORS restrictions.
    * We show the SVG as an image element.
    */

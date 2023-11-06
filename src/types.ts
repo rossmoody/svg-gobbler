@@ -75,5 +75,14 @@ export type CollectionData = {
      * The sort order of the collection
      */
     sort: 'none' | 'file-asc' | 'file-desc'
+    /**
+     * The filters applied to the collection
+     */
+    filters: {
+      /**
+       * Whether to hide icons that restrict via cors
+       */
+      'hide-cors': boolean
+    }
   }
 }
