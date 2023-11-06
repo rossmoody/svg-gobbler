@@ -22,6 +22,7 @@ export const SortMenu = () => {
 
   function handleSortChange(value: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const sort = value.currentTarget.dataset.value as SortOption['value']
+    chrome.storage.local.set({ view: { ...state.view, sort } })
     dispatch({ type: 'set-view', payload: { ...state.view, sort } })
     dispatch({ type: 'process-data' })
   }

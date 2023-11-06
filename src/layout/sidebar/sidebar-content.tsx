@@ -10,7 +10,7 @@ export const SidebarContent = () => {
   const { state } = useDashboard()
 
   return (
-    <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r px-6 pb-5 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+    <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r px-6 pb-5 border-gray-200 dark:border-gray-800 surface">
       <div className="flex h-16 shrink-0 items-center mt-2">
         <Logo className="h-8 w-auto" />
       </div>

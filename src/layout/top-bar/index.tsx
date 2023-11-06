@@ -1,10 +1,11 @@
-import { Bars3Icon, ChevronDownIcon, PaintBrushIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, PlusIcon } from '@heroicons/react/24/outline'
 import { Button, IconButton, Tooltip } from 'src/components'
 import { useDashboard } from 'src/providers/dashboard'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { SortMenu } from './sort-menu'
 import { ThemeButton } from './theme-btn'
+import { ViewPopover } from './view-popover'
 
 export const TopBar = () => {
   const { dispatch: sidebarDispatch } = useDashboard()
@@ -21,23 +22,20 @@ export const TopBar = () => {
           <span className="sr-only">Open collection panel</span>
         </IconButton>
       </Tooltip>
-      <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden />
+      <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 lg:hidden" aria-hidden />
       <CollectionTitle />
       <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">
         <div className="items-center gap-x-3 lg:gap-x-4 ml-auto hidden sm:flex">
           <ThemeButton />
           <Tooltip content="Canvas color">
-            <IconButton variant="ghost" onClick={openSidebar}>
+            {/* <IconButton variant="ghost">
               <PaintBrushIcon className="h-5 w-5" aria-hidden />
               <span className="sr-only">Change background color</span>
-            </IconButton>
+            </IconButton> */}
           </Tooltip>
           <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
           <SizeSelect />
-          <Button variant="ghost">
-            View
-            <ChevronDownIcon className="h-3 w-3" aria-hidden />
-          </Button>
+          <ViewPopover />
           <SortMenu />
           <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
           <Button variant="secondary">

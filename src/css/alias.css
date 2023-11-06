@@ -5,3 +5,7 @@
 .text-muted {
   @apply text-gray-700 dark:text-gray-400;
 }
+
+.surface {
+  @apply bg-white dark:bg-gray-900 transition-colors duration-300 ease-in-out;
+}

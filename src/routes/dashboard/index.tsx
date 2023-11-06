@@ -6,7 +6,7 @@ export const DashboardRoute = () => (
   <DashboardProvider>
     <CollectionProvider>
       <Sidebar />
-      <div className="lg:pl-72 transition-all relative overflow-hidden bg-white dark:bg-gray-900 min-h-screen">
+      <div className="lg:pl-72 transition-all relative overflow-hidden min-h-screen">
         <Outlet />
       </div>
     </CollectionProvider>
