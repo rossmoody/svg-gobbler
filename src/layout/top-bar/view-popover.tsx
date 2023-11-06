@@ -24,6 +24,10 @@ export const ViewPopover = () => {
     dispatch({ type: 'process-data' })
   }
 
+  const corsRestrictedCount = state.data.filter(
+    (svg) => svg.asElement instanceof HTMLImageElement,
+  ).length
+
   return (
     <Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
       <Popover className="relative inline-block px-4 text-left">
@@ -64,7 +68,7 @@ export const ViewPopover = () => {
                   htmlFor={option.value}
                   className="ml-3 whitespace-nowrap pr-4 text-sm font-medium text cursor-pointer"
                 >
-                  {option.label}
+                  {option.label} {corsRestrictedCount > 0 && `(${corsRestrictedCount})`}
                 </label>
               </div>
             ))}

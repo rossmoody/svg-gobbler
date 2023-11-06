@@ -39,9 +39,9 @@ export const sidebarReducer = (state: CollectionState, action: CollectionAction)
         switch (filter) {
           case 'hide-cors': {
             if (!value) break
-            processedData = processedData.filter((svg) => {
-              return svg.asElement instanceof HTMLImageElement
-            })
+            processedData = processedData.filter(
+              (svg) => !(svg.asElement instanceof HTMLImageElement),
+            )
             break
           }
         }

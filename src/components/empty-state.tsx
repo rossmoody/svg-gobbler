@@ -1,6 +1,10 @@
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Button } from '.'
 
+/**
+ * This is displayed when there are no SVGs found sourcing the client page.
+ * It is also rendered when the user has deleted all SVGs from the collection.
+ */
 export const EmptyState = () => (
   <div className="flex items-center justify-center w-full h-full rounded-3xl border-2 border-dashed border-gray-200 dark:border-gray-600 p-12 bg-white/70 dark:bg-gray-800/70">
     <div className="text-center">
