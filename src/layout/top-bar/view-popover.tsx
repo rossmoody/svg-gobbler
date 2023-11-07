@@ -58,7 +58,7 @@ export const ViewPopover = () => {
                   id={option.value}
                   name={option.value}
                   type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500 cursor-pointer"
+                  className="h-4 w-4 rounded border-gray-300 text-red-600 focus cursor-pointer"
                   onChange={handleCheckboxChange}
                   checked={
                     state.view.filters[option.value as keyof CollectionData['view']['filters']]

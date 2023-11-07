@@ -19,8 +19,9 @@ export const SizeSelect = () => {
   const { state, dispatch } = useCollection()
 
   function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    chrome.storage.local.set({ view: { size: Number(e.target.value) } })
-    dispatch({ type: 'set-view', payload: { ...state.view, size: Number(e.target.value) } })
+    const view = { ...state.view, size: Number(e.target.value) }
+    chrome.storage.local.set({ view })
+    dispatch({ type: 'set-view', payload: view })
   }
 
   return (
@@ -34,11 +35,9 @@ export const SizeSelect = () => {
         onChange={handleSizeChange}
         className={clsx(
           'text-sm border-none font-semibold rounded-md',
-          'focus:ring-0 h-8 text-center bg-transparent',
-          'py-0 px-1.5 cursor-pointer bg-none',
+          'h-8 text-center bg-transparent',
+          'py-0 px-1.5 cursor-pointer bg-none focus',
           'hover:bg-gray-100 dark:hover:bg-gray-800',
-          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
-          'focus-visible:outline-red-600',
         )}
       >
         {sizes.map((size) => (

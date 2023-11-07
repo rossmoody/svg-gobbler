@@ -5,7 +5,7 @@ import { Collection, PageData } from 'src/types'
 import { FormUtils } from 'src/utils/form-utils'
 import lzString from 'src/utils/lz-string'
 
-export const useSubmitForm = () => {
+export const useSubmitForm = (files: File[]) => {
   const navigate = useNavigate()
   const { state, dispatch } = useDashboard()
 
@@ -15,11 +15,10 @@ export const useSubmitForm = () => {
 
     const data = {
       name: formData.get('name') as string,
-      files: formData.getAll('files') as File[],
     }
 
     const id = nanoid()
-    const svgFileData = await FormUtils.handleUpload(data.files)
+    const svgFileData = await FormUtils.handleUpload(files)
 
     const pageData: PageData = {
       host: '',

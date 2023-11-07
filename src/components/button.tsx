@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 
 export const btnBaseStyles =
-  'rounded-lg flex items-center gap-1 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-all duration-200 ease-in-out'
+  'rounded-lg flex items-center gap-1 font-semibold transition-all duration-200 ease-in-out focus'
 
 export const btnVariantStyles = {
   primary: 'bg-red-600 hover:bg-red-500 text-white shadow-sm',

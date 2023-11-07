@@ -1,10 +1,11 @@
-import { Bars3Icon, PlusIcon } from '@heroicons/react/24/outline'
-import { Button, IconButton, Tooltip } from 'src/components'
+import { Bars3Icon } from '@heroicons/react/24/outline'
+import { IconButton, Tooltip } from 'src/components'
 import { useDashboard } from 'src/providers/dashboard'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { SortMenu } from './sort-menu'
 import { ThemeButton } from './theme-btn'
+import { UploadModal } from './upload-modal'
 import { ViewPopover } from './view-popover'
 
 export const TopBar = () => {
@@ -27,21 +28,12 @@ export const TopBar = () => {
       <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">
         <div className="items-center gap-x-3 lg:gap-x-4 ml-auto hidden sm:flex">
           <ThemeButton />
-          <Tooltip content="Canvas color">
-            {/* <IconButton variant="ghost">
-              <PaintBrushIcon className="h-5 w-5" aria-hidden />
-              <span className="sr-only">Change background color</span>
-            </IconButton> */}
-          </Tooltip>
           <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
           <SizeSelect />
           <ViewPopover />
           <SortMenu />
           <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
-          <Button variant="secondary">
-            Upload
-            <PlusIcon className="h-4 w-4" />
-          </Button>
+          <UploadModal />
         </div>
       </div>
     </section>

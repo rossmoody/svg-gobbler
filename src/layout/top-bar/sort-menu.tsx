@@ -47,7 +47,7 @@ export const SortMenu = () => {
           className={clsx(
             'absolute right-0 z-10 mt-2 w-48 origin-top-left rounded-md',
             'bg-white dark:bg-gray-800 shadow-2xl ring-1 ring-black dark:ring-white',
-            'dark:ring-opacity-5 ring-opacity-5 focus:outline-none',
+            'dark:ring-opacity-5 ring-opacity-5 focus',
           )}
         >
           <div className="py-1">

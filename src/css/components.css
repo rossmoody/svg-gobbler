@@ -1,9 +1,12 @@
 /* Components */
 
+.focus {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600;
+}
+
 .input {
-  @apply block w-full rounded-md border-0 py-2.5 px-4 shadow-sm ring-1 ring-inset ring-gray-300
-  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 text-sm mt-1 
-  outline-none;
+  @apply block w-full rounded-md border-0 py-2.5 px-4 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 text-sm mt-1 
+  outline-none dark:text-gray-100 dark:placeholder-gray-500 bg-transparent focus;
 }
 
 .label {
@@ -26,5 +29,5 @@
 
 .collection-item {
   @apply flex items-center gap-x-2 text-sm leading-6 font-normal px-2 py-1 rounded-md 
-  transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 text;
+  transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 text focus;
 }
