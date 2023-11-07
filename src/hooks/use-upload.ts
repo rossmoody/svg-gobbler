@@ -22,7 +22,7 @@ export const useUpload = () => {
     // Append new strings to collection's page data
     pageData = {
       ...pageData,
-      data: [...pageData.data, ...data],
+      data: [...data, ...pageData.data],
     }
 
     // Update the collection's page data

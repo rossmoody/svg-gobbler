@@ -1,10 +1,11 @@
+import headlessPlugin from '@headlessui/tailwindcss'
 import formsPlugin from '@tailwindcss/forms'
 import radixPlugin from 'tailwindcss-radix'
 
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  plugins: [formsPlugin, radixPlugin()],
+  plugins: [headlessPlugin(), formsPlugin, radixPlugin()],
   darkMode: 'class',
   theme: {
     extend: {

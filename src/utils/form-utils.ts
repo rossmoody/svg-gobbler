@@ -1,3 +1,6 @@
+/**
+ * Utility class for form related operations.
+ */
 export class FormUtils {
   /**
    * Process and returns the string SVG values associated with a
@@ -26,5 +29,27 @@ export class FormUtils {
     })
 
     return Promise.all(promises)
+  }
+
+  /**
+   * Checks if a given string is a valid SVG.
+   */
+  static isValidSVG(svgString: string) {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(svgString, 'image/svg+xml')
+
+    // Checks if any parsing error node exists
+    const parserErrorNS = parser
+      .parseFromString('INVALID', 'text/xml')
+      .getElementsByTagName('parsererror')[0].namespaceURI
+    const errorNode = doc.getElementsByTagNameNS(parserErrorNS, 'parsererror')
+
+    // If there's a parser error, the SVG is invalid
+    if (errorNode.length > 0) {
+      return false
+    }
+
+    // Additionally check if the root element is an SVG element
+    return doc.documentElement.nodeName === 'svg'
   }
 }
