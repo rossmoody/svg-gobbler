@@ -25,8 +25,8 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
   })
 
   function onClose() {
-    setAcceptedFiles([])
     setOpen(false)
+    setTimeout(() => setAcceptedFiles([]), 300)
   }
 
   return (
@@ -60,10 +60,8 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
           >
             <DocumentPlusIcon className="mx-auto h-12 w-12 text-muted mb-3" aria-hidden="true" />
             <div className="flex text-sm leading-6 text">
-              <label htmlFor="files" className="font-semibold text-red-600">
-                Upload files
-              </label>
-              <input id="files" className="sr-only" {...getInputProps()} />
+              <span className="font-semibold text-red-600 dark:text-red-500">Upload files</span>
+              <input className="sr-only" {...getInputProps()} />
               <p className="pl-1">or drag and drop</p>
             </div>
             <p className="text-xs leading-5">SVG files up to 10mb</p>
@@ -81,7 +79,7 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
             className="absolute inset-0 flex flex-col items-center justify-center"
           >
             <DocumentCheckIcon className="mx-auto h-12 w-12 text-muted mb-3" aria-hidden="true" />
-            <span className="text-sm leading-5 text-gray-500 dark:text-gray-400">
+            <span className="text-sm leading-5 text font-medium">
               {acceptedFiles.length} item{acceptedFiles.length > 1 && 's'} uploaded
             </span>
           </Transition>

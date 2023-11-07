@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import type { Collection } from 'src/types'
+import type { Collection, PageData } from 'src/types'
+import lzString from 'src/utils/lz-string'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()
@@ -12,11 +13,22 @@ export function useRemoveCollection() {
     const isActiveCollection = pathname.includes(collection.id)
     const filteredCollections = state.collections.filter(({ id }) => id !== collection.id)
 
+    // If there are no collections left, create an empty one
     if (filteredCollections.length === 0) {
-      // If there are no collections left, create an empty one
-      const emptyCollection: Collection = { id: nanoid(), name: 'New Collection', origin: '' }
-      filteredCollections.push(emptyCollection)
-      chrome.storage.local.set({ [emptyCollection.id]: [] })
+      const pageData: PageData = {
+        host: '',
+        origin: '',
+        data: [],
+      }
+
+      const collection: Collection = {
+        id: nanoid(),
+        name: 'New Collection',
+        origin: '',
+      }
+
+      filteredCollections.push(collection)
+      chrome.storage.local.set({ [collection.id]: lzString.compressToBase64(pageData) })
     }
 
     dispatch({ type: 'set-collections', payload: filteredCollections })

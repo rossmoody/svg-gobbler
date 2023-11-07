@@ -12,9 +12,7 @@ export const useCreateCollection = (files: File[]) => {
   return async function (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-
     const name = formData.get('name') as string
-
     const id = nanoid()
     const svgFileData = await FormUtils.handleUpload(files)
 
@@ -27,7 +25,7 @@ export const useCreateCollection = (files: File[]) => {
     const collection: Collection = {
       id,
       name,
-      origin: name,
+      origin: '',
     }
 
     const collections = [collection, ...state.collections]

@@ -1,14 +1,16 @@
-import { Bars3Icon } from '@heroicons/react/24/outline'
-import { IconButton, Tooltip } from 'src/components'
+import { Bars3Icon, PlusIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { Button, IconButton, Tooltip } from 'src/components'
 import { useDashboard } from 'src/providers/dashboard'
+import { UploadModal } from '../collection/upload-modal'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { SortMenu } from './sort-menu'
 import { ThemeButton } from './theme-btn'
-import { UploadModal } from './upload-modal'
 import { ViewPopover } from './view-popover'
 
 export const TopBar = () => {
+  const [open, setOpen] = useState(false)
   const { dispatch: sidebarDispatch } = useDashboard()
 
   function openSidebar() {
@@ -33,9 +35,13 @@ export const TopBar = () => {
           <ViewPopover />
           <SortMenu />
           <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
-          <UploadModal />
+          <Button variant="secondary" onClick={() => setOpen(true)}>
+            Upload
+            <PlusIcon className="h-4 w-4" />
+          </Button>
         </div>
       </div>
+      <UploadModal open={open} setOpen={setOpen} />
     </section>
   )
 }

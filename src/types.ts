@@ -19,8 +19,8 @@ export type PageData = {
    */
   data: string[]
   /**
-   * The host URL of the site. This is used to label the tabs and
-   * dashboard initially in the sidebar.
+   * The host URL of the site. This is used as a name for collection and
+   * dashboard title initially in the sidebar.
    */
   host: string
   /**

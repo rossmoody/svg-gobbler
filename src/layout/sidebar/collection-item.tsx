@@ -22,12 +22,14 @@ export const CollectionItem = ({ collection }: Props) => {
     return `https://s2.googleusercontent.com/s2/favicons?domain=${collection.origin}`
   }, [collection.origin])
 
+  function onClose() {
+    sidebarDispatch({ type: 'set-open', payload: false })
+  }
+
   return (
     <NavLink
       to={`collection/${collection.id}`}
-      onClick={() => {
-        sidebarDispatch({ type: 'set-open', payload: false })
-      }}
+      onClick={onClose}
       className={({ isActive }) => {
         return clsx(isActive && 'bg-gray-100 dark:bg-gray-700', 'collection-item group')
       }}

@@ -3,7 +3,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, PropsWithChildren } from 'react'
 import { IconButton } from '.'
 
-type ModalProps = PropsWithChildren<{
+export type ModalProps = PropsWithChildren<{
   /**
    * Whether the modal is open or not.
    */
@@ -26,7 +26,7 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-30" onClose={handleClose}>
+      <Dialog as="div" className="relative z-30 text" onClose={handleClose}>
         {/* Overlay */}
         <Transition.Child
           as={Fragment}
