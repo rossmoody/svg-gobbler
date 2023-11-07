@@ -16,7 +16,7 @@ const viewOptions: ViewOption[] = [{ label: 'Hide cors restricted', value: 'hide
 export const ViewPopover = () => {
   const { state, dispatch } = useCollection()
 
-  function handleCheckboxChange(e: React.MouseEvent<HTMLInputElement>) {
+  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, checked } = e.currentTarget
     const filters = { ...state.view.filters, [name]: checked }
     chrome.storage.local.set({ view: { ...state.view, filters } })
@@ -59,7 +59,7 @@ export const ViewPopover = () => {
                   name={option.value}
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500 cursor-pointer"
-                  onClick={handleCheckboxChange}
+                  onChange={handleCheckboxChange}
                   checked={
                     state.view.filters[option.value as keyof CollectionData['view']['filters']]
                   }
@@ -68,7 +68,7 @@ export const ViewPopover = () => {
                   htmlFor={option.value}
                   className="ml-3 whitespace-nowrap pr-4 text-sm font-medium text cursor-pointer"
                 >
-                  {option.label} {corsRestrictedCount > 0 && `(${corsRestrictedCount})`}
+                  {option.label} ({corsRestrictedCount})
                 </label>
               </div>
             ))}

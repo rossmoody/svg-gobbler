@@ -24,11 +24,6 @@ export async function collectionLoader({ params }: LoaderFunctionArgs<Collection
   return defer({
     view,
     collectionId: params.id,
-    // data: svgFactory.process(pageData), // Returns [] if no data
-    data: new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(svgFactory.process(pageData))
-      }, 2000)
-    }),
+    data: svgFactory.process(pageData), // Returns [] if no data
   })
 }

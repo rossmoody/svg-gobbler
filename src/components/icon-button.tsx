@@ -8,7 +8,7 @@ type IconButtonProps = ButtonProps
  * 20px icons are used for all sizes except xs, which uses 16px icons.
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
-  const { variant = 'primary', size = 'md', className, ...rest } = props
+  const { variant = 'primary', size = 'md', className, type = 'button', ...rest } = props
 
   const sizeStyles = {
     xs: 'px-1 py-1',
@@ -20,5 +20,5 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props,
 
   const combinedClassName = `${className} ${btnBaseStyles} ${btnVariantStyles[variant]} ${sizeStyles[size]}`
 
-  return <button ref={ref} {...rest} className={combinedClassName} />
+  return <button ref={ref} {...rest} className={combinedClassName} type={type} />
 })

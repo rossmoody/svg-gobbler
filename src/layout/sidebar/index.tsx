@@ -22,7 +22,7 @@ export const Sidebar = () => {
   return (
     <>
       <Transition.Root show={state.isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-50 lg:hidden" onClose={closeSidebar}>
+        <Dialog as="div" className="relative z-20 lg:hidden" onClose={closeSidebar}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -69,7 +69,7 @@ export const Sidebar = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col lg:w-72">
+      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col lg:w-72 z-10">
         <SidebarContent />
       </div>
     </>

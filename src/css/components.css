@@ -1,3 +1,15 @@
+/* Components */
+
+.input {
+  @apply block w-full rounded-md border-0 py-2.5 px-4 shadow-sm ring-1 ring-inset ring-gray-300
+  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 text-sm mt-1 
+  outline-none;
+}
+
+.label {
+  @apply block text-sm font-medium;
+}
+
 /* Layout */
 
 .top-bar {

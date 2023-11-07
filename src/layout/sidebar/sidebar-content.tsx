@@ -1,12 +1,14 @@
 import { Transition } from '@headlessui/react'
 import { Cog6ToothIcon, MegaphoneIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
 import { useDashboard } from 'src/providers'
 import { CollectionItem } from './collection-item'
+import { NewCollectionModal } from './new-collection-modal'
 
 export const SidebarContent = () => {
+  const [open, setOpen] = useState(false)
   const { state } = useDashboard()
 
   return (
@@ -17,10 +19,11 @@ export const SidebarContent = () => {
       <nav className="flex flex-1 flex-col">
         <ul role="list" className="flex flex-1 flex-col gap-1.5 -mx-2">
           <li>
-            <NavLink to="/details/1" className="collection-item">
-              <PlusIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
+            <button className="collection-item w-full" onClick={() => setOpen(true)}>
+              <PlusIcon className="h-4 w-4" aria-hidden="true" />
               New collection
-            </NavLink>
+            </button>
+            <NewCollectionModal open={open} setOpen={setOpen} />
           </li>
           <hr className="border-gray-200 dark:border-gray-800 mt-2 mb-5" />
           <li>

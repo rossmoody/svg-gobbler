@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 
 export const btnBaseStyles =
-  'rounded-md flex items-center gap-1 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-all duration-200 ease-in-out'
+  'rounded-lg flex items-center gap-1 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-all duration-200 ease-in-out'
 
 export const btnVariantStyles = {
   primary: 'bg-red-600 hover:bg-red-500 text-white shadow-sm',
@@ -28,7 +28,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
  * Uses 20px icons for all sizes except xs, which uses 16px icons.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', className = '', ...rest }, ref) => {
+  ({ variant = 'primary', size = 'md', className = '', type = 'button', ...rest }, ref) => {
     const combinedClassName = [
       btnBaseStyles,
       btnVariantStyles[variant],
@@ -38,6 +38,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       .join(' ')
       .trim()
 
-    return <button ref={ref} className={combinedClassName} {...rest} />
+    return <button ref={ref} className={combinedClassName} {...rest} type={type} />
   },
 )
