@@ -17,7 +17,7 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
       {...rest}
       ref={ref}
       className={clsx(
-        'rounded-2xl p-12 text bg-white dark:bg-gray-800 ',
+        'rounded-2xl p-12 text bg-white dark:bg-gray-800/50 ',
         'transition-all duration-300 ease-in-out',
         'flex items-center justify-center flex-grow',
         'min-w-[theme(space.32)] min-h-[theme(space.32)]',

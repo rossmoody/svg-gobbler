@@ -74,7 +74,7 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
 
 const Header = ({ children }: PropsWithChildren) => (
   <header>
-    <Dialog.Title as="h3" className="text-lg font-semibold leading-6 mb-6">
+    <Dialog.Title as="h3" className="text-lg font-semibold leading-6 mb-5">
       {children}
     </Dialog.Title>
   </header>

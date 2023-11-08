@@ -8,6 +8,7 @@ import { useUpload } from 'src/hooks/use-upload'
 import { FormUtils } from 'src/utils/form-utils'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {
+  const [error, setError] = useState(false)
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
   const ref = useRef<HTMLTextAreaElement>(null)
   const upload = useUpload()
@@ -26,7 +27,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
 
     // Early return if there's a clipboard value and it's invalid
     if (clipboardValue && !FormUtils.isValidSVG(clipboardValue)) {
-      alert('Invalid SVG string')
+      setError(true)
       return
     }
 
@@ -35,14 +36,19 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
 
     // Perform the upload and clear states
     await upload(files)
-    setOpen(false)
+    onClose()
+  }
 
-    // Reset accepted files state with a delay
-    setTimeout(() => setAcceptedFiles([]), 300)
+  function onClose() {
+    setOpen(false)
+    setTimeout(() => {
+      setError(false)
+      setAcceptedFiles([])
+    }, 300)
   }
 
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal open={open} setOpen={setOpen} onClose={onClose}>
       <Modal.Header>Upload</Modal.Header>
       <Tabs.Group>
         <Tabs.List>
@@ -109,7 +115,19 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
 
           {/* Clipboard */}
           <Tabs.Panel>
-            <textarea className="input mt-4 h-52" ref={ref} />
+            <textarea
+              className={clsx('input mt-4 h-52', error && 'input-invalid')}
+              onFocus={() => setError(false)}
+              ref={ref}
+            />
+            {error && (
+              <span
+                aria-live="polite"
+                className="block pt-2 text-xs text-red-600 dark:text-red-400"
+              >
+                Invalid SVG, double check the string syntax
+              </span>
+            )}
           </Tabs.Panel>
         </Tabs.Panels>
       </Tabs.Group>
@@ -117,7 +135,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
         <Button size="lg" onClick={onSubmit}>
           Upload
         </Button>
-        <Button size="lg" variant="secondary" onClick={() => setOpen(false)} type="button">
+        <Button size="lg" variant="secondary" onClick={onClose} type="button">
           Cancel
         </Button>
       </Modal.Footer>

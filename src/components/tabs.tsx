@@ -18,7 +18,7 @@ const Tab = (props: PropsWithChildren) => (
     className={clsx(
       'ui-selected:border-red-500 ui-selected:text-red-500 ui-selected:font-medium',
       'text-gray-600 ui-not-selected:dark:text-gray-400 hover:border-gray-200 border-transparent',
-      'whitespace-nowrap border-b-2 py-1.5 px-3 text-sm',
+      'whitespace-nowrap border-b-2 py-1.5 px-4 text-base dark:hover:border-gray-600',
     )}
   />
 )
