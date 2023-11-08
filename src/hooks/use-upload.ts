@@ -17,7 +17,7 @@ export const useUpload = () => {
 
     // Get current page data for storage
     const compressedPageData = await chrome.storage.local.get(collectionId)
-    let pageData = lzString.decompressFromBase64(compressedPageData[collectionId]) as PageData
+    let pageData = lzString.decompressFromBase64<PageData>(compressedPageData[collectionId])
 
     // Append new strings to collection's page data
     pageData = {
