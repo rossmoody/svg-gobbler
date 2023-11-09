@@ -17,14 +17,13 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
       {...rest}
       ref={ref}
       className={clsx(
-        'rounded-2xl p-12 text bg-white dark:bg-gray-800/50 ',
+        'rounded-2xl text bg-white dark:bg-gray-800/50 ',
         'transition-all duration-300 ease-in-out',
-        'flex items-center justify-center flex-grow',
-        'min-w-[theme(space.32)] min-h-[theme(space.32)]',
+        'flex items-center justify-center aspect-square',
       )}
     >
       <div
-        className={`relative shrink-0 min-h-60 overflow-hidden transition-all duration-300 ease-in-out [& > img]:flex`}
+        className={`relative shrink-0 overflow-hidden transition-all duration-300 ease-in`}
         style={{ height: state.view.size, width: state.view.size }}
       >
         <CardContent data={data} />

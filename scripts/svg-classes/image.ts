@@ -67,12 +67,16 @@ export class Image extends Svg {
    * and decoded using `decodeURIComponent` to handle any special Unicode characters.
    */
   private base64DecodeUnicode(str: string): string {
-    return decodeURIComponent(
-      atob(str)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join(''),
-    )
+    try {
+      return decodeURIComponent(
+        atob(str)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join(''),
+      )
+    } catch (error) {
+      return str
+    }
   }
 
   /**

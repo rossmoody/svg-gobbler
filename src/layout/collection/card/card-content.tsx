@@ -11,7 +11,7 @@ export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
   return (
     <span
       dangerouslySetInnerHTML={{ __html: data.presentationSvg }}
-      className="[& > svg]:absolute [& > svg]:h-full [& > svg]:w-full [& > svg]:left-0 [& > svg]:top-0 [& > svg]:overflow-visible"
+      className="[& > svg]:absolute [& > svg]:inset-0 [& > svg]:overflow-visible"
     />
   )
 }

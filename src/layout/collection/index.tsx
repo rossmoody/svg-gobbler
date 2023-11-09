@@ -14,13 +14,35 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     dispatch({ type: 'process-data' })
   }, [data, dispatch])
 
+  function generateMinSize() {
+    switch (state.view.size) {
+      case 64:
+        return '120px'
+      case 96:
+        return '160px'
+      case 128:
+        return '200px'
+      case 192:
+        return '240px'
+      case 256:
+        return '280px'
+      default:
+        return '100px'
+    }
+  }
+
   if (state.processedData.length === 0) {
     return <NoResults />
   }
 
   return (
     <section className="transition-colors border-gray-200 dark:border-gray-800">
-      <ul className="flex flex-wrap gap-3">
+      <ul
+        className="grid gap-4 justify-between"
+        style={{
+          gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))`,
+        }}
+      >
         {state.processedData.map((svg, i) => (
           <Transition
             show
