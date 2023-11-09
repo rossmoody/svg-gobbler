@@ -10,10 +10,10 @@ export const DetailsRoute = () => {
         show
         appear
         as={Fragment}
-        enter="transition-opacity duration-1000 ease-in-out"
+        enter="transition-opacity duration-500 ease-in-out"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        leave="transition-opacity duration-1000 ease-in-out"
+        leave="transition-opacity duration-500 ease-in-out"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
