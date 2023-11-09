@@ -1,13 +1,13 @@
-import { GElement } from './g-element'
-import { Image } from './image'
-import { Inline } from './inline'
-import { Svg } from './svg'
+import { GElement } from 'scripts/svg-classes/g-element'
+import { Image } from 'scripts/svg-classes/image'
+import { Inline } from 'scripts/svg-classes/inline'
+import { Svg } from 'scripts/svg-classes/svg'
 
 /**
  * Handles the presentation of an SVG in the DOM within cards. It is not used
- * to handle processing of the SVG itself.
+ * to handle the creation or classification of the SVG itself.
  */
-export class PresentationSvg {
+export class CardSvg {
   /**
    * The original element processed in the DOM.
    */

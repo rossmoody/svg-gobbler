@@ -1,7 +1,14 @@
+import { nanoid } from 'nanoid'
+
 /**
  * The root SVG class. This is the base class for all SVG types.
  */
 export class Svg {
+  /**
+   * A unique identifier
+   */
+  public id: string
+
   /**
    * The original string of the SVG element in the DOM
    */
@@ -20,6 +27,7 @@ export class Svg {
   public asElement?: Element
 
   constructor(originalString: string, origin: string) {
+    this.id = nanoid()
     this.originalString = originalString
     this.origin = origin
   }

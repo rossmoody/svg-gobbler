@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { Fragment, useEffect } from 'react'
-import { PresentationSvg } from 'scripts/svg-classes/presentation-svg'
 import { NoResults } from 'src/components/no-results'
+import { CardSvg } from 'src/layout/collection/card/card-svg'
 import { useCollection } from 'src/providers'
 import type { CollectionData } from 'src/types'
 import { Card } from './card'
@@ -52,7 +52,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
           >
-            <Card data={new PresentationSvg(svg)} style={{ transitionDelay: `${i * 8}ms` }} />
+            <Card data={new CardSvg(svg)} style={{ transitionDelay: `${i * 8}ms` }} />
           </Transition>
         ))}
       </ul>

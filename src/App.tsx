@@ -9,6 +9,7 @@ import {
   dashboardLoader,
   rootLoader,
 } from 'src/routes'
+import { detailLoader } from './routes/details/loader'
 import { SettingsRoute } from './routes/settings'
 
 export default function App() {
@@ -39,9 +40,10 @@ export default function App() {
       ],
     },
     {
-      path: '/details/:id',
+      path: '/details/:originalString',
       element: <DetailsRoute />,
       errorElement: <ErrorState />,
+      loader: detailLoader,
     },
   ])
 
