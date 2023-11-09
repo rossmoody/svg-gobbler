@@ -4,7 +4,9 @@ import { Inline } from './inline'
 import { Svg } from './svg'
 
 /**
- * A concise helper class for using SVGs we generate in the browser.
+ * A concise class for handling the presentation of an SVG. This class is used
+ * to handle the presentation of an SVG in the DOM within cards. It is not used
+ * to handle processing of the SVG itself.
  */
 export class PresentationSvg {
   /**
@@ -12,8 +14,14 @@ export class PresentationSvg {
    */
   private svg: Svg | Image | Inline | GElement
 
+  /**
+   * If the SVG is selected in the collection
+   */
+  public isSelected: boolean
+
   constructor(svg: Svg) {
     this.svg = svg
+    this.isSelected = false
   }
 
   /**
@@ -49,6 +57,7 @@ export class PresentationSvg {
    * if one is not present.
    */
   get presentationSvg(): string {
+    console.log(this)
     const element = this.svg.asElement?.cloneNode(true) as SVGElement
     const width = element.getAttribute('width')
     const height = element.getAttribute('height')

@@ -11,7 +11,7 @@ export type CardProps = HTMLAttributes<HTMLLIElement> & {
 }
 
 export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
-  const { data, ...rest } = props
+  const { data, className, ...rest } = props
   const { state } = useCollection()
 
   return (
@@ -22,12 +22,13 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
         'relative rounded-2xl text bg-white dark:bg-gray-800/50',
         'transition-all duration-300 ease-in-out group/card',
         'flex items-center justify-center aspect-square',
+        className,
       )}
     >
-      <CorsRestrictedActions data={data} />
-      <DefaultActions data={data} />
+      {!data.isCorsRestricted && <DefaultActions data={data} />}
+      {data.isCorsRestricted && <CorsRestrictedActions data={data} />}
       <div
-        className={`relative shrink-0 overflow-hidden transition-all duration-300 ease-in z-0`}
+        className="relative shrink-0 overflow-hidden transition-all duration-150 ease-in z-0"
         style={{ height: state.view.size, width: state.view.size }}
       >
         <CardContent data={data} />
