@@ -16,18 +16,16 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
 
   function generateMinSize() {
     switch (state.view.size) {
-      case 64:
-        return '120px'
       case 96:
-        return '160px'
+        return '10rem'
       case 128:
-        return '200px'
+        return '12.5rem'
       case 192:
-        return '240px'
+        return '15rem'
       case 256:
-        return '280px'
+        return '17.5rem'
       default:
-        return '100px'
+        return '8.75rem'
     }
   }
 

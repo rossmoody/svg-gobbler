@@ -31,7 +31,7 @@ export const Tooltip = ({
             'radix-side-right:animate-slide-left-fade',
             'radix-side-bottom:animate-slide-up-fade',
             'radix-side-left:animate-slide-right-fade',
-            'inline-flex items-center rounded-lg px-4 py-3',
+            'inline-flex items-center rounded-lg px-3 py-2',
             'bg-gray-800 dark:bg-white shadow-md text-xs',
             'text-white dark:text-gray-800 max-w-[16rem]',
           )}
