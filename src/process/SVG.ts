@@ -176,7 +176,7 @@ export default class SVG {
     const hasFirstElementChild = Boolean(element.body.firstElementChild)
 
     if (hasParsingError || !hasFirstElementChild) {
-      this.type === 'invalid'
+      this.type = 'invalid'
     } else {
       this.element = element.body.firstElementChild!
     }
@@ -189,7 +189,7 @@ export default class SVG {
     )
 
     if (documentElement.querySelector('parsererror')) {
-      this.type === 'invalid'
+      this.type = 'invalid'
     } else {
       this.element = documentElement
     }
