@@ -188,7 +188,8 @@ export default class SVG {
       'image/svg+xml',
     )
 
-    if (documentElement.querySelector('parsererror')) {
+    if (documentElement.querySelector('parsererror')
+       || documentElement.tagName.toLowerCase() === 'parsererror') {
       this.type === 'invalid'
     } else {
       this.element = documentElement
