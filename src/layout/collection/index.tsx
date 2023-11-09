@@ -9,8 +9,11 @@ import { Card } from './card'
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { state, dispatch } = useCollection()
 
+  /**
+   * We do this here instead of routes because data is awaited in
+   * Suspense within the route component.
+   */
   useEffect(() => {
-    dispatch({ type: 'reset' })
     dispatch({ type: 'set-data', payload: data })
     dispatch({ type: 'process-data' })
   }, [data, dispatch])

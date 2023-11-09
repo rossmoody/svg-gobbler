@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useCollection } from 'src/providers'
 
 export const Mainpanel = () => {
-  const { state, dispatch } = useCollection()
+  const { state } = useCollection()
 
   const panelStyle = {
     width: state.selected.length ? '18rem' : '0',
