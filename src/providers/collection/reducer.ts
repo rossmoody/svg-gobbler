@@ -7,6 +7,10 @@ export type CollectionState = CollectionData & {
    * after going through the filters and sorters and paginators.
    */
   processedData: Svg[]
+  /**
+   * The selected SVGs in the collection.
+   */
+  selected: Svg[]
 }
 
 export type CollectionAction =
@@ -15,10 +19,13 @@ export type CollectionAction =
   | { type: 'set-data'; payload: Svg[] }
   | { type: 'set-collection-id'; payload: string }
   | { type: 'set-view'; payload: CollectionState['view'] }
+  | { type: 'add-selected'; payload: Svg }
+  | { type: 'remove-selected'; payload: Svg }
 
 export const initCollectionState: CollectionState = {
   data: [],
   processedData: [],
+  selected: [],
   collectionId: '',
   view: {
     size: 48,
@@ -31,6 +38,20 @@ export const initCollectionState: CollectionState = {
 
 export const sidebarReducer = (state: CollectionState, action: CollectionAction) => {
   switch (action.type) {
+    case 'add-selected': {
+      return {
+        ...state,
+        selected: [...state.selected, action.payload],
+      }
+    }
+
+    case 'remove-selected': {
+      return {
+        ...state,
+        selected: state.selected.filter((svg) => svg !== action.payload),
+      }
+    }
+
     case 'process-data': {
       let processedData = [...state.data]
 

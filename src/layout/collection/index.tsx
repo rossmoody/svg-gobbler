@@ -10,6 +10,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { state, dispatch } = useCollection()
 
   useEffect(() => {
+    dispatch({ type: 'reset' })
     dispatch({ type: 'set-data', payload: data })
     dispatch({ type: 'process-data' })
   }, [data, dispatch])

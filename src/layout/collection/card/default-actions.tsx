@@ -10,8 +10,17 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
   const { state, dispatch } = useCollection()
 
   const isSelected = useMemo(() => {
-    return true
-  }, [])
+    return state.selected.includes(data.svg)
+  }, [state.selected, data.svg])
+
+  const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    switch (event.target.checked) {
+      case true:
+        return dispatch({ type: 'add-selected', payload: data.svg })
+      case false:
+        return dispatch({ type: 'remove-selected', payload: data.svg })
+    }
+  }
 
   return (
     <div className="z-10">
@@ -26,6 +35,8 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
         <label className="p-2 rounded-lg flex items-center justify-center group-hover/select:bg-gray-100/70 group-hover/select:dark:bg-gray-800 cursor-pointer">
           <input
             type="checkbox"
+            onChange={handleSelect}
+            checked={isSelected}
             className={clsx(
               'w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded',
               'dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer',

@@ -4,24 +4,17 @@ import { Inline } from './inline'
 import { Svg } from './svg'
 
 /**
- * A concise class for handling the presentation of an SVG. This class is used
- * to handle the presentation of an SVG in the DOM within cards. It is not used
+ * Handles the presentation of an SVG in the DOM within cards. It is not used
  * to handle processing of the SVG itself.
  */
 export class PresentationSvg {
   /**
-   * The SVG element.
+   * The original element processed in the DOM.
    */
-  private svg: Svg | Image | Inline | GElement
-
-  /**
-   * If the SVG is selected in the collection
-   */
-  public isSelected: boolean
+  readonly svg: Svg | Image | Inline | GElement
 
   constructor(svg: Svg) {
     this.svg = svg
-    this.isSelected = false
   }
 
   /**
@@ -45,19 +38,11 @@ export class PresentationSvg {
   }
 
   /**
-   * Guaranteed to be the original string of the SVG found in the dom.
-   */
-  get originalString(): string {
-    return this.svg.originalString
-  }
-
-  /**
    * Return the original SVG stripped of competing styles related to class, height,
    * or width attributes to allow the SVG to scale. Attempts to add a viewBox attribute
    * if one is not present.
    */
   get presentationSvg(): string {
-    console.log(this)
     const element = this.svg.asElement?.cloneNode(true) as SVGElement
     const width = element.getAttribute('width')
     const height = element.getAttribute('height')

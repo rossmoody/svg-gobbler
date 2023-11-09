@@ -28,8 +28,8 @@
 
 .top-bar,
 .main-bar {
-  @apply flex items-center border-b px-4 gap-x-4 lg:gap-x-6 sm:px-6 lg:px-8 border-gray-200 
-  dark:border-gray-800 text h-16 shrink-0 surface;
+  @apply flex items-center border-b px-2 lg:gap-x-4 sm:px-6 lg:px-8 border-gray-200 
+  dark:border-gray-800 text h-16 shrink-0 surface gap-x-4;
 }
 
 .main-bar {
