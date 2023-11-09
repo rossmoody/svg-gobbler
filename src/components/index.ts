@@ -1,4 +1,5 @@
 export * from './button'
+export * from './collection-panel-btn.tsx'
 export * from './empty-state'
 export * from './error-state'
 export * from './icon-button'

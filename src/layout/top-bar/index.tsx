@@ -1,7 +1,6 @@
-import { Bars3Icon, PlusIcon } from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
-import { Button, IconButton, Tooltip } from 'src/components'
-import { useDashboard } from 'src/providers/dashboard'
+import { Button, CollectionPanelButton } from 'src/components'
 import { UploadModal } from '../collection/upload-modal'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
@@ -11,20 +10,10 @@ import { ViewPopover } from './view-popover'
 
 export const TopBar = () => {
   const [open, setOpen] = useState(false)
-  const { dispatch: sidebarDispatch } = useDashboard()
-
-  function openSidebar() {
-    sidebarDispatch({ type: 'set-open', payload: true })
-  }
 
   return (
     <section className="top-bar">
-      <Tooltip content="Collections" side="right">
-        <IconButton variant="ghost" onClick={openSidebar} className="lg:hidden">
-          <Bars3Icon className="h-5 w-5" aria-hidden />
-          <span className="sr-only">Open collection panel</span>
-        </IconButton>
-      </Tooltip>
+      <CollectionPanelButton />
       <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 lg:hidden" aria-hidden />
       <CollectionTitle />
       <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">

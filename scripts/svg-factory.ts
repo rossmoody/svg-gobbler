@@ -38,7 +38,7 @@ class SvgFactory {
       })
       .filter((item) => item?.isValid)
 
-    return Promise.all(
+    const result = await Promise.all(
       processedData.map((item) => {
         if (item instanceof Image) {
           return item.fetchSvgContent()
@@ -48,6 +48,9 @@ class SvgFactory {
     ).catch(() => {
       return processedData
     })
+
+    // Filter out invalid items after async processing absolute urls
+    return result.filter((item) => item?.isValid)
   }
 }
 

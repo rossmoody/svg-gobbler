@@ -48,7 +48,7 @@ export const SidebarContent = () => {
               ))}
             </ul>
           </li>
-          <li className="mt-auto">
+          <li className="mt-auto pt-8">
             <NavLink to="settings" className="collection-item">
               <Cog6ToothIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
               Settings
