@@ -23,7 +23,7 @@ export class CardSvg {
    * We show the SVG as an image element.
    */
   get isCorsRestricted(): boolean {
-    return this.svg.asElement instanceof HTMLImageElement
+    return (this.svg as Image).corsProtected ?? false
   }
 
   /**
@@ -33,8 +33,7 @@ export class CardSvg {
    * Defaults to an empty string for redundancy.
    */
   get corsRestrictedUrl(): string {
-    if (this.svg instanceof Image) return this.svg.absoluteImageUrl ?? ''
-    return ''
+    return (this.svg as Image).absoluteImageUrl ?? ''
   }
 
   /**

@@ -5,9 +5,14 @@ export class Image extends Svg {
    * The absolute URL of the image source. If this is present, the SVG
    * is an image element with an external source. It will require a fetch
    * to get the SVG source. If it fails, the image is retained with the cors
-   * src attribute.
+   * src url.
    */
   absoluteImageUrl?: string
+
+  /**
+   * Whether or not the SVG is cors protected.
+   */
+  corsProtected = false
 
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
@@ -18,7 +23,7 @@ export class Image extends Svg {
   /**
    * I don't love setting properties in a method, but I'm not sure
    * how else to do this. I need to be able to await the async processImage
-   * method, but I can't do that in the constructor.
+   * method, but I can't do that in the constructor elegantly.
    */
   processImage() {
     if (!this.asElement) return
@@ -112,7 +117,7 @@ export class Image extends Svg {
       this.asElement = this.parseFromString('image/svg+xml')
       return this
     } catch (error) {
-      console.log(error)
+      this.corsProtected = true
       return this
     }
   }

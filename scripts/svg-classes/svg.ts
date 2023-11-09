@@ -10,7 +10,10 @@ export class Svg {
   public id: string
 
   /**
-   * The original string of the SVG element in the DOM
+   * The original string of the SVG element in the DOM.
+   * It is processed into an <svg> string through the svg factory.
+   *
+   * If it fails to do so, it is invalid or cors restricted.
    */
   public originalString: string
 
