@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
 import { useCollection, useDashboard } from 'src/providers'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 export const CollectionTitle = () => {
   const { state: mainState } = useCollection()
@@ -26,7 +27,7 @@ export const CollectionTitle = () => {
         return c
       })
       sidebarDispatch({ type: 'set-collections', payload: newCollections })
-      chrome.storage.local.set({ collections: newCollections })
+      StorageUtils.setCollectionsData(newCollections)
     }
   }
 

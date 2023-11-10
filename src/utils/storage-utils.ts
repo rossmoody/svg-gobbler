@@ -1,4 +1,5 @@
 import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
+import { Collection } from 'src/types'
 
 /**
  *
@@ -35,5 +36,24 @@ export class StorageUtils {
     await chrome.storage.local.set({
       [collectionId]: this.compressToBase64(data),
     })
+  }
+
+  /**
+   * Set collections data in storage.
+   * Automatically compresses data.
+   */
+  static async setCollectionsData(data: Collection[]): Promise<void> {
+    await chrome.storage.local.set({
+      collections: this.compressToBase64(data),
+    })
+  }
+
+  /**
+   * Get collections data from storage.
+   * Automatically decompresses data.
+   */
+  static async getCollectionsData(): Promise<Collection[]> {
+    const collectionsData = await chrome.storage.local.get('collections')
+    return this.decompressFromBase64(collectionsData.collections)
   }
 }

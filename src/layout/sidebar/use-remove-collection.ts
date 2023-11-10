@@ -32,7 +32,7 @@ export function useRemoveCollection() {
     }
 
     dispatch({ type: 'set-collections', payload: filteredCollections })
-    chrome.storage.local.set({ collections: filteredCollections })
+    StorageUtils.setCollectionsData(filteredCollections)
     chrome.storage.local.remove(collection.id)
 
     if (isActiveCollection) {

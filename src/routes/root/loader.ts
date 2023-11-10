@@ -17,9 +17,7 @@ export async function rootLoader() {
   }
 
   // Get all collections from storage for sidenav
-  let { collections: prevCollections } = (await chrome.storage.local.get('collections')) as {
-    collections: Collection[]
-  }
+  let prevCollections = await StorageUtils.getCollectionsData()
 
   // Happens occassionaly when hacking storage in dev mode
   if (!prevCollections) {
@@ -32,7 +30,7 @@ export async function rootLoader() {
     collection.name = response.data.host
     collection.origin = response.data.origin
     StorageUtils.setPageData(collection.id, response.data)
-    chrome.storage.local.set({ collections: [collection, ...prevCollections] })
+    StorageUtils.setCollectionsData([collection, ...prevCollections])
   } catch (error) {
     // The listener has been removed, so the background script is no longer listening
     // This fires when the extension is reloaded as we're managing all routes in memory

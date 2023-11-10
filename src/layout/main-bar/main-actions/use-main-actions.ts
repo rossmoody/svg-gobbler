@@ -1,27 +1,54 @@
+import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const useMainActions = () => {
-  const { state: collectionState, dispatch: collectionDispatch } = useCollection()
-  // const { state: dashboardState } = useDashboard()
+  const { revalidate } = useRevalidator()
+  const { state: collectionState } = useCollection()
 
-  const deleteSelected = async () => {
-    const selectedItems = collectionState.selected
-    const filteredItems = collectionState.data.filter((item) => !selectedItems.includes(item))
-    const filteredItemString = filteredItems.map((item) => item.originalString)
+  const { collectionId } = collectionState
+  const selectedItems = collectionState.selected
+  const nonSelectedItems = collectionState.data.filter((item) => !selectedItems.includes(item))
+  const nonSelectedItemsStrings = nonSelectedItems.map((item) => item.originalString)
+  const selectedItemsStrings = selectedItems.map((item) => item.originalString)
 
-    // Update storage
-    const pageData = await StorageUtils.getPageData<PageData>(collectionState.collectionId)
-    StorageUtils.setPageData(collectionState.collectionId, {
-      ...pageData,
-      data: filteredItemString,
+  const deleteSelectedItems = async () => {
+    const currentPageData = await StorageUtils.getPageData<PageData>(collectionId)
+
+    await StorageUtils.setPageData(collectionId, {
+      ...currentPageData,
+      data: nonSelectedItemsStrings,
     })
 
-    // Update client context
-    collectionDispatch({ type: 'set-data', payload: filteredItems })
-    collectionDispatch({ type: 'process-data' })
+    revalidate()
   }
 
-  return { deleteSelected }
+  const moveSelectedItems = async (targetCollectionId: string) => {
+    const targetPageData = await StorageUtils.getPageData<PageData>(targetCollectionId)
+    const currentPageData = await StorageUtils.getPageData<PageData>(collectionId)
+
+    await StorageUtils.setPageData(targetCollectionId, {
+      ...targetPageData,
+      data: [...selectedItemsStrings, ...targetPageData.data],
+    })
+
+    await StorageUtils.setPageData(collectionId, {
+      ...currentPageData,
+      data: nonSelectedItemsStrings,
+    })
+
+    revalidate()
+  }
+
+  const copySelectedItems = async (targetCollectionId: string) => {
+    const targetPageData = await StorageUtils.getPageData<PageData>(targetCollectionId)
+
+    await StorageUtils.setPageData(targetCollectionId, {
+      ...targetPageData,
+      data: [...selectedItemsStrings, ...targetPageData.data],
+    })
+  }
+
+  return { deleteSelectedItems, moveSelectedItems, copySelectedItems }
 }

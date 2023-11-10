@@ -1,50 +1,52 @@
-import { useEffect, useRef } from 'react'
+import { Transition } from '@headlessui/react'
+import { Fragment, useEffect, useRef } from 'react'
 import { useCollection } from 'src/providers'
 
 export const SelectionControl = () => {
-  const { state, dispatch } = useCollection()
-  const ref = useRef<HTMLInputElement>(null)
+  const { state: collectionState, dispatch: collectionDispatch } = useCollection()
+  const checkboxRef = useRef<HTMLInputElement>(null)
 
-  const selectedItems = state.selected
-  const filteredItems = state.processedData.filter((item) => !item.corsRestricted)
-  const allItemsSelected = selectedItems.length === filteredItems.length
+  const selectedItems = collectionState.selected
+  const availableItems = collectionState.processedData.filter((item) => !item.corsRestricted)
+  const allItemsAreSelected = selectedItems.length === availableItems.length
 
   const handleCheckboxChange = () => {
-    switch (allItemsSelected) {
-      case true:
-        dispatch({ type: 'unselect-all' })
-        break
-
-      default:
-        dispatch({ type: 'select-all' })
-        break
+    if (allItemsAreSelected) {
+      collectionDispatch({ type: 'unselect-all' })
+    } else {
+      collectionDispatch({ type: 'select-all' })
     }
   }
 
   useEffect(() => {
-    if (ref.current === null) return
-    if (allItemsSelected) {
-      ref.current.indeterminate = false
-    } else if (selectedItems.length === 0) {
-      ref.current.indeterminate = false
-    } else {
-      ref.current.indeterminate = true
-    }
-  }, [selectedItems.length, filteredItems.length, allItemsSelected])
+    if (checkboxRef.current === null) return
+    checkboxRef.current.indeterminate = selectedItems.length > 0 && !allItemsAreSelected
+  }, [selectedItems.length, availableItems.length, allItemsAreSelected])
 
   return (
-    <div className="flex items-center gap-2">
-      <input
-        ref={ref}
-        type="checkbox"
-        id="select"
-        className="checkbox"
-        onChange={handleCheckboxChange}
-        checked={allItemsSelected}
-      />
-      <label htmlFor="select" className="font-medium text-xs cursor-pointer">
-        Select {allItemsSelected ? 'none' : 'all'}
-      </label>
-    </div>
+    <Transition
+      as={Fragment}
+      show={availableItems.length > 0}
+      enter="transition ease-in-out duration-150"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition ease-in-out duration-150"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+    >
+      <div className="flex items-center gap-2">
+        <input
+          ref={checkboxRef}
+          type="checkbox"
+          id="select"
+          className="checkbox"
+          onChange={handleCheckboxChange}
+          checked={allItemsAreSelected}
+        />
+        <label htmlFor="select" className="font-medium text-xs cursor-pointer">
+          Select {allItemsAreSelected ? 'none' : 'all'}
+        </label>
+      </div>
+    </Transition>
   )
 }

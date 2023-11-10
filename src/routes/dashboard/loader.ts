@@ -1,12 +1,8 @@
-import type { Collection } from 'src/types'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
  * The primary initialization function for sidebar collections context.
  */
 export async function dashboardLoader() {
-  const { collections } = (await chrome.storage.local.get('collections')) as {
-    collections: Collection[]
-  }
-
-  return collections
+  return await StorageUtils.getCollectionsData()
 }
