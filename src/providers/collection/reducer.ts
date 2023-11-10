@@ -11,6 +11,10 @@ export type CollectionState = CollectionData & {
    * The selected SVGs in the collection.
    */
   selected: Svg[]
+  /**
+   * Pagination count.
+   */
+  pageCount: number
 }
 
 export type CollectionAction =
@@ -23,12 +27,14 @@ export type CollectionAction =
   | { type: 'remove-selected'; payload: Svg }
   | { type: 'select-all' }
   | { type: 'unselect-all' }
+  | { type: 'load-more' }
 
 export const initCollectionState: CollectionState = {
   data: [],
   processedData: [],
   selected: [],
   collectionId: '',
+  pageCount: 1,
   view: {
     size: 48,
     sort: 'none',
@@ -38,12 +44,26 @@ export const initCollectionState: CollectionState = {
   },
 }
 
-export const collectionReducer = (state: CollectionState, action: CollectionAction) => {
+export const collectionReducer = (
+  state: CollectionState,
+  action: CollectionAction,
+): CollectionState => {
   switch (action.type) {
+    case 'load-more': {
+      return {
+        ...state,
+        pageCount: state.pageCount + 1,
+        processedData: [
+          ...state.processedData,
+          ...state.data.slice(state.pageCount * 200, (state.pageCount + 1) * 200),
+        ],
+      }
+    }
+
     case 'select-all': {
       return {
         ...state,
-        selected: state.processedData.filter((item) => !item.corsRestricted),
+        selected: state.data.filter((item) => !item.corsRestricted),
       }
     }
 
@@ -69,16 +89,14 @@ export const collectionReducer = (state: CollectionState, action: CollectionActi
     }
 
     case 'process-data': {
-      let processedData = [...state.data]
+      let processedData = [...state.data].slice(0, 200)
 
       // Process filters
       Object.entries(state.view.filters).forEach(([filter, value]) => {
         switch (filter) {
           case 'hide-cors': {
             if (!value) break
-            processedData = processedData.filter(
-              (svg) => !(svg.asElement instanceof HTMLImageElement),
-            )
+            processedData = processedData.filter((svg) => !svg.corsRestricted)
             break
           }
         }
@@ -108,6 +126,7 @@ export const collectionReducer = (state: CollectionState, action: CollectionActi
       return {
         ...state,
         processedData,
+        pageCount: 1,
       }
     }
 

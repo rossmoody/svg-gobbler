@@ -6,9 +6,9 @@ export const SelectionControl = () => {
   const { state: collectionState, dispatch: collectionDispatch } = useCollection()
   const checkboxRef = useRef<HTMLInputElement>(null)
 
-  const selectedItems = collectionState.selected
-  const availableItems = collectionState.processedData.filter((item) => !item.corsRestricted)
-  const allItemsAreSelected = selectedItems.length === availableItems.length
+  const selectedItems = collectionState.selected.length
+  const availableItems = collectionState.data.filter((item) => !item.corsRestricted).length
+  const allItemsAreSelected = selectedItems === availableItems
 
   const handleCheckboxChange = () => {
     if (allItemsAreSelected) {
@@ -20,13 +20,13 @@ export const SelectionControl = () => {
 
   useEffect(() => {
     if (checkboxRef.current === null) return
-    checkboxRef.current.indeterminate = selectedItems.length > 0 && !allItemsAreSelected
-  }, [selectedItems.length, availableItems.length, allItemsAreSelected])
+    checkboxRef.current.indeterminate = selectedItems > 0 && !allItemsAreSelected
+  }, [selectedItems, availableItems, allItemsAreSelected])
 
   return (
     <Transition
       as={Fragment}
-      show={availableItems.length > 0}
+      show={availableItems > 0}
       enter="transition ease-in-out duration-150"
       enterFrom="opacity-0"
       enterTo="opacity-100"

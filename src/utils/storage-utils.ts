@@ -2,7 +2,7 @@ import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
 import { Collection } from 'src/types'
 
 /**
- *
+ * A poor man's trpc for storage.
  */
 export class StorageUtils {
   /**
@@ -54,6 +54,7 @@ export class StorageUtils {
    */
   static async getCollectionsData(): Promise<Collection[]> {
     const collectionsData = await chrome.storage.local.get('collections')
+    if (!collectionsData.collections) return [] // First time user
     return this.decompressFromBase64(collectionsData.collections)
   }
 }
