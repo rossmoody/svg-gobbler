@@ -21,6 +21,8 @@ export type CollectionAction =
   | { type: 'set-view'; payload: CollectionState['view'] }
   | { type: 'add-selected'; payload: Svg }
   | { type: 'remove-selected'; payload: Svg }
+  | { type: 'select-all' }
+  | { type: 'unselect-all' }
 
 export const initCollectionState: CollectionState = {
   data: [],
@@ -38,6 +40,20 @@ export const initCollectionState: CollectionState = {
 
 export const collectionReducer = (state: CollectionState, action: CollectionAction) => {
   switch (action.type) {
+    case 'select-all': {
+      return {
+        ...state,
+        selected: state.processedData.filter((item) => !item.corsRestricted),
+      }
+    }
+
+    case 'unselect-all': {
+      return {
+        ...state,
+        selected: [],
+      }
+    }
+
     case 'add-selected': {
       return {
         ...state,

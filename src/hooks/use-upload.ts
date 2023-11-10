@@ -2,7 +2,7 @@ import { useRevalidator } from 'react-router-dom'
 import { Inline } from 'scripts/svg-classes/inline'
 import { useCollection } from 'src/providers'
 import { PageData } from 'src/types'
-import lzString from 'src/utils/lz-string'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
  * Upload a given array of svg strings to chrome storage, update
@@ -16,8 +16,7 @@ export const useUpload = () => {
     const { collectionId } = state
 
     // Get current page data for storage
-    const compressedPageData = await chrome.storage.local.get(collectionId)
-    let pageData = lzString.decompressFromBase64<PageData>(compressedPageData[collectionId])
+    let pageData = await StorageUtils.getPageData<PageData>(collectionId)
 
     // Append new strings to collection's page data
     pageData = {
@@ -26,9 +25,7 @@ export const useUpload = () => {
     }
 
     // Update the collection's page data
-    await chrome.storage.local.set({
-      [collectionId]: lzString.compressToBase64(pageData),
-    })
+    await StorageUtils.setPageData(collectionId, pageData)
 
     // Update the collection context state
     const newSvgClasses = data.map((svg) => new Inline(svg, ''))

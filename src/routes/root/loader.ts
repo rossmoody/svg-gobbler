@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { redirect } from 'react-router-dom'
 import type { BackgroundMessage, Collection } from 'src/types'
-import lzString from 'src/utils/lz-string'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
  * The primary initialization function for the root route.
@@ -31,9 +31,8 @@ export async function rootLoader() {
     // If message connection is successful, process the response, add the collection to storage
     collection.name = response.data.host
     collection.origin = response.data.origin
-    const compressed = lzString.compressToBase64(response.data)
+    StorageUtils.setPageData(collection.id, response.data)
     chrome.storage.local.set({ collections: [collection, ...prevCollections] })
-    chrome.storage.local.set({ [collection.id]: compressed })
   } catch (error) {
     // The listener has been removed, so the background script is no longer listening
     // This fires when the extension is reloaded as we're managing all routes in memory

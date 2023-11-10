@@ -9,11 +9,6 @@ export class Image extends Svg {
    */
   absoluteImageUrl?: string
 
-  /**
-   * Whether or not the SVG is cors protected.
-   */
-  corsProtected = false
-
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
     this.asElement = this.parseAndReturnElement()
@@ -117,7 +112,7 @@ export class Image extends Svg {
       this.asElement = this.parseFromString('image/svg+xml')
       return this
     } catch (error) {
-      this.corsProtected = true
+      this.corsRestricted = true
       return this
     }
   }

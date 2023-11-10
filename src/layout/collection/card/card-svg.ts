@@ -18,15 +18,6 @@ export class CardSvg {
   }
 
   /**
-   * Returns true if the SVG is an image element that is cors restrictred. We process all SVGs and try every method
-   * to get at the SVG string. If the SVG is still an image element, the fetch failed due to CORS restrictions.
-   * We show the SVG as an image element.
-   */
-  get isCorsRestricted(): boolean {
-    return (this.svg as Image).corsProtected ?? false
-  }
-
-  /**
    * Returns the absolute URL of the SVG. This is used to fetch the SVG from the server
    * if corsRestricted is true. This is only used for SVGs that are images.
    *

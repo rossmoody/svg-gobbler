@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import type { Collection, PageData } from 'src/types'
-import lzString from 'src/utils/lz-string'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()
@@ -28,7 +28,7 @@ export function useRemoveCollection() {
       }
 
       filteredCollections.push(collection)
-      chrome.storage.local.set({ [collection.id]: lzString.compressToBase64(pageData) })
+      StorageUtils.setPageData(collection.id, pageData)
     }
 
     dispatch({ type: 'set-collections', payload: filteredCollections })

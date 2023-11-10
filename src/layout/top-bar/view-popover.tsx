@@ -24,9 +24,7 @@ export const ViewPopover = () => {
     dispatch({ type: 'process-data' })
   }
 
-  const corsRestrictedCount = state.data.filter(
-    (svg) => svg.asElement instanceof HTMLImageElement,
-  ).length
+  const corsRestrictedCount = state.data.filter((svg) => svg.corsRestricted).length
 
   return (
     <Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">

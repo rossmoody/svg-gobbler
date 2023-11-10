@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import { Collection, PageData } from 'src/types'
 import { FormUtils } from 'src/utils/form-utils'
-import lzString from 'src/utils/lz-string'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 export const useCreateCollection = (files: File[]) => {
   const navigate = useNavigate()
@@ -29,9 +29,8 @@ export const useCreateCollection = (files: File[]) => {
     }
 
     const collections = [collection, ...state.collections]
-    const collectionData = { [id]: lzString.compressToBase64(pageData) }
 
-    await chrome.storage.local.set(collectionData)
+    await StorageUtils.setPageData(id, pageData)
     await chrome.storage.local.set({ collections })
     dispatch({ type: 'set-collections', payload: collections })
     navigate(`/dashboard/collection/${id}`)

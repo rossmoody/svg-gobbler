@@ -25,8 +25,8 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
         className,
       )}
     >
-      {!data.isCorsRestricted && <DefaultActions data={data} />}
-      {data.isCorsRestricted && <CorsRestrictedActions data={data} />}
+      {!data.svg.corsRestricted && <DefaultActions data={data} />}
+      {data.svg.corsRestricted && <CorsRestrictedActions data={data} />}
       <div
         className="relative shrink-0 overflow-hidden transition-all duration-150 ease-in z-0"
         style={{ height: state.view.size, width: state.view.size }}

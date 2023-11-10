@@ -29,6 +29,12 @@ export class Svg {
    */
   public asElement?: Element
 
+  /**
+   * Defaults to false and only flips true if the element is an
+   * image and the fetch fails.
+   */
+  public corsRestricted = false
+
   constructor(originalString: string, origin: string) {
     this.id = nanoid()
     this.originalString = originalString
