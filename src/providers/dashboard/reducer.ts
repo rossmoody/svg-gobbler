@@ -21,7 +21,7 @@ export const initDashboardState: DashboardState = {
   collections: [],
 }
 
-export const sidebarReducer = (state: DashboardState, action: DashboardAction): DashboardState => {
+export const dashboardReducer = (state: DashboardState, action: DashboardAction) => {
   switch (action.type) {
     case 'set-collections': {
       return { ...state, collections: action.payload }

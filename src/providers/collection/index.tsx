@@ -1,6 +1,6 @@
 import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
 import type { CollectionAction, CollectionState } from './reducer'
-import { initCollectionState, sidebarReducer } from './reducer'
+import { collectionReducer, initCollectionState } from './reducer'
 
 export type CollectionContextProps = {
   state: CollectionState
@@ -10,7 +10,7 @@ export type CollectionContextProps = {
 const CollectionContext = createContext({} as CollectionContextProps)
 
 export const CollectionProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(sidebarReducer, initCollectionState)
+  const [state, dispatch] = useReducer(collectionReducer, initCollectionState)
 
   const memo = useMemo(() => {
     return { state, dispatch }

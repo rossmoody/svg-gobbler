@@ -1,5 +1,5 @@
 import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
-import { DetailsAction, DetailsState, initDetailsState, sidebarReducer } from './reducer'
+import { DetailsAction, detailsReducer, DetailsState, initDetailsState } from './reducer'
 
 export type DetailsContextProps = {
   state: DetailsState
@@ -9,7 +9,7 @@ export type DetailsContextProps = {
 const DetailsContext = createContext({} as DetailsContextProps)
 
 export const DetailsProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(sidebarReducer, initDetailsState)
+  const [state, dispatch] = useReducer(detailsReducer, initDetailsState)
 
   const memo = useMemo(() => {
     return { state, dispatch }

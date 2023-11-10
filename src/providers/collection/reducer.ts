@@ -36,7 +36,7 @@ export const initCollectionState: CollectionState = {
   },
 }
 
-export const sidebarReducer = (state: CollectionState, action: CollectionAction) => {
+export const collectionReducer = (state: CollectionState, action: CollectionAction) => {
   switch (action.type) {
     case 'add-selected': {
       return {

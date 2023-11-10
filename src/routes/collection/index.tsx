@@ -24,7 +24,6 @@ export const CollectionRoute = () => {
   useEffect(() => {
     dispatch({ type: 'set-collection-id', payload: collectionId })
     dispatch({ type: 'set-view', payload: view })
-
     return () => dispatch({ type: 'reset' })
   }, [collectionId, dispatch, view])
 

@@ -22,13 +22,13 @@ export const CorsRestrictedActions = ({ data }: Pick<CardProps, 'data'>) => {
       {/* Open in new tab button */}
       <div className="opacity-0 absolute bottom-4 right-4 left-4 group-hover/card:opacity-100 transition-all duration-300 ease-in-out">
         <Button
-          size="xs"
+          size="sm"
           className="w-full justify-center bg-white dark:bg-gray-800/40"
           variant="secondary"
           onClick={handleOpenInNewTab}
         >
           Open
-          <ArrowTopRightOnSquareIcon className="h-3 w-3" aria-hidden="true" />
+          <ArrowTopRightOnSquareIcon className="h-4 w-4" aria-hidden="true" />
         </Button>
       </div>
     </div>

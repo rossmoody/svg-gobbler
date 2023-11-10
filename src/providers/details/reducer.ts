@@ -11,7 +11,7 @@ export const initDetailsState: DetailsState = {
   originalString: '',
 }
 
-export const sidebarReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
+export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
     case 'init': {
       return {

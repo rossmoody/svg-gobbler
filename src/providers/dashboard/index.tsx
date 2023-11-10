@@ -1,5 +1,5 @@
 import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
-import { DashboardAction, DashboardState, initDashboardState, sidebarReducer } from './reducer'
+import { DashboardAction, dashboardReducer, DashboardState, initDashboardState } from './reducer'
 
 export type DashboardContextProps = {
   state: DashboardState
@@ -9,7 +9,7 @@ export type DashboardContextProps = {
 const DashboardContext = createContext({} as DashboardContextProps)
 
 export const DashboardProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(sidebarReducer, initDashboardState)
+  const [state, dispatch] = useReducer(dashboardReducer, initDashboardState)
 
   const memo = useMemo(() => {
     return { state, dispatch }

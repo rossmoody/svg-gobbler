@@ -27,8 +27,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
 
     // Early return if there's a clipboard value and it's invalid
     if (clipboardValue && !FormUtils.isValidSVG(clipboardValue)) {
-      setError(true)
-      return
+      return setError(true)
     }
 
     // Determine the source of files
