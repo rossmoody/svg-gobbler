@@ -5,12 +5,13 @@ import {
   DashboardRoute,
   DetailsRoute,
   RootRoute,
+  SettingsRoute,
   collectionLoader,
   dashboardLoader,
+  detailLoader,
   rootLoader,
+  settingsLoader,
 } from 'src/routes'
-import { detailLoader } from './routes/details/loader'
-import { SettingsRoute } from './routes/settings'
 
 export default function App() {
   const router = createMemoryRouter([
@@ -36,6 +37,7 @@ export default function App() {
           path: 'settings',
           element: <SettingsRoute />,
           errorElement: <ErrorState />,
+          loader: settingsLoader,
         },
       ],
     },

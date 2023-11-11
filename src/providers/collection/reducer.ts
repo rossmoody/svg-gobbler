@@ -12,7 +12,7 @@ export type CollectionState = CollectionData & {
    */
   selected: Svg[]
   /**
-   * Pagination count.
+   * Pagination increment count for loading more items.
    */
   pageCount: number
 }
@@ -36,7 +36,7 @@ export const initCollectionState: CollectionState = {
   collectionId: '',
   pageCount: 1,
   view: {
-    size: 48,
+    size: 40,
     sort: 'none',
     filters: {
       'hide-cors': false,
