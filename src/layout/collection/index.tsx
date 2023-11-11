@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react'
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useMemo } from 'react'
 import { Button } from 'src/components'
 import { NoResults } from 'src/components/no-results'
 import { CardSvg } from 'src/layout/collection/card/card-svg'
@@ -18,6 +18,14 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     dispatch({ type: 'set-data', payload: data })
     dispatch({ type: 'process-data' })
   }, [data, dispatch])
+
+  const filteredResultLength = useMemo(() => {
+    if (state.view.filters['hide-cors']) {
+      return state.data.filter((svg) => !svg.corsRestricted).length
+    }
+
+    return state.data.length
+  }, [state.data, state.view.filters])
 
   function generateMinSize() {
     switch (state.view.size) {
@@ -65,7 +73,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
         ))}
       </ul>
       <Transition
-        show={state.processedData.length < state.data.length}
+        show={state.processedData.length < filteredResultLength}
         enter="transition-opacity duration-300 ease-in-out"
         enterFrom="opacity-0"
         enterTo="opacity-100"

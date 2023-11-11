@@ -3,8 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
-import { useCollection } from 'src/providers'
-import { CollectionState } from 'src/providers/collection/reducer'
+import { CollectionState, useCollection } from 'src/providers'
 
 type SortOption = {
   label: string

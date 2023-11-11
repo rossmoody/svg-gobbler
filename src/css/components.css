@@ -12,7 +12,7 @@
 .input,
 .select {
   @apply border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 
-  focus:border-red-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 
+  focus:border-red-500 block w-full p-2 dark:border-gray-600 dark:placeholder-gray-400 
   dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500 bg-transparent
   dark:bg-white/5 dark:ring-white/10;
 }
@@ -40,4 +40,8 @@
 .collection-item {
   @apply flex items-center gap-x-2 text-sm leading-6 font-normal px-2 py-1 rounded-md 
   transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 text focus;
+}
+
+.export-label {
+  @apply ml-2 text-xs;
 }

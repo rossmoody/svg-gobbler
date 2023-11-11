@@ -1,5 +1,7 @@
+import JSZip from 'jszip'
+
 /**
- * Utility class for form related operations.
+ * Utility class for form related operations like upload, download, and copy.
  */
 export class FormUtils {
   /**
@@ -62,5 +64,33 @@ export class FormUtils {
     } catch (err) {
       console.error('Failed to copy: ', err)
     }
+  }
+
+  /**
+   * Downloads a given array of strings as a file or zip file
+   * depending on the number of strings.
+   */
+  static downloadFiles(svgStrings: string[], baseFileName: string = 'svg-gobbler') {
+    if (svgStrings.length === 1) {
+      const svgBlob = new Blob([svgStrings[0]], { type: 'image/svg+xml' })
+      const blobUrl = URL.createObjectURL(svgBlob)
+      const downloadLink = document.createElement('a')
+      downloadLink.download = `${baseFileName}.svg`
+      downloadLink.href = blobUrl
+      return downloadLink.click()
+    }
+
+    const zip = new JSZip()
+    svgStrings.forEach((svgString, index) => {
+      zip.file(`${baseFileName}-${index}.svg`, svgString)
+    })
+
+    zip.generateAsync({ type: 'blob' }).then((zipContent) => {
+      const zipUrl = URL.createObjectURL(zipContent)
+      const downloadLink = document.createElement('a')
+      downloadLink.download = `${baseFileName}.zip`
+      downloadLink.href = zipUrl
+      downloadLink.click()
+    })
   }
 }

@@ -13,6 +13,13 @@ export const Footer = () => {
     setTimeout(() => setLabel('Copy to clipboard'), 1000)
   }
 
+  const handleDownload = () => {
+    const svgStrings = state.selected.map((file) => file.originalString)
+    FormUtils.downloadFiles(svgStrings)
+  }
+
+  const downloadQuantityString = state.selected.length > 1 ? ` ${state.selected.length} files` : ''
+
   return (
     <footer className="flex flex-col gap-2">
       {state.selected.length < 2 && (
@@ -20,7 +27,9 @@ export const Footer = () => {
           {label}
         </Button>
       )}
-      <Button className="justify-center">Download</Button>
+      <Button className="justify-center" onClick={handleDownload}>
+        Download{downloadQuantityString}
+      </Button>
     </footer>
   )
 }

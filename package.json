@@ -19,6 +19,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
     "clsx": "^2.0.0",
+    "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
     "nanoid": "^5.0.2",

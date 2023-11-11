@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { LoaderFunctionArgs, defer } from 'react-router-dom'
 import svgFactory from 'scripts/svg-factory'
-import { initCollectionState } from 'src/providers/collection/reducer'
+import { initCollectionState } from 'src/providers'
 import type { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { svgFactoryChecker } from 'src/utils/svg-factory-checker'

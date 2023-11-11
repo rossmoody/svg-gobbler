@@ -4,8 +4,8 @@ import { Svg } from 'scripts/svg-classes/svg'
 import { EmptyState } from 'src/components'
 import { Collection } from 'src/layout/collection'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
+import { ExportPanel } from 'src/layout/export-panel'
 import { Mainbar } from 'src/layout/main-bar'
-import { Mainpanel } from 'src/layout/main-panel'
 import { TopBar } from 'src/layout/top-bar'
 import { useCollection } from 'src/providers'
 import type { CollectionData } from 'src/types'
@@ -49,7 +49,7 @@ export const CollectionRoute = () => {
             </React.Suspense>
           </div>
         </main>
-        <Mainpanel />
+        <ExportPanel />
       </div>
     </Fragment>
   )
