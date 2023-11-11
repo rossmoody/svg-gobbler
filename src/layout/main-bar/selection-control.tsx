@@ -43,7 +43,10 @@ export const SelectionControl = () => {
           onChange={handleCheckboxChange}
           checked={allItemsAreSelected}
         />
-        <label htmlFor="select" className="font-medium text-xs cursor-pointer">
+        <label
+          htmlFor="select"
+          className="font-medium text-xs cursor-pointer hidden md:block leading-none"
+        >
           Select {allItemsAreSelected ? 'none' : 'all'}
         </label>
       </div>

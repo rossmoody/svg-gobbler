@@ -13,7 +13,7 @@ export const Pagination = () => {
   }, [state.data, state.view.filters])
 
   return (
-    <div>
+    <div className="hidden md:block leading-none">
       Showing <span className="font-medium">{state.processedData.length}</span> of{' '}
       <span className="font-medium">{filteredResultLength}</span> results
     </div>

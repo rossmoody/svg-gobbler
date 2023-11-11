@@ -6,7 +6,7 @@
 /* Components */
 
 .label {
-  @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+  @apply block mb-1 text-sm font-medium text-gray-900 dark:text-white;
 }
 
 .input,

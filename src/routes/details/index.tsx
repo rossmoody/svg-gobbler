@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { Fragment, Suspense } from 'react'
 import { DetailsLayout } from 'src/layout/details'
-import { DetailsProvider } from 'src/providers/details'
+import { DetailsProvider } from 'src/providers'
 
 export const DetailsRoute = () => {
   return (

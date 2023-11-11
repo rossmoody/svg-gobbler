@@ -7,7 +7,7 @@ import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { Mainbar } from 'src/layout/main-bar'
 import { Mainpanel } from 'src/layout/main-panel'
 import { TopBar } from 'src/layout/top-bar'
-import { useCollection } from 'src/providers/collection'
+import { useCollection } from 'src/providers'
 import type { CollectionData } from 'src/types'
 
 /**

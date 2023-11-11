@@ -1,4 +1,3 @@
-import { ArrowRightCircleIcon } from '@heroicons/react/24/outline'
 import { Fragment, useRef, useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { useCollection, useDashboard } from 'src/providers'
@@ -29,7 +28,6 @@ export const MoveItemModal = () => {
   return (
     <Fragment>
       <Button variant="ghost" size="xs" onClick={openModal}>
-        <ArrowRightCircleIcon className="h-3 w-3" />
         Move
       </Button>
 

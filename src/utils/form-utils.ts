@@ -52,4 +52,15 @@ export class FormUtils {
     // Additionally check if the root element is an SVG element
     return doc.documentElement.nodeName === 'svg'
   }
+
+  /**
+   * Copies a given text to the clipboard.
+   */
+  static async copyToClipboard(text: string) {
+    try {
+      await navigator.clipboard.writeText(text)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+  }
 }

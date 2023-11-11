@@ -1,5 +1,7 @@
 import clsx from 'clsx'
 import { useCollection } from 'src/providers'
+import { Footer } from './footer'
+import { Header } from './header'
 
 export const Mainpanel = () => {
   const { state } = useCollection()
@@ -17,9 +19,20 @@ export const Mainpanel = () => {
         'transition-width duration-500 ease-in border-gray-200 dark:border-gray-800',
       )}
     >
-      <header className="flex items-center border-b px-4 border-gray-200 dark:border-gray-800 text h-12">
-        <h2 className="font-medium text-base">Export</h2>
-      </header>
+      <div className="flex flex-col px-4 pb-4 pt-2 h-full">
+        <Header />
+        <div className="flex-grow">
+          <label className="label" htmlFor="file-type">
+            File type
+          </label>
+          <select className="select" id="file-type">
+            <option value="json">JSON</option>
+            <option value="csv">CSV</option>
+            <option value="xml">XML</option>
+          </select>
+        </div>
+        <Footer />
+      </div>
     </aside>
   )
 }
