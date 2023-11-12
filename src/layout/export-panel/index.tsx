@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
 import { Footer } from './footer'
 import { Header } from './header'
+import { PngSettings } from './png-settings'
 import { SvgSettings } from './svg-settings'
 
 const transitionConfig = {
@@ -21,6 +22,10 @@ export const ExportPanel = () => {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     exportDispatch({ type: 'set-file-type', payload: e.target.value as FileType })
+  }
+
+  const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    exportDispatch({ type: 'set-filename', payload: e.target.value })
   }
 
   return (
@@ -42,31 +47,41 @@ export const ExportPanel = () => {
         <div className="flex flex-col px-4 pb-4 pt-2 h-full">
           <Header />
           <div className="flex-grow">
-            <label className="block" htmlFor="file-type">
-              File type
-            </label>
-            <select
-              className="mb-5 flex"
-              id="file-type"
-              value={exportState.fileType}
-              onChange={handleTypeChange}
-            >
-              {fileTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type.toUpperCase()}
-                </option>
-              ))}
-            </select>
+            <div className="mb-3">
+              <label className="export-label" htmlFor="file-type">
+                File type
+              </label>
+              <select
+                className="export-select"
+                id="file-type"
+                value={exportState.fileType}
+                onChange={handleTypeChange}
+              >
+                {fileTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type.toUpperCase()}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-5">
+              <label className="export-label" htmlFor="file-type">
+                File name
+              </label>
+              <input
+                type="text"
+                className="export-input"
+                onChange={handleFileNameChange}
+                value={exportState.filename}
+              />
+            </div>
             <h2 className="font-medium text-sm my-3">Settings</h2>
             <div className="relative">
               <Transition as="div" show={exportState.fileType === 'svg'} {...transitionConfig}>
                 <SvgSettings />
               </Transition>
-              <Transition as="div" show={exportState.fileType === 'jpg'} {...transitionConfig}>
-                JPG
-              </Transition>
               <Transition as="div" show={exportState.fileType === 'png'} {...transitionConfig}>
-                PNG
+                <PngSettings />
               </Transition>
             </div>
           </div>

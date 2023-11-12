@@ -70,7 +70,7 @@ export class FormUtils {
    * Downloads a given SVG string as a file.
    */
   static async downloadSvgString(file: string, baseFileName: string = 'svg-gobbler') {
-    const svgBlob = new Blob([file], { type: 'image/svg+xml' })
+    const svgBlob = new Blob([file], { type: 'text/xml' })
     const blobUrl = URL.createObjectURL(svgBlob)
     const downloadLink = document.createElement('a')
     downloadLink.download = `${baseFileName}.svg`
@@ -81,7 +81,7 @@ export class FormUtils {
   /**
    * Downloads a given array of SVG strings as a zip file.
    */
-  static async downloadSvgStringsZip(files: string[], baseFileName: string = 'svg-gobbler') {
+  static async downloadSvgStringsZip(files: string[], baseFileName: string) {
     const zip = new JSZip()
 
     files.forEach((file, index) => {
@@ -99,7 +99,7 @@ export class FormUtils {
   /**
    * Downloads a given array of strings as a file or zip file depending on the number of strings.
    */
-  static downloadSvgContent(svgStrings: string[], baseFileName: string = 'svg-gobbler') {
+  static downloadSvgContent(svgStrings: string[], baseFileName: string) {
     if (svgStrings.length === 1) {
       return this.downloadSvgString(svgStrings[0], baseFileName)
     }

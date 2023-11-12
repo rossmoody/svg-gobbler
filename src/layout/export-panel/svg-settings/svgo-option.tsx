@@ -26,7 +26,7 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
   }
 
   return (
-    <div className="flex gap-0_5">
+    <div className="flex gap-2">
       <input
         type="checkbox"
         className="checkbox"

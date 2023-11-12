@@ -11,7 +11,7 @@ export const useExportActions = () => {
     multipass: true,
     plugins: state.svgoPlugins,
     js2svg: {
-      pretty: true,
+      pretty: state.prettify,
       indent: 2,
     },
   }
@@ -26,11 +26,7 @@ export const useExportActions = () => {
   const processWithExportConfig = (svgs: Svg[]) => {
     switch (state.fileType) {
       case 'svg': {
-        if (state.optimizeExports) {
-          return processWithSvgo(svgs)
-        }
-
-        return svgs.map((svg) => svg.originalString)
+        return processWithSvgo(svgs)
       }
 
       default: {
