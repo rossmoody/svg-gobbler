@@ -110,10 +110,10 @@ export class Image extends Svg {
       const text = await response.text()
       this.originalString = text
       this.asElement = this.parseFromString('image/svg+xml')
-      return this
     } catch (error) {
       this.corsRestricted = true
-      return this
     }
+
+    return this
   }
 }

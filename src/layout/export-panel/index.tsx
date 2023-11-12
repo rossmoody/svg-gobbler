@@ -3,22 +3,29 @@ import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
 import { Footer } from './footer'
 import { Header } from './header'
+import { SvgSettings } from './svg-settings'
+
+const transitionConfig = {
+  enter: 'transition-all duration-500',
+  enterFrom: 'opacity-0 transform translate-y-4',
+  enterTo: 'opacity-100 transform translate-y-0',
+  leave: 'transition-all duration-500',
+  leaveFrom: 'opacity-100 transform translate-y-0',
+  leaveTo: 'opacity-0 transform translate-y-4',
+  className: 'absolute inset-0',
+}
 
 export const ExportPanel = () => {
-  const { state } = useCollection()
+  const { state: collectionState } = useCollection()
   const { state: exportState, dispatch: exportDispatch } = useExport()
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     exportDispatch({ type: 'set-file-type', payload: e.target.value as FileType })
   }
 
-  const handleOptimizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exportDispatch({ type: 'set-optimize-exports', payload: e.target.checked })
-  }
-
   return (
     <Transition
-      show={state.selected.length > 0}
+      show={collectionState.selected.length > 0}
       enter="transition-all duration-500"
       enterFrom="opacity-0 w-[0]"
       enterTo="opacity-100 w-[18rem]"
@@ -51,17 +58,16 @@ export const ExportPanel = () => {
               ))}
             </select>
             <h2 className="font-medium text-sm my-3">Settings</h2>
-            <div className="flex gap-0_5">
-              <input
-                id="optimize"
-                className="checkbox"
-                type="checkbox"
-                checked={exportState.optimizeExports}
-                onChange={handleOptimizeChange}
-              />
-              <label htmlFor="optimize" className="export-label">
-                Optimize exports
-              </label>
+            <div className="relative">
+              <Transition as="div" show={exportState.fileType === 'svg'} {...transitionConfig}>
+                <SvgSettings />
+              </Transition>
+              <Transition as="div" show={exportState.fileType === 'jpg'} {...transitionConfig}>
+                JPG
+              </Transition>
+              <Transition as="div" show={exportState.fileType === 'png'} {...transitionConfig}>
+                PNG
+              </Transition>
             </div>
           </div>
           <Footer />

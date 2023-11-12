@@ -67,30 +67,43 @@ export class FormUtils {
   }
 
   /**
-   * Downloads a given array of strings as a file or zip file
-   * depending on the number of strings.
+   * Downloads a given SVG string as a file.
    */
-  static downloadFiles(svgStrings: string[], baseFileName: string = 'svg-gobbler') {
+  static async downloadSvgString(file: string, baseFileName: string = 'svg-gobbler') {
+    const svgBlob = new Blob([file], { type: 'image/svg+xml' })
+    const blobUrl = URL.createObjectURL(svgBlob)
+    const downloadLink = document.createElement('a')
+    downloadLink.download = `${baseFileName}.svg`
+    downloadLink.href = blobUrl
+    return downloadLink.click()
+  }
+
+  /**
+   * Downloads a given array of SVG strings as a zip file.
+   */
+  static async downloadSvgStringsZip(files: string[], baseFileName: string = 'svg-gobbler') {
+    const zip = new JSZip()
+
+    files.forEach((file, index) => {
+      zip.file(`${baseFileName}-${index}.svg`, file)
+    })
+
+    const zipContent = await zip.generateAsync({ type: 'blob' })
+    const zipUrl = URL.createObjectURL(zipContent)
+    const downloadLink = document.createElement('a')
+    downloadLink.download = `${baseFileName}.zip`
+    downloadLink.href = zipUrl
+    return downloadLink.click()
+  }
+
+  /**
+   * Downloads a given array of strings as a file or zip file depending on the number of strings.
+   */
+  static downloadSvgContent(svgStrings: string[], baseFileName: string = 'svg-gobbler') {
     if (svgStrings.length === 1) {
-      const svgBlob = new Blob([svgStrings[0]], { type: 'image/svg+xml' })
-      const blobUrl = URL.createObjectURL(svgBlob)
-      const downloadLink = document.createElement('a')
-      downloadLink.download = `${baseFileName}.svg`
-      downloadLink.href = blobUrl
-      return downloadLink.click()
+      return this.downloadSvgString(svgStrings[0], baseFileName)
     }
 
-    const zip = new JSZip()
-    svgStrings.forEach((svgString, index) => {
-      zip.file(`${baseFileName}-${index}.svg`, svgString)
-    })
-
-    zip.generateAsync({ type: 'blob' }).then((zipContent) => {
-      const zipUrl = URL.createObjectURL(zipContent)
-      const downloadLink = document.createElement('a')
-      downloadLink.download = `${baseFileName}.zip`
-      downloadLink.href = zipUrl
-      downloadLink.click()
-    })
+    return this.downloadSvgStringsZip(svgStrings, baseFileName)
   }
 }

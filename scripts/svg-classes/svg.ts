@@ -1,7 +1,9 @@
 import { nanoid } from 'nanoid'
 
 /**
- * The root SVG class. This is the base class for all SVG types.
+ * The root SVG class. This is the base class for all SVG types. It doesn't actually
+ * produce a "valid" SVG element, but it is used to store the original string and
+ * origin of the SVG element in the DOM.
  */
 export class Svg {
   /**
@@ -83,8 +85,9 @@ export class Svg {
   }
 
   /**
-   * Determines if the SVG element is valid based on if
-   * the asElement property is defined.
+   * We try everything under the sun to get an SVG element from the original string.
+   * If we can't, the asElement property will be undefined and we can't do anything
+   * with it.
    */
   get isValid() {
     return !!this.asElement

@@ -6,9 +6,11 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": ".",
+    "typeRoots": ["./node_modules/svgo"],
     "paths": {
       "src/*": ["src/*"],
       "scripts/*": ["scripts/*"],
+      "data/*": ["data/*"],
       "types": ["src/types.ts"]
     },
 
