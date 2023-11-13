@@ -39,6 +39,7 @@ export const Footer = () => {
       }
 
       case 'png': {
+        FormUtils.downloadPngContent(results, exportState.filename)
         break
       }
     }
@@ -48,7 +49,7 @@ export const Footer = () => {
     collectionState.selected.length > 1 ? ` ${collectionState.selected.length} files` : ''
 
   return (
-    <footer className="flex flex-col gap-2">
+    <footer className="flex flex-col gap-2 pt-4 pb-6 px-1">
       {collectionState.selected.length < 2 && (
         <Button variant="secondary" className="justify-center" onClick={handleCopy}>
           {label}

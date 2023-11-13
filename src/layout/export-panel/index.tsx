@@ -7,13 +7,12 @@ import { PngSettings } from './png-settings'
 import { SvgSettings } from './svg-settings'
 
 const transitionConfig = {
-  enter: 'transition-all duration-500',
-  enterFrom: 'opacity-0 transform translate-y-4',
-  enterTo: 'opacity-100 transform translate-y-0',
-  leave: 'transition-all duration-500',
-  leaveFrom: 'opacity-100 transform translate-y-0',
-  leaveTo: 'opacity-0 transform translate-y-4',
-  className: 'absolute inset-0',
+  enter: 'transition-all duration-500 ease-in',
+  enterFrom: 'opacity-0 h-0 translate-y-2',
+  enterTo: 'opacity-100 h-20 translate-y-0',
+  leave: 'transition-all duration-500 ease-out',
+  leaveFrom: 'opacity-100 h-20 translate-y-0',
+  leaveTo: 'opacity-0 h-0 translate-y-2',
 }
 
 export const ExportPanel = () => {
@@ -44,47 +43,49 @@ export const ExportPanel = () => {
           'transition-width duration-500 ease-in border-gray-200 dark:border-gray-800',
         )}
       >
-        <div className="flex flex-col px-4 pb-4 pt-2 h-full">
-          <Header />
-          <div className="flex-grow">
-            <div className="mb-3">
-              <label className="export-label" htmlFor="file-type">
-                File type
-              </label>
-              <select
-                className="export-select"
-                id="file-type"
-                value={exportState.fileType}
-                onChange={handleTypeChange}
-              >
-                {fileTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type.toUpperCase()}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-5">
-              <label className="export-label" htmlFor="file-name">
-                File name
-              </label>
-              <input
-                id="file-name"
-                type="text"
-                className="export-input"
-                onChange={handleFileNameChange}
-                value={exportState.filename}
-              />
-            </div>
-            <h2 className="font-medium text-sm my-3">Settings</h2>
-            <div className="relative">
-              <Transition as="div" show={exportState.fileType === 'svg'} {...transitionConfig}>
-                <SvgSettings />
-              </Transition>
-              <Transition as="div" show={exportState.fileType === 'png'} {...transitionConfig}>
-                <PngSettings />
-              </Transition>
-            </div>
+        <div className="flex flex-col px-3 pt-2 h-full">
+          <div className="flex-grow overflow-y-auto px-1">
+            <Header />
+            <main>
+              <div className="mb-3">
+                <label className="export-label" htmlFor="file-type">
+                  File type
+                </label>
+                <select
+                  className="export-select"
+                  id="file-type"
+                  value={exportState.fileType}
+                  onChange={handleTypeChange}
+                >
+                  {fileTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-5">
+                <label className="export-label" htmlFor="file-name">
+                  File name
+                </label>
+                <input
+                  id="file-name"
+                  type="text"
+                  className="export-input"
+                  onChange={handleFileNameChange}
+                  value={exportState.filename}
+                />
+              </div>
+              <h2 className="font-medium text-sm my-3">Settings</h2>
+              <div className="relative">
+                <Transition as="div" show={exportState.fileType === 'svg'} {...transitionConfig}>
+                  <SvgSettings />
+                </Transition>
+                <Transition as="div" show={exportState.fileType === 'png'} {...transitionConfig}>
+                  <PngSettings />
+                </Transition>
+              </div>
+            </main>
           </div>
           <Footer />
         </div>

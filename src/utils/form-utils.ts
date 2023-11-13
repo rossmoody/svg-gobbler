@@ -82,13 +82,13 @@ export class FormUtils {
   /**
    * Downloads a given SVG string as a file.
    */
-  static async downloadSvgString(file: string, baseFileName: string = 'svg-gobbler') {
+  static async downloadSvgString(file: string, baseFileName: string) {
     const svgBlob = new Blob([file], { type: 'text/xml' })
     const blobUrl = URL.createObjectURL(svgBlob)
     const downloadLink = document.createElement('a')
     downloadLink.download = `${baseFileName}.svg`
     downloadLink.href = blobUrl
-    return downloadLink.click()
+    downloadLink.click()
   }
 
   /**
@@ -106,7 +106,49 @@ export class FormUtils {
     const downloadLink = document.createElement('a')
     downloadLink.download = `${baseFileName}.zip`
     downloadLink.href = zipUrl
-    return downloadLink.click()
+    downloadLink.click()
+  }
+
+  /**
+   * Downloads a given PNG data url as a file.
+   */
+  static async downloadPngDataURL(dataUrl: string, baseFileName: string) {
+    const blob = await fetch(dataUrl).then((res) => res.blob())
+    const blobUrl = URL.createObjectURL(blob)
+    const downloadLink = document.createElement('a')
+    downloadLink.download = `${baseFileName}.png`
+    downloadLink.href = blobUrl
+    downloadLink.click()
+  }
+
+  /**
+   * Downloads a given array of PNG data urls as a zip file.
+   */
+  static async downloadPngDataURLsZip(dataUrls: string[], baseFileName: string) {
+    const zip = new JSZip()
+
+    dataUrls.forEach((dataUrl, index) => {
+      const base64Data = dataUrl.split(',')[1]
+      zip.file(`${baseFileName}-${index}.png`, base64Data, { base64: true })
+    })
+
+    const zipContent = await zip.generateAsync({ type: 'blob' })
+    const zipUrl = URL.createObjectURL(zipContent)
+    const downloadLink = document.createElement('a')
+    downloadLink.download = `${baseFileName}.zip`
+    downloadLink.href = zipUrl
+    downloadLink.click()
+  }
+
+  /**
+   * Downloads a given array of PNG data urls as a file or zip file depending on the number of urls.
+   */
+  static downloadPngContent(dataUrls: string[], baseFileName: string) {
+    if (dataUrls.length === 1) {
+      return this.downloadPngDataURL(dataUrls[0], baseFileName)
+    }
+
+    this.downloadPngDataURLsZip(dataUrls, baseFileName)
   }
 
   /**
@@ -117,7 +159,7 @@ export class FormUtils {
       return this.downloadSvgString(svgStrings[0], baseFileName)
     }
 
-    return this.downloadSvgStringsZip(svgStrings, baseFileName)
+    this.downloadSvgStringsZip(svgStrings, baseFileName)
   }
 
   /**
@@ -125,10 +167,11 @@ export class FormUtils {
    */
   static svgToPngDataURL(svgString: string, width: number, height: number): Promise<string> {
     return new Promise((resolve, reject) => {
-      const svgBlob = new Blob([svgString], { type: 'image/svg+xml' })
+      const sanitizedSvg = this.buildSvgElementFromString(svgString)
+      const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml;charset=utf-8' })
       const url = URL.createObjectURL(svgBlob)
-      const img = new Image()
 
+      const img = new Image()
       img.onload = () => {
         const canvas = document.createElement('canvas')
         canvas.width = width
@@ -154,5 +197,39 @@ export class FormUtils {
 
       img.src = url
     })
+  }
+
+  /**
+   * Builds a valid SVG element from a given string.
+   *
+   * This is used to strip the SVG of competing styles related to class, explicit height,
+   * or explicit width attributes to allow the SVG to scale responsively in PNG creations.
+   * Attempts to add a viewBox attribute if one is not present based on width or height.
+   */
+  static buildSvgElementFromString(svgString: string): string {
+    const parser = new DOMParser()
+    const { documentElement: svg } = parser.parseFromString(svgString, 'image/svg+xml')
+
+    if (svg.querySelector('parsererror')) {
+      throw new Error('Invalid SVG string')
+    }
+
+    if (!svg.getAttribute('xmlns')) {
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    }
+
+    const width = svg.getAttribute('width')
+    const height = svg.getAttribute('height')
+    const viewBox = svg.getAttribute('viewBox')
+
+    svg.removeAttribute('height')
+    svg.removeAttribute('width')
+    svg.removeAttribute('style')
+
+    if (!viewBox && width && height) {
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
+    }
+
+    return svg.outerHTML
   }
 }
