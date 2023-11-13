@@ -39,10 +39,6 @@ export type ExportState = {
        * The size of the PNG to export.
        */
       size: number
-      /**
-       * The padding to use around the SVG when exporting.
-       */
-      padding: number
     }
   }
 }
@@ -56,7 +52,6 @@ export type ExportAction =
   | { type: 'set-prettify'; payload: boolean }
   | { type: 'set-filename'; payload: string }
   | { type: 'set-png-size'; payload: number }
-  | { type: 'set-png-padding'; payload: number }
 
 export const initExportState: ExportState = {
   fileType: 'svg',
@@ -69,7 +64,6 @@ export const initExportState: ExportState = {
     },
     png: {
       size: 512,
-      padding: 0,
     },
   },
 }
@@ -84,19 +78,6 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
           png: {
             ...state.settings.png,
             size: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'set-png-padding': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          png: {
-            ...state.settings.png,
-            padding: action.payload,
           },
         },
       }

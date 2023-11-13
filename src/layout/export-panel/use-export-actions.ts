@@ -29,15 +29,11 @@ export const useExportActions = () => {
       case 'png': {
         return await Promise.all(
           svgs.map((svg) =>
-            FormUtils.svgToPngDataURL(
-              svg.presentationSvg,
-              state.settings.png.size,
-              state.settings.png.size,
-            ),
+            FormUtils.svgToPngDataURL(svg.presentationSvg, state.settings.png.size),
           ),
         ).catch(() => {
           console.log('Failed to convert SVG to PNG')
-          return ['Bobb']
+          return ['']
         })
       }
 

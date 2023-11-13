@@ -9,10 +9,6 @@ export const PngSettings = () => {
     dispatch({ type: 'set-png-size', payload: Number(e.target.value) })
   }
 
-  const handlePaddingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-png-padding', payload: Number(e.target.value) })
-  }
-
   return (
     <div className="flex flex-col gap-3">
       <div>
@@ -30,23 +26,6 @@ export const PngSettings = () => {
           id="size"
           value={state.settings.png.size}
           onChange={handleSizeChange}
-        />
-      </div>
-      <div>
-        <div className="flex gap-1 items-center">
-          <label className="export-label" htmlFor="size">
-            Padding
-          </label>
-          <Tooltip content="Space applied around the outside edge of the canvas.">
-            <InformationCircleIcon className="w-4 h-4 text-gray-400 hover:cursor-help" />
-          </Tooltip>
-        </div>
-        <input
-          type="text"
-          className="export-input"
-          id="size"
-          value={state.settings.png.padding}
-          onChange={handlePaddingChange}
         />
       </div>
     </div>

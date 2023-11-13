@@ -49,7 +49,7 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
 
       {/* Click target and styling to drill into SVG details */}
       <Link
-        to={`/details/${encodeURIComponent(data.originalString)}}`}
+        to={`/details/${encodeURIComponent(data.originalString)}`}
         className="absolute inset-0 cursor-pointer opacity-0 group-hover/card:opacity-100 shadow-md rounded-xl transition-all ease-in"
       />
     </div>

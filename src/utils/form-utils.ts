@@ -165,7 +165,7 @@ export class FormUtils {
   /**
    * Creates a PNG data url from a given SVG string.
    */
-  static svgToPngDataURL(svgString: string, width: number, height: number): Promise<string> {
+  static svgToPngDataURL(svgString: string, size: number): Promise<string> {
     return new Promise((resolve, reject) => {
       const sanitizedSvg = this.buildSvgElementFromString(svgString)
       const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml;charset=utf-8' })
@@ -173,12 +173,22 @@ export class FormUtils {
 
       const img = new Image()
       img.onload = () => {
+        let width, height
+        const aspectRatio = img.width / img.height
+
+        if (img.width > img.height) {
+          width = size
+          height = size / aspectRatio
+        } else {
+          height = size
+          width = size * aspectRatio
+        }
+
         const canvas = document.createElement('canvas')
         canvas.width = width
         canvas.height = height
-        canvas.style.backgroundColor = 'black'
-        const ctx = canvas.getContext('2d')
 
+        const ctx = canvas.getContext('2d')
         if (!ctx) {
           reject(new Error('Canvas context is not available'))
           return

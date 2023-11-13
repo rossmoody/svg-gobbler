@@ -51,7 +51,7 @@ export const Footer = () => {
   return (
     <footer className="flex flex-col gap-2 pt-4 pb-6 px-1">
       {collectionState.selected.length < 2 && (
-        <Button variant="secondary" className="justify-center" onClick={handleCopy}>
+        <Button variant="secondary" className="justify-center transition-all" onClick={handleCopy}>
           {label}
         </Button>
       )}
