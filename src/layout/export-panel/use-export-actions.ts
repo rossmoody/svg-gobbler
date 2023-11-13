@@ -30,7 +30,7 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map((svg) =>
             FormUtils.svgToPngDataURL(
-              svg.originalString,
+              svg.presentationSvg,
               state.settings.png.size,
               state.settings.png.size,
             ),

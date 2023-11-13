@@ -6,6 +6,6 @@ import { Svg } from './svg'
 export class Inline extends Svg {
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
-    this.asElement = this.parseFromString('image/svg+xml')
+    this.asElement = this.parseFromString()
   }
 }

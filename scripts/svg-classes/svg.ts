@@ -46,9 +46,9 @@ export class Svg {
   /**
    * Rebuild the SVG element from the original string
    */
-  parseFromString(mimeType: 'image/svg+xml' | 'text/xml') {
+  parseFromString() {
     const parser = new DOMParser()
-    const { documentElement } = parser.parseFromString(this.originalString, mimeType)
+    const { documentElement } = parser.parseFromString(this.originalString, 'image/svg+xml')
 
     if (!documentElement.querySelector('parsererror')) {
       return documentElement

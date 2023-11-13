@@ -31,7 +31,7 @@ export class Image extends Svg {
         const base64Index = src.indexOf(',') + 1
         const base64String = src.slice(base64Index, src.length - 1) // -1 to exclude the trailing quote
         this.originalString = this.base64DecodeUnicode(base64String)
-        this.asElement = this.parseFromString('image/svg+xml')
+        this.asElement = this.parseFromString()
         break
       }
 
@@ -40,7 +40,7 @@ export class Image extends Svg {
         const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
         const svgString = src.slice(svgStart, svgEnd)
         this.originalString = svgString[0]
-        this.asElement = this.parseFromString('image/svg+xml')
+        this.asElement = this.parseFromString()
         break
       }
 
@@ -109,7 +109,7 @@ export class Image extends Svg {
       const response = await fetch(this.absoluteImageUrl, { mode: 'cors' })
       const text = await response.text()
       this.originalString = text
-      this.asElement = this.parseFromString('image/svg+xml')
+      this.asElement = this.parseFromString()
     } catch (error) {
       this.corsRestricted = true
     }

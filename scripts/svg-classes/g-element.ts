@@ -8,7 +8,7 @@ export class GElement extends Svg {
   }
 
   private processG() {
-    const g = this.parseFromString('image/svg+xml')
+    const g = this.parseFromString()
     if (!g) return
 
     const id = nanoid()

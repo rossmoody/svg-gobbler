@@ -12,7 +12,7 @@ export class Symbol extends Svg {
    * If the symbol string is invalid, the element will be undefined.
    */
   private processSymbol() {
-    const symbol = this.parseFromString('image/svg+xml')
+    const symbol = this.parseFromString()
     if (!symbol) return
 
     const id = nanoid()
