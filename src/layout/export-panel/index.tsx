@@ -65,10 +65,11 @@ export const ExportPanel = () => {
               </select>
             </div>
             <div className="mb-5">
-              <label className="export-label" htmlFor="file-type">
+              <label className="export-label" htmlFor="file-name">
                 File name
               </label>
               <input
+                id="file-name"
                 type="text"
                 className="export-input"
                 onChange={handleFileNameChange}

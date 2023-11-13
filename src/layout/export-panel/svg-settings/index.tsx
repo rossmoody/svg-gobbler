@@ -24,7 +24,7 @@ export const SvgSettings = () => {
             id="optimize"
             className="checkbox"
             type="checkbox"
-            checked={state.optimizeExports}
+            checked={state.settings.svg.optimizeExports}
             onChange={handleOptimizeChange}
           />
           <label htmlFor="optimize" className="export-label">
@@ -36,7 +36,7 @@ export const SvgSettings = () => {
             id="prettify"
             className="checkbox"
             type="checkbox"
-            checked={state.prettify}
+            checked={state.settings.svg.prettify}
             onChange={handlePrettifyChange}
           />
           <label htmlFor="prettify" className="export-label">
@@ -47,7 +47,7 @@ export const SvgSettings = () => {
       <span className="block bg-gray-200 dark:bg-gray-700 h-px my-4" />
       <Transition
         as="div"
-        show={state.optimizeExports}
+        show={state.settings.svg.optimizeExports}
         enter="transition-all duration-300 ease-in-out delay-150"
         enterFrom="opacity-0 h-0"
         enterTo="opacity-100 h-100"

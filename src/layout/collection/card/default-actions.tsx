@@ -11,15 +11,15 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
   const { state, dispatch } = useCollection()
 
   const isSelected = useMemo(() => {
-    return state.selected.includes(data.svg)
-  }, [state.selected, data.svg])
+    return state.selected.includes(data)
+  }, [state.selected, data])
 
   const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.checked) {
       case true:
-        return dispatch({ type: 'add-selected', payload: data.svg })
+        return dispatch({ type: 'add-selected', payload: data })
       case false:
-        return dispatch({ type: 'remove-selected', payload: data.svg })
+        return dispatch({ type: 'remove-selected', payload: data })
     }
   }
 
@@ -49,7 +49,7 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
 
       {/* Click target and styling to drill into SVG details */}
       <Link
-        to={`/details/${encodeURIComponent(data.svg.originalString)}}`}
+        to={`/details/${encodeURIComponent(data.originalString)}}`}
         className="absolute inset-0 cursor-pointer opacity-0 group-hover/card:opacity-100 shadow-md rounded-xl transition-all ease-in"
       />
     </div>

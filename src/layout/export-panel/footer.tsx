@@ -10,17 +10,38 @@ export const Footer = () => {
   const { state: exportState } = useExport()
   const { processWithExportConfig } = useExportActions()
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     setLabel('Copied')
-    const optimized = processWithExportConfig(collectionState.selected)[0]
-    FormUtils.copyToClipboard(optimized)
+    const results = (await processWithExportConfig(collectionState.selected))[0]
+
+    switch (exportState.fileType) {
+      case 'svg': {
+        FormUtils.copyStringToClipboard(results)
+        break
+      }
+
+      case 'png': {
+        FormUtils.copyPngToClipboard(results)
+        break
+      }
+    }
+
     setTimeout(() => setLabel('Copy to clipboard'), 1500)
   }
 
-  const handleDownload = () => {
-    const results = processWithExportConfig(collectionState.selected)
-    console.log(results, 'results')
-    FormUtils.downloadSvgContent(results, exportState.filename)
+  const handleDownload = async () => {
+    const results = await processWithExportConfig(collectionState.selected)
+
+    switch (exportState.fileType) {
+      case 'svg': {
+        FormUtils.downloadSvgContent(results, exportState.filename)
+        break
+      }
+
+      case 'png': {
+        break
+      }
+    }
   }
 
   const downloadQuantityString =

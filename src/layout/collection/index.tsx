@@ -2,7 +2,6 @@ import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useMemo } from 'react'
 import { Button } from 'src/components'
 import { NoResults } from 'src/components/no-results'
-import { CardSvg } from 'src/layout/collection/card/card-svg'
 import { useCollection } from 'src/providers'
 import type { CollectionData } from 'src/types'
 import { Card } from './card'
@@ -68,7 +67,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
           >
-            <Card data={new CardSvg(svg)} style={{ transitionDelay: calculateDelay(i) }} />
+            <Card data={svg} style={{ transitionDelay: calculateDelay(i) }} />
           </Transition>
         ))}
       </ul>

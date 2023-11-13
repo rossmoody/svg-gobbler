@@ -58,11 +58,24 @@ export class FormUtils {
   /**
    * Copies a given text to the clipboard.
    */
-  static async copyToClipboard(text: string) {
+  static async copyStringToClipboard(text: string) {
     try {
       await navigator.clipboard.writeText(text)
     } catch (err) {
       console.error('Failed to copy: ', err)
+    }
+  }
+
+  /**
+   * Copies a given png data url to the clipboard.
+   */
+  static async copyPngToClipboard(dataUrl: string) {
+    try {
+      const blob = await fetch(dataUrl).then((res) => res.blob())
+      const item = new ClipboardItem({ [blob.type]: blob })
+      await navigator.clipboard.write([item])
+    } catch (error) {
+      console.error('Failed to copy: ', error)
     }
   }
 
@@ -105,5 +118,58 @@ export class FormUtils {
     }
 
     return this.downloadSvgStringsZip(svgStrings, baseFileName)
+  }
+
+  /**
+   * Creates a PNG data url from a given SVG string.
+   */
+  static svgToPngDataURL(svgString: string, width: number, height: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      // Create a Blob from the SVG string
+      const svgBlob = new Blob(
+        [
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75Zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75ZM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Z"></path></svg>',
+        ],
+        { type: 'image/svg+xml' },
+      )
+
+      // Create a DOM URL for the Blob
+      const url = URL.createObjectURL(svgBlob)
+
+      // Create a temporary image to load the SVG
+      const img = new Image()
+      img.onload = () => {
+        // Create a canvas element
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
+        canvas.style.backgroundColor = 'black'
+        const ctx = canvas.getContext('2d')
+
+        if (!ctx) {
+          reject(new Error('Canvas context is not available'))
+          return
+        }
+
+        // Draw the image onto the canvas
+        ctx.drawImage(img, 0, 0, width, height)
+
+        // Convert the canvas to a PNG data URL
+        const dataURL = canvas.toDataURL('image/png')
+
+        // Clean up by revoking the Blob URL
+        URL.revokeObjectURL(url)
+
+        // Resolve the promise with the PNG data URL
+        resolve(dataURL)
+      }
+
+      img.onerror = () => {
+        reject(new Error('Error loading image'))
+      }
+
+      // Set the source of the image to the Blob URL
+      img.src = url
+    })
   }
 }

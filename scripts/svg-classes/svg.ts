@@ -92,4 +92,29 @@ export class Svg {
   get isValid() {
     return !!this.asElement
   }
+
+  /**
+   * Return the original SVG stripped of competing styles related to class, explicit height,
+   * or explicit width attributes to allow the SVG to scale responsively. Attempts to add
+   * a viewBox attribute if one is not present based on width or height.
+   *
+   * This is used to display the SVG in the DOM and export PNG for scaling.
+   */
+  get presentationSvg(): string {
+    const elementClone = this.asElement?.cloneNode(true) as SVGElement
+    const width = elementClone.getAttribute('width')
+    const height = elementClone.getAttribute('height')
+    const viewBox = elementClone.getAttribute('viewBox')
+
+    elementClone.removeAttribute('height')
+    elementClone.removeAttribute('width')
+    elementClone.removeAttribute('class') // Tailwind conflicts
+    elementClone.removeAttribute('style') // Risky, may remove
+
+    if (!viewBox && width && height) {
+      elementClone.setAttribute('viewBox', `0 0 ${width} ${height}`)
+    }
+
+    return elementClone.outerHTML
+  }
 }

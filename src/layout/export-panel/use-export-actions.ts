@@ -1,4 +1,5 @@
 import { useExport } from 'src/providers'
+import { FormUtils } from 'src/utils/form-utils'
 import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'
@@ -9,24 +10,35 @@ export const useExportActions = () => {
 
   const svgoConfig: Config = {
     multipass: true,
-    plugins: state.svgoPlugins,
+    plugins: state.settings.svg.svgoPlugins,
     js2svg: {
-      pretty: state.prettify,
+      pretty: state.settings.svg.prettify,
       indent: 2,
     },
   }
 
-  const processWithSvgo = (svgs: Svg[]) => {
-    return svgs.map((svg) => {
-      const { data } = optimize(svg.originalString, svgoConfig)
-      return data as string
-    })
-  }
-
-  const processWithExportConfig = (svgs: Svg[]) => {
+  const processWithExportConfig = async (svgs: Svg[]) => {
     switch (state.fileType) {
       case 'svg': {
-        return processWithSvgo(svgs)
+        return svgs.map((svg) => {
+          const { data } = optimize(svg.originalString, svgoConfig)
+          return data as string
+        })
+      }
+
+      case 'png': {
+        return await Promise.all(
+          svgs.map((svg) =>
+            FormUtils.svgToPngDataURL(
+              svg.originalString,
+              state.settings.png.size,
+              state.settings.png.size,
+            ),
+          ),
+        ).catch(() => {
+          console.log('Failed to convert SVG to PNG')
+          return ['Bobb']
+        })
       }
 
       default: {
@@ -35,5 +47,5 @@ export const useExportActions = () => {
     }
   }
 
-  return { processWithExportConfig, processWithSvgo }
+  return { processWithExportConfig }
 }

@@ -14,17 +14,37 @@ export type ExportState = {
    */
   filename: string
   /**
-   * Whether or not to show the optimization settings for SVG exports.
+   * The setting configurations for each file type.
    */
-  optimizeExports: boolean
-  /**
-   * The current SVGO plugins to use when exporting SVGs.
-   */
-  svgoPlugins: SvgoPlugin[]
-  /**
-   * Format the SVGs with prettier.
-   */
-  prettify: boolean
+  settings: {
+    svg: {
+      /**
+       * Whether or not to show the optimization settings for SVG exports.
+       */
+      optimizeExports: boolean
+      /**
+       * The current SVGO plugins to use when exporting SVGs.
+       */
+      svgoPlugins: SvgoPlugin[]
+      /**
+       * Format the SVGs with prettier.
+       */
+      prettify: boolean
+    }
+    /**
+     * PNG export settings.
+     */
+    png: {
+      /**
+       * The size of the PNG to export.
+       */
+      size: number
+      /**
+       * The padding to use around the SVG when exporting.
+       */
+      padding: number
+    }
+  }
 }
 
 export type ExportAction =
@@ -35,17 +55,53 @@ export type ExportAction =
   | { type: 'remove-svgo-plugin'; payload: SvgoPlugin }
   | { type: 'set-prettify'; payload: boolean }
   | { type: 'set-filename'; payload: string }
+  | { type: 'set-png-size'; payload: number }
+  | { type: 'set-png-padding'; payload: number }
 
 export const initExportState: ExportState = {
   fileType: 'svg',
   filename: 'svg-gobbler',
-  optimizeExports: false,
-  svgoPlugins: defaultSvgoPlugins,
-  prettify: true,
+  settings: {
+    svg: {
+      optimizeExports: false,
+      svgoPlugins: defaultSvgoPlugins,
+      prettify: true,
+    },
+    png: {
+      size: 512,
+      padding: 0,
+    },
+  },
 }
 
 export const exportReducer = (state: ExportState, action: ExportAction): ExportState => {
   switch (action.type) {
+    case 'set-png-size': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          png: {
+            ...state.settings.png,
+            size: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-png-padding': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          png: {
+            ...state.settings.png,
+            padding: action.payload,
+          },
+        },
+      }
+    }
+
     case 'set-filename': {
       return {
         ...state,
@@ -56,28 +112,54 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
     case 'set-prettify': {
       return {
         ...state,
-        prettify: action.payload,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            prettify: action.payload,
+          },
+        },
       }
     }
 
     case 'add-svgo-plugin': {
       return {
         ...state,
-        svgoPlugins: [...state.svgoPlugins, action.payload],
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            svgoPlugins: [...state.settings.svg.svgoPlugins, action.payload],
+          },
+        },
       }
     }
 
     case 'remove-svgo-plugin': {
       return {
         ...state,
-        svgoPlugins: state.svgoPlugins.filter((plugin) => plugin !== action.payload),
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            svgoPlugins: state.settings.svg.svgoPlugins.filter(
+              (plugin) => plugin !== action.payload,
+            ),
+          },
+        },
       }
     }
 
     case 'set-optimize-exports': {
       return {
         ...state,
-        optimizeExports: action.payload,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            optimizeExports: action.payload,
+          },
+        },
       }
     }
 

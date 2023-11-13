@@ -1,13 +1,17 @@
 import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
+import { Image } from 'scripts/svg-classes/image'
 import { Button, Tooltip } from 'src/components'
-import { CardProps } from '.'
+
+type Props = {
+  data: Image
+}
 
 /**
  * The functionality of a given card when it is cors restricted.
  */
-export const CorsRestrictedActions = ({ data }: Pick<CardProps, 'data'>) => {
+export const CorsRestrictedActions = ({ data }: Props) => {
   const handleOpenInNewTab = () => {
-    window.open(data.corsRestrictedUrl, '_blank')
+    window.open(data.absoluteImageUrl, '_blank')
   }
 
   return (
