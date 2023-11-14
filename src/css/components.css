@@ -6,37 +6,37 @@
 }
 
 .anchor {
-  @apply text-red-600 hover:text-red-500 underline cursor-pointer;
+  @apply cursor-pointer text-red-600 underline hover:text-red-500;
 }
 
 /* Components */
 
 .label {
-  @apply block mb-1 text-sm font-medium text-gray-900 dark:text-white;
+  @apply mb-1 block text-sm font-medium text-gray-900 dark:text-white;
 }
 
 .input,
 .select {
-  @apply border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 
-  focus:border-red-500 block w-full p-2 dark:border-gray-600 dark:placeholder-gray-400 
-  dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500 bg-transparent
-  dark:bg-white/5 dark:ring-white/10;
+  @apply block w-full rounded-lg border border-gray-300 bg-transparent 
+  p-2 text-sm text-gray-900 focus:border-red-500 focus:ring-red-500 dark:border-gray-600 
+  dark:bg-white/5 dark:text-white dark:placeholder-gray-400 dark:ring-white/10
+  dark:focus:border-red-500 dark:focus:ring-red-500;
 }
 
 .input-invalid {
-  @apply border-red-500 dark:border-red-500 border-2;
+  @apply border-2 border-red-500 dark:border-red-500;
 }
 
 .checkbox {
-  @apply w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer;
+  @apply h-4 w-4 cursor-pointer rounded border-gray-300 bg-gray-100 text-red-600 focus:ring-2 focus:ring-red-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-red-600;
 }
 
 /* Layout */
 
 .top-bar,
 .main-bar {
-  @apply flex items-center border-b px-2 lg:gap-x-4 sm:px-6 lg:px-8 border-gray-200 
-  dark:border-gray-800 text h-16 shrink-0 surface gap-x-4;
+  @apply text surface flex h-16 shrink-0 items-center gap-x-4 border-b 
+  border-gray-200 px-2 dark:border-gray-800 sm:px-6 lg:gap-x-4 lg:px-8;
 }
 
 .main-bar {
@@ -44,18 +44,18 @@
 }
 
 .collection-item {
-  @apply flex items-center gap-x-2 text-sm leading-6 font-normal px-2 py-1 rounded-md 
-  transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 text focus;
+  @apply text focus flex items-center gap-x-2 rounded-md px-2 py-1 text-sm 
+  font-normal leading-6 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800;
 }
 
 .export-label {
-  @apply text-xs block;
+  @apply block text-xs;
 }
 
 .export-input,
 .export-select {
-  @apply border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 
-  focus:border-red-500 block w-full p-2 dark:border-gray-600 dark:placeholder-gray-400 
-  dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500 bg-transparent
-  dark:bg-white/5 dark:ring-white/10 my-1 placeholder:text-gray-500;
+  @apply my-1 block w-full rounded-lg border border-gray-300 
+  bg-transparent p-2 text-sm text-gray-900 placeholder:text-gray-500 focus:border-red-500 
+  focus:ring-red-500 dark:border-gray-600 dark:bg-white/5 dark:text-white
+  dark:placeholder-gray-400 dark:ring-white/10 dark:focus:border-red-500 dark:focus:ring-red-500;
 }

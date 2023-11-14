@@ -12,12 +12,12 @@ export const PngSettings = () => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <div className="flex gap-1 items-center">
+        <div className="flex items-center gap-1">
           <label className="export-label" htmlFor="size">
             Size
           </label>
           <Tooltip content="Applied to the largest side (height or width) of the image while scaling proportionally.">
-            <InformationCircleIcon className="w-4 h-4 text-gray-400 hover:cursor-help" />
+            <InformationCircleIcon className="h-4 w-4 text-gray-400 hover:cursor-help" />
           </Tooltip>
         </div>
         <input

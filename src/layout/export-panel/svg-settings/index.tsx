@@ -44,7 +44,7 @@ export const SvgSettings = () => {
           </label>
         </div>
       </div>
-      <span className="block bg-gray-200 dark:bg-gray-700 h-px my-4" />
+      <span className="my-4 block h-px bg-gray-200 dark:bg-gray-700" />
       <Transition
         as="div"
         show={state.settings.svg.optimizeExports}

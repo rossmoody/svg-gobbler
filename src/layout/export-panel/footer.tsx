@@ -49,7 +49,7 @@ export const Footer = () => {
     collectionState.selected.length > 1 ? ` ${collectionState.selected.length} files` : ''
 
   return (
-    <footer className="flex flex-col gap-2 pt-4 pb-6 px-1">
+    <footer className="flex flex-col gap-2 px-1 pb-6 pt-4">
       {collectionState.selected.length < 2 && (
         <Button variant="secondary" className="justify-center transition-all" onClick={handleCopy}>
           {label}

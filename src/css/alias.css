@@ -7,5 +7,5 @@
 }
 
 .surface {
-  @apply bg-white dark:bg-gray-900 transition-colors duration-300 ease-in-out;
+  @apply bg-white transition-colors duration-300 ease-in-out dark:bg-gray-900;
 }

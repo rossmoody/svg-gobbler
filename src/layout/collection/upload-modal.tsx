@@ -60,8 +60,8 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
             <div
               {...getRootProps()}
               className={clsx(
-                'relative mt-4 rounded-lg border-2 border-dashed border-gray-500/25 min-h-[220px]',
-                'hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors cursor-pointer focus',
+                'relative mt-4 min-h-[220px] rounded-lg border-2 border-dashed border-gray-500/25',
+                'focus cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50',
                 isDragActive && 'ring-2 ring-red-600/50 dark:ring-red-500/50',
               )}
             >
@@ -79,10 +79,10 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
                 unmount={false}
               >
                 <DocumentPlusIcon
-                  className="mx-auto h-12 w-12 text-muted mb-3"
+                  className="text-muted mx-auto mb-3 h-12 w-12"
                   aria-hidden="true"
                 />
-                <div className="flex text-sm leading-6 text">
+                <div className="text flex text-sm leading-6">
                   <span className="font-semibold text-red-600 dark:text-red-500">Upload files</span>
                   <input className="sr-only" {...getInputProps()} />
                   <p className="pl-1">or drag and drop</p>
@@ -102,10 +102,10 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
                 className="absolute inset-0 flex flex-col items-center justify-center"
               >
                 <DocumentCheckIcon
-                  className="mx-auto h-12 w-12 text-muted mb-3"
+                  className="text-muted mx-auto mb-3 h-12 w-12"
                   aria-hidden="true"
                 />
-                <span className="text-sm leading-5 text font-medium">
+                <span className="text text-sm font-medium leading-5">
                   {acceptedFiles.length} item{acceptedFiles.length > 1 && 's'} uploaded
                 </span>
               </Transition>

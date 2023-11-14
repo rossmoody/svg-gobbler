@@ -26,7 +26,7 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-30 text" onClose={handleClose}>
+      <Dialog as="div" className="text relative z-30" onClose={handleClose}>
         {/* Overlay */}
         <Transition.Child
           as={Fragment}
@@ -53,12 +53,12 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               {/* Modal content */}
-              <Dialog.Panel className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-2xl w-full max-w-lg">
+              <Dialog.Panel className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-800">
                 <IconButton
                   variant="ghost"
                   size="xs"
                   onClick={handleClose}
-                  className="absolute top-4 right-4"
+                  className="absolute right-4 top-4"
                 >
                   <XMarkIcon className="h-5 w-5" />
                 </IconButton>
@@ -74,14 +74,14 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
 
 const Header = ({ children }: PropsWithChildren) => (
   <header>
-    <Dialog.Title as="h3" className="text-lg font-semibold leading-6 mb-5">
+    <Dialog.Title as="h3" className="mb-5 text-lg font-semibold leading-6">
       {children}
     </Dialog.Title>
   </header>
 )
 
 const Footer = ({ children }: PropsWithChildren) => (
-  <footer className="flex flex-row-reverse gap-2 mt-8">{children}</footer>
+  <footer className="mt-8 flex flex-row-reverse gap-2">{children}</footer>
 )
 
 Modal.Header = Header

@@ -39,11 +39,11 @@ export const CollectionItem = ({ collection }: Props) => {
       ) : (
         <div className="h-4 w-4 flex-shrink-0 rounded-md bg-gray-300" />
       )}
-      <span className="flex-1 whitespace-nowrap overflow-ellipsis overflow-hidden">
+      <span className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap">
         {collection.name}
       </span>
       <button
-        className="z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-300 hover:bg-gray-200 dark:hover:bg-gray-900 h-5 w-5 flex items-center justify-center rounded-md"
+        className="z-10 flex h-5 w-5 items-center justify-center rounded-md opacity-0 transition-opacity duration-300 hover:bg-gray-200 group-hover:opacity-100 dark:hover:bg-gray-900"
         onClick={(event) => {
           event.preventDefault()
           handleRemoveCollection(collection)

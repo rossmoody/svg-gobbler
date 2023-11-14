@@ -50,9 +50,9 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   }
 
   return (
-    <section className="transition-colors border-gray-200 dark:border-gray-800">
+    <section className="border-gray-200 transition-colors dark:border-gray-800">
       <ul
-        className="grid gap-4 justify-between"
+        className="grid justify-between gap-4"
         style={{
           gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))`,
         }}
@@ -76,7 +76,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
         enter="transition-opacity duration-300 ease-in-out"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        className="flex justify-center my-12"
+        className="my-12 flex justify-center"
       >
         <Button variant="secondary" size="lg" onClick={() => dispatch({ type: 'load-more' })}>
           Load more

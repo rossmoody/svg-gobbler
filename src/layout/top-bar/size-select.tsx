@@ -31,9 +31,9 @@ export const SizeSelect = () => {
         value={state.view.size}
         onChange={handleSizeChange}
         className={clsx(
-          'text-sm border-none font-semibold rounded-md',
-          'h-8 text-center bg-transparent',
-          'py-0 px-1.5 cursor-pointer bg-none focus',
+          'rounded-md border-none text-sm font-semibold',
+          'h-8 bg-transparent text-center',
+          'focus cursor-pointer bg-none px-1.5 py-0',
           'hover:bg-gray-100 dark:hover:bg-gray-800',
         )}
       >

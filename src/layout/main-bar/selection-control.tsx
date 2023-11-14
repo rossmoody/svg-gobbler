@@ -45,7 +45,7 @@ export const SelectionControl = () => {
         />
         <label
           htmlFor="select"
-          className="font-medium text-xs cursor-pointer hidden md:block leading-none"
+          className="hidden cursor-pointer text-xs font-medium leading-none md:block"
         >
           Select {allItemsAreSelected ? 'none' : 'all'}
         </label>

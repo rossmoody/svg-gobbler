@@ -9,7 +9,7 @@ export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
     return (
       <img
         src={(data as Image).absoluteImageUrl}
-        className="w-full absolute top-0 bottom-0 m-auto"
+        className="absolute bottom-0 top-0 m-auto w-full"
       />
     )
   }

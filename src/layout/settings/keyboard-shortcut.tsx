@@ -18,7 +18,7 @@ export const KeyboardShortcut = () => {
   }
 
   return (
-    <span className="bg-gray-100 dark:bg-gray-700 rounded-sm px-1.5 py-1 text text-base mx-1">
+    <span className="text mx-1 rounded-sm bg-gray-100 px-1.5 py-1 text-base dark:bg-gray-700">
       {shortcut}
     </span>
   )

@@ -16,7 +16,7 @@ export const SettingsLayout = () => {
       leaveTo="opacity-0"
     >
       {/* Header */}
-      <header className="px-4 sm:px-6 lg:px-8 py-8 border-b border-gray-200 dark:border-gray-800 flex gap-4 items-center">
+      <header className="flex items-center gap-4 border-b border-gray-200 px-4 py-8 dark:border-gray-800 sm:px-6 lg:px-8">
         <CollectionPanelButton />
         <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 lg:hidden" aria-hidden />
         <h1 className="text-2xl font-semibold leading-none">Settings</h1>

@@ -15,11 +15,11 @@ export const NoResults = () => (
     enterFrom="opacity-0 scale-95"
     enterTo="opacity-100 scale-100"
   >
-    <div className="flex items-center justify-center w-full h-full rounded-3xl p-12 bg-white/70 dark:bg-gray-800/70">
+    <div className="flex h-full w-full items-center justify-center rounded-3xl bg-white/70 p-12 dark:bg-gray-800/70">
       <div className="text-center">
-        <MagnifyingGlassIcon className="mx-auto h-12 w-12 mb-3" aria-hidden={true} />
-        <h3 className="mt-2 text-lg font-semibold mb-2">No SVGs to show</h3>
-        <p className="mt-1 text-sm text-muted">
+        <MagnifyingGlassIcon className="mx-auto mb-3 h-12 w-12" aria-hidden={true} />
+        <h3 className="mb-2 mt-2 text-lg font-semibold">No SVGs to show</h3>
+        <p className="text-muted mt-1 text-sm">
           Try changing your filter, search, or view settings to display SVGs
         </p>
       </div>

@@ -12,12 +12,12 @@ export const SidebarContent = () => {
   const { state } = useDashboard()
 
   return (
-    <div className="flex grow flex-col gap-y-4 overflow-y-auto border-r px-6 pb-5 border-gray-200 dark:border-gray-800 surface">
-      <div className="flex h-16 shrink-0 items-center mt-2">
+    <div className="surface flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 px-6 pb-5 dark:border-gray-800">
+      <div className="mt-2 flex h-16 shrink-0 items-center">
         <Logo className="h-8 w-auto" />
       </div>
       <nav className="flex flex-1 flex-col">
-        <ul role="list" className="flex flex-1 flex-col gap-1.5 -mx-2">
+        <ul role="list" className="-mx-2 flex flex-1 flex-col gap-1.5">
           <li>
             <button className="collection-item w-full" onClick={() => setOpen(true)}>
               <PlusIcon className="h-4 w-4" aria-hidden="true" />
@@ -25,7 +25,7 @@ export const SidebarContent = () => {
             </button>
             <NewCollectionModal open={open} setOpen={setOpen} />
           </li>
-          <hr className="border-gray-200 dark:border-gray-800 mt-2 mb-5" />
+          <hr className="mb-5 mt-2 border-gray-200 dark:border-gray-800" />
           <li>
             <ul role="list" className="flex flex-col gap-1.5">
               {state.collections.map((collection, i) => (

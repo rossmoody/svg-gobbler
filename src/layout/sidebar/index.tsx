@@ -69,7 +69,7 @@ export const Sidebar = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col lg:w-72 z-10">
+      <div className="z-10 hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
         <SidebarContent />
       </div>
     </>

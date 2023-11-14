@@ -33,16 +33,16 @@ export const EmptyState = () => {
     <div
       {...getRootProps()}
       className={clsx(
-        'flex items-center justify-center w-full h-full rounded-3xl border-2',
-        'border-dashed border-gray-200 dark:border-gray-700/50 p-12 bg-white/70 dark:bg-gray-800/40',
+        'flex h-full w-full items-center justify-center rounded-3xl border-2',
+        'border-dashed border-gray-200 bg-white/70 p-12 dark:border-gray-700/50 dark:bg-gray-800/40',
         isDragActive &&
-          'ring-4 ring-red-600/50 dark:ring-red-500/50 scale-[1.01] transition-all duration-300',
+          'scale-[1.01] ring-4 ring-red-600/50 transition-all duration-300 dark:ring-red-500/50',
       )}
     >
       <div className="text-center">
-        <MagnifyingGlassIcon className="mx-auto h-12 w-12 mb-3 text-muted" aria-hidden={true} />
-        <h3 className="mt-2 text-lg font-semibold mb-2">No SVGs found</h3>
-        <p className="mt-1 text-sm text-muted">
+        <MagnifyingGlassIcon className="text-muted mx-auto mb-3 h-12 w-12" aria-hidden={true} />
+        <h3 className="mb-2 mt-2 text-lg font-semibold">No SVGs found</h3>
+        <p className="text-muted mt-1 text-sm">
           Select or drag SVGs into this area to upload into this collection
         </p>
         <div className="mt-6 flex justify-center">

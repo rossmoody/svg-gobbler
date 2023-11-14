@@ -45,8 +45,8 @@ export const SortMenu = () => {
         <Menu.Items
           className={clsx(
             'absolute right-0 z-10 mt-2 w-48 origin-top-left rounded-md',
-            'bg-white dark:bg-gray-800 shadow-2xl ring-1 ring-black dark:ring-white',
-            'dark:ring-opacity-5 ring-opacity-5 focus',
+            'bg-white shadow-2xl ring-1 ring-black dark:bg-gray-800 dark:ring-white',
+            'focus ring-opacity-5 dark:ring-opacity-5',
           )}
         >
           <div className="py-1">
@@ -59,7 +59,7 @@ export const SortMenu = () => {
                     className={clsx(
                       state.view.sort === option.value && 'font-semibold',
                       active && 'bg-gray-100 dark:bg-gray-700',
-                      'block px-4 py-2 text-sm cursor-pointer',
+                      'block cursor-pointer px-4 py-2 text-sm',
                     )}
                   >
                     {option.label}

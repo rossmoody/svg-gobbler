@@ -9,7 +9,7 @@ export const Category = ({ children, title, description }: PropsWithChildren<Cat
   <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
     <div>
       <h2 className="text-lg font-semibold leading-7">{title}</h2>
-      <p className="mt-1 text-sm leading-6 text-muted">{description}</p>
+      <p className="text-muted mt-1 text-sm leading-6">{description}</p>
     </div>
     {children}
   </div>

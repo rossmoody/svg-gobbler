@@ -45,9 +45,9 @@ export const ViewPopover = () => {
         >
           <Popover.Panel
             className={clsx(
-              'absolute right-0 z-10 mt-2 p-4 origin-top-left rounded-md',
-              'bg-white dark:bg-gray-800 shadow-2xl ring-1 ring-black dark:ring-white',
-              'dark:ring-opacity-5 ring-opacity-5 focus:outline-none',
+              'absolute right-0 z-10 mt-2 origin-top-left rounded-md p-4',
+              'bg-white shadow-2xl ring-1 ring-black dark:bg-gray-800 dark:ring-white',
+              'ring-opacity-5 focus:outline-none dark:ring-opacity-5',
             )}
           >
             {viewOptions.map((option) => (
@@ -64,7 +64,7 @@ export const ViewPopover = () => {
                 />
                 <label
                   htmlFor={option.value}
-                  className="ml-3 whitespace-nowrap pr-4 text-sm font-medium text cursor-pointer"
+                  className="text ml-3 cursor-pointer whitespace-nowrap pr-4 text-sm font-medium"
                 >
                   {option.label} ({corsRestrictedCount})
                 </label>

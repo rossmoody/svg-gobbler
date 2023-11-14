@@ -9,7 +9,7 @@ export const AboutSettings = () => {
       <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
         <div className="mb-8">
           <h3 className="text-base font-semibold leading-7">Contribute</h3>
-          <p className="text-sm text-muted mt-1 leading-6">
+          <p className="text-muted mt-1 text-sm leading-6">
             The SVG Gobbler extension is open source and available for{' '}
             <a className="anchor" href="https://github.com/rossmoody/svg-gobbler">
               contribution on GitHub
@@ -21,7 +21,7 @@ export const AboutSettings = () => {
         <div className="mb-8">
           <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
             <h3 className="text-base font-semibold leading-7">Submit a bug</h3>
-            <p className="text-sm text-muted mt-1 leading-6">
+            <p className="text-muted mt-1 text-sm leading-6">
               Encounter a bug or have a feature request?{' '}
               <a className="anchor" href="https://github.com/rossmoody/svg-gobbler/issues">
                 Open an issue on GitHub
@@ -34,7 +34,7 @@ export const AboutSettings = () => {
         <div className="mb-8">
           <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
             <h3 className="text-base font-semibold leading-7">Be awesome</h3>
-            <p className="text-sm text-muted mt-1 leading-6">
+            <p className="text-muted mt-1 text-sm leading-6">
               This open-source browser extension was made, and is intended to facilitate the
               downloading of SVG icons from websites for personal, educational, or legitimate
               professional use. Users are expected to respect intellectual property rights and

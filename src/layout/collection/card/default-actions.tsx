@@ -28,19 +28,19 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
       {/* Select checkbox */}
       <div
         className={clsx(
-          'opacity-0 absolute top-1 right-1 group-hover/card:opacity-100',
-          'transition-all duration-300 ease-in-out group/select z-10',
+          'absolute right-1 top-1 opacity-0 group-hover/card:opacity-100',
+          'group/select z-10 transition-all duration-300 ease-in-out',
           isSelected && 'opacity-100',
         )}
       >
-        <label className="p-2 rounded-lg flex items-center justify-center group-hover/select:bg-gray-100/70 group-hover/select:dark:bg-gray-800 cursor-pointer">
+        <label className="flex cursor-pointer items-center justify-center rounded-lg p-2 group-hover/select:bg-gray-100/70 group-hover/select:dark:bg-gray-800">
           <input
             type="checkbox"
             onChange={handleSelect}
             checked={isSelected}
             className={clsx(
-              'w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded',
-              'dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer',
+              'h-5 w-5 rounded border-gray-300 bg-gray-100 text-red-600',
+              'cursor-pointer focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800',
               'transition-all duration-150 ease-in-out focus:ring-red-500 dark:focus:ring-red-600',
             )}
           />
@@ -50,7 +50,7 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
       {/* Click target and styling to drill into SVG details */}
       <Link
         to={`/details/${encodeURIComponent(data.originalString)}`}
-        className="absolute inset-0 cursor-pointer opacity-0 group-hover/card:opacity-100 shadow-md rounded-xl transition-all ease-in"
+        className="absolute inset-0 cursor-pointer rounded-xl opacity-0 shadow-md transition-all ease-in group-hover/card:opacity-100"
       />
     </div>
   )

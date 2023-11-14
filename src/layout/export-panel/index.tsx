@@ -39,11 +39,11 @@ export const ExportPanel = () => {
     >
       <aside
         className={clsx(
-          'border-l shrink-0 overflow-y-auto h-[calc(100dvh-theme(space.16))] surface',
-          'transition-width duration-500 ease-in border-gray-200 dark:border-gray-800',
+          'surface h-[calc(100dvh-theme(space.16))] shrink-0 overflow-y-auto border-l',
+          'transition-width border-gray-200 duration-500 ease-in dark:border-gray-800',
         )}
       >
-        <div className="flex flex-col px-3 pt-2 h-full">
+        <div className="flex h-full flex-col px-3 pt-2">
           <div className="flex-grow overflow-y-auto px-1">
             <Header />
             <main>
@@ -76,7 +76,7 @@ export const ExportPanel = () => {
                   value={exportState.filename}
                 />
               </div>
-              <h2 className="font-medium text-sm my-3">Settings</h2>
+              <h2 className="my-3 text-sm font-medium">Settings</h2>
               <div className="relative">
                 <Transition as="div" show={exportState.fileType === 'svg'} {...transitionConfig}>
                   <SvgSettings />

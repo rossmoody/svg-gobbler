@@ -16,14 +16,14 @@ export const TopBar = () => {
       <CollectionPanelButton />
       <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 lg:hidden" aria-hidden />
       <CollectionTitle />
-      <div className="flex flex-1 self-stretch gap-x-4 lg:gap-x-6">
-        <div className="items-center gap-x-3 lg:gap-x-4 ml-auto hidden sm:flex">
+      <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+        <div className="ml-auto hidden items-center gap-x-3 sm:flex lg:gap-x-4">
           <ThemeButton />
-          <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
+          <div className="h-6 w-px bg-gray-200 dark:bg-gray-700" aria-hidden />
           <SizeSelect />
           <ViewPopover />
           <SortMenu />
-          <div className="bg-gray-200 dark:bg-gray-700 h-6 w-px" aria-hidden />
+          <div className="h-6 w-px bg-gray-200 dark:bg-gray-700" aria-hidden />
           <Button variant="secondary" onClick={() => setOpen(true)}>
             Upload
             <PlusIcon className="h-4 w-4" />

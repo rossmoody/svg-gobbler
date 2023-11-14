@@ -10,7 +10,7 @@ export const DashboardRoute = () => (
       <CollectionProvider>
         <ExportProvider>
           <Sidebar />
-          <div className="lg:pl-72 transition-all relative overflow-hidden min-h-screen">
+          <div className="relative min-h-screen overflow-hidden transition-all lg:pl-72">
             <Outlet />
           </div>
         </ExportProvider>
