@@ -74,14 +74,14 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
 
 const Header = ({ children }: PropsWithChildren) => (
   <header>
-    <Dialog.Title as="h3" className="mb-5 text-xl font-semibold leading-6">
+    <Dialog.Title as="h3" className="mb-6 text-xl font-semibold leading-6">
       {children}
     </Dialog.Title>
   </header>
 )
 
 const Footer = ({ children }: PropsWithChildren) => (
-  <footer className="mt-8 flex flex-row-reverse gap-2">{children}</footer>
+  <footer className="mt-10 flex flex-row-reverse gap-2">{children}</footer>
 )
 
 Modal.Header = Header

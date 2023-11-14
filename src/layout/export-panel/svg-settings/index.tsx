@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
 import _ from 'lodash'
 import { Fragment } from 'react'
-import { svgoPlugins } from 'src/data/svgo'
+import { svgoPlugins } from 'src/data/svgo-plugins'
 import { useExport } from 'src/providers'
 import { SvgoOption } from './svgo-option'
 
@@ -54,7 +54,7 @@ export const SvgSettings = () => {
         leave="transition-all duration-300 ease-in-out"
         leaveFrom="opacity-100 h-100"
         leaveTo="opacity-0 h-0"
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-3 pb-8"
       >
         {_.sortBy(svgoPlugins, 'label').map((plugin) => (
           <SvgoOption key={plugin.name} plugin={plugin} />

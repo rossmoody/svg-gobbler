@@ -1,5 +1,7 @@
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import { useMemo } from 'react'
-import { SvgoPlugin } from 'src/data/svgo'
+import { Tooltip } from 'src/components'
+import { SvgoPlugin } from 'src/data/svgo-plugins'
 import { useExport } from 'src/providers'
 
 type SvgoOptionProps = {
@@ -26,7 +28,7 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
   }
 
   return (
-    <div className="flex gap-2">
+    <div className="group flex gap-2">
       <input
         type="checkbox"
         className="checkbox"
@@ -34,9 +36,12 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
         checked={isChecked}
         onChange={handleOptionChange}
       />
-      <label htmlFor={plugin.name} className="export-label">
+      <label htmlFor={plugin.name} className="export-label ">
         {plugin.label}
       </label>
+      <Tooltip content={plugin.description}>
+        <QuestionMarkCircleIcon className="text-muted h-4 w-4 opacity-0 transition-opacity ease-in group-hover:opacity-100" />
+      </Tooltip>
     </div>
   )
 }

@@ -17,7 +17,7 @@ export async function rootLoader() {
   }
 
   // Get all collections from storage for sidenav
-  const prevCollections = await StorageUtils.getCollectionsData()
+  const prevCollections = await StorageUtils.getStorageData<Collection[]>('collections')
 
   try {
     const response = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
@@ -25,7 +25,7 @@ export async function rootLoader() {
     collection.name = response.data.host
     collection.origin = response.data.origin
     await StorageUtils.setPageData(collection.id, response.data)
-    await StorageUtils.setCollectionsData([collection, ...prevCollections])
+    await StorageUtils.setStorageData('collections', [collection, ...prevCollections])
   } catch (error) {
     // The listener has been removed, so the background script is no longer listening
     // This fires when the extension is reloaded as we're managing all routes in memory

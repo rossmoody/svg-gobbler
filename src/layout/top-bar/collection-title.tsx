@@ -27,7 +27,7 @@ export const CollectionTitle = () => {
         return c
       })
       sidebarDispatch({ type: 'set-collections', payload: newCollections })
-      StorageUtils.setCollectionsData(newCollections)
+      StorageUtils.setPageData('collections', newCollections)
     }
   }
 
