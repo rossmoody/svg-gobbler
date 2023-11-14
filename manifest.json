@@ -22,10 +22,8 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+G",
-        "mac": "Command+G"
+        "default": "Ctrl+Shift+G"
       }
     }
-  },
-  "host_permissions": []
+  }
 }

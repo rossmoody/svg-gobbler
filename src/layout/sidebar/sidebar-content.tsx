@@ -55,10 +55,15 @@ export const SidebarContent = () => {
             </NavLink>
           </li>
           <li>
-            <a href="#" className="collection-item">
+            <button
+              onClick={() => {
+                chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
+              }}
+              className="collection-item"
+            >
               <MegaphoneIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
               Leave a review
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
