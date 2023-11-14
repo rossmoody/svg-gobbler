@@ -1,6 +1,12 @@
+/* Base */
+
 .focus {
   @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
   focus-visible:outline-red-600;
+}
+
+.anchor {
+  @apply text-red-600 hover:text-red-500 underline cursor-pointer;
 }
 
 /* Components */
