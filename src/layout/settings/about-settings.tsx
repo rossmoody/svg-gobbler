@@ -1,3 +1,4 @@
+import { links } from 'src/data/links'
 import { Category } from './category'
 
 export const AboutSettings = () => {
@@ -11,7 +12,7 @@ export const AboutSettings = () => {
           <h3 className="text-base font-semibold leading-7">Contribute</h3>
           <p className="text-muted mt-1 text-sm leading-6">
             The SVG Gobbler extension is open source and available for{' '}
-            <a className="anchor" href="https://github.com/rossmoody/svg-gobbler">
+            <a className="anchor" href={links.githubRepository}>
               contribution on GitHub
             </a>
             .
@@ -23,7 +24,7 @@ export const AboutSettings = () => {
             <h3 className="text-base font-semibold leading-7">Submit a bug</h3>
             <p className="text-muted mt-1 text-sm leading-6">
               Encounter a bug or have a feature request?{' '}
-              <a className="anchor" href="https://github.com/rossmoody/svg-gobbler/issues">
+              <a className="anchor" href={links.githubIssues}>
                 Open an issue on GitHub
               </a>
               .

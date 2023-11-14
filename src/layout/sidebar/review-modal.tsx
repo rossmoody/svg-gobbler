@@ -1,15 +1,13 @@
 import { MegaphoneIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { Button, Modal } from 'src/components'
+import { links } from 'src/data/links'
 
 export const ReviewModal = () => {
   const [open, setOpen] = useState(false)
 
   const webstoreLink = () => {
-    if (navigator.userAgent.includes('Firefox')) {
-      return 'https://addons.mozilla.org/en-US/firefox/addon/svg-gobbler/'
-    }
-    return 'https://chromewebstore.google.com/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch?hl=en'
+    return navigator.userAgent.includes('Firefox') ? links.firefoxWebstore : links.chromeWebstore
   }
 
   return (
@@ -41,7 +39,7 @@ export const ReviewModal = () => {
             variant="secondary"
             type="button"
             onClick={() => {
-              window.open('https://github.com/rossmoody/svg-gobbler/issues/new', '_blank')
+              window.open(links.githubIssuesNew, '_blank')
               setOpen(false)
             }}
           >
