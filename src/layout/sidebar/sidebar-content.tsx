@@ -1,11 +1,12 @@
 import { Transition } from '@headlessui/react'
-import { Cog6ToothIcon, MegaphoneIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
 import { useDashboard } from 'src/providers'
 import { CollectionItem } from './collection-item'
 import { NewCollectionModal } from './new-collection-modal'
+import { ReviewModal } from './review-modal'
 
 export const SidebarContent = () => {
   const [open, setOpen] = useState(false)
@@ -55,15 +56,7 @@ export const SidebarContent = () => {
             </NavLink>
           </li>
           <li>
-            <button
-              onClick={() => {
-                chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
-              }}
-              className="collection-item"
-            >
-              <MegaphoneIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
-              Leave a review
-            </button>
+            <ReviewModal />
           </li>
         </ul>
       </nav>

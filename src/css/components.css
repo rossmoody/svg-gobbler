@@ -44,7 +44,7 @@
 }
 
 .collection-item {
-  @apply text focus flex items-center gap-x-2 rounded-md px-2 py-1 text-sm 
+  @apply text focus flex w-full items-center gap-x-2 rounded-md px-2 py-1 text-sm
   font-normal leading-6 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800;
 }
 

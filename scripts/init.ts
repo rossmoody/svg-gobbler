@@ -1,5 +1,5 @@
 import type { PageData } from 'src/types'
-import Chrome from './chrome-utils'
+import Chrome from '../src/utils/chrome-utils'
 import { gatherPageData } from './gather-page-data'
 
 /**

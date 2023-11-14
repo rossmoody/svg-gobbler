@@ -7,8 +7,7 @@ import type { PageData } from 'src/types'
 export function gatherPageData() {
   /**
    * Background image urls must be parsed in the DOM window where
-   * they are placed. Chrome strips them in the message.
-   * This creates a new img with it set as the src to strip any security considerations.
+   * they are placed. Chrome strips them in the message for security.
    */
   const parseBgImageElements = () => {
     const extractSvgUrl = (backgroundImage: string) => {
