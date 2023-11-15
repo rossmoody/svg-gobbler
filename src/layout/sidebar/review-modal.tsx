@@ -19,8 +19,8 @@ export const ReviewModal = () => {
       <Modal open={open} setOpen={setOpen}>
         <Modal.Header>Leave a review</Modal.Header>
         <p className="text-muted text-base">
-          SVG Gobbler is free, open-source, and runs entirely on positive vibes. If you are
-          experiencing a problem, please allow me to fix the issue before submitting a bad review.
+          SVG Gobbler is free, open-source, and runs entirely on positive validation. If you are
+          experiencing a problem, please raise an issue to be fixed before submitting a bad review.
           If you’re having a great experience, then by all means, let it rain.
         </p>
         <Modal.Footer>

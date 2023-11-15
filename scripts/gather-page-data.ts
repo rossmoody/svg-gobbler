@@ -3,6 +3,10 @@ import type { PageData } from 'src/types'
 /**
  * Gathers all relevant SVG data from the active tab. Must be isolated self containing
  * function to make Chrome Manifest V3 security happy.
+ *
+ * The general strategy is to:
+ * 1. Try to find SVG elements in a given page in all the ways they can be rendered
+ * 2. Try to determine the size of the SVG and set it as a viewBox so the SVG can be scaled proportionally
  */
 export function gatherPageData() {
   /**
@@ -68,15 +72,21 @@ export function gatherPageData() {
         return svg.outerHTML
       }
 
+      const cloneSvg = svg.cloneNode(true) as SVGSVGElement
       const height = svg.getAttribute('height')
       const width = svg.getAttribute('width')
 
       if (height && width) {
-        const cloneSvg = svg.cloneNode(true) as SVGElement
         cloneSvg.setAttribute('viewBox', `0 0 ${width} ${height}`)
         return cloneSvg.outerHTML
       }
 
+      // Use Bounding Box as last resort
+      const boundingBox = cloneSvg.getBBox()
+      cloneSvg.setAttribute(
+        'viewBox',
+        `${boundingBox.x} ${boundingBox.y} ${boundingBox.width} ${boundingBox.height}`,
+      )
       return svg.outerHTML
     }
 
@@ -117,7 +127,10 @@ export function gatherPageData() {
 
       // Use Bounding Box as last resort
       const boundingBox = element.getBBox()
-      gClone.setAttribute('viewBox', `0 0 ${boundingBox.width} ${boundingBox.height}`)
+      gClone.setAttribute(
+        'viewBox',
+        `${boundingBox.x} ${boundingBox.y} ${boundingBox.width} ${boundingBox.height}`,
+      )
 
       results.push(gClone.outerHTML)
     })
