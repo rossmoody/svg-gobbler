@@ -242,17 +242,17 @@ export const additionalSvgoPlugins: SvgoPlugin[] = [
   {
     name: 'removeOffCanvasPaths',
     label: 'Remove off-canvas paths',
-    description: '',
+    description: 'Removes <path> elements that are drawn outside of a viewBox.',
   },
   {
     name: 'removeRasterImages',
     label: 'Remove raster images',
-    description: '',
+    description: 'Removes inline JPEGs, PNGs, and GIFs from the document.',
   },
   {
     name: 'removeScriptElement',
     label: 'Remove script element',
-    description: '',
+    description: 'Removes all scripts from the document.',
   },
   {
     name: 'removeStyleElement',
