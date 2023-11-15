@@ -138,7 +138,7 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
           svg: {
             ...state.settings.svg,
             svgoPlugins: state.settings.svg.svgoPlugins.filter(
-              (plugin) => plugin !== action.payload,
+              (plugin) => plugin.name !== action.payload.name,
             ),
           },
         },

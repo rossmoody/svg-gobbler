@@ -185,7 +185,7 @@ export const defaultSvgoPlugins: SvgoPlugin[] = [
   {
     name: 'removeXMLProcInst',
     label: 'Remove XML instructions',
-    description: 'Remove XML processing instructions',
+    description: 'Remove XML processing instructions.',
   },
   {
     name: 'sortAttrs',

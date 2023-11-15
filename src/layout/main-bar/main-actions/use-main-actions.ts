@@ -1,6 +1,5 @@
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
-import { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const useMainActions = () => {
@@ -14,7 +13,7 @@ export const useMainActions = () => {
   const selectedItemsStrings = selectedItems.map((item) => item.originalString)
 
   const deleteSelectedItems = async () => {
-    const currentPageData = await StorageUtils.getPageData<PageData>(collectionId)
+    const currentPageData = await StorageUtils.getPageData(collectionId)
 
     await StorageUtils.setPageData(collectionId, {
       ...currentPageData,
@@ -25,8 +24,8 @@ export const useMainActions = () => {
   }
 
   const moveSelectedItems = async (targetCollectionId: string) => {
-    const targetPageData = await StorageUtils.getPageData<PageData>(targetCollectionId)
-    const currentPageData = await StorageUtils.getPageData<PageData>(collectionId)
+    const targetPageData = await StorageUtils.getPageData(targetCollectionId)
+    const currentPageData = await StorageUtils.getPageData(collectionId)
 
     await StorageUtils.setPageData(targetCollectionId, {
       ...targetPageData,
@@ -42,7 +41,7 @@ export const useMainActions = () => {
   }
 
   const copySelectedItems = async (targetCollectionId: string) => {
-    const targetPageData = await StorageUtils.getPageData<PageData>(targetCollectionId)
+    const targetPageData = await StorageUtils.getPageData(targetCollectionId)
 
     await StorageUtils.setPageData(targetCollectionId, {
       ...targetPageData,

@@ -3,14 +3,13 @@ import { LoaderFunctionArgs, defer } from 'react-router-dom'
 import svgFactory from 'scripts/svg-factory'
 import { defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import { initCollectionState } from 'src/providers'
-import type { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { svgFactoryChecker } from 'src/utils/svg-factory-checker'
 
 export async function collectionLoader({ params }: LoaderFunctionArgs) {
-  const pageData = await StorageUtils.getPageData<PageData>(params.id as string)
+  const pageData = await StorageUtils.getPageData(params.id as string)
+  let plugins = await StorageUtils.getStorageData('plugins')
   let { view } = await chrome.storage.local.get('view')
-  let { plugins } = await chrome.storage.local.get('plugins')
 
   // Initialize context states if not exist in DB using lodash
   view = _.assign({}, initCollectionState.view, view)

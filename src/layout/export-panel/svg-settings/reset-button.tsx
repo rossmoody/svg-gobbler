@@ -2,22 +2,31 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
+import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
+import { useExport } from 'src/providers'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 export const ResetButton = () => {
-  // const { dispatch } = useExport()
+  const { dispatch } = useExport()
 
-  // const resetToDefault = async () => {
-  //   const plugins = await StorageUtils.getStorageData('plugins')
-  //   console.log(plugins)
-  //   // dispatch({ type: 'set-svgo-plugins', payload: plugins })
-  // }
+  const resetToDefault = async () => {
+    const plugins = (await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')) ?? []
+    dispatch({ type: 'set-svgo-plugins', payload: plugins })
+  }
 
-  // const menuItem = [
-  //   {
-  //     label: 'Reset to default',
-  //     onClick: resetToDefault,
-  //   },
-  // ]
+  const resetToEmpty = () => {
+    dispatch({ type: 'set-svgo-plugins', payload: [] })
+  }
+
+  const resetToSvgoDefault = () => {
+    dispatch({ type: 'set-svgo-plugins', payload: defaultSvgoPlugins })
+  }
+
+  const menuItem = [
+    { label: 'User default', onClick: resetToDefault },
+    { label: 'SVGO default', onClick: resetToSvgoDefault },
+    { label: 'Deselect all', onClick: resetToEmpty },
+  ]
 
   return (
     <Fragment>
@@ -42,7 +51,7 @@ export const ResetButton = () => {
               'focus ring-opacity-5 dark:ring-opacity-5',
             )}
           >
-            {/* <div className="py-1">
+            <div className="py-1">
               {menuItem.map((item) => (
                 <Menu.Item key={item.label}>
                   {({ active }) => (
@@ -57,7 +66,7 @@ export const ResetButton = () => {
                   )}
                 </Menu.Item>
               ))}
-            </div> */}
+            </div>
           </Menu.Items>
         </Transition>
       </Menu>

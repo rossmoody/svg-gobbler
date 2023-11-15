@@ -12,7 +12,7 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
   const { state, dispatch } = useExport()
 
   const isChecked = useMemo(() => {
-    return state.settings.svg.svgoPlugins.includes(plugin)
+    return state.settings.svg.svgoPlugins.some((p) => p.name === plugin.name)
   }, [state.settings.svg.svgoPlugins, plugin])
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,6 @@
 import { useRevalidator } from 'react-router-dom'
 import { Inline } from 'scripts/svg-classes/inline'
 import { useCollection } from 'src/providers'
-import { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
@@ -16,7 +15,7 @@ export const useUpload = () => {
     const { collectionId } = state
 
     // Get current page data for storage
-    let pageData = await StorageUtils.getPageData<PageData>(collectionId)
+    let pageData = await StorageUtils.getPageData(collectionId)
 
     // Append new strings to collection's page data
     pageData = {

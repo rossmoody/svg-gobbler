@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 import { redirect } from 'react-router-dom'
+import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import type { BackgroundMessage, Collection } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
@@ -26,6 +27,10 @@ export async function rootLoader() {
     collection.origin = data.origin
     await StorageUtils.setPageData(collection.id, data)
     await StorageUtils.setStorageData('collections', [collection, ...prevCollections])
+
+    // Initialize the plugins for the export panel if it doesn't exist
+    const plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
+    if (!plugins) await StorageUtils.setStorageData('plugins', defaultSvgoPlugins)
   } catch (error) {
     // The listener has been removed, so the background script is no longer listening
     // This fires when the extension is reloaded as we're managing all routes in memory

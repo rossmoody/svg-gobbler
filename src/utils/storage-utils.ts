@@ -1,4 +1,5 @@
 import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
+import { PageData } from 'src/types'
 
 /**
  * A poor man's trpc for storage.
@@ -22,9 +23,13 @@ export class StorageUtils {
    * Get page data from storage based on collectionId.
    * Automatically decompresses data.
    */
-  static async getPageData<T>(collectionId: string): Promise<T> {
-    const pageData = await chrome.storage.local.get(collectionId)
-    return this.decompressFromBase64(pageData[collectionId])
+  static async getPageData(collectionId: string): Promise<PageData> {
+    try {
+      const pageData = await chrome.storage.local.get(collectionId)
+      return this.decompressFromBase64(pageData[collectionId])
+    } catch (error) {
+      return {} as PageData
+    }
   }
 
   /**
@@ -51,8 +56,12 @@ export class StorageUtils {
    * Get collections data from storage.
    * Automatically decompresses data.
    */
-  static async getStorageData<T>(key: string): Promise<T> {
-    const data = await chrome.storage.local.get(key)
-    return this.decompressFromBase64(data[key])
+  static async getStorageData<T>(key: string): Promise<T | undefined> {
+    try {
+      const data = await chrome.storage.local.get(key)
+      return this.decompressFromBase64(data[key])
+    } catch (error) {
+      return
+    }
   }
 }
