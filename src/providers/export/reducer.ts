@@ -47,6 +47,7 @@ export type ExportAction =
   | { type: 'reset' }
   | { type: 'set-file-type'; payload: FileType }
   | { type: 'set-optimize-exports'; payload: boolean }
+  | { type: 'set-svgo-plugins'; payload: SvgoPlugin[] }
   | { type: 'add-svgo-plugin'; payload: SvgoPlugin }
   | { type: 'remove-svgo-plugin'; payload: SvgoPlugin }
   | { type: 'set-prettify'; payload: boolean }
@@ -58,9 +59,9 @@ export const initExportState: ExportState = {
   filename: 'svg-gobbler',
   settings: {
     svg: {
-      optimizeExports: false,
+      optimizeExports: true,
       svgoPlugins: defaultSvgoPlugins,
-      prettify: false,
+      prettify: true,
     },
     png: {
       size: 512,
@@ -70,6 +71,19 @@ export const initExportState: ExportState = {
 
 export const exportReducer = (state: ExportState, action: ExportAction): ExportState => {
   switch (action.type) {
+    case 'set-svgo-plugins': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            svgoPlugins: action.payload,
+          },
+        },
+      }
+    }
+
     case 'set-png-size': {
       return {
         ...state,

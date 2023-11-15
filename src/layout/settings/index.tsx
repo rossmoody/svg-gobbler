@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { CollectionPanelButton } from 'src/components'
 import { AboutSettings } from './about-settings'
+import { ExportSettings } from './export-settings'
 import { GeneralSettings } from './general-settings'
 
 export const SettingsLayout = () => {
@@ -25,6 +26,7 @@ export const SettingsLayout = () => {
       {/* Settings forms */}
       <main className="pb-20">
         <GeneralSettings />
+        <ExportSettings />
         <AboutSettings />
       </main>
     </Transition>

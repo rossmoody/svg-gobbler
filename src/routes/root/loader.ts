@@ -17,14 +17,14 @@ export async function rootLoader() {
   }
 
   // Get all collections from storage for sidenav
-  const prevCollections = await StorageUtils.getStorageData<Collection[]>('collections')
+  const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
   try {
-    const response = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
+    const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
     // If message connection is successful, process the response, add the collection to storage
-    collection.name = response.data.host
-    collection.origin = response.data.origin
-    await StorageUtils.setPageData(collection.id, response.data)
+    collection.name = data.host
+    collection.origin = data.origin
+    await StorageUtils.setPageData(collection.id, data)
     await StorageUtils.setStorageData('collections', [collection, ...prevCollections])
   } catch (error) {
     // The listener has been removed, so the background script is no longer listening

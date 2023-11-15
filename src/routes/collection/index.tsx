@@ -2,30 +2,35 @@ import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'
 import { Svg } from 'scripts/svg-classes/svg'
 import { EmptyState } from 'src/components'
+import { SvgoPlugin } from 'src/data/svgo-plugins'
 import { Collection } from 'src/layout/collection'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { ExportPanel } from 'src/layout/export-panel'
 import { Mainbar } from 'src/layout/main-bar'
 import { TopBar } from 'src/layout/top-bar'
-import { useCollection } from 'src/providers'
+import { useCollection, useExport } from 'src/providers'
 import type { CollectionData } from 'src/types'
 
 /**
  * This is really collection data with a promise we await for the svg data.
  */
 type LoaderData = CollectionData & {
+  plugins: SvgoPlugin[]
   data: Promise<Svg[]>
 }
 
 export const CollectionRoute = () => {
-  const { data, collectionId, view } = useLoaderData() as LoaderData
-  const { dispatch } = useCollection()
+  const { data, collectionId, view, plugins } = useLoaderData() as LoaderData
+  const { dispatch: collectionDispatch } = useCollection()
+  const { dispatch: exportDispatch } = useExport()
 
   useEffect(() => {
-    dispatch({ type: 'set-collection-id', payload: collectionId })
-    dispatch({ type: 'set-view', payload: view })
-    return () => dispatch({ type: 'reset' })
-  }, [collectionId, dispatch, view])
+    collectionDispatch({ type: 'set-collection-id', payload: collectionId })
+    collectionDispatch({ type: 'set-view', payload: view })
+    exportDispatch({ type: 'set-svgo-plugins', payload: plugins })
+
+    return () => collectionDispatch({ type: 'reset' })
+  }, [collectionId, collectionDispatch, view, exportDispatch, plugins])
 
   return (
     <Fragment>

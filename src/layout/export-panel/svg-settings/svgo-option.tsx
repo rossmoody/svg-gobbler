@@ -40,7 +40,7 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
         {plugin.label}
       </label>
       <Tooltip content={plugin.description}>
-        <QuestionMarkCircleIcon className="text-muted h-4 w-4 opacity-0 transition-opacity ease-in group-hover:opacity-100" />
+        <QuestionMarkCircleIcon className="text-muted h-4 w-4 cursor-help opacity-0 transition-opacity ease-in group-hover:opacity-100" />
       </Tooltip>
     </div>
   )
