@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useCollection } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
 import { CardProps } from '.'
 
 /**
@@ -22,6 +21,13 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
       case false:
         return dispatch({ type: 'remove-selected', payload: data })
     }
+  }
+
+  const handleEncodeURI = () => {
+    const baseURL = `/details/`
+    const escapedURL = data.originalString.replace(/\\/g, '\\\\')
+    const encodedURL = encodeURIComponent(escapedURL)
+    return baseURL + encodedURL
   }
 
   return (
@@ -48,9 +54,8 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
         </label>
       </div>
 
-      {/* Click target and styling to drill into SVG details */}
       <Link
-        to={`/details/${StorageUtils.compressToBase64(data.originalString)}`}
+        to={handleEncodeURI()}
         className="absolute inset-0 cursor-pointer rounded-xl opacity-0 shadow-md transition-all ease-in group-hover/card:opacity-100"
       />
     </div>

@@ -11,7 +11,7 @@ export class Image extends Svg {
 
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
-    this.asElement = this.parseAndReturnElement()
+    this.parseAndSetElement()
     this.processImage()
   }
 
@@ -44,6 +44,7 @@ export class Image extends Svg {
         break
       }
 
+      // Need to fetch asynchronously
       case src.includes('.svg'): {
         this.absoluteImageUrl = this.getAbsoluteImageSrc(src)
         break
@@ -85,7 +86,7 @@ export class Image extends Svg {
    * This function constructs a complete HTML document by embedding the original HTML string (`this.originalString`)
    * inside the body tags. It sets the `<base href>` to the current origin (`this.origin`) in the head section.
    */
-  private parseAndReturnElement() {
+  private parseAndSetElement() {
     const htmlSource = `<!DOCTYPE html><html><head><base href=${this.origin}></head><body>${this.originalString}</body></html>`
     const element = new DOMParser().parseFromString(htmlSource, 'text/html')
 
@@ -96,7 +97,7 @@ export class Image extends Svg {
       return
     }
 
-    return element.body.firstElementChild as Element
+    this.asElement = element.body.firstElementChild as Element
   }
 
   /**

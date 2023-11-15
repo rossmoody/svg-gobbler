@@ -6,55 +6,162 @@ import type { PageData } from 'src/types'
  */
 export function gatherPageData() {
   /**
-   * Background image urls must be parsed in the DOM window where
-   * they are placed. Chrome strips them in the message for security.
+   * Find all the elements with src or background images that contain svg
    */
-  const parseBgImageElements = () => {
-    const extractSvgUrl = (backgroundImage: string) => {
-      // base64, dataURI, or url all have svg in them
-      const match = /url\("?(.*\.svg)"?\)/.exec(backgroundImage)
-      return match ? match[1] : null
-    }
+  const parseSrcAndBgImages = () => {
+    const results: string[] = []
+    const elements = document.querySelectorAll(
+      'img[src*="svg"], object[type="image/svg+xml"], embed[type="image/svg+xml"], iframe[src*="svg"]',
+    )
 
     /**
-     * This intentionally only checks divs. It could check images for background images
-     * but it's so much more likely that it would be src. Recreates every background image
-     * url to be an Image with a src for processing.
+     * Helper function to quickly create a new image, set the src,
+     * and return the outerHTML created by it. We must do this because
+     * security is quite strict on what we can access from the page.
      */
-    return Array.from(document.querySelectorAll('div'))
-      .map((element) => {
-        const style = window.getComputedStyle(element)
-        const src = extractSvgUrl(style.backgroundImage)
+    const createImage = (src: string) => {
+      const image = new Image()
+      image.src = src
+      return image.outerHTML
+    }
 
-        if (src) {
-          const image = new Image()
-          image.src = src
-          return image.outerHTML
-        }
+    elements.forEach((element) => {
+      if (element instanceof HTMLImageElement && element.src.includes('svg')) {
+        results.push(createImage(element.src))
+      }
 
-        return null
-      })
-      .filter(Boolean) // Remove nulls (non-SVG backgrounds)
+      if (element instanceof HTMLElement && element.style.backgroundImage.includes('svg')) {
+        const url = window.getComputedStyle(element).backgroundImage.slice(5, -2)
+        results.push(createImage(url))
+      }
+
+      if (element instanceof HTMLObjectElement && element.type === 'image/svg+xml') {
+        results.push(createImage(element.data))
+      }
+
+      if (element instanceof HTMLEmbedElement && element.type === 'image/svg+xml') {
+        results.push(createImage(element.src))
+      }
+
+      if (element instanceof HTMLIFrameElement && element.src.includes('svg')) {
+        results.push(createImage(element.src))
+      }
+    })
+
+    return results
   }
 
   /**
-   * Returns the outer html of a specified tag that includes 'svg' or '<g ' in the string.
+   * Find all the inline svg elements that are not sprite instances or sprite sources
    */
-  function stringifyOuterHtmlByTag(tag: keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap) {
-    return Array.from(document.querySelectorAll(tag))
-      .filter(({ outerHTML }) => outerHTML.includes('svg') || outerHTML.includes('<g '))
-      .map((element) => element.outerHTML)
+  const gatherInlineSvgElements = () => {
+    const results: string[] = []
+    const elements = document.querySelectorAll('svg:not(:has(use)):not(:has(defs))')
+
+    /**
+     * An earnest effort to set a viewBox so we can handle resizing and displaying the SVGs
+     */
+    const tryToSetViewBox = (svg: SVGElement) => {
+      const viewBox = svg.getAttribute('viewBox')
+
+      if (viewBox) {
+        return svg.outerHTML
+      }
+
+      const height = svg.getAttribute('height')
+      const width = svg.getAttribute('width')
+
+      if (height && width) {
+        const cloneSvg = svg.cloneNode(true) as SVGElement
+        cloneSvg.setAttribute('viewBox', `0 0 ${width} ${height}`)
+        return cloneSvg.outerHTML
+      }
+
+      return svg.outerHTML
+    }
+
+    elements.forEach((element) => {
+      if (element instanceof SVGElement) {
+        results.push(tryToSetViewBox(element))
+      }
+    })
+
+    return results
   }
 
-  // TODO: Handle object, embed, and iframe tags
+  /**
+   * Find all the g elements on the page and try to establish their width and height
+   * so we can set a viewBox when processing them into SVGs. Setting a viewBox here is
+   * meaningless to the element, but we parse and remove it later.
+   */
+  const gatherGElements = () => {
+    const results: string[] = []
+    const elements = document.querySelectorAll('g')
+
+    elements.forEach((element) => {
+      const svg = element.closest('svg')
+      const gClone = element.cloneNode(true) as SVGGElement
+
+      const viewBox = svg?.getAttribute('viewBox')
+      if (viewBox) {
+        gClone.setAttribute('viewBox', viewBox)
+        return results.push(gClone.outerHTML)
+      }
+
+      const width = svg?.getAttribute('width')?.replace('px', '')
+      const height = svg?.getAttribute('height')?.replace('px', '')
+      if (width && height) {
+        gClone.setAttribute('viewBox', `0 0 ${width} ${height}`)
+        return results.push(gClone.outerHTML)
+      }
+
+      // Use Bounding Box as last resort
+      const boundingBox = element.getBBox()
+      gClone.setAttribute('viewBox', `0 0 ${boundingBox.width} ${boundingBox.height}`)
+
+      results.push(gClone.outerHTML)
+    })
+
+    return results
+  }
+
+  /**
+   * Gather all the symbol elements on the page and try to establish thir viewBox
+   */
+  const gatherSymbolElements = () => {
+    const results: string[] = []
+    const elements = document.querySelectorAll('symbol')
+
+    elements.forEach((element) => {
+      if (element.getAttribute('viewBox')) {
+        return results.push(element.outerHTML)
+      }
+
+      const height = element.getAttribute('height')
+      const width = element.getAttribute('width')
+      if (height && width) {
+        const cloneElement = element.cloneNode(true) as SVGElement
+        cloneElement.setAttribute('viewBox', `0 0 ${width} ${height}`)
+        return results.push(cloneElement.outerHTML)
+      }
+
+      const svgViewBox = element.closest('svg')?.getAttribute('viewBox')
+      if (svgViewBox) {
+        const cloneElement = element.cloneNode(true) as SVGElement
+        cloneElement.setAttribute('viewBox', svgViewBox)
+        return results.push(cloneElement.outerHTML)
+      }
+    })
+
+    return results
+  }
 
   const data = [
     ...new Set([
-      ...parseBgImageElements(),
-      ...stringifyOuterHtmlByTag('svg'),
-      ...stringifyOuterHtmlByTag('symbol'),
-      ...stringifyOuterHtmlByTag('img'),
-      ...stringifyOuterHtmlByTag('g'),
+      ...parseSrcAndBgImages(),
+      ...gatherInlineSvgElements(),
+      ...gatherGElements(),
+      ...gatherSymbolElements(),
     ]),
   ]
 

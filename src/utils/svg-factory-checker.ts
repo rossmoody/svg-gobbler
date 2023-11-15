@@ -1,3 +1,5 @@
+import _ from 'lodash'
+import { GElement } from 'scripts/svg-classes/g-element'
 import svgFactory from 'scripts/svg-factory'
 import type { PageData } from 'src/types'
 
@@ -8,16 +10,9 @@ export const svgFactoryChecker = async (pageData: PageData) => {
   if (process.env.NODE_ENV === 'development') {
     const processedData = await svgFactory.process(pageData)
 
-    const malformedData = processedData.filter((svg) => {
-      if (svg === undefined) return true
-
-      // Check if first characters of string are <svg
-      // This is a quick check to see if the string is an SVG
-      if (svg.originalString.slice(0, 4) !== '<svg') {
-        return true
-      }
-    })
-
-    console.log('Malformed data:', malformedData)
+    console.log(
+      'g element data:',
+      _.filter(processedData, (svg) => svg instanceof GElement).map((svg) => svg?.originalString),
+    )
   }
 }

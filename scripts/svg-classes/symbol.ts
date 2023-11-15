@@ -4,7 +4,7 @@ import { Svg } from './svg'
 export class Symbol extends Svg {
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
-    this.asElement = this.processSymbol()
+    this.processSymbol()
   }
 
   /**
@@ -29,6 +29,8 @@ export class Symbol extends Svg {
     width && svg.setAttribute('width', width)
 
     svg.append(symbol, useElement)
-    return svg
+
+    this.asElement = svg
+    this.originalString = svg.outerHTML
   }
 }

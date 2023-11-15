@@ -1,23 +1,23 @@
-import { nanoid } from 'nanoid'
 import { Svg } from './svg'
 
 export class GElement extends Svg {
   constructor(originalString: string, origin: string) {
     super(originalString, origin)
-    this.asElement = this.processG()
+    this.processG()
   }
 
   private processG() {
     const g = this.parseFromString()
     if (!g) return
 
-    const id = nanoid()
-    const svg = this.createSvgElement()
-    const use = this.createUseElement(id)
-    const symbol = this.createSymbolElement(id)
+    const viewBox = g.getAttribute('viewBox')
+    g.removeAttribute('viewBox') // Cleanup useless viewBox
 
-    symbol.append(g)
-    svg.append(symbol, use)
-    return svg
+    const svg = this.createSvgElement()
+    svg.setAttribute('viewBox', viewBox ?? '0 0 24 24')
+    svg.appendChild(g)
+
+    this.asElement = svg
+    this.originalString = svg.outerHTML
   }
 }

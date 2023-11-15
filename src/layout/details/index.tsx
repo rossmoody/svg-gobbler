@@ -14,8 +14,8 @@ export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <div ref={ref}>
-      {state.originalString}
       <Button onClick={() => navigate(-1)}>Back</Button>
+      {state.originalString}
     </div>
   )
 })

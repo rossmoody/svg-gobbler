@@ -19,8 +19,12 @@ class SvgFactory {
     const processedData = message.data
       .map((item) => {
         switch (true) {
-          case item.includes('<svg ') && !item.includes('<use '): {
+          case item.includes('<svg '): {
             return new Inline(item, message.origin)
+          }
+
+          case item.includes('<img '): {
+            return new Image(item, message.origin)
           }
 
           case item.includes('<symbol '): {
@@ -29,10 +33,6 @@ class SvgFactory {
 
           case item.includes('<g '): {
             return new GElement(item, message.origin)
-          }
-
-          case item.includes('<img '): {
-            return new Image(item, message.origin)
           }
         }
       })
