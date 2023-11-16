@@ -21,7 +21,8 @@ export function gatherPageData() {
     /**
      * Helper function to quickly create a new image, set the src,
      * and return the outerHTML created by it. We must do this because
-     * security is quite strict on what we can access from the page.
+     * security is quite strict on what we can access from the client page.
+     *
      */
     const createImage = (src: string) => {
       const image = new Image()
@@ -60,7 +61,7 @@ export function gatherPageData() {
    */
   const gatherInlineSvgElements = () => {
     const results: string[] = []
-    const elements = document.querySelectorAll('svg:not(:has(use)):not(:has(defs))')
+    const elements = document.querySelectorAll('svg')
 
     /**
      * An earnest effort to set a viewBox so we can handle resizing and displaying the SVGs
@@ -100,9 +101,9 @@ export function gatherPageData() {
   }
 
   /**
-   * Find all the g elements on the page and try to establish their width and height
+   * Find all the g elements on the page and try to establish their canvas size
    * so we can set a viewBox when processing them into SVGs. Setting a viewBox here is
-   * meaningless to the element, but we parse and remove it later.
+   * meaningless to the element, but we parse and remove it later in the class constructor.
    */
   const gatherGElements = () => {
     const results: string[] = []
@@ -139,7 +140,7 @@ export function gatherPageData() {
   }
 
   /**
-   * Gather all the symbol elements on the page and try to establish thir viewBox
+   * Gather all the symbol elements on the page and try to establish a viewBox
    */
   const gatherSymbolElements = () => {
     const results: string[] = []
@@ -150,18 +151,18 @@ export function gatherPageData() {
         return results.push(element.outerHTML)
       }
 
+      const svgViewBox = element.closest('svg')?.getAttribute('viewBox')
+      if (svgViewBox) {
+        const cloneElement = element.cloneNode(true) as SVGElement
+        cloneElement.setAttribute('viewBox', svgViewBox)
+        return results.push(cloneElement.outerHTML)
+      }
+
       const height = element.getAttribute('height')
       const width = element.getAttribute('width')
       if (height && width) {
         const cloneElement = element.cloneNode(true) as SVGElement
         cloneElement.setAttribute('viewBox', `0 0 ${width} ${height}`)
-        return results.push(cloneElement.outerHTML)
-      }
-
-      const svgViewBox = element.closest('svg')?.getAttribute('viewBox')
-      if (svgViewBox) {
-        const cloneElement = element.cloneNode(true) as SVGElement
-        cloneElement.setAttribute('viewBox', svgViewBox)
         return results.push(cloneElement.outerHTML)
       }
     })

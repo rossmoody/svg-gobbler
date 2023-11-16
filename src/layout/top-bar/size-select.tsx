@@ -31,10 +31,9 @@ export const SizeSelect = () => {
         value={state.view.size}
         onChange={handleSizeChange}
         className={clsx(
-          'rounded-md border-none text-sm font-semibold',
-          'h-8 bg-transparent text-center',
-          'focus cursor-pointer bg-none px-1.5 py-0',
-          'hover:bg-gray-100 dark:hover:bg-gray-800',
+          'focus h-8 rounded-md border-0 bg-transparent text-center text-sm font-semibold',
+          'cursor-pointer bg-none px-1.5 py-0 hover:bg-gray-100 dark:hover:bg-gray-800',
+          'focus:ring-0',
         )}
       >
         {sizes.map((size) => (

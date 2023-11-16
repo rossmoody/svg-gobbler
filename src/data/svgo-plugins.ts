@@ -13,6 +13,10 @@ export type SvgoPlugin = Extract<PluginConfig, { name: string }> & {
    * The help text to display for this plugin to explain generally what it does
    */
   description: string
+  /**
+   * The default params for this plugin
+   */
+  params?: Record<string, unknown>
 }
 
 export const defaultSvgoPlugins: SvgoPlugin[] = [

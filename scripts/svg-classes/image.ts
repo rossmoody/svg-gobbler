@@ -27,6 +27,7 @@ export class Image extends Svg {
     if (!src) return
 
     switch (true) {
+      // Base 64
       case src.includes('data:image/svg+xml;base64'): {
         const base64Index = src.indexOf(',') + 1
         const base64String = src.slice(base64Index, src.length - 1) // -1 to exclude the trailing quote
@@ -35,11 +36,20 @@ export class Image extends Svg {
         break
       }
 
+      // Utf 8
       case src.includes('data:image/svg+xml;utf8'): {
         const svgStart = src.indexOf('<svg')
         const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
         const svgString = src.slice(svgStart, svgEnd)
         this.originalString = svgString[0]
+        this.asElement = this.parseFromString()
+        break
+      }
+
+      // URL Encoded SVG
+      case src.startsWith('data:image/svg+xml,'): {
+        const svgString = decodeURIComponent(src.split(',')[1])
+        this.originalString = svgString
         this.asElement = this.parseFromString()
         break
       }

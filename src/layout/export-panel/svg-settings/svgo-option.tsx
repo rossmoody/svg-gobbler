@@ -36,9 +36,11 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
         checked={isChecked}
         onChange={handleOptionChange}
       />
-      <label htmlFor={plugin.name} className="export-label ">
-        {plugin.label}
-      </label>
+      <div>
+        <label htmlFor={plugin.name} className="export-label ">
+          {plugin.label}
+        </label>
+      </div>
       <Tooltip content={plugin.description}>
         <QuestionMarkCircleIcon className="text-muted h-4 w-4 cursor-help opacity-0 transition-opacity ease-in group-hover:opacity-100" />
       </Tooltip>
