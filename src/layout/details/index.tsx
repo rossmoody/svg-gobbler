@@ -8,7 +8,7 @@ import { PreviewSidebar } from './preview-sidebar'
 
 export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   const svg = useLoaderData() as string
-  const { dispatch } = useDetails()
+  const { state, dispatch } = useDetails()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
       </header>
       <main className="relative flex h-[calc(100dvh-theme(space.14))] ">
         <ExportSidebar />
-        <section className="flex-grow">Editor</section>
+        <section className="flex-grow">{state.originalString}</section>
         <PreviewSidebar />
       </main>
     </div>

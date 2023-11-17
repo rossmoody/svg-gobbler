@@ -11,12 +11,9 @@ export const DetailsRoute = () => {
           show
           appear
           as={Fragment}
-          enter="transition-opacity duration-500 ease-in-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="transition-opacity duration-500 ease-in-out"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+          enter="transition-all duration-500 ease-in-out"
+          enterFrom="opacity-0 scale-97"
+          enterTo="opacity-100 scale-100"
         >
           <DetailsLayout />
         </Transition>

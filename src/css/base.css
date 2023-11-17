@@ -13,4 +13,5 @@ html {
 
 body {
   min-height: 100%;
+  @apply scrollbar-thin;
 }

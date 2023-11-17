@@ -1,14 +1,19 @@
 export type DetailsState = {
   /**
-   * The original unmodified string of the SVG.
+   * The original svg string upon load.
    */
   originalString: string
+  /**
+   * The current svg string.
+   */
+  currentString: string
 }
 
 export type DetailsAction = { type: 'reset' } | { type: 'init'; payload: string }
 
 export const initDetailsState: DetailsState = {
   originalString: '',
+  currentString: '',
 }
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
@@ -17,6 +22,7 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       return {
         ...state,
         originalString: action.payload,
+        currentString: action.payload,
       }
     }
 

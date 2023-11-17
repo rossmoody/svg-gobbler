@@ -38,10 +38,7 @@ export const CollectionRoute = () => {
       <div className="flex">
         <main className="flex-1">
           <Mainbar />
-          <div
-            className="text h-[calc(100dvh-theme(space.28))] overflow-y-auto 
-                      bg-gray-100 p-6 transition-all duration-300 dark:bg-gray-900"
-          >
+          <div className="text h-[calc(100dvh-theme(space.28))] overflow-y-auto bg-gray-100 p-6 transition-all duration-300 dark:bg-gray-900">
             <React.Suspense fallback={<SkeletonCollection />}>
               <Await resolve={data}>
                 {(resolvedData: CollectionData['data']) => {
