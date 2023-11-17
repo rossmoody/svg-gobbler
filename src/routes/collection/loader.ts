@@ -4,7 +4,6 @@ import svgFactory from 'scripts/svg-factory'
 import { defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import { initCollectionState } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { svgFactoryChecker } from 'src/utils/svg-factory-checker'
 
 export async function collectionLoader({ params }: LoaderFunctionArgs) {
   const pageData = await StorageUtils.getPageData(params.id as string)
@@ -14,9 +13,6 @@ export async function collectionLoader({ params }: LoaderFunctionArgs) {
   // Initialize context states if not exist in DB using lodash
   view = _.assign({}, initCollectionState.view, view)
   plugins = _.assign([], defaultSvgoPlugins, plugins)
-
-  // Dev logger to look for malformed svgs
-  svgFactoryChecker(pageData)
 
   return defer({
     plugins,

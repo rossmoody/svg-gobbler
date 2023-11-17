@@ -94,20 +94,24 @@ export class Image extends Svg {
    * Parses a given HTML string and returns the first element in its body.
    *
    * This function constructs a complete HTML document by embedding the original HTML string (`this.originalString`)
-   * inside the body tags. It sets the `<base href>` to the current origin (`this.origin`) in the head section.
+   * inside the body tags. This ensures that the string is parsed in the context of a full HTML document, which can be
+   * important for correctly interpreting the HTML structure and any associated resources.
    */
   private parseAndSetElement() {
-    const htmlSource = `<!DOCTYPE html><html><head><base href=${this.origin}></head><body>${this.originalString}</body></html>`
-    const element = new DOMParser().parseFromString(htmlSource, 'text/html')
+    const htmlSource = `<!DOCTYPE html><html><head><base href=${this.origin}/></head><body>${this.originalString}</body></html>`
 
-    const hasParsingError = Boolean(element.querySelector('parsererror'))
-    const hasFirstElementChild = Boolean(element.body.firstElementChild)
+    try {
+      const element = new DOMParser().parseFromString(htmlSource, 'text/html')
 
-    if (hasParsingError || !hasFirstElementChild) {
-      return
+      if (!element.body.firstElementChild || element.querySelector('parsererror')) {
+        console.error('Parsing error in parseAndSetElement')
+        return
+      }
+
+      this.asElement = element.body.firstElementChild as Element
+    } catch (error) {
+      console.error('Error in parseAndSetElement:', error)
     }
-
-    this.asElement = element.body.firstElementChild as Element
   }
 
   /**
