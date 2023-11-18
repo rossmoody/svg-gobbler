@@ -34,9 +34,9 @@ export const useResize = (initialWidth = 320) => {
       if (ref.current) {
         const boundingRect = ref.current.getBoundingClientRect()
 
-        if (e.clientX < boundingRect.left + 10 && e.clientX > boundingRect.left - 10) {
+        if (e.clientX < boundingRect.left + 20 && e.clientX > boundingRect.left - 20) {
           resizeSide.current = 'left'
-        } else if (e.clientX < boundingRect.right + 10 && e.clientX > boundingRect.right - 10) {
+        } else if (e.clientX < boundingRect.right + 20 && e.clientX > boundingRect.right - 20) {
           resizeSide.current = 'right'
         }
 
