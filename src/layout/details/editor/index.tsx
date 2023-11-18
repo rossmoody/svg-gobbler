@@ -4,6 +4,7 @@ import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
 import CodeMirror from '@uiw/react-codemirror'
 import { useCallback } from 'react'
 import { useDetails } from 'src/providers'
+import { ActionBar } from './action-bar'
 
 export const DetailsEditor = () => {
   const { state, dispatch } = useDetails()
@@ -17,6 +18,7 @@ export const DetailsEditor = () => {
 
   return (
     <section className="relative flex-grow">
+      <ActionBar />
       <CodeMirror
         onChange={onChange}
         value={state.currentString}

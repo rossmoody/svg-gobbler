@@ -13,5 +13,16 @@ export const useOptimize = () => {
     [state.svgoConfig],
   )
 
-  return { optimize }
+  const format = useCallback((svg: string) => {
+    const { data } = svgoOptimize(svg, {
+      plugins: [],
+      js2svg: {
+        pretty: true,
+        indent: 2,
+      },
+    })
+    return data as string
+  }, [])
+
+  return { optimize, format }
 }

@@ -1,3 +1,4 @@
+import { defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import type { Config } from 'svgo'
 
 export type DetailsState = {
@@ -25,7 +26,7 @@ export const initDetailsState: DetailsState = {
   currentString: '',
   svgoConfig: {
     multipass: true,
-    plugins: [],
+    plugins: [...defaultSvgoPlugins],
     js2svg: {
       pretty: true,
       indent: 2,

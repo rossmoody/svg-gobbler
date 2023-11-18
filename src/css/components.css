@@ -45,7 +45,8 @@
   left: 0;
   overflow-y: auto;
   padding: 1rem;
-  padding-top: 4rem;
+  padding-bottom: 5rem;
+  @apply scrollbar-thin scrollbar-thumb-gray-600;
 }
 
 .cm-content {
@@ -53,6 +54,11 @@
   font-weight: 400;
   font-size: 0.8125rem;
   line-height: 24px;
+}
+
+.editor-btn {
+  @apply focus flex items-center gap-1 rounded-lg bg-gray-600/30 px-2 py-1 font-semibold 
+  text-white transition-all duration-200 ease-in-out hover:bg-gray-600/60;
 }
 
 /* Layout */

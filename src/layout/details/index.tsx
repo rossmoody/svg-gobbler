@@ -9,16 +9,16 @@ import { PreviewSidebar } from './preview-sidebar'
 
 export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   const svg = useLoaderData() as string
-  const { optimize } = useOptimize()
+  const { format } = useOptimize()
   const { dispatch } = useDetails()
 
   useEffect(() => {
     dispatch({ type: 'init', payload: svg })
-    dispatch({ type: 'update-current-string', payload: optimize(svg) })
-  }, [dispatch, svg, optimize])
+    dispatch({ type: 'update-current-string', payload: format(svg) })
+  }, [dispatch, svg, format])
 
   return (
-    <div ref={ref} className="h-full">
+    <div ref={ref} className="h-full overflow-hidden">
       <Header />
       <main className="relative flex h-[calc(100dvh-theme(space.14))]">
         <ExportSidebar />
