@@ -31,6 +31,30 @@
   @apply h-4 w-4 cursor-pointer rounded border-gray-300 bg-gray-100 text-red-600 focus:ring-2 focus:ring-red-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-red-600;
 }
 
+.cm-editor {
+  flex: 1;
+  height: 100%;
+  font-size: 0.75rem;
+}
+
+.cm-scroller {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  padding: 1rem;
+  padding-top: 4rem;
+}
+
+.cm-content {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  line-height: 24px;
+}
+
 /* Layout */
 
 .top-bar,

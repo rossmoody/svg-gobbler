@@ -8,7 +8,7 @@ export const Header = () => {
   const navigateBack = () => navigate(-1)
 
   return (
-    <header className="flex h-14 items-center justify-between border-b border-gray-200 px-5 py-4 dark:border-gray-800">
+    <header className="flex h-14 items-center justify-between border-b border-gray-200 px-4 py-4 dark:border-gray-800">
       <nav className="flex items-center gap-3">
         <IconButton onClick={navigateBack} size="sm" variant="secondary">
           <ArrowLeftIcon className="h-5 w-5" />

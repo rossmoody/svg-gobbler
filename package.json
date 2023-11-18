@@ -13,11 +13,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-html": "^6.4.6",
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@uiw/codemirror-theme-tokyo-night-storm": "^4.21.20",
+    "@uiw/react-codemirror": "^4.21.20",
     "clsx": "^2.0.0",
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",
