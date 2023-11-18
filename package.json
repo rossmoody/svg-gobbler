@@ -27,8 +27,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.18.0",
-    "svgo": "^3.0.3",
-    "tailwindcss-radix": "^2.8.0"
+    "svgo": "^3.0.3"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.19",
@@ -50,6 +49,7 @@
     "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^3.3.5",
+    "tailwindcss-radix": "^2.8.0",
     "typescript": "^5.0.2",
     "vite": "^5.0.0"
   }
