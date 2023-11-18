@@ -15,7 +15,7 @@ export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   useEffect(() => {
     dispatch({ type: 'init', payload: svg })
     dispatch({ type: 'update-current-string', payload: optimize(svg) })
-  }, [])
+  }, [dispatch, svg, optimize])
 
   return (
     <div ref={ref} className="h-full">
