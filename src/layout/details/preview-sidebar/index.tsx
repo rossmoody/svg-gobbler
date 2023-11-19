@@ -4,10 +4,10 @@ import { DataURI } from './data-uri'
 import { PreviewSvg } from './preview-svg'
 
 export const PreviewSidebar = () => {
-  const { ref, width } = useResize()
+  const { ref, width } = useResize(400)
 
   return (
-    <aside ref={ref} style={{ width }} className="relative z-10">
+    <aside ref={ref} style={{ width }} className="relative z-10 overflow-hidden">
       <div className="h-full pt-2">
         <Tabs.Group>
           <Tabs.List className="overflow-x-auto whitespace-nowrap">

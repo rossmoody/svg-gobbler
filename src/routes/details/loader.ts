@@ -2,7 +2,7 @@ import { LoaderFunctionArgs } from 'react-router-dom'
 
 export async function detailLoader({ params }: LoaderFunctionArgs) {
   return {
-    originalString: decodeURIComponent(params.originalString ?? ''),
+    originalString: atob(params.originalString ?? ''),
     collectionId: params.collectionId ?? '',
   }
 }

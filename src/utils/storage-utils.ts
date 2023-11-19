@@ -36,7 +36,7 @@ export class StorageUtils {
    * Set page data in storage based on collectionId.
    * Automatically compresses data.
    */
-  static async setPageData(collectionId: string, data: unknown): Promise<void> {
+  static async setPageData(collectionId: string, data: PageData): Promise<void> {
     await chrome.storage.local.set({
       [collectionId]: this.compressToBase64(data),
     })

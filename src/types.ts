@@ -11,13 +11,27 @@ export type BackgroundMessage = {
 }
 
 /**
+ * The shape of the svg data stored in chrome storage as part of page data.
+ */
+export type StorageSvg = {
+  /**
+   * A unique id for the svg
+   */
+  id: string
+  /**
+   * The svg string of the item
+   */
+  svg: string
+}
+
+/**
  * The data gathered from the active tab.
  */
 export type PageData = {
   /**
    * An array of SVG string elements from the active tab.
    */
-  data: string[]
+  data: StorageSvg[]
   /**
    * The host URL of the site. This is used as a name for collection and
    * dashboard title initially in the sidebar.

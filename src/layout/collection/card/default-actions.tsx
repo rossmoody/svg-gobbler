@@ -23,18 +23,12 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
     }
   }
 
+  /**
+   * encodeURIComponent causes malformed URI errors with SVG strings quite often.
+   * btoa is a more reliable alternative.
+   */
   const handleEncodeURI = () => {
-    let encodedURL = data.originalString.replace(/\//g, '%2F')
-    encodedURL = encodeURIComponent(data.originalString)
-
-    encodedURL = encodedURL
-      .replace(/\(/g, '%28')
-      .replace(/\)/g, '%29')
-      .replace(/!/g, '%21')
-      .replace(/'/g, '%27')
-      .replace(/\*/g, '%2A')
-      .replace(/%20/g, ' ')
-
+    const encodedURL = btoa(data.originalString)
     return '/details/' + state.collectionId + '/' + encodedURL
   }
 
