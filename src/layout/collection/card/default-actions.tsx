@@ -24,15 +24,22 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
   }
 
   const handleEncodeURI = () => {
-    const baseURL = `/details`
-    const escapedURL = data.originalString.replace(/\\/g, '\\\\')
-    const encodedURL = encodeURIComponent(escapedURL)
-    return baseURL + '/' + state.collectionId + '/' + encodedURL
+    let encodedURL = data.originalString.replace(/\//g, '%2F')
+    encodedURL = encodeURIComponent(data.originalString)
+
+    encodedURL = encodedURL
+      .replace(/\(/g, '%28')
+      .replace(/\)/g, '%29')
+      .replace(/!/g, '%21')
+      .replace(/'/g, '%27')
+      .replace(/\*/g, '%2A')
+      .replace(/%20/g, ' ')
+
+    return '/details/' + state.collectionId + '/' + encodedURL
   }
 
   return (
     <div className="z-10">
-      {/* Select checkbox */}
       <div
         className={clsx(
           'absolute right-1 top-1 opacity-0 group-hover/card:opacity-100',

@@ -13,11 +13,10 @@ export const Header = () => {
   const { state, dispatch } = useDetails()
   const { format, minify } = useOptimize()
 
-  const navigateBack = () => navigate(-1)
-
-  const isDirty = useMemo(() => {
-    return minify(state.originalString) !== minify(state.currentString)
-  }, [state.currentString, state.originalString, minify])
+  const isDirty = useMemo(
+    () => minify(state.originalString) !== minify(state.currentString),
+    [state.currentString, state.originalString, minify],
+  )
 
   const handleReset = () => {
     dispatch({ type: 'update-current-string', payload: format(state.originalString) })
@@ -28,13 +27,23 @@ export const Header = () => {
 
     const pageData: PageData = {
       ...collectionData,
-      data: collectionData.data.map((svg) => {
-        return svg === state.originalString ? state.currentString : svg
-      }),
+      data: collectionData.data.map((svg) =>
+        svg === state.originalString ? state.currentString : svg,
+      ),
     }
 
     await StorageUtils.setPageData(state.collectionId, pageData)
     dispatch({ type: 'update-original-string', payload: state.currentString })
+  }
+
+  const navigateBack = () => {
+    if (isDirty) {
+      if (window.confirm('Are you sure you want to leave? Your changes will be lost.')) {
+        navigate(-1)
+      }
+      return
+    }
+    navigate(-1)
   }
 
   return (
