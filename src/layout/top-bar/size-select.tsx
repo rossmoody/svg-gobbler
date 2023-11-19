@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useCollection } from 'src/providers'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 export const sizes = [
   { value: 16, label: '16px' },
@@ -17,7 +18,7 @@ export const SizeSelect = () => {
 
   function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const view = { ...state.view, size: Number(e.target.value) }
-    chrome.storage.local.set({ view })
+    StorageUtils.setStorageData('view', view)
     dispatch({ type: 'set-view', payload: view })
   }
 

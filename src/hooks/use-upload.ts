@@ -1,6 +1,8 @@
+import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
 import { Inline } from 'scripts/svg-classes/inline'
 import { useCollection } from 'src/providers'
+import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
@@ -16,18 +18,22 @@ export const useUpload = () => {
 
     // Get current page data for storage
     let pageData = await StorageUtils.getPageData(collectionId)
+    const newData: StorageSvg[] = data.map((svg) => ({
+      id: nanoid(),
+      svg,
+    }))
 
     // Append new strings to collection's page data
     pageData = {
       ...pageData,
-      data: [...data, ...pageData.data],
+      data: [...newData, ...pageData.data],
     }
 
     // Update the collection's page data
     await StorageUtils.setPageData(collectionId, pageData)
 
     // Update the collection context state
-    const newSvgClasses = data.map((svg) => new Inline(svg, ''))
+    const newSvgClasses = newData.map((item) => new Inline(item.svg, '', item.id))
     dispatch({ type: 'set-data', payload: [...state.data, ...newSvgClasses] })
     dispatch({ type: 'process-data' })
     revalidate()

@@ -1,4 +1,4 @@
-import type { PageData } from 'src/types'
+import type { BackgroundMessage } from 'src/types'
 
 /**
  * Gathers all relevant SVG data from the active tab. Must be isolated self containing
@@ -183,5 +183,5 @@ export function gatherPageData() {
     data,
     host: document.location.host,
     origin: document.location.origin,
-  } as PageData
+  } as BackgroundMessage['data']
 }

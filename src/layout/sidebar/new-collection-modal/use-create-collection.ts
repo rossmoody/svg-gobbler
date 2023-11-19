@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import { Collection, PageData } from 'src/types'
+import { Collection, PageData, StorageSvg } from 'src/types'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 
@@ -15,11 +15,15 @@ export const useCreateCollection = (files: File[]) => {
     const name = formData.get('name') as string
     const id = nanoid()
     const svgFileData = await FormUtils.handleUpload(files)
+    const svgStorageData: StorageSvg[] = svgFileData.map((svg) => ({
+      id: nanoid(),
+      svg,
+    }))
 
     const pageData: PageData = {
       host: '',
       origin: '',
-      data: svgFileData,
+      data: svgStorageData,
     }
 
     const collection: Collection = {
@@ -31,7 +35,7 @@ export const useCreateCollection = (files: File[]) => {
     const collections = [collection, ...state.collections]
 
     await StorageUtils.setPageData(id, pageData)
-    await chrome.storage.local.set({ collections })
+    await StorageUtils.setStorageData('collections', collections)
     dispatch({ type: 'set-collections', payload: collections })
     navigate(`/dashboard/collection/${id}`)
 

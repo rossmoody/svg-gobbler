@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { CollectionState, useCollection } from 'src/providers'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 type SortOption = {
   label: string
@@ -21,7 +22,7 @@ export const SortMenu = () => {
 
   function handleSortChange(value: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const sort = value.currentTarget.dataset.value as SortOption['value']
-    chrome.storage.local.set({ view: { ...state.view, sort } })
+    StorageUtils.setStorageData('view', { ...state.view, sort })
     dispatch({ type: 'set-view', payload: { ...state.view, sort } })
     dispatch({ type: 'process-data' })
   }

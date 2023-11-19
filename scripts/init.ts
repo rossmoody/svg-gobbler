@@ -1,4 +1,4 @@
-import type { PageData } from 'src/types'
+import type { BackgroundMessage } from 'src/types'
 import Chrome from '../src/utils/chrome-utils'
 import { gatherPageData } from './gather-page-data'
 
@@ -18,7 +18,7 @@ class Init {
         data: [],
         host: 'Settings',
         origin: '',
-      } as PageData
+      } as BackgroundMessage['data']
 
       const activeTab = await Chrome.getActiveTab()
 

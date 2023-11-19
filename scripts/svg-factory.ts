@@ -17,22 +17,22 @@ class SvgFactory {
     }
 
     const processedData = message.data
-      .map((item) => {
+      .map(({ svg, id }) => {
         switch (true) {
-          case item.includes('<svg '): {
-            return new Inline(item, message.origin)
+          case svg.includes('<svg '): {
+            return new Inline(svg, message.origin, id)
           }
 
-          case item.includes('<img '): {
-            return new Image(item, message.origin)
+          case svg.includes('<img '): {
+            return new Image(svg, message.origin, id)
           }
 
-          case item.includes('<symbol '): {
-            return new Symbol(item, message.origin)
+          case svg.includes('<symbol '): {
+            return new Symbol(svg, message.origin, id)
           }
 
-          case item.includes('<g '): {
-            return new GElement(item, message.origin)
+          case svg.includes('<g '): {
+            return new GElement(svg, message.origin, id)
           }
         }
       })

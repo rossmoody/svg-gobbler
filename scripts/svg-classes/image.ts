@@ -9,8 +9,8 @@ export class Image extends Svg {
    */
   absoluteImageUrl?: string
 
-  constructor(originalString: string, origin: string) {
-    super(originalString, origin)
+  constructor(originalString: string, origin: string, id: string) {
+    super(originalString, origin, id)
     this.parseAndSetElement()
     this.processImage()
   }

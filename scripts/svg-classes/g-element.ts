@@ -1,8 +1,8 @@
 import { Svg } from './svg'
 
 export class GElement extends Svg {
-  constructor(originalString: string, origin: string) {
-    super(originalString, origin)
+  constructor(originalString: string, origin: string, id: string) {
+    super(originalString, origin, id)
     this.processG()
   }
 

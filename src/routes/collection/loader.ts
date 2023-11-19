@@ -8,7 +8,7 @@ import { StorageUtils } from 'src/utils/storage-utils'
 export async function collectionLoader({ params }: LoaderFunctionArgs) {
   const pageData = await StorageUtils.getPageData(params.id as string)
   let plugins = await StorageUtils.getStorageData('plugins')
-  let { view } = await chrome.storage.local.get('view')
+  let view = await StorageUtils.getStorageData('view')
 
   // Initialize context states if not exist in DB using lodash
   view = _.assign({}, initCollectionState.view, view)

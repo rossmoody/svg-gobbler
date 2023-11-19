@@ -1,5 +1,6 @@
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
+import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const useMainActions = () => {
@@ -9,15 +10,21 @@ export const useMainActions = () => {
   const { collectionId } = collectionState
   const selectedItems = collectionState.selected
   const nonSelectedItems = collectionState.data.filter((item) => !selectedItems.includes(item))
-  const nonSelectedItemsStrings = nonSelectedItems.map((item) => item.originalString)
-  const selectedItemsStrings = selectedItems.map((item) => item.originalString)
+  const nonSelectedItemStorageSvgs: StorageSvg[] = nonSelectedItems.map((item) => ({
+    svg: item.originalString,
+    id: item.id,
+  }))
+  const selectedItemsStorageSvgs: StorageSvg[] = selectedItems.map((item) => ({
+    svg: item.originalString,
+    id: item.id,
+  }))
 
   const deleteSelectedItems = async () => {
     const currentPageData = await StorageUtils.getPageData(collectionId)
 
     await StorageUtils.setPageData(collectionId, {
       ...currentPageData,
-      data: nonSelectedItemsStrings,
+      data: nonSelectedItemStorageSvgs,
     })
 
     revalidate()
@@ -29,12 +36,12 @@ export const useMainActions = () => {
 
     await StorageUtils.setPageData(targetCollectionId, {
       ...targetPageData,
-      data: [...selectedItemsStrings, ...targetPageData.data],
+      data: [...selectedItemsStorageSvgs, ...targetPageData.data],
     })
 
     await StorageUtils.setPageData(collectionId, {
       ...currentPageData,
-      data: nonSelectedItemsStrings,
+      data: nonSelectedItemStorageSvgs,
     })
 
     revalidate()
@@ -45,7 +52,7 @@ export const useMainActions = () => {
 
     await StorageUtils.setPageData(targetCollectionId, {
       ...targetPageData,
-      data: [...selectedItemsStrings, ...targetPageData.data],
+      data: [...selectedItemsStorageSvgs, ...targetPageData.data],
     })
   }
 

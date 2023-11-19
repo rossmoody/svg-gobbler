@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { redirect } from 'react-router-dom'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
-import type { BackgroundMessage, Collection } from 'src/types'
+import type { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
@@ -21,11 +21,19 @@ export async function rootLoader() {
   const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
   try {
-    const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
     // If message connection is successful, process the response, add the collection to storage
+    const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
+    const pageData: PageData = {
+      origin: data.origin,
+      host: data.host,
+      data: data.data.map((svg) => ({
+        id: nanoid(),
+        svg,
+      })),
+    }
     collection.name = data.host
     collection.origin = data.origin
-    await StorageUtils.setPageData(collection.id, data)
+    await StorageUtils.setPageData(collection.id, pageData)
     await StorageUtils.setStorageData('collections', [collection, ...prevCollections])
 
     // Initialize the plugins for the export panel if it doesn't exist

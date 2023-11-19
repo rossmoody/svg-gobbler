@@ -7,7 +7,22 @@ export type BackgroundMessage = {
   /**
    * The data gathered from the active tab
    */
-  data: PageData
+  data: {
+    /**
+     * An array of SVG string elements from the active tab.
+     */
+    data: string[]
+    /**
+     * The host URL of the site. This is used as a name for collection and
+     * dashboard title initially in the sidebar.
+     */
+    host: string
+    /**
+     * The origin of the active tab. This is used to rebuild the SVGs in the
+     * content script. Especially related to image sources and cors restrictions.
+     */
+    origin: string
+  }
 }
 
 /**
@@ -25,7 +40,7 @@ export type StorageSvg = {
 }
 
 /**
- * The data gathered from the active tab.
+ * The data stored in chrome storage as part of page data.
  */
 export type PageData = {
   /**
@@ -113,4 +128,8 @@ export type DetailsParams = {
    * The original svg string upon load.
    */
   originalString: string
+  /**
+   * The id of the svg in storage
+   */
+  id: string
 }

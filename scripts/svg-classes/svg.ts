@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid'
-
 /**
  * The root SVG class. This is the base class for all SVG types. It doesn't actually
  * produce a "valid" SVG element, but it is used to store the original string and
@@ -7,7 +5,8 @@ import { nanoid } from 'nanoid'
  */
 export class Svg {
   /**
-   * A unique identifier
+   * A unique identifier. This must be supplied as a matching identifier
+   * from the SVG element in storage.
    */
   public id: string
 
@@ -20,7 +19,8 @@ export class Svg {
   public originalString: string
 
   /**
-   * The document.location.origin of the SVG element in the DOM
+   * The document.location.origin of the SVG element in the DOM. Can be blank.
+   * TODO: Move this to the last parameter and make it optional.
    */
   readonly origin: string
 
@@ -37,8 +37,8 @@ export class Svg {
    */
   public corsRestricted = false
 
-  constructor(originalString: string, origin: string) {
-    this.id = nanoid()
+  constructor(originalString: string, origin: string, id: string) {
+    this.id = id
     this.originalString = originalString
     this.origin = origin
   }

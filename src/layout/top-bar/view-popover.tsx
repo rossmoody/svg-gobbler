@@ -5,6 +5,7 @@ import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { useCollection } from 'src/providers'
 import { CollectionData } from 'src/types'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 type ViewOption = {
   label: string
@@ -19,7 +20,7 @@ export const ViewPopover = () => {
   function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, checked } = e.currentTarget
     const filters = { ...state.view.filters, [name]: checked }
-    chrome.storage.local.set({ view: { ...state.view, filters } })
+    StorageUtils.setStorageData('view', { ...state.view, filters })
     dispatch({ type: 'set-view', payload: { ...state.view, filters } })
     dispatch({ type: 'process-data' })
   }

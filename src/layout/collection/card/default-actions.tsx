@@ -27,10 +27,9 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
    * encodeURIComponent causes malformed URI errors with SVG strings quite often.
    * btoa is a more reliable alternative.
    */
-  const handleEncodeURI = () => {
-    const encodedURL = btoa(data.originalString)
-    return '/details/' + state.collectionId + '/' + encodedURL
-  }
+  const handleEncodeURI = useMemo(() => {
+    return `/details/${state.collectionId}/${data.id}`
+  }, [state.collectionId, data.id])
 
   return (
     <div className="z-10">
@@ -56,7 +55,7 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
       </div>
 
       <Link
-        to={handleEncodeURI()}
+        to={handleEncodeURI}
         className="absolute inset-0 cursor-pointer rounded-xl opacity-0 shadow-md transition-all ease-in group-hover/card:opacity-100"
       />
     </div>

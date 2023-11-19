@@ -4,6 +4,10 @@ import type { Config } from 'svgo'
 
 export type DetailsState = {
   /**
+   * The id of the svg in storage
+   */
+  id: string
+  /**
    * The id of the collection.
    */
   collectionId: string
@@ -28,6 +32,7 @@ export type DetailsAction =
   | { type: 'update-original-string'; payload: string }
 
 export const initDetailsState: DetailsState = {
+  id: '',
   collectionId: '',
   originalString: '',
   currentString: '',
@@ -60,6 +65,7 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
     case 'init': {
       return {
         ...state,
+        id: action.payload.id,
         collectionId: action.payload.collectionId,
         originalString: action.payload.originalString,
         currentString: action.payload.originalString,

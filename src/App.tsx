@@ -42,7 +42,7 @@ export default function App() {
       ],
     },
     {
-      path: '/details/:collectionId/:originalString',
+      path: '/details/:collectionId/:id',
       element: <DetailsRoute />,
       errorElement: <ErrorState />,
       loader: detailLoader,
