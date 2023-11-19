@@ -25,6 +25,7 @@ export const EmptyState = () => {
   })
 
   async function onDropAccepted(files: File[]) {
+    // TODO: The `onDropAccepted` callback is called twice when dropping files because of the modal
     const svgStrings = await FormUtils.handleUpload(files)
     upload(svgStrings)
   }
@@ -36,7 +37,7 @@ export const EmptyState = () => {
         'flex h-full w-full items-center justify-center rounded-3xl border-2',
         'border-dashed border-gray-200 bg-white/70 p-12 dark:border-gray-700/50 dark:bg-gray-800/40',
         isDragActive &&
-          'scale-[1.01] ring-4 ring-red-600/50 transition-all duration-300 dark:ring-red-500/50',
+          'scale-[1.002] ring-4 ring-red-600/50 transition-all duration-300 dark:ring-red-500/50',
       )}
     >
       <div className="text-center">

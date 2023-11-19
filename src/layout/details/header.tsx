@@ -4,6 +4,8 @@ import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
+import { PageData } from 'src/types'
+import { StorageUtils } from 'src/utils/storage-utils'
 import { useOptimize } from './editor/use-optimize'
 
 export const Header = () => {
@@ -21,15 +23,15 @@ export const Header = () => {
   }
 
   const handleSave = async () => {
-    // const collectionData = await StorageUtils.getPageData(state.collectionId)
-    // const pageData: PageData = {
-    //   ...collectionData,
-    //   data: collectionData.data.map((svg) =>
-    //     svg.id === state.originalString ? state.currentString : svg,
-    //   ),
-    // }
-    // await StorageUtils.setPageData(state.collectionId, pageData)
-    // dispatch({ type: 'update-original-string', payload: state.currentString })
+    const collectionData = await StorageUtils.getPageData(state.collectionId)
+    const pageData: PageData = {
+      ...collectionData,
+      data: collectionData.data.map((item) =>
+        item.id === state.id ? { id: item.id, svg: state.currentString } : item,
+      ),
+    }
+    await StorageUtils.setPageData(state.collectionId, pageData)
+    dispatch({ type: 'update-original-string', payload: state.currentString })
   }
 
   const navigateBack = () => {
