@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 /**
- * Facilitates resizing of an element based on whether it is
+ * Facilitates resizing of the sidebars in the details page based on whether it is
  * the right or left side of the element that is being dragged.
  */
 export const useResize = (initialWidth = 320) => {

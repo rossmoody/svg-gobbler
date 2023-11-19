@@ -1,7 +1,12 @@
 import { defaultSvgoPlugins } from 'src/data/svgo-plugins'
+import type { DetailsParams } from 'src/types'
 import type { Config } from 'svgo'
 
 export type DetailsState = {
+  /**
+   * The id of the collection.
+   */
+  collectionId: string
   /**
    * The original svg string upon load.
    */
@@ -18,10 +23,12 @@ export type DetailsState = {
 
 export type DetailsAction =
   | { type: 'reset' }
-  | { type: 'init'; payload: string }
+  | { type: 'init'; payload: DetailsParams }
   | { type: 'update-current-string'; payload: string }
+  | { type: 'update-original-string'; payload: string }
 
 export const initDetailsState: DetailsState = {
+  collectionId: '',
   originalString: '',
   currentString: '',
   svgoConfig: {
@@ -36,6 +43,13 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'update-original-string': {
+      return {
+        ...state,
+        originalString: action.payload,
+      }
+    }
+
     case 'update-current-string': {
       return {
         ...state,
@@ -46,8 +60,9 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
     case 'init': {
       return {
         ...state,
-        originalString: action.payload,
-        currentString: action.payload,
+        collectionId: action.payload.collectionId,
+        originalString: action.payload.originalString,
+        currentString: action.payload.originalString,
       }
     }
 

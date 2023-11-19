@@ -86,3 +86,17 @@ export type CollectionData = {
     }
   }
 }
+
+/**
+ * The params passed to a standard details route.
+ */
+export type DetailsParams = {
+  /**
+   * The id of the collection.
+   */
+  collectionId: string
+  /**
+   * The original svg string upon load.
+   */
+  originalString: string
+}

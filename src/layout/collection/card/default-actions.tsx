@@ -24,10 +24,10 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
   }
 
   const handleEncodeURI = () => {
-    const baseURL = `/details/`
+    const baseURL = `/details`
     const escapedURL = data.originalString.replace(/\\/g, '\\\\')
     const encodedURL = encodeURIComponent(escapedURL)
-    return baseURL + encodedURL
+    return baseURL + '/' + state.collectionId + '/' + encodedURL
   }
 
   return (
