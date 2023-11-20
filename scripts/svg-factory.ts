@@ -32,7 +32,7 @@ class SvgFactory {
           }
 
           case svg.includes('<img '): {
-            return new Image(svg, message.origin, id)
+            return new Image(svg, id, message.origin)
           }
         }
       })

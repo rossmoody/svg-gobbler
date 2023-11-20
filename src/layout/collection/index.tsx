@@ -24,7 +24,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     // Dev Logs
     logger.table(
       _.chain(data)
-        .map((obj) => _.pick(obj, ['originalString']))
+        .map((obj) => _.pick(obj, ['originalString', 'id']))
         .value(),
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -13,7 +13,7 @@ export const DataURI = () => {
     return {
       ['Minified data URI']: miniUri(state.currentString),
       base64: 'data:image/svg+xml;base64,' + btoa(state.currentString),
-      encodeURI: 'data:image/svg+xml,' + encodeURIComponent(state.currentString),
+      encodeURIComponent: 'data:image/svg+xml,' + encodeURIComponent(state.currentString),
     }
   }, [state.currentString])
 
@@ -30,7 +30,7 @@ export const DataURI = () => {
           <span className="label pb-1">
             {key} - <span className="text-muted">{SvgUtils.getPrettyBytes(value)}</span>
           </span>
-          <div className="relative rounded-lg border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/70">
+          <div className="relative rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/70">
             <Button
               size="xs"
               onClick={() => handleCopy(value)}
@@ -39,7 +39,9 @@ export const DataURI = () => {
               <ClipboardDocumentIcon className="h-3 w-3" />
               {copy}
             </Button>
-            <pre className="whitespace-pre-wrap break-all">{value}</pre>
+            <div className="max-h-52 overflow-y-auto p-5">
+              <pre className="whitespace-pre-wrap break-all">{value}</pre>
+            </div>
           </div>
         </section>
       ))}
