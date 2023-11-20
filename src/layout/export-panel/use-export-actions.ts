@@ -1,5 +1,6 @@
 import { useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
+import { logger } from 'src/utils/logger'
 import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'
@@ -32,7 +33,7 @@ export const useExportActions = () => {
             FormUtils.svgToPngDataURL(svg.presentationSvg, state.settings.png.size),
           ),
         ).catch(() => {
-          console.log('Failed to convert SVG to PNG')
+          logger.error('Failed to convert SVG to PNG')
           return ['']
         })
       }

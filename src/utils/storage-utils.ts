@@ -2,7 +2,7 @@ import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
 import { PageData } from 'src/types'
 
 /**
- * A poor man's trpc for storage.
+ * A helper for working with Chrome storage and automating compression.
  */
 export class StorageUtils {
   /**

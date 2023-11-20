@@ -1,7 +1,7 @@
 import { ArrowRightIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outline'
-import prettyBytes from 'pretty-bytes'
 import { useMemo } from 'react'
 import { useDetails } from 'src/providers'
+import { SvgUtils } from 'src/utils/svg-utils'
 import { useOptimize } from './use-optimize'
 
 export const ActionBar = () => {
@@ -19,11 +19,9 @@ export const ActionBar = () => {
   }
 
   const bytes = useMemo(() => {
-    const generateBytes = (string: string) => prettyBytes(new Blob([minify(string)]).size)
-
     return {
-      before: generateBytes(state.originalString),
-      after: generateBytes(state.currentString),
+      before: SvgUtils.getPrettyBytes(minify(state.originalString)),
+      after: SvgUtils.getPrettyBytes(minify(state.currentString)),
     }
   }, [state.currentString, state.originalString, minify])
 

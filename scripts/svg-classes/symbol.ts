@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { Svg } from './svg'
 
-export class Symbol extends Svg {
+export class SvgSymbol extends Svg {
   constructor(originalString: string, id: string) {
     super(originalString, id)
     this.processSymbol()

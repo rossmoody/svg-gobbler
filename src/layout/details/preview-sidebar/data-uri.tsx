@@ -1,9 +1,9 @@
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import miniUri from 'mini-svg-data-uri'
-import prettyBytes from 'pretty-bytes'
 import { useMemo, useState } from 'react'
 import { Button } from 'src/components'
 import { useDetails } from 'src/providers'
+import { SvgUtils } from 'src/utils/svg-utils'
 
 export const DataURI = () => {
   const [copy, setCopy] = useState('Copy')
@@ -17,10 +17,6 @@ export const DataURI = () => {
     }
   }, [state.currentString])
 
-  const getPrettyBytes = (string: string) => {
-    return prettyBytes(new Blob([string]).size)
-  }
-
   const handleCopy = (string: string) => {
     setCopy('Copied')
     navigator.clipboard.writeText(string)
@@ -32,7 +28,7 @@ export const DataURI = () => {
       {Object.entries(uriData).map(([key, value]) => (
         <section key={key} className="group mb-6">
           <span className="label pb-1">
-            {key} - <span className="text-muted">{getPrettyBytes(value)}</span>
+            {key} - <span className="text-muted">{SvgUtils.getPrettyBytes(value)}</span>
           </span>
           <div className="relative rounded-lg border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/70">
             <Button

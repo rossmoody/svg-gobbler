@@ -4,6 +4,7 @@ import svgFactory from 'scripts/svg-factory'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { SvgUtils } from 'src/utils/svg-utils'
 
 /**
  * The primary initialization function for the root route.
@@ -32,10 +33,7 @@ export async function rootLoader() {
         const pageData: PageData = {
           origin: data.origin,
           host: data.host,
-          data: data.data.map((svg) => ({
-            id: nanoid(),
-            svg,
-          })),
+          data: data.data.map(SvgUtils.createStorageSvg),
         }
 
         // Create classes and process the raw svg elements
@@ -43,8 +41,8 @@ export async function rootLoader() {
 
         // Update the page data with the processed strings
         pageData.data = svgClasses.map((item) => ({
-          svg: item!.originalString,
-          id: item!.id,
+          svg: item.originalString,
+          id: item.id,
         }))
 
         collection.name = data.host

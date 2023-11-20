@@ -1,8 +1,8 @@
-import type { PageData } from 'src/types'
+import type { PageData, SvgType } from 'src/types'
 import { GElement } from './svg-classes/g-element'
 import { Image } from './svg-classes/image'
 import { Inline } from './svg-classes/inline'
-import { Symbol } from './svg-classes/symbol'
+import { SvgSymbol } from './svg-classes/symbol'
 
 /**
  * The SVG factory will process the page data and return an array of SVG objects.
@@ -23,20 +23,20 @@ class SvgFactory {
             return new Inline(svg, id)
           }
 
-          case svg.includes('<img '): {
-            return new Image(svg, message.origin, id)
-          }
-
           case svg.includes('<symbol '): {
-            return new Symbol(svg, id)
+            return new SvgSymbol(svg, id)
           }
 
           case svg.includes('<g '): {
             return new GElement(svg, id)
           }
+
+          case svg.includes('<img '): {
+            return new Image(svg, message.origin, id)
+          }
         }
       })
-      .filter((item) => item?.isValid)
+      .filter((item) => item && item.isValid)
 
     const result = await Promise.all(
       processedData.map((item) => {
@@ -50,7 +50,7 @@ class SvgFactory {
     })
 
     // Filter out invalid items after async processing absolute urls
-    return result.filter((item) => item?.isValid)
+    return result.filter((item) => item?.isValid) as SvgType[]
   }
 }
 
