@@ -1,10 +1,10 @@
 import { Tabs } from 'src/components'
-import { useResize } from 'src/hooks'
 import { DataURI } from './data-uri'
 import { PreviewSvg } from './preview-svg'
+import { usePreviewResize } from './use-preview-resize'
 
 export const PreviewSidebar = () => {
-  const { ref, width } = useResize(400)
+  const { ref, width } = usePreviewResize()
 
   return (
     <aside ref={ref} style={{ width }} className="relative z-10 overflow-hidden">

@@ -1,10 +1,10 @@
-import { useResize } from 'src/hooks'
 import { ExportDetailFooter } from './footer'
 import { ExportDetailHeader } from './header'
 import { ExportDetailMain } from './main'
+import { useExportResize } from './use-export-resize'
 
 export const ExportSidebar = () => {
-  const { ref, width } = useResize()
+  const { ref, width } = useExportResize()
 
   return (
     <aside
