@@ -1,4 +1,4 @@
-import { useResize } from 'src/hooks/use-resize'
+import { useResize } from 'src/hooks'
 
 export const ExportSidebar = () => {
   const { ref, width } = useResize()

@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
-import { useUpload } from 'src/hooks/use-upload'
+import { useUpload } from 'src/hooks'
 import { FormUtils } from 'src/utils/form-utils'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {

@@ -1,5 +1,5 @@
 import { Tabs } from 'src/components'
-import { useResize } from 'src/hooks/use-resize'
+import { useResize } from 'src/hooks'
 import { DataURI } from './data-uri'
 import { PreviewSvg } from './preview-svg'
 

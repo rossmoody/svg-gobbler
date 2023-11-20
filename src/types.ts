@@ -139,4 +139,7 @@ export type DetailsParams = {
   id: string
 }
 
+/**
+ * A union of all the svg types that are returned from the svgFactory
+ */
 export type SvgType = Inline | Image | SvgSymbol | GElement
