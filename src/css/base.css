@@ -8,9 +8,13 @@
 
 html {
   height: 100%;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
 body {
   min-height: 100%;
+  @apply surface text;
+}
+
+#root {
+  min-height: 100dvh;
 }

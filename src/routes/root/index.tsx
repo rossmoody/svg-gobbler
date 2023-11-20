@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Await, Navigate, useLoaderData } from 'react-router-dom'
+import { FullPageLoader } from 'src/components/full-page-loader'
 
 /**
  * This is a lonely route that is used to initialize the app via chrome messages between client and background scripts.
@@ -10,7 +11,7 @@ export const RootRoute = () => {
   const { collectionId } = useLoaderData() as { collectionId: Promise<string> }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<FullPageLoader />}>
       <Await resolve={collectionId}>
         {(resolvedCollectionId: string) => {
           return <Navigate to={`/dashboard/collection/${resolvedCollectionId}`} />

@@ -1,29 +1,25 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 import { useMemo } from 'react'
 import { Tooltip } from 'src/components'
 import { SvgoPlugin } from 'src/data/svgo-plugins'
-import { useExport } from 'src/providers'
+import { useDetails } from 'src/providers'
 
-type SvgoOptionProps = {
+type Props = {
   plugin: SvgoPlugin
 }
 
-export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
-  const { state, dispatch } = useExport()
+export const SvgoOption = ({ plugin }: Props) => {
+  const { state, dispatch } = useDetails()
 
   const isChecked = useMemo(() => {
-    return state.settings.svg.svgoPlugins.some((p) => p.name === plugin.name)
-  }, [state.settings.svg.svgoPlugins, plugin])
+    return state.export.svgoConfig.plugins.some((p: SvgoPlugin) => p.name === plugin.name)
+  }, [state.export.svgoConfig.plugins, plugin.name])
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.checked) {
-      case true:
-        dispatch({ type: 'add-svgo-plugin', payload: plugin })
-        break
-
-      case false:
-        dispatch({ type: 'remove-svgo-plugin', payload: plugin })
-        break
+  const handleOptionChange = () => {
+    if (isChecked) {
+      dispatch({ type: 'remove-plugin', payload: plugin })
+    } else {
+      dispatch({ type: 'add-plugin', payload: plugin })
     }
   }
 

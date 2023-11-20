@@ -56,6 +56,7 @@ export async function rootLoader() {
       } catch (error) {
         // The listener has been removed, so the background script is no longer listening
         // This fires when the extension is reloaded as we're managing all routes in memory
+        // It's pretty hard to get here without the browser extension
         return prevCollections[0].id
       }
 

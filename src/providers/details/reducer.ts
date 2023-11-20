@@ -1,4 +1,4 @@
-import { defaultSvgoPlugins } from 'src/data/svgo-plugins'
+import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import type { DetailsParams } from 'src/types'
 import type { Config } from 'svgo'
 
@@ -20,9 +20,31 @@ export type DetailsState = {
    */
   currentString: string
   /**
-   * SVGO Config
+   * The export configuration settings
    */
-  svgoConfig: Config
+  export: {
+    /**
+     * The filename of the export
+     */
+    filename: string
+    /**
+     * SVGO Config
+     */
+    svgoConfig: {
+      /**
+       * SVGO multipass
+       */
+      multipass: boolean
+      /**
+       * SVGO plugins
+       */
+      plugins: SvgoPlugin[]
+      /**
+       * SVGO js2svg
+       */
+      js2svg: Config['js2svg']
+    }
+  }
 }
 
 export type DetailsAction =
@@ -30,24 +52,82 @@ export type DetailsAction =
   | { type: 'init'; payload: DetailsParams }
   | { type: 'update-current-string'; payload: string }
   | { type: 'update-original-string'; payload: string }
+  | { type: 'update-export-filename'; payload: string }
+  | { type: 'add-plugin'; payload: SvgoPlugin }
+  | { type: 'remove-plugin'; payload: SvgoPlugin }
+  | { type: 'set-svgo-plugins'; payload: SvgoPlugin[] }
 
 export const initDetailsState: DetailsState = {
   id: '',
   collectionId: '',
   originalString: '',
   currentString: '',
-  svgoConfig: {
-    multipass: true,
-    plugins: [...defaultSvgoPlugins],
-    js2svg: {
-      pretty: true,
-      indent: 2,
+  export: {
+    filename: 'svg-gobbler',
+    svgoConfig: {
+      multipass: true,
+      plugins: [...defaultSvgoPlugins],
+      js2svg: {
+        pretty: true,
+        indent: 2,
+      },
     },
   },
 }
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'set-svgo-plugins': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            plugins: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'add-plugin': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            plugins: [...state.export.svgoConfig.plugins, action.payload],
+          },
+        },
+      }
+    }
+
+    case 'remove-plugin': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            plugins: state.export.svgoConfig.plugins.filter(
+              (plugin) => plugin.name !== action.payload.name,
+            ),
+          },
+        },
+      }
+    }
+
+    case 'update-export-filename': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          filename: action.payload,
+        },
+      }
+    }
+
     case 'update-original-string': {
       return {
         ...state,
