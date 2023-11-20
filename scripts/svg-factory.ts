@@ -20,7 +20,7 @@ class SvgFactory {
       .map(({ svg, id }) => {
         switch (true) {
           case svg.includes('<svg '): {
-            return new Inline(svg, message.origin, id)
+            return new Inline(svg, id)
           }
 
           case svg.includes('<img '): {
@@ -28,11 +28,11 @@ class SvgFactory {
           }
 
           case svg.includes('<symbol '): {
-            return new Symbol(svg, message.origin, id)
+            return new Symbol(svg, id)
           }
 
           case svg.includes('<g '): {
-            return new GElement(svg, message.origin, id)
+            return new GElement(svg, id)
           }
         }
       })

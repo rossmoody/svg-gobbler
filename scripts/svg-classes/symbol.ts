@@ -2,8 +2,8 @@ import { nanoid } from 'nanoid'
 import { Svg } from './svg'
 
 export class Symbol extends Svg {
-  constructor(originalString: string, origin: string, id: string) {
-    super(originalString, origin, id)
+  constructor(originalString: string, id: string) {
+    super(originalString, id)
     this.processSymbol()
   }
 

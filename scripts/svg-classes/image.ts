@@ -9,8 +9,14 @@ export class Image extends Svg {
    */
   absoluteImageUrl?: string
 
-  constructor(originalString: string, origin: string, id: string) {
-    super(originalString, origin, id)
+  /**
+   * The document.location.origin of the SVG element in the DOM. Can be blank.
+   */
+  origin: string
+
+  constructor(originalString: string, id: string, origin: string) {
+    super(originalString, id)
+    this.origin = origin
     this.parseAndSetElement()
     this.processImage()
   }

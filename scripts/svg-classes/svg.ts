@@ -19,12 +19,6 @@ export class Svg {
   public originalString: string
 
   /**
-   * The document.location.origin of the SVG element in the DOM. Can be blank.
-   * TODO: Move this to the last parameter and make it optional.
-   */
-  readonly origin: string
-
-  /**
    * The original string is parsed and assigned to this property as an element.
    * If it is undefined, the SVG factory was unable to parse or
    * manually create the SVG element from parts.
@@ -37,10 +31,9 @@ export class Svg {
    */
   public corsRestricted = false
 
-  constructor(originalString: string, origin: string, id: string) {
+  constructor(originalString: string, id: string) {
     this.id = id
     this.originalString = originalString
-    this.origin = origin
   }
 
   /**

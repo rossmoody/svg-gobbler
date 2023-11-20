@@ -30,11 +30,12 @@ export type BackgroundMessage = {
  */
 export type StorageSvg = {
   /**
-   * A unique id for the svg
+   * A unique id for the svg. Used to identify the svg in storage and also as
+   * the id for routing to a given svg.
    */
   id: string
   /**
-   * The svg string of the item
+   * The svg string of the item.
    */
   svg: string
 }
