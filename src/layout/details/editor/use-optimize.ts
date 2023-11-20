@@ -10,10 +10,10 @@ export const useOptimize = () => {
    */
   const optimize = useCallback(
     (svg: string) => {
-      const { data } = svgoOptimize(svg, state.svgoConfig)
-      return data as string
+      const { data } = svgoOptimize(svg, state.export.svgoConfig)
+      return data
     },
-    [state.svgoConfig],
+    [state.export.svgoConfig],
   )
 
   /**
@@ -27,7 +27,7 @@ export const useOptimize = () => {
         indent: 2,
       },
     })
-    return data as string
+    return data
   }, [])
 
   /**
@@ -42,7 +42,7 @@ export const useOptimize = () => {
         indent: 0,
       },
     })
-    return data as string
+    return data
   }, [])
 
   return { optimize, format, minify }

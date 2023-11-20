@@ -3,6 +3,7 @@ import type { Image } from 'scripts/svg-classes/image'
 import type { Inline } from 'scripts/svg-classes/inline'
 import type { Svg } from 'scripts/svg-classes/svg'
 import type { SvgSymbol } from 'scripts/svg-classes/symbol'
+import { SvgoPlugin } from './data/svgo-plugins'
 
 /**
  * The message sent from the Background script to the Content script.
@@ -137,6 +138,10 @@ export type DetailsParams = {
    * The id of the svg in storage
    */
   id: string
+  /**
+   * The default plugin configuraiton for SVGO
+   */
+  defaultSvgoPlugins: SvgoPlugin[]
 }
 
 /**

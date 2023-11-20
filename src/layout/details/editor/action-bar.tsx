@@ -6,11 +6,10 @@ import { useOptimize } from './use-optimize'
 
 export const ActionBar = () => {
   const { state, dispatch } = useDetails()
-  const { optimize, format, minify } = useOptimize()
+  const { format, minify, optimize } = useOptimize()
 
   const onOptimize = () => {
-    const optimized = optimize(state.currentString)
-    dispatch({ type: 'update-current-string', payload: optimized })
+    dispatch({ type: 'update-current-string', payload: optimize(state.currentString) })
   }
 
   const onFormat = () => {

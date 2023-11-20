@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { Tooltip } from 'src/components'
 import { SvgoPlugin } from 'src/data/svgo-plugins'
 import { useDetails } from 'src/providers'
+import { useOptimize } from '../editor/use-optimize'
 
 type Props = {
   plugin: SvgoPlugin
@@ -10,6 +11,7 @@ type Props = {
 
 export const SvgoOption = ({ plugin }: Props) => {
   const { state, dispatch } = useDetails()
+  const { optimize } = useOptimize()
 
   const isChecked = useMemo(() => {
     return state.export.svgoConfig.plugins.some((p: SvgoPlugin) => p.name === plugin.name)
@@ -21,6 +23,8 @@ export const SvgoOption = ({ plugin }: Props) => {
     } else {
       dispatch({ type: 'add-plugin', payload: plugin })
     }
+
+    dispatch({ type: 'update-current-string', payload: optimize(state.originalString) })
   }
 
   return (

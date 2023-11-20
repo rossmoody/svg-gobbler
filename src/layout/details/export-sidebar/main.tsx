@@ -11,6 +11,10 @@ export const ExportDetailMain = () => {
     dispatch({ type: 'update-export-filename', payload: e.target.value })
   }
 
+  const handleMinifyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'set-minify', payload: e.currentTarget.checked })
+  }
+
   return (
     <div className="mb-3">
       <div className="mb-5">
@@ -26,8 +30,25 @@ export const ExportDetailMain = () => {
         />
       </div>
       <h2 className="my-3 text-sm font-medium">Settings</h2>
-      <div className="flex flex-col gap-3 pb-8">
+      <div className="mb-5 flex gap-2">
+        <input
+          type="checkbox"
+          className="checkbox"
+          id="minify"
+          checked={state.export.minify}
+          onChange={handleMinifyChange}
+        />
+        <div>
+          <label htmlFor="minify" className="export-label">
+            Minify output
+          </label>
+        </div>
+      </div>
+      <div className="flex items-center justify-between">
+        <h2 className="my-3 text-sm font-medium">SVGO Plugins</h2>
         <ResetButton />
+      </div>
+      <div className="flex flex-col gap-3 pb-8">
         {_.sortBy(svgoPlugins, 'label').map((plugin) => (
           <SvgoOption key={plugin.name} plugin={plugin} />
         ))}

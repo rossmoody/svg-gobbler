@@ -5,21 +5,26 @@ import { Fragment } from 'react'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import { useDetails } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { useOptimize } from '../editor/use-optimize'
 
 export const ResetButton = () => {
   const { state, dispatch } = useDetails()
+  const { optimize } = useOptimize()
 
   const resetToDefault = async () => {
     const plugins = (await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')) ?? []
     dispatch({ type: 'set-svgo-plugins', payload: plugins })
+    dispatch({ type: 'update-current-string', payload: optimize(state.originalString) })
   }
 
   const resetToEmpty = () => {
     dispatch({ type: 'set-svgo-plugins', payload: [] })
+    dispatch({ type: 'update-current-string', payload: state.originalString })
   }
 
   const resetToSvgoDefault = () => {
     dispatch({ type: 'set-svgo-plugins', payload: defaultSvgoPlugins })
+    dispatch({ type: 'update-current-string', payload: optimize(state.originalString) })
   }
 
   const setAsDefault = async () => {
@@ -35,7 +40,7 @@ export const ResetButton = () => {
   return (
     <Fragment>
       <Menu>
-        <Menu.Button className="flex items-center gap-1 self-end">
+        <Menu.Button className="flex items-center gap-1">
           Reset <ChevronDownIcon className="h-4 w-4" />
         </Menu.Button>
 
