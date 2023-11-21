@@ -2,6 +2,11 @@ import type { SvgoPlugin } from 'src/data/svgo-plugins'
 import type { DetailsParams } from 'src/types'
 import { optimize, type Config } from 'svgo'
 
+/**
+ * This is similar in many ways to ExportState. The primary reason we don't colocate them
+ * is this initializes empty because of the editable code area and doesn't facilitate optimizing
+ * any more than one svg so much of the batch export is unnecessary.
+ */
 export type DetailsState = {
   /**
    * The id of the svg in storage

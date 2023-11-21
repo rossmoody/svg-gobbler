@@ -7,7 +7,7 @@ type HelpIconProps = {
 
 /**
  * Displays a help icon with a tooltip on the hover of a group element.
- * Must be placed inside a group className to function.
+ * Must be placed inside a group className to render.
  */
 export const HelpIcon = ({ content }: HelpIconProps) => {
   return (
