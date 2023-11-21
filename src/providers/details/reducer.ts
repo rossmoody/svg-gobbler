@@ -1,6 +1,6 @@
 import type { SvgoPlugin } from 'src/data/svgo-plugins'
 import type { DetailsParams } from 'src/types'
-import { type Config } from 'svgo'
+import type { Config } from 'svgo'
 
 export type DetailsState = {
   /**
@@ -28,14 +28,9 @@ export type DetailsState = {
      */
     filename: string
     /**
-     * Whether or not to minify the output. The editor config
-     * is always to prettify. This is just for the export.
-     */
-    minify: boolean
-    /**
      * SVGO Config
      */
-    svgoConfig: {
+    svgoConfig: Config & {
       /**
        * SVGO multipass
        */
@@ -61,7 +56,6 @@ export type DetailsAction =
   | { type: 'add-plugin'; payload: SvgoPlugin }
   | { type: 'remove-plugin'; payload: SvgoPlugin }
   | { type: 'set-svgo-plugins'; payload: SvgoPlugin[] }
-  | { type: 'set-minify'; payload: boolean }
 
 export const initDetailsState: DetailsState = {
   id: '',
@@ -70,7 +64,6 @@ export const initDetailsState: DetailsState = {
   currentString: '',
   export: {
     filename: 'svg-gobbler',
-    minify: true,
     svgoConfig: {
       multipass: true,
       plugins: [],
@@ -84,16 +77,6 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
-    case 'set-minify': {
-      return {
-        ...state,
-        export: {
-          ...state.export,
-          minify: action.payload,
-        },
-      }
-    }
-
     case 'set-svgo-plugins': {
       return {
         ...state,
@@ -128,7 +111,7 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
           svgoConfig: {
             ...state.export.svgoConfig,
             plugins: state.export.svgoConfig.plugins.filter(
-              (plugin) => plugin.name !== action.payload.name,
+              (plugin: SvgoPlugin) => plugin.name !== action.payload.name,
             ),
           },
         },
@@ -166,13 +149,6 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
         collectionId: action.payload.collectionId,
         originalString: action.payload.originalString,
         currentString: action.payload.originalString,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            plugins: action.payload.defaultSvgoPlugins,
-          },
-        },
       }
     }
 

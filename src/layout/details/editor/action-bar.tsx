@@ -2,11 +2,11 @@ import { ArrowRightIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outl
 import { useMemo } from 'react'
 import { useDetails } from 'src/providers'
 import { SvgUtils } from 'src/utils/svg-utils'
-import { useOptimize } from './use-optimize'
+import { useOptimize } from '../use-optimize'
 
 export const ActionBar = () => {
   const { state, dispatch } = useDetails()
-  const { format, minify, optimize } = useOptimize()
+  const { format, optimize } = useOptimize()
 
   const onOptimize = () => {
     dispatch({ type: 'update-current-string', payload: optimize(state.currentString) })
@@ -19,10 +19,10 @@ export const ActionBar = () => {
 
   const bytes = useMemo(() => {
     return {
-      before: SvgUtils.getPrettyBytes(minify(state.originalString)),
-      after: SvgUtils.getPrettyBytes(minify(state.currentString)),
+      before: SvgUtils.getPrettyBytes(state.originalString),
+      after: SvgUtils.getPrettyBytes(state.currentString),
     }
-  }, [state.currentString, state.originalString, minify])
+  }, [state.currentString, state.originalString])
 
   return (
     <div className="flex h-14 items-center justify-between bg-[#24283b] px-4 text-white">

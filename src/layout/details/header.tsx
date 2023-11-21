@@ -6,30 +6,30 @@ import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
 import { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { useOptimize } from './editor/use-optimize'
 
 export const Header = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useDetails()
-  const { format, minify } = useOptimize()
 
   const isDirty = useMemo(
-    () => minify(state.originalString) !== minify(state.currentString),
-    [state.currentString, state.originalString, minify],
+    () => state.currentString !== state.originalString,
+    [state.currentString, state.originalString],
   )
 
   const handleReset = () => {
-    dispatch({ type: 'update-current-string', payload: format(state.originalString) })
+    dispatch({ type: 'update-current-string', payload: state.originalString })
   }
 
   const handleSave = async () => {
     const collectionData = await StorageUtils.getPageData(state.collectionId)
+
     const pageData: PageData = {
       ...collectionData,
       data: collectionData.data.map((item) =>
         item.id === state.id ? { id: item.id, svg: state.currentString } : item,
       ),
     }
+
     await StorageUtils.setPageData(state.collectionId, pageData)
     dispatch({ type: 'update-original-string', payload: state.currentString })
   }
@@ -45,7 +45,7 @@ export const Header = () => {
   }
 
   return (
-    <header className="flex h-14 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
+    <header className="flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
       <nav className="flex items-center gap-3">
         <IconButton onClick={navigateBack} variant="ghost">
           <ArrowLeftIcon className="h-5 w-5" />
@@ -64,9 +64,9 @@ export const Header = () => {
         className="flex h-full items-center justify-center gap-2"
       >
         <Button variant="secondary" onClick={handleReset}>
-          Reset
+          Reset changes
         </Button>
-        <Button onClick={handleSave}>Save</Button>
+        <Button onClick={handleSave}>Save changes</Button>
       </Transition>
     </header>
   )

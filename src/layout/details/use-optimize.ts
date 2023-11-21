@@ -2,11 +2,14 @@ import { useCallback } from 'react'
 import { useDetails } from 'src/providers'
 import { optimize as svgoOptimize } from 'svgo'
 
+/**
+ * Handle common optimization callbacks related to SVGO
+ */
 export const useOptimize = () => {
   const { state } = useDetails()
 
   /**
-   * Optimize a given svg string with the current svgo config.
+   * Optimize a given svg string with the current svgo config
    */
   const optimize = useCallback(
     (svg: string) => {
@@ -31,7 +34,7 @@ export const useOptimize = () => {
   }, [])
 
   /**
-   * Minify a given svg string with no plugins.
+   * Normalize and minify a given svg string with no plugins.
    * Often used to compare two strings or get the size of a string.
    */
   const minify = useCallback((svg: string) => {

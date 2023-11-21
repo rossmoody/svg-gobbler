@@ -3,20 +3,17 @@ import { useLoaderData } from 'react-router-dom'
 import { useDetails } from 'src/providers/details'
 import type { DetailsParams } from 'src/types'
 import { DetailsEditor } from './editor'
-import { useOptimize } from './editor/use-optimize'
 import { ExportSidebar } from './export-sidebar'
 import { Header } from './header'
 import { PreviewSidebar } from './preview-sidebar'
 
 export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   const data = useLoaderData() as DetailsParams
-  const { format } = useOptimize()
   const { dispatch } = useDetails()
 
   useEffect(() => {
     dispatch({ type: 'init', payload: data })
-    dispatch({ type: 'update-current-string', payload: format(data.originalString) })
-  }, [dispatch, data, format])
+  }, [dispatch, data])
 
   return (
     <div ref={ref} className="h-full overflow-hidden">

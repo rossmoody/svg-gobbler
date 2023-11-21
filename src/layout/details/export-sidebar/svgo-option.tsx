@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { Tooltip } from 'src/components'
 import { SvgoPlugin } from 'src/data/svgo-plugins'
 import { useDetails } from 'src/providers'
-import { useOptimize } from '../editor/use-optimize'
+import { useOptimize } from '../use-optimize'
 
 type Props = {
   plugin: SvgoPlugin
@@ -24,7 +24,7 @@ export const SvgoOption = ({ plugin }: Props) => {
       dispatch({ type: 'add-plugin', payload: plugin })
     }
 
-    dispatch({ type: 'update-current-string', payload: optimize(state.originalString) })
+    dispatch({ type: 'update-current-string', payload: optimize(state.currentString) })
   }
 
   return (
