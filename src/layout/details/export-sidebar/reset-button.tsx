@@ -5,26 +5,24 @@ import { Fragment } from 'react'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
 import { useDetails } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { useOptimize } from '../use-optimize'
 
 export const ResetButton = () => {
   const { state, dispatch } = useDetails()
-  const { optimize } = useOptimize()
 
   const resetToDefault = async () => {
     const plugins = (await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')) ?? []
     dispatch({ type: 'set-svgo-plugins', payload: plugins })
-    dispatch({ type: 'update-current-string', payload: optimize(state.currentString) })
+    dispatch({ type: 'process-current-string' })
   }
 
   const resetToEmpty = () => {
     dispatch({ type: 'set-svgo-plugins', payload: [] })
-    dispatch({ type: 'update-current-string', payload: state.currentString })
+    dispatch({ type: 'process-current-string' })
   }
 
   const resetToSvgoDefault = () => {
     dispatch({ type: 'set-svgo-plugins', payload: defaultSvgoPlugins })
-    dispatch({ type: 'update-current-string', payload: optimize(state.currentString) })
+    dispatch({ type: 'process-current-string' })
   }
 
   const setAsDefault = async () => {

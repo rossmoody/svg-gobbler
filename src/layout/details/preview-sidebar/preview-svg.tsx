@@ -5,7 +5,7 @@ export const PreviewSvg = () => {
 
   return (
     <div
-      className="flex h-full items-center justify-center p-8"
+      className="flex h-full items-center justify-center overflow-hidden p-8"
       dangerouslySetInnerHTML={{ __html: state.currentString }}
     ></div>
   )

@@ -11,6 +11,11 @@ export const ExportDetailMain = () => {
     dispatch({ type: 'update-export-filename', payload: e.target.value })
   }
 
+  const handlePrettifyMarkupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'set-prettify', payload: e.target.checked })
+    dispatch({ type: 'process-current-string' })
+  }
+
   return (
     <div className="mb-3">
       <div className="mb-5">
@@ -25,12 +30,17 @@ export const ExportDetailMain = () => {
           value={state.export.filename}
         />
       </div>
-      <h2 className="my-3 text-sm font-medium">Settings</h2>
       <div className="mb-5 flex gap-2">
-        <input type="checkbox" className="checkbox" id="minify" />
+        <input
+          type="checkbox"
+          className="checkbox"
+          id="prettify-markup"
+          onChange={handlePrettifyMarkupChange}
+          checked={state.export.svgoConfig.js2svg?.pretty}
+        />
         <div>
-          <label htmlFor="minify" className="export-label">
-            Prettify
+          <label htmlFor="prettify-markup" className="export-label">
+            Prettify markup
           </label>
         </div>
       </div>

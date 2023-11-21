@@ -18,7 +18,7 @@ export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div ref={ref} className="h-full overflow-hidden">
       <Header />
-      <main className="relative flex h-[calc(100dvh-theme(space.14))]">
+      <main className="relative flex h-[calc(100dvh-theme(space.16))]">
         <ExportSidebar />
         <DetailsEditor />
         <PreviewSidebar />

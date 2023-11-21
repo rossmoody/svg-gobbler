@@ -1,6 +1,6 @@
 import type { SvgoPlugin } from 'src/data/svgo-plugins'
 import type { DetailsParams } from 'src/types'
-import type { Config } from 'svgo'
+import { optimize, type Config } from 'svgo'
 
 export type DetailsState = {
   /**
@@ -56,6 +56,8 @@ export type DetailsAction =
   | { type: 'add-plugin'; payload: SvgoPlugin }
   | { type: 'remove-plugin'; payload: SvgoPlugin }
   | { type: 'set-svgo-plugins'; payload: SvgoPlugin[] }
+  | { type: 'set-prettify'; payload: boolean }
+  | { type: 'process-current-string' }
 
 export const initDetailsState: DetailsState = {
   id: '',
@@ -68,7 +70,7 @@ export const initDetailsState: DetailsState = {
       multipass: true,
       plugins: [],
       js2svg: {
-        pretty: true,
+        pretty: false,
         indent: 2,
       },
     },
@@ -77,6 +79,31 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'process-current-string': {
+      const { data } = optimize(state.currentString, state.export.svgoConfig)
+
+      return {
+        ...state,
+        currentString: data,
+      }
+    }
+
+    case 'set-prettify': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            js2svg: {
+              ...state.export.svgoConfig.js2svg,
+              pretty: action.payload,
+            },
+          },
+        },
+      }
+    }
+
     case 'set-svgo-plugins': {
       return {
         ...state,

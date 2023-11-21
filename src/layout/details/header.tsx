@@ -47,7 +47,7 @@ export const Header = () => {
   return (
     <header className="flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
       <nav className="flex items-center gap-3">
-        <IconButton onClick={navigateBack} variant="ghost">
+        <IconButton onClick={navigateBack} variant="ghost" size="lg">
           <ArrowLeftIcon className="h-5 w-5" />
         </IconButton>
         <h1 className="text-lg font-semibold">Edit SVG</h1>
