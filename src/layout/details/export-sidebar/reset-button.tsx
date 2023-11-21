@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
-import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
+import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
 

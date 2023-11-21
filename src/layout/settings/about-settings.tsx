@@ -1,4 +1,4 @@
-import { links } from 'src/data/links'
+import { links } from 'src/constants/links'
 import { Category } from './category'
 
 export const AboutSettings = () => {

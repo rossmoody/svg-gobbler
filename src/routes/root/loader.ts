@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import svgFactory from 'scripts/svg-factory'
-import { SvgoPlugin, defaultSvgoPlugins } from 'src/data/svgo-plugins'
+import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'

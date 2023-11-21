@@ -1,5 +1,5 @@
-import type { SvgoPlugin } from 'src/data/svgo-plugins'
-import { defaultSvgoPlugins } from 'src/data/svgo-plugins'
+import type { SvgoPlugin } from 'src/constants/svgo-plugins'
+import { defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 
 export const fileTypes = ['svg', 'png'] as const
 export type FileType = (typeof fileTypes)[number]

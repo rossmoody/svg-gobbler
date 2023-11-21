@@ -25,6 +25,5 @@
         "default": "Ctrl+Shift+G"
       }
     }
-  },
-  "host_permissions": []
+  }
 }

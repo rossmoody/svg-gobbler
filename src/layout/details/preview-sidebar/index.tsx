@@ -1,5 +1,6 @@
 import { Tabs } from 'src/components'
-import { DataURI } from './data-uri'
+import { DataURI } from './preview-data-uri'
+import { PreviewReact } from './preview-react'
 import { PreviewSvg } from './preview-svg'
 import { usePreviewResize } from './use-preview-resize'
 
@@ -19,7 +20,9 @@ export const PreviewSidebar = () => {
             <Tabs.Panel className="h-full">
               <PreviewSvg />
             </Tabs.Panel>
-            <Tabs.Panel className="h-full">React</Tabs.Panel>
+            <Tabs.Panel className="h-full">
+              <PreviewReact />
+            </Tabs.Panel>
             <Tabs.Panel className="h-full">
               <DataURI />
             </Tabs.Panel>

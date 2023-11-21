@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
-import { SvgoPlugin, svgoPlugins } from 'src/data/svgo-plugins'
+import { SvgoPlugin, svgoPlugins } from 'src/constants/svgo-plugins'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { Category } from './category'
 

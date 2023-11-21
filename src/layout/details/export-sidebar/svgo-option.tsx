@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { HelpIcon } from 'src/components'
-import { SvgoPlugin } from 'src/data/svgo-plugins'
+import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
 
 type Props = {

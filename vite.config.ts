@@ -4,9 +4,11 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import manifest from './manifest.json'
 
-// https://vitejs.dev/config/
+export const serverEndpoint =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000/*' : 'tbd'
+
 export default defineConfig({
-  plugins: [react(), crx({ manifest })],
+  plugins: [react(), crx({ manifest: { ...manifest, host_permissions: [serverEndpoint] } })],
   // Server error: https://github.com/crxjs/chrome-extension-tools/issues/696
   server: {
     port: 5173,

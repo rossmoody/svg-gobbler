@@ -1,7 +1,7 @@
 import { MegaphoneIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { Button, Modal } from 'src/components'
-import { links } from 'src/data/links'
+import { links } from 'src/constants/links'
 
 export const ReviewModal = () => {
   const [open, setOpen] = useState(false)

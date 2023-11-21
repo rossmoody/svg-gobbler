@@ -1,4 +1,4 @@
-import type { SvgoPlugin } from 'src/data/svgo-plugins'
+import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 import type { DetailsParams } from 'src/types'
 import { optimize, type Config } from 'svgo'
 
