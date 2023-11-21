@@ -1,4 +1,4 @@
-import { PluginConfig } from 'svgo'
+import type { PluginConfig } from 'svgo'
 
 /**
  * A standard plugin config for SVGO. The types for PluginConfig are weird but to make it play
@@ -209,7 +209,7 @@ export const additionalSvgoPlugins: SvgoPlugin[] = [
   {
     name: 'removeViewBox',
     label: 'Remove viewBox',
-    description: 'Removes the viewBox attribute when height/width is identical.',
+    description: 'Removes the viewBox attribute when height and width is identical.',
   },
   {
     name: 'cleanupListOfValues',
@@ -231,11 +231,9 @@ export const additionalSvgoPlugins: SvgoPlugin[] = [
   },
   {
     name: 'prefixIds',
-    label: 'Prefix IDs',
-    description: 'Prefix element IDs and class names with the provided string.',
-    params: {
-      prefix: 'gobbler',
-    },
+    label: 'Prefix IDs and class names',
+    description:
+      'Prefix element IDs and class names with the provided file name. Defaults to "prefix__"',
   },
   {
     name: 'removeDimensions',

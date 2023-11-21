@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import _ from 'lodash'
 import { Fragment } from 'react'
+import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/data/svgo-plugins'
 import { useExport } from 'src/providers'
 import { ResetButton } from './reset-button'
@@ -15,6 +16,10 @@ export const SvgSettings = () => {
 
   const handlePrettifyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: 'set-prettify', payload: e.target.checked })
+  }
+
+  const handleFloatPrecisionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'set-float-precision', payload: Number(e.target.value) })
   }
 
   return (
@@ -43,6 +48,23 @@ export const SvgSettings = () => {
           <label htmlFor="prettify" className="export-label">
             Prettify output
           </label>
+        </div>
+        <div>
+          <div className="group mt-2 flex items-center gap-1">
+            <label htmlFor="float-precision" className="export-label mb-1">
+              Floating precision
+            </label>
+            <HelpIcon content="Precision of floating point numbers. Will be passed to each plugin that supports this param." />
+          </div>
+          <input
+            id="float-precision"
+            type="number"
+            min="1"
+            max="10"
+            value={state.settings.svg.floatPrecision}
+            onChange={handleFloatPrecisionChange}
+            className="input"
+          />
         </div>
       </div>
       <span className="mb-5 mt-6 block h-px bg-gray-200 dark:bg-gray-700" />

@@ -27,7 +27,7 @@ export const ResetButton = () => {
   }
 
   const menuItem = [
-    { label: 'Default preset', onClick: resetToDefault },
+    { label: 'Default settings', onClick: resetToDefault },
     { label: 'SVGO default', onClick: resetToSvgoDefault },
     { label: 'Deselect all', onClick: resetToEmpty },
   ]

@@ -29,7 +29,7 @@ const Tab = (props: PropsWithChildren) => (
     className={clsx(
       'ui-selected:border-red-500 ui-selected:font-medium ui-selected:text-red-500',
       'border-transparent text-gray-600 hover:border-gray-200 ui-not-selected:dark:text-gray-400',
-      'whitespace-nowrap border-b-2 px-4 py-1.5 text-sm dark:hover:border-gray-600',
+      'whitespace-nowrap border-b-2 px-4 py-2.5 text-sm dark:hover:border-gray-600',
     )}
   />
 )

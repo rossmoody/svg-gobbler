@@ -12,9 +12,9 @@ html {
 
 body {
   min-height: 100%;
-  @apply surface text;
 }
 
 #root {
   min-height: 100dvh;
+  @apply surface text;
 }

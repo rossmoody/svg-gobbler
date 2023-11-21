@@ -1,6 +1,5 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import { useMemo } from 'react'
-import { Tooltip } from 'src/components'
+import { HelpIcon } from 'src/components'
 import { SvgoPlugin } from 'src/data/svgo-plugins'
 import { useExport } from 'src/providers'
 
@@ -41,9 +40,7 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
           {plugin.label}
         </label>
       </div>
-      <Tooltip content={plugin.description}>
-        <QuestionMarkCircleIcon className="text-muted h-4 w-4 cursor-help opacity-0 transition-opacity ease-in group-hover:opacity-100" />
-      </Tooltip>
+      <HelpIcon content={plugin.description} />
     </div>
   )
 }

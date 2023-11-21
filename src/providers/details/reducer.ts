@@ -58,6 +58,7 @@ export type DetailsAction =
   | { type: 'set-svgo-plugins'; payload: SvgoPlugin[] }
   | { type: 'set-prettify'; payload: boolean }
   | { type: 'process-current-string' }
+  | { type: 'set-float-precision'; payload: number }
 
 export const initDetailsState: DetailsState = {
   id: '',
@@ -67,6 +68,8 @@ export const initDetailsState: DetailsState = {
   export: {
     filename: 'svg-gobbler',
     svgoConfig: {
+      path: 'svg-gobbler',
+      floatPrecision: 3,
       multipass: true,
       plugins: [],
       js2svg: {
@@ -79,8 +82,21 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'set-float-precision': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            floatPrecision: action.payload,
+          },
+        },
+      }
+    }
+
     case 'process-current-string': {
-      const { data } = optimize(state.currentString, state.export.svgoConfig)
+      const { data } = optimize(state.originalString, state.export.svgoConfig)
 
       return {
         ...state,
@@ -151,6 +167,10 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
         export: {
           ...state.export,
           filename: action.payload,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            path: action.payload,
+          },
         },
       }
     }

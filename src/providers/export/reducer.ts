@@ -30,6 +30,14 @@ export type ExportState = {
        * Format the SVGs with prettier.
        */
       prettify: boolean
+      /**
+       * The floating precision to use when optimizing SVGs.
+       */
+      floatPrecision: number
+      /**
+       * Path for SVGO config. Mainly used to prefix IDs
+       */
+      path: string
     }
     /**
      * PNG export settings.
@@ -53,6 +61,7 @@ export type ExportAction =
   | { type: 'set-prettify'; payload: boolean }
   | { type: 'set-filename'; payload: string }
   | { type: 'set-png-size'; payload: number }
+  | { type: 'set-float-precision'; payload: number }
 
 export const initExportState: ExportState = {
   fileType: 'svg',
@@ -62,6 +71,8 @@ export const initExportState: ExportState = {
       optimizeExports: true,
       svgoPlugins: defaultSvgoPlugins,
       prettify: false,
+      floatPrecision: 3,
+      path: 'svg-gobbler',
     },
     png: {
       size: 512,
@@ -71,6 +82,19 @@ export const initExportState: ExportState = {
 
 export const exportReducer = (state: ExportState, action: ExportAction): ExportState => {
   switch (action.type) {
+    case 'set-float-precision': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            floatPrecision: action.payload,
+          },
+        },
+      }
+    }
+
     case 'set-svgo-plugins': {
       return {
         ...state,
@@ -101,6 +125,13 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
       return {
         ...state,
         filename: action.payload,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            path: action.payload,
+          },
+        },
       }
     }
 
