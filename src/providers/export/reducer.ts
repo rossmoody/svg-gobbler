@@ -61,7 +61,7 @@ export const initExportState: ExportState = {
     svg: {
       optimizeExports: true,
       svgoPlugins: defaultSvgoPlugins,
-      prettify: true,
+      prettify: false,
     },
     png: {
       size: 512,

@@ -27,7 +27,7 @@ export const ResetButton = () => {
   }
 
   const menuItem = [
-    { label: 'Default', onClick: resetToDefault },
+    { label: 'Default preset', onClick: resetToDefault },
     { label: 'SVGO default', onClick: resetToSvgoDefault },
     { label: 'Deselect all', onClick: resetToEmpty },
   ]
@@ -35,8 +35,8 @@ export const ResetButton = () => {
   return (
     <Fragment>
       <Menu>
-        <Menu.Button className="flex items-center gap-1 self-end">
-          Reset <ChevronDownIcon className="h-4 w-4" />
+        <Menu.Button className="flex items-center gap-1">
+          Apply <ChevronDownIcon className="h-4 w-4" />
         </Menu.Button>
 
         <Transition

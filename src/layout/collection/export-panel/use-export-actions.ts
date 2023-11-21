@@ -4,7 +4,7 @@ import { logger } from 'src/utils/logger'
 import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'
-import { Svg } from '../../../scripts/svg-classes/svg'
+import { Svg } from '../../../../scripts/svg-classes/svg'
 
 export const useExportActions = () => {
   const { state } = useExport()

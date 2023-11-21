@@ -45,7 +45,7 @@ export const SvgSettings = () => {
           </label>
         </div>
       </div>
-      <span className="my-4 block h-px bg-gray-200 dark:bg-gray-700" />
+      <span className="mb-5 mt-6 block h-px bg-gray-200 dark:bg-gray-700" />
       <Transition
         as="div"
         show={state.settings.svg.optimizeExports}
@@ -57,7 +57,10 @@ export const SvgSettings = () => {
         leaveTo="opacity-0 h-0"
         className="flex flex-col gap-3 pb-8"
       >
-        <ResetButton />
+        <div className="flex items-center justify-between">
+          <h2 className="my-2 text-sm font-medium leading-none">Plugins</h2>
+          <ResetButton />
+        </div>
         {_.sortBy(svgoPlugins, 'label').map((plugin) => (
           <SvgoOption key={plugin.name} plugin={plugin} />
         ))}

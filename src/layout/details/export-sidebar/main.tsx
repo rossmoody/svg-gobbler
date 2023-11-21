@@ -30,12 +30,12 @@ export const ExportDetailMain = () => {
         <input type="checkbox" className="checkbox" id="minify" />
         <div>
           <label htmlFor="minify" className="export-label">
-            Minify output
+            Prettify
           </label>
         </div>
       </div>
       <div className="flex items-center justify-between">
-        <h2 className="my-3 text-sm font-medium">SVGO Plugins</h2>
+        <h2 className="my-3 text-sm font-medium">Plugins</h2>
         <ResetButton />
       </div>
       <div className="flex flex-col gap-3 pb-8">
