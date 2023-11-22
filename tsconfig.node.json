@@ -7,5 +7,5 @@
     "allowSyntheticDefaultImports": true,
     "typeRoots": ["node_modules/svgo"]
   },
-  "include": ["vite.config.ts", "manifest.json"]
+  "include": ["vite.config.ts", "manifest.json", "server/config.ts"]
 }
