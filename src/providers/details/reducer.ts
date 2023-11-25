@@ -1,53 +1,31 @@
+import type { Config, State } from '@svgr/core'
 import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 import type { DetailsParams } from 'src/types'
-import { optimize, type Config } from 'svgo'
+import { optimize, type Config as SvgoConfig } from 'svgo'
 
 /**
  * This is similar in many ways to ExportState. The primary reason we don't colocate them
  * is this initializes empty because of the editable code area and doesn't facilitate optimizing
- * any more than one svg so much of the batch export is unnecessary.
+ * any more than one svg so much of the batch export is unnecessary (anything with png).
  */
 export type DetailsState = {
-  /**
-   * The id of the svg in storage
-   */
-  id: string
-  /**
-   * The id of the collection.
-   */
+  id: string // The id of the svg
   collectionId: string
-  /**
-   * The original svg string upon load.
-   */
   originalString: string
-  /**
-   * The current svg string.
-   */
   currentString: string
-  /**
-   * The export configuration settings
-   */
   export: {
-    /**
-     * The filename of the export
-     */
     filename: string
-    /**
-     * SVGO Config
-     */
-    svgoConfig: Config & {
-      /**
-       * SVGO multipass
-       */
+    svgoConfig: SvgoConfig & {
       multipass: boolean
-      /**
-       * SVGO plugins
-       */
       plugins: SvgoPlugin[]
-      /**
-       * SVGO js2svg
-       */
-      js2svg: Config['js2svg']
+      js2svg: SvgoConfig['js2svg']
+    }
+  }
+  preview: {
+    svgr: {
+      result: string
+      config: Config
+      state: State
     }
   }
 }
@@ -64,6 +42,10 @@ export type DetailsAction =
   | { type: 'set-prettify'; payload: boolean }
   | { type: 'process-current-string' }
   | { type: 'set-float-precision'; payload: number }
+  | { type: 'set-svgr-result'; payload: string }
+  | { type: 'set-svgr-config'; payload: Config }
+  | { type: 'set-svgr-config-value'; payload: { key: string; value: boolean | string } }
+  | { type: 'set-svgr-state-name'; payload: string }
 
 export const initDetailsState: DetailsState = {
   id: '',
@@ -83,10 +65,91 @@ export const initDetailsState: DetailsState = {
       },
     },
   },
+  preview: {
+    svgr: {
+      result: '',
+      config: {
+        ref: false,
+        dimensions: false,
+        native: false,
+        typescript: false,
+        memo: false,
+        // Not configurable
+        jsxRuntime: 'classic', // This doesn't remove if set to none
+        expandProps: 'end', // Executive decision to simplify
+        icon: false, // Not needed because svg is editable in panel
+        prettier: false, // Problem with prettier modules but needed as false to work
+        exportType: 'default', // This is silly. Does an alias of the same named export.
+        namedExport: '', // Unused because it's silly
+        plugins: ['@svgr/plugin-jsx'],
+      },
+      state: {
+        componentName: 'Icon',
+      },
+    },
+  },
 }
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'set-svgr-state-name': {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          svgr: {
+            ...state.preview.svgr,
+            state: {
+              ...state.preview.svgr.state,
+              componentName: action.payload,
+            },
+          },
+        },
+      }
+    }
+
+    case 'set-svgr-config': {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          svgr: {
+            ...state.preview.svgr,
+            config: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-svgr-config-value': {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          svgr: {
+            ...state.preview.svgr,
+            config: {
+              ...state.preview.svgr.config,
+              [action.payload.key]: action.payload.value,
+            },
+          },
+        },
+      }
+    }
+
+    case 'set-svgr-result': {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          svgr: {
+            ...state.preview.svgr,
+            result: action.payload,
+          },
+        },
+      }
+    }
+
     case 'set-float-precision': {
       return {
         ...state,

@@ -49,6 +49,11 @@
   @apply scrollbar-thin scrollbar-thumb-gray-600;
 }
 
+/* Fix for JSX preview */
+.cm-padding-fix .cm-scroller {
+  padding: 0;
+}
+
 .cm-content {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   font-weight: 400;

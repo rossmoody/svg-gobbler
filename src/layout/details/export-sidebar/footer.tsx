@@ -1,16 +1,14 @@
-import { useState } from 'react'
 import { Button } from 'src/components'
+import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 
 export const ExportDetailFooter = () => {
   const { state } = useDetails()
-  const [label, setLabel] = useState('Copy to clipboard')
+  const { text, copyToClipboard } = useClipboard('Copy to clipboard')
 
-  const handleCopy = async () => {
-    setLabel('Copied')
-    await navigator.clipboard.writeText(state.currentString)
-    setTimeout(() => setLabel('Copy to clipboard'), 1500)
+  const handleCopy = () => {
+    copyToClipboard(state.currentString)
   }
 
   const handleDownload = async () => {
@@ -20,7 +18,7 @@ export const ExportDetailFooter = () => {
   return (
     <footer className="flex flex-col gap-2 px-3 pb-6 pt-4">
       <Button variant="secondary" className="justify-center transition-all" onClick={handleCopy}>
-        {label}
+        {text}
       </Button>
       <Button className="justify-center" onClick={handleDownload}>
         Download

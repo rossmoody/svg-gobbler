@@ -1,12 +1,13 @@
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import miniUri from 'mini-svg-data-uri'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Button } from 'src/components'
+import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
 import { SvgUtils } from 'src/utils/svg-utils'
 
 export const DataURI = () => {
-  const [copy, setCopy] = useState('Copy')
+  const { text, copyToClipboard } = useClipboard()
   const { state } = useDetails()
 
   const uriData = useMemo(() => {
@@ -26,12 +27,6 @@ export const DataURI = () => {
     ]
   }, [state.currentString])
 
-  const handleCopy = (string: string) => {
-    setCopy('Copied')
-    navigator.clipboard.writeText(string)
-    setTimeout(() => setCopy('Copy'), 1000)
-  }
-
   return (
     <div className="h-full overflow-auto px-4 pb-12 pt-6 transition-all duration-500 ease-in-out">
       {uriData.map((item) => (
@@ -42,11 +37,11 @@ export const DataURI = () => {
           <div className="relative rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/70">
             <Button
               size="xs"
-              onClick={() => handleCopy(item.value)}
+              onClick={() => copyToClipboard(item.value)}
               className="absolute right-4 top-4 opacity-0 shadow-md group-hover:opacity-100"
             >
               <ClipboardDocumentIcon className="h-3 w-3" />
-              {copy}
+              {text}
             </Button>
             <div className="max-h-52 overflow-y-auto p-5">
               <pre className="whitespace-pre-wrap break-all">{item.value}</pre>

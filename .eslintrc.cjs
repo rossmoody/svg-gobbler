@@ -12,5 +12,6 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 0,
     '@typescript-eslint/ban-ts-comment': 0,
+    'no-extra-semi': 0, // For async iife
   },
 }
