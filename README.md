@@ -7,8 +7,7 @@
 This extension is available on:
 
 - [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
-- [Firefox Addon Marketplace](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
-- [Microsoft Edge Add-ons Marketplace](#)
+- [Firefox Addon Marketplace (v3 version)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
 ---
 
@@ -104,6 +103,7 @@ This project benefits from some incredibly talented folks.
 - [Radix UI](https://www.radix-ui.com/): Accessible component library primitives
 - [JSZip](https://stuk.github.io/jszip/): Zipping files for download
 - [Mini SVG Data URI](https://github.com/tigt/mini-svg-data-uri): Minify SVG data URIs
+- [React Router](https://reactrouter.com/en/main): App routes
 
 ### Open source
 

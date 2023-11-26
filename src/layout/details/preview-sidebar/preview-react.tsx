@@ -1,5 +1,4 @@
 import { javascript } from '@codemirror/lang-javascript'
-
 import { basicLight } from '@uiw/codemirror-theme-basic'
 import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { Button } from 'src/components'

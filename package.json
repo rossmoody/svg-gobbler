@@ -9,9 +9,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "serve": "nodemon server/index.ts --exec 'ts-node --esm'"
+    "serve": "nodemon server/index.ts --exec 'ts-node --esm'",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.6",
@@ -24,7 +23,6 @@
     "@uiw/codemirror-theme-tokyo-night-storm": "^4.21.20",
     "@uiw/react-codemirror": "^4.21.20",
     "clsx": "^2.0.0",
-    "i": "^0.3.7",
     "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
