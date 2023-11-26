@@ -3,13 +3,10 @@ import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import { defineConfig } from 'vite'
 import manifest from './manifest.json'
-import { serverEndpoint } from './server/config'
+import { serverEndpoint } from './src/constants/server-config'
 
 export default defineConfig({
-  plugins: [
-    react(),
-    crx({ manifest: { ...manifest, host_permissions: [serverEndpoint.manifest] } }),
-  ],
+  plugins: [react(), crx({ manifest: { ...manifest, host_permissions: [serverEndpoint.svgr] } })],
   // Server error: https://github.com/crxjs/chrome-extension-tools/issues/696
   server: {
     port: 5173,
@@ -34,7 +31,6 @@ export default defineConfig({
     alias: {
       scripts: path.resolve(__dirname, 'scripts'),
       src: path.resolve(__dirname, 'src'),
-      server: path.resolve(__dirname, 'server'),
     },
   },
 })

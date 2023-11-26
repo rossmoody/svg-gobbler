@@ -10,7 +10,7 @@ export const PreviewReact = () => {
   const { state, dispatch } = useDetails()
   const { config, result } = state.preview.svgr
   const { text, copyToClipboard } = useClipboard()
-  useSvgr()
+  const { loading } = useSvgr()
 
   const handleBooleanChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, checked } = e.target
@@ -26,15 +26,38 @@ export const PreviewReact = () => {
       <Button size="xs" className="absolute right-4 top-4 z-10" onClick={handleCopy}>
         {text}
       </Button>
-      <CodeMirror
-        readOnly
-        value={result}
-        theme={basicLight}
-        extensions={[javascript(), EditorView.lineWrapping]}
-        className="cm-padding-fix h-1/2"
-        basicSetup={{ highlightActiveLine: false }}
-      />
-      <div className="h-1/2 overflow-auto border-t p-4">
+      {!loading && (
+        <CodeMirror
+          readOnly
+          value={result}
+          theme={basicLight}
+          extensions={[javascript(), EditorView.lineWrapping]}
+          className="cm-padding-fix h-1/2"
+          basicSetup={{ highlightActiveLine: false }}
+        />
+      )}
+      {loading && (
+        <div className="flex h-1/2 items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" height={60}>
+            <path
+              fill="rgb(220, 38, 38)"
+              d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+            >
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                dur="1s"
+                from="0 50 50"
+                to="360 50 50"
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+        </div>
+      )}
+
+      <div className="h-1/2 shrink-0 overflow-auto border-t p-4">
         <header className="mb-4">
           <h2 className="mt-2 text-sm font-medium">SVGR Options</h2>
         </header>

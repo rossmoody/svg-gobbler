@@ -7,7 +7,7 @@
 This extension is available on:
 
 - [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
-- [Firefox Addon Marketplace (v3 version)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
+- [Firefox Addon Marketplace (locked to v3)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
 ---
 
@@ -16,25 +16,24 @@ optimize, download, copy, edit, or export.
 
 ### Find SVGs
 
-- Gathers SVGs by various placement methods (`base64`|`background src`)
-- Handle CORs restricted SVGs
-- Quickly find, view, organize, and navigate SVGs from a page
-- See the status and reasoning for requests that don't succed
-- View links and where they redirect to before navigating
+- Gathers SVGs from a tab by various placement methods like `base64` or `background src`
+- Quickly find, view, organize, and refine SVGs from a page
+- Handle CORs restricted SVGs from a page
+- Find individual sprite SVG instances
 
 ### Organize SVGs
 
 - Group and categorize SVGs by their primary domain or custom collection name
-- Move, copy, duplicate, and optimize multiple SVGs
+- Move, copy, duplicate, and optimize icons before sharing
 - Save and store a set of uploaded SVGs for optimization
 
 ### Optimize SVGs
 
-- Copy SVGs to clipboard
-- Download SVGs to computer
-- Transform SVGs into minified Data URIs
-- Transform SVGs into React components with SVGR
-- Optimize SVGs with SVGO
+- Copy SVGs to clipboard for immediate use
+- Download SVGs to your computer
+- Data Conversion: Transform SVGs into minified Data URIs
+- React Integration: Transform SVGs into React components with SVGR
+- Optimize and minify SVGs with SVGO
 
 ---
 
@@ -74,8 +73,26 @@ When you make changes in src the background script and any content script will r
 
 ### 4. Start the server
 
-You'll need to start up the server to make some fetch calls related to Node processes. In a separate
-terminal session run:
+For a majority of the functionality you won't need a server. If you want to make some local fetch
+calls related to Node processes in a separate terminal session cd into the `server` directory.
+
+```bash
+cd server
+```
+
+Install the necessary dependencies
+
+```bash
+yarn
+```
+
+From this directory, compile the server function to the `dist` folder.
+
+```bash
+yarn build
+```
+
+In a separate terminal session serve the function on a local server.
 
 ```bash
 yarn serve
@@ -103,7 +120,7 @@ This project benefits from some incredibly talented folks.
 - [Radix UI](https://www.radix-ui.com/): Accessible component library primitives
 - [JSZip](https://stuk.github.io/jszip/): Zipping files for download
 - [Mini SVG Data URI](https://github.com/tigt/mini-svg-data-uri): Minify SVG data URIs
-- [React Router](https://reactrouter.com/en/main): App routes
+- [React Router](https://reactrouter.com/en/main): App routing
 
 ### Open source
 

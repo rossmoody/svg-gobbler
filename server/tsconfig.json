@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "outDir": "dist",
+    "jsx": "react"
+  },
+  "include": ["index.ts"],
+  "exclude": ["node_modules"]
+}

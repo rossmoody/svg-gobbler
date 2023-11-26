@@ -1,25 +1,20 @@
-import type { Config, State } from '@svgr/core'
-import { useEffect } from 'react'
-import { serverEndpoint } from 'server/config'
+import { useEffect, useState } from 'react'
+import { serverEndpoint } from 'src/constants/server-config'
 import { useDetails } from 'src/providers'
 import { logger } from 'src/utils/logger'
-
-export type SvgrMessage = {
-  svg: string
-  config: Config
-  state: State
-}
+import { SvgrMessage } from '../../../../server/index'
 
 export const useSvgr = () => {
+  const [loading, setLoading] = useState(false)
+
   const {
     state: { currentString, preview },
     dispatch,
   } = useDetails()
 
   useEffect(() => {
+    setLoading(true)
     ;(async () => {
-      const route = `${serverEndpoint.base}/svgr`
-
       const message: SvgrMessage = {
         svg: currentString,
         config: preview.svgr.config,
@@ -27,7 +22,7 @@ export const useSvgr = () => {
       }
 
       try {
-        const response = await fetch(route, {
+        const response = await fetch(serverEndpoint.svgr, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(message),
@@ -36,7 +31,12 @@ export const useSvgr = () => {
         dispatch({ type: 'set-svgr-result', payload: result })
       } catch (error) {
         logger.error(error)
+        dispatch({ type: 'set-svgr-result', payload: '😥 Error creating the SVGR component' })
       }
+
+      setLoading(false)
     })()
   }, [currentString, dispatch, preview.svgr.config, preview.svgr.state])
+
+  return { loading }
 }
