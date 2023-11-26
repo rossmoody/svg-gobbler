@@ -6,8 +6,6 @@ import { CardProps } from '.'
  * Conditionally renders a cors protected image element or the original svg string as html.
  */
 export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
-  const hasViewBox = data.asElement?.getAttribute('viewBox')
-
   if (data.corsRestricted) {
     return (
       <img
@@ -20,10 +18,9 @@ export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
   return (
     <span
       dangerouslySetInnerHTML={{ __html: data.presentationSvg }}
-      className={clsx({
-        'flex h-full items-center justify-center': hasViewBox,
-        '[& > svg]:absolute [& > svg]:inset-0 [& > svg]:overflow-visible': !hasViewBox,
-      })}
+      className={clsx(
+        '[& > svg]:absolute [& > svg]:inset-0 [& > svg]:inline-block relative inline-block w-full overflow-hidden pb-[100%] align-top',
+      )}
     />
   )
 }

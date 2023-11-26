@@ -18,8 +18,8 @@ export const SizeSelect = () => {
 
   function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const view = { ...state.view, size: Number(e.target.value) }
-    StorageUtils.setStorageData('view', view)
     dispatch({ type: 'set-view', payload: view })
+    StorageUtils.setStorageData('view', view)
   }
 
   return (
