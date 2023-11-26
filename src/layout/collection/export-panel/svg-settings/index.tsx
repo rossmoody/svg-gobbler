@@ -50,8 +50,8 @@ export const SvgSettings = () => {
           </label>
         </div>
         <div>
-          <div className="group mt-2 flex items-center gap-1">
-            <label htmlFor="float-precision" className="export-label mb-1">
+          <div className="group mb-1 mt-2 flex items-center gap-1">
+            <label htmlFor="float-precision" className="export-label">
               Floating precision
             </label>
             <HelpIcon content="Precision of floating point numbers. Will be passed to each plugin that supports this param." />

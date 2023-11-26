@@ -6,10 +6,6 @@ import { links } from 'src/constants/links'
 export const ReviewModal = () => {
   const [open, setOpen] = useState(false)
 
-  const webstoreLink = () => {
-    return navigator.userAgent.includes('Firefox') ? links.firefoxWebstore : links.chromeWebstore
-  }
-
   return (
     <Fragment>
       <button onClick={() => setOpen(true)} className="collection-item">
@@ -18,17 +14,20 @@ export const ReviewModal = () => {
       </button>
       <Modal open={open} setOpen={setOpen}>
         <Modal.Header>Leave a review</Modal.Header>
-        <p className="text-muted text-base">
-          SVG Gobbler is free, open-source, and runs entirely on positive vibes. If you are
-          experiencing a problem, please raise an issue to be fixed before submitting a bad review.
-          If you’re having a great experience, then by all means, let it rain.
-        </p>
+        <div className="text-muted flex flex-col gap-4 text-base">
+          <p>
+            SVG Gobbler is free, open-source, and runs entirely on positive vibes. If you are
+            experiencing a problem or want missing functionality, please raise an issue to be fixed
+            before submitting a bad review.
+          </p>
+          <p>If you’re having a great experience, then by all means, let it rain.</p>
+        </div>
         <Modal.Footer>
           <Button
             size="lg"
             type="submit"
             onClick={() => {
-              window.open(webstoreLink(), '_blank')
+              window.open(links.chromeWebstore, '_blank')
               setOpen(false)
             }}
           >
