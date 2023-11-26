@@ -28,7 +28,7 @@ export const DataURI = () => {
   }, [state.currentString])
 
   return (
-    <div className="h-full overflow-auto px-4 pb-12 pt-6 transition-all duration-500 ease-in-out">
+    <div className="px-4 py-6 transition-all duration-500 ease-in-out">
       {uriData.map((item) => (
         <section key={item.name} className="group mb-6">
           <span className="label">

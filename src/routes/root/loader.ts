@@ -15,19 +15,17 @@ import { SvgUtils } from 'src/utils/svg-utils'
 export async function rootLoader() {
   return defer({
     collectionId: (async () => {
-      const collection: Collection = {
-        id: nanoid(),
-        name: 'Collection',
-        origin: '',
-      }
-
       // Get all collections from storage for sidenav
       const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
-      // If message connection is successful, process the response, add the collection to storage
       try {
         // Get the strings from the client page
         const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
+
+        // On a settings page and has a collection, send to the first collection
+        if (!data.origin && prevCollections.length) {
+          throw new Error('Browser settings page, send to first collection')
+        }
 
         // Process the strings as page data with ids
         const pageData: PageData = {
@@ -45,22 +43,26 @@ export async function rootLoader() {
           id: item.id,
         }))
 
-        collection.name = data.host
-        collection.origin = data.origin
+        const collection: Collection = {
+          id: nanoid(),
+          name: data.host,
+          origin: data.origin,
+        }
+
         await StorageUtils.setPageData(collection.id, pageData)
         await StorageUtils.setStorageData('collections', [collection, ...prevCollections])
 
         // Initialize the plugins for the export panel if it doesn't exist
         const plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
         if (!plugins) await StorageUtils.setStorageData('plugins', defaultSvgoPlugins)
+
+        return collection.id
       } catch (error) {
-        // The listener has been removed, so the background script is no longer listening
-        // This fires when the extension is reloaded as we're managing all routes in memory
-        // It's pretty hard to get here without the browser extension
+        // This catch is reached more than you'd think
+        // 1. The listener has been removed, so the background script is no longer listening on refresh
+        // 2. Send the user to the first collection if they invoke on a browser system page
         return prevCollections[0].id
       }
-
-      return collection.id
     })(),
   })
 }

@@ -1,109 +1,128 @@
 # 👋 SVG Gobbler
 
-> The Chrome storage can handle roughly 8,000 svgs at 10mb storage limit. Store collections as a Map
+![SVG Gobbler Graphic!](./assets/local/read-me.png)
 
-Download this extension on the
-[Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
-or in the [Add-On Marketplace](https://addons.mozilla.org/firefox/addon/svg-gobbler/) for Firefox.
+## 🚀 Where to install
 
-SVG Gobbler is a browser extension that finds SVG content in your current window and lets you
-download, copy to clipboard, or export as a PNG.
+This extension is available on:
 
-## Build
+- [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
+- [Firefox Addon Marketplace](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
+- [Microsoft Edge Add-ons Marketplace](#)
 
-Currently, if you would like to modify this extension you will need to install it manually. Before
-making edits you will need to build it locally and side load SVG Gobbler as a developer extension to
-test any changes.
+---
 
-> This extension is in a strange middle ground with the v3 manifest updates coming from Chrome.
-> Firefox extension is pinned to version 3.17 for Firefox but the extension is being refactored to
-> comply with v3 Manifest changes for Chrome.
+SVG Gobbler is a browser extension that finds the SVG content in your current tab and lets you
+optimize, download, copy, edit, or export.
 
-### Installation
+### Find SVGs
 
-#### 1. Clone the repo
+- Gathers SVGs by various placement methods (`base64`|`background src`)
+- Handle CORs restricted SVGs
+- Quickly find, view, organize, and navigate SVGs from a page
+- See the status and reasoning for requests that don't succed
+- View links and where they redirect to before navigating
+
+### Organize SVGs
+
+- Group and categorize SVGs by their primary domain or custom collection name
+- Move, copy, duplicate, and optimize multiple SVGs
+- Save and store a set of uploaded SVGs for optimization
+
+### Optimize SVGs
+
+- Copy SVGs to clipboard
+- Download SVGs to computer
+- Transform SVGs into minified Data URIs
+- Transform SVGs into React components with SVGR
+- Optimize SVGs with SVGO
+
+---
+
+## Local development
+
+Before making edits you will need to build the extension locally and side load it as a developer
+extension to test any changes.
+
+> At the moment, v3 and v2 manifest API conflicts are making things difficult. The Rollup config
+> programmatically compiles two different versions depending on the manifest. For Chrome, the v3
+> manifest in the `dist` folder is the one to load. For Firefox, you will need to build and load the
+> zipped release version with `yarn release`.
+
+### 1. Clone the repo
 
 Clone the repo to your local machine and navigate into the root directory.
 
-```bash
+```shell
 cd svg-gobbler
 ```
 
-#### 2. Install dependencies
+### 2. Install dependencies
 
-SVG Gobbler uses `yarn` to build the necessary dependencies.
+Link Roamer uses yarn to build the necessary dependencies.
 
-```bash
+```shell
 yarn
 ```
 
-#### 3. Bundle the extension
+### 3. Start and watch a build
 
-Run `yarn start` to build files into the `dist` folder and watch source files for changes.
+For development with hot reloading use Vite:
 
 ```bash
-yarn start
+yarn dev
 ```
 
-#### 4. Side load extension
+This will build to the `dist` folder. To load the extension, open the Extensions Dashboard, enable
+"Developer mode", click "Load unpacked", and choose the `dist` folder.
 
-#### Chrome
+When you make changes in src the background script and any content script will reload automatically.
 
-1. In the address bar, navigate to `chrome://extensions`
-1. In the top right of the screen, flip the toggle to enable `Developer Mode`
-1. Click the button to `Load unpacked` and select the `dist` folder inside the SVG Gobbler repo
+### 4. Start the server
 
-Once this is complete you can start hacking. Editing content in the `src` directory will
-automatically build and update the extension folder which will feed the extension in the browser the
-latest code.
+You'll need to start up the server to make some fetch calls related to Node processes. In a separate
+terminal session run:
 
-## 🎉 How to use the extension
+```bash
+yarn serve
+```
 
-Click the SVG Gobbler extension icon to search the current page for SVGs.
+This will startup the server and restart it any time a change is recompiled.
 
-Unique attributes for each SVG element will be shown within the card. The attributes currently being
-shown are:
+---
 
-1. If the SVG is placed as a:
+## About
 
-   - background image
-   - image source
-   - inline svg
-   - object data
-   - sprite
-   - symbol
+5 versions ago, this started as a pet project to improve the
+[SVG Crowbar](https://github.com/nytimes/svg-crowbar) tool that is no longer being maintained by NY
+Times.
 
-2. The size of the SVG in the DOM
+### Powered by
+
+This project benefits from some incredibly talented folks.
+
+- [Vite](https://vitejs.dev/): Frontend tooling and build processes
+- [Tailwind CSS](https://tailwindcss.com/): CSS styling around the app
+- [SVGR](https://react-svgr.com/): SVG to React component transformation
+- [SVGO](https://github.com/svg/svgo): SVG optimization scripts
+- [Codemirror](https://codemirror.net/): Extensible code editor
+- [Radix UI](https://www.radix-ui.com/): Accessible component library primitives
+- [JSZip](https://stuk.github.io/jszip/): Zipping files for download
+- [Mini SVG Data URI](https://github.com/tigt/mini-svg-data-uri): Minify SVG data URIs
+
+### Open source
+
+This extension is open source and doesn't collect any information from users. It's free, and made
+available because I enjoy making useful things for the web. Please consider contributing with an
+idea, bug fix, or feature request.
+
+### Contribute
+
+Feel free to submit a pull request if you've made an improvement of some kind. This is an open
+source project and any help is very appreciated.
 
 ---
 
 ## More apps by me
 
 I like making things. [Check out what I'm up to lately](https://rossmoody.com).
-
----
-
-## Contribute
-
-Feel free to submit a pull request if you've made an improvement of some kind. This is an open
-source project and any help is very appreciated.
-
-### Friends
-
-TODO: Update this to be current
-
-This project leverages code and value from some incredibly talented folks. Most notably and
-predominantly are:
-
-- Design System Toolkit: [Chakra UI](https://chakra-ui.com/)
-- React Component SVG Transformation: [SVGR](https://react-svgr.com/)
-- SVG Optimization: [SVGO](https://github.com/svg/svgo)
-
-### About
-
-TODO: Show all the various versions over the years
-
-This started as a pet project to improve the [SVG Crowbar](http://nytimes.github.com/svg-crowbar/)
-tool that is no longer being maintained by NY Times.
-
-The codebase has been completely rewritten 4 times.

@@ -35,7 +35,7 @@ export const PreviewReact = () => {
         className="cm-padding-fix h-1/2"
         basicSetup={{ highlightActiveLine: false }}
       />
-      <div className="h-1/2 overflow-auto border-t p-4 pb-16">
+      <div className="h-1/2 overflow-auto border-t p-4">
         <header className="mb-4">
           <h2 className="mt-2 text-sm font-medium">SVGR Options</h2>
         </header>

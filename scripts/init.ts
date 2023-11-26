@@ -16,7 +16,7 @@ class Init {
     const onClickHandler = async () => {
       let data = {
         data: [],
-        host: 'Settings',
+        host: 'Collection',
         origin: '',
       } as BackgroundMessage['data']
 
@@ -27,12 +27,14 @@ class Init {
         data = await Chrome.executeScript(activeTab.id!, gatherPageData)
       }
 
-      // Open the SVG Gobbler page
-      await Chrome.createNewTab()
+      // Add a listener
       chrome.runtime.onMessage.addListener(function listener(_, __, sendResponse) {
         sendResponse({ data })
         chrome.runtime.onMessage.removeListener(listener)
       })
+
+      // Open the SVG Gobbler page
+      await Chrome.createNewTab()
     }
 
     chrome.action.onClicked.addListener(onClickHandler)
