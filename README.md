@@ -44,11 +44,6 @@ optimize, download, copy, edit, or export.
 Before making edits you will need to build the extension locally and side load it as a developer
 extension to test any changes.
 
-> At the moment, v3 and v2 manifest API conflicts are making things difficult. The Rollup config
-> programmatically compiles two different versions depending on the manifest. For Chrome, the v3
-> manifest in the `dist` folder is the one to load. For Firefox, you will need to build and load the
-> zipped release version with `yarn release`.
-
 ### 1. Clone the repo
 
 Clone the repo to your local machine and navigate into the root directory.
@@ -59,7 +54,7 @@ cd svg-gobbler
 
 ### 2. Install dependencies
 
-Link Roamer uses yarn to build the necessary dependencies.
+SVG Gobbler uses yarn to build the necessary dependencies.
 
 ```shell
 yarn
