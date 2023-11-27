@@ -49,6 +49,30 @@
   @apply scrollbar-thin scrollbar-thumb-gray-600;
 }
 
+.input-color {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  @apply h-8 w-8;
+}
+
+.input-color::-webkit-color-swatch {
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+  @apply rounded-lg shadow-md;
+}
+
+.input-color::-webkit-color-swatch-wrapper {
+  border: 1px solid rgba(209, 209, 209, 0.25);
+  padding: 0;
+  @apply rounded-lg;
+}
+
 /* Fix for JSX preview */
 .cm-padding-fix .cm-scroller {
   padding: 0;

@@ -27,7 +27,7 @@ export const PreviewSidebar = () => {
           </Tabs.Panel>
         </Tabs.Panels>
       </Tabs.Group>
-      <div className="absolute inset-y-0 left-0 z-50 w-[1px] cursor-ew-resize hover:bg-gray-200" />
+      <div className="absolute inset-y-0 left-0 z-50 w-px cursor-ew-resize" />
       <div className="absolute inset-y-1/2 -left-2 z-50 h-12 w-1 cursor-ew-resize rounded bg-gray-500/50" />
     </aside>
   )

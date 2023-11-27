@@ -34,7 +34,7 @@ export const DataURI = () => {
           <span className="label">
             {item.name} - <span className="text-muted">{SvgUtils.getPrettyBytes(item.value)}</span>
           </span>
-          <div className="relative rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/70">
+          <div className="relative rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700/50 dark:bg-gray-800/50">
             <Button
               size="xs"
               onClick={() => copyToClipboard(item.value)}

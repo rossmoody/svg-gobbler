@@ -6,7 +6,7 @@ import { optimize, type Config as SvgoConfig } from 'svgo'
 /**
  * This is similar in many ways to ExportState. The primary reason we don't colocate them
  * is this initializes empty because of the editable code area and doesn't facilitate optimizing
- * any more than one svg so much of the batch export is unnecessary (anything with png).
+ * any more than one svg so much of the batch export is unnecessary
  */
 export type DetailsState = {
   id: string // The id of the svg
@@ -22,6 +22,9 @@ export type DetailsState = {
     }
   }
   preview: {
+    svg: {
+      background: string
+    }
     svgr: {
       result: string
       config: Config
@@ -46,6 +49,7 @@ export type DetailsAction =
   | { type: 'set-svgr-config'; payload: Config }
   | { type: 'set-svgr-config-value'; payload: { key: string; value: boolean | string } }
   | { type: 'set-svgr-state-name'; payload: string }
+  | { type: 'set-preview-background'; payload: string }
 
 export const initDetailsState: DetailsState = {
   id: '',
@@ -66,6 +70,9 @@ export const initDetailsState: DetailsState = {
     },
   },
   preview: {
+    svg: {
+      background: '',
+    },
     svgr: {
       result: '',
       config: {
@@ -80,7 +87,7 @@ export const initDetailsState: DetailsState = {
         icon: false, // Not needed because svg is editable in panel
         prettier: false, // Problem with prettier modules but needed as false to work
         exportType: 'default', // This is silly. Does an alias of the same named export.
-        namedExport: '', // Unused because it's silly
+        namedExport: '',
         plugins: ['@svgr/plugin-jsx'],
       },
       state: {
@@ -92,6 +99,19 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'set-preview-background': {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          svg: {
+            ...state.preview.svg,
+            background: action.payload,
+          },
+        },
+      }
+    }
+
     case 'set-svgr-state-name': {
       return {
         ...state,

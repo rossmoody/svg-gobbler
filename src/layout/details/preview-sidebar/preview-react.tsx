@@ -1,6 +1,7 @@
 import { javascript } from '@codemirror/lang-javascript'
-import { basicLight } from '@uiw/codemirror-theme-basic'
+import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
 import CodeMirror, { EditorView } from '@uiw/react-codemirror'
+import { debounce } from 'lodash'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
@@ -17,12 +18,20 @@ export const PreviewReact = () => {
     dispatch({ type: 'set-svgr-config-value', payload: { key: id, value: checked } })
   }
 
+  const debouncedFunction = debounce((payload) => {
+    dispatch({ type: 'set-svgr-state-name', payload })
+  }, 700)
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedFunction(e.target.value)
+  }
+
   const handleCopy = () => {
     copyToClipboard(result)
   }
 
   return (
-    <div className="relative h-full">
+    <div className="relative h-full border-l border-slate-500/50">
       <Button size="xs" className="absolute right-4 top-4 z-10" onClick={handleCopy}>
         {text}
       </Button>
@@ -30,7 +39,7 @@ export const PreviewReact = () => {
         <CodeMirror
           readOnly
           value={result}
-          theme={basicLight}
+          theme={tokyoNightStorm}
           extensions={[javascript(), EditorView.lineWrapping]}
           className="cm-padding-fix h-1/2"
           basicSetup={{ highlightActiveLine: false }}
@@ -57,10 +66,26 @@ export const PreviewReact = () => {
         </div>
       )}
 
-      <div className="h-1/2 shrink-0 overflow-auto border-t p-4">
+      <div className="h-1/2 shrink-0 overflow-auto p-4">
         <header className="mb-4">
           <h2 className="mt-2 text-sm font-medium">SVGR Options</h2>
         </header>
+
+        <div className="mt-6 flex flex-col gap-2">
+          <div>
+            <label htmlFor="dimensions" className="export-label">
+              Component name
+            </label>
+            <span className="text-muted block pt-1">The name of the exported component</span>
+          </div>
+          <input
+            type="text"
+            className="input"
+            id="name"
+            defaultValue={state.preview.svgr.state.componentName}
+            onChange={handleNameChange}
+          />
+        </div>
 
         <div className="mt-6 flex gap-2">
           <input
@@ -75,7 +100,7 @@ export const PreviewReact = () => {
               Dimensions
             </label>
             <span className="text-muted block pt-1">
-              Keep width and height attributes from the root SVG tag.
+              Keep width and height attributes from the root SVG tag
             </span>
           </div>
         </div>
@@ -92,7 +117,7 @@ export const PreviewReact = () => {
             <label htmlFor="ref" className="export-label">
               Ref
             </label>
-            <span className="text-muted block pt-1">Supply a forward ref to the root SVG tag.</span>
+            <span className="text-muted block pt-1">Supply a forward ref to the root SVG tag</span>
           </div>
         </div>
 
