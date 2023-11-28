@@ -24,7 +24,7 @@ export async function rootLoader() {
 
         // On a settings page and has a collection, send to the first collection
         if (!data.origin && prevCollections.length) {
-          throw new Error('Browser settings page, send to first collection')
+          throw new Error('Browser system page, send to first collection')
         }
 
         // Process the strings as page data with ids

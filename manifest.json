@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SVG Gobbler",
-  "description": "Download and optimize icons, logos, and vector SVGs.",
+  "description": "Organize, optimize, download, copy, edit, and export SVGs",
   "version": "5.0.0",
   "homepage_url": "https://github.com/rossmoody/svg-gobbler",
   "permissions": ["activeTab", "scripting", "storage"],

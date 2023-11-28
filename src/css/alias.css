@@ -9,3 +9,12 @@
 .surface {
   @apply bg-white transition-colors duration-300 ease-in-out dark:bg-gray-900;
 }
+
+.focus {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
+  focus-visible:outline-red-600;
+}
+
+.anchor {
+  @apply cursor-pointer text-red-600 underline hover:text-red-500;
+}

@@ -28,9 +28,11 @@ class Init {
       }
 
       // Add a listener
-      chrome.runtime.onMessage.addListener(function listener(_, __, sendResponse) {
-        sendResponse({ data })
-        chrome.runtime.onMessage.removeListener(listener)
+      chrome.runtime.onMessage.addListener(function listener(req, __, sendResponse) {
+        if (req === 'gobble') {
+          sendResponse({ data })
+          chrome.runtime.onMessage.removeListener(listener)
+        }
       })
 
       // Open the SVG Gobbler page
@@ -39,6 +41,27 @@ class Init {
 
     chrome.action.onClicked.addListener(onClickHandler)
   }
+
+  /**
+   * Launches the extension from the onboarding page.
+   */
+  launchExtensionFromOnboarding() {
+    chrome.runtime.onMessage.addListener(async function onboardingListener(req) {
+      const { type, data } = req
+
+      if (type === 'launch-svg-gobbler-from-onboarding') {
+        chrome.runtime.onMessage.addListener(function listener(req, __, sendResponse) {
+          if (req === 'gobble') {
+            sendResponse({ data })
+            chrome.runtime.onMessage.removeListener(listener)
+          }
+        })
+
+        await Chrome.createNewTab()
+      }
+    })
+  }
+
   /**
    * If the extension is installed for the first time, open the onboarding page.
    */

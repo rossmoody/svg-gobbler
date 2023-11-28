@@ -1252,20 +1252,6 @@
     "@codemirror/state" "^6.0.0"
     "@codemirror/view" "^6.0.0"
 
-"@uiw/codemirror-theme-basic@^4.21.20":
-  version "4.21.20"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-basic/-/codemirror-theme-basic-4.21.20.tgz#e9e42777cd6911852b39ec009d9ea703956efda6"
-  integrity sha512-YNyiiUItsuG2PuyNirlDciRfm5JIlvO0Z79KmnZUpv9JDI96Q4h04iNVHhK8kNEUcUIi3SMCaEOwg+p7ZeW2AQ==
-  dependencies:
-    "@uiw/codemirror-themes" "4.21.20"
-
-"@uiw/codemirror-theme-tokyo-night-day@^4.21.20":
-  version "4.21.20"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-tokyo-night-day/-/codemirror-theme-tokyo-night-day-4.21.20.tgz#81f99e5eb8bdc17bef4e418ef1a966611dd0705f"
-  integrity sha512-vyNkvYg+ttw4Bb3WBOnugcYRY+I6kaGppVN6yzhfIIHSKJg3Qa6MWU3CX4jkEt93h06AuZKJQEtr0tGu7CahwQ==
-  dependencies:
-    "@uiw/codemirror-themes" "4.21.20"
-
 "@uiw/codemirror-theme-tokyo-night-storm@^4.21.20":
   version "4.21.20"
   resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-tokyo-night-storm/-/codemirror-theme-tokyo-night-storm-4.21.20.tgz#28ba0b4fa6572affbc63bdd323cf49a9c2f6bb5a"

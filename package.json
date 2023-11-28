@@ -2,7 +2,7 @@
   "name": "svg-gobbler",
   "private": true,
   "version": "5.0.0",
-  "description": "Download and optimize icons, logos, and vector SVGs.",
+  "description": "Organize, optimize, download, copy, edit, and export SVGs.",
   "author": "Ross Moody<ross@rossmoody.com>",
   "license": "apache-2.0",
   "type": "module",
