@@ -104,7 +104,7 @@ This will startup the server and restart it any time a change is recompiled.
 
 ## About
 
-5 versions ago, this started as a pet project to improve the
+5 versions and 5+ years ago, this started as a pet project to improve the
 [SVG Crowbar](https://github.com/nytimes/svg-crowbar) tool that is no longer being maintained by NY
 Times.
 
@@ -113,6 +113,7 @@ Times.
 This project benefits from some incredibly talented folks.
 
 - [Vite](https://vitejs.dev/): Frontend tooling and build processes
+- [CRXJS](https://github.com/crxjs/chrome-extension-tools): Chrome extension build automation
 - [Tailwind CSS](https://tailwindcss.com/): CSS styling around the app
 - [SVGR](https://react-svgr.com/): SVG to React component transformation
 - [SVGO](https://github.com/svg/svgo): SVG optimization scripts
@@ -127,11 +128,6 @@ This project benefits from some incredibly talented folks.
 This extension is open source and doesn't collect any information from users. It's free, and made
 available because I enjoy making useful things for the web. Please consider contributing with an
 idea, bug fix, or feature request.
-
-### Contribute
-
-Feel free to submit a pull request if you've made an improvement of some kind. This is an open
-source project and any help is very appreciated.
 
 ---
 
