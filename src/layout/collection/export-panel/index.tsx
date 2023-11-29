@@ -3,8 +3,10 @@ import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
 import { Footer } from './footer'
 import { Header } from './header'
+import { JpegSettings } from './jpeg-settings'
 import { PngSettings } from './png-settings'
 import { SvgSettings } from './svg-settings'
+import { WebPSettings } from './webp-settings'
 
 const transitionConfig = {
   enter: 'transition-all duration-500 ease-in',
@@ -83,6 +85,12 @@ export const ExportPanel = () => {
                 </Transition>
                 <Transition as="div" show={exportState.fileType === 'png'} {...transitionConfig}>
                   <PngSettings />
+                </Transition>
+                <Transition as="div" show={exportState.fileType === 'webp'} {...transitionConfig}>
+                  <WebPSettings />
+                </Transition>
+                <Transition as="div" show={exportState.fileType === 'jpeg'} {...transitionConfig}>
+                  <JpegSettings />
                 </Transition>
               </div>
             </main>

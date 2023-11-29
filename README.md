@@ -16,24 +16,22 @@ optimize, download, copy, edit, or export.
 
 ### Find SVGs
 
-- Gathers SVGs from a tab by various placement methods like `base64` or `background src`
-- Quickly find, view, organize, and refine SVGs from a page
+- Quickly find SVGs from a site by various placement methods like `base64` or `background src`
 - Handle CORs restricted SVGs from a page
 - Find individual sprite SVG instances
+
+### Export SVGs
+
+- Export as SVG, PNG, WEBP, JPEG and various other formats
+- Transform SVGs into minified Data URIs
+- Transform SVGs into React components with SVGR
+- Optimize and minify SVGs with SVGO
 
 ### Organize SVGs
 
 - Group and categorize SVGs by their primary domain or custom collection name
 - Move, copy, duplicate, and optimize icons before sharing
 - Save and store a set of uploaded SVGs for optimization
-
-### Optimize SVGs
-
-- Copy SVGs to clipboard for immediate use
-- Download SVGs to your computer
-- Data Conversion: Transform SVGs into minified Data URIs
-- React Integration: Transform SVGs into React components with SVGR
-- Optimize and minify SVGs with SVGO
 
 ---
 

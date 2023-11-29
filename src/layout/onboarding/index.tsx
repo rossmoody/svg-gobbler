@@ -99,7 +99,6 @@ export const OnboardingLayout = () => {
             </div>
           </div>
         </div>
-        G
       </div>
     </div>
   )

@@ -46,7 +46,7 @@ export const SvgSettings = () => {
             onChange={handlePrettifyChange}
           />
           <label htmlFor="prettify" className="export-label">
-            Prettify output
+            Pretty output
           </label>
         </div>
         <div>

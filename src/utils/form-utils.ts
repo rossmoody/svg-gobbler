@@ -1,4 +1,5 @@
 import JSZip from 'jszip'
+import { FileType } from 'src/providers'
 
 /**
  * Utility class for form related operations like upload, download, and copy.
@@ -69,7 +70,7 @@ export class FormUtils {
   /**
    * Copies a given png data url to the clipboard.
    */
-  static async copyPngToClipboard(dataUrl: string) {
+  static async copyImageToClipboard(dataUrl: string) {
     try {
       const blob = await fetch(dataUrl).then((res) => res.blob())
       const item = new ClipboardItem({ [blob.type]: blob })
@@ -110,26 +111,26 @@ export class FormUtils {
   }
 
   /**
-   * Downloads a given PNG data url as a file.
+   * Downloads a given data url as a file.
    */
-  static async downloadPngDataURL(dataUrl: string, baseFileName: string) {
+  static async downloadImageDataUrl(dataUrl: string, baseFileName: string, type: FileType) {
     const blob = await fetch(dataUrl).then((res) => res.blob())
     const blobUrl = URL.createObjectURL(blob)
     const downloadLink = document.createElement('a')
-    downloadLink.download = `${baseFileName}.png`
+    downloadLink.download = `${baseFileName}.${type}`
     downloadLink.href = blobUrl
     downloadLink.click()
   }
 
   /**
-   * Downloads a given array of PNG data urls as a zip file.
+   * Downloads a given array of data urls as a zip file.
    */
-  static async downloadPngDataURLsZip(dataUrls: string[], baseFileName: string) {
+  static async downloadDataUrlsZip(dataUrls: string[], baseFileName: string, type: FileType) {
     const zip = new JSZip()
 
     dataUrls.forEach((dataUrl, index) => {
       const base64Data = dataUrl.split(',')[1]
-      zip.file(`${baseFileName}-${index}.png`, base64Data, { base64: true })
+      zip.file(`${baseFileName}-${index}.${type}`, base64Data, { base64: true })
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
@@ -141,14 +142,14 @@ export class FormUtils {
   }
 
   /**
-   * Downloads a given array of PNG data urls as a file or zip file depending on the number of urls.
+   * Downloads a given array of data urls as a file or zip file depending on the number of urls.
    */
-  static downloadPngContent(dataUrls: string[], baseFileName: string) {
+  static downloadImageContent(dataUrls: string[], baseFileName: string, type: FileType) {
     if (dataUrls.length === 1) {
-      return this.downloadPngDataURL(dataUrls[0], baseFileName)
+      return this.downloadImageDataUrl(dataUrls[0], baseFileName, type)
     }
 
-    this.downloadPngDataURLsZip(dataUrls, baseFileName)
+    this.downloadDataUrlsZip(dataUrls, baseFileName, type)
   }
 
   /**
@@ -163,9 +164,14 @@ export class FormUtils {
   }
 
   /**
-   * Creates a PNG data url from a given SVG string.
+   * Creates a data url from a given SVG string.
    */
-  static svgToPngDataURL(svgString: string, size: number): Promise<string> {
+  static convertToDataUrl(
+    svgString: string,
+    size: number,
+    type: 'image/jpeg' | 'image/png' | 'image/webp',
+    quality?: number,
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       const sanitizedSvg = this.buildSvgElementFromString(svgString)
       const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml;charset=utf-8' })
@@ -194,9 +200,15 @@ export class FormUtils {
           return
         }
 
+        // Fill background with white for JPEGs
+        if (type === 'image/jpeg') {
+          ctx.fillStyle = '#FFF'
+          ctx.fillRect(0, 0, width, height)
+        }
+
         ctx.drawImage(img, 0, 0, width, height)
 
-        const dataURL = canvas.toDataURL('image/png')
+        const dataURL = canvas.toDataURL(type, quality)
         URL.revokeObjectURL(url)
         resolve(dataURL)
       }

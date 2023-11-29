@@ -21,7 +21,17 @@ export const Footer = () => {
       }
 
       case 'png': {
-        FormUtils.copyPngToClipboard(results)
+        FormUtils.copyImageToClipboard(results)
+        break
+      }
+
+      case 'webp': {
+        FormUtils.copyImageToClipboard(results)
+        break
+      }
+
+      case 'jpeg': {
+        FormUtils.copyImageToClipboard(results)
         break
       }
     }
@@ -39,7 +49,17 @@ export const Footer = () => {
       }
 
       case 'png': {
-        FormUtils.downloadPngContent(results, exportState.filename)
+        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType)
+        break
+      }
+
+      case 'webp': {
+        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType)
+        break
+      }
+
+      case 'jpeg': {
+        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType)
         break
       }
     }

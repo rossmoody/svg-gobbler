@@ -7,23 +7,23 @@ import { optimize } from 'svgo/dist/svgo.browser'
 import { Svg } from '../../../../scripts/svg-classes/svg'
 
 export const useExportActions = () => {
-  const {
-    state: { settings, fileType },
-  } = useExport()
+  const { state } = useExport()
 
   const svgoConfig: Config = {
     multipass: true,
-    path: settings.svg.path,
-    plugins: settings.svg.svgoPlugins,
-    floatPrecision: settings.svg.floatPrecision,
+    path: state.settings.svg.path,
+    plugins: state.settings.svg.svgoPlugins,
+    floatPrecision: state.settings.svg.floatPrecision,
     js2svg: {
-      pretty: settings.svg.prettify,
+      pretty: state.settings.svg.prettify,
       indent: 2,
     },
   }
 
   const processWithExportConfig = async (svgs: Svg[]) => {
-    switch (fileType) {
+    const { png, jpeg, webp } = state.settings
+
+    switch (state.fileType) {
       case 'svg': {
         return svgs.map((svg) => {
           const { data } = optimize(svg.originalString, svgoConfig)
@@ -33,9 +33,32 @@ export const useExportActions = () => {
 
       case 'png': {
         return await Promise.all(
-          svgs.map((svg) => FormUtils.svgToPngDataURL(svg.presentationSvg, settings.png.size)),
+          svgs.map((svg) => FormUtils.convertToDataUrl(svg.presentationSvg, png.size, 'image/png')),
         ).catch(() => {
           logger.error('Failed to convert SVG to PNG')
+          return ['']
+        })
+      }
+
+      case 'webp': {
+        console.log(webp)
+        return await Promise.all(
+          svgs.map((svg) =>
+            FormUtils.convertToDataUrl(svg.presentationSvg, webp.size, 'image/webp', webp.quality),
+          ),
+        ).catch(() => {
+          logger.error('Failed to convert SVG to WebP')
+          return ['']
+        })
+      }
+
+      case 'jpeg': {
+        return await Promise.all(
+          svgs.map((svg) =>
+            FormUtils.convertToDataUrl(svg.presentationSvg, jpeg.size, 'image/jpeg', jpeg.quality),
+          ),
+        ).catch(() => {
+          logger.error('Failed to convert SVG to JPEG')
           return ['']
         })
       }
