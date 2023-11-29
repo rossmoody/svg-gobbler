@@ -1,6 +1,9 @@
-# 👋 SVG Gobbler
-
-![SVG Gobbler Graphic!](./assets/local/read-me.png)
+<div align="center">
+ <a href="https://svggobbler.com">
+  <img src="assets/local/read-me.png">
+ </a>
+ <br>
+</div>
 
 ## 🚀 Where to install
 
@@ -10,6 +13,8 @@ This extension is available on:
 - [Firefox Addon Marketplace (locked to v3)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
 ---
+
+## Features
 
 SVG Gobbler is a browser extension that finds the SVG content in your current tab and lets you
 optimize, download, copy, edit, or export.

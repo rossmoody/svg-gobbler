@@ -84,6 +84,8 @@ class Init {
           '16': 'assets/dev/16.png',
           '24': 'assets/dev/24.png',
           '32': 'assets/dev/32.png',
+          '48': 'assets/dev/48.png',
+          '64': 'assets/dev/64.png',
         },
       })
     } else {
