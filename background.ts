@@ -1,4 +1,4 @@
-import Init from './scripts/init'
+import { Init } from './scripts/init'
 
 Init.launchOnboardingExperience()
 Init.setExtensionIcons()

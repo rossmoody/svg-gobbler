@@ -6,13 +6,13 @@ import { gatherPageData } from './gather-page-data'
  * Functions related to initializing the extension. This includes setting the
  * extension icons and launching the onboarding experience.
  */
-class Init {
+export class Init {
   /**
    * Initializes SVG Gobbler conditionally based on the type of page the user is
    * currently on. Responsible for getting data from the active tab and sending
    * it to the content script.
    */
-  launchSvgGobbler() {
+  static launchSvgGobbler() {
     const onClickHandler = async () => {
       let data = {
         data: [],
@@ -45,7 +45,7 @@ class Init {
   /**
    * Launches the extension from the onboarding page.
    */
-  launchExtensionFromOnboarding() {
+  static launchExtensionFromOnboarding() {
     chrome.runtime.onMessage.addListener(async function onboardingListener(req) {
       const { type, data } = req
 
@@ -65,7 +65,7 @@ class Init {
   /**
    * If the extension is installed for the first time, open the onboarding page.
    */
-  launchOnboardingExperience() {
+  static launchOnboardingExperience() {
     chrome.runtime.onInstalled.addListener(async (details) => {
       if (details.reason === 'install') {
         await Chrome.createNewTab('onboarding.html')
@@ -76,7 +76,7 @@ class Init {
   /**
    * Load the development icon if the extension is running in development mode.
    */
-  setExtensionIcons() {
+  static setExtensionIcons() {
     if (!('update_url' in chrome.runtime.getManifest())) {
       // The extension is running as an unpacked extension
       chrome.action.setIcon({
@@ -105,5 +105,3 @@ class Init {
     }
   }
 }
-
-export default new Init()
