@@ -71,7 +71,7 @@ export const initDetailsState: DetailsState = {
   },
   preview: {
     svg: {
-      background: '',
+      background: '#FFFFFF',
     },
     svgr: {
       result: '',

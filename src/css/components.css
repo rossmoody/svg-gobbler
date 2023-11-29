@@ -69,7 +69,7 @@
 }
 
 .input-color::-webkit-color-swatch-wrapper {
-  border: 1px solid rgba(209, 209, 209, 0.25);
+  border: 1px solid rgba(209, 209, 209, 0.6);
   padding: 0;
   @apply rounded-lg;
 }
