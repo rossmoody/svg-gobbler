@@ -7,25 +7,16 @@ import {
 import * as ContextMenu from '@radix-ui/react-context-menu'
 import { Fragment, PropsWithChildren } from 'react'
 import type { Svg } from 'scripts/svg-classes/svg'
-import { useCollection } from 'src/providers'
 import { ContextMenuItem } from './context-menu-item'
 import { ContextMenuSubTrigger } from './context-menu-sub-trigger'
+import { useContextActions } from './use-context-actions'
 
 type Props = {
   data: Svg
 }
 
 export const CardContextMenu = ({ data, children }: PropsWithChildren<Props>) => {
-  const { dispatch } = useCollection()
-
-  const duplicateItem = async () => {
-    dispatch({ type: 'duplicate-svg', payload: data })
-    // const pageData = await StorageUtils.getPageData(state.collectionId)
-    // StorageUtils.setPageData(state.collectionId, {
-    //   ...pageData,
-    //   data: SvgUtils.createStorageSvgs(state.data),
-    // })
-  }
+  const actions = useContextActions(data)
 
   if (data.corsRestricted) {
     return <Fragment>{children}</Fragment>
@@ -37,11 +28,11 @@ export const CardContextMenu = ({ data, children }: PropsWithChildren<Props>) =>
       <ContextMenu.Portal>
         <ContextMenu.Content className="context-content">
           <Fragment>
-            <ContextMenuItem onClick={duplicateItem}>
+            <ContextMenuItem onClick={actions.duplicateItem}>
               <DocumentDuplicateIcon className="mr-1.5 h-3.5 w-3.5" />
               Duplicate
             </ContextMenuItem>
-            <ContextMenuItem>
+            <ContextMenuItem onClick={actions.deleteItem}>
               <TrashIcon className="mr-1.5 h-3.5 w-3.5" />
               Delete
             </ContextMenuItem>
@@ -54,9 +45,11 @@ export const CardContextMenu = ({ data, children }: PropsWithChildren<Props>) =>
               </ContextMenuSubTrigger>
               <ContextMenu.Portal>
                 <ContextMenu.SubContent className="context-content origin-radix-context-menu">
-                  <ContextMenuItem>Original</ContextMenuItem>
-                  <ContextMenuItem>SVGO optimized</ContextMenuItem>
-                  <ContextMenuItem>Default optimized</ContextMenuItem>
+                  <ContextMenuItem onClick={actions.copyOriginal}>Original</ContextMenuItem>
+                  <ContextMenuItem onClick={actions.copySvgoConfig}>SVGO Config</ContextMenuItem>
+                  <ContextMenuItem onClick={actions.copyDefaultConfig}>
+                    Default User Config
+                  </ContextMenuItem>
                 </ContextMenu.SubContent>
               </ContextMenu.Portal>
             </ContextMenu.Sub>
@@ -68,9 +61,13 @@ export const CardContextMenu = ({ data, children }: PropsWithChildren<Props>) =>
               </ContextMenuSubTrigger>
               <ContextMenu.Portal>
                 <ContextMenu.SubContent className="context-content origin-radix-context-menu">
-                  <ContextMenuItem>Original</ContextMenuItem>
-                  <ContextMenuItem>SVGO optimized</ContextMenuItem>
-                  <ContextMenuItem>Default optimized</ContextMenuItem>
+                  <ContextMenuItem onClick={actions.downloadOriginal}>Original</ContextMenuItem>
+                  <ContextMenuItem onClick={actions.downloadSvgoConfig}>
+                    SVGO Config
+                  </ContextMenuItem>
+                  <ContextMenuItem onClick={actions.downloadDefaultConfig}>
+                    Default User Config
+                  </ContextMenuItem>
                 </ContextMenu.SubContent>
               </ContextMenu.Portal>
             </ContextMenu.Sub>

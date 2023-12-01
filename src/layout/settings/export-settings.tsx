@@ -39,7 +39,7 @@ export const ExportSettings = () => {
     <Category title="Export" description="Configuration settings for the export panel.">
       <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
         <div className="mb-5">
-          <h3 className="text-base font-semibold leading-7">SVGO Plugins</h3>
+          <h3 className="text-base font-semibold leading-7">Default SVGO Config</h3>
           <p className="text-muted mt-1 text-sm leading-6">
             The default SVGO plugin configuration that will be used when launching SVG Gobbler.
           </p>

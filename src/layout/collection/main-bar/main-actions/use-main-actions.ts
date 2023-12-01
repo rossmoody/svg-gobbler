@@ -4,7 +4,7 @@ import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
 
-export const useCollectionActions = () => {
+export const useMainActions = () => {
   const { revalidate } = useRevalidator()
   const { state: collectionState } = useCollection()
 

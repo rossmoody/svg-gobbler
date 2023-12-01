@@ -1,8 +1,8 @@
 import { Button } from 'src/components'
-import { useCollectionActions } from 'src/hooks'
+import { useMainActions } from './use-main-actions'
 
 export const DeleteAction = () => {
-  const { deleteSelectedItems } = useCollectionActions()
+  const { deleteSelectedItems } = useMainActions()
 
   return (
     <Button variant="ghost" size="xs" onClick={deleteSelectedItems}>
