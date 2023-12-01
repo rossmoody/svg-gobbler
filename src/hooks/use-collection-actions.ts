@@ -2,22 +2,17 @@ import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { SvgUtils } from 'src/utils/svg-utils'
 
-export const useMainActions = () => {
+export const useCollectionActions = () => {
   const { revalidate } = useRevalidator()
   const { state: collectionState } = useCollection()
 
   const { collectionId } = collectionState
   const selectedItems = collectionState.selected
   const nonSelectedItems = collectionState.data.filter((item) => !selectedItems.includes(item))
-  const nonSelectedItemStorageSvgs: StorageSvg[] = nonSelectedItems.map((item) => ({
-    svg: item.originalString,
-    id: item.id,
-  }))
-  const selectedItemsStorageSvgs: StorageSvg[] = selectedItems.map((item) => ({
-    svg: item.originalString,
-    id: item.id,
-  }))
+  const nonSelectedItemStorageSvgs: StorageSvg[] = SvgUtils.createStorageSvgs(nonSelectedItems)
+  const selectedItemsStorageSvgs: StorageSvg[] = SvgUtils.createStorageSvgs(selectedItems)
 
   const deleteSelectedItems = async () => {
     const currentPageData = await StorageUtils.getPageData(collectionId)

@@ -18,17 +18,13 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   useEffect(() => {
     dispatch({ type: 'set-data', payload: data })
     dispatch({ type: 'process-data' })
-  }, [data, dispatch])
 
-  useEffect(() => {
-    // Dev Logs
     logger.table(
       _.chain(data)
         .map((obj) => _.pick(obj, ['originalString', 'id']))
         .value(),
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [data, dispatch])
 
   const filteredResultLength = useMemo(() => {
     if (state.view.filters['hide-cors']) {
@@ -65,9 +61,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     <section className="border-gray-200 transition-colors dark:border-gray-800">
       <ul
         className="grid justify-between gap-4"
-        style={{
-          gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))`,
-        }}
+        style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))` }}
       >
         {state.processedData.map((svg, i) => (
           <Transition

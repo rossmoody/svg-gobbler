@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import type { Options } from 'pretty-bytes'
 import prettyBytes from 'pretty-bytes'
+import { Svg } from 'scripts/svg-classes/svg'
 import { StorageSvg } from 'src/types'
 
 export class SvgUtils {
@@ -20,5 +21,15 @@ export class SvgUtils {
       id: nanoid(),
       svg: svgString,
     }
+  }
+
+  /**
+   *
+   */
+  static createStorageSvgs(svgArray: Svg[]): StorageSvg[] {
+    return svgArray.map((svg) => ({
+      id: svg.id,
+      svg: svg.originalString,
+    }))
   }
 }

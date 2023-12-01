@@ -6,8 +6,10 @@ import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 /**
- * Upload a given array of svg strings to chrome storage, update
- * collection context and reset the route to reflect the new data.
+ * Upload a given array of svg strings to chrome storage, update the
+ * collection context and reset the route to reflect the new data for the current
+ * collection. This function is used by the upload button in the collection
+ * header.
  */
 export const useUpload = () => {
   const { state, dispatch } = useCollection()

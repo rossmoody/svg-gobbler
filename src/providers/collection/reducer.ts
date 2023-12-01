@@ -25,6 +25,7 @@ export type CollectionAction =
   | { type: 'set-view'; payload: CollectionState['view'] }
   | { type: 'add-selected'; payload: Svg }
   | { type: 'remove-selected'; payload: Svg }
+  | { type: 'duplicate-svg'; payload: Svg }
   | { type: 'select-all' }
   | { type: 'unselect-all' }
   | { type: 'load-more' }
@@ -49,6 +50,23 @@ export const collectionReducer = (
   action: CollectionAction,
 ): CollectionState => {
   switch (action.type) {
+    case 'duplicate-svg': {
+      const indexOf = state.data.findIndex((svg) => svg.id === action.payload.id)
+
+      if (indexOf === -1) {
+        return state
+      }
+
+      const data = [...state.data]
+      data.splice(indexOf, 0, action.payload)
+
+      return {
+        ...state,
+        data,
+        processedData: data,
+      }
+    }
+
     case 'load-more': {
       return {
         ...state,

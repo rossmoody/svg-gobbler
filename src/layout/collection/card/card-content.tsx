@@ -2,9 +2,6 @@ import clsx from 'clsx'
 import { Image } from 'scripts/svg-classes/image'
 import { CardProps } from '.'
 
-/**
- * Conditionally renders a cors protected image element or the original svg string as html.
- */
 export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
   if (data.corsRestricted) {
     return (

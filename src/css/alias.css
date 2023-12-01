@@ -1,3 +1,7 @@
+/* 
+Broad shared design token values
+*/
+
 .text {
   @apply text-gray-900 dark:text-gray-200;
 }

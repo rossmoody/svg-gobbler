@@ -1,13 +1,13 @@
 import { Fragment, useRef, useState } from 'react'
 import { Button, Modal } from 'src/components'
+import { useCollectionActions } from 'src/hooks'
 import { useCollection, useDashboard } from 'src/providers'
-import { useMainActions } from './use-main-actions'
 
 export const CopyItemModal = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const { state: dashboardState } = useDashboard()
   const { state: collectionState } = useCollection()
-  const { copySelectedItems } = useMainActions()
+  const { copySelectedItems } = useCollectionActions()
   const collectionSelectRef = useRef<HTMLSelectElement>(null)
 
   const openModal = () => {
@@ -30,7 +30,6 @@ export const CopyItemModal = () => {
       <Button variant="ghost" size="xs" onClick={openModal}>
         Copy
       </Button>
-
       <Modal open={isModalOpen} setOpen={setModalOpen}>
         <Modal.Header>Copy items to collection</Modal.Header>
         <div className="py-3">

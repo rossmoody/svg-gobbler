@@ -23,14 +23,6 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
     }
   }
 
-  /**
-   * encodeURIComponent causes malformed URI errors with SVG strings quite often.
-   * btoa is a more reliable alternative.
-   */
-  const handleEncodeURI = useMemo(() => {
-    return `/details/${state.collectionId}/${data.id}`
-  }, [state.collectionId, data.id])
-
   return (
     <div className="z-10">
       <div
@@ -45,17 +37,15 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
             type="checkbox"
             onChange={handleSelect}
             checked={isSelected}
-            className={clsx(
-              'h-5 w-5 rounded border-gray-300 bg-gray-100 text-red-600',
-              'cursor-pointer focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800',
-              'transition-all duration-150 ease-in-out focus:ring-red-500 dark:focus:ring-red-600',
-            )}
+            className="h-5 w-5 cursor-pointer rounded border-gray-300 bg-gray-100 text-red-600 
+            transition-all duration-150 ease-in-out focus:ring-2 focus:ring-red-500 dark:border-gray-600 
+            dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-red-600"
           />
         </label>
       </div>
 
       <Link
-        to={handleEncodeURI}
+        to={`/details/${state.collectionId}/${data.id}`}
         className="absolute inset-0 cursor-pointer rounded-xl opacity-0 shadow-md transition-all ease-in group-hover/card:opacity-100"
       />
     </div>
