@@ -10,6 +10,18 @@ import type { BackgroundMessage } from 'src/types'
  */
 export function gatherPageData() {
   /**
+   * Helper function to quickly create a new image, set the src,
+   * and return the outerHTML created by it. We must do this because
+   * security is quite strict on what we can access from the client page.
+   *
+   */
+  const createImage = (src: string) => {
+    const image = new Image()
+    image.src = src
+    return image.outerHTML
+  }
+
+  /**
    * Find all the elements with src or background images that contain svg
    */
   const parseSrcAndBgImages = () => {
@@ -18,24 +30,12 @@ export function gatherPageData() {
       'img[src*="svg"], object[type="image/svg+xml"], embed[type="image/svg+xml"], iframe[src*="svg"]',
     )
 
-    /**
-     * Helper function to quickly create a new image, set the src,
-     * and return the outerHTML created by it. We must do this because
-     * security is quite strict on what we can access from the client page.
-     *
-     */
-    const createImage = (src: string) => {
-      const image = new Image()
-      image.src = src
-      return image.outerHTML
-    }
-
     elements.forEach((element) => {
-      if (element instanceof HTMLImageElement && element.src.includes('svg')) {
+      if (element instanceof HTMLImageElement && element.src.includes('.svg')) {
         results.push(createImage(element.src))
       }
 
-      if (element instanceof HTMLElement && element.style.backgroundImage.includes('svg')) {
+      if (element instanceof HTMLElement && element.style.backgroundImage.includes('.svg')) {
         const url = window.getComputedStyle(element).backgroundImage.slice(5, -2)
         results.push(createImage(url))
       }
@@ -48,7 +48,7 @@ export function gatherPageData() {
         results.push(createImage(element.src))
       }
 
-      if (element instanceof HTMLIFrameElement && element.src.includes('svg')) {
+      if (element instanceof HTMLIFrameElement && element.src.includes('.svg')) {
         results.push(createImage(element.src))
       }
     })
@@ -61,25 +61,26 @@ export function gatherPageData() {
    */
   const gatherInlineSvgElements = () => {
     const results: string[] = []
-    const elements = document.querySelectorAll('svg')
+    const elements = document.querySelectorAll('svg:not(:has(use))') as NodeListOf<SVGSVGElement>
 
     /**
-     * An earnest effort to set a viewBox so we can handle resizing and displaying the SVGs
+     * An earnest effort to set a viewBox so we can handle resizing and displaying the SVGs.
+     * Returns a clone of the SVG.
      */
     const tryToSetViewBox = (svg: SVGElement) => {
-      const viewBox = svg.getAttribute('viewBox')
+      const cloneSvg = svg.cloneNode(true) as SVGSVGElement
+      const viewBox = cloneSvg.getAttribute('viewBox')
 
       if (viewBox) {
-        return svg.outerHTML
+        return cloneSvg.outerHTML // Success, early return
       }
 
-      const cloneSvg = svg.cloneNode(true) as SVGSVGElement
-      const height = svg.getAttribute('height')
-      const width = svg.getAttribute('width')
+      const height = cloneSvg.getAttribute('height')
+      const width = cloneSvg.getAttribute('width')
 
       if (height && width) {
         cloneSvg.setAttribute('viewBox', `0 0 ${width} ${height}`)
-        return cloneSvg.outerHTML
+        return cloneSvg.outerHTML // Meh, but we'll take it
       }
 
       // Use Bounding Box as last resort
@@ -88,13 +89,11 @@ export function gatherPageData() {
         'viewBox',
         `${boundingBox.x} ${boundingBox.y} ${boundingBox.width} ${boundingBox.height}`,
       )
-      return svg.outerHTML
+      return cloneSvg.outerHTML
     }
 
     elements.forEach((element) => {
-      if (element instanceof SVGElement) {
-        results.push(tryToSetViewBox(element))
-      }
+      results.push(tryToSetViewBox(element))
     })
 
     return results
@@ -170,14 +169,38 @@ export function gatherPageData() {
     return results
   }
 
+  const gatherUseElements = () => {
+    const results: string[] = []
+    const elements = document.querySelectorAll('use')
+
+    elements.forEach((element) => {
+      const href = element.getAttribute('href')
+      if (href) {
+        results.push(createImage(href))
+      }
+
+      const xLinkHref = element.getAttribute('xlink:href')
+      if (xLinkHref) {
+        results.push(createImage(xLinkHref))
+      }
+    })
+
+    return results
+  }
+
   const data = [
     ...new Set([
       ...parseSrcAndBgImages(),
       ...gatherInlineSvgElements(),
       ...gatherGElements(),
       ...gatherSymbolElements(),
+      // ...gatherUseElements(),
     ]),
   ]
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Gathered data: ', data)
+  }
 
   return {
     data,

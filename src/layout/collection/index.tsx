@@ -1,11 +1,9 @@
 import { Transition } from '@headlessui/react'
-import _ from 'lodash'
 import { Fragment, useEffect, useMemo } from 'react'
 import { Button } from 'src/components'
 import { NoResults } from 'src/components/no-results'
 import { useCollection } from 'src/providers'
 import type { CollectionData } from 'src/types'
-import { logger } from 'src/utils/logger'
 import { Card } from './card'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
@@ -18,12 +16,6 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   useEffect(() => {
     dispatch({ type: 'set-data', payload: data })
     dispatch({ type: 'process-data' })
-
-    logger.table(
-      _.chain(data)
-        .map((obj) => _.pick(obj, ['originalString', 'id']))
-        .value(),
-    )
   }, [data, dispatch])
 
   const filteredResultLength = useMemo(() => {

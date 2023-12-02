@@ -3,7 +3,13 @@ import { Svg } from './svg'
 export class GElement extends Svg {
   constructor(originalString: string, id: string) {
     super(originalString, id)
+    this.removeXlinkHref()
     this.processG()
+  }
+
+  private removeXlinkHref() {
+    // parseFromString fails to parse xlink:href as it is deprecated
+    this.originalString = this.originalString.replace(/xlink:href/g, 'href')
   }
 
   private processG() {

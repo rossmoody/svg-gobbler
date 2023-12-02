@@ -2,8 +2,8 @@
  * A proverbial logger that logs to the console in development mode and does nothing in production mode.
  */
 type Logger = {
-  info: (message: unknown) => void
-  error: (message: unknown) => void
+  info: (...message: unknown[]) => void
+  error: (...message: unknown[]) => void
   table: (message: unknown) => void
 }
 

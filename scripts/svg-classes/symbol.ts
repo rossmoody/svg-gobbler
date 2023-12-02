@@ -18,7 +18,7 @@ export class SvgSymbol extends Svg {
     const id = nanoid()
     const svg = this.createSvgElement()
     const useElement = this.createUseElement(id)
-    symbol.id = id
+    symbol.setAttribute('id', id)
 
     const viewBox = symbol.getAttribute('viewBox')
     viewBox && svg.setAttribute('viewBox', viewBox)

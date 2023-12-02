@@ -41,7 +41,6 @@ export const useExportActions = () => {
       }
 
       case 'webp': {
-        console.log(webp)
         return await Promise.all(
           svgs.map((svg) =>
             FormUtils.convertToDataUrl(svg.presentationSvg, webp.size, 'image/webp', webp.quality),

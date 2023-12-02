@@ -1,3 +1,5 @@
+import { logger } from 'src/utils/logger'
+
 /**
  * The root SVG class. This is the base class for all SVG types. It doesn't actually
  * produce a "valid" SVG element, but it is used to store the original string and
@@ -42,10 +44,11 @@ export class Svg {
   parseFromString() {
     const parser = new DOMParser()
     const { documentElement } = parser.parseFromString(this.originalString, 'image/svg+xml')
-
     if (!documentElement.querySelector('parsererror')) {
       return documentElement
     }
+
+    logger.info(`Failed to parse SVG element: ${this.originalString}`)
   }
 
   /**
@@ -63,7 +66,7 @@ export class Svg {
    */
   createUseElement(id: string) {
     const use = document.createElementNS('http://www.w3.org/2000/svg', 'use')
-    use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#${id}`)
+    use.setAttribute('href', `#${id}`)
     return use
   }
 
@@ -73,7 +76,7 @@ export class Svg {
    */
   createSymbolElement(id: string) {
     const symbol = document.createElementNS('http://www.w3.org/2000/svg', 'symbol')
-    symbol.id = id
+    symbol.setAttribute('id', id)
     return symbol
   }
 

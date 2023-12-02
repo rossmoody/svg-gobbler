@@ -1,3 +1,4 @@
+import { logger } from 'src/utils/logger'
 import { Svg } from './svg'
 
 export class Image extends Svg {
@@ -110,13 +111,13 @@ export class Image extends Svg {
       const element = new DOMParser().parseFromString(htmlSource, 'text/html')
 
       if (!element.body.firstElementChild || element.querySelector('parsererror')) {
-        console.error('Parsing error in parseAndSetElement')
+        logger.error('Parsing error in parseAndSetElement')
         return
       }
 
       this.asElement = element.body.firstElementChild as Element
     } catch (error) {
-      console.error('Error in parseAndSetElement:', error)
+      logger.error('Error in parseAndSetElement:', error)
     }
   }
 
@@ -131,6 +132,7 @@ export class Image extends Svg {
       const text = await response.text()
       this.originalString = text
       this.asElement = this.parseFromString()
+      this.originalString = this.asElement!.outerHTML
     } catch (error) {
       this.corsRestricted = true
     }

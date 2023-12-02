@@ -23,7 +23,6 @@ export const PreviewSvg = () => {
             type="color"
             className="input-color"
             onChange={handleColorChange}
-            defaultValue={state.preview.svg.background}
             value={state.preview.svg.background}
           />
         </Tooltip>
