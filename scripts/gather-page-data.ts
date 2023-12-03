@@ -3,16 +3,12 @@ import type { BackgroundMessage } from 'src/types'
 /**
  * Gathers all relevant SVG data from the active tab. Must be isolated self containing
  * function to make Chrome Manifest V3 security happy.
- *
- * The general strategy is to:
- * 1. Try to find SVG elements in a given page in all the ways they can be rendered
- * 2. Try to determine the size of the SVG and set it as a viewBox so the SVG can be scaled proportionally
  */
 export function gatherPageData() {
   /**
-   * Helper function to quickly create a new image, set the src,
-   * and return the outerHTML created by it. We must do this because
-   * security is quite strict on what we can access from the client page.
+   * Helper function to quickly create a new image, set the src,  and return the outerHTML
+   * created by it. We must do this because security is quite strict on what we can access
+   * from the client page.
    *
    */
   const createImage = (src: string) => {
@@ -74,15 +70,14 @@ export function gatherPageData() {
         return cloneSvg.outerHTML // Success, early return
       }
 
-      const height = cloneSvg.getAttribute('height')
-      const width = cloneSvg.getAttribute('width')
+      const height = cloneSvg.getAttribute('height')?.replace('px', '')
+      const width = cloneSvg.getAttribute('width')?.replace('px', '')
 
       if (height && width) {
         cloneSvg.setAttribute('viewBox', `0 0 ${width} ${height}`)
         return cloneSvg.outerHTML // Meh, but we'll take it
       }
 
-      // Use Bounding Box as last resort
       const boundingBox = cloneSvg.getBBox()
       cloneSvg.setAttribute(
         'viewBox',
@@ -98,11 +93,6 @@ export function gatherPageData() {
     return results
   }
 
-  /**
-   * Find all the g elements on the page and try to establish their canvas size
-   * so we can set a viewBox when processing them into SVGs. Setting a viewBox here is
-   * meaningless to the element, but we parse and remove it later in the class constructor.
-   */
   const gatherGElements = () => {
     const results: string[] = []
     const elements = document.querySelectorAll('g')
@@ -111,6 +101,10 @@ export function gatherPageData() {
       const svg = element.closest('svg')
       const gClone = element.cloneNode(true) as SVGGElement
 
+      /**
+       * Setting a viewBox here is meaningless to the element, but
+       * we parse and remove it later in the class constructor.
+       */
       const viewBox = svg?.getAttribute('viewBox')
       if (viewBox) {
         gClone.setAttribute('viewBox', viewBox)
@@ -124,7 +118,6 @@ export function gatherPageData() {
         return results.push(gClone.outerHTML)
       }
 
-      // Use Bounding Box as last resort
       const boundingBox = element.getBBox()
       gClone.setAttribute(
         'viewBox',
@@ -137,9 +130,6 @@ export function gatherPageData() {
     return results
   }
 
-  /**
-   * Gather all the symbol elements on the page and try to establish a viewBox
-   */
   const gatherSymbolElements = () => {
     const results: string[] = []
     const elements = document.querySelectorAll('symbol')
@@ -172,8 +162,8 @@ export function gatherPageData() {
     const results: string[] = []
     const elements = document.querySelectorAll('use')
 
+    // Checking for use elements that call to a remote sprite source
     elements.forEach((element) => {
-      // Checking for use elements that call to a remote sprite source
       const href = element.getAttribute('href')
       if (href?.includes('.svg')) {
         results.push(createImage(href))

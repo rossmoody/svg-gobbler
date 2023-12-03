@@ -8,6 +8,7 @@ const distPath = path.join(rootPath, 'dist')
 const fileName = `${packageJson.version}.zip`
 const outputPath = path.join(rootPath, 'releases', fileName)
 
+// Create releases folder if not exists
 if (!fs.existsSync(path.join(rootPath, 'releases'))) {
   fs.mkdirSync(path.join(rootPath, 'releases'))
 }
