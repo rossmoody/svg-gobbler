@@ -1,5 +1,5 @@
+import { nanoid } from 'nanoid'
 import type { PageData, SvgType } from 'src/types'
-import { logger } from 'src/utils/logger'
 import { GElement } from './svg-classes/g-element'
 import { Image } from './svg-classes/image'
 import { Inline } from './svg-classes/inline'
@@ -48,10 +48,31 @@ class SvgFactory {
       return processedData
     })
 
-    logger.info('Processed data: ', processedData)
+    // Must do one final pass after async requests to break apart remote
+    // SVG sprites into their individual SVGs, symbols, or g elements
+    processedData = processedData
+      .filter((item) => item && item?.isValid)
+      .flatMap((item) => {
+        if (item instanceof Image) {
+          const results = [item] as SvgType[]
 
-    // Filter out invalid items after async processing absolute urls
-    return processedData.filter((item) => item?.isValid) as SvgType[]
+          const symbols = item.asElement?.querySelectorAll('symbol')
+          symbols?.forEach((symbol) => {
+            results.push(new SvgSymbol(symbol.outerHTML, nanoid()))
+          })
+
+          const gElements = item.asElement?.querySelectorAll('g')
+          gElements?.forEach((gElement) => {
+            results.push(new GElement(gElement.outerHTML, nanoid()))
+          })
+
+          return results
+        }
+
+        return item
+      })
+
+    return processedData as SvgType[]
   }
 }
 

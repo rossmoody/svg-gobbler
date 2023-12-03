@@ -127,8 +127,13 @@ export class Image extends Svg {
   async fetchSvgContent() {
     if (!this.absoluteImageUrl) return this
 
+    const controller = new AbortController()
+    const signal = controller.signal
+    const timeoutId = setTimeout(() => controller.abort(), 3000)
+
     try {
-      const response = await fetch(this.absoluteImageUrl, { mode: 'cors' })
+      const response = await fetch(this.absoluteImageUrl, { mode: 'cors', signal })
+      clearTimeout(timeoutId)
       const text = await response.text()
       this.originalString = text
       this.asElement = this.parseFromString()

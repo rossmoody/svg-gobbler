@@ -1,4 +1,5 @@
 import type { BackgroundMessage } from 'src/types'
+import { logger } from 'src/utils/logger'
 import Chrome from '../src/utils/chrome-utils'
 import { gatherPageData } from './gather-page-data'
 
@@ -25,6 +26,7 @@ export class Init {
       // Check if the active tab is a system page
       if (!activeTab.url?.includes('chrome://')) {
         data = await Chrome.executeScript(activeTab.id!, gatherPageData)
+        logger.info(data.data)
       }
 
       // Add a listener

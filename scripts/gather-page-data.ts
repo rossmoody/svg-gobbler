@@ -26,17 +26,16 @@ export function gatherPageData() {
    */
   const parseSrcAndBgImages = () => {
     const results: string[] = []
-    const elements = document.querySelectorAll(
-      'img[src*="svg"], object[type="image/svg+xml"], embed[type="image/svg+xml"], iframe[src*="svg"]',
-    )
+    const elements = document.querySelectorAll('*')
 
     elements.forEach((element) => {
       if (element instanceof HTMLImageElement && element.src.includes('.svg')) {
         results.push(createImage(element.src))
       }
 
-      if (element instanceof HTMLElement && element.style.backgroundImage.includes('.svg')) {
-        const url = window.getComputedStyle(element).backgroundImage.slice(5, -2)
+      const backgroundImage = window.getComputedStyle(element).backgroundImage
+      if (element instanceof HTMLElement && backgroundImage.includes('.svg')) {
+        const url = backgroundImage.slice(5, -2)
         results.push(createImage(url))
       }
 
@@ -174,13 +173,14 @@ export function gatherPageData() {
     const elements = document.querySelectorAll('use')
 
     elements.forEach((element) => {
+      // Checking for use elements that call to a remote sprite source
       const href = element.getAttribute('href')
-      if (href) {
+      if (href?.includes('.svg')) {
         results.push(createImage(href))
       }
 
       const xLinkHref = element.getAttribute('xlink:href')
-      if (xLinkHref) {
+      if (xLinkHref?.includes('.svg')) {
         results.push(createImage(xLinkHref))
       }
     })
@@ -194,13 +194,9 @@ export function gatherPageData() {
       ...gatherInlineSvgElements(),
       ...gatherGElements(),
       ...gatherSymbolElements(),
-      // ...gatherUseElements(),
+      ...gatherUseElements(),
     ]),
   ]
-
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Gathered data: ', data)
-  }
 
   return {
     data,
