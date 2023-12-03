@@ -11,7 +11,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "nodemon server/index.ts --exec 'ts-node --esm'",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "release": "yarn clean && yarn build && npx ts-node --esm src/utils/zip-release.ts"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.6",
@@ -39,6 +40,7 @@
     "@crxjs/vite-plugin": "^2.0.0-beta.19",
     "@svgr/core": "^8.1.0",
     "@tailwindcss/forms": "^0.5.6",
+    "@types/archiver": "^6.0.2",
     "@types/chrome": "^0.0.248",
     "@types/lodash": "^4.14.200",
     "@types/node": "^20.8.9",
@@ -48,6 +50,7 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@uiw/codemirror-theme-tokyo-night-storm": "^4.21.20",
     "@vitejs/plugin-react-swc": "^3.3.2",
+    "archiver": "^6.0.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
