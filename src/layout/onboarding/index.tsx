@@ -1,8 +1,8 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
-import { gatherPageData } from 'scripts/gather-page-data'
 import { Logo } from 'src/components'
 import { links } from 'src/constants/links'
+import { findSvg } from 'svg-gobbler-scripts'
 import graphic from './onboarding-graphic.png'
 
 export const OnboardingLayout = () => {
@@ -10,7 +10,7 @@ export const OnboardingLayout = () => {
     chrome.runtime.sendMessage({
       type: 'launch-svg-gobbler-from-onboarding',
       data: {
-        ...gatherPageData(),
+        ...findSvg(),
         host: 'Welcome to SVG Gobbler',
         origin: links.svgGobblerHomepage,
       },

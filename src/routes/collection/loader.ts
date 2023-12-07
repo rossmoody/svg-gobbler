@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import { LoaderFunctionArgs, defer } from 'react-router-dom'
-import svgFactory from 'scripts/svg-factory'
 import { defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { initCollectionState } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { svgFactory } from 'svg-gobbler-scripts'
 
 export async function collectionLoader({ params }: LoaderFunctionArgs) {
   const pageData = await StorageUtils.getPageData(params.id as string)

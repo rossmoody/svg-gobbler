@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
-import svgFactory from 'scripts/svg-factory'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
+import { svgFactory } from 'svg-gobbler-scripts'
 
 /**
  * The primary initialization function for the root route.

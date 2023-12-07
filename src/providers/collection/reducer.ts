@@ -1,5 +1,5 @@
-import { Svg } from 'scripts/svg-classes/svg'
-import { CollectionData } from 'src/types'
+import type { CollectionData } from 'src/types'
+import type { Svg } from 'svg-gobbler-scripts'
 
 export type CollectionState = CollectionData & {
   /**

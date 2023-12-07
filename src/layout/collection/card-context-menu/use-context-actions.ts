@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
-import { Inline } from 'scripts/svg-classes/inline'
-import type { Svg } from 'scripts/svg-classes/svg'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { useCollection } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
+import type { Svg } from 'svg-gobbler-scripts'
+import { Inline } from 'svg-gobbler-scripts'
 import { Config, optimize } from 'svgo'
 
 export const useContextActions = (data: Svg) => {

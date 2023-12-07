@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Image } from 'scripts/svg-classes/image'
+import type { Image } from 'svg-gobbler-scripts'
 import { CardProps } from '.'
 
 export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {

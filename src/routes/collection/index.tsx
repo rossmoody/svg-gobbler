@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'
-import { Svg } from 'scripts/svg-classes/svg'
 import { EmptyState } from 'src/components'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { Collection } from 'src/layout/collection'
@@ -10,6 +9,7 @@ import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { TopBar } from 'src/layout/top-bar'
 import { useCollection, useExport } from 'src/providers'
 import type { CollectionData } from 'src/types'
+import type { Svg } from 'svg-gobbler-scripts'
 
 /**
  * This is really collection data with a promise we await for the svg data.

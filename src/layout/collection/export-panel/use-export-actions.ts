@@ -1,10 +1,10 @@
 import { useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 import { logger } from 'src/utils/logger'
+import type { Svg } from 'svg-gobbler-scripts'
 import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'
-import { Svg } from '../../../../scripts/svg-classes/svg'
 
 export const useExportActions = () => {
   const { state } = useExport()

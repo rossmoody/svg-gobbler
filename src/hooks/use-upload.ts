@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
-import { Inline } from 'scripts/svg-classes/inline'
 import { useCollection } from 'src/providers'
 import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { Inline } from 'svg-gobbler-scripts'
 
 /**
  * Upload a given array of svg strings to chrome storage, update the
