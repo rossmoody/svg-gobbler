@@ -15,8 +15,7 @@ export type BackgroundMessage = {
  */
 export type StorageSvg = {
   /**
-   * A unique id for the svg. Used to identify the svg in storage and also as
-   * the id for routing to a given svg.
+   * Unique ID
    */
   id: string
   /**
@@ -28,22 +27,7 @@ export type StorageSvg = {
 /**
  * The model for data stored and gathered from the document
  */
-export type PageData = {
-  /**
-   * An array of SVG string elements from the active tab.
-   */
-  data: StorageSvg[]
-  /**
-   * The host URL of the site. This is used as a name for collection and
-   * dashboard title initially in the sidebar.
-   */
-  host: string
-  /**
-   * The origin of the active tab. This is used to rebuild the SVGs in the
-   * content script. Especially related to image sources and cors restrictions.
-   */
-  origin: string
-}
+export type PageData = DocumentData
 
 /**
  * The model of a collection that is stored in local storage.

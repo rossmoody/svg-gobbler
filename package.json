@@ -33,7 +33,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.18.0",
-    "svg-gobbler-scripts": "^1.0.6",
+    "svg-gobbler-scripts": "^1.1.0",
     "svgo": "^3.0.3"
   },
   "devDependencies": {
