@@ -1,4 +1,4 @@
-import type { GElement, Image, Inline, Svg, SvgSymbol } from 'svg-gobbler-scripts'
+import type { DocumentData, GElement, Image, Inline, Svg, SvgSymbol } from 'svg-gobbler-scripts'
 
 /**
  * The message sent from the Background script to the Content script.
@@ -7,22 +7,7 @@ export type BackgroundMessage = {
   /**
    * The data gathered from the active tab
    */
-  data: {
-    /**
-     * An array of SVG string elements from the active tab.
-     */
-    data: string[]
-    /**
-     * The host URL of the site. This is used as a name for collection and
-     * dashboard title initially in the sidebar.
-     */
-    host: string
-    /**
-     * The origin of the active tab. This is used to rebuild the SVGs in the
-     * content script. Especially related to image sources and cors restrictions.
-     */
-    origin: string
-  }
+  data: DocumentData
 }
 
 /**
@@ -41,7 +26,7 @@ export type StorageSvg = {
 }
 
 /**
- * The data stored in chrome storage as part of page data.
+ * The model for data stored and gathered from the document
  */
 export type PageData = {
   /**

@@ -3,7 +3,6 @@ import { defer } from 'react-router-dom'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
 import { svgFactory } from 'svg-gobbler-scripts'
 
 /**
@@ -31,7 +30,7 @@ export async function rootLoader() {
         const pageData: PageData = {
           origin: data.origin,
           host: data.host,
-          data: data.data.map(SvgUtils.createStorageSvg),
+          data: data.data,
         }
 
         // Create classes and process the raw svg elements

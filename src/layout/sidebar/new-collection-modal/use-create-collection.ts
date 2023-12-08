@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import { Collection, PageData, StorageSvg } from 'src/types'
+import type { Collection, PageData, StorageSvg } from 'src/types'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 

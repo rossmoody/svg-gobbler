@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
-import { PageData } from 'src/types'
+import type { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const Header = () => {

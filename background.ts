@@ -1,6 +1,5 @@
-import { BackgroundMessage } from 'src/types'
 import { logger } from 'src/utils/logger'
-import { findSvg } from 'svg-gobbler-scripts'
+import { findSvg, type DocumentData } from 'svg-gobbler-scripts'
 import Chrome from './src/utils/chrome-utils'
 
 /**
@@ -29,7 +28,7 @@ class Background {
         data: [],
         host: 'Collection',
         origin: '',
-      } as BackgroundMessage['data']
+      } as DocumentData
 
       const activeTab = await Chrome.getActiveTab()
 

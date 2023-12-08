@@ -1,5 +1,5 @@
 import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
-import { PageData } from 'src/types'
+import type { PageData } from 'src/types'
 
 /**
  * A helper for working with Chrome storage and automating compression.
