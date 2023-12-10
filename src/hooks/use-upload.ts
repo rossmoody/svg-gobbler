@@ -12,7 +12,7 @@ import { Inline } from 'svg-gobbler-scripts'
  * header.
  */
 export const useUpload = () => {
-  const { state, dispatch } = useCollection()
+  const { dispatch, state } = useCollection()
   const { revalidate } = useRevalidator()
 
   return async function (data: string[]) {
@@ -36,7 +36,7 @@ export const useUpload = () => {
 
     // Update the collection context state
     const newSvgClasses = newData.map((item) => new Inline(item.svg, item.id))
-    dispatch({ type: 'set-data', payload: [...state.data, ...newSvgClasses] })
+    dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
     dispatch({ type: 'process-data' })
     revalidate()
   }

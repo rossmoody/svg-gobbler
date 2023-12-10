@@ -51,5 +51,5 @@ export const useMainActions = () => {
     })
   }
 
-  return { deleteSelectedItems, moveSelectedItems, copySelectedItems }
+  return { copySelectedItems, deleteSelectedItems, moveSelectedItems }
 }

@@ -4,8 +4,8 @@ import { clsx } from 'clsx'
 import { useState } from 'react'
 
 type ToastProps = {
-  title: string
   description: string
+  title: string
 }
 
 export const useToast = () => {
@@ -13,11 +13,9 @@ export const useToast = () => {
 
   const toast = () => setOpen(true)
 
-  const Toast = ({ title, description }: ToastProps) => {
+  const Toast = ({ description, title }: ToastProps) => {
     return (
       <ToastPrimitive.Root
-        open={open}
-        onOpenChange={setOpen}
         className={clsx(
           'fixed inset-x-4 bottom-4 z-50 w-auto rounded-lg shadow-lg md:bottom-auto md:left-auto md:right-4 md:top-4 md:w-full md:max-w-sm',
           'bg-white dark:bg-gray-800',
@@ -30,6 +28,8 @@ export const useToast = () => {
           'radix-swipe-cancel:translate-x-0 radix-swipe-cancel:duration-200 radix-swipe-cancel:ease-[ease]',
           'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75',
         )}
+        onOpenChange={setOpen}
+        open={open}
       >
         <div className="flex">
           <div className="flex w-0 flex-1 items-center py-4 pl-5">
@@ -54,7 +54,7 @@ export const useToast = () => {
               </div>
               <div className="flex h-0 flex-1">
                 <ToastPrimitive.Close>
-                  <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                  <XMarkIcon aria-hidden="true" className="h-5 w-5" />
                 </ToastPrimitive.Close>
               </div>
             </div>

@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef } from 'react'
 import { useCollection } from 'src/providers'
 
 export const SelectionControl = () => {
-  const { state: collectionState, dispatch: collectionDispatch } = useCollection()
+  const { dispatch: collectionDispatch, state: collectionState } = useCollection()
   const checkboxRef = useRef<HTMLInputElement>(null)
 
   const selectedItems = collectionState.selected.length
@@ -26,26 +26,26 @@ export const SelectionControl = () => {
   return (
     <Transition
       as={Fragment}
-      show={availableItems > 0}
       enter="transition ease-in-out duration-150"
       enterFrom="opacity-0"
       enterTo="opacity-100"
       leave="transition ease-in-out duration-150"
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
+      show={availableItems > 0}
     >
       <div className="flex items-center gap-2">
         <input
+          checked={allItemsAreSelected}
+          className="checkbox"
+          id="select"
+          onChange={handleCheckboxChange}
           ref={checkboxRef}
           type="checkbox"
-          id="select"
-          className="checkbox"
-          onChange={handleCheckboxChange}
-          checked={allItemsAreSelected}
         />
         <label
-          htmlFor="select"
           className="hidden cursor-pointer text-xs font-medium leading-none md:block"
+          htmlFor="select"
         >
           Select {allItemsAreSelected ? 'none' : 'all'}
         </label>

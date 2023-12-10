@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 export const usePreviewResize = () => {
   const [width, setWidth] = useState(400)
   const ref = useRef<HTMLElement>(null)
-  const resizeSide = useRef<string | null>(null)
+  const resizeSide = useRef<null | string>(null)
 
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (ref.current && resizeSide.current === 'left') {

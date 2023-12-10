@@ -11,8 +11,8 @@ export async function detailLoader({ params }: LoaderFunctionArgs): Promise<Deta
   const storageSvg = pageData.data.find((item) => item.id === params.id) as StorageSvg
 
   return {
+    collectionId: params.collectionId ?? '',
     id: storageSvg.id,
     originalString: storageSvg.svg,
-    collectionId: params.collectionId ?? '',
   }
 }

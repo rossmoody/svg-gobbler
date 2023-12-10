@@ -1,7 +1,8 @@
+import type { Svg } from 'svg-gobbler-scripts'
+
 import { useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 import { logger } from 'src/utils/logger'
-import type { Svg } from 'svg-gobbler-scripts'
 import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'
@@ -10,18 +11,18 @@ export const useExportActions = () => {
   const { state } = useExport()
 
   const svgoConfig: Config = {
+    floatPrecision: state.settings.svg.floatPrecision,
+    js2svg: {
+      indent: 2,
+      pretty: state.settings.svg.prettify,
+    },
     multipass: true,
     path: state.settings.svg.path,
     plugins: state.settings.svg.svgoPlugins,
-    floatPrecision: state.settings.svg.floatPrecision,
-    js2svg: {
-      pretty: state.settings.svg.prettify,
-      indent: 2,
-    },
   }
 
   const processWithExportConfig = async (svgs: Svg[]) => {
-    const { png, jpeg, webp } = state.settings
+    const { jpeg, png, webp } = state.settings
 
     switch (state.fileType) {
       case 'svg': {

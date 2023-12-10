@@ -1,4 +1,5 @@
 import { Tabs } from 'src/components'
+
 import { DataURI } from './preview-data-uri'
 import { PreviewReact } from './preview-react'
 import { PreviewSvg } from './preview-svg'
@@ -8,7 +9,7 @@ export const PreviewSidebar = () => {
   const { ref, width } = usePreviewResize()
 
   return (
-    <aside ref={ref} style={{ width }} className="relative z-10 flex flex-col">
+    <aside className="relative z-10 flex flex-col" ref={ref} style={{ width }}>
       <Tabs.Group>
         <Tabs.List className="shrink-0 overflow-x-auto whitespace-nowrap">
           <Tabs.Tab>Preview</Tabs.Tab>

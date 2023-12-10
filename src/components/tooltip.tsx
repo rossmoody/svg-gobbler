@@ -11,7 +11,7 @@ type TooltipProps = {
    * The side the tooltip will render in relation to the trigger element.
    * Defaults to 'bottom'
    */
-  side?: 'top' | 'right' | 'bottom' | 'left'
+  side?: 'bottom' | 'left' | 'right' | 'top'
 }
 
 export const Tooltip = ({
@@ -24,8 +24,6 @@ export const Tooltip = ({
       <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
       <RTooltip.Portal>
         <RTooltip.Content
-          side={side}
-          sideOffset={4}
           className={clsx(
             'radix-side-top:animate-slide-down-fade',
             'radix-side-right:animate-slide-left-fade',
@@ -35,6 +33,8 @@ export const Tooltip = ({
             'bg-gray-800 text-xs shadow-md dark:bg-white',
             'max-w-[16rem] text-white dark:text-gray-800',
           )}
+          side={side}
+          sideOffset={4}
         >
           {content}
           <RTooltip.Arrow className="fill-current text-gray-800 dark:text-gray-200" />

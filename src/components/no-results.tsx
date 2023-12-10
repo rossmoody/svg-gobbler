@@ -8,16 +8,16 @@ import { Fragment } from 'react'
  */
 export const NoResults = () => (
   <Transition
-    show
     appear
     as={Fragment}
     enter="transition-all duration-300 ease-in-out"
     enterFrom="opacity-0 scale-95"
     enterTo="opacity-100 scale-100"
+    show
   >
     <div className="flex h-full w-full items-center justify-center rounded-3xl bg-white/70 p-12 dark:bg-gray-800/70">
       <div className="text-center">
-        <MagnifyingGlassIcon className="mx-auto mb-3 h-12 w-12" aria-hidden={true} />
+        <MagnifyingGlassIcon aria-hidden={true} className="mx-auto mb-3 h-12 w-12" />
         <h3 className="mb-2 mt-2 text-lg font-semibold">No SVGs to show</h3>
         <p className="text-muted mt-1 text-sm">
           Try changing your filter, search, or view settings to display SVGs

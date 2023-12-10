@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone'
 import { useUpload } from 'src/hooks'
 import { UploadModal } from 'src/layout/collection/upload-modal'
 import { FormUtils } from 'src/utils/form-utils'
+
 import { Button } from '.'
 
 /**
@@ -15,12 +16,12 @@ export const EmptyState = () => {
   const [open, setOpen] = useState(false)
   const upload = useUpload()
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getInputProps, getRootProps, isDragActive } = useDropzone({
     accept: { 'image/svg+xml': ['.svg'] },
     maxSize: 10 * 1024 * 1024,
     multiple: true,
-    noKeyboard: true,
     noClick: true,
+    noKeyboard: true,
     onDropAccepted,
   })
 
@@ -41,14 +42,14 @@ export const EmptyState = () => {
       )}
     >
       <div className="text-center">
-        <MagnifyingGlassIcon className="text-muted mx-auto mb-3 h-12 w-12" aria-hidden={true} />
+        <MagnifyingGlassIcon aria-hidden={true} className="text-muted mx-auto mb-3 h-12 w-12" />
         <h3 className="mb-2 mt-2 text-lg font-semibold">No SVGs found</h3>
         <p className="text-muted mt-1 text-sm">
           Select or drag SVGs into this area to upload into this collection
         </p>
         <div className="mt-6 flex justify-center">
-          <Button size="lg" onClick={() => setOpen(true)}>
-            <PlusIcon className="-ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
+          <Button onClick={() => setOpen(true)} size="lg">
+            <PlusIcon aria-hidden="true" className="-ml-0.5 mr-1.5 h-5 w-5" />
             Upload SVG
           </Button>
         </div>

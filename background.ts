@@ -1,5 +1,6 @@
 import { logger } from 'src/utils/logger'
-import { findSvg, type DocumentData } from 'svg-gobbler-scripts'
+import { type DocumentData, findSvg } from 'svg-gobbler-scripts'
+
 import Chrome from './src/utils/chrome-utils'
 
 /**
@@ -15,6 +16,37 @@ class Background {
     Background.launchOnboardingExperience()
     Background.launchExtensionFromOnboarding()
     Background.launchSvgGobbler()
+  }
+
+  /**
+   * Launches the extension from the onboarding page.
+   */
+  static launchExtensionFromOnboarding() {
+    chrome.runtime.onMessage.addListener(async function onboardingListener(req) {
+      const { data, type } = req
+
+      if (type === 'launch-svg-gobbler-from-onboarding') {
+        chrome.runtime.onMessage.addListener(function listener(req, __, sendResponse) {
+          if (req === 'gobble') {
+            sendResponse({ data })
+            chrome.runtime.onMessage.removeListener(listener)
+          }
+        })
+
+        await Chrome.createNewTab()
+      }
+    })
+  }
+
+  /**
+   * If the extension is installed for the first time, open the onboarding page.
+   */
+  static launchOnboardingExperience() {
+    chrome.runtime.onInstalled.addListener(async (details) => {
+      if (details.reason === 'install') {
+        await Chrome.createNewTab('onboarding.html')
+      }
+    })
   }
 
   /**
@@ -51,37 +83,6 @@ class Background {
     }
 
     chrome.action.onClicked.addListener(onClickHandler)
-  }
-
-  /**
-   * Launches the extension from the onboarding page.
-   */
-  static launchExtensionFromOnboarding() {
-    chrome.runtime.onMessage.addListener(async function onboardingListener(req) {
-      const { type, data } = req
-
-      if (type === 'launch-svg-gobbler-from-onboarding') {
-        chrome.runtime.onMessage.addListener(function listener(req, __, sendResponse) {
-          if (req === 'gobble') {
-            sendResponse({ data })
-            chrome.runtime.onMessage.removeListener(listener)
-          }
-        })
-
-        await Chrome.createNewTab()
-      }
-    })
-  }
-
-  /**
-   * If the extension is installed for the first time, open the onboarding page.
-   */
-  static launchOnboardingExperience() {
-    chrome.runtime.onInstalled.addListener(async (details) => {
-      if (details.reason === 'install') {
-        await Chrome.createNewTab('onboarding.html')
-      }
-    })
   }
 
   /**

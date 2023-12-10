@@ -1,5 +1,6 @@
-import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
 import type { PageData } from 'src/types'
+
+import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
 
 /**
  * A helper for working with Chrome storage and automating compression.
@@ -33,6 +34,18 @@ export class StorageUtils {
   }
 
   /**
+   * Get collections data from storage. Automatically decompresses data.
+   */
+  static async getStorageData<T>(key: 'collections' | 'plugins' | 'view'): Promise<T | undefined> {
+    try {
+      const data = await chrome.storage.local.get(key)
+      return this.decompressFromBase64(data[key])
+    } catch (error) {
+      return
+    }
+  }
+
+  /**
    * Set page data in storage based on collectionId.
    * Automatically compresses data.
    */
@@ -50,17 +63,5 @@ export class StorageUtils {
     await chrome.storage.local.set({
       [key]: this.compressToBase64(data),
     })
-  }
-
-  /**
-   * Get collections data from storage. Automatically decompresses data.
-   */
-  static async getStorageData<T>(key: 'plugins' | 'view' | 'collections'): Promise<T | undefined> {
-    try {
-      const data = await chrome.storage.local.get(key)
-      return this.decompressFromBase64(data[key])
-    } catch (error) {
-      return
-    }
   }
 }

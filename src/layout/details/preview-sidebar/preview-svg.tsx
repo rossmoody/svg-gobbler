@@ -2,10 +2,10 @@ import { Tooltip } from 'src/components'
 import { useDetails } from 'src/providers'
 
 export const PreviewSvg = () => {
-  const { state, dispatch } = useDetails()
+  const { dispatch, state } = useDetails()
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-preview-background', payload: e.target.value })
+    dispatch({ payload: e.target.value, type: 'set-preview-background' })
   }
 
   return (
@@ -20,9 +20,9 @@ export const PreviewSvg = () => {
       <div className="absolute bottom-6 left-6 right-6 flex justify-end">
         <Tooltip content="Background color" side="left">
           <input
-            type="color"
             className="input-color"
             onChange={handleColorChange}
+            type="color"
             value={state.preview.svg.background}
           />
         </Tooltip>

@@ -1,15 +1,16 @@
+import type { PageData } from 'src/types'
+
 import { Transition } from '@headlessui/react'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
-import type { PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const Header = () => {
   const navigate = useNavigate()
-  const { state, dispatch } = useDetails()
+  const { dispatch, state } = useDetails()
 
   const isDirty = useMemo(
     () => state.currentString !== state.originalString,
@@ -17,7 +18,7 @@ export const Header = () => {
   )
 
   const handleReset = () => {
-    dispatch({ type: 'update-current-string', payload: state.originalString })
+    dispatch({ payload: state.originalString, type: 'update-current-string' })
   }
 
   const handleSave = async () => {
@@ -31,7 +32,7 @@ export const Header = () => {
     }
 
     await StorageUtils.setPageData(state.collectionId, pageData)
-    dispatch({ type: 'update-original-string', payload: state.currentString })
+    dispatch({ payload: state.currentString, type: 'update-original-string' })
   }
 
   const navigateBack = () => {
@@ -47,23 +48,23 @@ export const Header = () => {
   return (
     <header className="flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
       <nav className="flex items-center gap-3">
-        <IconButton onClick={navigateBack} variant="ghost" size="lg">
+        <IconButton onClick={navigateBack} size="lg" variant="ghost">
           <ArrowLeftIcon className="h-5 w-5" />
         </IconButton>
         <h1 className="text-lg font-semibold">Edit SVG</h1>
       </nav>
       <Transition
         as="div"
-        show={isDirty}
+        className="flex h-full items-center justify-center gap-2"
         enter="transition-all duration-300"
         enterFrom="opacity-0 scale-95"
         enterTo="opacity-100 scale-100"
         leave="transition-all duration-300"
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
-        className="flex h-full items-center justify-center gap-2"
+        show={isDirty}
       >
-        <Button variant="secondary" onClick={handleReset}>
+        <Button onClick={handleReset} variant="secondary">
           Reset changes
         </Button>
         <Button onClick={handleSave}>Save changes</Button>

@@ -1,13 +1,14 @@
+import type { Collection, PageData } from 'src/types'
+
 import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import type { Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { state, dispatch } = useDashboard()
+  const { dispatch, state } = useDashboard()
 
   return function (collection: Collection) {
     const isActiveCollection = pathname.includes(collection.id)
@@ -16,9 +17,9 @@ export function useRemoveCollection() {
     // If there are no collections left, create an empty one
     if (filteredCollections.length === 0) {
       const pageData: PageData = {
+        data: [],
         host: '',
         origin: '',
-        data: [],
       }
 
       const collection: Collection = {
@@ -31,7 +32,7 @@ export function useRemoveCollection() {
       StorageUtils.setPageData(collection.id, pageData)
     }
 
-    dispatch({ type: 'set-collections', payload: filteredCollections })
+    dispatch({ payload: filteredCollections, type: 'set-collections' })
     chrome.storage.local.remove(collection.id)
     StorageUtils.setStorageData('collections', filteredCollections)
 

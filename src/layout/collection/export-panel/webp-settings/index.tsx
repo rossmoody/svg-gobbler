@@ -5,14 +5,14 @@ export const imageTooltip =
   'Applied to the largest side (height or width) of the image while scaling proportionally.'
 
 export const WebPSettings = () => {
-  const { state, dispatch } = useExport()
+  const { dispatch, state } = useExport()
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-webp-size', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-webp-size' })
   }
 
   const handleQualityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-webp-quality', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-webp-quality' })
   }
 
   return (
@@ -25,11 +25,11 @@ export const WebPSettings = () => {
           <HelpIcon content={imageTooltip} />
         </div>
         <input
-          type="text"
           className="export-input"
           id="size"
-          value={state.settings.webp.size}
           onChange={handleSizeChange}
+          type="text"
+          value={state.settings.webp.size}
         />
       </div>
       <div>
@@ -37,14 +37,14 @@ export const WebPSettings = () => {
           Quality
         </label>
         <input
-          type="number"
           className="export-input"
           id="quality"
-          min={0}
           max={1}
-          step={0.01}
-          value={state.settings.webp.quality}
+          min={0}
           onChange={handleQualityChange}
+          step={0.01}
+          type="number"
+          value={state.settings.webp.quality}
         />
       </div>
     </div>

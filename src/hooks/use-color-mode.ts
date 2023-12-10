@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type ColorMode = 'light' | 'dark'
+type ColorMode = 'dark' | 'light'
 
 export function useColorMode() {
   const [colorMode, setColorMode] = useState<ColorMode>('light')

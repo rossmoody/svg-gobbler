@@ -28,9 +28,9 @@ export async function rootLoader() {
 
         // Process the strings as page data with ids
         const pageData: PageData = {
-          origin: data.origin,
-          host: data.host,
           data: data.data,
+          host: data.host,
+          origin: data.origin,
         }
 
         // Create classes and process the raw svg elements
@@ -38,8 +38,8 @@ export async function rootLoader() {
 
         // Update the page data with the processed strings
         pageData.data = svgClasses.map((item) => ({
-          svg: item.originalString,
           id: item.id,
+          svg: item.originalString,
         }))
 
         const collection: Collection = {

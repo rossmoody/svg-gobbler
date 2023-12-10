@@ -7,7 +7,7 @@ import { useDetails } from 'src/providers'
 import { SvgUtils } from 'src/utils/svg-utils'
 
 export const DataURI = () => {
-  const { text, copyToClipboard } = useClipboard()
+  const { copyToClipboard, text } = useClipboard()
   const { state } = useDetails()
 
   const uriData = useMemo(() => {
@@ -30,15 +30,15 @@ export const DataURI = () => {
   return (
     <div className="px-4 py-6 transition-all duration-500 ease-in-out">
       {uriData.map((item) => (
-        <section key={item.name} className="group mb-6">
+        <section className="group mb-6" key={item.name}>
           <span className="label">
             {item.name} - <span className="text-muted">{SvgUtils.getPrettyBytes(item.value)}</span>
           </span>
           <div className="relative rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700/50 dark:bg-gray-800/50">
             <Button
-              size="xs"
-              onClick={() => copyToClipboard(item.value)}
               className="absolute right-4 top-4 opacity-0 shadow-md group-hover:opacity-100"
+              onClick={() => copyToClipboard(item.value)}
+              size="xs"
             >
               <ClipboardDocumentIcon className="h-3 w-3" />
               {text}

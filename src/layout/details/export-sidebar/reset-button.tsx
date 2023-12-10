@@ -7,21 +7,21 @@ import { useDetails } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const ResetButton = () => {
-  const { state, dispatch } = useDetails()
+  const { dispatch, state } = useDetails()
 
   const resetToDefault = async () => {
     const plugins = (await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')) ?? []
-    dispatch({ type: 'set-svgo-plugins', payload: plugins })
+    dispatch({ payload: plugins, type: 'set-svgo-plugins' })
     dispatch({ type: 'process-current-string' })
   }
 
   const resetToEmpty = () => {
-    dispatch({ type: 'set-svgo-plugins', payload: [] })
+    dispatch({ payload: [], type: 'set-svgo-plugins' })
     dispatch({ type: 'process-current-string' })
   }
 
   const resetToSvgoDefault = () => {
-    dispatch({ type: 'set-svgo-plugins', payload: defaultSvgoPlugins })
+    dispatch({ payload: defaultSvgoPlugins, type: 'set-svgo-plugins' })
     dispatch({ type: 'process-current-string' })
   }
 
@@ -63,10 +63,10 @@ export const ResetButton = () => {
                 <Menu.Item key={item.label}>
                   {({ active }) => (
                     <span
-                      onClick={item.onClick}
                       className={clsx('block cursor-pointer px-3 py-1.5 text-xs', {
                         'bg-gray-100 dark:bg-gray-700': active,
                       })}
+                      onClick={item.onClick}
                     >
                       {item.label}
                     </span>
@@ -77,10 +77,10 @@ export const ResetButton = () => {
               <Menu.Item>
                 {({ active }) => (
                   <span
-                    onClick={setAsDefault}
                     className={clsx('block cursor-pointer px-3 py-1.5 text-xs', {
                       'bg-gray-100 dark:bg-gray-700': active,
                     })}
+                    onClick={setAsDefault}
                   >
                     Set as default
                   </span>

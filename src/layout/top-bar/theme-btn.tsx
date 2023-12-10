@@ -7,11 +7,11 @@ export const ThemeButton = () => {
 
   return (
     <Tooltip content="Color mode">
-      <IconButton variant="ghost" onClick={toggleColorMode} size="lg">
+      <IconButton onClick={toggleColorMode} size="lg" variant="ghost">
         {colorMode === 'dark' ? (
-          <MoonIcon className="h-5 w-5" aria-hidden="true" />
+          <MoonIcon aria-hidden="true" className="h-5 w-5" />
         ) : (
-          <SunIcon className="h-5 w-5" aria-hidden="true" />
+          <SunIcon aria-hidden="true" className="h-5 w-5" />
         )}
         <span className="sr-only">Toggle color mode</span>
       </IconButton>

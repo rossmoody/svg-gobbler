@@ -18,12 +18,12 @@ const sortOptions: SortOption[] = [
 ]
 
 export const SortMenu = () => {
-  const { state, dispatch } = useCollection()
+  const { dispatch, state } = useCollection()
 
   function handleSortChange(value: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const sort = value.currentTarget.dataset.value as SortOption['value']
     StorageUtils.setStorageData('view', { ...state.view, sort })
-    dispatch({ type: 'set-view', payload: { ...state.view, sort } })
+    dispatch({ payload: { ...state.view, sort }, type: 'set-view' })
     dispatch({ type: 'process-data' })
   }
 
@@ -31,7 +31,7 @@ export const SortMenu = () => {
     <Menu as="div" className="relative inline-block text-left">
       <Menu.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
         Sort
-        <ChevronDownIcon className="h-3 w-3" aria-hidden />
+        <ChevronDownIcon aria-hidden className="h-3 w-3" />
       </Menu.Button>
 
       <Transition
@@ -55,13 +55,13 @@ export const SortMenu = () => {
               <Menu.Item key={option.value}>
                 {({ active }) => (
                   <span
-                    data-value={option.value}
-                    onClick={handleSortChange}
                     className={clsx(
                       state.view.sort === option.value && 'font-semibold',
                       active && 'bg-gray-100 dark:bg-gray-700',
                       'block cursor-pointer px-4 py-2 text-sm',
                     )}
+                    data-value={option.value}
+                    onClick={handleSortChange}
                   >
                     {option.label}
                   </span>

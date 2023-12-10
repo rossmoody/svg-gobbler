@@ -67,14 +67,6 @@ export type CollectionData = {
    */
   view: {
     /**
-     * The size of the icons in the collection
-     */
-    size: number
-    /**
-     * The sort order of the collection
-     */
-    sort: 'none' | 'file-asc' | 'file-desc'
-    /**
      * The filters applied to the collection
      */
     filters: {
@@ -83,6 +75,14 @@ export type CollectionData = {
        */
       'hide-cors': boolean
     }
+    /**
+     * The size of the icons in the collection
+     */
+    size: number
+    /**
+     * The sort order of the collection
+     */
+    sort: 'file-asc' | 'file-desc' | 'none'
   }
 }
 
@@ -95,16 +95,16 @@ export type DetailsParams = {
    */
   collectionId: string
   /**
-   * The original svg string upon load.
-   */
-  originalString: string
-  /**
    * The id of the svg in storage
    */
   id: string
+  /**
+   * The original svg string upon load.
+   */
+  originalString: string
 }
 
 /**
  * A union of all the svg types that are returned from the svgFactory
  */
-export type SvgType = Inline | Image | SvgSymbol | GElement
+export type SvgType = GElement | Image | Inline | SvgSymbol

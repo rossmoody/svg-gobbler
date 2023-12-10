@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { SvgoPlugin, svgoPlugins } from 'src/constants/svgo-plugins'
 import { StorageUtils } from 'src/utils/storage-utils'
+
 import { Category } from './category'
 
 export const ExportSettings = () => {
@@ -36,7 +37,7 @@ export const ExportSettings = () => {
     }
 
   return (
-    <Category title="Export" description="Configuration settings for the export panel.">
+    <Category description="Configuration settings for the export panel." title="Export">
       <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
         <div className="mb-5">
           <h3 className="text-base font-semibold leading-7">Default SVGO Config</h3>
@@ -45,16 +46,16 @@ export const ExportSettings = () => {
           </p>
         </div>
         {_.sortBy(svgoPlugins, 'name').map((plugin) => (
-          <div key={plugin.name} className="mt-4 flex gap-2">
+          <div className="mt-4 flex gap-2" key={plugin.name}>
             <input
-              id={plugin.name}
-              type="checkbox"
-              className="checkbox"
               checked={isChecked(plugin)}
+              className="checkbox"
+              id={plugin.name}
               onChange={handleCheckboxChange(plugin)}
+              type="checkbox"
             />
             <div>
-              <label htmlFor={plugin.name} className="block leading-4">
+              <label className="block leading-4" htmlFor={plugin.name}>
                 {plugin.label}
               </label>
               <span className="text-muted">{plugin.description}</span>

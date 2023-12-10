@@ -1,9 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, PropsWithChildren } from 'react'
+
 import { IconButton } from '.'
 
 export type ModalProps = PropsWithChildren<{
+  /**
+   * Optional callback for when the modal is closed from the close button or clicking the overlay.
+   */
+  onClose?: () => void
   /**
    * Whether the modal is open or not.
    */
@@ -12,20 +17,16 @@ export type ModalProps = PropsWithChildren<{
    * Callback to set the open state.
    */
   setOpen: (open: boolean) => void
-  /**
-   * Optional callback for when the modal is closed from the close button or clicking the overlay.
-   */
-  onClose?: () => void
 }>
 
-export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<ModalProps>) => {
+export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<ModalProps>) => {
   const handleClose = () => {
     onClose?.()
     setOpen(false)
   }
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root as={Fragment} show={open}>
       <Dialog as="div" className="text relative z-30" onClose={handleClose}>
         {/* Overlay */}
         <Transition.Child
@@ -55,10 +56,10 @@ export const Modal = ({ open, setOpen, onClose, children }: PropsWithChildren<Mo
               {/* Modal content */}
               <Dialog.Panel className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-800">
                 <IconButton
-                  variant="ghost"
-                  size="xs"
-                  onClick={handleClose}
                   className="absolute right-4 top-4"
+                  onClick={handleClose}
+                  size="xs"
+                  variant="ghost"
                 >
                   <XMarkIcon className="h-5 w-5" />
                 </IconButton>

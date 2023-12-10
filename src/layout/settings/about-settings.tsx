@@ -1,11 +1,12 @@
 import { links } from 'src/constants/links'
+
 import { Category } from './category'
 
 export const AboutSettings = () => {
   return (
     <Category
-      title="About"
       description="A little history of the SVG Gobbler extension and how to support."
+      title="About"
     >
       <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
         <div className="mb-8">

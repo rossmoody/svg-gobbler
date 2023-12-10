@@ -1,9 +1,11 @@
+import type { Collection } from 'src/types'
+
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import type { Collection } from 'src/types'
+
 import { useRemoveCollection } from './use-remove-collection'
 
 type Props = {
@@ -23,19 +25,19 @@ export const CollectionItem = ({ collection }: Props) => {
   }, [collection.origin])
 
   function onClose() {
-    sidebarDispatch({ type: 'set-open', payload: false })
+    sidebarDispatch({ payload: false, type: 'set-open' })
   }
 
   return (
     <NavLink
-      to={`collection/${collection.id}`}
-      onClick={onClose}
       className={({ isActive }) => {
         return clsx(isActive && 'bg-gray-100 dark:bg-gray-700', 'collection-item group')
       }}
+      onClick={onClose}
+      to={`collection/${collection.id}`}
     >
       {faviconUrl ? (
-        <img src={faviconUrl} className="h-4 w-4 flex-shrink-0 rounded-sm" alt="Favicon" />
+        <img alt="Favicon" className="h-4 w-4 flex-shrink-0 rounded-sm" src={faviconUrl} />
       ) : (
         <div className="h-4 w-4 flex-shrink-0 rounded-md bg-gray-300" />
       )}

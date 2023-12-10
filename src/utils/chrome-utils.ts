@@ -5,7 +5,7 @@ class Chrome {
    */
   createNewTab(url = 'index.html'): Promise<chrome.tabs.Tab> {
     return new Promise((resolve) => {
-      chrome.tabs.create({ url, active: true }, (tab) => {
+      chrome.tabs.create({ active: true, url }, (tab) => {
         const listener = (
           updatedTabId: number,
           changeInfo: chrome.tabs.TabChangeInfo,
@@ -35,8 +35,8 @@ class Chrome {
    */
   async executeScript<T>(tabId: number, callBack: () => T): Promise<T> {
     const results = await chrome.scripting.executeScript({
-      target: { tabId },
       func: callBack,
+      target: { tabId },
     })
 
     if (chrome.runtime.lastError) {

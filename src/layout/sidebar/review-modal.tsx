@@ -8,8 +8,8 @@ export const ReviewModal = () => {
 
   return (
     <Fragment>
-      <button onClick={() => setOpen(true)} className="collection-item">
-        <MegaphoneIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
+      <button className="collection-item" onClick={() => setOpen(true)}>
+        <MegaphoneIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
         Leave a review
       </button>
       <Modal open={open} setOpen={setOpen}>
@@ -24,23 +24,23 @@ export const ReviewModal = () => {
         </div>
         <Modal.Footer>
           <Button
-            size="lg"
-            type="submit"
             onClick={() => {
               window.open(links.chromeWebstore, '_blank')
               setOpen(false)
             }}
+            size="lg"
+            type="submit"
           >
             Submit a review
           </Button>
           <Button
-            size="lg"
-            variant="secondary"
-            type="button"
             onClick={() => {
               window.open(links.githubIssuesNew, '_blank')
               setOpen(false)
             }}
+            size="lg"
+            type="button"
+            variant="secondary"
           >
             File an issue
           </Button>

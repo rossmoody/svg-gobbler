@@ -1,5 +1,6 @@
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useDashboard } from 'src/providers'
+
 import { IconButton, Tooltip } from '.'
 
 /**
@@ -9,13 +10,13 @@ export const CollectionPanelButton = () => {
   const { dispatch: sidebarDispatch } = useDashboard()
 
   function openSidebar() {
-    sidebarDispatch({ type: 'set-open', payload: true })
+    sidebarDispatch({ payload: true, type: 'set-open' })
   }
 
   return (
     <Tooltip content="Collections" side="right">
-      <IconButton variant="ghost" onClick={openSidebar} className="lg:hidden">
-        <Bars3Icon className="h-5 w-5" aria-hidden />
+      <IconButton className="lg:hidden" onClick={openSidebar} variant="ghost">
+        <Bars3Icon aria-hidden className="h-5 w-5" />
         <span className="sr-only">Open collection panel</span>
       </IconButton>
     </Tooltip>

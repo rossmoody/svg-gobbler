@@ -16,7 +16,7 @@ export const useClipboard = (label = 'Copy') => {
   }
 
   return {
-    text,
     copyToClipboard,
+    text,
   }
 }
