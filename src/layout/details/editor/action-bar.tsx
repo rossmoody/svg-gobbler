@@ -2,25 +2,26 @@ import { ArrowRightIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outl
 import { useMemo } from 'react'
 import { useDetails } from 'src/providers'
 import { SvgUtils } from 'src/utils/svg-utils'
+
 import { useOptimize } from '../use-optimize'
 
 export const ActionBar = () => {
-  const { state, dispatch } = useDetails()
+  const { dispatch, state } = useDetails()
   const { format, optimize } = useOptimize()
 
   const onOptimize = () => {
-    dispatch({ type: 'update-current-string', payload: optimize(state.currentString) })
+    dispatch({ payload: optimize(state.currentString), type: 'update-current-string' })
   }
 
   const onFormat = () => {
     const formatted = format(state.currentString)
-    dispatch({ type: 'update-current-string', payload: formatted })
+    dispatch({ payload: formatted, type: 'update-current-string' })
   }
 
   const bytes = useMemo(() => {
     return {
-      before: SvgUtils.getPrettyBytes(state.originalString),
       after: SvgUtils.getPrettyBytes(state.currentString),
+      before: SvgUtils.getPrettyBytes(state.originalString),
     }
   }, [state.currentString, state.originalString])
 

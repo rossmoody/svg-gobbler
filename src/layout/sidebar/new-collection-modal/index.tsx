@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal } from 'src/components'
+
 import { useCreateCollection } from './use-create-collection'
 
 type Props = {
@@ -11,11 +12,11 @@ type Props = {
   setOpen: (open: boolean) => void
 }
 
-export const NewCollectionModal = ({ setOpen, open }: Props) => {
+export const NewCollectionModal = ({ open, setOpen }: Props) => {
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
   const onSubmitForm = useCreateCollection(acceptedFiles)
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getInputProps, getRootProps, isDragActive } = useDropzone({
     accept: { 'image/svg+xml': ['.svg'] },
     maxSize: 10 * 1024 * 1024,
     multiple: true,
@@ -30,13 +31,13 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
   }
 
   return (
-    <Modal open={open} setOpen={setOpen} onClose={onClose}>
+    <Modal onClose={onClose} open={open} setOpen={setOpen}>
       <Modal.Header>Create a new collection</Modal.Header>
       <form onSubmit={onSubmitForm}>
-        <label htmlFor="name" className="label">
+        <label className="label" htmlFor="name">
           Name
         </label>
-        <input id="name" name="name" className="input" type="text" required />
+        <input className="input" id="name" name="name" required type="text" />
         <div
           {...getRootProps()}
           className={clsx(
@@ -48,17 +49,17 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
           {/* Upload Content */}
           <Transition
             as="div"
-            show={acceptedFiles.length < 1}
+            className="absolute inset-0 flex flex-col items-center justify-center"
             enter="transition-all duration-300 ease-in-out"
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
             leave="transition-all duration-300 ease-in-out"
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-70"
-            className="absolute inset-0 flex flex-col items-center justify-center"
+            show={acceptedFiles.length < 1}
             unmount={false}
           >
-            <DocumentPlusIcon className="text-muted mx-auto mb-3 h-12 w-12" aria-hidden="true" />
+            <DocumentPlusIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
             <div className="text flex text-sm leading-6">
               <span className="font-semibold text-red-600 dark:text-red-500">Upload files</span>
               <input className="sr-only" {...getInputProps()} />
@@ -69,16 +70,16 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
           {/* Content Uploaded */}
           <Transition
             as="div"
-            show={acceptedFiles.length > 0}
+            className="absolute inset-0 flex flex-col items-center justify-center"
             enter="transition-all duration-300 ease-in-out delay-150"
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
             leave="transition-all duration-300 ease-in-out"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            className="absolute inset-0 flex flex-col items-center justify-center"
+            show={acceptedFiles.length > 0}
           >
-            <DocumentCheckIcon className="text-muted mx-auto mb-3 h-12 w-12" aria-hidden="true" />
+            <DocumentCheckIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
             <span className="text text-sm font-medium leading-5">
               {acceptedFiles.length} item{acceptedFiles.length > 1 && 's'} uploaded
             </span>
@@ -89,7 +90,7 @@ export const NewCollectionModal = ({ setOpen, open }: Props) => {
           <Button size="lg" type="submit">
             Create collection
           </Button>
-          <Button size="lg" variant="secondary" onClick={onClose} type="button">
+          <Button onClick={onClose} size="lg" type="button" variant="secondary">
             Cancel
           </Button>
         </Modal.Footer>

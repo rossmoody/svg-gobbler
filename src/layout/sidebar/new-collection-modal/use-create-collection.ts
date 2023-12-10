@@ -1,13 +1,14 @@
+import type { Collection, PageData, StorageSvg } from 'src/types'
+
 import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import { Collection, PageData, StorageSvg } from 'src/types'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const useCreateCollection = (files: File[]) => {
   const navigate = useNavigate()
-  const { state, dispatch } = useDashboard()
+  const { dispatch, state } = useDashboard()
 
   return async function (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -21,9 +22,9 @@ export const useCreateCollection = (files: File[]) => {
     }))
 
     const pageData: PageData = {
+      data: svgStorageData,
       host: '',
       origin: '',
-      data: svgStorageData,
     }
 
     const collection: Collection = {
@@ -36,7 +37,7 @@ export const useCreateCollection = (files: File[]) => {
 
     await StorageUtils.setPageData(id, pageData)
     await StorageUtils.setStorageData('collections', collections)
-    dispatch({ type: 'set-collections', payload: collections })
+    dispatch({ payload: collections, type: 'set-collections' })
     navigate(`/dashboard/collection/${id}`)
 
     // Close the modal, I'm being lazy here

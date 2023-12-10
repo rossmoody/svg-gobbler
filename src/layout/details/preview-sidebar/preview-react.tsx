@@ -5,21 +5,22 @@ import { debounce } from 'lodash'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
+
 import { useSvgr } from './use-svgr'
 
 export const PreviewReact = () => {
-  const { state, dispatch } = useDetails()
+  const { dispatch, state } = useDetails()
   const { config, result } = state.preview.svgr
-  const { text, copyToClipboard } = useClipboard()
+  const { copyToClipboard, text } = useClipboard()
   const { loading } = useSvgr()
 
   const handleBooleanChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, checked } = e.target
-    dispatch({ type: 'set-svgr-config-value', payload: { key: id, value: checked } })
+    const { checked, id } = e.target
+    dispatch({ payload: { key: id, value: checked }, type: 'set-svgr-config-value' })
   }
 
   const debouncedFunction = debounce((payload) => {
-    dispatch({ type: 'set-svgr-state-name', payload })
+    dispatch({ payload, type: 'set-svgr-state-name' })
   }, 700)
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,34 +33,34 @@ export const PreviewReact = () => {
 
   return (
     <div className="relative h-full border-l border-slate-500/50">
-      <Button size="xs" className="absolute right-4 top-4 z-10" onClick={handleCopy}>
+      <Button className="absolute right-4 top-4 z-10" onClick={handleCopy} size="xs">
         {text}
       </Button>
       {!loading && (
         <CodeMirror
-          readOnly
-          value={result}
-          theme={tokyoNightStorm}
-          extensions={[javascript(), EditorView.lineWrapping]}
-          className="cm-padding-fix h-1/2"
           basicSetup={{ highlightActiveLine: false }}
+          className="cm-padding-fix h-1/2"
+          extensions={[javascript(), EditorView.lineWrapping]}
+          readOnly
+          theme={tokyoNightStorm}
+          value={result}
         />
       )}
       {loading && (
         <div className="flex h-1/2 items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" height={60}>
+          <svg height={60} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <path
-              fill="rgb(220, 38, 38)"
               d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+              fill="rgb(220, 38, 38)"
             >
               <animateTransform
                 attributeName="transform"
                 attributeType="XML"
-                type="rotate"
                 dur="1s"
                 from="0 50 50"
-                to="360 50 50"
                 repeatCount="indefinite"
+                to="360 50 50"
+                type="rotate"
               />
             </path>
           </svg>
@@ -73,30 +74,30 @@ export const PreviewReact = () => {
 
         <div className="mt-6 flex flex-col gap-2">
           <div>
-            <label htmlFor="dimensions" className="export-label">
+            <label className="export-label" htmlFor="dimensions">
               Component name
             </label>
             <span className="text-muted block pt-1">The name of the exported component</span>
           </div>
           <input
-            type="text"
             className="input"
-            id="name"
             defaultValue={state.preview.svgr.state.componentName}
+            id="name"
             onChange={handleNameChange}
+            type="text"
           />
         </div>
 
         <div className="mt-6 flex gap-2">
           <input
-            type="checkbox"
+            checked={config.dimensions}
             className="checkbox"
             id="dimensions"
-            checked={config.dimensions}
             onChange={handleBooleanChange}
+            type="checkbox"
           />
           <div>
-            <label htmlFor="dimensions" className="export-label">
+            <label className="export-label" htmlFor="dimensions">
               Dimensions
             </label>
             <span className="text-muted block pt-1">
@@ -107,14 +108,14 @@ export const PreviewReact = () => {
 
         <div className="mt-4 flex gap-2">
           <input
-            type="checkbox"
+            checked={config.ref}
             className="checkbox"
             id="ref"
-            checked={config.ref}
             onChange={handleBooleanChange}
+            type="checkbox"
           />
           <div>
-            <label htmlFor="ref" className="export-label">
+            <label className="export-label" htmlFor="ref">
               Ref
             </label>
             <span className="text-muted block pt-1">Supply a forward ref to the root SVG tag</span>
@@ -123,14 +124,14 @@ export const PreviewReact = () => {
 
         <div className="mt-4 flex gap-2">
           <input
-            type="checkbox"
+            checked={config.native}
             className="checkbox"
             id="native"
-            checked={config.native}
             onChange={handleBooleanChange}
+            type="checkbox"
           />
           <div>
-            <label htmlFor="native" className="export-label">
+            <label className="export-label" htmlFor="native">
               Native
             </label>
             <span className="text-muted block pt-1">
@@ -142,14 +143,14 @@ export const PreviewReact = () => {
 
         <div className="mt-4 flex gap-2">
           <input
-            type="checkbox"
+            checked={config.typescript}
             className="checkbox"
             id="typescript"
-            checked={config.typescript}
             onChange={handleBooleanChange}
+            type="checkbox"
           />
           <div>
-            <label htmlFor="typescript" className="export-label">
+            <label className="export-label" htmlFor="typescript">
               Typescript
             </label>
             <span className="text-muted block pt-1">Generate type definitions for TypeScript</span>
@@ -158,14 +159,14 @@ export const PreviewReact = () => {
 
         <div className="mt-4 flex gap-2">
           <input
-            type="checkbox"
+            checked={config.memo}
             className="checkbox"
             id="memo"
-            checked={config.memo}
             onChange={handleBooleanChange}
+            type="checkbox"
           />
           <div>
-            <label htmlFor="memo" className="export-label">
+            <label className="export-label" htmlFor="memo">
               Memo
             </label>
             <span className="text-muted block pt-1">Wrap component definition in a React.memo</span>

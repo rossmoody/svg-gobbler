@@ -1,10 +1,9 @@
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
-import svgFactory from 'scripts/svg-factory'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { svgFactory } from 'svg-gobbler-scripts'
 
 /**
  * The primary initialization function for the root route.
@@ -29,9 +28,9 @@ export async function rootLoader() {
 
         // Process the strings as page data with ids
         const pageData: PageData = {
-          origin: data.origin,
+          data: data.data,
           host: data.host,
-          data: data.data.map(SvgUtils.createStorageSvg),
+          origin: data.origin,
         }
 
         // Create classes and process the raw svg elements
@@ -39,8 +38,8 @@ export async function rootLoader() {
 
         // Update the page data with the processed strings
         pageData.data = svgClasses.map((item) => ({
-          svg: item.originalString,
           id: item.id,
+          svg: item.originalString,
         }))
 
         const collection: Collection = {

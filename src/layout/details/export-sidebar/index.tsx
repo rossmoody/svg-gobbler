@@ -7,9 +7,9 @@ export const ExportSidebar = () => {
 
   return (
     <aside
+      className="relative z-10 border-r border-gray-200 dark:border-gray-800"
       ref={ref}
       style={{ width }}
-      className="relative z-10 border-r border-gray-200 dark:border-gray-800"
     >
       <div className="flex h-full flex-col">
         <div className="flex-grow overflow-y-auto px-3 pt-2">

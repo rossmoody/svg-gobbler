@@ -5,7 +5,7 @@ import { FormUtils } from 'src/utils/form-utils'
 
 export const ExportDetailFooter = () => {
   const { state } = useDetails()
-  const { text, copyToClipboard } = useClipboard('Copy to clipboard')
+  const { copyToClipboard, text } = useClipboard('Copy to clipboard')
 
   const handleCopy = () => {
     copyToClipboard(state.currentString)
@@ -17,7 +17,7 @@ export const ExportDetailFooter = () => {
 
   return (
     <footer className="flex flex-col gap-2 px-3 pb-6 pt-4">
-      <Button variant="secondary" className="justify-center transition-all" onClick={handleCopy}>
+      <Button className="justify-center transition-all" onClick={handleCopy} variant="secondary">
         {text}
       </Button>
       <Button className="justify-center" onClick={handleDownload}>

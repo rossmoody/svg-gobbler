@@ -1,27 +1,28 @@
-import { Dialog, Transition } from '@headlessui/react'
+import type { Collection } from 'src/types'
 
+import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { useDashboard } from 'src/providers/dashboard'
-import type { Collection } from 'src/types'
+
 import { SidebarContent } from './sidebar-content'
 
 export const Sidebar = () => {
-  const { state, dispatch } = useDashboard()
+  const { dispatch, state } = useDashboard()
   const collections = useLoaderData() as Collection[]
 
   useEffect(() => {
-    dispatch({ type: 'set-collections', payload: collections })
+    dispatch({ payload: collections, type: 'set-collections' })
   }, [collections, dispatch])
 
   function closeSidebar() {
-    dispatch({ type: 'set-open', payload: false })
+    dispatch({ payload: false, type: 'set-open' })
   }
 
   return (
     <>
-      <Transition.Root show={state.isOpen} as={Fragment}>
+      <Transition.Root as={Fragment} show={state.isOpen}>
         <Dialog as="div" className="relative z-20 lg:hidden" onClose={closeSidebar}>
           <Transition.Child
             as={Fragment}
@@ -55,9 +56,9 @@ export const Sidebar = () => {
                   leaveTo="opacity-0"
                 >
                   <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-                    <button type="button" className="-m-2.5 p-2.5" onClick={closeSidebar}>
+                    <button className="-m-2.5 p-2.5" onClick={closeSidebar} type="button">
                       <span className="sr-only">Close sidebar</span>
-                      <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <XMarkIcon aria-hidden="true" className="h-6 w-6 text-white" />
                     </button>
                   </div>
                 </Transition.Child>

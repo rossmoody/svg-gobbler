@@ -2,36 +2,37 @@ import { useEffect, useState } from 'react'
 import { serverEndpoint } from 'src/constants/server-config'
 import { useDetails } from 'src/providers'
 import { logger } from 'src/utils/logger'
+
 import { SvgrMessage } from '../../../../server/index'
 
 export const useSvgr = () => {
   const [loading, setLoading] = useState(false)
 
   const {
-    state: { currentString, preview },
     dispatch,
+    state: { currentString, preview },
   } = useDetails()
 
   useEffect(() => {
     setLoading(true)
     ;(async () => {
       const message: SvgrMessage = {
-        svg: currentString,
         config: preview.svgr.config,
         state: preview.svgr.state,
+        svg: currentString,
       }
 
       try {
         const response = await fetch(serverEndpoint.svgr, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(message),
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
         })
         const result = await response.text()
-        dispatch({ type: 'set-svgr-result', payload: result })
+        dispatch({ payload: result, type: 'set-svgr-result' })
       } catch (error) {
         logger.error(error)
-        dispatch({ type: 'set-svgr-result', payload: '😥 Error creating the SVGR component' })
+        dispatch({ payload: '😥 Error creating the SVGR component', type: 'set-svgr-result' })
       }
 
       setLoading(false)

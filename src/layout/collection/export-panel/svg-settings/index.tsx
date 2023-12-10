@@ -4,22 +4,23 @@ import { Fragment } from 'react'
 import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useExport } from 'src/providers'
+
 import { ResetButton } from './reset-button'
 import { SvgoOption } from './svgo-option'
 
 export const SvgSettings = () => {
-  const { state, dispatch } = useExport()
+  const { dispatch, state } = useExport()
 
   const handleOptimizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-optimize-exports', payload: e.target.checked })
+    dispatch({ payload: e.target.checked, type: 'set-optimize-exports' })
   }
 
   const handlePrettifyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-prettify', payload: e.target.checked })
+    dispatch({ payload: e.target.checked, type: 'set-prettify' })
   }
 
   const handleFloatPrecisionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-float-precision', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-float-precision' })
   }
 
   return (
@@ -27,57 +28,57 @@ export const SvgSettings = () => {
       <div className="flex flex-col gap-3">
         <div className="flex gap-2">
           <input
-            id="optimize"
-            className="checkbox"
-            type="checkbox"
             checked={state.settings.svg.optimizeExports}
+            className="checkbox"
+            id="optimize"
             onChange={handleOptimizeChange}
+            type="checkbox"
           />
-          <label htmlFor="optimize" className="export-label">
+          <label className="export-label" htmlFor="optimize">
             Optimize exports
           </label>
         </div>
         <div className="flex gap-2">
           <input
-            id="prettify"
-            className="checkbox"
-            type="checkbox"
             checked={state.settings.svg.prettify}
+            className="checkbox"
+            id="prettify"
             onChange={handlePrettifyChange}
+            type="checkbox"
           />
-          <label htmlFor="prettify" className="export-label">
+          <label className="export-label" htmlFor="prettify">
             Pretty output
           </label>
         </div>
         <div>
           <div className="group mb-1 mt-2 flex items-center gap-1">
-            <label htmlFor="float-precision" className="export-label">
+            <label className="export-label" htmlFor="float-precision">
               Floating precision
             </label>
             <HelpIcon content="Precision of floating point numbers. Will be passed to each plugin that supports this param." />
           </div>
           <input
-            id="float-precision"
-            type="number"
-            min="1"
-            max="10"
-            value={state.settings.svg.floatPrecision}
-            onChange={handleFloatPrecisionChange}
             className="input"
+            id="float-precision"
+            max="10"
+            min="1"
+            onChange={handleFloatPrecisionChange}
+            type="number"
+            value={state.settings.svg.floatPrecision}
           />
         </div>
       </div>
       <span className="mb-5 mt-6 block h-px bg-gray-200 dark:bg-gray-700" />
       <Transition
         as="div"
-        show={state.settings.svg.optimizeExports}
+        className="flex flex-col gap-3 pb-8"
         enter="transition-all duration-300 ease-in-out delay-150"
         enterFrom="opacity-0 h-0"
         enterTo="opacity-100 h-100"
         leave="transition-all duration-300 ease-in-out"
         leaveFrom="opacity-100 h-100"
         leaveTo="opacity-0 h-0"
-        className="flex flex-col gap-3 pb-8"
+        show={state.settings.svg.optimizeExports}
       >
         <div className="flex items-center justify-between">
           <h2 className="my-2 text-sm font-medium leading-none">Plugins</h2>

@@ -37,7 +37,7 @@ const Tab = (props: PropsWithChildren) => (
 export const Tabs = {
   Group,
   List,
-  Panels,
   Panel,
+  Panels,
   Tab,
 }

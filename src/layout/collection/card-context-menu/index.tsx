@@ -1,3 +1,5 @@
+import type { Svg } from 'svg-gobbler-scripts'
+
 import {
   ArrowDownTrayIcon,
   ChevronRightIcon,
@@ -6,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline'
 import * as ContextMenu from '@radix-ui/react-context-menu'
 import { Fragment, PropsWithChildren } from 'react'
-import type { Svg } from 'scripts/svg-classes/svg'
+
 import { ContextMenuItem } from './context-menu-item'
 import { ContextMenuSubTrigger } from './context-menu-sub-trigger'
 import { useContextActions } from './use-context-actions'
@@ -15,7 +17,7 @@ type Props = {
   data: Svg
 }
 
-export const CardContextMenu = ({ data, children }: PropsWithChildren<Props>) => {
+export const CardContextMenu = ({ children, data }: PropsWithChildren<Props>) => {
   const actions = useContextActions(data)
 
   if (data.corsRestricted) {

@@ -1,4 +1,5 @@
 import type { SvgoPlugin } from 'src/constants/svgo-plugins'
+
 import { defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 
 export const fileTypes = ['svg', 'png', 'webp', 'jpeg'] as const
@@ -17,27 +18,18 @@ export type ExportState = {
    * The setting configurations for each file type.
    */
   settings: {
-    svg: {
+    /**
+     * JPEG export settings.
+     */
+    jpeg: {
       /**
-       * Whether or not to show the optimization settings for SVG exports.
+       * The quality of the jpeg to export.
        */
-      optimizeExports: boolean
+      quality: number
       /**
-       * The current SVGO plugins to use when exporting SVGs.
+       * The size of the jpeg to export.
        */
-      svgoPlugins: SvgoPlugin[]
-      /**
-       * Format the SVGs with prettier.
-       */
-      prettify: boolean
-      /**
-       * The floating precision to use when optimizing SVGs.
-       */
-      floatPrecision: number
-      /**
-       * Path for SVGO config. Mainly used to prefix IDs
-       */
-      path: string
+      size: number
     }
     /**
      * PNG export settings.
@@ -48,72 +40,81 @@ export type ExportState = {
        */
       size: number
     }
+    svg: {
+      /**
+       * The floating precision to use when optimizing SVGs.
+       */
+      floatPrecision: number
+      /**
+       * Whether or not to show the optimization settings for SVG exports.
+       */
+      optimizeExports: boolean
+      /**
+       * Path for SVGO config. Mainly used to prefix IDs
+       */
+      path: string
+      /**
+       * Format the SVGs with prettier.
+       */
+      prettify: boolean
+      /**
+       * The current SVGO plugins to use when exporting SVGs.
+       */
+      svgoPlugins: SvgoPlugin[]
+    }
     /**
      * PNG export settings.
      */
     webp: {
       /**
-       * The size of the webp to export.
-       */
-      size: number
-      /**
        * The quality of the webp to export.
        */
       quality: number
-    }
-    /**
-     * JPEG export settings.
-     */
-    jpeg: {
       /**
-       * The size of the jpeg to export.
+       * The size of the webp to export.
        */
       size: number
-      /**
-       * The quality of the jpeg to export.
-       */
-      quality: number
     }
   }
 }
 
 export type ExportAction =
+  | { payload: FileType; type: 'set-file-type' }
+  | { payload: SvgoPlugin; type: 'add-svgo-plugin' }
+  | { payload: SvgoPlugin; type: 'remove-svgo-plugin' }
+  | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
+  | { payload: boolean; type: 'set-optimize-exports' }
+  | { payload: boolean; type: 'set-prettify' }
+  | { payload: number; type: 'set-float-precision' }
+  | { payload: number; type: 'set-jpeg-quality' }
+  | { payload: number; type: 'set-jpeg-size' }
+  | { payload: number; type: 'set-png-size' }
+  | { payload: number; type: 'set-webp-quality' }
+  | { payload: number; type: 'set-webp-size' }
+  | { payload: string; type: 'set-filename' }
   | { type: 'reset' }
-  | { type: 'set-file-type'; payload: FileType }
-  | { type: 'set-optimize-exports'; payload: boolean }
-  | { type: 'set-svgo-plugins'; payload: SvgoPlugin[] }
-  | { type: 'add-svgo-plugin'; payload: SvgoPlugin }
-  | { type: 'remove-svgo-plugin'; payload: SvgoPlugin }
-  | { type: 'set-prettify'; payload: boolean }
-  | { type: 'set-filename'; payload: string }
-  | { type: 'set-png-size'; payload: number }
-  | { type: 'set-float-precision'; payload: number }
-  | { type: 'set-webp-size'; payload: number }
-  | { type: 'set-webp-quality'; payload: number }
-  | { type: 'set-jpeg-size'; payload: number }
-  | { type: 'set-jpeg-quality'; payload: number }
 
 export const initExportState: ExportState = {
   fileType: 'svg',
   filename: 'svg-gobbler',
   settings: {
-    svg: {
-      optimizeExports: true,
-      svgoPlugins: defaultSvgoPlugins,
-      prettify: false,
-      floatPrecision: 3,
-      path: 'svg-gobbler',
+    jpeg: {
+      quality: 0.92,
+      size: 512,
     },
     png: {
       size: 512,
     },
-    webp: {
-      size: 512,
-      quality: 0.92,
+    svg: {
+      floatPrecision: 3,
+      optimizeExports: true,
+      path: 'svg-gobbler',
+      prettify: false,
+      svgoPlugins: defaultSvgoPlugins,
     },
-    jpeg: {
-      size: 512,
+    webp: {
       quality: 0.92,
+      size: 512,
     },
   },
 }

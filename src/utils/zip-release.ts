@@ -1,6 +1,7 @@
 import archiver from 'archiver'
 import fs from 'fs'
 import path from 'path'
+
 import packageJson from '../../package.json' assert { type: 'json' }
 
 const rootPath = process.cwd()

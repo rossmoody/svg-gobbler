@@ -24,11 +24,11 @@ export const useOptimize = () => {
    */
   const format = useCallback((svg: string) => {
     const { data } = svgoOptimize(svg, {
-      plugins: [],
       js2svg: {
-        pretty: true,
         indent: 2,
+        pretty: true,
       },
+      plugins: [],
     })
     return data
   }, [])
@@ -39,14 +39,14 @@ export const useOptimize = () => {
    */
   const minify = useCallback((svg: string) => {
     const { data } = svgoOptimize(svg, {
-      plugins: [],
       js2svg: {
-        pretty: false,
         indent: 0,
+        pretty: false,
       },
+      plugins: [],
     })
     return data
   }, [])
 
-  return { optimize, format, minify }
+  return { format, minify, optimize }
 }

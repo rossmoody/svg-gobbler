@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
+
 import { useExportActions } from './use-export-actions'
 
 export const Footer = () => {
@@ -71,7 +72,7 @@ export const Footer = () => {
   return (
     <footer className="flex flex-col gap-2 px-1 pb-6 pt-4">
       {collectionState.selected.length < 2 && (
-        <Button variant="secondary" className="justify-center transition-all" onClick={handleCopy}>
+        <Button className="justify-center transition-all" onClick={handleCopy} variant="secondary">
           {label}
         </Button>
       )}

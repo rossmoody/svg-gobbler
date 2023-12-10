@@ -8,7 +8,7 @@ type SvgoOptionProps = {
 }
 
 export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
-  const { state, dispatch } = useExport()
+  const { dispatch, state } = useExport()
 
   const isChecked = useMemo(() => {
     return state.settings.svg.svgoPlugins.some((p) => p.name === plugin.name)
@@ -17,11 +17,11 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
   const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.checked) {
       case true:
-        dispatch({ type: 'add-svgo-plugin', payload: plugin })
+        dispatch({ payload: plugin, type: 'add-svgo-plugin' })
         break
 
       case false:
-        dispatch({ type: 'remove-svgo-plugin', payload: plugin })
+        dispatch({ payload: plugin, type: 'remove-svgo-plugin' })
         break
     }
   }
@@ -29,14 +29,14 @@ export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
   return (
     <div className="group flex gap-2">
       <input
-        type="checkbox"
+        checked={isChecked}
         className="checkbox"
         id={plugin.name}
-        checked={isChecked}
         onChange={handleOptionChange}
+        type="checkbox"
       />
       <div>
-        <label htmlFor={plugin.name} className="export-label">
+        <label className="export-label" htmlFor={plugin.name}>
           {plugin.label}
         </label>
       </div>

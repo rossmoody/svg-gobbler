@@ -16,36 +16,36 @@ import {
 export default function App() {
   const router = createMemoryRouter([
     {
-      path: '/',
       element: <RootRoute />,
       errorElement: <ErrorState />,
       loader: rootLoader,
+      path: '/',
     },
     {
-      path: '/dashboard',
-      element: <DashboardRoute />,
-      errorElement: <ErrorState />,
-      loader: dashboardLoader,
       children: [
         {
-          path: 'collection/:id',
           element: <CollectionRoute />,
           errorElement: <ErrorState />,
           loader: collectionLoader,
+          path: 'collection/:id',
         },
         {
-          path: 'settings',
           element: <SettingsRoute />,
           errorElement: <ErrorState />,
           loader: settingsLoader,
+          path: 'settings',
         },
       ],
+      element: <DashboardRoute />,
+      errorElement: <ErrorState />,
+      loader: dashboardLoader,
+      path: '/dashboard',
     },
     {
-      path: '/details/:collectionId/:id',
       element: <DetailsRoute />,
       errorElement: <ErrorState />,
       loader: detailLoader,
+      path: '/details/:collectionId/:id',
     },
   ])
 

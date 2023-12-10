@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
-import { Inline } from 'scripts/svg-classes/inline'
 import { useCollection } from 'src/providers'
 import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { Inline } from 'svg-gobbler-scripts'
 
 /**
  * Upload a given array of svg strings to chrome storage, update the
@@ -12,7 +12,7 @@ import { StorageUtils } from 'src/utils/storage-utils'
  * header.
  */
 export const useUpload = () => {
-  const { state, dispatch } = useCollection()
+  const { dispatch, state } = useCollection()
   const { revalidate } = useRevalidator()
 
   return async function (data: string[]) {
@@ -36,7 +36,7 @@ export const useUpload = () => {
 
     // Update the collection context state
     const newSvgClasses = newData.map((item) => new Inline(item.svg, item.id))
-    dispatch({ type: 'set-data', payload: [...state.data, ...newSvgClasses] })
+    dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
     dispatch({ type: 'process-data' })
     revalidate()
   }

@@ -1,8 +1,9 @@
+import type { Image, Svg } from 'svg-gobbler-scripts'
+
 import clsx from 'clsx'
 import { HTMLAttributes, forwardRef, useMemo } from 'react'
-import type { Image } from 'scripts/svg-classes/image'
-import type { Svg } from 'scripts/svg-classes/svg'
 import { useCollection } from 'src/providers'
+
 import { CardContextMenu } from '../card-context-menu'
 import { CardContent } from './card-content'
 import { CorsRestrictedActions } from './cors-restricted-actions'
@@ -13,7 +14,7 @@ export type CardProps = HTMLAttributes<HTMLLIElement> & {
 }
 
 export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
-  const { data, className, ...rest } = props
+  const { className, data, ...rest } = props
   const { state } = useCollection()
 
   const Actions = useMemo(() => {
@@ -24,13 +25,13 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
     <CardContextMenu data={data}>
       <li
         {...rest}
-        ref={ref}
         className={clsx(
           'text relative rounded-2xl bg-white dark:bg-gray-800/50',
           'group/card transition-all duration-300 ease-in-out',
           'flex aspect-square items-center justify-center',
           className,
         )}
+        ref={ref}
       >
         <Actions data={data as Image} />
         <div

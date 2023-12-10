@@ -1,20 +1,22 @@
+import type { CollectionData } from 'src/types'
+
 import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useMemo } from 'react'
 import { Button } from 'src/components'
 import { NoResults } from 'src/components/no-results'
 import { useCollection } from 'src/providers'
-import type { CollectionData } from 'src/types'
+
 import { Card } from './card'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
-  const { state, dispatch } = useCollection()
+  const { dispatch, state } = useCollection()
 
   /**
    * We do this here instead of routes because data is awaited in
    * Suspense within the route component.
    */
   useEffect(() => {
-    dispatch({ type: 'set-data', payload: data })
+    dispatch({ payload: data, type: 'set-data' })
     dispatch({ type: 'process-data' })
   }, [data, dispatch])
 
@@ -57,26 +59,26 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
       >
         {state.processedData.map((svg, i) => (
           <Transition
-            show
             appear
             as={Fragment}
-            key={svg.originalString + i}
             enter="transition-all duration-300 ease-in-out"
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
+            key={svg.originalString + i}
+            show
           >
             <Card data={svg} style={{ transitionDelay: calculateDelay(i) }} />
           </Transition>
         ))}
       </ul>
       <Transition
-        show={state.processedData.length < filteredResultLength}
+        className="my-12 flex justify-center"
         enter="transition-opacity duration-300 ease-in-out"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        className="my-12 flex justify-center"
+        show={state.processedData.length < filteredResultLength}
       >
-        <Button variant="secondary" size="lg" onClick={() => dispatch({ type: 'load-more' })}>
+        <Button onClick={() => dispatch({ type: 'load-more' })} size="lg" variant="secondary">
           Load more
         </Button>
       </Transition>

@@ -2,13 +2,14 @@ import clsx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useCollection } from 'src/providers'
+
 import { CardProps } from '.'
 
 /**
  * The functionality of a given card when it is not cors restricted.
  */
 export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
-  const { state, dispatch } = useCollection()
+  const { dispatch, state } = useCollection()
 
   const isSelected = useMemo(() => {
     return state.selected.includes(data)
@@ -17,9 +18,9 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
   const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.checked) {
       case true:
-        return dispatch({ type: 'add-selected', payload: data })
+        return dispatch({ payload: data, type: 'add-selected' })
       case false:
-        return dispatch({ type: 'remove-selected', payload: data })
+        return dispatch({ payload: data, type: 'remove-selected' })
     }
   }
 
@@ -34,19 +35,19 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
       >
         <label className="flex cursor-pointer items-center justify-center rounded-lg p-2 group-hover/select:bg-gray-100/70 group-hover/select:dark:bg-gray-800">
           <input
-            type="checkbox"
-            onChange={handleSelect}
             checked={isSelected}
             className="h-5 w-5 cursor-pointer rounded border-gray-300 bg-gray-100 text-red-600 
             transition-all duration-150 ease-in-out focus:ring-2 focus:ring-red-500 dark:border-gray-600 
             dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-red-600"
+            onChange={handleSelect}
+            type="checkbox"
           />
         </label>
       </div>
 
       <Link
-        to={`/details/${state.collectionId}/${data.id}`}
         className="absolute inset-0 cursor-pointer rounded-xl opacity-0 shadow-md transition-all ease-in group-hover/card:opacity-100"
+        to={`/details/${state.collectionId}/${data.id}`}
       />
     </div>
   )

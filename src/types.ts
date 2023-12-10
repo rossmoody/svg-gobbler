@@ -1,8 +1,4 @@
-import type { GElement } from 'scripts/svg-classes/g-element'
-import type { Image } from 'scripts/svg-classes/image'
-import type { Inline } from 'scripts/svg-classes/inline'
-import type { Svg } from 'scripts/svg-classes/svg'
-import type { SvgSymbol } from 'scripts/svg-classes/symbol'
+import type { DocumentData, GElement, Image, Inline, Svg, SvgSymbol } from 'svg-gobbler-scripts'
 
 /**
  * The message sent from the Background script to the Content script.
@@ -11,22 +7,7 @@ export type BackgroundMessage = {
   /**
    * The data gathered from the active tab
    */
-  data: {
-    /**
-     * An array of SVG string elements from the active tab.
-     */
-    data: string[]
-    /**
-     * The host URL of the site. This is used as a name for collection and
-     * dashboard title initially in the sidebar.
-     */
-    host: string
-    /**
-     * The origin of the active tab. This is used to rebuild the SVGs in the
-     * content script. Especially related to image sources and cors restrictions.
-     */
-    origin: string
-  }
+  data: DocumentData
 }
 
 /**
@@ -34,8 +15,7 @@ export type BackgroundMessage = {
  */
 export type StorageSvg = {
   /**
-   * A unique id for the svg. Used to identify the svg in storage and also as
-   * the id for routing to a given svg.
+   * Unique ID
    */
   id: string
   /**
@@ -45,24 +25,9 @@ export type StorageSvg = {
 }
 
 /**
- * The data stored in chrome storage as part of page data.
+ * The model for data stored and gathered from the document
  */
-export type PageData = {
-  /**
-   * An array of SVG string elements from the active tab.
-   */
-  data: StorageSvg[]
-  /**
-   * The host URL of the site. This is used as a name for collection and
-   * dashboard title initially in the sidebar.
-   */
-  host: string
-  /**
-   * The origin of the active tab. This is used to rebuild the SVGs in the
-   * content script. Especially related to image sources and cors restrictions.
-   */
-  origin: string
-}
+export type PageData = DocumentData
 
 /**
  * The model of a collection that is stored in local storage.
@@ -102,14 +67,6 @@ export type CollectionData = {
    */
   view: {
     /**
-     * The size of the icons in the collection
-     */
-    size: number
-    /**
-     * The sort order of the collection
-     */
-    sort: 'none' | 'file-asc' | 'file-desc'
-    /**
      * The filters applied to the collection
      */
     filters: {
@@ -118,6 +75,14 @@ export type CollectionData = {
        */
       'hide-cors': boolean
     }
+    /**
+     * The size of the icons in the collection
+     */
+    size: number
+    /**
+     * The sort order of the collection
+     */
+    sort: 'file-asc' | 'file-desc' | 'none'
   }
 }
 
@@ -130,16 +95,16 @@ export type DetailsParams = {
    */
   collectionId: string
   /**
-   * The original svg string upon load.
-   */
-  originalString: string
-  /**
    * The id of the svg in storage
    */
   id: string
+  /**
+   * The original svg string upon load.
+   */
+  originalString: string
 }
 
 /**
  * A union of all the svg types that are returned from the svgFactory
  */
-export type SvgType = Inline | Image | SvgSymbol | GElement
+export type SvgType = GElement | Image | Inline | SvgSymbol

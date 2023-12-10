@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
 import { useDashboard } from 'src/providers'
+
 import { CollectionItem } from './collection-item'
 import { NewCollectionModal } from './new-collection-modal'
 import { ReviewModal } from './review-modal'
@@ -18,29 +19,29 @@ export const SidebarContent = () => {
         <Logo className="h-8 w-auto" />
       </div>
       <nav className="flex flex-1 flex-col">
-        <ul role="list" className="-mx-2 flex flex-1 flex-col gap-1.5">
+        <ul className="-mx-2 flex flex-1 flex-col gap-1.5" role="list">
           <li>
             <button className="collection-item w-full" onClick={() => setOpen(true)}>
-              <PlusIcon className="h-4 w-4" aria-hidden="true" />
+              <PlusIcon aria-hidden="true" className="h-4 w-4" />
               New collection
             </button>
             <NewCollectionModal open={open} setOpen={setOpen} />
           </li>
           <hr className="mb-5 mt-2 border-gray-200 dark:border-gray-800" />
           <li>
-            <ul role="list" className="flex flex-col gap-1.5">
+            <ul className="flex flex-col gap-1.5" role="list">
               {state.collections.map((collection, i) => (
                 <Transition
-                  show
                   appear
                   as={Fragment}
-                  key={collection.id}
                   enter="transition-all duration-300 ease-in-out"
                   enterFrom="opacity-0 translate-y-2 scale-95"
                   enterTo="opacity-100 translate-y-0 scale-100"
+                  key={collection.id}
                   leave="transition-all duration-300 ease-in-out"
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
+                  show
                 >
                   <li key={collection.id} style={{ transitionDelay: `${i * 15}ms` }}>
                     <CollectionItem collection={collection} />
@@ -50,8 +51,8 @@ export const SidebarContent = () => {
             </ul>
           </li>
           <li className="mt-auto pt-8">
-            <NavLink to="settings" className="collection-item">
-              <Cog6ToothIcon className="h-4 w-4 shrink-0 " aria-hidden="true" />
+            <NavLink className="collection-item" to="settings">
+              <Cog6ToothIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
               Settings
             </NavLink>
           </li>

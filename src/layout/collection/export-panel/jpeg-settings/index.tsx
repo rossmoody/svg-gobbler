@@ -1,16 +1,17 @@
 import { HelpIcon } from 'src/components'
 import { useExport } from 'src/providers'
+
 import { imageTooltip } from '../webp-settings'
 
 export const JpegSettings = () => {
-  const { state, dispatch } = useExport()
+  const { dispatch, state } = useExport()
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-jpeg-size', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-jpeg-size' })
   }
 
   const handleQualityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-jpeg-quality', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-jpeg-quality' })
   }
 
   return (
@@ -23,11 +24,11 @@ export const JpegSettings = () => {
           <HelpIcon content={imageTooltip} />
         </div>
         <input
-          type="text"
           className="export-input"
           id="size"
-          value={state.settings.png.size}
           onChange={handleSizeChange}
+          type="text"
+          value={state.settings.png.size}
         />
       </div>
       <div>
@@ -35,14 +36,14 @@ export const JpegSettings = () => {
           Quality
         </label>
         <input
-          type="number"
           className="export-input"
           id="quality"
-          min={0}
           max={1}
-          step={0.01}
-          value={state.settings.jpeg.quality}
+          min={0}
           onChange={handleQualityChange}
+          step={0.01}
+          type="number"
+          value={state.settings.jpeg.quality}
         />
       </div>
     </div>

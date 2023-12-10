@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
+
 import { Footer } from './footer'
 import { Header } from './header'
 import { JpegSettings } from './jpeg-settings'
@@ -19,25 +20,25 @@ const transitionConfig = {
 
 export const ExportPanel = () => {
   const { state: collectionState } = useCollection()
-  const { state: exportState, dispatch: exportDispatch } = useExport()
+  const { dispatch: exportDispatch, state: exportState } = useExport()
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    exportDispatch({ type: 'set-file-type', payload: e.target.value as FileType })
+    exportDispatch({ payload: e.target.value as FileType, type: 'set-file-type' })
   }
 
   const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exportDispatch({ type: 'set-filename', payload: e.target.value })
+    exportDispatch({ payload: e.target.value, type: 'set-filename' })
   }
 
   return (
     <Transition
-      show={collectionState.selected.length > 0}
       enter="transition-all duration-500"
       enterFrom="opacity-0 w-[0]"
       enterTo="opacity-100 w-[18rem]"
       leave="transition-all duration-500"
       leaveFrom="opacity-100 w-[18rem]"
       leaveTo="opacity-0 w-[0]"
+      show={collectionState.selected.length > 0}
     >
       <aside
         className={clsx(
@@ -56,8 +57,8 @@ export const ExportPanel = () => {
                 <select
                   className="export-select"
                   id="file-type"
-                  value={exportState.fileType}
                   onChange={handleTypeChange}
+                  value={exportState.fileType}
                 >
                   {fileTypes.map((type) => (
                     <option key={type} value={type}>
@@ -71,10 +72,10 @@ export const ExportPanel = () => {
                   File name
                 </label>
                 <input
-                  id="file-name"
-                  type="text"
                   className="export-input"
+                  id="file-name"
                   onChange={handleFileNameChange}
+                  type="text"
                   value={exportState.filename}
                 />
               </div>

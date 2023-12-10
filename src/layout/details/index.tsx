@@ -1,7 +1,9 @@
+import type { DetailsParams } from 'src/types'
+
 import { forwardRef, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { useDetails } from 'src/providers/details'
-import type { DetailsParams } from 'src/types'
+
 import { DetailsEditor } from './editor'
 import { ExportSidebar } from './export-sidebar'
 import { Header } from './header'
@@ -12,11 +14,11 @@ export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   const { dispatch } = useDetails()
 
   useEffect(() => {
-    dispatch({ type: 'init', payload: data })
+    dispatch({ payload: data, type: 'init' })
   }, [dispatch, data])
 
   return (
-    <div ref={ref} className="h-full overflow-hidden">
+    <div className="h-full overflow-hidden" ref={ref}>
       <Header />
       <main className="relative flex h-[calc(100dvh-theme(space.16))]">
         <ExportSidebar />

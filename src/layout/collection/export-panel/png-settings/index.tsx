@@ -1,12 +1,13 @@
 import { HelpIcon } from 'src/components'
 import { useExport } from 'src/providers'
+
 import { imageTooltip } from '../webp-settings'
 
 export const PngSettings = () => {
-  const { state, dispatch } = useExport()
+  const { dispatch, state } = useExport()
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-png-size', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-png-size' })
   }
 
   return (
@@ -19,11 +20,11 @@ export const PngSettings = () => {
           <HelpIcon content={imageTooltip} />
         </div>
         <input
-          type="text"
           className="export-input"
           id="size"
-          value={state.settings.png.size}
           onChange={handleSizeChange}
+          type="text"
+          value={state.settings.png.size}
         />
       </div>
     </div>

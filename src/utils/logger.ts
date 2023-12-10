@@ -2,20 +2,20 @@
  * A proverbial logger that logs to the console in development mode and does nothing in production mode.
  */
 type Logger = {
-  info: (...message: unknown[]) => void
   error: (...message: unknown[]) => void
+  info: (...message: unknown[]) => void
   table: (message: unknown) => void
 }
 
 const developmentLogger: Logger = {
-  info: console.info,
   error: console.error,
+  info: console.info,
   table: console.table,
 }
 
 const productionLogger: Logger = {
-  info: () => {},
   error: console.error,
+  info: () => {},
   table: () => {},
 }
 

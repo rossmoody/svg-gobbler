@@ -15,13 +15,13 @@ type ViewOption = {
 const viewOptions: ViewOption[] = [{ label: 'Hide cors restricted', value: 'hide-cors' }]
 
 export const ViewPopover = () => {
-  const { state, dispatch } = useCollection()
+  const { dispatch, state } = useCollection()
 
   function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { name, checked } = e.currentTarget
+    const { checked, name } = e.currentTarget
     const filters = { ...state.view.filters, [name]: checked }
     StorageUtils.setStorageData('view', { ...state.view, filters })
-    dispatch({ type: 'set-view', payload: { ...state.view, filters } })
+    dispatch({ payload: { ...state.view, filters }, type: 'set-view' })
     dispatch({ type: 'process-data' })
   }
 
@@ -32,7 +32,7 @@ export const ViewPopover = () => {
       <Popover className="relative inline-block px-4 text-left">
         <Popover.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
           View
-          <ChevronDownIcon className="h-3 w-3" aria-hidden />
+          <ChevronDownIcon aria-hidden className="h-3 w-3" />
         </Popover.Button>
 
         <Transition
@@ -52,20 +52,20 @@ export const ViewPopover = () => {
             )}
           >
             {viewOptions.map((option) => (
-              <div key={option.value} className="flex items-center">
+              <div className="flex items-center" key={option.value}>
                 <input
-                  id={option.value}
-                  name={option.value}
-                  type="checkbox"
-                  className="checkbox"
-                  onChange={handleCheckboxChange}
                   checked={
                     state.view.filters[option.value as keyof CollectionData['view']['filters']]
                   }
+                  className="checkbox"
+                  id={option.value}
+                  name={option.value}
+                  onChange={handleCheckboxChange}
+                  type="checkbox"
                 />
                 <label
-                  htmlFor={option.value}
                   className="text ml-3 cursor-pointer whitespace-nowrap pr-4 text-sm font-medium"
+                  htmlFor={option.value}
                 >
                   {option.label} ({corsRestrictedCount})
                 </label>

@@ -2,24 +2,25 @@ import _ from 'lodash'
 import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
+
 import { ResetButton } from './reset-button'
 import { SvgoOption } from './svgo-option'
 
 export const ExportDetailMain = () => {
-  const { state, dispatch } = useDetails()
+  const { dispatch, state } = useDetails()
 
   const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'update-export-filename', payload: e.target.value })
+    dispatch({ payload: e.target.value, type: 'update-export-filename' })
     dispatch({ type: 'process-current-string' })
   }
 
   const handlePrettifyMarkupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-prettify', payload: e.target.checked })
+    dispatch({ payload: e.target.checked, type: 'set-prettify' })
     dispatch({ type: 'process-current-string' })
   }
 
   const handleFloatPrecisionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'set-float-precision', payload: Number(e.target.value) })
+    dispatch({ payload: Number(e.target.value), type: 'set-float-precision' })
     dispatch({ type: 'process-current-string' })
   }
 
@@ -32,39 +33,39 @@ export const ExportDetailMain = () => {
             File name
           </label>
           <input
-            id="file-name"
-            type="text"
             className="export-input"
+            id="file-name"
             onChange={handleFileNameChange}
+            type="text"
             value={state.export.filename}
           />
         </div>
         <div>
           <div className="group mb-1 flex items-center gap-1">
-            <label htmlFor="float-precision" className="export-label">
+            <label className="export-label" htmlFor="float-precision">
               Floating precision
             </label>
             <HelpIcon content="Precision of floating point numbers. Will be passed to each plugin that supports this param." />
           </div>
           <input
-            id="float-precision"
-            type="number"
-            min="1"
-            max="10"
-            value={state.export.svgoConfig.floatPrecision}
             className="input"
+            id="float-precision"
+            max="10"
+            min="1"
             onChange={handleFloatPrecisionChange}
+            type="number"
+            value={state.export.svgoConfig.floatPrecision}
           />
         </div>
         <div className="mt-3 flex gap-2">
           <input
-            type="checkbox"
+            checked={state.export.svgoConfig.js2svg?.pretty}
             className="checkbox"
             id="prettify-markup"
             onChange={handlePrettifyMarkupChange}
-            checked={state.export.svgoConfig.js2svg?.pretty}
+            type="checkbox"
           />
-          <label htmlFor="prettify-markup" className="export-label">
+          <label className="export-label" htmlFor="prettify-markup">
             Pretty print
           </label>
         </div>

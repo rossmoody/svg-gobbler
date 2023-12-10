@@ -1,6 +1,7 @@
 import { Fragment, useRef, useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { useCollection, useDashboard } from 'src/providers'
+
 import { useMainActions } from './use-main-actions'
 
 export const MoveItemModal = () => {
@@ -27,25 +28,25 @@ export const MoveItemModal = () => {
 
   return (
     <Fragment>
-      <Button variant="ghost" size="xs" onClick={openModal}>
+      <Button onClick={openModal} size="xs" variant="ghost">
         Move
       </Button>
 
       <Modal open={isModalOpen} setOpen={setModalOpen}>
         <Modal.Header>Move items to collection</Modal.Header>
-        <label htmlFor="collection" className="label">
+        <label className="label" htmlFor="collection">
           Name
         </label>
-        <select ref={collectionSelectRef} id="collection" className="select">
+        <select className="select" id="collection" ref={collectionSelectRef}>
           {options.map((collection) => (
-            <option value={collection.id} key={collection.id}>
+            <option key={collection.id} value={collection.id}>
               {collection.name}
             </option>
           ))}
         </select>
         <Modal.Footer>
           <Button onClick={moveItemsToCollection}>Submit</Button>
-          <Button variant="secondary" onClick={() => setModalOpen(false)}>
+          <Button onClick={() => setModalOpen(false)} variant="secondary">
             Cancel
           </Button>
         </Modal.Footer>
