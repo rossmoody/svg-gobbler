@@ -3,6 +3,10 @@ import type { Svg } from 'svg-gobbler-scripts'
 
 export type CollectionState = CollectionData & {
   /**
+   * Pagination increment count for loading more items.
+   */
+  pageCount: number
+  /**
    * Processed data is the collection data that is ready to be rendered
    * after going through the filters and sorters and paginators.
    */
@@ -11,36 +15,32 @@ export type CollectionState = CollectionData & {
    * The selected SVGs in the collection.
    */
   selected: Svg[]
-  /**
-   * Pagination increment count for loading more items.
-   */
-  pageCount: number
 }
 
 export type CollectionAction =
-  | { type: 'reset' }
+  | { payload: CollectionState['view']; type: 'set-view' }
+  | { payload: Svg; type: 'add-selected' }
+  | { payload: Svg; type: 'remove-selected' }
+  | { payload: Svg[]; type: 'set-data' }
+  | { payload: string; type: 'set-collection-id' }
+  | { type: 'load-more' }
   | { type: 'process-data' }
-  | { type: 'set-data'; payload: Svg[] }
-  | { type: 'set-collection-id'; payload: string }
-  | { type: 'set-view'; payload: CollectionState['view'] }
-  | { type: 'add-selected'; payload: Svg }
-  | { type: 'remove-selected'; payload: Svg }
+  | { type: 'reset' }
   | { type: 'select-all' }
   | { type: 'unselect-all' }
-  | { type: 'load-more' }
 
 export const initCollectionState: CollectionState = {
+  collectionId: '',
   data: [],
+  pageCount: 1,
   processedData: [],
   selected: [],
-  collectionId: '',
-  pageCount: 1,
   view: {
-    size: 40,
-    sort: 'none',
     filters: {
       'hide-cors': false,
     },
+    size: 40,
+    sort: 'none',
   },
 }
 
@@ -125,8 +125,8 @@ export const collectionReducer = (
 
       return {
         ...state,
-        processedData,
         pageCount: 1,
+        processedData,
       }
     }
 

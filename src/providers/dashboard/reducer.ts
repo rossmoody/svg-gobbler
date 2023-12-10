@@ -2,23 +2,23 @@ import type { Collection } from 'src/types'
 
 export type DashboardState = {
   /**
-   * Whether the sidebar is open or not in mobile contexts.
-   */
-  isOpen: boolean
-  /**
    * The collections that are available to the user.
    */
   collections: Collection[]
+  /**
+   * Whether the sidebar is open or not in mobile contexts.
+   */
+  isOpen: boolean
 }
 
 export type DashboardAction =
+  | { payload: Collection[]; type: 'set-collections' }
+  | { payload: boolean; type: 'set-open' }
   | { type: 'reset' }
-  | { type: 'set-open'; payload: boolean }
-  | { type: 'set-collections'; payload: Collection[] }
 
 export const initDashboardState: DashboardState = {
-  isOpen: false,
   collections: [],
+  isOpen: false,
 }
 
 export const dashboardReducer = (state: DashboardState, action: DashboardAction) => {

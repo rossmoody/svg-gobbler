@@ -2,16 +2,16 @@
   "name": "svg-gobbler",
   "version": "5.3.0",
   "description": "Organize, optimize, download, copy, edit, and export SVGs.",
-  "author": "Ross Moody<ross@rossmoody.com>",
   "license": "apache-2.0",
+  "author": "Ross Moody<ross@rossmoody.com>",
   "type": "module",
   "module": "dist/gather-page-data.js",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "nodemon server/index.ts --exec 'ts-node --esm'",
     "clean": "rm -rf dist",
-    "release": "yarn build && npx ts-node --esm src/utils/zip-release.ts"
+    "dev": "vite",
+    "release": "yarn build && npx ts-node --esm src/utils/zip-release.ts",
+    "serve": "nodemon server/index.ts --exec 'ts-node --esm'"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.6",
@@ -33,7 +33,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.18.0",
-    "svg-gobbler-scripts": "^1.1.0",
+    "svg-gobbler-scripts": "^1.2.0",
     "svgo": "^3.0.3"
   },
   "devDependencies": {
@@ -53,6 +53,7 @@
     "archiver": "^6.0.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.45.0",
+    "eslint-plugin-perfectionist": "^2.5.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss": "^8.4.31",
