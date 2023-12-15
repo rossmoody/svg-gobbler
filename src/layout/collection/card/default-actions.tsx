@@ -1,14 +1,18 @@
 import clsx from 'clsx'
-import { useMemo } from 'react'
+import { Fragment, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 
 import { CardProps } from '.'
 
+type Props = Pick<CardProps, 'data'> & {
+  children: React.ReactNode
+}
+
 /**
  * The functionality of a given card when it is not cors restricted.
  */
-export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
+export const DefaultActions = ({ children, data }: Props) => {
   const { dispatch, state } = useCollection()
 
   const isSelected = useMemo(() => {
@@ -25,7 +29,7 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
   }
 
   return (
-    <div className="z-10">
+    <Fragment>
       <div
         className={clsx(
           'absolute right-1 top-1 opacity-0 group-hover/card:opacity-100',
@@ -44,11 +48,12 @@ export const DefaultActions = ({ data }: Pick<CardProps, 'data'>) => {
           />
         </label>
       </div>
-
       <Link
-        className="absolute inset-0 cursor-pointer rounded-xl opacity-0 shadow-md transition-all ease-in group-hover/card:opacity-100"
+        className="flex h-full w-full items-center justify-center"
         to={`/details/${state.collectionId}/${data.id}`}
-      />
-    </div>
+      >
+        {children}
+      </Link>
+    </Fragment>
   )
 }
