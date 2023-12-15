@@ -4,13 +4,10 @@ import _ from 'lodash'
 import { PropsWithChildren } from 'react'
 import { useUser } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { type Svg } from 'svg-gobbler-scripts'
 
-type Props = {
-  data: Svg
-}
+import { type CardData } from '.'
 
-export const CardOnboarding = ({ children, data }: PropsWithChildren<Props>) => {
+export const CardOnboarding = ({ children, data }: PropsWithChildren<CardData>) => {
   const { dispatch, state } = useUser()
 
   const handleRightClick = () => {

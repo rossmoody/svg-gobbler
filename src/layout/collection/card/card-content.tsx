@@ -2,9 +2,9 @@ import type { Image } from 'svg-gobbler-scripts'
 
 import clsx from 'clsx'
 
-import { CardProps } from '.'
+import { type CardData } from '.'
 
-export const CardContent = ({ data }: Pick<CardProps, 'data'>) => {
+export const CardContent = ({ data }: CardData) => {
   if (data.corsRestricted) {
     return (
       <img
