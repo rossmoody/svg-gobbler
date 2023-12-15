@@ -15,7 +15,7 @@ export default <ManifestV3Export>{
     },
   },
   description: packageJson.description,
-  homepage_url: packageJson.homepage,
+  homepage_url: 'https://svggobbler.com',
   host_permissions: [serverEndpoint.svgr],
   icons: {
     16: 'assets/prod/16.png',

@@ -6,6 +6,7 @@ import { useCollection } from 'src/providers'
 
 import { CardContextMenu } from '../card-context-menu'
 import { CardContent } from './card-content'
+import { CardOnboarding } from './card-onboarding'
 import { CorsRestrictedActions } from './cors-restricted-actions'
 import { DefaultActions } from './default-actions'
 
@@ -28,18 +29,21 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
         className={clsx(
           'text relative rounded-2xl bg-white dark:bg-gray-800/50',
           'group/card transition-all duration-300 ease-in-out',
-          'flex aspect-square items-center justify-center',
+          'flex aspect-square items-center justify-center hover:shadow-md',
           className,
         )}
         ref={ref}
       >
-        <Actions data={data as Image} />
-        <div
-          className="relative z-0 shrink-0 overflow-hidden transition-all duration-100 ease-in"
-          style={{ height: state.view.size, width: state.view.size }}
-        >
-          <CardContent data={data} />
-        </div>
+        <CardOnboarding data={data}>
+          <Actions data={data as Image}>
+            <div
+              className="relative overflow-hidden transition-all duration-100 ease-in"
+              style={{ height: state.view.size, width: state.view.size }}
+            >
+              <CardContent data={data} />
+            </div>
+          </Actions>
+        </CardOnboarding>
       </li>
     </CardContextMenu>
   )

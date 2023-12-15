@@ -1,22 +1,24 @@
 import type { Image } from 'svg-gobbler-scripts'
 
 import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
+import { Fragment } from 'react'
 import { Button, Tooltip } from 'src/components'
 
 type Props = {
+  children: React.ReactNode
   data: Image
 }
 
 /**
  * The functionality of a given card when it is cors restricted.
  */
-export const CorsRestrictedActions = ({ data }: Props) => {
+export const CorsRestrictedActions = ({ children, data }: Props) => {
   const handleOpenInNewTab = () => {
     window.open(data.absoluteImageUrl, '_blank')
   }
 
   return (
-    <div className="z-10">
+    <Fragment>
       {/* Info icon in place of checkbox */}
       <div className="absolute right-3 top-3 cursor-help opacity-0 transition-all duration-300 ease-in-out group-hover/card:opacity-100">
         <Tooltip content="This SVG is restricted from cross-origin resource sharing and can't be edited or exported directly from SVG Gobbler">
@@ -36,6 +38,7 @@ export const CorsRestrictedActions = ({ data }: Props) => {
           <ArrowTopRightOnSquareIcon aria-hidden="true" className="h-4 w-4" />
         </Button>
       </div>
-    </div>
+      {children}
+    </Fragment>
   )
 }

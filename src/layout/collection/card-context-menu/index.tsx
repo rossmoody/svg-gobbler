@@ -30,15 +30,6 @@ export const CardContextMenu = ({ children, data }: PropsWithChildren<Props>) =>
       <ContextMenu.Portal>
         <ContextMenu.Content className="context-content">
           <Fragment>
-            <ContextMenuItem onClick={actions.duplicateItem}>
-              <DocumentDuplicateIcon className="mr-1.5 h-3.5 w-3.5" />
-              Duplicate
-            </ContextMenuItem>
-            <ContextMenuItem onClick={actions.deleteItem}>
-              <TrashIcon className="mr-1.5 h-3.5 w-3.5" />
-              Delete
-            </ContextMenuItem>
-            <ContextMenu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
             <ContextMenu.Sub>
               <ContextMenuSubTrigger>
                 <DocumentDuplicateIcon className="mr-1.5 h-3.5 w-3.5" />
@@ -73,6 +64,15 @@ export const CardContextMenu = ({ children, data }: PropsWithChildren<Props>) =>
                 </ContextMenu.SubContent>
               </ContextMenu.Portal>
             </ContextMenu.Sub>
+            <ContextMenu.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
+            <ContextMenuItem onClick={actions.duplicateItem}>
+              <DocumentDuplicateIcon className="mr-1.5 h-3.5 w-3.5" />
+              Duplicate
+            </ContextMenuItem>
+            <ContextMenuItem onClick={actions.deleteItem}>
+              <TrashIcon className="mr-1.5 h-3.5 w-3.5" />
+              Delete
+            </ContextMenuItem>
           </Fragment>
         </ContextMenu.Content>
       </ContextMenu.Portal>
