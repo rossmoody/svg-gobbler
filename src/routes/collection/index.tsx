@@ -10,7 +10,7 @@ import { ExportPanel } from 'src/layout/collection/export-panel'
 import { Mainbar } from 'src/layout/collection/main-bar'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { TopBar } from 'src/layout/top-bar'
-import { useCollection, useExport } from 'src/providers'
+import { UserState, useCollection, useExport, useUser } from 'src/providers'
 
 /**
  * This is really collection data with a promise we await for the svg data.
@@ -18,20 +18,23 @@ import { useCollection, useExport } from 'src/providers'
 type LoaderData = CollectionData & {
   data: Promise<Svg[]>
   plugins: SvgoPlugin[]
+  user: UserState
 }
 
 export const CollectionRoute = () => {
-  const { collectionId, data, plugins, view } = useLoaderData() as LoaderData
+  const { collectionId, data, plugins, user, view } = useLoaderData() as LoaderData
   const { dispatch: collectionDispatch } = useCollection()
   const { dispatch: exportDispatch } = useExport()
+  const { dispatch: userDispatch } = useUser()
 
   useEffect(() => {
     collectionDispatch({ payload: collectionId, type: 'set-collection-id' })
     collectionDispatch({ payload: view, type: 'set-view' })
     exportDispatch({ payload: plugins, type: 'set-svgo-plugins' })
+    userDispatch({ payload: user, type: 'set-user' })
 
     return () => collectionDispatch({ type: 'reset' })
-  }, [collectionId, collectionDispatch, view, exportDispatch, plugins])
+  }, [collectionId, collectionDispatch, view, exportDispatch, plugins, user, userDispatch])
 
   return (
     <Fragment>

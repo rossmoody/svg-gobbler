@@ -36,7 +36,9 @@ export class StorageUtils {
   /**
    * Get collections data from storage. Automatically decompresses data.
    */
-  static async getStorageData<T>(key: 'collections' | 'plugins' | 'view'): Promise<T | undefined> {
+  static async getStorageData<T>(
+    key: 'collections' | 'plugins' | 'user' | 'view',
+  ): Promise<T | undefined> {
     try {
       const data = await chrome.storage.local.get(key)
       return this.decompressFromBase64(data[key])
