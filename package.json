@@ -1,11 +1,10 @@
 {
   "name": "svg-gobbler",
-  "version": "5.4.0",
-  "description": "Organize, optimize, download, copy, edit, and export SVGs.",
+  "version": "5.4.1",
+  "description": "Find, optimize, organize, edit, and export your SVGs",
   "license": "apache-2.0",
   "author": "Ross Moody<ross@rossmoody.com>",
   "type": "module",
-  "module": "dist/gather-page-data.js",
   "scripts": {
     "build": "tsc && vite build",
     "clean": "rm -rf dist",
