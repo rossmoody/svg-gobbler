@@ -3,10 +3,12 @@ import { Cog6ToothIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
+import { isDevEnv } from 'src/constants/server-config'
 import { useDashboard } from 'src/providers'
 
 import { CollectionItem } from './collection-item'
 import { NewCollectionModal } from './new-collection-modal'
+import { ResetEnvironment } from './reset-environment'
 import { ReviewModal } from './review-modal'
 
 export const SidebarContent = () => {
@@ -59,6 +61,11 @@ export const SidebarContent = () => {
           <li>
             <ReviewModal />
           </li>
+          {isDevEnv && (
+            <li>
+              <ResetEnvironment />
+            </li>
+          )}
         </ul>
       </nav>
     </div>
