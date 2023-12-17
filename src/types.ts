@@ -114,3 +114,8 @@ export type DetailsParams = {
  * A union of all the svg types that are returned from the svgFactory
  */
 export type SvgType = GElement | Image | Inline | SvgSymbol
+
+/**
+ * The database keys
+ */
+export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
