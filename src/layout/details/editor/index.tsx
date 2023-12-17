@@ -21,7 +21,7 @@ export const DetailsEditor = () => {
     [dispatch],
   )
 
-  const onBlur = useCallback(() => {
+  const onFocus = useCallback(() => {
     if (!userState.onboarding.viewedEditSvg) {
       const newUser = merge(userState, { onboarding: { viewedEditSvg: true } })
       userDispatch({ payload: newUser, type: 'set-user' })
@@ -30,24 +30,23 @@ export const DetailsEditor = () => {
   }, [userDispatch, userState])
 
   return (
-    <EditorOnboarding>
-      <section className="relative flex-grow">
-        <ActionBar />
-        <CodeMirror
-          basicSetup={{
-            autocompletion: true,
-            highlightActiveLine: false,
-            highlightActiveLineGutter: false,
-            lineNumbers: false,
-          }}
-          className="h-full"
-          extensions={[html(), EditorView.lineWrapping]}
-          onBlur={onBlur}
-          onChange={onChange}
-          theme={tokyoNightStorm}
-          value={state.currentString}
-        />
-      </section>
-    </EditorOnboarding>
+    <section className="relative flex-grow">
+      <EditorOnboarding />
+      <ActionBar />
+      <CodeMirror
+        basicSetup={{
+          autocompletion: true,
+          highlightActiveLine: false,
+          highlightActiveLineGutter: false,
+          lineNumbers: false,
+        }}
+        className="h-full"
+        extensions={[html(), EditorView.lineWrapping]}
+        onChange={onChange}
+        onFocus={onFocus}
+        theme={tokyoNightStorm}
+        value={state.currentString}
+      />
+    </section>
   )
 }

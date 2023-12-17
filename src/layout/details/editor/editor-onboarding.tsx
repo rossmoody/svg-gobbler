@@ -11,8 +11,10 @@ export const EditorOnboarding = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <Tooltip.Root>
-      <Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
+    <Tooltip.Root open>
+      <Tooltip.Trigger asChild>
+        <span className="absolute inset-x-0" />
+      </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content
           className={clsx(
