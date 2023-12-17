@@ -17,15 +17,17 @@ export const DetailsEditor = () => {
   const onChange = useCallback(
     (val: string) => {
       dispatch({ payload: val, type: 'update-current-string' })
-
-      if (!userState.onboarding.viewedEditSvg) {
-        const newUser = merge(userState, { onboarding: { viewedEditSvg: true } })
-        userDispatch({ payload: newUser, type: 'set-user' })
-        StorageUtils.setStorageData('user', newUser)
-      }
     },
-    [dispatch, userDispatch, userState],
+    [dispatch],
   )
+
+  const onBlur = useCallback(() => {
+    if (!userState.onboarding.viewedEditSvg) {
+      const newUser = merge(userState, { onboarding: { viewedEditSvg: true } })
+      userDispatch({ payload: newUser, type: 'set-user' })
+      StorageUtils.setStorageData('user', newUser)
+    }
+  }, [userDispatch, userState])
 
   return (
     <EditorOnboarding>
@@ -40,6 +42,7 @@ export const DetailsEditor = () => {
           }}
           className="h-full"
           extensions={[html(), EditorView.lineWrapping]}
+          onBlur={onBlur}
           onChange={onChange}
           theme={tokyoNightStorm}
           value={state.currentString}

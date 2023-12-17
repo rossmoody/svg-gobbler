@@ -9,8 +9,8 @@ export const DetailsRoute = () => {
   return (
     <ToastProvider>
       <TooltipProvider delayDuration={100}>
-        <DetailsProvider>
-          <UserProvider>
+        <UserProvider>
+          <DetailsProvider>
             <Transition
               appear
               as={Fragment}
@@ -21,8 +21,8 @@ export const DetailsRoute = () => {
             >
               <DetailsLayout />
             </Transition>
-          </UserProvider>
-        </DetailsProvider>
+          </DetailsProvider>
+        </UserProvider>
       </TooltipProvider>
     </ToastProvider>
   )

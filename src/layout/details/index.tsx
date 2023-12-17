@@ -18,7 +18,7 @@ export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   useEffect(() => {
     detailsDispatch({ payload: data, type: 'init' })
     userDispatch({ payload: data.user, type: 'set-user' })
-  }, [detailsDispatch, data, userDispatch])
+  }, [data, detailsDispatch, userDispatch])
 
   return (
     <div className="h-full overflow-hidden" ref={ref}>

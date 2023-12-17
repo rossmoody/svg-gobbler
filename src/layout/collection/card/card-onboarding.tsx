@@ -17,7 +17,7 @@ export const CardOnboarding = ({ children, data }: PropsWithChildren<CardData>) 
   }
 
   if (data.corsRestricted || state.onboarding.viewedCardContext) {
-    return <>{children}</>
+    return children
   }
 
   return (

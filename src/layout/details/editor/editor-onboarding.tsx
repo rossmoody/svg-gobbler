@@ -7,7 +7,7 @@ export const EditorOnboarding = ({ children }: PropsWithChildren) => {
   const { state } = useUser()
 
   if (state.onboarding.viewedEditSvg) {
-    return <>{children}</>
+    return children
   }
 
   return (
