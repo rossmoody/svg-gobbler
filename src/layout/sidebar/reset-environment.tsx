@@ -6,6 +6,7 @@ export const ResetEnvironment = () => {
   const handleResetEnvironment = async () => {
     await chrome.storage.local.clear()
     const collection = emptyCollection()
+    collection.name = 'Test Collection'
     const pageData = emptyPageData()
     pageData.data = [dummyStorageSvg()]
     await StorageUtils.setPageData(collection.id, pageData)

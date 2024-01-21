@@ -34,7 +34,7 @@ export const ReviewModal = () => {
             size="lg"
             type="submit"
           >
-            Submit a review
+            Give a review
           </Button>
           <Button
             onClick={() => {
