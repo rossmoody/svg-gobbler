@@ -2,6 +2,7 @@ import type { DetailsParams } from 'src/types'
 
 import { forwardRef, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
+import { useUser } from 'src/providers'
 import { useDetails } from 'src/providers/details'
 
 import { DetailsEditor } from './editor'
@@ -11,11 +12,13 @@ import { PreviewSidebar } from './preview-sidebar'
 
 export const DetailsLayout = forwardRef<HTMLDivElement>((_, ref) => {
   const data = useLoaderData() as DetailsParams
-  const { dispatch } = useDetails()
+  const { dispatch: detailsDispatch } = useDetails()
+  const { dispatch: userDispatch } = useUser()
 
   useEffect(() => {
-    dispatch({ payload: data, type: 'init' })
-  }, [dispatch, data])
+    detailsDispatch({ payload: data, type: 'init' })
+    userDispatch({ payload: data.user, type: 'set-user' })
+  }, [data, detailsDispatch, userDispatch])
 
   return (
     <div className="h-full overflow-hidden" ref={ref}>

@@ -1,18 +1,14 @@
 import clsx from 'clsx'
-import { Fragment, useMemo } from 'react'
+import { Fragment, PropsWithChildren, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 
-import { CardProps } from '.'
-
-type Props = Pick<CardProps, 'data'> & {
-  children: React.ReactNode
-}
+import { type CardData } from '.'
 
 /**
  * The functionality of a given card when it is not cors restricted.
  */
-export const DefaultActions = ({ children, data }: Props) => {
+export const DefaultActions = ({ children, data }: PropsWithChildren<CardData>) => {
   const { dispatch, state } = useCollection()
 
   const isSelected = useMemo(() => {

@@ -13,14 +13,17 @@ export const ReviewModal = () => {
         Leave a review
       </button>
       <Modal open={open} setOpen={setOpen}>
-        <Modal.Header>Leave a review</Modal.Header>
-        <div className="text-muted flex flex-col gap-4 text-base">
+        <Modal.Header>Support SVG Gobbler</Modal.Header>
+        <div className="text-muted flex flex-col gap-4 text-sm">
           <p>
-            SVG Gobbler is free, open-source, and runs entirely on positive vibes. If you are
-            experiencing a problem or want missing functionality, please raise an issue to be fixed
-            before submitting a bad review.
+            SVG Gobbler is{' '}
+            <span className="font-semibold">
+              free, open-source, and runs entirely on positive vibes
+            </span>
+            . If you are experiencing a problem or want missing functionality, please raise an issue
+            to be fixed before submitting a bad review.
           </p>
-          <p>If you’re having a great experience, then by all means, let it rain.</p>
+          <p>If you’re having a great experience, then by all means, let it rain. 🚀</p>
         </div>
         <Modal.Footer>
           <Button
@@ -31,7 +34,7 @@ export const ReviewModal = () => {
             size="lg"
             type="submit"
           >
-            Submit a review
+            Give a review
           </Button>
           <Button
             onClick={() => {
@@ -42,7 +45,7 @@ export const ReviewModal = () => {
             type="button"
             variant="secondary"
           >
-            File an issue
+            Submit feedback
           </Button>
         </Modal.Footer>
       </Modal>

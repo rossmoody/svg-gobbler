@@ -34,15 +34,12 @@ export const CardContextMenu = ({ children, data }: PropsWithChildren<Props>) =>
               <ContextMenuSubTrigger>
                 <DocumentDuplicateIcon className="mr-1.5 h-3.5 w-3.5" />
                 <span className="flex-grow">Copy to clipboard</span>
-                <ChevronRightIcon className="h-3.5 w-3.5" />
+                <ChevronRightIcon className="ml-2 h-3.5 w-3.5" />
               </ContextMenuSubTrigger>
               <ContextMenu.Portal>
                 <ContextMenu.SubContent className="context-content origin-radix-context-menu">
                   <ContextMenuItem onClick={actions.copyOriginal}>Original</ContextMenuItem>
-                  <ContextMenuItem onClick={actions.copySvgoConfig}>SVGO Config</ContextMenuItem>
-                  <ContextMenuItem onClick={actions.copyDefaultConfig}>
-                    Default User Config
-                  </ContextMenuItem>
+                  <ContextMenuItem onClick={actions.copySvgoConfig}>Optimized</ContextMenuItem>
                 </ContextMenu.SubContent>
               </ContextMenu.Portal>
             </ContextMenu.Sub>
@@ -50,17 +47,12 @@ export const CardContextMenu = ({ children, data }: PropsWithChildren<Props>) =>
               <ContextMenuSubTrigger>
                 <ArrowDownTrayIcon className="mr-1.5 h-3.5 w-3.5" />
                 <span className="flex-grow">Download</span>
-                <ChevronRightIcon className="h-3.5 w-3.5" />
+                <ChevronRightIcon className="ml-2 h-3.5 w-3.5" />
               </ContextMenuSubTrigger>
               <ContextMenu.Portal>
                 <ContextMenu.SubContent className="context-content origin-radix-context-menu">
                   <ContextMenuItem onClick={actions.downloadOriginal}>Original</ContextMenuItem>
-                  <ContextMenuItem onClick={actions.downloadSvgoConfig}>
-                    SVGO Config
-                  </ContextMenuItem>
-                  <ContextMenuItem onClick={actions.downloadDefaultConfig}>
-                    Default User Config
-                  </ContextMenuItem>
+                  <ContextMenuItem onClick={actions.downloadSvgoConfig}>Optimized</ContextMenuItem>
                 </ContextMenu.SubContent>
               </ContextMenu.Portal>
             </ContextMenu.Sub>

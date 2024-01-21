@@ -1,5 +1,7 @@
 import type { DocumentData, GElement, Image, Inline, Svg, SvgSymbol } from 'svg-gobbler-scripts'
 
+import { type UserState } from './providers'
+
 /**
  * The message sent from the Background script to the Content script.
  */
@@ -102,9 +104,18 @@ export type DetailsParams = {
    * The original svg string upon load.
    */
   originalString: string
+  /**
+   * The user state from storage.
+   */
+  user: UserState
 }
 
 /**
  * A union of all the svg types that are returned from the svgFactory
  */
 export type SvgType = GElement | Image | Inline | SvgSymbol
+
+/**
+ * The database keys
+ */
+export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'

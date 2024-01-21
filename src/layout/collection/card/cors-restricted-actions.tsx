@@ -1,20 +1,16 @@
-import type { Image } from 'svg-gobbler-scripts'
-
 import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
-import { Fragment } from 'react'
+import { Fragment, PropsWithChildren } from 'react'
 import { Button, Tooltip } from 'src/components'
+import { type Image } from 'svg-gobbler-scripts'
 
-type Props = {
-  children: React.ReactNode
-  data: Image
-}
+import { type CardData } from '.'
 
 /**
  * The functionality of a given card when it is cors restricted.
  */
-export const CorsRestrictedActions = ({ children, data }: Props) => {
+export const CorsRestrictedActions = ({ children, data }: PropsWithChildren<CardData>) => {
   const handleOpenInNewTab = () => {
-    window.open(data.absoluteImageUrl, '_blank')
+    window.open((data as Image).absoluteImageUrl, '_blank')
   }
 
   return (

@@ -12,6 +12,10 @@ export type UserState = {
      * The user has viewed the tooltip for generating a context menu.
      */
     viewedCardContext: boolean
+    /**
+     * The user has viewed the tooltip for editing the svg in detail view.
+     */
+    viewedEditSvg: boolean
   }
 }
 
@@ -20,6 +24,7 @@ export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'res
 export const initUserState: UserState = {
   onboarding: {
     viewedCardContext: false,
+    viewedEditSvg: false,
   },
 }
 

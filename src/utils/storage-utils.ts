@@ -1,4 +1,4 @@
-import type { PageData } from 'src/types'
+import type { DatabaseKey, PageData } from 'src/types'
 
 import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
 
@@ -36,9 +36,7 @@ export class StorageUtils {
   /**
    * Get collections data from storage. Automatically decompresses data.
    */
-  static async getStorageData<T>(
-    key: 'collections' | 'plugins' | 'user' | 'view',
-  ): Promise<T | undefined> {
+  static async getStorageData<T>(key: DatabaseKey): Promise<T | undefined> {
     try {
       const data = await chrome.storage.local.get(key)
       return this.decompressFromBase64(data[key])
@@ -58,10 +56,9 @@ export class StorageUtils {
   }
 
   /**
-   * Sets data in storage based on key.
-   * Automatically compresses data.
+   * Sets data in storage based on key. Automatically compresses data.
    */
-  static async setStorageData(key: string, data: unknown): Promise<void> {
+  static async setStorageData(key: DatabaseKey, data: unknown): Promise<void> {
     await chrome.storage.local.set({
       [key]: this.compressToBase64(data),
     })

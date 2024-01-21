@@ -1,4 +1,5 @@
 import { LoaderFunctionArgs } from 'react-router-dom'
+import { type UserState, initUserState } from 'src/providers'
 import { DetailsParams, StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 
@@ -7,12 +8,15 @@ import { StorageUtils } from 'src/utils/storage-utils'
  * from the collection it belongs to and returns it to the client context.
  */
 export async function detailLoader({ params }: LoaderFunctionArgs): Promise<DetailsParams> {
-  const pageData = await StorageUtils.getPageData(params.collectionId as string)
+  const collectionId = params.collectionId as string
+  const pageData = await StorageUtils.getPageData(collectionId)
   const storageSvg = pageData.data.find((item) => item.id === params.id) as StorageSvg
+  const user = (await StorageUtils.getStorageData<UserState>('user')) ?? initUserState
 
   return {
-    collectionId: params.collectionId ?? '',
+    collectionId,
     id: storageSvg.id,
     originalString: storageSvg.svg,
+    user,
   }
 }

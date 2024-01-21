@@ -10,9 +10,11 @@ import { CardOnboarding } from './card-onboarding'
 import { CorsRestrictedActions } from './cors-restricted-actions'
 import { DefaultActions } from './default-actions'
 
-export type CardProps = HTMLAttributes<HTMLLIElement> & {
-  data: Svg
+export type CardData = {
+  data: Image | Svg
 }
+
+export type CardProps = HTMLAttributes<HTMLLIElement> & CardData
 
 export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
   const { className, data, ...rest } = props
