@@ -52,7 +52,7 @@ export const OnboardingLayout = () => {
                 What's new
               </span>
               <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-600">
-                <span>Version 5.0</span>
+                <span>Version 5</span>
                 <ChevronRightIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
               </span>
             </a>

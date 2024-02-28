@@ -21,16 +21,8 @@ export const Footer = () => {
         break
       }
 
-      case 'png': {
-        FormUtils.copyImageToClipboard(results)
-        break
-      }
-
-      case 'webp': {
-        FormUtils.copyImageToClipboard(results)
-        break
-      }
-
+      case 'png':
+      case 'webp':
       case 'jpeg': {
         FormUtils.copyImageToClipboard(results)
         break
@@ -45,22 +37,19 @@ export const Footer = () => {
 
     switch (exportState.fileType) {
       case 'svg': {
-        FormUtils.downloadSvgContent(results, exportState.filename)
+        FormUtils.downloadSvgContent(results, exportState.filename, exportState.filenamePrefix)
         break
       }
 
-      case 'png': {
-        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType)
-        break
-      }
-
-      case 'webp': {
-        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType)
-        break
-      }
-
+      case 'png':
+      case 'webp':
       case 'jpeg': {
-        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType)
+        FormUtils.downloadImageContent(
+          results,
+          exportState.filename,
+          exportState.fileType,
+          exportState.filenamePrefix,
+        )
         break
       }
     }

@@ -124,12 +124,17 @@ export class FormUtils {
   /**
    * Downloads a given array of data urls as a zip file.
    */
-  static async downloadDataUrlsZip(dataUrls: string[], baseFileName: string, type: FileType) {
+  static async downloadDataUrlsZip(
+    dataUrls: string[],
+    baseFileName: string,
+    type: FileType,
+    filenamePrefix: string,
+  ) {
     const zip = new JSZip()
 
     dataUrls.forEach((dataUrl, index) => {
       const base64Data = dataUrl.split(',')[1]
-      zip.file(`${baseFileName}-${index}.${type}`, base64Data, { base64: true })
+      zip.file(`${filenamePrefix || baseFileName}_${index}.${type}`, base64Data, { base64: true })
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
@@ -143,12 +148,17 @@ export class FormUtils {
   /**
    * Downloads a given array of data urls as a file or zip file depending on the number of urls.
    */
-  static downloadImageContent(dataUrls: string[], baseFileName: string, type: FileType) {
+  static downloadImageContent(
+    dataUrls: string[],
+    baseFileName: string,
+    type: FileType,
+    filenamePrefix: string,
+  ) {
     if (dataUrls.length === 1) {
       return this.downloadImageDataUrl(dataUrls[0], baseFileName, type)
     }
 
-    this.downloadDataUrlsZip(dataUrls, baseFileName, type)
+    this.downloadDataUrlsZip(dataUrls, baseFileName, type, filenamePrefix)
   }
 
   /**
@@ -166,12 +176,12 @@ export class FormUtils {
   /**
    * Downloads a given array of strings as a file or zip file depending on the number of strings.
    */
-  static downloadSvgContent(svgStrings: string[], baseFileName: string) {
+  static downloadSvgContent(svgStrings: string[], baseFileName: string, filenamePrefix: string) {
     if (svgStrings.length === 1) {
       return this.downloadSvgString(svgStrings[0], baseFileName)
     }
 
-    this.downloadSvgStringsZip(svgStrings, baseFileName)
+    this.downloadSvgStringsZip(svgStrings, baseFileName, filenamePrefix)
   }
 
   /**
@@ -189,11 +199,15 @@ export class FormUtils {
   /**
    * Downloads a given array of SVG strings as a zip file.
    */
-  static async downloadSvgStringsZip(files: string[], baseFileName: string) {
+  static async downloadSvgStringsZip(
+    files: string[],
+    baseFileName: string,
+    filenamePrefix: string,
+  ) {
     const zip = new JSZip()
 
     files.forEach((file, index) => {
-      zip.file(`${baseFileName}-${index}.svg`, file)
+      zip.file(`${filenamePrefix || baseFileName}_${index}.svg`, file)
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
