@@ -15,6 +15,10 @@ export type ExportState = {
    */
   filename: string
   /**
+   * The prefix to use when exporting multiple files.
+   */
+  filenamePrefix: string
+  /**
    * The setting configurations for each file type.
    */
   settings: {
@@ -92,11 +96,13 @@ export type ExportAction =
   | { payload: number; type: 'set-webp-quality' }
   | { payload: number; type: 'set-webp-size' }
   | { payload: string; type: 'set-filename' }
+  | { payload: string; type: 'set-filename-prefix' }
   | { type: 'reset' }
 
 export const initExportState: ExportState = {
   fileType: 'svg',
   filename: 'svg-gobbler',
+  filenamePrefix: '',
   settings: {
     jpeg: {
       quality: 0.92,
@@ -223,6 +229,13 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
             path: action.payload,
           },
         },
+      }
+    }
+
+    case 'set-filename-prefix': {
+      return {
+        ...state,
+        filenamePrefix: action.payload,
       }
     }
 

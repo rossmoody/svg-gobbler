@@ -2,6 +2,7 @@ import { Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
 
+import { Filename } from './file-name'
 import { Footer } from './footer'
 import { Header } from './header'
 import { JpegSettings } from './jpeg-settings'
@@ -24,10 +25,6 @@ export const ExportPanel = () => {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     exportDispatch({ payload: e.target.value as FileType, type: 'set-file-type' })
-  }
-
-  const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exportDispatch({ payload: e.target.value, type: 'set-filename' })
   }
 
   return (
@@ -68,16 +65,7 @@ export const ExportPanel = () => {
                 </select>
               </div>
               <div className="mb-5">
-                <label className="export-label" htmlFor="file-name">
-                  File name
-                </label>
-                <input
-                  className="export-input"
-                  id="file-name"
-                  onChange={handleFileNameChange}
-                  type="text"
-                  value={exportState.filename}
-                />
+                <Filename />
               </div>
               <h2 className="my-3 text-sm font-medium">Settings</h2>
               <div className="relative">
