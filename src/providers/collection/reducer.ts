@@ -39,7 +39,7 @@ export const initCollectionState: CollectionState = {
     filters: {
       'hide-cors': false,
     },
-    size: 40,
+    size: 96,
     sort: 'none',
   },
 }

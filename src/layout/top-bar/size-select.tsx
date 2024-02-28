@@ -11,7 +11,7 @@ export const sizes = [
   { label: '96px', value: 96 },
   { label: '128px', value: 128 },
   { label: '256px', value: 256 },
-]
+] as const
 
 export const SizeSelect = () => {
   const { dispatch, state } = useCollection()
