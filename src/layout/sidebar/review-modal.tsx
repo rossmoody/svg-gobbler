@@ -16,12 +16,9 @@ export const ReviewModal = () => {
         <Modal.Header>Support SVG Gobbler</Modal.Header>
         <div className="text-muted flex flex-col gap-4 text-sm">
           <p>
-            SVG Gobbler is{' '}
-            <span className="font-semibold">
-              free, open-source, and runs entirely on positive vibes
-            </span>
-            . If you are experiencing a problem or want missing functionality, please raise an issue
-            to be fixed before submitting a bad review.
+            SVG Gobbler is free, open-source, and runs entirely on positive vibes. If you are
+            experiencing a problem or want missing functionality, please raise an issue or email{' '}
+            <b>ross@rossmoody.com</b> to be fixed before submitting a bad review.
           </p>
           <p>If you’re having a great experience, then by all means, let it rain. 🚀</p>
         </div>
