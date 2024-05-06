@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import { HelpIcon } from 'src/components'
+import { useMountEffect } from 'src/hooks'
 import { useCollection, useDashboard, useExport } from 'src/providers'
 
 export const Filename = () => {
@@ -8,12 +8,12 @@ export const Filename = () => {
   const { dispatch: exportDispatch, state: exportState } = useExport()
   const { state: dashboardState } = useDashboard()
 
-  useEffect(() => {
+  useMountEffect(() => {
     const payload =
       dashboardState.collections.find((c) => c.id === collectionState.collectionId)?.name ??
       'svg-gobbler'
     dispatch({ payload, type: 'set-filename' })
-  }, [])
+  })
 
   const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     exportDispatch({ payload: e.target.value, type: 'set-filename' })
@@ -55,7 +55,7 @@ export const Filename = () => {
       />
       <div className="group mt-3 flex items-center gap-1">
         <label className="export-label" htmlFor="prefix-file-name">
-          File name prefix
+          File prefix
         </label>
         <HelpIcon content="The prefix that will be added to the beginning of each file name." />
       </div>
@@ -67,7 +67,7 @@ export const Filename = () => {
         value={exportState.filenamePrefix}
       />
       <span className="text-muted text-xs">
-        {exportState.filenamePrefix && exportState.filenamePrefix + '_1.svg'}
+        {exportState.filenamePrefix && exportState.filenamePrefix + '_1.' + exportState.fileType}
       </span>
     </>
   )
