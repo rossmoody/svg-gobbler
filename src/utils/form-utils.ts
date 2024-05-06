@@ -134,7 +134,7 @@ export class FormUtils {
 
     dataUrls.forEach((dataUrl, index) => {
       const base64Data = dataUrl.split(',')[1]
-      zip.file(`${filenamePrefix || baseFileName}_${index}.${type}`, base64Data, { base64: true })
+      zip.file(`${filenamePrefix}_${index}.${type}`, base64Data, { base64: true })
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
@@ -207,7 +207,7 @@ export class FormUtils {
     const zip = new JSZip()
 
     files.forEach((file, index) => {
-      zip.file(`${filenamePrefix || baseFileName}_${index}.svg`, file)
+      zip.file(`${filenamePrefix}_${index}.svg`, file)
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })

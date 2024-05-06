@@ -1,9 +1,19 @@
+import { useEffect } from 'react'
 import { HelpIcon } from 'src/components'
-import { useCollection, useExport } from 'src/providers'
+import { useCollection, useDashboard, useExport } from 'src/providers'
 
 export const Filename = () => {
+  const { dispatch } = useExport()
   const { state: collectionState } = useCollection()
   const { dispatch: exportDispatch, state: exportState } = useExport()
+  const { state: dashboardState } = useDashboard()
+
+  useEffect(() => {
+    const payload =
+      dashboardState.collections.find((c) => c.id === collectionState.collectionId)?.name ??
+      'svg-gobbler'
+    dispatch({ payload, type: 'set-filename' })
+  }, [])
 
   const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     exportDispatch({ payload: e.target.value, type: 'set-filename' })

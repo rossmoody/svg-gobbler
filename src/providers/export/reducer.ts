@@ -102,7 +102,7 @@ export type ExportAction =
 export const initExportState: ExportState = {
   fileType: 'svg',
   filename: 'svg-gobbler',
-  filenamePrefix: '',
+  filenamePrefix: 'svg',
   settings: {
     jpeg: {
       quality: 0.92,
