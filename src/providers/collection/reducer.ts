@@ -22,6 +22,7 @@ export type CollectionAction =
   | { payload: Svg; type: 'add-selected' }
   | { payload: Svg; type: 'remove-selected' }
   | { payload: Svg[]; type: 'set-data' }
+  | { payload: string; type: 'set-canvas-color' }
   | { payload: string; type: 'set-collection-id' }
   | { type: 'load-more' }
   | { type: 'process-data' }
@@ -36,6 +37,7 @@ export const initCollectionState: CollectionState = {
   processedData: [],
   selected: [],
   view: {
+    canvas: '#ffffff',
     filters: {
       'hide-cors': false,
     },
@@ -49,6 +51,16 @@ export const collectionReducer = (
   action: CollectionAction,
 ): CollectionState => {
   switch (action.type) {
+    case 'set-canvas-color': {
+      return {
+        ...state,
+        view: {
+          ...state.view,
+          canvas: action.payload,
+        },
+      }
+    }
+
     case 'load-more': {
       return {
         ...state,
