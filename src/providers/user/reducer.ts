@@ -16,6 +16,10 @@ export type UserState = {
      * The user has viewed the tooltip for editing the svg in detail view.
      */
     viewedEditSvg: boolean
+    /**
+     * The user has viewed the tooltip for submitting a review.
+     */
+    viewedReview: boolean
   }
 }
 
@@ -25,6 +29,7 @@ export const initUserState: UserState = {
   onboarding: {
     viewedCardContext: false,
     viewedEditSvg: false,
+    viewedReview: false,
   },
 }
 
