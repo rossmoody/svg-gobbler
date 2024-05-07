@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
+import { useCollection } from 'src/providers'
+import { StorageUtils } from 'src/utils/storage-utils'
+
+import { type CollectionData } from '../types'
 
 type ColorMode = 'dark' | 'light'
 
 export function useColorMode() {
   const [colorMode, setColorMode] = useState<ColorMode>('light')
+  const { dispatch, state } = useCollection()
 
   useEffect(() => {
     chrome.storage.local.get(['colorMode'], (result) => {
@@ -23,15 +28,13 @@ export function useColorMode() {
   }
 
   function setColorModeClass(value: ColorMode) {
-    const body = document.querySelector('body')
-
-    if (body) {
-      if (value === 'dark') {
-        body.classList.add('dark')
-      } else {
-        body.classList.remove('dark')
-      }
+    const view: CollectionData['view'] = {
+      ...state.view,
+      canvas: value === 'dark' ? '#1A2338' : '#fff',
     }
+    document.body.classList.toggle('dark', value === 'dark')
+    dispatch({ payload: view, type: 'set-view' })
+    StorageUtils.setStorageData('view', view)
   }
 
   return { colorMode, toggleColorMode }

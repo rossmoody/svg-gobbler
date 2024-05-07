@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Button, CollectionPanelButton } from 'src/components'
 
 import { UploadModal } from '../collection/upload-modal'
-import { CanvasButton } from './canvas-btn'
+import { CardColorButton } from './card-color-btn'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { SortMenu } from './sort-menu'
@@ -20,7 +20,7 @@ export const TopBar = () => {
       <CollectionTitle />
       <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <div className="ml-auto hidden items-center gap-x-3 sm:flex lg:gap-x-4">
-          <CanvasButton />
+          <CardColorButton />
           <ThemeButton />
           <div aria-hidden className="h-6 w-px bg-gray-200 dark:bg-gray-700" />
           <SizeSelect />

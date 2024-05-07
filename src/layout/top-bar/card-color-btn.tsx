@@ -4,7 +4,7 @@ import { IconButton, Tooltip } from 'src/components'
 import { useCollection } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
 
-export const CanvasButton = () => {
+export const CardColorButton = () => {
   const { dispatch, state } = useCollection()
   const colorInputRef = useRef<HTMLInputElement>(null)
 
