@@ -31,10 +31,6 @@ export const ReviewPrompt = () => {
     window.open(links.chromeWebstore, '_blank')
   }
 
-  const handleDismiss = () => {
-    setReviewPromptViewed()
-  }
-
   return (
     <Toast.Provider>
       <Toast.Root
@@ -78,7 +74,7 @@ export const ReviewPrompt = () => {
                 <Toast.Action
                   altText="Dismiss"
                   className="flex w-full items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-medium hover:bg-gray-50 focus:z-10 focus:outline-none focus-visible:ring dark:hover:bg-gray-900"
-                  onClick={handleDismiss}
+                  onClick={setReviewPromptViewed}
                 >
                   Dismiss
                 </Toast.Action>
