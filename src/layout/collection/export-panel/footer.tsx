@@ -34,22 +34,18 @@ export const Footer = () => {
 
   const handleDownload = async () => {
     const results = await processWithExportConfig(collectionState.selected)
+    const prefix = exportState.filenamePrefix || 'gobbler'
 
     switch (exportState.fileType) {
       case 'svg': {
-        FormUtils.downloadSvgContent(results, exportState.filename, exportState.filenamePrefix)
+        FormUtils.downloadSvgContent(results, exportState.filename, prefix)
         break
       }
 
       case 'png':
       case 'webp':
       case 'jpeg': {
-        FormUtils.downloadImageContent(
-          results,
-          exportState.filename,
-          exportState.fileType,
-          exportState.filenamePrefix,
-        )
+        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType, prefix)
         break
       }
     }

@@ -69,6 +69,10 @@ export type CollectionData = {
    */
   view: {
     /**
+     * The card canvas color.
+     */
+    canvas: string
+    /**
      * The filters applied to the collection
      */
     filters: {

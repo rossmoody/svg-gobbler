@@ -11,7 +11,7 @@ export const ExportSettings = () => {
   useEffect(() => {
     const fetchSvgoPlugins = async () => {
       const plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
-      setStoragePlugins(plugins!)
+      setStoragePlugins(plugins ?? [])
     }
 
     fetchSvgoPlugins()

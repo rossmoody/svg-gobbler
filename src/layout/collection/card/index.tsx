@@ -29,12 +29,13 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
       <li
         {...rest}
         className={clsx(
-          'text relative rounded-2xl bg-white dark:bg-gray-800/50',
+          'text relative rounded-2xl',
           'group/card transition-all duration-300 ease-in-out',
           'flex aspect-square items-center justify-center hover:shadow-md',
           className,
         )}
         ref={ref}
+        style={{ backgroundColor: state.view.canvas }}
       >
         <CardOnboarding data={data}>
           <Actions data={data as Image}>
