@@ -20,9 +20,7 @@ ff.http('server', async (req: ff.Request, res: ff.Response) => {
   switch (req.body.type) {
     case 'feedback': {
       try {
-        const { feedback } = req.body.payload as FeedbackMessage
-        console.log(feedback)
-        res.send(feedback)
+        // const { feedback } = req.body.payload as FeedbackMessage
       } catch (error) {
         console.error(error)
       }

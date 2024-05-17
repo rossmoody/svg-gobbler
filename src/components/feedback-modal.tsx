@@ -62,7 +62,7 @@ export const FeedbackModal = () => {
       logger.error('Could not send feature request.', error)
     }
 
-    setRequestModalViewed()
+    // setRequestModalViewed()
   }
 
   return (
