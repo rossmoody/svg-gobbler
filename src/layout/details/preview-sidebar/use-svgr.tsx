@@ -3,7 +3,7 @@ import { serverEndpoint } from 'src/constants/server-config'
 import { useDetails } from 'src/providers'
 import { logger } from 'src/utils/logger'
 
-import { SvgrMessage } from '../../../../server/index'
+import { ServerMessage } from '../../../../server/index'
 
 export const useSvgr = () => {
   const [loading, setLoading] = useState(false)
@@ -16,10 +16,13 @@ export const useSvgr = () => {
   useEffect(() => {
     setLoading(true)
     ;(async () => {
-      const message: SvgrMessage = {
-        config: preview.svgr.config,
-        state: preview.svgr.state,
-        svg: currentString,
+      const message: ServerMessage = {
+        payload: {
+          config: preview.svgr.config,
+          state: preview.svgr.state,
+          svg: currentString,
+        },
+        type: 'svgr',
       }
 
       try {
