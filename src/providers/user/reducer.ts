@@ -4,6 +4,10 @@
  */
 export type UserState = {
   /**
+   * The date the user installed/first initialized the application.
+   */
+  installDate: string
+  /**
    * The onboarding state of the user for showing help cards
    * or other friendly onboarding stuff.
    */
@@ -17,6 +21,10 @@ export type UserState = {
      */
     viewedEditSvg: boolean
     /**
+     * The user has viewed the request for features modal.
+     */
+    viewedFeatureRequest: boolean
+    /**
      * The user has viewed the tooltip for submitting a review.
      */
     viewedReview: boolean
@@ -26,9 +34,11 @@ export type UserState = {
 export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'reset' }
 
 export const initUserState: UserState = {
+  installDate: new Date().toISOString(),
   onboarding: {
     viewedCardContext: false,
     viewedEditSvg: false,
+    viewedFeatureRequest: false,
     viewedReview: false,
   },
 }

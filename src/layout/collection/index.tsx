@@ -2,7 +2,7 @@ import type { CollectionData } from 'src/types'
 
 import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useMemo } from 'react'
-import { Button, ReviewPrompt } from 'src/components'
+import { Button, FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
 import { useCollection } from 'src/providers'
 
@@ -82,7 +82,10 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
           Load more
         </Button>
       </Transition>
+
+      {/* Solicitation*/}
       <ReviewPrompt />
+      <FeedbackModal />
     </section>
   )
 }
