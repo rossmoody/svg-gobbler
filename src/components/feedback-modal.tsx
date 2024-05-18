@@ -21,7 +21,7 @@ export const FeedbackModal = () => {
     const currentDate = new Date().getTime()
     const daysInstalled = Math.floor((currentDate - installDate) / (1000 * 60 * 60 * 24))
 
-    if (!userState.onboarding.viewedFeatureRequest && daysInstalled >= 0) {
+    if (!userState.onboarding.viewedFeatureRequest && daysInstalled >= 5) {
       setTimeout(() => setOpen(true), 3000)
     }
   }, [collections.length, userState.onboarding.viewedFeatureRequest, userState.installDate])
