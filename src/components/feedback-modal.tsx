@@ -36,7 +36,6 @@ export const FeedbackModal = () => {
     }
     StorageUtils.setStorageData('user', payload)
     dispatch({ payload, type: 'set-user' })
-    setOpen(false)
   }
 
   const onClose = () => {
@@ -53,7 +52,7 @@ export const FeedbackModal = () => {
     }
 
     try {
-      await fetch(serverEndpoint.svgr, {
+      fetch(serverEndpoint.svgr, {
         body: JSON.stringify(feedbackMessage),
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
@@ -62,7 +61,7 @@ export const FeedbackModal = () => {
       logger.error('Could not send feature request.', error)
     }
 
-    // setRequestModalViewed()
+    onClose()
   }
 
   return (
