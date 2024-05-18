@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
+import { initUserState } from 'src/providers'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { svgFactory } from 'svg-gobbler-scripts'
@@ -14,6 +15,12 @@ import { svgFactory } from 'svg-gobbler-scripts'
 export async function rootLoader() {
   return defer({
     collectionId: (async () => {
+      // Initialize user
+      const user = await StorageUtils.getStorageData('user')
+      if (!user) {
+        await StorageUtils.setStorageData('user', initUserState)
+      }
+
       // Get all collections from storage for sidenav
       const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 

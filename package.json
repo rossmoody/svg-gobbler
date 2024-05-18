@@ -1,6 +1,6 @@
 {
   "name": "svg-gobbler",
-  "version": "5.7.0",
+  "version": "5.8.0",
   "description": "Find, optimize, organize, edit, and export your SVGs",
   "license": "apache-2.0",
   "author": "Ross Moody<ross@rossmoody.com>",
@@ -9,8 +9,7 @@
     "build": "tsc && vite build",
     "clean": "rm -rf dist",
     "dev": "vite",
-    "release": "yarn build && npx ts-node --esm src/utils/zip-release.ts",
-    "serve": "nodemon server/index.ts --exec 'ts-node --esm'"
+    "release": "yarn build && npx ts-node --esm src/utils/zip-release.ts"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.6",

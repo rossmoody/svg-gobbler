@@ -17,7 +17,7 @@ export class SvgUtils {
   }
 
   /**
-   *
+   * Creates an array of storage svg objects with an id and the svg string.
    */
   static createStorageSvgs(svgArray: Svg[]): StorageSvg[] {
     return svgArray.map((svg) => ({
