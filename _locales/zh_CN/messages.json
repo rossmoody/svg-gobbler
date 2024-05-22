@@ -1,0 +1,758 @@
+{
+  "empty_title": {
+    "message": "未找到 SVG"
+  },
+  "empty_desc": {
+    "message": "选择或拖动 SVG 到此区域以上传到该集合"
+  },
+  "empty_action": {
+    "message": "上传 SVG"
+  },
+  "error_title": {
+    "message": "哎呀！发生了错误"
+  },
+  "error_desc": {
+    "message": "尝试刷新页面或返回主页"
+  },
+  "error_action": {
+    "message": "刷新"
+  },
+  "feedback_title": {
+    "message": "快速反馈，您觉得 SVG Gobbler 缺少哪一项功能？"
+  },
+  "feedback_placeholder": {
+    "message": "我希望 SVG Gobbler 能够..."
+  },
+  "feedback_primary_action": {
+    "message": "提交"
+  },
+  "feedback_secondary_action": {
+    "message": "取消"
+  },
+  "no_results_title": {
+    "message": "无可显示的 SVG"
+  },
+  "no_results_desc": {
+    "message": "尝试更改您的筛选条件、搜索或视图设置以显示 SVG"
+  },
+  "review_title": {
+    "message": "觉得 SVG Gobbler 有用吗？"
+  },
+  "review_desc": {
+    "message": "请考虑留下评论以帮助其他人发现它。"
+  },
+  "review_primary_action": {
+    "message": "评论"
+  },
+  "review_secondary_action": {
+    "message": "忽略"
+  },
+  "card_open": {
+    "message": "打开"
+  },
+  "card_tooltip_cors": {
+    "message": "此 SVG 被跨域资源共享限制，无法直接从 SVG Gobbler 编辑或导出"
+  },
+  "card_onboarding_context": {
+    "message": "右键单击以打开上下文菜单"
+  },
+  "card_action_copy": {
+    "message": "复制到剪贴板"
+  },
+  "card_action_download": {
+    "message": "下载"
+  },
+  "card_action_duplicate": {
+    "message": "复制"
+  },
+  "card_action_delete": {
+    "message": "删除"
+  },
+  "card_action_original": {
+    "message": "原始"
+  },
+  "card_action_optimized": {
+    "message": "优化"
+  },
+  "export_size": {
+    "message": "大小"
+  },
+  "export_quality": {
+    "message": "质量"
+  },
+  "export_optimize_exports": {
+    "message": "优化导出"
+  },
+  "export_pretty": {
+    "message": "美观输出"
+  },
+  "export_floating": {
+    "message": "浮点精度"
+  },
+  "export_filename": {
+    "message": "文件名"
+  },
+  "export_filetype": {
+    "message": "文件类型"
+  },
+  "export_export_filename": {
+    "message": "导出文件名"
+  },
+  "export_filename_prefix": {
+    "message": "文件前缀"
+  },
+  "export_prefix_tooltip": {
+    "message": "将添加到每个文件名前缀的前缀。"
+  },
+  "export_copy_clipboard": {
+    "message": "复制到剪贴板"
+  },
+  "export_copied": {
+    "message": "已复制"
+  },
+  "export_download": {
+    "message": "下载"
+  },
+  "export_files": {
+    "message": "文件"
+  },
+  "export_export": {
+    "message": "导出"
+  },
+  "export_settings": {
+    "message": "设置"
+  },
+  "main_copy": {
+    "message": "复制"
+  },
+  "main_copy_collection": {
+    "message": "将项目复制到集合"
+  },
+  "main_name": {
+    "message": "名称"
+  },
+  "main_submit": {
+    "message": "提交"
+  },
+  "main_cancel": {
+    "message": "取消"
+  },
+  "main_delete": {
+    "message": "删除"
+  },
+  "main_move": {
+    "message": "移动"
+  },
+  "main_move_collection": {
+    "message": "将项目移动到集合"
+  },
+  "main_showing": {
+    "message": "显示"
+  },
+  "main_of": {
+    "message": "的"
+  },
+  "main_results": {
+    "message": "结果"
+  },
+  "main_select": {
+    "message": "选择"
+  },
+  "main_all": {
+    "message": "全部"
+  },
+  "main_none": {
+    "message": "无"
+  },
+  "main_load_more": {
+    "message": "加载更多"
+  },
+  "upload_upload": {
+    "message": "上传"
+  },
+  "upload_file": {
+    "message": "文件"
+  },
+  "upload_clipboard": {
+    "message": "剪贴板"
+  },
+  "upload_upload_files": {
+    "message": "上传文件"
+  },
+  "upload_drag_files": {
+    "message": "或拖放"
+  },
+  "upload_file_limit": {
+    "message": "SVG 文件最多 10mb"
+  },
+  "upload_item": {
+    "message": "项目"
+  },
+  "upload_uploaded": {
+    "message": "已上传"
+  },
+  "upload_error": {
+    "message": "无效的 SVG，请检查字符串并重试"
+  },
+  "details_optimize": {
+    "message": "优化"
+  },
+  "details_format": {
+    "message": "格式"
+  },
+  "details_live": {
+    "message": "这是一个实时编辑器，请尝试更改代码"
+  },
+  "details_download": {
+    "message": "下载"
+  },
+  "details_settings": {
+    "message": "设置"
+  },
+  "details_floating_tooltip": {
+    "message": "浮点数的精度。将传递给每个支持此参数的插件。"
+  },
+  "details_plugin": {
+    "message": "插件"
+  },
+  "details_set_default": {
+    "message": "设为默认"
+  },
+  "details_default": {
+    "message": "默认设置"
+  },
+  "details_svgo_default": {
+    "message": "SVGO 默认"
+  },
+  "details_deselect_all": {
+    "message": "取消全选"
+  },
+  "details_preview": {
+    "message": "预览"
+  },
+  "details_react": {
+    "message": "React"
+  },
+  "details_data_uri": {
+    "message": "数据 URI"
+  },
+  "details_svgr": {
+    "message": "SVGR 选项"
+  },
+  "details_component_name": {
+    "message": "组件名称"
+  },
+  "details_component_desc": {
+    "message": "导出组件的名称"
+  },
+  "details_dimensions": {
+    "message": "尺寸"
+  },
+  "details_dimensions_desc": {
+    "message": "保留根 SVG 标签的宽度和高度属性"
+  },
+  "details_ref": {
+    "message": "Ref"
+  },
+  "details_ref_desc": {
+    "message": "为根 SVG 标签提供一个转发引用"
+  },
+  "details_native": {
+    "message": "原生"
+  },
+  "details_native_desc": {
+    "message": "将所有 SVG 节点修改为大写，并使用带有 react-native-svg 导入的特定模板。所有不支持的节点将被删除。"
+  },
+  "details_typescript": {
+    "message": "TypeScript"
+  },
+  "details_typescript_desc": {
+    "message": "为 TypeScript 生成类型定义"
+  },
+  "details_memo": {
+    "message": "Memo"
+  },
+  "details_memo_desc": {
+    "message": "将导出的组件包装在 React.memo 中"
+  },
+  "details_background_color": {
+    "message": "背景颜色"
+  },
+  "details_svgr_error": {
+    "message": "创建 SVGR 组件时出错"
+  },
+  "details_are_you_sure": {
+    "message": "您确定要离开吗？您的更改将丢失。"
+  },
+  "details_edit_svg": {
+    "message": "编辑 SVG"
+  },
+  "details_reset_changes": {
+    "message": "重置更改"
+  },
+  "details_save_changes": {
+    "message": "保存更改"
+  },
+  "onboarding_title": {
+    "message": "欢迎使用 SVG Gobbler"
+  },
+  "onboarding_new": {
+    "message": "新内容"
+  },
+  "onboarding_version": {
+    "message": "版本 5"
+  },
+  "onboarding_desc": {
+    "message": "SVG Gobbler 是由"
+  },
+  "onboarding_desc_2": {
+    "message": "在阳光明媚的旧金山创建的开源浏览器扩展。为项目做贡献，分享您的功能想法或在 GitHub 上提交错误。"
+  },
+  "onboarding_launch": {
+    "message": "启动 SVG Gobbler"
+  },
+  "onboarding_visit": {
+    "message": "访问 GitHub"
+  },
+  "settings_about": {
+    "message": "关于"
+  },
+  "settings_about_desc": {
+    "message": "SVG Gobbler 扩展的一些历史以及如何支持。"
+  },
+  "settings_contribute": {
+    "message": "贡献"
+  },
+  "settings_contribute_desc": {
+    "message": "SVG Gobbler 扩展是开源的，可用于"
+  },
+  "settings_contribute_desc_2": {
+    "message": "在 GitHub 上贡献"
+  },
+  "settings_bug": {
+    "message": "报告错误"
+  },
+  "settings_bug_desc": {
+    "message": "遇到错误或有功能请求？"
+  },
+  "settings_open_issue": {
+    "message": "在 GitHub 上打开问题"
+  },
+  "settings_disclaimer": {
+    "message": "免责声明"
+  },
+  "settings_disclaimer_desc": {
+    "message": "此开源浏览器扩展是为了便于从网站下载 SVG 图标，用于个人、教育或合法的专业用途。用户应尊重知识产权，不得在未经授权的情况下使用此工具侵犯版权或用于商业目的。"
+  },
+  "settings_default_svgo": {
+    "message": "默认 SVGO 配置"
+  },
+  "settings_default_svgo_desc": {
+    "message": "启动 SVG Gobbler 时将使用的默认 SVGO 插件配置。"
+  },
+  "settings_export": {
+    "message": "导出"
+  },
+  "settings_export_desc": {
+    "message": "导出面板的配置设置。"
+  },
+  "settings_general": {
+    "message": "常规"
+  },
+  "settings_general_desc": {
+    "message": "自定义 SVG Gobbler 在您的浏览器中的工作方式。这些设置特定于此浏览器配置文件。"
+  },
+  "settings_kbd": {
+    "message": "键盘快捷键"
+  },
+  "settings_kbd_desc": {
+    "message": "当前启动 SVG Gobbler 的快捷键是"
+  },
+  "settings_kbd_desc_2": {
+    "message": "要编辑或删除此快捷键"
+  },
+  "settings_kbd_desc_3": {
+    "message": "访问扩展快捷键页面"
+  },
+  "settings_settings": {
+    "message": "设置"
+  },
+  "topbar_canvas_tooltip": {
+    "message": "画布颜色"
+  },
+  "topbar_canvas": {
+    "message": "更改画布颜色"
+  },
+  "topbar_upload": {
+    "message": "上传"
+  },
+  "topbar_size": {
+    "message": "大小"
+  },
+  "topbar_sort_none": {
+    "message": "无"
+  },
+  "topbar_sort_size_asc": {
+    "message": "文件大小：从小到大"
+  },
+  "topbar_sort_size_desc": {
+    "message": "文件大小：从大到小"
+  },
+  "topbar_sort": {
+    "message": "排序"
+  },
+  "topbar_color_tooltip": {
+    "message": "颜色模式"
+  },
+  "topbar_color": {
+    "message": "切换颜色模式"
+  },
+  "topbar_view": {
+    "message": "视图"
+  },
+  "topbar_hide_cors": {
+    "message": "隐藏 CORS 限制"
+  },
+  "topbar_collection": {
+    "message": "收藏"
+  },
+  "sidebar_create_new": {
+    "message": "创建新收藏"
+  },
+  "sidebar_name": {
+    "message": "名称"
+  },
+  "sidebar_upload_files": {
+    "message": "上传文件"
+  },
+  "sidebar_drag_files": {
+    "message": "或拖放"
+  },
+  "sidebar_file_limit": {
+    "message": "SVG 文件最多 10mb"
+  },
+  "sidebar_item": {
+    "message": "项目"
+  },
+  "sidebar_uploaded": {
+    "message": "已上传"
+  },
+  "sidebar_create_collection": {
+    "message": "创建收藏"
+  },
+  "sidebar_cancel": {
+    "message": "取消"
+  },
+  "sidebar_close": {
+    "message": "关闭侧边栏"
+  },
+  "sidebar_reset": {
+    "message": "重置环境"
+  },
+  "sidebar_review": {
+    "message": "留下评论"
+  },
+  "sidebar_support": {
+    "message": "支持 SVG Gobbler"
+  },
+  "sidebar_free": {
+    "message": "SVG Gobbler 是免费的"
+  },
+  "sidebar_open": {
+    "message": "开源的"
+  },
+  "sidebar_support_2": {
+    "message": "并且完全依赖正能量运行。如果您遇到问题或希望添加功能，请先提出问题或发送电子邮件至 <b>ross@rossmoody.com</b>，在提交差评之前修复问题。"
+  },
+  "sidebar_support_3": {
+    "message": "如果您喜欢 SVG Gobbler，请考虑留下评论以帮助其他人发现它。"
+  },
+  "sidebar_support_submit": {
+    "message": "提交评论"
+  },
+  "sidebar_new_collection": {
+    "message": "新收藏"
+  },
+  "sidebar_settings": {
+    "message": "设置"
+  },
+  "export_apply": {
+    "message": "应用"
+  },
+  "svgo_cleanupAttrs": {
+    "message": "清理属性"
+  },
+  "svgo_cleanupAttrs_desc": {
+    "message": "删除属性值中的冗余空格。这不会修改属性键，也不会在优化后值为空时删除它们。"
+  },
+  "svgo_cleanupEnableBackground": {
+    "message": "清理 enable-background"
+  },
+  "svgo_cleanupEnableBackground_desc": {
+    "message": "删除 enable-background 属性，除非它在滤镜元素中使用"
+  },
+  "svgo_cleanupIDs": {
+    "message": "清理 ID"
+  },
+  "svgo_cleanupIDs_desc": {
+    "message": "删除未使用的 ID，并最小化被其他元素引用的 ID。"
+  },
+  "svgo_cleanupNumericValues": {
+    "message": "清理数值"
+  },
+  "svgo_cleanupNumericValues_desc": {
+    "message": "四舍五入数值，当单位为 'px' 时移除，因为这是默认单位。"
+  },
+  "svgo_collapsGroups": {
+    "message": "折叠组"
+  },
+  "svgo_collapsGroups_desc": {
+    "message": "找到有效不起作用的组并将其扁平化，保留组的内容。"
+  },
+  "svgo_convertColors": {
+    "message": "转换颜色"
+  },
+  "svgo_convertColors_desc": {
+    "message": "将颜色引用转换为最短等效值。"
+  },
+  "svgo_convertEllipseToCircle": {
+    "message": "将椭圆转换为圆形"
+  },
+  "svgo_convertEllipseToCircle_desc": {
+    "message": "将等半径的椭圆转换为圆形。"
+  },
+  "svgo_convertPathData": {
+    "message": "转换路径数据"
+  },
+  "svgo_convertPathData_desc": {
+    "message": "优化在 <path>、<glyph> 和 <missing-glyph> 元素中找到的路径命令。路径命令是 d 属性中使用的语法，每个字符代表绘制路径的指令。"
+  },
+  "svgo_convertShapeToPath": {
+    "message": "将形状转换为路径"
+  },
+  "svgo_convertShapeToPath_desc": {
+    "message": "将基本形状转换为 <path> 元素。"
+  },
+  "svgo_convertTransform": {
+    "message": "转换变换"
+  },
+  "svgo_convertTransform_desc": {
+    "message": "将多个变换合并为一个，并将矩阵转换为短别名"
+  },
+  "svgo_inlineStyles": {
+    "message": "内联样式"
+  },
+  "svgo_inlineStyles_desc": {
+    "message": "将 <style> 元素中的样式合并到匹配元素的样式属性中"
+  },
+  "svgo_mergePaths": {
+    "message": "合并路径"
+  },
+  "svgo_mergePaths_desc": {
+    "message": "将多个路径合并为一个，或如果它们具有相同属性则合并为 <g> 元素"
+  },
+  "svgo_mergeStyles": {
+    "message": "合并样式"
+  },
+  "svgo_mergeStyles_desc": {
+    "message": "将多个样式元素合并为一个"
+  },
+  "svgo_minifyStyles": {
+    "message": "最小化样式"
+  },
+  "svgo_minifyStyles_desc": {
+    "message": "使用 CSSO 最小化 <style> 元素"
+  },
+  "svgo_moveElemsAttrsToGroup": {
+    "message": "将元素属性移动到组"
+  },
+  "svgo_moveElemsAttrsToGroup_desc": {
+    "message": "将元素属性移动到其封闭组"
+  },
+  "svgo_moveGroupAttrsToElems": {
+    "message": "将组属性移动到元素"
+  },
+  "svgo_moveGroupAttrsToElems_desc": {
+    "message": "将一些组属性移动到包含的元素中"
+  },
+  "svgo_removeComments": {
+    "message": "删除注释"
+  },
+  "svgo_removeComments_desc": {
+    "message": "删除文档中的 XML 注释。XML 注释是 '<!--' 和 '-->' 语法之间的内容，不影响渲染"
+  },
+  "svgo_removeDesc": {
+    "message": "删除描述"
+  },
+  "svgo_removeDesc_desc": {
+    "message": "如果 <desc> 元素为空或似乎只包含编辑器属性，则将其从文档中删除"
+  },
+  "svgo_removeDoctype": {
+    "message": "删除 doctype"
+  },
+  "svgo_removeDoctype_desc": {
+    "message": "从 svg 中删除文档类型定义（DOCTYPE）"
+  },
+  "svgo_removeEditorsNSData": {
+    "message": "删除编辑器的命名空间数据"
+  },
+  "svgo_removeEditorsNSData_desc": {
+    "message": "删除与流行的矢量编辑软件相关的所有 XML 命名空间、元素和属性"
+  },
+  "svgo_removeEmptyAttrs": {
+    "message": "删除空属性"
+  },
+  "svgo_removeEmptyAttrs_desc": {
+    "message": "删除空值属性"
+  },
+  "svgo_removeEmptyContainers": {
+    "message": "删除空容器"
+  },
+  "svgo_removeEmptyContainers_desc": {
+    "message": "删除文档中没有子项或有意义属性的容器元素"
+  },
+  "svgo_removeEmptyText": {
+    "message": "删除空文本"
+  },
+  "svgo_removeEmptyText_desc": {
+    "message": "删除没有有意义属性的文本元素"
+  },
+  "svgo_removeHiddenElems": {
+    "message": "删除隐藏元素"
+  },
+  "svgo_removeHiddenElems_desc": {
+    "message": "从文档中删除隐藏或不可见的元素。这可能是定义了 0 宽度和高度的元素，或使用 CSS 隐藏的元素"
+  },
+  "svgo_removeMetadata": {
+    "message": "删除元数据"
+  },
+  "svgo_removeMetadata_desc": {
+    "message": "从文档中删除 <metadata> 元素。元数据不影响渲染。从优化的角度来看，这些可以始终安全地删除"
+  },
+  "svgo_removeNonInheritableGroupAttrs": {
+    "message": "删除不可继承的组属性"
+  },
+  "svgo_removeNonInheritableGroupAttrs_desc": {
+    "message": "从子项中删除不可继承的表示组"
+  },
+  "svgo_removeTitle": {
+    "message": "删除标题"
+  },
+  "svgo_removeTitle_desc": {
+    "message": "从文档中删除 <title> 元素。"
+  },
+  "svgo_removeUnknownsAndDefaults": {
+    "message": "删除未知和默认值"
+  },
+  "svgo_removeUnknownsAndDefaults_desc": {
+    "message": "删除未知元素和属性，以及设置为默认值的属性"
+  },
+  "svgo_removeUnusedNS": {
+    "message": "删除未使用的命名空间"
+  },
+  "svgo_removeUnusedNS_desc": {
+    "message": "从文档中删除未使用的命名空间声明"
+  },
+  "svgo_removeUselessDefs": {
+    "message": "删除无用的 defs"
+  },
+  "svgo_removeUselessDefs_desc": {
+    "message": "删除 <defs> 元素中没有引用 ID 的子项。"
+  },
+  "svgo_removeUselessStrokeAndFill": {
+    "message": "删除无用的描边和填充"
+  },
+  "svgo_removeUselessStrokeAndFill_desc": {
+    "message": "删除无用的描边和填充属性"
+  },
+  "svgo_removeXMLInstructions": {
+    "message": "删除 XML 指令"
+  },
+  "svgo_removeXMLInstructions_desc": {
+    "message": "删除 XML 处理指令"
+  },
+  "svgo_sortAttrs": {
+    "message": "排序属性"
+  },
+  "svgo_sortAttrs_desc": {
+    "message": "在文档中对所有元素的属性进行排序。这不会减小 SVG 的大小，但会提高可读性，并可能提高压缩算法的性能"
+  },
+  "svgo_sortDefsChildren": {
+    "message": "排序 defs 子项"
+  },
+  "svgo_sortDefsChildren_desc": {
+    "message": "在 '<defs>' 元素中对所有子项进行排序。这不会减小 SVG 的大小，但可能提高压缩算法的性能"
+  },
+  "svgo_removeViewBox": {
+    "message": "删除 viewBox"
+  },
+  "svgo_removeViewBox_desc": {
+    "message": "当高度和宽度相同时删除 viewBox 属性"
+  },
+  "svgo_cleanupListOfValues": {
+    "message": "清理值列表"
+  },
+  "svgo_cleanupListOfValues_desc": {
+    "message": "在属性中四舍五入数值，如 viewBox、enable-background 和 points"
+  },
+  "svgo_convertOneStopGradients": {
+    "message": "转换单点渐变"
+  },
+  "svgo_convertOneStopGradients_desc": {
+    "message": "将 <linearGradient> 和 <radialGradient> 节点转换为实色"
+  },
+  "svgo_convertStyleToAttrs": {
+    "message": "将样式转换为属性"
+  },
+  "svgo_convertStyleToAttrs_desc": {
+    "message": "将元素样式中的表示属性转换为等效的 XML 属性"
+  },
+  "svgo_prefixIds": {
+    "message": "前缀 ID"
+  },
+  "svgo_prefixIds_desc": {
+    "message": "使用提供的文件名为元素 ID 和类名添加前缀。默认 'prefix__'"
+  },
+  "svgo_removeDimensions": {
+    "message": "删除尺寸"
+  },
+  "svgo_removeDimensions_desc": {
+    "message": "如果指定，则从最顶层的 <svg> 元素中删除宽度和高度属性，并在缺失时用 viewBox 属性替换"
+  },
+  "svgo_removeOffCanvasPaths": {
+    "message": "删除画布外路径"
+  },
+  "svgo_removeOffCanvasPaths_desc": {
+    "message": "删除在 viewBox 外绘制的 <path> 元素"
+  },
+  "svgo_removeRasterImages": {
+    "message": "删除光栅图像"
+  },
+  "svgo_removeRasterImages_desc": {
+    "message": "从文档中删除嵌入的 JPEG、PNG 和 GIF"
+  },
+  "svgo_removeScriptElement": {
+    "message": "删除脚本元素"
+  },
+  "svgo_removeScriptElement_desc": {
+    "message": "从文档中删除 <script> 元素"
+  },
+  "svgo_removeStyleElement": {
+    "message": "删除样式元素"
+  },
+  "svgo_removeStyleElement_desc": {
+    "message": "从文档中删除 <style> 元素"
+  },
+  "svgo_removeXMLNS": {
+    "message": "删除 XMLNS"
+  },
+  "svgo_removeXMLNS_desc": {
+    "message": "从文档中最顶层的 <svg> 元素中删除 xmlns 属性"
+  },
+  "svgo_reusePaths": {
+    "message": "重用路径"
+  },
+  "svgo_reusePaths_desc": {
+    "message": "为相似路径创建定义，并将 <path> 元素替换为 <use> 元素，这些元素将引用单个 <path> 定义"
+  }
+}
