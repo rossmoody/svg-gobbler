@@ -2,17 +2,18 @@ import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
+import { loc } from 'src/utils/i18n'
 
 import { useExportActions } from './use-export-actions'
 
 export const Footer = () => {
-  const [label, setLabel] = useState('Copy to clipboard')
+  const [label, setLabel] = useState(loc('export_copy_clipboard'))
   const { state: collectionState } = useCollection()
   const { state: exportState } = useExport()
   const { processWithExportConfig } = useExportActions()
 
   const handleCopy = async () => {
-    setLabel('Copied')
+    setLabel(loc('export_copied'))
     const results = (await processWithExportConfig(collectionState.selected))[0]
 
     switch (exportState.fileType) {
@@ -29,7 +30,7 @@ export const Footer = () => {
       }
     }
 
-    setTimeout(() => setLabel('Copy to clipboard'), 1500)
+    setTimeout(() => setLabel(loc('export_copy_clipboard')), 1500)
   }
 
   const handleDownload = async () => {
@@ -52,7 +53,9 @@ export const Footer = () => {
   }
 
   const downloadQuantityString =
-    collectionState.selected.length > 1 ? ` ${collectionState.selected.length} files` : ''
+    collectionState.selected.length > 1
+      ? ` ${collectionState.selected.length} ${loc('export_files')}`
+      : ''
 
   return (
     <footer className="flex flex-col gap-2 px-1 pb-6 pt-4">
@@ -62,7 +65,8 @@ export const Footer = () => {
         </Button>
       )}
       <Button className="justify-center" onClick={handleDownload}>
-        Download{downloadQuantityString}
+        {loc('export_download')}
+        {downloadQuantityString}
       </Button>
     </footer>
   )

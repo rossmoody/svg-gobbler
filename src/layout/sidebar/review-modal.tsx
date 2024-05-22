@@ -2,6 +2,7 @@ import { MegaphoneIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { links } from 'src/constants/links'
+import { loc } from 'src/utils/i18n'
 
 export const ReviewModal = () => {
   const [open, setOpen] = useState(false)
@@ -10,21 +11,19 @@ export const ReviewModal = () => {
     <Fragment>
       <button className="collection-item" onClick={() => setOpen(true)}>
         <MegaphoneIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
-        Leave a review
+        {loc('sidebar_review')}
       </button>
       <Modal open={open} setOpen={setOpen}>
-        <Modal.Header>Support SVG Gobbler</Modal.Header>
+        <Modal.Header>{loc('sidebar_support')}</Modal.Header>
         <div className="text-muted flex flex-col gap-4 text-sm">
           <p>
-            SVG Gobbler is free,{' '}
+            {loc('sidebar_free')},{' '}
             <a className="anchor" href={links.githubRepository}>
-              open-source
+              {loc('sidebar_open')}
             </a>
-            , and runs entirely on positive vibes. If you are experiencing a problem or want missing
-            functionality, please raise an issue or email <b>ross@rossmoody.com</b> to be fixed
-            before submitting a bad review.
+            , {loc('sidebar_support_2')}
           </p>
-          <p>If you’re having a great experience, then by all means, let it rain. 🚀</p>
+          <p>{loc('sidebar_support_3')} 🚀</p>
         </div>
         <Modal.Footer>
           <Button
@@ -35,10 +34,10 @@ export const ReviewModal = () => {
             size="lg"
             type="submit"
           >
-            Submit a review
+            {loc('sidebar_support_submit')}
           </Button>
           <Button onClick={() => setOpen(false)} size="lg" type="button" variant="secondary">
-            Cancel
+            {loc('sidebar_cancel')}
           </Button>
         </Modal.Footer>
       </Modal>

@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import _ from 'lodash'
 import { PropsWithChildren } from 'react'
 import { useUser } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 import { type CardData } from '.'
@@ -39,7 +40,7 @@ export const CardOnboarding = ({ children, data }: PropsWithChildren<CardData>) 
           side="top"
           sideOffset={4}
         >
-          Right click for context menu
+          {loc('card_onboarding_context')}
           <Tooltip.Arrow className="fill-current text-gray-800 dark:text-gray-200" />
         </Tooltip.Content>
       </Tooltip.Portal>

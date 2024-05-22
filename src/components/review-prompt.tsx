@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { links } from 'src/constants/links'
 import { useDashboard, useUser } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const ReviewPrompt = () => {
@@ -52,10 +53,10 @@ export const ReviewPrompt = () => {
           <div className="flex w-0 flex-1 items-center py-4 pl-5">
             <div className="radix w-full">
               <Toast.Title className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                Finding SVG Gobbler useful? 👋
+                {loc('review_title')} 👋
               </Toast.Title>
               <Toast.Description className="mt-1 text-sm text-gray-700 dark:text-gray-400">
-                Please consider leaving a review to help others discover it.
+                {loc('review_desc')}
               </Toast.Description>
             </div>
           </div>
@@ -67,7 +68,7 @@ export const ReviewPrompt = () => {
                   className="flex w-full items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-red-600 hover:bg-gray-50 focus:z-10 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75 dark:text-red-500 dark:hover:bg-gray-900"
                   onClick={handleReviewPrompt}
                 >
-                  Review
+                  {loc('review_primary_action')}
                 </Toast.Action>
               </div>
               <div className="flex h-0 flex-1">
@@ -76,7 +77,7 @@ export const ReviewPrompt = () => {
                   className="flex w-full items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-medium hover:bg-gray-50 focus:z-10 focus:outline-none focus-visible:ring dark:hover:bg-gray-900"
                   onClick={setReviewPromptViewed}
                 >
-                  Dismiss
+                  {loc('review_secondary_action')}
                 </Toast.Action>
               </div>
             </div>

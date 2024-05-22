@@ -1,0 +1,758 @@
+{
+  "empty_title": {
+    "message": "POOP"
+  },
+  "empty_desc": {
+    "message": "POOP"
+  },
+  "empty_action": {
+    "message": "POOP"
+  },
+  "error_title": {
+    "message": "POOP"
+  },
+  "error_desc": {
+    "message": "POOP"
+  },
+  "error_action": {
+    "message": "POOP"
+  },
+  "feedback_title": {
+    "message": "POOP"
+  },
+  "feedback_placeholder": {
+    "message": "POOP"
+  },
+  "feedback_primary_action": {
+    "message": "POOP"
+  },
+  "feedback_secondary_action": {
+    "message": "POOP"
+  },
+  "no_results_title": {
+    "message": "POOP"
+  },
+  "no_results_desc": {
+    "message": "POOP"
+  },
+  "review_title": {
+    "message": "POOP"
+  },
+  "review_desc": {
+    "message": "POOP"
+  },
+  "review_primary_action": {
+    "message": "POOP"
+  },
+  "review_secondary_action": {
+    "message": "POOP"
+  },
+  "card_open": {
+    "message": "POOP"
+  },
+  "card_tooltip_cors": {
+    "message": "POOP"
+  },
+  "card_onboarding_context": {
+    "message": "POOP"
+  },
+  "card_action_copy": {
+    "message": "POOP"
+  },
+  "card_action_download": {
+    "message": "POOP"
+  },
+  "card_action_duplicate": {
+    "message": "POOP"
+  },
+  "card_action_delete": {
+    "message": "POOP"
+  },
+  "card_action_original": {
+    "message": "POOP"
+  },
+  "card_action_optimized": {
+    "message": "POOP"
+  },
+  "export_size": {
+    "message": "POOP"
+  },
+  "export_quality": {
+    "message": "POOP"
+  },
+  "export_optimize_exports": {
+    "message": "POOP"
+  },
+  "export_pretty": {
+    "message": "POOP"
+  },
+  "export_floating": {
+    "message": "POOP"
+  },
+  "export_filename": {
+    "message": "POOP"
+  },
+  "export_filetype": {
+    "message": "POOP"
+  },
+  "export_export_filename": {
+    "message": "POOP"
+  },
+  "export_filename_prefix": {
+    "message": "POOP"
+  },
+  "export_prefix_tooltip": {
+    "message": "POOP"
+  },
+  "export_copy_clipboard": {
+    "message": "POOP"
+  },
+  "export_copied": {
+    "message": "POOP"
+  },
+  "export_download": {
+    "message": "POOP"
+  },
+  "export_files": {
+    "message": "POOP"
+  },
+  "export_export": {
+    "message": "POOP"
+  },
+  "export_settings": {
+    "message": "POOP"
+  },
+  "main_copy": {
+    "message": "POOP"
+  },
+  "main_copy_collection": {
+    "message": "POOP"
+  },
+  "main_name": {
+    "message": "POOP"
+  },
+  "main_submit": {
+    "message": "POOP"
+  },
+  "main_cancel": {
+    "message": "POOP"
+  },
+  "main_delete": {
+    "message": "POOP"
+  },
+  "main_move": {
+    "message": "POOP"
+  },
+  "main_move_collection": {
+    "message": "POOP"
+  },
+  "main_showing": {
+    "message": "POOP"
+  },
+  "main_of": {
+    "message": "POOP"
+  },
+  "main_results": {
+    "message": "POOP"
+  },
+  "main_select": {
+    "message": "POOP"
+  },
+  "main_all": {
+    "message": "POOP"
+  },
+  "main_none": {
+    "message": "POOP"
+  },
+  "main_load_more": {
+    "message": "POOP"
+  },
+  "upload_upload": {
+    "message": "POOP"
+  },
+  "upload_file": {
+    "message": "POOP"
+  },
+  "upload_clipboard": {
+    "message": "POOP"
+  },
+  "upload_upload_files": {
+    "message": "POOP"
+  },
+  "upload_drag_files": {
+    "message": "POOP"
+  },
+  "upload_file_limit": {
+    "message": "POOP"
+  },
+  "upload_item": {
+    "message": "POOP"
+  },
+  "upload_uploaded": {
+    "message": "POOP"
+  },
+  "upload_error": {
+    "message": "POOP"
+  },
+  "details_optimize": {
+    "message": "POOP"
+  },
+  "details_format": {
+    "message": "POOP"
+  },
+  "details_live": {
+    "message": "POOP"
+  },
+  "details_download": {
+    "message": "POOP"
+  },
+  "details_settings": {
+    "message": "POOP"
+  },
+  "details_floating_tooltip": {
+    "message": "POOP"
+  },
+  "details_plugin": {
+    "message": "POOP"
+  },
+  "details_set_default": {
+    "message": "POOP"
+  },
+  "details_default": {
+    "message": "POOP"
+  },
+  "details_svgo_default": {
+    "message": "POOP"
+  },
+  "details_deselect_all": {
+    "message": "POOP"
+  },
+  "details_preview": {
+    "message": "POOP"
+  },
+  "details_react": {
+    "message": "POOP"
+  },
+  "details_data_uri": {
+    "message": "POOP"
+  },
+  "details_svgr": {
+    "message": "POOP"
+  },
+  "details_component_name": {
+    "message": "POOP"
+  },
+  "details_component_desc": {
+    "message": "POOP"
+  },
+  "details_dimensions": {
+    "message": "POOP"
+  },
+  "details_dimensions_desc": {
+    "message": "POOP"
+  },
+  "details_ref": {
+    "message": "POOP"
+  },
+  "details_ref_desc": {
+    "message": "POOP"
+  },
+  "details_native": {
+    "message": "POOP"
+  },
+  "details_native_desc": {
+    "message": "POOP"
+  },
+  "details_typescript": {
+    "message": "POOP"
+  },
+  "details_typescript_desc": {
+    "message": "POOP"
+  },
+  "details_memo": {
+    "message": "POOP"
+  },
+  "details_memo_desc": {
+    "message": "POOP"
+  },
+  "details_background_color": {
+    "message": "POOP"
+  },
+  "details_svgr_error": {
+    "message": "POOP"
+  },
+  "details_are_you_sure": {
+    "message": "POOP"
+  },
+  "details_edit_svg": {
+    "message": "POOP"
+  },
+  "details_reset_changes": {
+    "message": "POOP"
+  },
+  "details_save_changes": {
+    "message": "POOP"
+  },
+  "onboarding_title": {
+    "message": "POOP"
+  },
+  "onboarding_new": {
+    "message": "POOP"
+  },
+  "onboarding_version": {
+    "message": "POOP"
+  },
+  "onboarding_desc": {
+    "message": "POOP"
+  },
+  "onboarding_desc_2": {
+    "message": "POOP"
+  },
+  "onboarding_launch": {
+    "message": "POOP"
+  },
+  "onboarding_visit": {
+    "message": "POOP"
+  },
+  "settings_about": {
+    "message": "POOP"
+  },
+  "settings_about_desc": {
+    "message": "POOP"
+  },
+  "settings_contribute": {
+    "message": "POOP"
+  },
+  "settings_contribute_desc": {
+    "message": "POOP"
+  },
+  "settings_contribute_desc_2": {
+    "message": "POOP"
+  },
+  "settings_bug": {
+    "message": "POOP"
+  },
+  "settings_bug_desc": {
+    "message": "POOP"
+  },
+  "settings_open_issue": {
+    "message": "POOP"
+  },
+  "settings_disclaimer": {
+    "message": "POOP"
+  },
+  "settings_disclaimer_desc": {
+    "message": "POOP"
+  },
+  "settings_default_svgo": {
+    "message": "POOP"
+  },
+  "settings_default_svgo_desc": {
+    "message": "POOP"
+  },
+  "settings_export": {
+    "message": "POOP"
+  },
+  "settings_export_desc": {
+    "message": "POOP"
+  },
+  "settings_general": {
+    "message": "POOP"
+  },
+  "settings_general_desc": {
+    "message": "POOP"
+  },
+  "settings_kbd": {
+    "message": "POOP"
+  },
+  "settings_kbd_desc": {
+    "message": "POOP"
+  },
+  "settings_kbd_desc_2": {
+    "message": "POOP"
+  },
+  "settings_kbd_desc_3": {
+    "message": "POOP"
+  },
+  "settings_settings": {
+    "message": "POOP"
+  },
+  "topbar_canvas_tooltip": {
+    "message": "POOP"
+  },
+  "topbar_canvas": {
+    "message": "POOP"
+  },
+  "topbar_upload": {
+    "message": "POOP"
+  },
+  "topbar_size": {
+    "message": "POOP"
+  },
+  "topbar_sort_none": {
+    "message": "POOP"
+  },
+  "topbar_sort_size_asc": {
+    "message": "POOP"
+  },
+  "topbar_sort_size_desc": {
+    "message": "POOP"
+  },
+  "topbar_sort": {
+    "message": "POOP"
+  },
+  "topbar_color_tooltip": {
+    "message": "POOP"
+  },
+  "topbar_color": {
+    "message": "POOP"
+  },
+  "topbar_view": {
+    "message": "POOP"
+  },
+  "topbar_hide_cors": {
+    "message": "POOP"
+  },
+  "topbar_collection": {
+    "message": "POOP"
+  },
+  "sidebar_create_new": {
+    "message": "POOP"
+  },
+  "sidebar_name": {
+    "message": "POOP"
+  },
+  "sidebar_upload_files": {
+    "message": "POOP"
+  },
+  "sidebar_drag_files": {
+    "message": "POOP"
+  },
+  "sidebar_file_limit": {
+    "message": "POOP"
+  },
+  "sidebar_item": {
+    "message": "POOP"
+  },
+  "sidebar_uploaded": {
+    "message": "POOP"
+  },
+  "sidebar_create_collection": {
+    "message": "POOP"
+  },
+  "sidebar_cancel": {
+    "message": "POOP"
+  },
+  "sidebar_close": {
+    "message": "POOP"
+  },
+  "sidebar_reset": {
+    "message": "POOP"
+  },
+  "sidebar_review": {
+    "message": "POOP"
+  },
+  "sidebar_support": {
+    "message": "POOP"
+  },
+  "sidebar_free": {
+    "message": "POOP"
+  },
+  "sidebar_open": {
+    "message": "POOP"
+  },
+  "sidebar_support_2": {
+    "message": "POOP"
+  },
+  "sidebar_support_3": {
+    "message": "POOP"
+  },
+  "sidebar_support_submit": {
+    "message": "POOP"
+  },
+  "sidebar_new_collection": {
+    "message": "POOP"
+  },
+  "sidebar_settings": {
+    "message": "POOP"
+  },
+  "export_apply": {
+    "message": "POOP"
+  },
+  "svgo_cleanupAttrs": {
+    "message": "POOP"
+  },
+  "svgo_cleanupAttrs_desc": {
+    "message": "POOP"
+  },
+  "svgo_cleanupEnableBackground": {
+    "message": "POOP"
+  },
+  "svgo_cleanupEnableBackground_desc": {
+    "message": "POOP"
+  },
+  "svgo_cleanupIDs": {
+    "message": "POOP"
+  },
+  "svgo_cleanupIDs_desc": {
+    "message": "POOP"
+  },
+  "svgo_cleanupNumericValues": {
+    "message": "POOP"
+  },
+  "svgo_cleanupNumericValues_desc": {
+    "message": "POOP"
+  },
+  "svgo_collapsGroups": {
+    "message": "POOP"
+  },
+  "svgo_collapsGroups_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertColors": {
+    "message": "POOP"
+  },
+  "svgo_convertColors_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertEllipseToCircle": {
+    "message": "POOP"
+  },
+  "svgo_convertEllipseToCircle_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertPathData": {
+    "message": "POOP"
+  },
+  "svgo_convertPathData_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertShapeToPath": {
+    "message": "POOP"
+  },
+  "svgo_convertShapeToPath_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertTransform": {
+    "message": "POOP"
+  },
+  "svgo_convertTransform_desc": {
+    "message": "POOP"
+  },
+  "svgo_inlineStyles": {
+    "message": "POOP"
+  },
+  "svgo_inlineStyles_desc": {
+    "message": "POOP"
+  },
+  "svgo_mergePaths": {
+    "message": "POOP"
+  },
+  "svgo_mergePaths_desc": {
+    "message": "POOP"
+  },
+  "svgo_mergeStyles": {
+    "message": "POOP"
+  },
+  "svgo_mergeStyles_desc": {
+    "message": "POOP"
+  },
+  "svgo_minifyStyles": {
+    "message": "POOP"
+  },
+  "svgo_minifyStyles_desc": {
+    "message": "POOP"
+  },
+  "svgo_moveElemsAttrsToGroup": {
+    "message": "POOP"
+  },
+  "svgo_moveElemsAttrsToGroup_desc": {
+    "message": "POOP"
+  },
+  "svgo_moveGroupAttrsToElems": {
+    "message": "POOP"
+  },
+  "svgo_moveGroupAttrsToElems_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeComments": {
+    "message": "POOP"
+  },
+  "svgo_removeComments_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeDesc": {
+    "message": "POOP"
+  },
+  "svgo_removeDesc_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeDoctype": {
+    "message": "POOP"
+  },
+  "svgo_removeDoctype_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeEditorsNSData": {
+    "message": "POOP"
+  },
+  "svgo_removeEditorsNSData_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeEmptyAttrs": {
+    "message": "POOP"
+  },
+  "svgo_removeEmptyAttrs_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeEmptyContainers": {
+    "message": "POOP"
+  },
+  "svgo_removeEmptyContainers_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeEmptyText": {
+    "message": "POOP"
+  },
+  "svgo_removeEmptyText_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeHiddenElems": {
+    "message": "POOP"
+  },
+  "svgo_removeHiddenElems_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeMetadata": {
+    "message": "POOP"
+  },
+  "svgo_removeMetadata_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeNonInheritableGroupAttrs": {
+    "message": "POOP"
+  },
+  "svgo_removeNonInheritableGroupAttrs_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeTitle": {
+    "message": "POOP"
+  },
+  "svgo_removeTitle_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeUnknownsAndDefaults": {
+    "message": "POOP"
+  },
+  "svgo_removeUnknownsAndDefaults_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeUnusedNS": {
+    "message": "POOP"
+  },
+  "svgo_removeUnusedNS_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeUselessDefs": {
+    "message": "POOP"
+  },
+  "svgo_removeUselessDefs_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeUselessStrokeAndFill": {
+    "message": "POOP"
+  },
+  "svgo_removeUselessStrokeAndFill_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeXMLInstructions": {
+    "message": "POOP"
+  },
+  "svgo_removeXMLInstructions_desc": {
+    "message": "POOP"
+  },
+  "svgo_sortAttrs": {
+    "message": "POOP"
+  },
+  "svgo_sortAttrs_desc": {
+    "message": "POOP"
+  },
+  "svgo_sortDefsChildren": {
+    "message": "POOP"
+  },
+  "svgo_sortDefsChildren_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeViewBox": {
+    "message": "POOP"
+  },
+  "svgo_removeViewBox_desc": {
+    "message": "POOP"
+  },
+  "svgo_cleanupListOfValues": {
+    "message": "POOP"
+  },
+  "svgo_cleanupListOfValues_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertOneStopGradients": {
+    "message": "POOP"
+  },
+  "svgo_convertOneStopGradients_desc": {
+    "message": "POOP"
+  },
+  "svgo_convertStyleToAttrs": {
+    "message": "POOP"
+  },
+  "svgo_convertStyleToAttrs_desc": {
+    "message": "POOP"
+  },
+  "svgo_prefixIds": {
+    "message": "POOP"
+  },
+  "svgo_prefixIds_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeDimensions": {
+    "message": "POOP"
+  },
+  "svgo_removeDimensions_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeOffCanvasPaths": {
+    "message": "POOP"
+  },
+  "svgo_removeOffCanvasPaths_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeRasterImages": {
+    "message": "POOP"
+  },
+  "svgo_removeRasterImages_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeScriptElement": {
+    "message": "POOP"
+  },
+  "svgo_removeScriptElement_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeStyleElement": {
+    "message": "POOP"
+  },
+  "svgo_removeStyleElement_desc": {
+    "message": "POOP"
+  },
+  "svgo_removeXMLNS": {
+    "message": "POOP"
+  },
+  "svgo_removeXMLNS_desc": {
+    "message": "POOP"
+  },
+  "svgo_reusePaths": {
+    "message": "POOP"
+  },
+  "svgo_reusePaths_desc": {
+    "message": "POOP"
+  }
+}

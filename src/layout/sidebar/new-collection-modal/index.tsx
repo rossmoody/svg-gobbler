@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal } from 'src/components'
+import { loc } from 'src/utils/i18n'
 
 import { useCreateCollection } from './use-create-collection'
 
@@ -32,10 +33,10 @@ export const NewCollectionModal = ({ open, setOpen }: Props) => {
 
   return (
     <Modal onClose={onClose} open={open} setOpen={setOpen}>
-      <Modal.Header>Create a new collection</Modal.Header>
+      <Modal.Header>{loc('sidebar_create_new')}</Modal.Header>
       <form onSubmit={onSubmitForm}>
         <label className="label" htmlFor="name">
-          Name
+          {loc('sidebar_name')}
         </label>
         <input className="input" id="name" name="name" required type="text" />
         <div
@@ -61,11 +62,13 @@ export const NewCollectionModal = ({ open, setOpen }: Props) => {
           >
             <DocumentPlusIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
             <div className="text flex text-sm leading-6">
-              <span className="font-semibold text-red-600 dark:text-red-500">Upload files</span>
+              <span className="font-semibold text-red-600 dark:text-red-500">
+                {loc('sidebar_upload_files')}
+              </span>
               <input className="sr-only" {...getInputProps()} />
-              <p className="pl-1">or drag and drop</p>
+              <p className="pl-1">{loc('sidebar_drag_files')}</p>
             </div>
-            <p className="text-xs leading-5">SVG files up to 10mb</p>
+            <p className="text-xs leading-5">{loc('sidebar_file_limit')}</p>
           </Transition>
           {/* Content Uploaded */}
           <Transition
@@ -81,17 +84,18 @@ export const NewCollectionModal = ({ open, setOpen }: Props) => {
           >
             <DocumentCheckIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
             <span className="text text-sm font-medium leading-5">
-              {acceptedFiles.length} item{acceptedFiles.length > 1 && 's'} uploaded
+              {acceptedFiles.length} {loc('sidebar_item')}
+              {acceptedFiles.length > 1 && 's'} {loc('sidebar_uploaded')}
             </span>
           </Transition>
         </div>
 
         <Modal.Footer>
           <Button size="lg" type="submit">
-            Create collection
+            {loc('sidebar_create_collection')}
           </Button>
           <Button onClick={onClose} size="lg" type="button" variant="secondary">
-            Cancel
+            {loc('sidebar_cancel')}
           </Button>
         </Modal.Footer>
       </form>

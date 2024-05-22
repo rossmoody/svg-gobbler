@@ -1,6 +1,7 @@
 import { Fragment, useRef, useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { useCollection, useDashboard } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { useMainActions } from './use-main-actions'
 
@@ -29,13 +30,13 @@ export const CopyItemModal = () => {
   return (
     <Fragment>
       <Button onClick={openModal} size="xs" variant="ghost">
-        Copy
+        {loc('main_copy')}
       </Button>
       <Modal open={isModalOpen} setOpen={setModalOpen}>
-        <Modal.Header>Copy items to collection</Modal.Header>
+        <Modal.Header>{loc('main_copy_collection')}</Modal.Header>
         <div className="py-3">
           <label className="label" htmlFor="collection">
-            Name
+            {loc('main_name')}
           </label>
           <select className="select" id="collection" ref={collectionSelectRef}>
             {options.map((collection) => (
@@ -46,9 +47,9 @@ export const CopyItemModal = () => {
           </select>
         </div>
         <Modal.Footer>
-          <Button onClick={copyItemsToCollection}>Submit</Button>
+          <Button onClick={copyItemsToCollection}>{loc('main_submit')}</Button>
           <Button onClick={() => setModalOpen(false)} variant="secondary">
-            Cancel
+            {loc('main_cancel')}
           </Button>
         </Modal.Footer>
       </Modal>

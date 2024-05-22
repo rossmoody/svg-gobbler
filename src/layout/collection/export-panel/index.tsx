@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { Filename } from './file-name'
 import { Footer } from './footer'
@@ -49,7 +50,7 @@ export const ExportPanel = () => {
             <main>
               <div className="mb-3">
                 <label className="export-label" htmlFor="file-type">
-                  File type
+                  {loc('export_filetype')}
                 </label>
                 <select
                   className="export-select"
@@ -67,7 +68,7 @@ export const ExportPanel = () => {
               <div className="mb-5">
                 <Filename />
               </div>
-              <h2 className="my-3 text-sm font-medium">Settings</h2>
+              <h2 className="my-3 text-sm font-medium">{loc('export_settings')}</h2>
               <div className="relative">
                 <Transition as="div" show={exportState.fileType === 'svg'} {...transitionConfig}>
                   <SvgSettings />

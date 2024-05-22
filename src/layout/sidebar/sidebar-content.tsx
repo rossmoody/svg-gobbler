@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
 import { isDevEnv } from 'src/constants/server-config'
 import { useDashboard } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { CollectionItem } from './collection-item'
 import { NewCollectionModal } from './new-collection-modal'
@@ -25,7 +26,7 @@ export const SidebarContent = () => {
           <li>
             <button className="collection-item w-full" onClick={() => setOpen(true)}>
               <PlusIcon aria-hidden="true" className="h-4 w-4" />
-              New collection
+              {loc('sidebar_new_collection')}
             </button>
             <NewCollectionModal open={open} setOpen={setOpen} />
           </li>
@@ -55,7 +56,7 @@ export const SidebarContent = () => {
           <li className="mt-auto pt-8">
             <NavLink className="collection-item" to="settings">
               <Cog6ToothIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
-              Settings
+              {loc('sidebar_settings')}
             </NavLink>
           </li>
           <li>

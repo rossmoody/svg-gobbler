@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const Pagination = () => {
   const { state } = useCollection()
@@ -14,8 +15,9 @@ export const Pagination = () => {
 
   return (
     <div className="hidden leading-none md:block">
-      Showing <span className="font-medium">{state.processedData.length}</span> of{' '}
-      <span className="font-medium">{filteredResultLength}</span> results
+      {loc('main_showing')} <span className="font-medium">{state.processedData.length}</span>{' '}
+      {loc('main_of')} <span className="font-medium">{filteredResultLength}</span>{' '}
+      {loc('main_results')}
     </div>
   )
 }

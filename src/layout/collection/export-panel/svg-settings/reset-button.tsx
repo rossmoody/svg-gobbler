@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { useExport } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const ResetButton = () => {
@@ -36,7 +37,7 @@ export const ResetButton = () => {
     <Fragment>
       <Menu>
         <Menu.Button className="flex items-center gap-1">
-          Apply <ChevronDownIcon className="h-4 w-4" />
+          {loc('export_apply')} <ChevronDownIcon className="h-4 w-4" />
         </Menu.Button>
 
         <Transition

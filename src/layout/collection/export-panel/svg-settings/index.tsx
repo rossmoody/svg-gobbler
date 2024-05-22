@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useExport } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { ResetButton } from './reset-button'
 import { SvgoOption } from './svgo-option'
@@ -35,7 +36,7 @@ export const SvgSettings = () => {
             type="checkbox"
           />
           <label className="export-label" htmlFor="optimize">
-            Optimize exports
+            {loc('export_optimize_exports')}
           </label>
         </div>
         <div className="flex gap-2">
@@ -47,13 +48,13 @@ export const SvgSettings = () => {
             type="checkbox"
           />
           <label className="export-label" htmlFor="prettify">
-            Pretty output
+            {loc('export_pretty')}
           </label>
         </div>
         <div>
           <div className="group mb-1 mt-2 flex items-center gap-1">
             <label className="export-label" htmlFor="float-precision">
-              Floating precision
+              {loc('export_floating')}
             </label>
             <HelpIcon content="Precision of floating point numbers. Will be passed to each plugin that supports this param." />
           </div>
@@ -81,7 +82,7 @@ export const SvgSettings = () => {
         show={state.settings.svg.optimizeExports}
       >
         <div className="flex items-center justify-between">
-          <h2 className="my-2 text-sm font-medium leading-none">Plugins</h2>
+          <h2 className="my-2 text-sm font-medium leading-none">{loc('details_plugin')}</h2>
           <ResetButton />
         </div>
         {_.sortBy(svgoPlugins, 'label').map((plugin) => (

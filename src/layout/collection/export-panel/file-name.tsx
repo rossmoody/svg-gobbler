@@ -1,6 +1,7 @@
 import { HelpIcon } from 'src/components'
 import { useMountEffect } from 'src/hooks'
 import { useCollection, useDashboard, useExport } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const Filename = () => {
   const { dispatch } = useExport()
@@ -28,7 +29,7 @@ export const Filename = () => {
     return (
       <>
         <label className="export-label" htmlFor="file-name">
-          File name
+          {loc('export_filename')}
         </label>
         <input
           className="export-input"
@@ -44,7 +45,7 @@ export const Filename = () => {
   return (
     <>
       <label className="export-label" htmlFor="file-name">
-        Export file name
+        {loc('export_export_filename')}
       </label>
       <input
         className="export-input"
@@ -55,9 +56,9 @@ export const Filename = () => {
       />
       <div className="group mt-3 flex items-center gap-1">
         <label className="export-label" htmlFor="prefix-file-name">
-          File prefix
+          {loc('export_filename_prefix')}
         </label>
-        <HelpIcon content="The prefix that will be added to the beginning of each file name." />
+        <HelpIcon content={loc('export_prefix_tooltip')} />
       </div>
       <input
         className="export-input"

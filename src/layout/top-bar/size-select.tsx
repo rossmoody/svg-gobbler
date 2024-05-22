@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const sizes = [
@@ -25,7 +26,7 @@ export const SizeSelect = () => {
   return (
     <>
       <label className="hidden" htmlFor="size">
-        Size
+        {loc('topbar_size')}
       </label>
       <select
         className={clsx(

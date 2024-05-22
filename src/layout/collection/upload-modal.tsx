@@ -6,6 +6,7 @@ import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
 import { FormUtils } from 'src/utils/form-utils'
+import { loc } from 'src/utils/i18n'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {
   const [error, setError] = useState(false)
@@ -48,11 +49,11 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
 
   return (
     <Modal onClose={onClose} open={open} setOpen={setOpen}>
-      <Modal.Header>Upload</Modal.Header>
+      <Modal.Header>{loc('upload_upload')}</Modal.Header>
       <Tabs.Group>
         <Tabs.List>
-          <Tabs.Tab>File</Tabs.Tab>
-          <Tabs.Tab>Clipboard</Tabs.Tab>
+          <Tabs.Tab>{loc('upload_file')}</Tabs.Tab>
+          <Tabs.Tab>{loc('upload_clipboard')}</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panels>
           {/* Files */}
@@ -83,11 +84,13 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
                   className="text-muted mx-auto mb-3 h-12 w-12"
                 />
                 <div className="text flex text-sm leading-6">
-                  <span className="font-semibold text-red-600 dark:text-red-500">Upload files</span>
+                  <span className="font-semibold text-red-600 dark:text-red-500">
+                    {loc('upload_upload_files')}
+                  </span>
                   <input className="sr-only" {...getInputProps()} />
-                  <p className="pl-1">or drag and drop</p>
+                  <p className="pl-1">{loc('upload_drag_files')}</p>
                 </div>
-                <p className="text-xs leading-5">SVG files up to 10mb</p>
+                <p className="text-xs leading-5">{loc('upload_file_limit')}</p>
               </Transition>
               {/* Content Uploaded */}
               <Transition
@@ -106,7 +109,8 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
                   className="text-muted mx-auto mb-3 h-12 w-12"
                 />
                 <span className="text text-sm font-medium leading-5">
-                  {acceptedFiles.length} item{acceptedFiles.length > 1 && 's'} uploaded
+                  {acceptedFiles.length} {loc('upload_item')}
+                  {acceptedFiles.length > 1 && 's'} {loc('upload_uploaded')}
                 </span>
               </Transition>
             </div>
@@ -124,7 +128,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
                 aria-live="polite"
                 className="block pt-2 text-xs text-red-600 dark:text-red-400"
               >
-                Invalid SVG, double check the string syntax
+                {loc('upload_error')}
               </span>
             )}
           </Tabs.Panel>
@@ -132,10 +136,10 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
       </Tabs.Group>
       <Modal.Footer>
         <Button onClick={onSubmit} size="lg">
-          Upload
+          {loc('upload_upload')}
         </Button>
         <Button onClick={onClose} size="lg" type="button" variant="secondary">
-          Cancel
+          {loc('main_cancel')}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -1,5 +1,6 @@
 import { ArrowUturnDownIcon } from '@heroicons/react/24/outline'
 import { dummyStorageSvg, emptyCollection, emptyPageData } from 'src/constants/models'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const ResetEnvironment = () => {
@@ -17,7 +18,7 @@ export const ResetEnvironment = () => {
   return (
     <button className="collection-item" onClick={handleResetEnvironment}>
       <ArrowUturnDownIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
-      Reset environment
+      {loc('sidebar_reset')}
     </button>
   )
 }

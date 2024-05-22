@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { CollectionState, useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 type SortOption = {
@@ -12,9 +13,9 @@ type SortOption = {
 }
 
 const sortOptions: SortOption[] = [
-  { label: 'None', value: 'none' },
-  { label: 'File size: low to high', value: 'file-asc' },
-  { label: 'File size: high to low', value: 'file-desc' },
+  { label: loc('topbar_sort_none'), value: 'none' },
+  { label: loc('topbar_sort_size_asc'), value: 'file-asc' },
+  { label: loc('topbar_sort_size_desc'), value: 'file-desc' },
 ]
 
 export const SortMenu = () => {
@@ -30,7 +31,7 @@ export const SortMenu = () => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <Menu.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
-        Sort
+        {loc('topbar_sort')}
         <ChevronDownIcon aria-hidden className="h-3 w-3" />
       </Menu.Button>
 

@@ -2,6 +2,7 @@ import * as Tooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 import { useUser } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const EditorOnboarding = ({ children }: PropsWithChildren) => {
   const { state } = useUser()
@@ -29,7 +30,7 @@ export const EditorOnboarding = ({ children }: PropsWithChildren) => {
           side="top"
           sideOffset={4}
         >
-          This is a live editor, try changing the code
+          {loc('details_live')}
           <Tooltip.Arrow className="fill-current text-gray-800 dark:text-gray-200" />
         </Tooltip.Content>
       </Tooltip.Portal>

@@ -1,6 +1,7 @@
 import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import { Fragment, PropsWithChildren } from 'react'
 import { Button, Tooltip } from 'src/components'
+import { loc } from 'src/utils/i18n'
 import { type Image } from 'svg-gobbler-scripts'
 
 import { type CardData } from '.'
@@ -17,7 +18,7 @@ export const CorsRestrictedActions = ({ children, data }: PropsWithChildren<Card
     <Fragment>
       {/* Info icon in place of checkbox */}
       <div className="absolute right-3 top-3 z-50 cursor-help opacity-0 transition-all duration-300 ease-in-out group-hover/card:opacity-100">
-        <Tooltip content="This SVG is restricted from cross-origin resource sharing and can't be edited or exported directly from SVG Gobbler">
+        <Tooltip content={loc('card_tooltip_cors')}>
           <InformationCircleIcon aria-hidden="true" className="h-6 w-6" />
         </Tooltip>
       </div>
@@ -30,7 +31,7 @@ export const CorsRestrictedActions = ({ children, data }: PropsWithChildren<Card
           size="sm"
           variant="secondary"
         >
-          Open
+          {loc('card_open')}
           <ArrowTopRightOnSquareIcon aria-hidden="true" className="h-4 w-4" />
         </Button>
       </div>

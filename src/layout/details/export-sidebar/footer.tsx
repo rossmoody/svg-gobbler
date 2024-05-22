@@ -2,10 +2,11 @@ import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
+import { loc } from 'src/utils/i18n'
 
 export const ExportDetailFooter = () => {
   const { state } = useDetails()
-  const { copyToClipboard, text } = useClipboard('Copy to clipboard')
+  const { copyToClipboard, text } = useClipboard(loc('card_action_copy'))
 
   const handleCopy = () => {
     copyToClipboard(state.currentString)
@@ -21,7 +22,7 @@ export const ExportDetailFooter = () => {
         {text}
       </Button>
       <Button className="justify-center" onClick={handleDownload}>
-        Download
+        {loc('details_download')}
       </Button>
     </footer>
   )

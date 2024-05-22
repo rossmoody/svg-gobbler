@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { ResetButton } from './reset-button'
 import { SvgoOption } from './svgo-option'
@@ -30,7 +31,7 @@ export const ExportDetailMain = () => {
       <div className="flex flex-col gap-2">
         <div>
           <label className="export-label" htmlFor="file-name">
-            File name
+            {loc('export_filename')}
           </label>
           <input
             className="export-input"
@@ -43,9 +44,9 @@ export const ExportDetailMain = () => {
         <div>
           <div className="group mb-1 flex items-center gap-1">
             <label className="export-label" htmlFor="float-precision">
-              Floating precision
+              {loc('export_floating')}
             </label>
-            <HelpIcon content="Precision of floating point numbers. Will be passed to each plugin that supports this param." />
+            <HelpIcon content={loc('details_floating_tooltip')} />
           </div>
           <input
             className="input"
@@ -66,14 +67,14 @@ export const ExportDetailMain = () => {
             type="checkbox"
           />
           <label className="export-label" htmlFor="prettify-markup">
-            Pretty print
+            {loc('export_pretty')}
           </label>
         </div>
       </div>
 
       {/* Plugins */}
       <div className="mt-5 flex items-center justify-between">
-        <h2 className="text-sm font-medium">Plugins</h2>
+        <h2 className="text-sm font-medium">{loc('details_plugin')}</h2>
         <ResetButton />
       </div>
       <div className="mt-4 flex flex-col gap-3 pb-8">
