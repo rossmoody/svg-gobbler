@@ -1,0 +1,758 @@
+{
+  "empty_title": {
+    "message": "कोई SVG नहीं मिला"
+  },
+  "empty_desc": {
+    "message": "इस संग्रह में अपलोड करने के लिए SVG का चयन करें या इसे इस क्षेत्र में खींचें"
+  },
+  "empty_action": {
+    "message": "SVG अपलोड करें"
+  },
+  "error_title": {
+    "message": "उफ़! एक त्रुटि हुई"
+  },
+  "error_desc": {
+    "message": "पृष्ठ को ताज़ा करने या होम पेज पर वापस जाने का प्रयास करें"
+  },
+  "error_action": {
+    "message": "ताज़ा करें"
+  },
+  "feedback_title": {
+    "message": "जल्दी बताएं, आपको क्या लगता है कि SVG Gobbler में कौन सी सुविधा गायब है?"
+  },
+  "feedback_placeholder": {
+    "message": "काश SVG Gobbler..."
+  },
+  "feedback_primary_action": {
+    "message": "जमा करें"
+  },
+  "feedback_secondary_action": {
+    "message": "रद्द करें"
+  },
+  "no_results_title": {
+    "message": "दिखाने के लिए कोई SVG नहीं"
+  },
+  "no_results_desc": {
+    "message": "SVG दिखाने के लिए अपने फ़िल्टर, खोज, या दृश्य सेटिंग बदलने का प्रयास करें"
+  },
+  "review_title": {
+    "message": "क्या आपको SVG Gobbler उपयोगी लग रहा है?"
+  },
+  "review_desc": {
+    "message": "कृपया अन्य लोगों को इसे खोजने में मदद करने के लिए एक समीक्षा छोड़ने पर विचार करें।"
+  },
+  "review_primary_action": {
+    "message": "समीक्षा करें"
+  },
+  "review_secondary_action": {
+    "message": "खारिज करें"
+  },
+  "card_open": {
+    "message": "खोलें"
+  },
+  "card_tooltip_cors": {
+    "message": "यह SVG क्रॉस-ओरिजिन संसाधन साझाकरण से प्रतिबंधित है और इसे सीधे SVG Gobbler से संपादित या निर्यात नहीं किया जा सकता"
+  },
+  "card_onboarding_context": {
+    "message": "संदर्भ मेनू के लिए राइट क्लिक करें"
+  },
+  "card_action_copy": {
+    "message": "क्लिपबोर्ड पर कॉपी करें"
+  },
+  "card_action_download": {
+    "message": "डाउनलोड करें"
+  },
+  "card_action_duplicate": {
+    "message": "प्रतिलिपि बनाएं"
+  },
+  "card_action_delete": {
+    "message": "हटाएं"
+  },
+  "card_action_original": {
+    "message": "मूल"
+  },
+  "card_action_optimized": {
+    "message": "अनुकूलित"
+  },
+  "export_size": {
+    "message": "आकार"
+  },
+  "export_quality": {
+    "message": "गुणवत्ता"
+  },
+  "export_optimize_exports": {
+    "message": "निर्यात को अनुकूलित करें"
+  },
+  "export_pretty": {
+    "message": "सुंदर आउटपुट"
+  },
+  "export_floating": {
+    "message": "फ्लोटिंग प्रिसिजन"
+  },
+  "export_filename": {
+    "message": "फाइल का नाम"
+  },
+  "export_filetype": {
+    "message": "फाइल का प्रकार"
+  },
+  "export_export_filename": {
+    "message": "निर्यात फाइल का नाम"
+  },
+  "export_filename_prefix": {
+    "message": "फाइल प्रीफिक्स"
+  },
+  "export_prefix_tooltip": {
+    "message": "प्रीफिक्स जो प्रत्येक फाइल नाम के शुरू में जोड़ा जाएगा।"
+  },
+  "export_copy_clipboard": {
+    "message": "क्लिपबोर्ड पर कॉपी करें"
+  },
+  "export_copied": {
+    "message": "कॉपी किया गया"
+  },
+  "export_download": {
+    "message": "डाउनलोड करें"
+  },
+  "export_files": {
+    "message": "फाइलें"
+  },
+  "export_export": {
+    "message": "निर्यात करें"
+  },
+  "export_settings": {
+    "message": "सेटिंग्स"
+  },
+  "main_copy": {
+    "message": "कॉपी करें"
+  },
+  "main_copy_collection": {
+    "message": "आइटम्स को संग्रह में कॉपी करें"
+  },
+  "main_name": {
+    "message": "नाम"
+  },
+  "main_submit": {
+    "message": "जमा करें"
+  },
+  "main_cancel": {
+    "message": "रद्द करें"
+  },
+  "main_delete": {
+    "message": "हटाएं"
+  },
+  "main_move": {
+    "message": "स्थानांतरित करें"
+  },
+  "main_move_collection": {
+    "message": "आइटम्स को संग्रह में स्थानांतरित करें"
+  },
+  "main_showing": {
+    "message": "दिखा रहा है"
+  },
+  "main_of": {
+    "message": "का"
+  },
+  "main_results": {
+    "message": "परिणाम"
+  },
+  "main_select": {
+    "message": "चयन करें"
+  },
+  "main_all": {
+    "message": "सभी"
+  },
+  "main_none": {
+    "message": "कोई नहीं"
+  },
+  "main_load_more": {
+    "message": "और लोड करें"
+  },
+  "upload_upload": {
+    "message": "अपलोड करें"
+  },
+  "upload_file": {
+    "message": "फाइल"
+  },
+  "upload_clipboard": {
+    "message": "क्लिपबोर्ड"
+  },
+  "upload_upload_files": {
+    "message": "फाइलें अपलोड करें"
+  },
+  "upload_drag_files": {
+    "message": "या खींचें और छोड़ें"
+  },
+  "upload_file_limit": {
+    "message": "10mb तक के SVG फाइलें"
+  },
+  "upload_item": {
+    "message": "आइटम"
+  },
+  "upload_uploaded": {
+    "message": "अपलोड किया गया"
+  },
+  "upload_error": {
+    "message": "अमान्य SVG, स्ट्रिंग की दोबारा जाँच करें और फिर से प्रयास करें"
+  },
+  "details_optimize": {
+    "message": "अनुकूलित करें"
+  },
+  "details_format": {
+    "message": "फॉर्मेट"
+  },
+  "details_live": {
+    "message": "यह एक लाइव एडिटर है, कोड बदलने का प्रयास करें"
+  },
+  "details_download": {
+    "message": "डाउनलोड करें"
+  },
+  "details_settings": {
+    "message": "सेटिंग्स"
+  },
+  "details_floating_tooltip": {
+    "message": "फ्लोटिंग पॉइंट नंबरों की प्रिसिजन। इसे प्रत्येक प्लगइन में पारित किया जाएगा जो इस पैरामीटर का समर्थन करता है।"
+  },
+  "details_plugin": {
+    "message": "प्लगइन्स"
+  },
+  "details_set_default": {
+    "message": "डिफ़ॉल्ट रूप में सेट करें"
+  },
+  "details_default": {
+    "message": "डिफ़ॉल्ट सेटिंग्स"
+  },
+  "details_svgo_default": {
+    "message": "SVGO डिफ़ॉल्ट"
+  },
+  "details_deselect_all": {
+    "message": "सभी चयन रद्द करें"
+  },
+  "details_preview": {
+    "message": "पूर्वावलोकन"
+  },
+  "details_react": {
+    "message": "React"
+  },
+  "details_data_uri": {
+    "message": "Data URI"
+  },
+  "details_svgr": {
+    "message": "SVGR विकल्प"
+  },
+  "details_component_name": {
+    "message": "घटक का नाम"
+  },
+  "details_component_desc": {
+    "message": "निर्यातित घटक का नाम"
+  },
+  "details_dimensions": {
+    "message": "आयाम"
+  },
+  "details_dimensions_desc": {
+    "message": "मूल SVG टैग से चौड़ाई और ऊंचाई की विशेषताओं को रखें"
+  },
+  "details_ref": {
+    "message": "रेफ"
+  },
+  "details_ref_desc": {
+    "message": "मूल SVG टैग को एक अग्रेषित रेफ प्रदान करें"
+  },
+  "details_native": {
+    "message": "मूल"
+  },
+  "details_native_desc": {
+    "message": "सभी SVG नोड्स को बड़े अक्षरों में बदलें और react-native-svg इम्पोर्ट्स के साथ एक विशिष्ट टेम्पलेट का उपयोग करें। सभी असमर्थित नोड्स हटा दिए जाएंगे।"
+  },
+  "details_typescript": {
+    "message": "TypeScript"
+  },
+  "details_typescript_desc": {
+    "message": "TypeScript के लिए प्रकार परिभाषाएं उत्पन्न करें"
+  },
+  "details_memo": {
+    "message": "मेमो"
+  },
+  "details_memo_desc": {
+    "message": "निर्यातित घटक को React.memo में लपेटें"
+  },
+  "details_background_color": {
+    "message": "पृष्ठभूमि का रंग"
+  },
+  "details_svgr_error": {
+    "message": "SVGR घटक बनाने में त्रुटि"
+  },
+  "details_are_you_sure": {
+    "message": "क्या आप वाकई जाना चाहते हैं? आपके परिवर्तन खो जाएंगे।"
+  },
+  "details_edit_svg": {
+    "message": "SVG संपादित करें"
+  },
+  "details_reset_changes": {
+    "message": "परिवर्तनों को रीसेट करें"
+  },
+  "details_save_changes": {
+    "message": "परिवर्तनों को सहेजें"
+  },
+  "onboarding_title": {
+    "message": "SVG Gobbler में आपका स्वागत है"
+  },
+  "onboarding_new": {
+    "message": "नया क्या है"
+  },
+  "onboarding_version": {
+    "message": "संस्करण 5"
+  },
+  "onboarding_desc": {
+    "message": "SVG Gobbler एक ओपन-सोर्स ब्राउज़र एक्सटेंशन है जिसे"
+  },
+  "onboarding_desc_2": {
+    "message": "सनी सैन फ्रांसिस्को में बनाया गया है। परियोजना में योगदान दें, अपनी सुविधाओं के विचार साझा करें, या GitHub पर बग सबमिट करें।"
+  },
+  "onboarding_launch": {
+    "message": "SVG Gobbler लॉन्च करें"
+  },
+  "onboarding_visit": {
+    "message": "GitHub पर जाएं"
+  },
+  "settings_about": {
+    "message": "के बारे में"
+  },
+  "settings_about_desc": {
+    "message": "SVG Gobbler एक्सटेंशन का थोड़ा इतिहास और इसे समर्थन देने का तरीका।"
+  },
+  "settings_contribute": {
+    "message": "योगदान करें"
+  },
+  "settings_contribute_desc": {
+    "message": "SVG Gobbler एक्सटेंशन ओपन-सोर्स है और"
+  },
+  "settings_contribute_desc_2": {
+    "message": "GitHub पर योगदान के लिए उपलब्ध है"
+  },
+  "settings_bug": {
+    "message": "बग रिपोर्ट करें"
+  },
+  "settings_bug_desc": {
+    "message": "क्या आपको कोई बग मिला या कोई फीचर रिक्वेस्ट है?"
+  },
+  "settings_open_issue": {
+    "message": "GitHub पर एक मुद्दा खोलें"
+  },
+  "settings_disclaimer": {
+    "message": "अस्वीकरण"
+  },
+  "settings_disclaimer_desc": {
+    "message": "यह ओपन-सोर्स ब्राउज़र एक्सटेंशन बनाया गया था और इसका उद्देश्य वेबसाइटों से SVG आइकन डाउनलोड करने में सुविधा प्रदान करना है जो व्यक्तिगत, शैक्षिक या वैध पेशेवर उपयोग के लिए है। उपयोगकर्ताओं से अपेक्षा की जाती है कि वे बौद्धिक संपदा अधिकारों का सम्मान करें और इस उपकरण का उपयोग बिना उचित अनुमति के कॉपीराइट का उल्लंघन करने या व्यावसायिक उद्देश्यों के लिए नहीं करना चाहिए।"
+  },
+  "settings_default_svgo": {
+    "message": "डिफ़ॉल्ट SVGO कॉन्फ़िग"
+  },
+  "settings_default_svgo_desc": {
+    "message": "डिफ़ॉल्ट SVGO प्लगइन कॉन्फ़िगरेशन जो SVG Gobbler लॉन्च करते समय उपयोग किया जाएगा।"
+  },
+  "settings_export": {
+    "message": "निर्यात"
+  },
+  "settings_export_desc": {
+    "message": "निर्यात पैनल के लिए कॉन्फ़िगरेशन सेटिंग्स।"
+  },
+  "settings_general": {
+    "message": "सामान्य"
+  },
+  "settings_general_desc": {
+    "message": "कस्टमाइज़ करें कि आपका ब्राउज़र में SVG Gobbler कैसे काम करता है। ये सेटिंग्स इस ब्राउज़र प्रोफाइल के लिए विशिष्ट हैं।"
+  },
+  "settings_kbd": {
+    "message": "कीबोर्ड शॉर्टकट"
+  },
+  "settings_kbd_desc": {
+    "message": "SVG Gobbler लॉन्च करने के लिए वर्तमान शॉर्टकट"
+  },
+  "settings_kbd_desc_2": {
+    "message": "इस शॉर्टकट को संपादित करने या हटाने के लिए"
+  },
+  "settings_kbd_desc_3": {
+    "message": "एक्सटेंशन शॉर्टकट पेज पर जाएं"
+  },
+  "settings_settings": {
+    "message": "सेटिंग्स"
+  },
+  "topbar_canvas_tooltip": {
+    "message": "कैनवास का रंग"
+  },
+  "topbar_canvas": {
+    "message": "कैनवास का रंग बदलें"
+  },
+  "topbar_upload": {
+    "message": "अपलोड करें"
+  },
+  "topbar_size": {
+    "message": "आकार"
+  },
+  "topbar_sort_none": {
+    "message": "कोई नहीं"
+  },
+  "topbar_sort_size_asc": {
+    "message": "फाइल का आकार: छोटे से बड़े"
+  },
+  "topbar_sort_size_desc": {
+    "message": "फाइल का आकार: बड़े से छोटे"
+  },
+  "topbar_sort": {
+    "message": "सॉर्ट करें"
+  },
+  "topbar_color_tooltip": {
+    "message": "रंग मोड"
+  },
+  "topbar_color": {
+    "message": "रंग मोड टॉगल करें"
+  },
+  "topbar_view": {
+    "message": "दृश्य"
+  },
+  "topbar_hide_cors": {
+    "message": "CORS प्रतिबंधित छिपाएं"
+  },
+  "topbar_collection": {
+    "message": "संग्रह"
+  },
+  "sidebar_create_new": {
+    "message": "नया संग्रह बनाएँ"
+  },
+  "sidebar_name": {
+    "message": "नाम"
+  },
+  "sidebar_upload_files": {
+    "message": "फाइलें अपलोड करें"
+  },
+  "sidebar_drag_files": {
+    "message": "या खींचें और छोड़ें"
+  },
+  "sidebar_file_limit": {
+    "message": "10mb तक के SVG फाइलें"
+  },
+  "sidebar_item": {
+    "message": "आइटम"
+  },
+  "sidebar_uploaded": {
+    "message": "अपलोड किया गया"
+  },
+  "sidebar_create_collection": {
+    "message": "संग्रह बनाएँ"
+  },
+  "sidebar_cancel": {
+    "message": "रद्द करें"
+  },
+  "sidebar_close": {
+    "message": "साइडबार बंद करें"
+  },
+  "sidebar_reset": {
+    "message": "पर्यावरण रीसेट करें"
+  },
+  "sidebar_review": {
+    "message": "समीक्षा छोड़ें"
+  },
+  "sidebar_support": {
+    "message": "SVG Gobbler का समर्थन करें"
+  },
+  "sidebar_free": {
+    "message": "SVG Gobbler मुफ्त है"
+  },
+  "sidebar_open": {
+    "message": "ओपन-सोर्स"
+  },
+  "sidebar_support_2": {
+    "message": "और पूरी तरह से सकारात्मक वाइब्स पर चलता है। यदि आप किसी समस्या का सामना कर रहे हैं या किसी कार्यक्षमता की आवश्यकता है, तो कृपया एक मुद्दा उठाएं या <b>ross@rossmoody.com</b> पर ईमेल करें ताकि इसे ठीक किया जा सके, इससे पहले कि आप खराब समीक्षा सबमिट करें।"
+  },
+  "sidebar_support_3": {
+    "message": "यदि आप SVG Gobbler का आनंद ले रहे हैं, तो कृपया इसे खोजने में दूसरों की मदद करने के लिए एक समीक्षा छोड़ने पर विचार करें।"
+  },
+  "sidebar_support_submit": {
+    "message": "समीक्षा सबमिट करें"
+  },
+  "sidebar_new_collection": {
+    "message": "नया संग्रह"
+  },
+  "sidebar_settings": {
+    "message": "सेटिंग्स"
+  },
+  "export_apply": {
+    "message": "लागू करें"
+  },
+  "svgo_cleanupAttrs": {
+    "message": "एट्रीब्यूट्स साफ करें"
+  },
+  "svgo_cleanupAttrs_desc": {
+    "message": "एट्रीब्यूट मानों से अनावश्यक स्पेस हटाता है। यह एट्रीब्यूट कुंजियों को संशोधित नहीं करेगा, न ही उन्हें हटा देगा यदि मान अनुकूलन के बाद खाली हो जाता है।"
+  },
+  "svgo_cleanupEnableBackground": {
+    "message": "सक्षम-पृष्ठभूमि साफ करें"
+  },
+  "svgo_cleanupEnableBackground_desc": {
+    "message": "सक्षम-पृष्ठभूमि एट्रीब्यूट को हटा देता है, जब तक कि इसका उपयोग किसी फ़िल्टर तत्व में न हो"
+  },
+  "svgo_cleanupIDs": {
+    "message": "ID साफ करें"
+  },
+  "svgo_cleanupIDs_desc": {
+    "message": "अप्रयुक्त ID को हटाता है, और उन ID को संक्षिप्त करता है जिनका संदर्भ अन्य तत्वों द्वारा दिया गया है।"
+  },
+  "svgo_cleanupNumericValues": {
+    "message": "संख्यात्मक मान साफ करें"
+  },
+  "svgo_cleanupNumericValues_desc": {
+    "message": "संख्यात्मक मानों को गोल करता है, और जब इकाई 'px' होती है तो इसे हटा देता है क्योंकि यह डिफ़ॉल्ट होता है।"
+  },
+  "svgo_collapsGroups": {
+    "message": "समूह संक्षिप्त करें"
+  },
+  "svgo_collapsGroups_desc": {
+    "message": "ऐसे समूह पाता है जो प्रभावी रूप से कुछ नहीं करते और उन्हें संक्षिप्त करता है, समूहों की सामग्री को संरक्षित करता है।"
+  },
+  "svgo_convertColors": {
+    "message": "रंग बदलें"
+  },
+  "svgo_convertColors_desc": {
+    "message": "रंग संदर्भों को उनके सबसे छोटे समकक्ष में बदलता है।"
+  },
+  "svgo_convertEllipseToCircle": {
+    "message": "दीर्घवृत्त को वृत्त में बदलें"
+  },
+  "svgo_convertEllipseToCircle_desc": {
+    "message": "समान रेडियस वाले दीर्घवृत्तों को वृत्त में बदलता है।"
+  },
+  "svgo_convertPathData": {
+    "message": "पथ डेटा बदलें"
+  },
+  "svgo_convertPathData_desc": {
+    "message": "<path>, <glyph>, और <missing-glyph> तत्वों में पाई गई पथ कमांड को अनुकूलित करता है। पथ कमांड d एट्रीब्यूट में उपयोग किया गया सिंटैक्स है, प्रत्येक अक्षर पथ को खींचने के लिए एक निर्देश का प्रतिनिधित्व करता है।"
+  },
+  "svgo_convertShapeToPath": {
+    "message": "आकृति को पथ में बदलें"
+  },
+  "svgo_convertShapeToPath_desc": {
+    "message": "मूल आकृतियों को <path> तत्वों में बदलता है।"
+  },
+  "svgo_convertTransform": {
+    "message": "रूपांतरण बदलें"
+  },
+  "svgo_convertTransform_desc": {
+    "message": "कई रूपांतरणों को एक में संक्षिप्त करता है और मैट्रिसेस को छोटे उपनामों में बदलता है"
+  },
+  "svgo_inlineStyles": {
+    "message": "इनलाइन स्टाइल्स"
+  },
+  "svgo_inlineStyles_desc": {
+    "message": "<style> तत्वों से मिलान करने वाले तत्वों के स्टाइल एट्रीब्यूट में शैलियों को मर्ज करता है"
+  },
+  "svgo_mergePaths": {
+    "message": "पथ मर्ज करें"
+  },
+  "svgo_mergePaths_desc": {
+    "message": "कई पथों को एक में मर्ज करता है, या उन्हें <g> तत्व में मर्ज करता है यदि उनके पास एक ही एट्रीब्यूट हैं"
+  },
+  "svgo_mergeStyles": {
+    "message": "शैलियों को मर्ज करें"
+  },
+  "svgo_mergeStyles_desc": {
+    "message": "कई शैली तत्वों को एक में मर्ज करता है"
+  },
+  "svgo_minifyStyles": {
+    "message": "शैलियों को मिनीफाई करें"
+  },
+  "svgo_minifyStyles_desc": {
+    "message": "CSSO के साथ <style> तत्वों को मिनीफाई करता है"
+  },
+  "svgo_moveElemsAttrsToGroup": {
+    "message": "तत्व एट्रीब्यूट्स को समूह में ले जाएं"
+  },
+  "svgo_moveElemsAttrsToGroup_desc": {
+    "message": "तत्वों के एट्रीब्यूट्स को उनके संलग्न समूह में ले जाता है"
+  },
+  "svgo_moveGroupAttrsToElems": {
+    "message": "समूह एट्रीब्यूट्स को तत्वों में ले जाएं"
+  },
+  "svgo_moveGroupAttrsToElems_desc": {
+    "message": "कुछ समूह एट्रीब्यूट्स को निहित तत्वों में ले जाता है"
+  },
+  "svgo_removeComments": {
+    "message": "टिप्पणियाँ हटाएं"
+  },
+  "svgo_removeComments_desc": {
+    "message": "XML टिप्पणियों को दस्तावेज़ से हटाता है। XML टिप्पणियाँ '<!--' और '-->' सिंटैक्स के बीच की सामग्री हैं, और रेंडरिंग को प्रभावित नहीं करतीं"
+  },
+  "svgo_removeDesc": {
+    "message": "विवरण हटाएं"
+  },
+  "svgo_removeDesc_desc": {
+    "message": "दस्तावेज़ से <desc> तत्व को हटा देता है यदि <desc> तत्व खाली है या केवल संपादक की विशेषता लगती है"
+  },
+  "svgo_removeDoctype": {
+    "message": "DOCTYPE हटाएं"
+  },
+  "svgo_removeDoctype_desc": {
+    "message": "DOCTYPE के रूप में ज्ञात दस्तावेज़ प्रकार परिभाषा को SVG से हटाता है"
+  },
+  "svgo_removeEditorsNSData": {
+    "message": "संपादक के नामस्थान डेटा को हटा दें"
+  },
+  "svgo_removeEditorsNSData_desc": {
+    "message": "लोकप्रिय वेक्टर संपादन सॉफ़्टवेयर से संबंधित सभी XML नामस्थान, तत्व और एट्रीब्यूट्स को हटाता है"
+  },
+  "svgo_removeEmptyAttrs": {
+    "message": "खाली एट्रीब्यूट्स हटाएं"
+  },
+  "svgo_removeEmptyAttrs_desc": {
+    "message": "खाली मान वाले एट्रीब्यूट्स को हटाता है"
+  },
+  "svgo_removeEmptyContainers": {
+    "message": "खाली कंटेनर हटाएं"
+  },
+  "svgo_removeEmptyContainers_desc": {
+    "message": "दस्तावेज़ में कंटेनर तत्वों को हटाता है जिनके कोई बच्चे या अर्थपूर्ण एट्रीब्यूट्स नहीं हैं"
+  },
+  "svgo_removeEmptyText": {
+    "message": "खाली पाठ हटाएं"
+  },
+  "svgo_removeEmptyText_desc": {
+    "message": "पाठ तत्वों को हटाता है जिनके कोई अर्थपूर्ण एट्रीब्यूट्स नहीं हैं"
+  },
+  "svgo_removeHiddenElems": {
+    "message": "छिपाए गए तत्वों को हटाएं"
+  },
+  "svgo_removeHiddenElems_desc": {
+    "message": "दस्तावेज़ से छिपाए गए या अदृश्य तत्वों को हटाता है। ये ऐसे तत्व हो सकते हैं जिनकी चौड़ाई और ऊंचाई शून्य है, या तत्व जो CSS के साथ छिपाए गए हैं"
+  },
+  "svgo_removeMetadata": {
+    "message": "मेटाडेटा हटाएं"
+  },
+  "svgo_removeMetadata_desc": {
+    "message": "दस्तावेज़ से <metadata> तत्व को हटाता है। मेटाडेटा रेंडरिंग को प्रभावित नहीं करता। अनुकूलन दृष्टिकोण से, इन्हें हमेशा सुरक्षित रूप से हटाया जा सकता है"
+  },
+  "svgo_removeNonInheritableGroupAttrs": {
+    "message": "गैर-उत्तराधिकारी समूह एट्रीब्यूट्स को हटाएं"
+  },
+  "svgo_removeNonInheritableGroupAttrs_desc": {
+    "message": "बच्चों से गैर-उत्तराधिकारी प्रस्तुति समूहों को हटाता है"
+  },
+  "svgo_removeTitle": {
+    "message": "शीर्षक हटाएं"
+  },
+  "svgo_removeTitle_desc": {
+    "message": "दस्तावेज़ से <title> तत्व को हटाता है।"
+  },
+  "svgo_removeUnknownsAndDefaults": {
+    "message": "अज्ञात और डिफ़ॉल्ट हटाएं"
+  },
+  "svgo_removeUnknownsAndDefaults_desc": {
+    "message": "अज्ञात तत्वों और एट्रीब्यूट्स को हटाता है, साथ ही एट्रीब्यूट्स को उनके डिफ़ॉल्ट मान पर सेट करता है"
+  },
+  "svgo_removeUnusedNS": {
+    "message": "अप्रयुक्त नामस्थान हटाएं"
+  },
+  "svgo_removeUnusedNS_desc": {
+    "message": "दस्तावेज़ से अप्रयुक्त नामस्थान घोषणाओं को हटाता है"
+  },
+  "svgo_removeUselessDefs": {
+    "message": "बेकार defs हटाएं"
+  },
+  "svgo_removeUselessDefs_desc": {
+    "message": "<defs> तत्व के बच्चों को हटाता है जिनके संदर्भ के लिए कोई ID नहीं है।"
+  },
+  "svgo_removeUselessStrokeAndFill": {
+    "message": "बेकार स्ट्रोक और फिल को हटाएं"
+  },
+  "svgo_removeUselessStrokeAndFill_desc": {
+    "message": "बेकार स्ट्रोक और फिल एट्रीब्यूट्स को हटाता है"
+  },
+  "svgo_removeXMLInstructions": {
+    "message": "XML निर्देश हटाएं"
+  },
+  "svgo_removeXMLInstructions_desc": {
+    "message": "XML प्रोसेसिंग निर्देशों को हटाता है"
+  },
+  "svgo_sortAttrs": {
+    "message": "एट्रीब्यूट्स सॉर्ट करें"
+  },
+  "svgo_sortAttrs_desc": {
+    "message": "दस्तावेज़ में सभी तत्वों में एट्रीब्यूट्स को सॉर्ट करता है। यह SVG के आकार को कम नहीं करता है, लेकिन पठनीयता में सुधार करता है और संपीड़न एल्गोरिदम के प्रदर्शन में सुधार कर सकता है"
+  },
+  "svgo_sortDefsChildren": {
+    "message": "<defs> के बच्चों को सॉर्ट करें"
+  },
+  "svgo_sortDefsChildren_desc": {
+    "message": "<defs> तत्व में सभी बच्चों को सॉर्ट करता है। यह SVG के आकार को कम नहीं करता है, लेकिन संपीड़न एल्गोरिदम के प्रदर्शन में सुधार कर सकता है"
+  },
+  "svgo_removeViewBox": {
+    "message": "viewBox हटाएं"
+  },
+  "svgo_removeViewBox_desc": {
+    "message": "जब ऊंचाई और चौड़ाई समान होती है तो viewBox एट्रीब्यूट को हटाता है"
+  },
+  "svgo_cleanupListOfValues": {
+    "message": "मानों की सूची साफ करें"
+  },
+  "svgo_cleanupListOfValues_desc": {
+    "message": "एट्रीब्यूट्स में संख्यात्मक मानों को गोल करता है, जैसे viewBox, सक्षम-पृष्ठभूमि और बिंदु"
+  },
+  "svgo_convertOneStopGradients": {
+    "message": "एक स्टॉप ग्रेडिएंट्स को बदलें"
+  },
+  "svgo_convertOneStopGradients_desc": {
+    "message": "<linearGradient> और <radialGradient> नोड्स को बदलता है जो प्रभावी रूप से ठोस रंग होते हैं"
+  },
+  "svgo_convertStyleToAttrs": {
+    "message": "शैली को एट्रीब्यूट्स में बदलें"
+  },
+  "svgo_convertStyleToAttrs_desc": {
+    "message": "तत्व शैलियों में प्रस्तुति एट्रीब्यूट्स को समकक्ष XML एट्रीब्यूट में बदलता है"
+  },
+  "svgo_prefixIds": {
+    "message": "प्रत्यय ID"
+  },
+  "svgo_prefixIds_desc": {
+    "message": "प्रदान किए गए फाइल नाम के साथ तत्व ID और वर्ग नामों को प्रत्यय देता है। डिफ़ॉल्ट रूप से 'prefix__'"
+  },
+  "svgo_removeDimensions": {
+    "message": "आयाम हटाएं"
+  },
+  "svgo_removeDimensions_desc": {
+    "message": "यदि निर्दिष्ट है, तो शीर्ष <svg> तत्व से चौड़ाई और ऊंचाई एट्रीब्यूट को हटा देता है, और यदि यह गायब है तो इसे viewBox एट्रीब्यूट से बदल देता है"
+  },
+  "svgo_removeOffCanvasPaths": {
+    "message": "ऑफ-कैनवास पथों को हटाएं"
+  },
+  "svgo_removeOffCanvasPaths_desc": {
+    "message": "<path> तत्वों को हटाता है जो viewBox के बाहर खींचे गए हैं"
+  },
+  "svgo_removeRasterImages": {
+    "message": "रैस्टर छवियों को हटाएं"
+  },
+  "svgo_removeRasterImages_desc": {
+    "message": "दस्तावेज़ से इनलाइन JPEG, PNG और GIF को हटाता है"
+  },
+  "svgo_removeScriptElement": {
+    "message": "स्क्रिप्ट तत्वों को हटाएं"
+  },
+  "svgo_removeScriptElement_desc": {
+    "message": "दस्तावेज़ से <script> तत्वों को हटाता है"
+  },
+  "svgo_removeStyleElement": {
+    "message": "शैली तत्वों को हटाएं"
+  },
+  "svgo_removeStyleElement_desc": {
+    "message": "दस्तावेज़ से <style> तत्वों को हटाता है"
+  },
+  "svgo_removeXMLNS": {
+    "message": "XMLNS हटाएं"
+  },
+  "svgo_removeXMLNS_desc": {
+    "message": "दस्तावेज़ में शीर्ष <svg> तत्व से xmlns एट्रीब्यूट को हटाता है"
+  },
+  "svgo_reusePaths": {
+    "message": "पथों का पुन: उपयोग करें"
+  },
+  "svgo_reusePaths_desc": {
+    "message": "इसी तरह के पथों के लिए एक परिभाषा बनाता है, और <path> तत्वों को <use> तत्वों में बदलता है जो एक ही <path> परिभाषा को संदर्भित करेंगे"
+  }
+}

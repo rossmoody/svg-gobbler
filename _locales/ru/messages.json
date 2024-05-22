@@ -1,758 +1,758 @@
 {
   "empty_title": {
-    "message": "POOP"
+    "message": "SVG не найдены"
   },
   "empty_desc": {
-    "message": "POOP"
+    "message": "Выберите или перетащите SVG в эту область для загрузки в эту коллекцию"
   },
   "empty_action": {
-    "message": "POOP"
+    "message": "Загрузить SVG"
   },
   "error_title": {
-    "message": "POOP"
+    "message": "Упс! Произошла ошибка"
   },
   "error_desc": {
-    "message": "POOP"
+    "message": "Попробуйте обновить страницу или вернуться на главную страницу"
   },
   "error_action": {
-    "message": "POOP"
+    "message": "Обновить"
   },
   "feedback_title": {
-    "message": "POOP"
+    "message": "Быстро, какой функции, по вашему мнению, не хватает SVG Gobbler?"
   },
   "feedback_placeholder": {
-    "message": "POOP"
+    "message": "Хотелось бы, чтобы SVG Gobbler мог..."
   },
   "feedback_primary_action": {
-    "message": "POOP"
+    "message": "Отправить"
   },
   "feedback_secondary_action": {
-    "message": "POOP"
+    "message": "Отмена"
   },
   "no_results_title": {
-    "message": "POOP"
+    "message": "Нет SVG для показа"
   },
   "no_results_desc": {
-    "message": "POOP"
+    "message": "Попробуйте изменить фильтр, поиск или настройки просмотра, чтобы отобразить SVG"
   },
   "review_title": {
-    "message": "POOP"
+    "message": "Находите SVG Gobbler полезным?"
   },
   "review_desc": {
-    "message": "POOP"
+    "message": "Пожалуйста, оставьте отзыв, чтобы помочь другим его найти."
   },
   "review_primary_action": {
-    "message": "POOP"
+    "message": "Оставить отзыв"
   },
   "review_secondary_action": {
-    "message": "POOP"
+    "message": "Отклонить"
   },
   "card_open": {
-    "message": "POOP"
+    "message": "Открыть"
   },
   "card_tooltip_cors": {
-    "message": "POOP"
+    "message": "Этот SVG ограничен междоменными ресурсами и не может быть изменен или экспортирован напрямую из SVG Gobbler"
   },
   "card_onboarding_context": {
-    "message": "POOP"
+    "message": "Щелкните правой кнопкой мыши для контекстного меню"
   },
   "card_action_copy": {
-    "message": "POOP"
+    "message": "Копировать в буфер"
   },
   "card_action_download": {
-    "message": "POOP"
+    "message": "Скачать"
   },
   "card_action_duplicate": {
-    "message": "POOP"
+    "message": "Дублировать"
   },
   "card_action_delete": {
-    "message": "POOP"
+    "message": "Удалить"
   },
   "card_action_original": {
-    "message": "POOP"
+    "message": "Оригинал"
   },
   "card_action_optimized": {
-    "message": "POOP"
+    "message": "Оптимизировано"
   },
   "export_size": {
-    "message": "POOP"
+    "message": "Размер"
   },
   "export_quality": {
-    "message": "POOP"
+    "message": "Качество"
   },
   "export_optimize_exports": {
-    "message": "POOP"
+    "message": "Оптимизировать экспорт"
   },
   "export_pretty": {
-    "message": "POOP"
+    "message": "Красивый вывод"
   },
   "export_floating": {
-    "message": "POOP"
+    "message": "Точность с плавающей запятой"
   },
   "export_filename": {
-    "message": "POOP"
+    "message": "Имя файла"
   },
   "export_filetype": {
-    "message": "POOP"
+    "message": "Тип файла"
   },
   "export_export_filename": {
-    "message": "POOP"
+    "message": "Экспорт имени файла"
   },
   "export_filename_prefix": {
-    "message": "POOP"
+    "message": "Префикс файла"
   },
   "export_prefix_tooltip": {
-    "message": "POOP"
+    "message": "Префикс, который будет добавлен в начало каждого имени файла."
   },
   "export_copy_clipboard": {
-    "message": "POOP"
+    "message": "Копировать в буфер"
   },
   "export_copied": {
-    "message": "POOP"
+    "message": "Скопировано"
   },
   "export_download": {
-    "message": "POOP"
+    "message": "Скачать"
   },
   "export_files": {
-    "message": "POOP"
+    "message": "Файлы"
   },
   "export_export": {
-    "message": "POOP"
+    "message": "Экспортировать"
   },
   "export_settings": {
-    "message": "POOP"
+    "message": "Настройки"
   },
   "main_copy": {
-    "message": "POOP"
+    "message": "Копировать"
   },
   "main_copy_collection": {
-    "message": "POOP"
+    "message": "Копировать элементы в коллекцию"
   },
   "main_name": {
-    "message": "POOP"
+    "message": "Имя"
   },
   "main_submit": {
-    "message": "POOP"
+    "message": "Отправить"
   },
   "main_cancel": {
-    "message": "POOP"
+    "message": "Отмена"
   },
   "main_delete": {
-    "message": "POOP"
+    "message": "Удалить"
   },
   "main_move": {
-    "message": "POOP"
+    "message": "Переместить"
   },
   "main_move_collection": {
-    "message": "POOP"
+    "message": "Переместить элементы в коллекцию"
   },
   "main_showing": {
-    "message": "POOP"
+    "message": "Показано"
   },
   "main_of": {
-    "message": "POOP"
+    "message": "из"
   },
   "main_results": {
-    "message": "POOP"
+    "message": "результаты"
   },
   "main_select": {
-    "message": "POOP"
+    "message": "Выбрать"
   },
   "main_all": {
-    "message": "POOP"
+    "message": "все"
   },
   "main_none": {
-    "message": "POOP"
+    "message": "ничего"
   },
   "main_load_more": {
-    "message": "POOP"
+    "message": "Загрузить еще"
   },
   "upload_upload": {
-    "message": "POOP"
+    "message": "Загрузить"
   },
   "upload_file": {
-    "message": "POOP"
+    "message": "Файл"
   },
   "upload_clipboard": {
-    "message": "POOP"
+    "message": "Буфер обмена"
   },
   "upload_upload_files": {
-    "message": "POOP"
+    "message": "Загрузить файлы"
   },
   "upload_drag_files": {
-    "message": "POOP"
+    "message": "или перетащите"
   },
   "upload_file_limit": {
-    "message": "POOP"
+    "message": "SVG файлы до 10 МБ"
   },
   "upload_item": {
-    "message": "POOP"
+    "message": "элемент"
   },
   "upload_uploaded": {
-    "message": "POOP"
+    "message": "загружено"
   },
   "upload_error": {
-    "message": "POOP"
+    "message": "Неверный SVG, проверьте строку и попробуйте снова"
   },
   "details_optimize": {
-    "message": "POOP"
+    "message": "Оптимизировать"
   },
   "details_format": {
-    "message": "POOP"
+    "message": "Формат"
   },
   "details_live": {
-    "message": "POOP"
+    "message": "Это живой редактор, попробуйте изменить код"
   },
   "details_download": {
-    "message": "POOP"
+    "message": "Скачать"
   },
   "details_settings": {
-    "message": "POOP"
+    "message": "Настройки"
   },
   "details_floating_tooltip": {
-    "message": "POOP"
+    "message": "Точность чисел с плавающей запятой. Будет передано каждому плагину, поддерживающему этот параметр."
   },
   "details_plugin": {
-    "message": "POOP"
+    "message": "Плагины"
   },
   "details_set_default": {
-    "message": "POOP"
+    "message": "Установить по умолчанию"
   },
   "details_default": {
-    "message": "POOP"
+    "message": "Настройки по умолчанию"
   },
   "details_svgo_default": {
-    "message": "POOP"
+    "message": "SVGO по умолчанию"
   },
   "details_deselect_all": {
-    "message": "POOP"
+    "message": "Снять выделение со всего"
   },
   "details_preview": {
-    "message": "POOP"
+    "message": "Предпросмотр"
   },
   "details_react": {
-    "message": "POOP"
+    "message": "React"
   },
   "details_data_uri": {
-    "message": "POOP"
+    "message": "Data URI"
   },
   "details_svgr": {
-    "message": "POOP"
+    "message": "Параметры SVGR"
   },
   "details_component_name": {
-    "message": "POOP"
+    "message": "Имя компонента"
   },
   "details_component_desc": {
-    "message": "POOP"
+    "message": "Имя экспортируемого компонента"
   },
   "details_dimensions": {
-    "message": "POOP"
+    "message": "Размеры"
   },
   "details_dimensions_desc": {
-    "message": "POOP"
+    "message": "Сохранить атрибуты ширины и высоты из корневого тега SVG"
   },
   "details_ref": {
-    "message": "POOP"
+    "message": "Ссылка"
   },
   "details_ref_desc": {
-    "message": "POOP"
+    "message": "Передать ссылку на корневой тег SVG"
   },
   "details_native": {
-    "message": "POOP"
+    "message": "Нативный"
   },
   "details_native_desc": {
-    "message": "POOP"
+    "message": "Изменить все узлы SVG на заглавные и использовать специфичный шаблон с импортами react-native-svg. Все неподдерживаемые узлы будут удалены."
   },
   "details_typescript": {
-    "message": "POOP"
+    "message": "TypeScript"
   },
   "details_typescript_desc": {
-    "message": "POOP"
+    "message": "Генерировать определения типов для TypeScript"
   },
   "details_memo": {
-    "message": "POOP"
+    "message": "Memo"
   },
   "details_memo_desc": {
-    "message": "POOP"
+    "message": "Оборачивать экспортируемый компонент в React.memo"
   },
   "details_background_color": {
-    "message": "POOP"
+    "message": "Цвет фона"
   },
   "details_svgr_error": {
-    "message": "POOP"
+    "message": "Ошибка при создании компонента SVGR"
   },
   "details_are_you_sure": {
-    "message": "POOP"
+    "message": "Вы уверены, что хотите уйти? Ваши изменения будут потеряны."
   },
   "details_edit_svg": {
-    "message": "POOP"
+    "message": "Редактировать SVG"
   },
   "details_reset_changes": {
-    "message": "POOP"
+    "message": "Сбросить изменения"
   },
   "details_save_changes": {
-    "message": "POOP"
+    "message": "Сохранить изменения"
   },
   "onboarding_title": {
-    "message": "POOP"
+    "message": "Добро пожаловать в SVG Gobbler"
   },
   "onboarding_new": {
-    "message": "POOP"
+    "message": "Что нового"
   },
   "onboarding_version": {
-    "message": "POOP"
+    "message": "Версия 5"
   },
   "onboarding_desc": {
-    "message": "POOP"
+    "message": "SVG Gobbler - это расширение для браузера с открытым исходным кодом, созданное"
   },
   "onboarding_desc_2": {
-    "message": "POOP"
+    "message": "в солнечном Сан-Франциско. Внесите вклад в проект, поделитесь своими идеями для функций или сообщите об ошибках на GitHub."
   },
   "onboarding_launch": {
-    "message": "POOP"
+    "message": "Запустить SVG Gobbler"
   },
   "onboarding_visit": {
-    "message": "POOP"
+    "message": "Посетить GitHub"
   },
   "settings_about": {
-    "message": "POOP"
+    "message": "О программе"
   },
   "settings_about_desc": {
-    "message": "POOP"
+    "message": "Немного истории о расширении SVG Gobbler и как его поддержать."
   },
   "settings_contribute": {
-    "message": "POOP"
+    "message": "Внести вклад"
   },
   "settings_contribute_desc": {
-    "message": "POOP"
+    "message": "Расширение SVG Gobbler с открытым исходным кодом доступно для"
   },
   "settings_contribute_desc_2": {
-    "message": "POOP"
+    "message": "вклада на GitHub"
   },
   "settings_bug": {
-    "message": "POOP"
+    "message": "Сообщить об ошибке"
   },
   "settings_bug_desc": {
-    "message": "POOP"
+    "message": "Обнаружили ошибку или есть предложение по функции?"
   },
   "settings_open_issue": {
-    "message": "POOP"
+    "message": "Открыть задачу на GitHub"
   },
   "settings_disclaimer": {
-    "message": "POOP"
+    "message": "Отказ от ответственности"
   },
   "settings_disclaimer_desc": {
-    "message": "POOP"
+    "message": "Это расширение для браузера с открытым исходным кодом было создано и предназначено для облегчения загрузки SVG-иконок с веб-сайтов для личного, образовательного или законного профессионального использования. Пользователи должны уважать права интеллектуальной собственности и не использовать этот инструмент для нарушения авторских прав или для коммерческих целей без надлежащей авторизации."
   },
   "settings_default_svgo": {
-    "message": "POOP"
+    "message": "Конфигурация SVGO по умолчанию"
   },
   "settings_default_svgo_desc": {
-    "message": "POOP"
+    "message": "Конфигурация плагинов SVGO по умолчанию, которая будет использоваться при запуске SVG Gobbler."
   },
   "settings_export": {
-    "message": "POOP"
+    "message": "Экспорт"
   },
   "settings_export_desc": {
-    "message": "POOP"
+    "message": "Настройки конфигурации для панели экспорта."
   },
   "settings_general": {
-    "message": "POOP"
+    "message": "Общие"
   },
   "settings_general_desc": {
-    "message": "POOP"
+    "message": "Настройте, как SVG Gobbler работает в вашем браузере. Эти настройки специфичны для этого профиля браузера."
   },
   "settings_kbd": {
-    "message": "POOP"
+    "message": "Сочетание клавиш"
   },
   "settings_kbd_desc": {
-    "message": "POOP"
+    "message": "Текущее сочетание клавиш для запуска SVG Gobbler:"
   },
   "settings_kbd_desc_2": {
-    "message": "POOP"
+    "message": "Чтобы изменить или удалить это сочетание клавиш"
   },
   "settings_kbd_desc_3": {
-    "message": "POOP"
+    "message": "посетите страницу сочетаний клавиш расширения"
   },
   "settings_settings": {
-    "message": "POOP"
+    "message": "Настройки"
   },
   "topbar_canvas_tooltip": {
-    "message": "POOP"
+    "message": "Цвет холста"
   },
   "topbar_canvas": {
-    "message": "POOP"
+    "message": "Изменить цвет холста"
   },
   "topbar_upload": {
-    "message": "POOP"
+    "message": "Загрузить"
   },
   "topbar_size": {
-    "message": "POOP"
+    "message": "Размер"
   },
   "topbar_sort_none": {
-    "message": "POOP"
+    "message": "Нет"
   },
   "topbar_sort_size_asc": {
-    "message": "POOP"
+    "message": "Размер файла: от меньшего к большему"
   },
   "topbar_sort_size_desc": {
-    "message": "POOP"
+    "message": "Размер файла: от большего к меньшему"
   },
   "topbar_sort": {
-    "message": "POOP"
+    "message": "Сортировать"
   },
   "topbar_color_tooltip": {
-    "message": "POOP"
+    "message": "Режим цвета"
   },
   "topbar_color": {
-    "message": "POOP"
+    "message": "Переключить режим цвета"
   },
   "topbar_view": {
-    "message": "POOP"
+    "message": "Вид"
   },
   "topbar_hide_cors": {
-    "message": "POOP"
+    "message": "Скрыть ограниченные CORS"
   },
   "topbar_collection": {
-    "message": "POOP"
+    "message": "Коллекция"
   },
   "sidebar_create_new": {
-    "message": "POOP"
+    "message": "Создать новую коллекцию"
   },
   "sidebar_name": {
-    "message": "POOP"
+    "message": "Имя"
   },
   "sidebar_upload_files": {
-    "message": "POOP"
+    "message": "Загрузить файлы"
   },
   "sidebar_drag_files": {
-    "message": "POOP"
+    "message": "или перетащите"
   },
   "sidebar_file_limit": {
-    "message": "POOP"
+    "message": "SVG файлы до 10 МБ"
   },
   "sidebar_item": {
-    "message": "POOP"
+    "message": "элемент"
   },
   "sidebar_uploaded": {
-    "message": "POOP"
+    "message": "загружено"
   },
   "sidebar_create_collection": {
-    "message": "POOP"
+    "message": "Создать коллекцию"
   },
   "sidebar_cancel": {
-    "message": "POOP"
+    "message": "Отмена"
   },
   "sidebar_close": {
-    "message": "POOP"
+    "message": "Закрыть боковую панель"
   },
   "sidebar_reset": {
-    "message": "POOP"
+    "message": "Сбросить окружение"
   },
   "sidebar_review": {
-    "message": "POOP"
+    "message": "Оставить отзыв"
   },
   "sidebar_support": {
-    "message": "POOP"
+    "message": "Поддержать SVG Gobbler"
   },
   "sidebar_free": {
-    "message": "POOP"
+    "message": "SVG Gobbler бесплатен"
   },
   "sidebar_open": {
-    "message": "POOP"
+    "message": "с открытым исходным кодом"
   },
   "sidebar_support_2": {
-    "message": "POOP"
+    "message": "и работает полностью на положительных вибрациях. Если у вас возникла проблема или вы хотите добавить функциональность, пожалуйста, создайте задачу или напишите на <b>ross@rossmoody.com</b> для исправления, прежде чем оставлять плохой отзыв."
   },
   "sidebar_support_3": {
-    "message": "POOP"
+    "message": "Если вам нравится SVG Gobbler, пожалуйста, оставьте отзыв, чтобы помочь другим его найти."
   },
   "sidebar_support_submit": {
-    "message": "POOP"
+    "message": "Отправить отзыв"
   },
   "sidebar_new_collection": {
-    "message": "POOP"
+    "message": "Новая коллекция"
   },
   "sidebar_settings": {
-    "message": "POOP"
+    "message": "Настройки"
   },
   "export_apply": {
-    "message": "POOP"
+    "message": "Применить"
   },
   "svgo_cleanupAttrs": {
-    "message": "POOP"
+    "message": "Очистить атрибуты"
   },
   "svgo_cleanupAttrs_desc": {
-    "message": "POOP"
+    "message": "Удаляет избыточные пробелы из значений атрибутов. Это не изменит ключи атрибутов и не удалит их, если значение станет пустым после оптимизации."
   },
   "svgo_cleanupEnableBackground": {
-    "message": "POOP"
+    "message": "Очистить enable-background"
   },
   "svgo_cleanupEnableBackground_desc": {
-    "message": "POOP"
+    "message": "Удаляет атрибут enable-background, если он не используется в элементе фильтра"
   },
   "svgo_cleanupIDs": {
-    "message": "POOP"
+    "message": "Очистить ID"
   },
   "svgo_cleanupIDs_desc": {
-    "message": "POOP"
+    "message": "Удаляет неиспользуемые ID и минимизирует ID, на которые ссылаются другие элементы."
   },
   "svgo_cleanupNumericValues": {
-    "message": "POOP"
+    "message": "Очистить числовые значения"
   },
   "svgo_cleanupNumericValues_desc": {
-    "message": "POOP"
+    "message": "Округляет числовые значения и удаляет единицу измерения, если она 'px', так как это значение по умолчанию."
   },
   "svgo_collapsGroups": {
-    "message": "POOP"
+    "message": "Свернуть группы"
   },
   "svgo_collapsGroups_desc": {
-    "message": "POOP"
+    "message": "Находит группы, которые фактически ничего не делают, и объединяет их, сохраняя содержимое групп."
   },
   "svgo_convertColors": {
-    "message": "POOP"
+    "message": "Преобразовать цвета"
   },
   "svgo_convertColors_desc": {
-    "message": "POOP"
+    "message": "Преобразует ссылки на цвета в их кратчайший эквивалент."
   },
   "svgo_convertEllipseToCircle": {
-    "message": "POOP"
+    "message": "Преобразовать эллипс в круг"
   },
   "svgo_convertEllipseToCircle_desc": {
-    "message": "POOP"
+    "message": "Преобразует эллипсы с равными радиусами в круги."
   },
   "svgo_convertPathData": {
-    "message": "POOP"
+    "message": "Преобразовать данные пути"
   },
   "svgo_convertPathData_desc": {
-    "message": "POOP"
+    "message": "Оптимизирует команды пути, найденные в элементах <path>, <glyph> и <missing-glyph>. Команды пути - это синтаксис, используемый в атрибуте d, где каждый символ представляет собой инструкцию для рисования путей."
   },
   "svgo_convertShapeToPath": {
-    "message": "POOP"
+    "message": "Преобразовать фигуры в путь"
   },
   "svgo_convertShapeToPath_desc": {
-    "message": "POOP"
+    "message": "Преобразует основные фигуры в элементы <path>."
   },
   "svgo_convertTransform": {
-    "message": "POOP"
+    "message": "Преобразовать трансформацию"
   },
   "svgo_convertTransform_desc": {
-    "message": "POOP"
+    "message": "Объединяет несколько трансформаций в одну и преобразует матрицы в короткие псевдонимы"
   },
   "svgo_inlineStyles": {
-    "message": "POOP"
+    "message": "Встроенные стили"
   },
   "svgo_inlineStyles_desc": {
-    "message": "POOP"
+    "message": "Объединяет стили из элементов <style> в атрибут стиля соответствующих элементов"
   },
   "svgo_mergePaths": {
-    "message": "POOP"
+    "message": "Объединить пути"
   },
   "svgo_mergePaths_desc": {
-    "message": "POOP"
+    "message": "Объединяет несколько путей в один или в элемент <g>, если у них одинаковые атрибуты"
   },
   "svgo_mergeStyles": {
-    "message": "POOP"
+    "message": "Объединить стили"
   },
   "svgo_mergeStyles_desc": {
-    "message": "POOP"
+    "message": "Объединяет несколько элементов стиля в один"
   },
   "svgo_minifyStyles": {
-    "message": "POOP"
+    "message": "Минимизировать стили"
   },
   "svgo_minifyStyles_desc": {
-    "message": "POOP"
+    "message": "Минимизирует элементы <style> с помощью CSSO"
   },
   "svgo_moveElemsAttrsToGroup": {
-    "message": "POOP"
+    "message": "Переместить атрибуты элементов в группу"
   },
   "svgo_moveElemsAttrsToGroup_desc": {
-    "message": "POOP"
+    "message": "Перемещает атрибуты элементов в их охватывающую группу"
   },
   "svgo_moveGroupAttrsToElems": {
-    "message": "POOP"
+    "message": "Переместить атрибуты группы в элементы"
   },
   "svgo_moveGroupAttrsToElems_desc": {
-    "message": "POOP"
+    "message": "Перемещает некоторые атрибуты группы в содержащие элементы"
   },
   "svgo_removeComments": {
-    "message": "POOP"
+    "message": "Удалить комментарии"
   },
   "svgo_removeComments_desc": {
-    "message": "POOP"
+    "message": "Удаляет XML-комментарии из документа. XML-комментарии - это содержимое между синтаксисом '<!--' и '-->', и они не влияют на рендеринг"
   },
   "svgo_removeDesc": {
-    "message": "POOP"
+    "message": "Удалить описание"
   },
   "svgo_removeDesc_desc": {
-    "message": "POOP"
+    "message": "Удаляет элемент <desc> из документа, если он пуст или кажется, что содержит только атрибуцию редактора"
   },
   "svgo_removeDoctype": {
-    "message": "POOP"
+    "message": "Удалить DOCTYPE"
   },
   "svgo_removeDoctype_desc": {
-    "message": "POOP"
+    "message": "Удаляет определение типа документа, также известное как DOCTYPE, из SVG"
   },
   "svgo_removeEditorsNSData": {
-    "message": "POOP"
+    "message": "Удалить данные пространств имен редакторов"
   },
   "svgo_removeEditorsNSData_desc": {
-    "message": "POOP"
+    "message": "Удаляет все пространства имен XML, элементы и атрибуты, связанные с популярным программным обеспечением для редактирования векторов"
   },
   "svgo_removeEmptyAttrs": {
-    "message": "POOP"
+    "message": "Удалить пустые атрибуты"
   },
   "svgo_removeEmptyAttrs_desc": {
-    "message": "POOP"
+    "message": "Удаляет атрибуты с пустыми значениями"
   },
   "svgo_removeEmptyContainers": {
-    "message": "POOP"
+    "message": "Удалить пустые контейнеры"
   },
   "svgo_removeEmptyContainers_desc": {
-    "message": "POOP"
+    "message": "Удаляет контейнерные элементы в документе, которые не имеют детей или значимых атрибутов"
   },
   "svgo_removeEmptyText": {
-    "message": "POOP"
+    "message": "Удалить пустой текст"
   },
   "svgo_removeEmptyText_desc": {
-    "message": "POOP"
+    "message": "Удаляет текстовые элементы, которые не имеют значимых атрибутов"
   },
   "svgo_removeHiddenElems": {
-    "message": "POOP"
+    "message": "Удалить скрытые элементы"
   },
   "svgo_removeHiddenElems_desc": {
-    "message": "POOP"
+    "message": "Удаляет скрытые или невидимые элементы из документа. Это могут быть элементы с определенной нулевой шириной и высотой или элементы, которые просто скрыты с помощью CSS"
   },
   "svgo_removeMetadata": {
-    "message": "POOP"
+    "message": "Удалить метаданные"
   },
   "svgo_removeMetadata_desc": {
-    "message": "POOP"
+    "message": "Удаляет элемент <metadata> из документа. Метаданные не влияют на рендеринг. С точки зрения оптимизации, их всегда можно безопасно удалить"
   },
   "svgo_removeNonInheritableGroupAttrs": {
-    "message": "POOP"
+    "message": "Удалить неунаследованные атрибуты группы"
   },
   "svgo_removeNonInheritableGroupAttrs_desc": {
-    "message": "POOP"
+    "message": "Удаляет неунаследованные презентационные группы из детей"
   },
   "svgo_removeTitle": {
-    "message": "POOP"
+    "message": "Удалить заголовок"
   },
   "svgo_removeTitle_desc": {
-    "message": "POOP"
+    "message": "Удаляет элемент <title> из документа."
   },
   "svgo_removeUnknownsAndDefaults": {
-    "message": "POOP"
+    "message": "Удалить неизвестные и значения по умолчанию"
   },
   "svgo_removeUnknownsAndDefaults_desc": {
-    "message": "POOP"
+    "message": "Удаляет неизвестные элементы и атрибуты, а также атрибуты, установленные на их значение по умолчанию"
   },
   "svgo_removeUnusedNS": {
-    "message": "POOP"
+    "message": "Удалить неиспользуемые пространства имен"
   },
   "svgo_removeUnusedNS_desc": {
-    "message": "POOP"
+    "message": "Удаляет неиспользуемые объявления пространств имен из документа"
   },
   "svgo_removeUselessDefs": {
-    "message": "POOP"
+    "message": "Удалить бесполезные defs"
   },
   "svgo_removeUselessDefs_desc": {
-    "message": "POOP"
+    "message": "Удаляет дочерние элементы <defs>, у которых нет ID для ссылки."
   },
   "svgo_removeUselessStrokeAndFill": {
-    "message": "POOP"
+    "message": "Удалить бесполезные обводки и заливки"
   },
   "svgo_removeUselessStrokeAndFill_desc": {
-    "message": "POOP"
+    "message": "Удаляет бесполезные атрибуты обводки и заливки"
   },
   "svgo_removeXMLInstructions": {
-    "message": "POOP"
+    "message": "Удалить XML инструкции"
   },
   "svgo_removeXMLInstructions_desc": {
-    "message": "POOP"
+    "message": "Удаляет инструкции обработки XML"
   },
   "svgo_sortAttrs": {
-    "message": "POOP"
+    "message": "Сортировать атрибуты"
   },
   "svgo_sortAttrs_desc": {
-    "message": "POOP"
+    "message": "Сортирует атрибуты во всех элементах в документе. Это не уменьшает размер SVG, но улучшает читаемость и может улучшить работу алгоритмов сжатия"
   },
   "svgo_sortDefsChildren": {
-    "message": "POOP"
+    "message": "Сортировать детей defs"
   },
   "svgo_sortDefsChildren_desc": {
-    "message": "POOP"
+    "message": "Сортирует всех детей в элементе '<defs>'. Это не уменьшает размер SVG, но может улучшить работу алгоритмов сжатия"
   },
   "svgo_removeViewBox": {
-    "message": "POOP"
+    "message": "Удалить viewBox"
   },
   "svgo_removeViewBox_desc": {
-    "message": "POOP"
+    "message": "Удаляет атрибут viewBox, когда высота и ширина идентичны"
   },
   "svgo_cleanupListOfValues": {
-    "message": "POOP"
+    "message": "Очистить список значений"
   },
   "svgo_cleanupListOfValues_desc": {
-    "message": "POOP"
+    "message": "Округляет числовые значения в атрибутах, таких как viewBox, enable-background и точки"
   },
   "svgo_convertOneStopGradients": {
-    "message": "POOP"
+    "message": "Преобразовать градиенты с одной остановкой"
   },
   "svgo_convertOneStopGradients_desc": {
-    "message": "POOP"
+    "message": "Преобразует узлы <linearGradient> и <radialGradient>, которые фактически являются сплошным цветом, в этот цвет"
   },
   "svgo_convertStyleToAttrs": {
-    "message": "POOP"
+    "message": "Преобразовать стиль в атрибуты"
   },
   "svgo_convertStyleToAttrs_desc": {
-    "message": "POOP"
+    "message": "Преобразует презентационные атрибуты в стилях элементов в эквивалентный XML атрибут"
   },
   "svgo_prefixIds": {
-    "message": "POOP"
+    "message": "Префикс ID"
   },
   "svgo_prefixIds_desc": {
-    "message": "POOP"
+    "message": "Добавляет префикс к ID элементов и именам классов с указанным именем файла. По умолчанию 'prefix__'"
   },
   "svgo_removeDimensions": {
-    "message": "POOP"
+    "message": "Удалить размеры"
   },
   "svgo_removeDimensions_desc": {
-    "message": "POOP"
+    "message": "Удаляет атрибуты ширины и высоты из верхнего элемента <svg>, если они указаны, и заменяет их атрибутом viewBox, если он отсутствует"
   },
   "svgo_removeOffCanvasPaths": {
-    "message": "POOP"
+    "message": "Удалить пути за пределами холста"
   },
   "svgo_removeOffCanvasPaths_desc": {
-    "message": "POOP"
+    "message": "Удаляет элементы <path>, которые рисуются за пределами viewBox"
   },
   "svgo_removeRasterImages": {
-    "message": "POOP"
+    "message": "Удалить растровые изображения"
   },
   "svgo_removeRasterImages_desc": {
-    "message": "POOP"
+    "message": "Удаляет встроенные JPEG, PNG и GIF из документа"
   },
   "svgo_removeScriptElement": {
-    "message": "POOP"
+    "message": "Удалить элементы script"
   },
   "svgo_removeScriptElement_desc": {
-    "message": "POOP"
+    "message": "Удаляет элементы <script> из документа"
   },
   "svgo_removeStyleElement": {
-    "message": "POOP"
+    "message": "Удалить элементы style"
   },
   "svgo_removeStyleElement_desc": {
-    "message": "POOP"
+    "message": "Удаляет элементы <style> из документа"
   },
   "svgo_removeXMLNS": {
-    "message": "POOP"
+    "message": "Удалить XMLNS"
   },
   "svgo_removeXMLNS_desc": {
-    "message": "POOP"
+    "message": "Удаляет атрибут xmlns из верхнего элемента <svg> в документе"
   },
   "svgo_reusePaths": {
-    "message": "POOP"
+    "message": "Повторное использование путей"
   },
   "svgo_reusePaths_desc": {
-    "message": "POOP"
+    "message": "Создает определение для похожих путей и заменяет элементы <path> на элементы <use>, которые будут ссылаться на одно определение <path>"
   }
 }
