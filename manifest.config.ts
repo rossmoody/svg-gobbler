@@ -14,6 +14,7 @@ export default <ManifestV3Export>{
       },
     },
   },
+  default_locale: 'en',
   description: packageJson.description,
   homepage_url: 'https://svggobbler.com',
   host_permissions: [serverEndpoint.svgr],

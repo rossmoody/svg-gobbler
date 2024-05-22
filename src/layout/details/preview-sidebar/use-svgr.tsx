@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { serverEndpoint } from 'src/constants/server-config'
 import { useDetails } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { logger } from 'src/utils/logger'
 
 import { ServerMessage } from '../../../../server/index'
@@ -35,7 +36,7 @@ export const useSvgr = () => {
         dispatch({ payload: result, type: 'set-svgr-result' })
       } catch (error) {
         logger.error(error)
-        dispatch({ payload: '😥 Error creating the SVGR component', type: 'set-svgr-result' })
+        dispatch({ payload: `😥 ${loc('details_svgr_error')}`, type: 'set-svgr-result' })
       }
 
       setLoading(false)

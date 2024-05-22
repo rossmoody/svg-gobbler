@@ -1,5 +1,6 @@
 import { Tooltip } from 'src/components'
 import { useDetails } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const PreviewSvg = () => {
   const { dispatch, state } = useDetails()
@@ -18,7 +19,7 @@ export const PreviewSvg = () => {
         dangerouslySetInnerHTML={{ __html: state.currentString }}
       />
       <div className="absolute bottom-6 left-6 right-6 flex justify-end">
-        <Tooltip content="Background color" side="left">
+        <Tooltip content={loc('details_background_color')} side="left">
           <input
             className="input-color"
             onChange={handleColorChange}

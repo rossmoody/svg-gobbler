@@ -2,6 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { Logo } from 'src/components'
 import { links } from 'src/constants/links'
+import { loc } from 'src/utils/i18n'
 import { findSvg } from 'svg-gobbler-scripts'
 
 import graphic from './onboarding-graphic.png'
@@ -11,7 +12,7 @@ export const OnboardingLayout = () => {
     chrome.runtime.sendMessage({
       data: {
         ...findSvg(),
-        host: 'Welcome to SVG Gobbler',
+        host: loc('onboarding_title'),
         origin: links.svgGobblerHomepage,
       },
       type: 'launch-svg-gobbler-from-onboarding',
@@ -49,41 +50,40 @@ export const OnboardingLayout = () => {
           <div className="mt-16">
             <a className="inline-flex space-x-6" href={links.githubReleases} target="_blank">
               <span className="rounded-full bg-red-600/10 px-3 py-1 text-sm font-semibold leading-6 text-red-600 ring-1 ring-inset ring-red-600/10">
-                What's new
+                {loc('onboarding_new')}
               </span>
               <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-600">
-                <span>Version 5</span>
+                <span>{loc('onboarding_version')}</span>
                 <ChevronRightIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
               </span>
             </a>
           </div>
           <h1 className="mt-10 text-6xl font-bold tracking-tight text-gray-900">
-            Welcome to SVG Gobbler
+            {loc('onboarding_title')}
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            SVG Gobbler is an open-source browser extension created by{' '}
+            {loc('onboarding_desc')}{' '}
             <a
               className="cursor-pointer text-red-600 hover:text-red-500"
               href={links.rossMoodyHomepage}
             >
               Ross Moody
             </a>{' '}
-            out in sunny San Francisco. Contribute to the project, share your feature ideas, or
-            submit bugs on Github.
+            {loc('onboarding_desc_2')}
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <button
               className="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
               onClick={launchSvgGobbler}
             >
-              Launch SVG Gobbler
+              {loc('onboarding_launch')}
             </button>
             <a
               className="flex items-center gap-1 text-sm font-semibold leading-6 text-gray-900"
               href={links.githubRepository}
               target="_blank"
             >
-              Visit GitHub <ArrowRightIcon aria-hidden="true" className="h-4 w-4" />
+              {loc('onboarding_visit')} <ArrowRightIcon aria-hidden="true" className="h-4 w-4" />
             </a>
           </div>
         </div>

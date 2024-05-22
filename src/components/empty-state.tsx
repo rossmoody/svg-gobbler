@@ -7,6 +7,7 @@ import { UploadModal } from 'src/layout/collection/upload-modal'
 import { FormUtils } from 'src/utils/form-utils'
 
 import { Button } from '.'
+import { loc } from '../utils/i18n'
 
 /**
  * This is displayed when there are no SVGs found sourcing the client page.
@@ -43,14 +44,12 @@ export const EmptyState = () => {
     >
       <div className="text-center">
         <MagnifyingGlassIcon aria-hidden={true} className="text-muted mx-auto mb-3 h-12 w-12" />
-        <h3 className="mb-2 mt-2 text-lg font-semibold">No SVGs found</h3>
-        <p className="text-muted mt-1 text-sm">
-          Select or drag SVGs into this area to upload into this collection
-        </p>
+        <h3 className="mb-2 mt-2 text-lg font-semibold">{loc('empty_title')}</h3>
+        <p className="text-muted mt-1 text-sm">{loc('empty_desc')}</p>
         <div className="mt-6 flex justify-center">
           <Button onClick={() => setOpen(true)} size="lg">
             <PlusIcon aria-hidden="true" className="-ml-0.5 mr-1.5 h-5 w-5" />
-            Upload SVG
+            {loc('empty_action')}
           </Button>
         </div>
       </div>

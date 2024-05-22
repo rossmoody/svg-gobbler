@@ -1,3 +1,5 @@
+import { loc } from 'src/utils/i18n'
+
 import { ExportDetailFooter } from './footer'
 import { ExportDetailMain } from './main'
 import { useExportResize } from './use-export-resize'
@@ -14,7 +16,7 @@ export const ExportSidebar = () => {
       <div className="flex h-full flex-col">
         <div className="flex-grow overflow-y-auto px-3 pt-2">
           <header className="mb-4">
-            <h2 className="mt-2 text-sm font-medium">Settings</h2>
+            <h2 className="mt-2 text-sm font-medium">{loc('details_settings')}</h2>
           </header>
           <ExportDetailMain />
         </div>

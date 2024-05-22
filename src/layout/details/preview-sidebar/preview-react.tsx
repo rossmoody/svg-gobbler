@@ -5,6 +5,7 @@ import { debounce } from 'lodash'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { useSvgr } from './use-svgr'
 
@@ -69,15 +70,15 @@ export const PreviewReact = () => {
 
       <div className="h-1/2 shrink-0 overflow-auto p-4">
         <header className="mb-4">
-          <h2 className="mt-2 text-sm font-medium">SVGR Options</h2>
+          <h2 className="mt-2 text-sm font-medium">{loc('details_svgr')}</h2>
         </header>
 
         <div className="mt-6 flex flex-col gap-2">
           <div>
             <label className="export-label" htmlFor="dimensions">
-              Component name
+              {loc('details_component_name')}
             </label>
-            <span className="text-muted block pt-1">The name of the exported component</span>
+            <span className="text-muted block pt-1">{loc('details_component_desc')}</span>
           </div>
           <input
             className="input"
@@ -98,11 +99,9 @@ export const PreviewReact = () => {
           />
           <div>
             <label className="export-label" htmlFor="dimensions">
-              Dimensions
+              {loc('details_dimensions')}
             </label>
-            <span className="text-muted block pt-1">
-              Keep width and height attributes from the root SVG tag
-            </span>
+            <span className="text-muted block pt-1">{loc('details_dimensions_desc')}</span>
           </div>
         </div>
 
@@ -116,9 +115,9 @@ export const PreviewReact = () => {
           />
           <div>
             <label className="export-label" htmlFor="ref">
-              Ref
+              {loc('details_ref')}
             </label>
-            <span className="text-muted block pt-1">Supply a forward ref to the root SVG tag</span>
+            <span className="text-muted block pt-1">{loc('details_ref_desc')}</span>
           </div>
         </div>
 
@@ -132,12 +131,9 @@ export const PreviewReact = () => {
           />
           <div>
             <label className="export-label" htmlFor="native">
-              Native
+              {loc('details_native')}
             </label>
-            <span className="text-muted block pt-1">
-              Modify all SVG nodes with uppercase and use a specific template with react-native-svg
-              imports. All unsupported nodes will be removed.
-            </span>
+            <span className="text-muted block pt-1">{loc('details_native_desc')}</span>
           </div>
         </div>
 
@@ -151,9 +147,9 @@ export const PreviewReact = () => {
           />
           <div>
             <label className="export-label" htmlFor="typescript">
-              Typescript
+              {loc('details_typescript')}
             </label>
-            <span className="text-muted block pt-1">Generate type definitions for TypeScript</span>
+            <span className="text-muted block pt-1">{loc('details_typescript_desc')}</span>
           </div>
         </div>
 
@@ -167,9 +163,9 @@ export const PreviewReact = () => {
           />
           <div>
             <label className="export-label" htmlFor="memo">
-              Memo
+              {loc('details_memo')}
             </label>
-            <span className="text-muted block pt-1">Wrap component definition in a React.memo</span>
+            <span className="text-muted block pt-1">{loc('details_memo_desc')}</span>
           </div>
         </div>
       </div>

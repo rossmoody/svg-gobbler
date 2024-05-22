@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
 import { useCollection, useDashboard } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const CollectionTitle = () => {
@@ -18,7 +19,8 @@ export const CollectionTitle = () => {
   }
 
   function handleBlur(event: React.FocusEvent<HTMLHeadingElement>) {
-    const newTitle = event.target.textContent ?? 'Collection'
+    const newTitle = event.target.textContent ?? loc('topbar_collection')
+
     if (newTitle !== title) {
       const newCollections = sidebarState.collections.map((c) => {
         if (c.id === mainState.collectionId) {

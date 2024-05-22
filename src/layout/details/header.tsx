@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const Header = () => {
@@ -37,7 +38,7 @@ export const Header = () => {
 
   const navigateBack = () => {
     if (isDirty) {
-      if (window.confirm('Are you sure you want to leave? Your changes will be lost.')) {
+      if (window.confirm(loc('details_are_you_sure'))) {
         navigate(-1)
       }
       return
@@ -51,7 +52,7 @@ export const Header = () => {
         <IconButton onClick={navigateBack} size="lg" variant="ghost">
           <ArrowLeftIcon className="h-5 w-5" />
         </IconButton>
-        <h1 className="text-lg font-semibold">Edit SVG</h1>
+        <h1 className="text-lg font-semibold">{loc('details_edit_svg')}</h1>
       </nav>
       <Transition
         as="div"
@@ -65,9 +66,9 @@ export const Header = () => {
         show={isDirty}
       >
         <Button onClick={handleReset} variant="secondary">
-          Reset changes
+          {loc('details_reset_changes')}
         </Button>
-        <Button onClick={handleSave}>Save changes</Button>
+        <Button onClick={handleSave}>{loc('details_save_changes')}</Button>
       </Transition>
     </header>
   )

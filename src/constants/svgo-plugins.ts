@@ -1,5 +1,7 @@
 import type { PluginConfig } from 'svgo'
 
+import { loc } from 'src/utils/i18n'
+
 /**
  * A standard plugin config for SVGO. The types for PluginConfig are weird but to make it play
  * nicely with the optimize function we include it and re-add the properties.
@@ -21,255 +23,236 @@ export type SvgoPlugin = Extract<PluginConfig, { name: string }> & {
 
 export const defaultSvgoPlugins: SvgoPlugin[] = [
   {
-    description:
-      'Removes redundant whitespaces from attribute values. This will not modify the attribute keys, nor remove them if the value becomes empty after optimization.',
-    label: 'Cleanup attributes',
+    description: loc('svgo_cleanupAttrs_desc'),
+    label: loc('svgo_cleanupAttrs'),
     name: 'cleanupAttrs',
   },
   {
-    description: "Removes the /enable-background/ attribute, unless it's used in a filter element",
-    label: 'Cleanup enable-background',
+    description: loc('svgo_cleanupEnableBackground_desc'),
+    label: loc('svgo_cleanupEnableBackground'),
     name: 'cleanupEnableBackground',
   },
   {
-    description: 'Removes unused IDs, and minifys IDs that are referenced by other elements.',
-    label: 'Cleanup IDs',
+    description: loc('svgo_cleanupIDs_desc'),
+    label: loc('svgo_cleanupIDs'),
     name: 'cleanupIds',
   },
   {
-    description:
-      "Rounds numeric values, and removes the unit when it's 'px' as this is the default.",
-    label: 'Cleanup numeric values',
+    description: loc('svgo_cleanupNumericValues_desc'),
+    label: loc('svgo_cleanupNumericValues'),
     name: 'cleanupNumericValues',
   },
   {
-    description:
-      'Finds groups that effectively do nothing and flattens them, preserving the contents of the groups.',
-    label: 'Collapse groups',
+    description: loc('svgo_collapsGroups_desc'),
+    label: loc('svgo_collapsGroups'),
     name: 'collapseGroups',
   },
   {
-    description: 'Converts color references to the shortest equivalent.',
-    label: 'Convert colors',
+    description: loc('svgo_convertColors_desc'),
+    label: loc('svgo_convertColors'),
     name: 'convertColors',
   },
   {
-    description: 'Converts ellipses with equal radiuses to circles.',
-    label: 'Convert ellipse to circle',
+    description: loc('svgo_convertEllipseToCircle_desc'),
+    label: loc('svgo_convertEllipseToCircle'),
     name: 'convertEllipseToCircle',
   },
   {
-    description:
-      'Optimize path commands found in <path>, <glyph>, and <missing-glyph> elements. Path commands are the syntax used in the d attribute, each character represents an instruction to draw paths.',
-    label: 'Convert path data',
+    description: loc('svgo_convertPathData_desc'),
+    label: loc('svgo_convertPathData'),
     name: 'convertPathData',
   },
   {
-    description: 'Convert basic shapes to <path> elements.',
-    label: 'Convert shape to path',
+    description: loc('svgo_convertShapeToPath_desc'),
+    label: loc('svgo_convertShapeToPath'),
     name: 'convertShapeToPath',
   },
   {
-    description: 'Collapse multiple transforms into one and convert matrices to the short aliases.',
-    label: 'Convert transform',
+    description: loc('svgo_convertTransform_desc'),
+    label: loc('svgo_convertTransform'),
     name: 'convertTransform',
   },
   {
-    description: 'Merges styles from <style> elements to the style attribute of matching elements.',
-    label: 'Inline styles',
+    description: loc('svgo_inlineStyles_desc'),
+    label: loc('svgo_inlineStyles'),
     name: 'inlineStyles',
   },
   {
-    description: 'Merge multiple paths into one.',
-    label: 'Merge paths',
+    description: loc('svgo_mergePaths_desc'),
+    label: loc('svgo_mergePaths'),
     name: 'mergePaths',
   },
   {
-    description: 'Merge multiple style elements into one.',
-    label: 'Merge styles',
+    description: loc('svgo_mergeStyles_desc'),
+    label: loc('svgo_mergeStyles'),
     name: 'mergeStyles',
   },
   {
-    description: 'Minify <style> elements with CSSO',
-    label: 'Minify styles',
+    description: loc('svgo_minifyStyles_desc'),
+    label: loc('svgo_minifyStyles'),
     name: 'minifyStyles',
   },
   {
-    description: 'Move an elements attributes to their enclosing group.',
-    label: 'Move element attributes to group',
+    description: loc('svgo_moveElemsAttrsToGroup_desc'),
+    label: loc('svgo_moveElemsAttrsToGroup'),
     name: 'moveElemsAttrsToGroup',
   },
   {
-    description: 'Move some group attributes to the contained elements.',
-    label: 'Move group attributes to elements',
+    description: loc('svgo_moveGroupAttrsToElems_desc'),
+    label: loc('svgo_moveGroupAttrsToElems'),
     name: 'moveGroupAttrsToElems',
   },
   {
-    description:
-      "Removes XML comments from the document. XML comments are the content between the '<!--' and '-->' syntax, and do not effect rendering.",
-    label: 'Remove comments',
+    description: loc('svgo_removeComments_desc'),
+    label: loc('svgo_removeComments'),
     name: 'removeComments',
   },
   {
-    description:
-      'Removes the <desc> element from the document if the <desc> element is empty or appears to only contain editor attribution.',
-    label: 'Remove description',
+    description: loc('svgo_removeDesc_desc'),
+    label: loc('svgo_removeDesc'),
     name: 'removeDesc',
   },
   {
-    description: 'Removes the Document Type Definition, also known as the DOCTYPE, from the svg.',
-    label: 'Remove doctype',
+    description: loc('svgo_removeDoctype_desc'),
+    label: loc('svgo_removeDoctype'),
     name: 'removeDoctype',
   },
   {
-    description:
-      'Removes all XML namespaces, elements, and attributes associated with popular vector editing software.',
-    label: 'Remove editor namespace data',
+    description: loc('svgo_removeEditorsNSData_desc'),
+    label: loc('svgo_removeEditorsNSData'),
     name: 'removeEditorsNSData',
   },
   {
-    description: 'Removes attributes with empty values from elements.',
-    label: 'Remove empty attributes',
+    description: loc('svgo_removeEmptyAttrs_desc'),
+    label: loc('svgo_removeEmptyAttrs'),
     name: 'removeEmptyAttrs',
   },
   {
-    description:
-      'Remove container elements in the document that have no children or meaningful attributes.',
-    label: 'Remove empty containers',
+    description: loc('svgo_removeEmptyContainers_desc'),
+    label: loc('svgo_removeEmptyContainers'),
     name: 'removeEmptyContainers',
   },
   {
-    description: 'Removes text elements that do not have meaningful attributes.',
-    label: 'Remove empty text',
+    description: loc('svgo_removeEmptyText_desc'),
+    label: loc('svgo_removeEmptyText'),
     name: 'removeEmptyText',
   },
   {
-    description:
-      'Remove hidden or invisible elements from the document. This can be elements with 0 width and height defined, or elements that were just hidden with CSS.',
-    label: 'Remove hidden elements',
+    description: loc('svgo_removeHiddenElems_desc'),
+    label: loc('svgo_removeHiddenElems'),
     name: 'removeHiddenElems',
   },
   {
-    description:
-      "Removes the <metadata> element from the document. Metadata doesn't effect rendering. From an optimization perspective, these can always be safely removed.",
-    label: 'Remove metadata',
+    description: loc('svgo_removeMetadata_desc'),
+    label: loc('svgo_removeMetadata'),
     name: 'removeMetadata',
   },
   {
-    description: 'Removes non-inheritable presentation groups from children',
-    label: 'Remove non-inheritable group attributes',
+    description: loc('svgo_removeNonInheritableGroupAttrs_desc'),
+    label: loc('svgo_removeNonInheritableGroupAttrs'),
     name: 'removeNonInheritableGroupAttrs',
   },
   {
-    description: 'Removes the <title> element from the document.',
-    label: 'Remove title',
+    description: loc('svgo_removeTitle_desc'),
+    label: loc('svgo_removeTitle'),
     name: 'removeTitle',
   },
   {
-    description:
-      'Removes unknown elements and attributes, as well as attributes that are set to their default value.',
-    label: 'Remove unknowns and defaults',
+    description: loc('svgo_removeUnknownsAndDefaults_desc'),
+    label: loc('svgo_removeUnknownsAndDefaults'),
     name: 'removeUnknownsAndDefaults',
   },
   {
-    description: 'Removes unused namespace declarations from the document.',
-    label: 'Remove unused namespaces',
+    description: loc('svgo_removeUnusedNS_desc'),
+    label: loc('svgo_removeUnusedNS'),
     name: 'removeUnusedNS',
   },
   {
-    description: 'Removes children of <defs> element that do not have an ID to reference.',
-    label: 'Remove useless defs',
+    description: loc('svgo_removeUselessDefs_desc'),
+    label: loc('svgo_removeUselessDefs'),
     name: 'removeUselessDefs',
   },
   {
-    description: 'Removes useless stroke and fill attributes.',
-    label: 'Remove useless stroke and fill',
+    description: loc('svgo_removeUselessStrokeAndFill_desc'),
+    label: loc('svgo_removeUselessStrokeAndFill'),
     name: 'removeUselessStrokeAndFill',
   },
   {
-    description: 'Remove XML processing instructions.',
-    label: 'Remove XML instructions',
+    description: loc('svgo_removeXMLInstructions_desc'),
+    label: loc('svgo_removeXMLInstructions'),
     name: 'removeXMLProcInst',
   },
   {
-    description:
-      'Sorts attributes in all elements in the document. This does not reduce the size of the SVG, but improves readability and may improve how compression algorithms perform on it.',
-    label: 'Sort attributes',
+    description: loc('svgo_sortAttrs_desc'),
+    label: loc('svgo_sortAttrs'),
     name: 'sortAttrs',
   },
   {
-    description:
-      "Sorts all children in the '<defs>' element. This does not reduce the size of the SVG, but may improve how compression algorithms perform on it.",
-    label: 'Sort defs children',
+    description: loc('svgo_sortDefsChildren_desc'),
+    label: loc('svgo_sortDefsChildren'),
     name: 'sortDefsChildren',
   },
 ]
 
 export const additionalSvgoPlugins: SvgoPlugin[] = [
   {
-    description: 'Removes the viewBox attribute when height and width is identical.',
-    label: 'Remove viewBox',
+    description: loc('svgo_removeViewBox_desc'),
+    label: loc('svgo_removeViewBox'),
     name: 'removeViewBox',
   },
   {
-    description:
-      'Rounds numeric values in attributes, such as those found in viewBox, enable-background, and points.',
-    label: 'Cleanup list of values',
+    description: loc('svgo_cleanupListOfValues_desc'),
+    label: loc('svgo_cleanupListOfValues'),
     name: 'cleanupListOfValues',
   },
   {
-    description:
-      'Converts the <linearGradient> and <radialGradient> nodes that are effectively a solid color to the color.',
-    label: 'Convert one stop gradients',
+    description: loc('svgo_convertOneStopGradients_desc'),
+    label: loc('svgo_convertOneStopGradients'),
     name: 'convertOneStopGradients',
   },
   {
-    description:
-      'Converts presentation attributes in element styles to the equvilent XML attribute.',
-    label: 'Convert style to attributes',
+    description: loc('svgo_convertStyleToAttrs_desc'),
+    label: loc('svgo_convertStyleToAttrs'),
     name: 'convertStyleToAttrs',
   },
   {
-    description:
-      'Prefix element IDs and class names with the provided file name. Defaults to "prefix__"',
-    label: 'Prefix IDs and class names',
+    description: loc('svgo_prefixIds_desc'),
+    label: loc('svgo_prefixIds'),
     name: 'prefixIds',
   },
   {
-    description:
-      "Removes the width and height attribute from the top-most <svg> element if specified, and replaces it with the viewBox attribute if it's missing.",
-    label: 'Remove dimensions',
+    description: loc('svgo_removeDimensions_desc'),
+    label: loc('svgo_removeDimensions'),
     name: 'removeDimensions',
   },
   {
-    description: 'Removes <path> elements that are drawn outside of a viewBox.',
-    label: 'Remove off-canvas paths',
+    description: loc('svgo_removeOffCanvasPaths_desc'),
+    label: loc('svgo_removeOffCanvasPaths'),
     name: 'removeOffCanvasPaths',
   },
   {
-    description: 'Removes inline JPEGs, PNGs, and GIFs from the document.',
-    label: 'Remove raster images',
+    description: loc('svgo_removeRasterImages_desc'),
+    label: loc('svgo_removeRasterImages'),
     name: 'removeRasterImages',
   },
   {
-    description: 'Removes all scripts from the document.',
-    label: 'Remove script element',
+    description: loc('svgo_removeScriptElement_desc'),
+    label: loc('svgo_removeScriptElement'),
     name: 'removeScriptElement',
   },
   {
-    description: 'Remove all <style> elements from the document.',
-    label: 'Remove style element',
+    description: loc('svgo_removeStyleElement_desc'),
+    label: loc('svgo_removeStyleElement'),
     name: 'removeStyleElement',
   },
   {
-    description: 'Removes the xmlns attribute from the top-most <svg> element in the document.',
-    label: 'Remove XMLNS',
+    description: loc('svgo_removeXMLNS_desc'),
+    label: loc('svgo_removeXMLNS'),
     name: 'removeXMLNS',
   },
   {
-    description:
-      'Creates a definition for similar paths, and swaps the <path> elements to <use> elements that will reference a single <path> definition.',
-    label: 'Reuse paths',
+    description: loc('svgo_reusePaths_desc'),
+    label: loc('svgo_reusePaths'),
     name: 'reusePaths',
   },
 ]

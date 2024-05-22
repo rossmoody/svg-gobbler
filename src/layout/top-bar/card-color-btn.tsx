@@ -2,6 +2,7 @@ import { PaintBrushIcon } from '@heroicons/react/24/outline'
 import { useRef } from 'react'
 import { IconButton, Tooltip } from 'src/components'
 import { useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const CardColorButton = () => {
@@ -18,7 +19,7 @@ export const CardColorButton = () => {
   }
 
   return (
-    <Tooltip content="Canvas color">
+    <Tooltip content={loc('topbar_canvas_tooltip')}>
       <IconButton onClick={handleClick} size="lg" variant="ghost">
         <input
           className="sr-only"
@@ -28,7 +29,7 @@ export const CardColorButton = () => {
           value={state.view.canvas}
         />
         <PaintBrushIcon aria-hidden="true" className="h-5 w-5" />
-        <span className="sr-only">Change canvas color</span>
+        <span className="sr-only">{loc('topbar_canvas')}</span>
       </IconButton>
     </Tooltip>
   )

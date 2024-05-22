@@ -5,6 +5,7 @@ import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { useCollection } from 'src/providers'
 import { CollectionData } from 'src/types'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 type ViewOption = {
@@ -12,7 +13,7 @@ type ViewOption = {
   value: string
 }
 
-const viewOptions: ViewOption[] = [{ label: 'Hide cors restricted', value: 'hide-cors' }]
+const viewOptions: ViewOption[] = [{ label: loc('topbar_hide_cors'), value: 'hide-cors' }]
 
 export const ViewPopover = () => {
   const { dispatch, state } = useCollection()
@@ -31,7 +32,7 @@ export const ViewPopover = () => {
     <Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
       <Popover className="relative inline-block px-4 text-left">
         <Popover.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
-          View
+          {loc('topbar_view')}
           <ChevronDownIcon aria-hidden className="h-3 w-3" />
         </Popover.Button>
 

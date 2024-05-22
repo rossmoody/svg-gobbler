@@ -1,0 +1,758 @@
+{
+  "empty_title": {
+    "message": "No se encontraron SVGs"
+  },
+  "empty_desc": {
+    "message": "Seleccione o arrastre los SVGs a esta área para subirlos a esta colección"
+  },
+  "empty_action": {
+    "message": "Subir SVGs"
+  },
+  "error_title": {
+    "message": "¡Ups! Ocurrió un error"
+  },
+  "error_desc": {
+    "message": "Intente actualizar la página o navegar de vuelta a la página de inicio"
+  },
+  "error_action": {
+    "message": "Actualizar"
+  },
+  "feedback_title": {
+    "message": "Rápidamente, ¿qué función crees que le falta a SVG Gobbler?"
+  },
+  "feedback_placeholder": {
+    "message": "Desearía que SVG Gobbler pudiera..."
+  },
+  "feedback_primary_action": {
+    "message": "Enviar"
+  },
+  "feedback_secondary_action": {
+    "message": "Cancelar"
+  },
+  "no_results_title": {
+    "message": "No hay SVGs para mostrar"
+  },
+  "no_results_desc": {
+    "message": "Intente cambiar su filtro, búsqueda o configuraciones de vista para mostrar SVGs"
+  },
+  "review_title": {
+    "message": "¿Encuentras útil SVG Gobbler?"
+  },
+  "review_desc": {
+    "message": "Por favor, considera dejar una reseña para ayudar a otros a descubrirlo."
+  },
+  "review_primary_action": {
+    "message": "Reseña"
+  },
+  "review_secondary_action": {
+    "message": "Descartar"
+  },
+  "card_open": {
+    "message": "Abrir"
+  },
+  "card_tooltip_cors": {
+    "message": "Este SVG está restringido por compartir recursos de origen cruzado y no puede ser editado o exportado directamente desde SVG Gobbler"
+  },
+  "card_onboarding_context": {
+    "message": "Haga clic derecho para el menú contextual"
+  },
+  "card_action_copy": {
+    "message": "Copiar al portapapeles"
+  },
+  "card_action_download": {
+    "message": "Descargar"
+  },
+  "card_action_duplicate": {
+    "message": "Duplicar"
+  },
+  "card_action_delete": {
+    "message": "Eliminar"
+  },
+  "card_action_original": {
+    "message": "Original"
+  },
+  "card_action_optimized": {
+    "message": "Optimizado"
+  },
+  "export_size": {
+    "message": "Tamaño"
+  },
+  "export_quality": {
+    "message": "Calidad"
+  },
+  "export_optimize_exports": {
+    "message": "Optimizar exportaciones"
+  },
+  "export_pretty": {
+    "message": "Salida bonita"
+  },
+  "export_floating": {
+    "message": "Precisión flotante"
+  },
+  "export_filename": {
+    "message": "Nombre del archivo"
+  },
+  "export_filetype": {
+    "message": "Tipo de archivo"
+  },
+  "export_export_filename": {
+    "message": "Nombre del archivo exportado"
+  },
+  "export_filename_prefix": {
+    "message": "Prefijo del archivo"
+  },
+  "export_prefix_tooltip": {
+    "message": "El prefijo que se añadirá al inicio de cada nombre de archivo."
+  },
+  "export_copy_clipboard": {
+    "message": "Copiar al portapapeles"
+  },
+  "export_copied": {
+    "message": "Copiado"
+  },
+  "export_download": {
+    "message": "Descargar"
+  },
+  "export_files": {
+    "message": "Archivos"
+  },
+  "export_export": {
+    "message": "Exportar"
+  },
+  "export_settings": {
+    "message": "Configuraciones"
+  },
+  "main_copy": {
+    "message": "Copiar"
+  },
+  "main_copy_collection": {
+    "message": "Copiar ítems a la colección"
+  },
+  "main_name": {
+    "message": "Nombre"
+  },
+  "main_submit": {
+    "message": "Enviar"
+  },
+  "main_cancel": {
+    "message": "Cancelar"
+  },
+  "main_delete": {
+    "message": "Eliminar"
+  },
+  "main_move": {
+    "message": "Mover"
+  },
+  "main_move_collection": {
+    "message": "Mover ítems a la colección"
+  },
+  "main_showing": {
+    "message": "Mostrando"
+  },
+  "main_of": {
+    "message": "de"
+  },
+  "main_results": {
+    "message": "resultados"
+  },
+  "main_select": {
+    "message": "Seleccionar"
+  },
+  "main_all": {
+    "message": "todo"
+  },
+  "main_none": {
+    "message": "ninguno"
+  },
+  "main_load_more": {
+    "message": "Cargar más"
+  },
+  "upload_upload": {
+    "message": "Subir"
+  },
+  "upload_file": {
+    "message": "Archivo"
+  },
+  "upload_clipboard": {
+    "message": "Portapapeles"
+  },
+  "upload_upload_files": {
+    "message": "Subir archivos"
+  },
+  "upload_drag_files": {
+    "message": "o arrastrar y soltar"
+  },
+  "upload_file_limit": {
+    "message": "Archivos SVG de hasta 10mb"
+  },
+  "upload_item": {
+    "message": "ítem"
+  },
+  "upload_uploaded": {
+    "message": "subido"
+  },
+  "upload_error": {
+    "message": "SVG inválido, verifique la cadena e intente nuevamente"
+  },
+  "details_optimize": {
+    "message": "Optimizar"
+  },
+  "details_format": {
+    "message": "Formato"
+  },
+  "details_live": {
+    "message": "Este es un editor en vivo, intente cambiar el código"
+  },
+  "details_download": {
+    "message": "Descargar"
+  },
+  "details_settings": {
+    "message": "Configuraciones"
+  },
+  "details_floating_tooltip": {
+    "message": "Precisión de números con punto flotante. Será pasado a cada plugin que soporte este parámetro."
+  },
+  "details_plugin": {
+    "message": "Plugins"
+  },
+  "details_set_default": {
+    "message": "Establecer como predeterminado"
+  },
+  "details_default": {
+    "message": "Configuraciones predeterminadas"
+  },
+  "details_svgo_default": {
+    "message": "SVGO predeterminado"
+  },
+  "details_deselect_all": {
+    "message": "Deseleccionar todo"
+  },
+  "details_preview": {
+    "message": "Vista previa"
+  },
+  "details_react": {
+    "message": "React"
+  },
+  "details_data_uri": {
+    "message": "Data URI"
+  },
+  "details_svgr": {
+    "message": "Opciones SVGR"
+  },
+  "details_component_name": {
+    "message": "Nombre del componente"
+  },
+  "details_component_desc": {
+    "message": "El nombre del componente exportado"
+  },
+  "details_dimensions": {
+    "message": "Dimensiones"
+  },
+  "details_dimensions_desc": {
+    "message": "Conservar los atributos de ancho y alto de la etiqueta SVG raíz"
+  },
+  "details_ref": {
+    "message": "Ref"
+  },
+  "details_ref_desc": {
+    "message": "Proveer una referencia a la etiqueta SVG raíz"
+  },
+  "details_native": {
+    "message": "Nativo"
+  },
+  "details_native_desc": {
+    "message": "Modificar todos los nodos SVG con mayúsculas y usar una plantilla específica con importaciones react-native-svg. Todos los nodos no soportados serán eliminados."
+  },
+  "details_typescript": {
+    "message": "TypeScript"
+  },
+  "details_typescript_desc": {
+    "message": "Generar definiciones de tipos para TypeScript"
+  },
+  "details_memo": {
+    "message": "Memo"
+  },
+  "details_memo_desc": {
+    "message": "Envolver el componente exportado en React.memo"
+  },
+  "details_background_color": {
+    "message": "Color de fondo"
+  },
+  "details_svgr_error": {
+    "message": "Error al crear el componente SVGR"
+  },
+  "details_are_you_sure": {
+    "message": "¿Estás seguro de que quieres salir? Tus cambios se perderán."
+  },
+  "details_edit_svg": {
+    "message": "Editar SVG"
+  },
+  "details_reset_changes": {
+    "message": "Restablecer cambios"
+  },
+  "details_save_changes": {
+    "message": "Guardar cambios"
+  },
+  "onboarding_title": {
+    "message": "Bienvenido a SVG Gobbler"
+  },
+  "onboarding_new": {
+    "message": "Qué hay de nuevo"
+  },
+  "onboarding_version": {
+    "message": "Versión 5"
+  },
+  "onboarding_desc": {
+    "message": "SVG Gobbler es una extensión de navegador de código abierto creada por"
+  },
+  "onboarding_desc_2": {
+    "message": "en el soleado San Francisco. Contribuya al proyecto, comparta sus ideas de funciones o envíe errores en GitHub."
+  },
+  "onboarding_launch": {
+    "message": "Lanzar SVG Gobbler"
+  },
+  "onboarding_visit": {
+    "message": "Visitar GitHub"
+  },
+  "settings_about": {
+    "message": "Acerca de"
+  },
+  "settings_about_desc": {
+    "message": "Un poco de historia de la extensión SVG Gobbler y cómo apoyar."
+  },
+  "settings_contribute": {
+    "message": "Contribuir"
+  },
+  "settings_contribute_desc": {
+    "message": "La extensión SVG Gobbler es de código abierto y está disponible para"
+  },
+  "settings_contribute_desc_2": {
+    "message": "contribución en GitHub"
+  },
+  "settings_bug": {
+    "message": "Informar un error"
+  },
+  "settings_bug_desc": {
+    "message": "¿Encontraste un error o tienes una solicitud de función?"
+  },
+  "settings_open_issue": {
+    "message": "Abrir un problema en GitHub"
+  },
+  "settings_disclaimer": {
+    "message": "Descargo de responsabilidad"
+  },
+  "settings_disclaimer_desc": {
+    "message": "Esta extensión de navegador de código abierto fue creada y está destinada a facilitar la descarga de íconos SVG de sitios web para uso personal, educativo o profesional legítimo. Se espera que los usuarios respeten los derechos de propiedad intelectual y no deben usar esta herramienta para infringir derechos de autor o con fines comerciales sin la autorización adecuada."
+  },
+  "settings_default_svgo": {
+    "message": "Configuración predeterminada de SVGO"
+  },
+  "settings_default_svgo_desc": {
+    "message": "La configuración predeterminada del plugin SVGO que se usará al iniciar SVG Gobbler."
+  },
+  "settings_export": {
+    "message": "Exportar"
+  },
+  "settings_export_desc": {
+    "message": "Configuración para el panel de exportación."
+  },
+  "settings_general": {
+    "message": "General"
+  },
+  "settings_general_desc": {
+    "message": "Personaliza cómo funciona SVG Gobbler en tu navegador. Estas configuraciones son específicas de este perfil de navegador."
+  },
+  "settings_kbd": {
+    "message": "Atajo de teclado"
+  },
+  "settings_kbd_desc": {
+    "message": "El atajo actual para lanzar SVG Gobbler es"
+  },
+  "settings_kbd_desc_2": {
+    "message": "Para editar o eliminar este atajo"
+  },
+  "settings_kbd_desc_3": {
+    "message": "visita la página de atajos de extensión"
+  },
+  "settings_settings": {
+    "message": "Configuraciones"
+  },
+  "topbar_canvas_tooltip": {
+    "message": "Color del lienzo"
+  },
+  "topbar_canvas": {
+    "message": "Cambiar color del lienzo"
+  },
+  "topbar_upload": {
+    "message": "Subir"
+  },
+  "topbar_size": {
+    "message": "Tamaño"
+  },
+  "topbar_sort_none": {
+    "message": "Ninguno"
+  },
+  "topbar_sort_size_asc": {
+    "message": "Tamaño de archivo: de menor a mayor"
+  },
+  "topbar_sort_size_desc": {
+    "message": "Tamaño de archivo: de mayor a menor"
+  },
+  "topbar_sort": {
+    "message": "Ordenar"
+  },
+  "topbar_color_tooltip": {
+    "message": "Modo de color"
+  },
+  "topbar_color": {
+    "message": "Alternar modo de color"
+  },
+  "topbar_view": {
+    "message": "Vista"
+  },
+  "topbar_hide_cors": {
+    "message": "Ocultar restringidos por CORS"
+  },
+  "topbar_collection": {
+    "message": "Colección"
+  },
+  "sidebar_create_new": {
+    "message": "Crear una nueva colección"
+  },
+  "sidebar_name": {
+    "message": "Nombre"
+  },
+  "sidebar_upload_files": {
+    "message": "Subir archivos"
+  },
+  "sidebar_drag_files": {
+    "message": "o arrastrar y soltar"
+  },
+  "sidebar_file_limit": {
+    "message": "Archivos SVG de hasta 10mb"
+  },
+  "sidebar_item": {
+    "message": "ítem"
+  },
+  "sidebar_uploaded": {
+    "message": "subido"
+  },
+  "sidebar_create_collection": {
+    "message": "Crear colección"
+  },
+  "sidebar_cancel": {
+    "message": "Cancelar"
+  },
+  "sidebar_close": {
+    "message": "Cerrar barra lateral"
+  },
+  "sidebar_reset": {
+    "message": "Restablecer entorno"
+  },
+  "sidebar_review": {
+    "message": "Dejar una reseña"
+  },
+  "sidebar_support": {
+    "message": "Apoyar SVG Gobbler"
+  },
+  "sidebar_free": {
+    "message": "SVG Gobbler es gratuito"
+  },
+  "sidebar_open": {
+    "message": "código abierto"
+  },
+  "sidebar_support_2": {
+    "message": "y funciona completamente con vibras positivas. Si estás experimentando un problema o deseas funcionalidad faltante, por favor levanta un problema o envía un correo electrónico a <b>ross@rossmoody.com</b> para solucionarlo antes de enviar una reseña negativa."
+  },
+  "sidebar_support_3": {
+    "message": "Si estás disfrutando SVG Gobbler, por favor considera dejar una reseña para ayudar a otros a descubrirlo."
+  },
+  "sidebar_support_submit": {
+    "message": "Enviar una reseña"
+  },
+  "sidebar_new_collection": {
+    "message": "Nueva colección"
+  },
+  "sidebar_settings": {
+    "message": "Configuraciones"
+  },
+  "export_apply": {
+    "message": "Aplicar"
+  },
+  "svgo_cleanupAttrs": {
+    "message": "Limpiar atributos"
+  },
+  "svgo_cleanupAttrs_desc": {
+    "message": "Elimina espacios redundantes de los valores de los atributos. Esto no modificará las claves de los atributos, ni los eliminará si el valor se vuelve vacío después de la optimización."
+  },
+  "svgo_cleanupEnableBackground": {
+    "message": "Limpiar enable-background"
+  },
+  "svgo_cleanupEnableBackground_desc": {
+    "message": "Elimina el atributo enable-background, a menos que se use en un elemento de filtro"
+  },
+  "svgo_cleanupIDs": {
+    "message": "Limpiar IDs"
+  },
+  "svgo_cleanupIDs_desc": {
+    "message": "Elimina IDs no utilizados y minimiza IDs que son referenciados por otros elementos."
+  },
+  "svgo_cleanupNumericValues": {
+    "message": "Limpiar valores numéricos"
+  },
+  "svgo_cleanupNumericValues_desc": {
+    "message": "Redondea valores numéricos y elimina la unidad cuando es 'px', ya que es la predeterminada."
+  },
+  "svgo_collapsGroups": {
+    "message": "Colapsar grupos"
+  },
+  "svgo_collapsGroups_desc": {
+    "message": "Encuentra grupos que efectivamente no hacen nada y los aplana, preservando el contenido de los grupos."
+  },
+  "svgo_convertColors": {
+    "message": "Convertir colores"
+  },
+  "svgo_convertColors_desc": {
+    "message": "Convierte referencias de color en el equivalente más corto."
+  },
+  "svgo_convertEllipseToCircle": {
+    "message": "Convertir elipse en círculo"
+  },
+  "svgo_convertEllipseToCircle_desc": {
+    "message": "Convierte elipses con radios iguales en círculos."
+  },
+  "svgo_convertPathData": {
+    "message": "Convertir datos de camino"
+  },
+  "svgo_convertPathData_desc": {
+    "message": "Optimiza los comandos de camino encontrados en elementos <path>, <glyph> y <missing-glyph>. Los comandos de camino son la sintaxis utilizada en el atributo d, cada carácter representa una instrucción para dibujar caminos."
+  },
+  "svgo_convertShapeToPath": {
+    "message": "Convertir forma a camino"
+  },
+  "svgo_convertShapeToPath_desc": {
+    "message": "Convierte formas básicas en elementos <path>."
+  },
+  "svgo_convertTransform": {
+    "message": "Convertir transformación"
+  },
+  "svgo_convertTransform_desc": {
+    "message": "Combina múltiples transformaciones en una y convierte matrices en alias cortos"
+  },
+  "svgo_inlineStyles": {
+    "message": "Estilos en línea"
+  },
+  "svgo_inlineStyles_desc": {
+    "message": "Fusiona estilos de elementos <style> en el atributo de estilo de los elementos coincidentes"
+  },
+  "svgo_mergePaths": {
+    "message": "Unir caminos"
+  },
+  "svgo_mergePaths_desc": {
+    "message": "Une múltiples caminos en uno, o en un elemento <g> si tienen los mismos atributos"
+  },
+  "svgo_mergeStyles": {
+    "message": "Unir estilos"
+  },
+  "svgo_mergeStyles_desc": {
+    "message": "Fusiona múltiples elementos de estilo en uno"
+  },
+  "svgo_minifyStyles": {
+    "message": "Minificar estilos"
+  },
+  "svgo_minifyStyles_desc": {
+    "message": "Minimiza los elementos <style> con CSSO"
+  },
+  "svgo_moveElemsAttrsToGroup": {
+    "message": "Mover atributos de elementos al grupo"
+  },
+  "svgo_moveElemsAttrsToGroup_desc": {
+    "message": "Mueve los atributos de los elementos a su grupo envolvente"
+  },
+  "svgo_moveGroupAttrsToElems": {
+    "message": "Mover atributos de grupo a elementos"
+  },
+  "svgo_moveGroupAttrsToElems_desc": {
+    "message": "Mueve algunos atributos de grupo a los elementos contenidos"
+  },
+  "svgo_removeComments": {
+    "message": "Eliminar comentarios"
+  },
+  "svgo_removeComments_desc": {
+    "message": "Elimina los comentarios XML del documento. Los comentarios XML son el contenido entre la sintaxis '<!--' y '-->', y no afectan el renderizado"
+  },
+  "svgo_removeDesc": {
+    "message": "Eliminar descripción"
+  },
+  "svgo_removeDesc_desc": {
+    "message": "Elimina el elemento <desc> del documento si el elemento <desc> está vacío o parece contener solo atribuciones de editor"
+  },
+  "svgo_removeDoctype": {
+    "message": "Eliminar doctype"
+  },
+  "svgo_removeDoctype_desc": {
+    "message": "Elimina la definición del tipo de documento, también conocida como DOCTYPE, del SVG"
+  },
+  "svgo_removeEditorsNSData": {
+    "message": "Eliminar datos de namespace del editor"
+  },
+  "svgo_removeEditorsNSData_desc": {
+    "message": "Elimina todos los espacios de nombres XML, elementos y atributos asociados con software de edición vectorial popular"
+  },
+  "svgo_removeEmptyAttrs": {
+    "message": "Eliminar atributos vacíos"
+  },
+  "svgo_removeEmptyAttrs_desc": {
+    "message": "Elimina atributos con valores vacíos"
+  },
+  "svgo_removeEmptyContainers": {
+    "message": "Eliminar contenedores vacíos"
+  },
+  "svgo_removeEmptyContainers_desc": {
+    "message": "Elimina elementos contenedores en el documento que no tienen hijos o atributos significativos"
+  },
+  "svgo_removeEmptyText": {
+    "message": "Eliminar texto vacío"
+  },
+  "svgo_removeEmptyText_desc": {
+    "message": "Elimina elementos de texto que no tienen atributos significativos"
+  },
+  "svgo_removeHiddenElems": {
+    "message": "Eliminar elementos ocultos"
+  },
+  "svgo_removeHiddenElems_desc": {
+    "message": "Elimina elementos ocultos o invisibles del documento. Esto puede ser elementos con 0 de ancho y alto definidos, o elementos que fueron simplemente ocultos con CSS"
+  },
+  "svgo_removeMetadata": {
+    "message": "Eliminar metadatos"
+  },
+  "svgo_removeMetadata_desc": {
+    "message": "Elimina el elemento <metadata> del documento. Los metadatos no afectan el renderizado. Desde una perspectiva de optimización, estos siempre pueden ser eliminados de forma segura"
+  },
+  "svgo_removeNonInheritableGroupAttrs": {
+    "message": "Eliminar atributos de grupo no heredables"
+  },
+  "svgo_removeNonInheritableGroupAttrs_desc": {
+    "message": "Elimina grupos de presentación no heredables de los hijos"
+  },
+  "svgo_removeTitle": {
+    "message": "Eliminar título"
+  },
+  "svgo_removeTitle_desc": {
+    "message": "Elimina el elemento <title> del documento."
+  },
+  "svgo_removeUnknownsAndDefaults": {
+    "message": "Eliminar desconocidos y valores predeterminados"
+  },
+  "svgo_removeUnknownsAndDefaults_desc": {
+    "message": "Elimina elementos y atributos desconocidos, así como atributos que están configurados en su valor predeterminado"
+  },
+  "svgo_removeUnusedNS": {
+    "message": "Eliminar namespaces no utilizados"
+  },
+  "svgo_removeUnusedNS_desc": {
+    "message": "Elimina declaraciones de namespaces no utilizados del documento"
+  },
+  "svgo_removeUselessDefs": {
+    "message": "Eliminar defs inútiles"
+  },
+  "svgo_removeUselessDefs_desc": {
+    "message": "Elimina hijos del elemento <defs> que no tienen una ID para referencia."
+  },
+  "svgo_removeUselessStrokeAndFill": {
+    "message": "Eliminar trazos y rellenos inútiles"
+  },
+  "svgo_removeUselessStrokeAndFill_desc": {
+    "message": "Elimina atributos de trazos y rellenos inútiles"
+  },
+  "svgo_removeXMLInstructions": {
+    "message": "Eliminar instrucciones XML"
+  },
+  "svgo_removeXMLInstructions_desc": {
+    "message": "Elimina instrucciones de procesamiento XML"
+  },
+  "svgo_sortAttrs": {
+    "message": "Ordenar atributos"
+  },
+  "svgo_sortAttrs_desc": {
+    "message": "Ordena atributos en todos los elementos en el documento. Esto no reduce el tamaño del SVG, pero mejora la legibilidad y puede mejorar el rendimiento de los algoritmos de compresión"
+  },
+  "svgo_sortDefsChildren": {
+    "message": "Ordenar hijos de defs"
+  },
+  "svgo_sortDefsChildren_desc": {
+    "message": "Ordena todos los hijos en el elemento '<defs>'. Esto no reduce el tamaño del SVG, pero puede mejorar el rendimiento de los algoritmos de compresión"
+  },
+  "svgo_removeViewBox": {
+    "message": "Eliminar viewBox"
+  },
+  "svgo_removeViewBox_desc": {
+    "message": "Elimina el atributo viewBox cuando la altura y el ancho son idénticos"
+  },
+  "svgo_cleanupListOfValues": {
+    "message": "Limpiar lista de valores"
+  },
+  "svgo_cleanupListOfValues_desc": {
+    "message": "Redondea valores numéricos en atributos, como aquellos encontrados en viewBox, enable-background y puntos"
+  },
+  "svgo_convertOneStopGradients": {
+    "message": "Convertir degradados de una parada"
+  },
+  "svgo_convertOneStopGradients_desc": {
+    "message": "Convierte los nodos <linearGradient> y <radialGradient> que son efectivamente un color sólido"
+  },
+  "svgo_convertStyleToAttrs": {
+    "message": "Convertir estilo a atributos"
+  },
+  "svgo_convertStyleToAttrs_desc": {
+    "message": "Convierte atributos de presentación en estilos de elementos al atributo XML equivalente"
+  },
+  "svgo_prefixIds": {
+    "message": "Prefijar IDs"
+  },
+  "svgo_prefixIds_desc": {
+    "message": "Prefija IDs de elementos y nombres de clase con el nombre de archivo proporcionado. Por defecto 'prefix__'"
+  },
+  "svgo_removeDimensions": {
+    "message": "Eliminar dimensiones"
+  },
+  "svgo_removeDimensions_desc": {
+    "message": "Elimina los atributos de ancho y alto del elemento <svg> superior si se especifica, y los reemplaza con el atributo viewBox si falta"
+  },
+  "svgo_removeOffCanvasPaths": {
+    "message": "Eliminar caminos fuera del lienzo"
+  },
+  "svgo_removeOffCanvasPaths_desc": {
+    "message": "Elimina elementos <path> que se dibujan fuera de un viewBox"
+  },
+  "svgo_removeRasterImages": {
+    "message": "Eliminar imágenes raster"
+  },
+  "svgo_removeRasterImages_desc": {
+    "message": "Elimina JPEG, PNG y GIF incrustados del documento"
+  },
+  "svgo_removeScriptElement": {
+    "message": "Eliminar elementos de script"
+  },
+  "svgo_removeScriptElement_desc": {
+    "message": "Elimina elementos <script> del documento"
+  },
+  "svgo_removeStyleElement": {
+    "message": "Eliminar elementos de estilo"
+  },
+  "svgo_removeStyleElement_desc": {
+    "message": "Elimina elementos <style> del documento"
+  },
+  "svgo_removeXMLNS": {
+    "message": "Eliminar XMLNS"
+  },
+  "svgo_removeXMLNS_desc": {
+    "message": "Elimina el atributo xmlns del elemento <svg> superior en el documento"
+  },
+  "svgo_reusePaths": {
+    "message": "Reutilizar caminos"
+  },
+  "svgo_reusePaths_desc": {
+    "message": "Crea una definición para caminos similares y reemplaza los elementos <path> por elementos <use> que referenciarán una sola definición <path>"
+  }
+}

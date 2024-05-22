@@ -5,6 +5,7 @@ import { Fragment, useEffect, useMemo } from 'react'
 import { Button, FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
 import { useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { Card } from './card'
 
@@ -79,7 +80,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
         show={state.processedData.length < filteredResultLength}
       >
         <Button onClick={() => dispatch({ type: 'load-more' })} size="lg" variant="secondary">
-          Load more
+          {loc('main_load_more')}
         </Button>
       </Transition>
 

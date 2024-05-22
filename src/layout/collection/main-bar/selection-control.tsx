@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef } from 'react'
 import { useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const SelectionControl = () => {
   const { dispatch: collectionDispatch, state: collectionState } = useCollection()
@@ -47,7 +48,7 @@ export const SelectionControl = () => {
           className="hidden cursor-pointer text-xs font-medium leading-none md:block"
           htmlFor="select"
         >
-          Select {allItemsAreSelected ? 'none' : 'all'}
+          {loc('main_select')} {allItemsAreSelected ? loc('main_none') : loc('main_all')}
         </label>
       </div>
     </Transition>

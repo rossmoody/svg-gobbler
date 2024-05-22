@@ -1,6 +1,7 @@
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
 import { Button, CollectionPanelButton } from 'src/components'
+import { loc } from 'src/utils/i18n'
 
 import { UploadModal } from '../collection/upload-modal'
 import { CardColorButton } from './card-color-btn'
@@ -28,7 +29,7 @@ export const TopBar = () => {
           <SortMenu />
           <div aria-hidden className="h-6 w-px bg-gray-200 dark:bg-gray-700" />
           <Button onClick={() => setOpen(true)} variant="secondary">
-            Upload
+            {loc('topbar_upload')}
             <PlusIcon className="h-4 w-4" />
           </Button>
         </div>

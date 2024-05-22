@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export const ResetButton = () => {
@@ -30,16 +31,16 @@ export const ResetButton = () => {
   }
 
   const menuItem = [
-    { label: 'Default settings', onClick: resetToDefault },
-    { label: 'SVGO default', onClick: resetToSvgoDefault },
-    { label: 'Deselect all', onClick: resetToEmpty },
+    { label: loc('details_default'), onClick: resetToDefault },
+    { label: loc('details_svgo_default'), onClick: resetToSvgoDefault },
+    { label: loc('details_deselect_all'), onClick: resetToEmpty },
   ]
 
   return (
     <Fragment>
       <Menu>
         <Menu.Button className="flex items-center gap-1">
-          Apply <ChevronDownIcon className="h-4 w-4" />
+          {loc('export_apply')} <ChevronDownIcon className="h-4 w-4" />
         </Menu.Button>
 
         <Transition
@@ -82,7 +83,7 @@ export const ResetButton = () => {
                     })}
                     onClick={setAsDefault}
                   >
-                    Set as default
+                    {loc('details_set_default')}
                   </span>
                 )}
               </Menu.Item>

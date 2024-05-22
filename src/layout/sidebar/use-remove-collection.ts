@@ -3,6 +3,7 @@ import type { Collection, PageData } from 'src/types'
 import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 export function useRemoveCollection() {
@@ -24,7 +25,7 @@ export function useRemoveCollection() {
 
       const collection: Collection = {
         id: nanoid(),
-        name: 'New Collection',
+        name: loc('sidebar_new_collection'),
         origin: '',
       }
 

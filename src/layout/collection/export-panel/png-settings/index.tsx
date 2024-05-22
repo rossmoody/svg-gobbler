@@ -1,5 +1,6 @@
 import { HelpIcon } from 'src/components'
 import { useExport } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 import { imageTooltip } from '../webp-settings'
 
@@ -15,7 +16,7 @@ export const PngSettings = () => {
       <div>
         <div className="group flex items-center gap-1">
           <label className="export-label" htmlFor="size">
-            Size
+            {loc('export_size')}
           </label>
           <HelpIcon content={imageTooltip} />
         </div>

@@ -1,4 +1,5 @@
 import { Tabs } from 'src/components'
+import { loc } from 'src/utils/i18n'
 
 import { DataURI } from './preview-data-uri'
 import { PreviewReact } from './preview-react'
@@ -12,9 +13,9 @@ export const PreviewSidebar = () => {
     <aside className="relative z-10 flex flex-col" ref={ref} style={{ width }}>
       <Tabs.Group>
         <Tabs.List className="shrink-0 overflow-x-auto whitespace-nowrap">
-          <Tabs.Tab>Preview</Tabs.Tab>
-          <Tabs.Tab>React</Tabs.Tab>
-          <Tabs.Tab>Data URI</Tabs.Tab>
+          <Tabs.Tab>{loc('details_preview')}</Tabs.Tab>
+          <Tabs.Tab>{loc('details_react')}</Tabs.Tab>
+          <Tabs.Tab>{loc('details_data_uri')}</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panels className="flex-grow overflow-auto">
           <Tabs.Panel className="h-full">
