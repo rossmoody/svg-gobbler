@@ -9,6 +9,13 @@ import Chrome from './src/utils/chrome-utils'
  */
 class Background {
   /**
+   * Sets the uninstall URL for the extension.
+   */
+  static handleUninstall() {
+    chrome.runtime.setUninstallURL('https://svggobbler.com/uninstall')
+  }
+
+  /**
    * Initializes the extension.
    */
   static init() {
@@ -16,6 +23,7 @@ class Background {
     Background.launchOnboardingExperience()
     Background.launchExtensionFromOnboarding()
     Background.launchSvgGobbler()
+    Background.handleUninstall()
   }
 
   /**
