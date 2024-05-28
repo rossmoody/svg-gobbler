@@ -1,5 +1,5 @@
 import { logger } from 'src/utils/logger'
-import { type DocumentData, findSvg } from 'svg-gobbler-scripts'
+import { DocumentData, findSvg } from 'svg-gobbler-scripts'
 
 import Chrome from './src/utils/chrome-utils'
 
@@ -9,6 +9,13 @@ import Chrome from './src/utils/chrome-utils'
  */
 class Background {
   /**
+   * Sets the uninstall URL for the extension.
+   */
+  static handleUninstall() {
+    chrome.runtime.setUninstallURL('https://svggobbler.com/uninstall')
+  }
+
+  /**
    * Initializes the extension.
    */
   static init() {
@@ -16,6 +23,7 @@ class Background {
     Background.launchOnboardingExperience()
     Background.launchExtensionFromOnboarding()
     Background.launchSvgGobbler()
+    Background.handleUninstall()
   }
 
   /**
@@ -67,7 +75,7 @@ class Background {
       // Check if the active tab is a system page
       if (!activeTab.url?.includes('chrome://')) {
         data = await Chrome.executeScript(activeTab.id!, findSvg)
-        logger.info(data.data)
+        logger.info('All Found SVGs: ', data.data)
       }
 
       // Add a listener
