@@ -1,5 +1,5 @@
 import { logger } from 'src/utils/logger'
-import { type DocumentData, findSvg } from 'svg-gobbler-scripts'
+import { DocumentData, findSvg } from 'svg-gobbler-scripts'
 
 import Chrome from './src/utils/chrome-utils'
 
@@ -67,7 +67,7 @@ class Background {
       // Check if the active tab is a system page
       if (!activeTab.url?.includes('chrome://')) {
         data = await Chrome.executeScript(activeTab.id!, findSvg)
-        logger.info(data.data)
+        logger.info('All Found SVGs: ', data.data)
       }
 
       // Add a listener
