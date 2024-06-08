@@ -9,10 +9,12 @@
     "build": "tsc && vite build",
     "clean": "rm -rf dist",
     "dev": "vite",
-    "release": "yarn build && npx ts-node --esm src/utils/zip-release.ts"
+    "release": "pnpm build && npx ts-node --esm src/utils/zip-release.ts"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.6",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/view": "^6.27.0",
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.0.18",
