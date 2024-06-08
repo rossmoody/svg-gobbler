@@ -77,12 +77,12 @@
   border: 0;
   cursor: pointer;
   padding: 0;
-  @apply h-8 w-8;
+  @apply h-6 w-6;
 }
 
 .input-color::-webkit-color-swatch {
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 0;
   @apply rounded-lg shadow-md;
 }
@@ -90,7 +90,7 @@
 .input-color::-webkit-color-swatch-wrapper {
   border: 1px solid rgba(209, 209, 209, 0.6);
   padding: 0;
-  @apply rounded-lg;
+  @apply rounded-md;
 }
 
 .editor-btn {

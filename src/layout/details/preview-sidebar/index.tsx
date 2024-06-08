@@ -10,15 +10,15 @@ export const PreviewSidebar = () => {
   const { ref, width } = usePreviewResize()
 
   return (
-    <aside className="relative z-10 flex flex-col" ref={ref} style={{ width }}>
+    <aside className="relative z-10 flex h-full flex-col" ref={ref} style={{ width }}>
       <Tabs.Group>
-        <Tabs.List className="shrink-0 overflow-x-auto whitespace-nowrap">
+        <Tabs.List className="h-10 whitespace-nowrap">
           <Tabs.Tab>{loc('details_preview')}</Tabs.Tab>
           <Tabs.Tab>{loc('details_react')}</Tabs.Tab>
           <Tabs.Tab>{loc('details_data_uri')}</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panels className="flex-grow overflow-auto">
-          <Tabs.Panel className="h-full">
+          <Tabs.Panel className="flex h-full flex-col">
             <PreviewSvg />
           </Tabs.Panel>
           <Tabs.Panel className="h-full">
