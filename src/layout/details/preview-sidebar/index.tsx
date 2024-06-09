@@ -12,7 +12,7 @@ export const PreviewSidebar = () => {
   return (
     <aside className="relative z-10 flex h-full flex-col" ref={ref} style={{ width }}>
       <Tabs.Group>
-        <Tabs.List className="h-10 whitespace-nowrap">
+        <Tabs.List className="whitespace-nowrap">
           <Tabs.Tab>{loc('details_preview')}</Tabs.Tab>
           <Tabs.Tab>{loc('details_react')}</Tabs.Tab>
           <Tabs.Tab>{loc('details_data_uri')}</Tabs.Tab>

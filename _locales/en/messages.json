@@ -754,5 +754,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "Creates a definition for similar paths, and swaps the <path> elements to <use> elements that will reference a single <path> definition"
+  },
+  "zoom_in": {
+    "message": "Zoom in"
+  },
+  "zoom_out": {
+    "message": "Zoom out"
   }
 }

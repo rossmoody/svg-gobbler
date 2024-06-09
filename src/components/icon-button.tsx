@@ -19,7 +19,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props,
     xs: 'px-1 py-1',
   }
 
-  const combinedClassName = `${className} ${btnBaseStyles} ${btnVariantStyles[variant]} ${sizeStyles[size]}`
+  const combinedClassName = `${btnBaseStyles} ${btnVariantStyles[variant]} ${sizeStyles[size]} ${className}`
 
   return <button ref={ref} {...rest} className={combinedClassName} type={type} />
 })

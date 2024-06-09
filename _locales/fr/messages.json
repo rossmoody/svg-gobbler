@@ -754,5 +754,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "Crée une définition pour des chemins similaires et remplace les éléments <path> par des éléments <use> qui référenceront une seule définition <path>"
+  },
+  "zoom_in": {
+    "message": "Zoom avant"
+  },
+  "zoom_out": {
+    "message": "Zoom arrière"
   }
 }
