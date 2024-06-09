@@ -16,11 +16,11 @@ import { logger } from 'src/utils/logger'
 /**
  * This is really collection data with a promise we await for the svg data.
  */
-type LoaderData = CollectionData & {
+type LoaderData = {
   data: Promise<Svg[]>
   plugins: SvgoPlugin[]
   user: UserState
-}
+} & CollectionData
 
 export const CollectionRoute = () => {
   const { collectionId, data, plugins, user, view } = useLoaderData() as LoaderData
