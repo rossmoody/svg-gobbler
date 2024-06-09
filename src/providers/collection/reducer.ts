@@ -1,7 +1,7 @@
 import type { CollectionData } from 'src/types'
 import type { Svg } from 'svg-gobbler-scripts'
 
-export type CollectionState = CollectionData & {
+export type CollectionState = {
   /**
    * Pagination increment count for loading more items.
    */
@@ -15,7 +15,7 @@ export type CollectionState = CollectionData & {
    * The selected SVGs in the collection.
    */
   selected: Svg[]
-}
+} & CollectionData
 
 export type CollectionAction =
   | { payload: CollectionState['view']; type: 'set-view' }
@@ -67,7 +67,7 @@ export const collectionReducer = (
         pageCount: state.pageCount + 1,
         processedData: [
           ...state.processedData,
-          ...state.data.slice(state.pageCount * 200, (state.pageCount + 1) * 200),
+          ...state.data.slice(state.pageCount * 300, (state.pageCount + 1) * 300),
         ],
       }
     }
@@ -101,7 +101,7 @@ export const collectionReducer = (
     }
 
     case 'process-data': {
-      let processedData = [...state.data].slice(0, 200)
+      let processedData = [...state.data].slice(0, 300)
 
       // Process filters
       Object.entries(state.view.filters).forEach(([filter, value]) => {
