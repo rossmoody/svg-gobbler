@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "Sort"
   },
+  "topbar_sort_last_asc": {
+    "message": "Last edited: most recent"
+  },
+  "topbar_sort_last_desc": {
+    "message": "Last edited: oldest"
+  },
   "topbar_color_tooltip": {
     "message": "Color mode"
   },

@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "Сортировать"
   },
+  "topbar_sort_last_asc": {
+    "message": "Последнее редактирование: сначала новые"
+  },
+  "topbar_sort_last_desc": {
+    "message": "Последнее редактирование: сначала старые"
+  },
   "topbar_color_tooltip": {
     "message": "Режим цвета"
   },

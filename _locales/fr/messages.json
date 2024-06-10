@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "Trier"
   },
+  "topbar_sort_last_asc": {
+    "message": "Dernière modification : la plus récente"
+  },
+  "topbar_sort_last_desc": {
+    "message": "Dernière modification : la plus ancienne"
+  },
   "topbar_color_tooltip": {
     "message": "Mode couleur"
   },

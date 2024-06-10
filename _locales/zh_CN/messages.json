@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "排序"
   },
+  "topbar_sort_last_asc": {
+    "message": "最后编辑: 最新"
+  },
+  "topbar_sort_last_desc": {
+    "message": "最后编辑: 最旧"
+  },
   "topbar_color_tooltip": {
     "message": "颜色模式"
   },
