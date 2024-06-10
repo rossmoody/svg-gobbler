@@ -4,6 +4,7 @@ import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 import { initUserState } from 'src/providers'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { SvgUtils } from 'src/utils/svg-utils'
 import { svgFactory } from 'svg-gobbler-scripts'
 
 /**
@@ -33,26 +34,23 @@ export async function rootLoader() {
           throw new Error('Browser system page, send to first collection')
         }
 
-        // Process the strings as page data with ids
+        // Create classes and process the raw svg elements
+        const svgClasses = await svgFactory.process(data)
+
+        // Create storage svgs from the svg classes
+        const storageSvgs = SvgUtils.createStorageSvgs(svgClasses)
+
+        // Create the page data object
         const pageData: PageData = {
-          data: data.data,
+          data: storageSvgs,
           host: data.host,
           origin: data.origin,
         }
 
-        // Create classes and process the raw svg elements
-        const svgClasses = await svgFactory.process(pageData)
-
-        // Update the page data with the processed strings
-        pageData.data = svgClasses.map((item) => ({
-          id: item.id,
-          svg: item.originalString,
-        }))
-
         const collection: Collection = {
           id: nanoid(),
-          name: data.host,
-          origin: data.origin,
+          name: pageData.host,
+          origin: pageData.origin,
         }
 
         await StorageUtils.setPageData(collection.id, pageData)

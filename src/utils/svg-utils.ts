@@ -12,6 +12,7 @@ export class SvgUtils {
   static createStorageSvg(svgString: string): StorageSvg {
     return {
       id: nanoid(),
+      lastEdited: new Date().toISOString(),
       svg: svgString,
     }
   }
@@ -22,6 +23,7 @@ export class SvgUtils {
   static createStorageSvgs(svgArray: Svg[]): StorageSvg[] {
     return svgArray.map((svg) => ({
       id: svg.id,
+      lastEdited: new Date().toISOString(),
       svg: svg.originalString,
     }))
   }

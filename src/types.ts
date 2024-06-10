@@ -13,13 +13,18 @@ export type BackgroundMessage = {
 }
 
 /**
- * The shape of the svg data stored in chrome storage as part of page data.
+ * The shape of the svg data stored in chrome storage as part of page data. This data
+ * gets processed in and out of SVGTypes.
  */
 export type StorageSvg = {
   /**
    * Unique ID
    */
   id: string
+  /**
+   * Last edited data
+   */
+  lastEdited: string
   /**
    * The svg string of the item.
    */
@@ -29,7 +34,9 @@ export type StorageSvg = {
 /**
  * The model for data stored and gathered from the document
  */
-export type PageData = DocumentData
+export type PageData = {
+  data: StorageSvg[]
+} & DocumentData
 
 /**
  * The model of a collection that is stored in local storage.
@@ -88,7 +95,7 @@ export type CollectionData = {
     /**
      * The sort order of the collection
      */
-    sort: 'file-asc' | 'file-desc' | 'none'
+    sort: 'file-asc' | 'file-desc' | 'last-edit-asc' | 'last-edit-desc' | 'none'
   }
 }
 

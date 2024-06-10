@@ -11,7 +11,6 @@ import { Mainbar } from 'src/layout/collection/main-bar'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { TopBar } from 'src/layout/top-bar'
 import { UserState, useCollection, useExport, useUser } from 'src/providers'
-import { logger } from 'src/utils/logger'
 
 /**
  * This is really collection data with a promise we await for the svg data.
@@ -33,7 +32,6 @@ export const CollectionRoute = () => {
     collectionDispatch({ payload: view, type: 'set-view' })
     exportDispatch({ payload: plugins, type: 'set-svgo-plugins' })
     userDispatch({ payload: user, type: 'set-user' })
-    logger.info('Collection Context', { collectionId, plugins, user, view })
 
     return () => collectionDispatch({ type: 'reset' })
   }, [collectionId, collectionDispatch, view, exportDispatch, plugins, user, userDispatch])
