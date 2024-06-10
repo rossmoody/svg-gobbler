@@ -18,10 +18,6 @@ export async function collectionLoader({ params }: LoaderFunctionArgs) {
   plugins = _.assign([], defaultSvgoPlugins, plugins)
   user = _.assign({}, initUserState, user)
 
-  // Set a lastEdited timestamp if it doesn't exist in pageData and uplod to storage
-  pageData.data = pageData.data.map((svg) => _.defaults(svg, { lastEdited: Date.now() }))
-  await StorageUtils.setPageData(id, pageData)
-
   logger.info('Collection Loader', { id, pageData, plugins, user, view })
 
   return defer({

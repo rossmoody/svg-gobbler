@@ -28,9 +28,7 @@ export const Header = () => {
     const pageData: PageData = {
       ...collectionData,
       data: collectionData.data.map((item) =>
-        item.id === state.id
-          ? { id: item.id, lastEdited: new Date().toISOString(), svg: state.currentString }
-          : item,
+        item.id === state.id ? { id: item.id, svg: state.currentString } : item,
       ),
     }
 

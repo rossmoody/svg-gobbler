@@ -1,4 +1,4 @@
-import type { CollectionData, PageData } from 'src/types'
+import type { CollectionData } from 'src/types'
 import type { Svg } from 'svg-gobbler-scripts'
 
 export type CollectionState = {
@@ -24,8 +24,8 @@ export type CollectionAction =
   | { payload: Svg[]; type: 'set-data' }
   | { payload: string; type: 'set-canvas-color' }
   | { payload: string; type: 'set-collection-id' }
-  | { payload?: PageData; type: 'process-data' }
   | { type: 'load-more' }
+  | { type: 'process-data' }
   | { type: 'reset' }
   | { type: 'select-all' }
   | { type: 'unselect-all' }
@@ -130,38 +130,6 @@ export const collectionReducer = (
             const aSize = new Blob([a.originalString]).size
             const bSize = new Blob([b.originalString]).size
             return bSize - aSize
-          })
-          break
-        }
-
-        case 'last-edit-desc': {
-          const storageSvgs = action.payload?.data
-          if (!storageSvgs) break
-
-          processedData.sort((a, b) => {
-            const aLastEdited = new Date(
-              storageSvgs.find((svg) => svg.id === a.id)?.lastEdited || 0,
-            )
-            const bLastEdited = new Date(
-              storageSvgs.find((svg) => svg.id === b.id)?.lastEdited || 0,
-            )
-            return aLastEdited.getTime() - bLastEdited.getTime()
-          })
-          break
-        }
-
-        case 'last-edit-asc': {
-          const storageSvgs = action.payload?.data
-          if (!storageSvgs) break
-
-          processedData.sort((a, b) => {
-            const aLastEdited = new Date(
-              storageSvgs.find((svg) => svg.id === a.id)?.lastEdited || 0,
-            )
-            const bLastEdited = new Date(
-              storageSvgs.find((svg) => svg.id === b.id)?.lastEdited || 0,
-            )
-            return bLastEdited.getTime() - aLastEdited.getTime()
           })
           break
         }

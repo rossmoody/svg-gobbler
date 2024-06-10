@@ -16,7 +16,6 @@ export const emptyPageData = (): PageData => ({
 
 export const dummyStorageSvg = (): StorageSvg => ({
   id: nanoid(),
-  lastEdited: new Date().toISOString(),
   svg: `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" 
   data-view-component="true" class="octicon octicon-home"><path d="M6.906.664a1.749 1.749 0 0 1 2.187 
   0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 

@@ -22,10 +22,6 @@ export type StorageSvg = {
    */
   id: string
   /**
-   * Last edited data
-   */
-  lastEdited: string
-  /**
    * The svg string of the item.
    */
   svg: string

@@ -16,8 +16,6 @@ const sortOptions: SortOption[] = [
   { label: loc('topbar_sort_none'), value: 'none' },
   { label: loc('topbar_sort_size_asc'), value: 'file-asc' },
   { label: loc('topbar_sort_size_desc'), value: 'file-desc' },
-  { label: loc('topbar_sort_last_asc'), value: 'last-edit-asc' },
-  { label: loc('topbar_sort_last_desc'), value: 'last-edit-desc' },
 ]
 
 export const SortMenu = () => {
@@ -26,10 +24,8 @@ export const SortMenu = () => {
   function handleSortChange(value: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const sort = value.currentTarget.dataset.value as SortOption['value']
     StorageUtils.setStorageData('view', { ...state.view, sort })
-    StorageUtils.getPageData(state.collectionId).then((storageSvgs) => {
-      dispatch({ payload: { ...state.view, sort }, type: 'set-view' })
-      dispatch({ payload: storageSvgs, type: 'process-data' })
-    })
+    dispatch({ payload: { ...state.view, sort }, type: 'set-view' })
+    dispatch({ type: 'process-data' })
   }
 
   return (
