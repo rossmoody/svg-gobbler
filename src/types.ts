@@ -91,7 +91,7 @@ export type CollectionData = {
     /**
      * The sort order of the collection
      */
-    sort: 'file-asc' | 'file-desc' | 'last-edit-asc' | 'last-edit-desc' | 'none'
+    sort: 'file-asc' | 'file-desc' | 'none'
   }
 }
 

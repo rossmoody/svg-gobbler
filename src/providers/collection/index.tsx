@@ -1,11 +1,8 @@
 import { Dispatch, PropsWithChildren, createContext, useContext, useMemo, useReducer } from 'react'
 
-import {
-  type CollectionAction,
-  type CollectionState,
-  collectionReducer,
-  initCollectionState,
-} from './reducer'
+import type { CollectionAction, CollectionState } from './reducer'
+
+import { collectionReducer, initCollectionState } from './reducer'
 
 export type CollectionContextProps = {
   dispatch: Dispatch<CollectionAction>
