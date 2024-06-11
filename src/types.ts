@@ -76,6 +76,10 @@ export type CollectionData = {
      */
     canvas: string
     /**
+     * The color mode of the app
+     */
+    colorMode: 'dark' | 'light'
+    /**
      * The filters applied to the collection
      */
     filters: {

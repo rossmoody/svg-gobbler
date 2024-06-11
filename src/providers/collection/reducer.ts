@@ -38,6 +38,7 @@ export const initCollectionState: CollectionState = {
   selected: [],
   view: {
     canvas: '#ffffff',
+    colorMode: 'light',
     filters: {
       'hide-cors': false,
     },

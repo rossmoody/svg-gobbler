@@ -32,6 +32,7 @@ export const CollectionRoute = () => {
     collectionDispatch({ payload: view, type: 'set-view' })
     exportDispatch({ payload: plugins, type: 'set-svgo-plugins' })
     userDispatch({ payload: user, type: 'set-user' })
+    collectionDispatch({ type: 'process-data' })
   }, [collectionId, collectionDispatch, view, exportDispatch, plugins, user, userDispatch])
 
   return (
