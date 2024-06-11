@@ -69,33 +69,44 @@
   line-height: 24px;
 }
 
-.input-color {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background: none;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-  @apply h-8 w-8;
-}
-
-.input-color::-webkit-color-swatch {
-  border: none;
-  border-radius: 10px;
-  padding: 0;
-  @apply rounded-lg shadow-md;
-}
-
-.input-color::-webkit-color-swatch-wrapper {
-  border: 1px solid rgba(209, 209, 209, 0.6);
-  padding: 0;
-  @apply rounded-lg;
-}
-
 .editor-btn {
   @apply focus flex items-center gap-1 rounded-lg bg-gray-600/30 px-2 py-1 font-semibold 
   text-white transition-all duration-200 ease-in-out hover:bg-gray-600/60;
+}
+
+#preview-svg svg:not(:hover) {
+  outline-style: dashed;
+  @apply outline-gray-300;
+}
+
+#preview-svg svg {
+  margin: auto;
+}
+
+.transparent {
+  background-color: white;
+  background-image: linear-gradient(45deg, #ebebeb 25%, transparent 25%),
+    linear-gradient(135deg, #ebebeb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ebebeb 75%),
+    linear-gradient(135deg, transparent 75%, #ebebeb 75%);
+  background-size: 25px 25px; /* Must be a square */
+  background-position:
+    0 0,
+    12.5px 0,
+    12.5px -12.5px,
+    0px 12.5px; /* Must be half of one side of the square */
+}
+
+.white {
+  background: white;
+}
+
+.black {
+  @apply bg-slate-900;
+}
+
+.gray {
+  @apply bg-gray-200;
 }
 
 /* Layout */
@@ -125,8 +136,4 @@
   bg-transparent p-2 text-sm text-gray-900 placeholder:text-gray-500 focus:border-red-500 
   focus:ring-red-500 dark:border-gray-600 dark:bg-white/5 dark:text-white
   dark:placeholder-gray-400 dark:ring-white/10 dark:focus:border-red-500 dark:focus:ring-red-500;
-}
-
-.context-content {
-  @apply text animate-slide-up-fade rounded-lg bg-white px-1.5 py-1 shadow-md dark:bg-gray-800;
 }

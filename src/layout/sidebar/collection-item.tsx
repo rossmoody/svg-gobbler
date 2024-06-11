@@ -45,7 +45,7 @@ export const CollectionItem = ({ collection }: Props) => {
         {collection.name}
       </span>
       <button
-        className="z-10 flex h-5 w-5 items-center justify-center rounded-md opacity-0 transition-opacity duration-300 hover:bg-gray-200 group-hover:opacity-100 dark:hover:bg-gray-900"
+        className="z-10 flex h-5 w-5 items-center justify-center rounded-md opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:bg-gray-200 dark:hover:bg-gray-900"
         onClick={(event) => {
           event.preventDefault()
           handleRemoveCollection(collection)

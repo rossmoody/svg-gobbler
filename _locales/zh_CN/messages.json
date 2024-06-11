@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "排序"
   },
+  "topbar_sort_last_asc": {
+    "message": "最后编辑: 最新"
+  },
+  "topbar_sort_last_desc": {
+    "message": "最后编辑: 最旧"
+  },
   "topbar_color_tooltip": {
     "message": "颜色模式"
   },
@@ -754,5 +760,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "为相似路径创建定义，并将 <path> 元素替换为 <use> 元素，这些元素将引用单个 <path> 定义"
+  },
+  "zoom_in": {
+    "message": "放大"
+  },
+  "zoom_out": {
+    "message": "缩小"
   }
 }

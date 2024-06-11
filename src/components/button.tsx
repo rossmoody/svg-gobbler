@@ -18,10 +18,10 @@ export const btnSizeStyles = {
   xs: 'px-2 py-1 text-xs',
 }
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = {
   size?: keyof typeof btnSizeStyles
   variant?: keyof typeof btnVariantStyles
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 /**
  * General Button component.

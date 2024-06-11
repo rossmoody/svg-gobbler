@@ -13,7 +13,8 @@ export type BackgroundMessage = {
 }
 
 /**
- * The shape of the svg data stored in chrome storage as part of page data.
+ * The shape of the svg data stored in chrome storage as part of page data. This data
+ * gets processed in and out of SVGTypes.
  */
 export type StorageSvg = {
   /**
@@ -29,7 +30,9 @@ export type StorageSvg = {
 /**
  * The model for data stored and gathered from the document
  */
-export type PageData = DocumentData
+export type PageData = {
+  data: StorageSvg[]
+} & DocumentData
 
 /**
  * The model of a collection that is stored in local storage.
@@ -72,6 +75,10 @@ export type CollectionData = {
      * The card canvas color.
      */
     canvas: string
+    /**
+     * The color mode of the app
+     */
+    colorMode: 'dark' | 'light'
     /**
      * The filters applied to the collection
      */

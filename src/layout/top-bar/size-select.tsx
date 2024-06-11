@@ -11,6 +11,7 @@ export const sizes = [
   { label: '64px', value: 64 },
   { label: '96px', value: 96 },
   { label: '128px', value: 128 },
+  { label: '192px', value: 192 },
   { label: '256px', value: 256 },
 ] as const
 

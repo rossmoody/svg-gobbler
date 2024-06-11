@@ -1,8 +1,11 @@
 import type { Config, State } from '@svgr/core'
 import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 import type { DetailsParams } from 'src/types'
+import type { Config as SvgoConfig } from 'svgo'
 
-import { type Config as SvgoConfig, optimize } from 'svgo'
+import { optimize } from 'svgo'
+
+export type PreviewBackgroundClass = 'black' | 'gray' | 'transparent' | 'white'
 
 /**
  * This is similar in many ways to ExportState. The primary reason we don't colocate them
@@ -14,17 +17,18 @@ export type DetailsState = {
   currentString: string
   export: {
     filename: string
-    svgoConfig: SvgoConfig & {
+    svgoConfig: {
       js2svg: SvgoConfig['js2svg']
       multipass: boolean
       plugins: SvgoPlugin[]
-    }
+    } & SvgoConfig
   }
   id: string // The id of the svg
   originalString: string
   preview: {
     svg: {
-      background: string
+      background: PreviewBackgroundClass
+      scale: number
     }
     svgr: {
       config: Config
@@ -38,12 +42,13 @@ export type DetailsAction =
   | { payload: { key: string; value: boolean | string }; type: 'set-svgr-config-value' }
   | { payload: Config; type: 'set-svgr-config' }
   | { payload: DetailsParams; type: 'init' }
+  | { payload: PreviewBackgroundClass; type: 'set-preview-background' }
   | { payload: SvgoPlugin; type: 'add-plugin' }
   | { payload: SvgoPlugin; type: 'remove-plugin' }
   | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
   | { payload: boolean; type: 'set-prettify' }
   | { payload: number; type: 'set-float-precision' }
-  | { payload: string; type: 'set-preview-background' }
+  | { payload: string; type: 'set-preview-scale' }
   | { payload: string; type: 'set-svgr-result' }
   | { payload: string; type: 'set-svgr-state-name' }
   | { payload: string; type: 'update-current-string' }
@@ -72,7 +77,8 @@ export const initDetailsState: DetailsState = {
   originalString: '',
   preview: {
     svg: {
-      background: '#FFFFFF',
+      background: 'transparent',
+      scale: 1,
     },
     svgr: {
       config: {
@@ -100,6 +106,19 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
+    case 'set-preview-scale': {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          svg: {
+            ...state.preview.svg,
+            scale: parseFloat(action.payload),
+          },
+        },
+      }
+    }
+
     case 'set-preview-background': {
       return {
         ...state,

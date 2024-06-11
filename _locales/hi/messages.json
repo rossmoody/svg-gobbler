@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "सॉर्ट करें"
   },
+  "topbar_sort_last_asc": {
+    "message": "आखिरी संपादित: हाल का"
+  },
+  "topbar_sort_last_desc": {
+    "message": "आखिरी संपादित: पुराना"
+  },
   "topbar_color_tooltip": {
     "message": "रंग मोड"
   },
@@ -754,5 +760,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "इसी तरह के पथों के लिए एक परिभाषा बनाता है, और <path> तत्वों को <use> तत्वों में बदलता है जो एक ही <path> परिभाषा को संदर्भित करेंगे"
+  },
+  "zoom_in": {
+    "message": "ज़ूम इन"
+  },
+  "zoom_out": {
+    "message": "ज़ूम आउट"
   }
 }

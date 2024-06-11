@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "Sort"
   },
+  "topbar_sort_last_asc": {
+    "message": "Last edited: most recent"
+  },
+  "topbar_sort_last_desc": {
+    "message": "Last edited: oldest"
+  },
   "topbar_color_tooltip": {
     "message": "Color mode"
   },
@@ -754,5 +760,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "Creates a definition for similar paths, and swaps the <path> elements to <use> elements that will reference a single <path> definition"
+  },
+  "zoom_in": {
+    "message": "Zoom in"
+  },
+  "zoom_out": {
+    "message": "Zoom out"
   }
 }

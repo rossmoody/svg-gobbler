@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { SvgUtils } from 'src/utils/svg-utils'
 
 export const useCreateCollection = (files: File[]) => {
   const navigate = useNavigate()
@@ -16,10 +17,7 @@ export const useCreateCollection = (files: File[]) => {
     const name = formData.get('name') as string
     const id = nanoid()
     const svgFileData = await FormUtils.handleUpload(files)
-    const svgStorageData: StorageSvg[] = svgFileData.map((svg) => ({
-      id: nanoid(),
-      svg,
-    }))
+    const svgStorageData: StorageSvg[] = svgFileData.map(SvgUtils.createStorageSvg)
 
     const pageData: PageData = {
       data: svgStorageData,

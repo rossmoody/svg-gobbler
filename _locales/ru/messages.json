@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "Сортировать"
   },
+  "topbar_sort_last_asc": {
+    "message": "Последнее редактирование: сначала новые"
+  },
+  "topbar_sort_last_desc": {
+    "message": "Последнее редактирование: сначала старые"
+  },
   "topbar_color_tooltip": {
     "message": "Режим цвета"
   },
@@ -754,5 +760,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "Создает определение для похожих путей и заменяет элементы <path> на элементы <use>, которые будут ссылаться на одно определение <path>"
+  },
+  "zoom_in": {
+    "message": "Увеличить"
+  },
+  "zoom_out": {
+    "message": "Уменьшить"
   }
 }

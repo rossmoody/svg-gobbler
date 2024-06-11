@@ -401,6 +401,12 @@
   "topbar_sort": {
     "message": "Ordenar"
   },
+  "topbar_sort_last_asc": {
+    "message": "Última edición: más reciente"
+  },
+  "topbar_sort_last_desc": {
+    "message": "Última edición: más antigua"
+  },
   "topbar_color_tooltip": {
     "message": "Modo de color"
   },
@@ -754,5 +760,11 @@
   },
   "svgo_reusePaths_desc": {
     "message": "Crea una definición para caminos similares y reemplaza los elementos <path> por elementos <use> que referenciarán una sola definición <path>"
+  },
+  "zoom_in": {
+    "message": "Acercar"
+  },
+  "zoom_out": {
+    "message": "Alejar"
   }
 }
