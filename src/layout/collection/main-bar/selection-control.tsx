@@ -44,10 +44,7 @@ export const SelectionControl = () => {
           ref={checkboxRef}
           type="checkbox"
         />
-        <label
-          className="hidden cursor-pointer text-xs font-medium leading-none md:block"
-          htmlFor="select"
-        >
+        <label className="cursor-pointer text-xs font-medium leading-none" htmlFor="select">
           {loc('main_select')} {allItemsAreSelected ? loc('main_none') : loc('main_all')}
         </label>
       </div>

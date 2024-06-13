@@ -117,7 +117,6 @@ class Background {
           '64': 'assets/prod/64.png',
           '128': 'assets/prod/128.png',
           '256': 'assets/prod/256.png',
-          '300': 'assets/prod/300.png',
         },
       })
     }

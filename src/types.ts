@@ -1,4 +1,12 @@
-import type { DocumentData, GElement, Image, Inline, Svg, SvgSymbol } from 'svg-gobbler-scripts'
+import type {
+  DocumentData,
+  GElement,
+  Image,
+  Inline,
+  StorageSvg,
+  Svg,
+  SvgSymbol,
+} from 'svg-gobbler-scripts'
 
 import { type UserState } from './providers'
 
@@ -10,21 +18,6 @@ export type BackgroundMessage = {
    * The data gathered from the active tab
    */
   data: DocumentData
-}
-
-/**
- * The shape of the svg data stored in chrome storage as part of page data. This data
- * gets processed in and out of SVGTypes.
- */
-export type StorageSvg = {
-  /**
-   * Unique ID
-   */
-  id: string
-  /**
-   * The svg string of the item.
-   */
-  svg: string
 }
 
 /**
@@ -95,7 +88,7 @@ export type CollectionData = {
     /**
      * The sort order of the collection
      */
-    sort: 'file-asc' | 'file-desc' | 'none'
+    sort: 'file-asc' | 'file-desc' | 'last-asc' | 'last-desc' | 'none'
   }
 }
 
