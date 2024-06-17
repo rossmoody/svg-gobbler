@@ -402,7 +402,7 @@
     "message": "Sort"
   },
   "topbar_sort_last_asc": {
-    "message": "Last edited: most recent"
+    "message": "Last edited: recent"
   },
   "topbar_sort_last_desc": {
     "message": "Last edited: oldest"

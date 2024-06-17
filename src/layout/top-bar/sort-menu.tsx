@@ -16,6 +16,8 @@ const sortOptions: SortOption[] = [
   { label: loc('topbar_sort_none'), value: 'none' },
   { label: loc('topbar_sort_size_asc'), value: 'file-asc' },
   { label: loc('topbar_sort_size_desc'), value: 'file-desc' },
+  { label: loc('topbar_sort_last_asc'), value: 'last-asc' },
+  { label: loc('topbar_sort_last_desc'), value: 'last-desc' },
 ]
 
 export const SortMenu = () => {

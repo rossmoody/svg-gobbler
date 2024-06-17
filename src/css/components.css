@@ -1,5 +1,10 @@
 /* Components */
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .label {
   @apply mb-1 block text-sm font-medium text-gray-900 dark:text-white;
 }

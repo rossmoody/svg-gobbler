@@ -42,6 +42,7 @@ export const ExportPanel = () => {
         className={clsx(
           'surface h-[calc(100dvh-theme(space.16))] shrink-0 overflow-y-auto border-l',
           'transition-width border-gray-200 duration-500 ease-in dark:border-gray-800',
+          'w-80',
         )}
       >
         <div className="flex h-full flex-col px-3 pt-2">

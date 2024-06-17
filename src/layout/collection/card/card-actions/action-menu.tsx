@@ -26,10 +26,10 @@ export const CardActionMenu = ({ data }: CardData) => {
       )}
     >
       <Menu as="div" className="relative">
-        <Menu.Button>
+        <Menu.Button as="div">
           <label className="flex cursor-pointer items-center justify-center rounded-lg p-2 group-hover/select:bg-gray-100/70 group-hover/select:dark:bg-gray-800">
-            <IconButton size="xs" variant="secondary">
-              <ChevronDownIcon aria-hidden="true" className="h-4 w-4" />
+            <IconButton className="rounded-md" size="xs" variant="secondary">
+              <ChevronDownIcon aria-hidden="true" className="h-3 w-3" />
             </IconButton>
           </label>
         </Menu.Button>
