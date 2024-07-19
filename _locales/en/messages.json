@@ -36,10 +36,10 @@
     "message": "Try changing your filter, search, or view settings to display SVGs"
   },
   "review_title": {
-    "message": "Finding SVG Gobbler useful?"
+    "message": "Please leave a review"
   },
   "review_desc": {
-    "message": "Please consider leaving a review to help others discover it."
+    "message": "SVG Gobbler is free and open-source. Help others discover it."
   },
   "review_primary_action": {
     "message": "Review"
