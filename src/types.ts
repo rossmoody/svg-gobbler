@@ -32,6 +32,10 @@ export type PageData = {
  */
 export type Collection = {
   /**
+   * The emoji used to represent the collection in the sidebar.
+   */
+  emoji?: string
+  /**
    * The id of the collection. Used to identify the collection in local storage
    * and also as the id for routing to a given collection.
    */

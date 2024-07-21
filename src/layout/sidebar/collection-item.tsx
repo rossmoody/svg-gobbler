@@ -2,27 +2,22 @@ import type { Collection } from 'src/types'
 
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { useMemo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 
+import { CollectionItemIcon } from './collection-item-icon'
 import { useRemoveCollection } from './use-remove-collection'
 
-type Props = {
+export type CollectionItemProps = {
   /**
    * The collection from which to render the item
    */
   collection: Collection
 }
 
-export const CollectionItem = ({ collection }: Props) => {
+export const CollectionItem = ({ collection }: CollectionItemProps) => {
   const { dispatch: sidebarDispatch } = useDashboard()
   const handleRemoveCollection = useRemoveCollection()
-
-  const faviconUrl = useMemo(() => {
-    if (!collection.origin) return ''
-    return `https://s2.googleusercontent.com/s2/favicons?domain=${collection.origin}`
-  }, [collection.origin])
 
   function onClose() {
     sidebarDispatch({ payload: false, type: 'set-open' })
@@ -36,11 +31,7 @@ export const CollectionItem = ({ collection }: Props) => {
       onClick={onClose}
       to={`collection/${collection.id}`}
     >
-      {faviconUrl ? (
-        <img alt="Favicon" className="h-4 w-4 flex-shrink-0 rounded-sm" src={faviconUrl} />
-      ) : (
-        <div className="h-4 w-4 flex-shrink-0 rounded-md bg-gray-300" />
-      )}
+      <CollectionItemIcon collection={collection} />
       <span className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap">
         {collection.name}
       </span>
