@@ -9,6 +9,7 @@ import {
 import clsx from 'clsx'
 import { Fragment } from 'react/jsx-runtime'
 import { IconButton } from 'src/components'
+import { transitions } from 'src/constants/transitions'
 import { loc } from 'src/utils/i18n'
 
 import { CardData } from '..'
@@ -33,15 +34,7 @@ export const CardActionMenu = ({ data }: CardData) => {
             </IconButton>
           </label>
         </Menu.Button>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
+        <Transition as={Fragment} {...transitions.menu}>
           <Menu.Items
             className={clsx(
               'absolute z-10 w-40 origin-top-left rounded-lg p-1',
