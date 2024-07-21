@@ -766,5 +766,8 @@
   },
   "zoom_out": {
     "message": "ज़ूम आउट"
+  },
+  "name": {
+    "message": "नाम"
   }
 }

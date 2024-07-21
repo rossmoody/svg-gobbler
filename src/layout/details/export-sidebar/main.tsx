@@ -31,7 +31,7 @@ export const ExportDetailMain = () => {
       <div className="flex flex-col gap-2">
         <div>
           <label className="export-label" htmlFor="file-name">
-            {loc('export_filename')}
+            {loc('name')}
           </label>
           <input
             className="export-input"
