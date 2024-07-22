@@ -9,9 +9,12 @@ export class SvgUtils {
    * Creates a storage svg object with an id and the svg string.
    */
   static createStorageSvg(svgString: string): StorageSvg {
+    const id = nanoid()
+
     return {
-      id: nanoid(),
+      id,
       lastEdited: new Date().toISOString(),
+      name: id,
       svg: svgString,
     }
   }
@@ -23,6 +26,7 @@ export class SvgUtils {
     return svgArray.map((svg) => ({
       id: svg.id,
       lastEdited: svg.lastEdited,
+      name: svg.name,
       svg: svg.originalString,
     }))
   }

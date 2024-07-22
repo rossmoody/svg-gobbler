@@ -13,7 +13,7 @@ export const ExportDetailFooter = () => {
   }
 
   const handleDownload = async () => {
-    FormUtils.downloadSvgString(state.currentString, state.export.filename)
+    FormUtils.downloadSvgString(state.currentString, state.name)
   }
 
   return (

@@ -105,13 +105,9 @@ export type DetailsParams = {
    */
   collectionId: string
   /**
-   * The id of the svg in storage
+   * The svg data from storage.
    */
-  id: string
-  /**
-   * The original svg string upon load.
-   */
-  originalString: string
+  svg: StorageSvg
   /**
    * The user state from storage.
    */

@@ -81,8 +81,8 @@ importers:
         specifier: ^6.18.0
         version: 6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       svg-gobbler-scripts:
-        specifier: ^1.5.4
-        version: 1.5.4
+        specifier: ^1.5.6
+        version: 1.5.6
       svgo:
         specifier: ^3.0.3
         version: 3.3.2
@@ -2392,8 +2392,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svg-gobbler-scripts@1.5.4:
-    resolution: {integrity: sha512-KYmGwhe9Dcd3drn+Zr72CbXtHiWHBirKV4TtYeaGP+LJVFqamhsngSiHn46Uo+cKEqNXiky66F4zECJFD6L4Bw==}
+  svg-gobbler-scripts@1.5.6:
+    resolution: {integrity: sha512-1N/sUuNElSezepZsD8InzExFN9MnDjaOehoGuXS7FvuZPfSuN+anqlhixVzksjnqUPOcNMFeZuc50kqu6pfuWQ==}
 
   svgo@3.3.2:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
@@ -4770,7 +4770,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svg-gobbler-scripts@1.5.4:
+  svg-gobbler-scripts@1.5.6:
     dependencies:
       nanoid: 5.0.7
 

@@ -12,30 +12,37 @@ import { StorageUtils } from 'src/utils/storage-utils'
 export const Header = () => {
   const navigate = useNavigate()
   const { dispatch, state } = useDetails()
+  const { collectionId, currentString, id, name, originalName, originalString } = state
 
-  const isDirty = useMemo(
-    () => state.currentString !== state.originalString,
-    [state.currentString, state.originalString],
-  )
+  const isDirty = useMemo(() => {
+    return currentString !== originalString || name !== originalName
+  }, [currentString, originalString, name, originalName])
 
   const handleReset = () => {
-    dispatch({ payload: state.originalString, type: 'update-current-string' })
+    dispatch({ payload: originalString, type: 'update-current-string' })
+    dispatch({ payload: originalName, type: 'update-name' })
   }
 
   const handleSave = async () => {
-    const collectionData = await StorageUtils.getPageData(state.collectionId)
+    const collectionData = await StorageUtils.getPageData(collectionId)
 
     const pageData: PageData = {
       ...collectionData,
       data: collectionData.data.map((item) =>
-        item.id === state.id
-          ? { id: item.id, lastEdited: new Date().toISOString(), svg: state.currentString }
+        item.id === id
+          ? {
+              id: item.id,
+              lastEdited: new Date().toISOString(),
+              name,
+              svg: currentString,
+            }
           : item,
       ),
     }
 
-    await StorageUtils.setPageData(state.collectionId, pageData)
-    dispatch({ payload: state.currentString, type: 'update-original-string' })
+    await StorageUtils.setPageData(collectionId, pageData)
+    dispatch({ payload: currentString, type: 'update-original-string' })
+    dispatch({ payload: name, type: 'update-original-name' })
   }
 
   const navigateBack = () => {

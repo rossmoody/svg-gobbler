@@ -16,7 +16,6 @@ export type DetailsState = {
   collectionId: string
   currentString: string
   export: {
-    filename: string
     svgoConfig: {
       js2svg: SvgoConfig['js2svg']
       multipass: boolean
@@ -24,6 +23,8 @@ export type DetailsState = {
     } & SvgoConfig
   }
   id: string // The id of the svg
+  name: string
+  originalName: string
   originalString: string
   preview: {
     svg: {
@@ -52,7 +53,8 @@ export type DetailsAction =
   | { payload: string; type: 'set-svgr-result' }
   | { payload: string; type: 'set-svgr-state-name' }
   | { payload: string; type: 'update-current-string' }
-  | { payload: string; type: 'update-export-filename' }
+  | { payload: string; type: 'update-name' }
+  | { payload: string; type: 'update-original-name' }
   | { payload: string; type: 'update-original-string' }
   | { type: 'process-current-string' }
   | { type: 'reset' }
@@ -61,7 +63,6 @@ export const initDetailsState: DetailsState = {
   collectionId: '',
   currentString: '',
   export: {
-    filename: 'svg-gobbler',
     svgoConfig: {
       floatPrecision: 3,
       js2svg: {
@@ -74,6 +75,8 @@ export const initDetailsState: DetailsState = {
     },
   },
   id: '',
+  name: '',
+  originalName: '',
   originalString: '',
   preview: {
     svg: {
@@ -269,17 +272,10 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       }
     }
 
-    case 'update-export-filename': {
+    case 'update-name': {
       return {
         ...state,
-        export: {
-          ...state.export,
-          filename: action.payload,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            path: action.payload,
-          },
-        },
+        name: action.payload,
       }
     }
 
@@ -287,6 +283,13 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       return {
         ...state,
         originalString: action.payload,
+      }
+    }
+
+    case 'update-original-name': {
+      return {
+        ...state,
+        originalName: action.payload,
       }
     }
 
@@ -301,9 +304,11 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       return {
         ...state,
         collectionId: action.payload.collectionId,
-        currentString: action.payload.originalString,
-        id: action.payload.id,
-        originalString: action.payload.originalString,
+        currentString: action.payload.svg.svg,
+        id: action.payload.svg.id,
+        name: action.payload.svg.name,
+        originalName: action.payload.svg.name,
+        originalString: action.payload.svg.svg,
       }
     }
 

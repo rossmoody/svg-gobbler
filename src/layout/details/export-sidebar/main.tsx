@@ -11,7 +11,7 @@ export const ExportDetailMain = () => {
   const { dispatch, state } = useDetails()
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.value, type: 'update-export-filename' })
+    dispatch({ payload: e.target.value, type: 'update-name' })
     dispatch({ type: 'process-current-string' })
   }
 
@@ -27,7 +27,6 @@ export const ExportDetailMain = () => {
 
   return (
     <div>
-      {/* Settings */}
       <div className="flex flex-col gap-2">
         <div>
           <label className="export-label" htmlFor="name">
@@ -38,7 +37,7 @@ export const ExportDetailMain = () => {
             id="name"
             onChange={handleNameChange}
             type="text"
-            value={state.export.filename}
+            value={state.name}
           />
         </div>
         <div>

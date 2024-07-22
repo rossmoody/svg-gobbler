@@ -11,13 +11,12 @@ import { StorageSvg } from 'svg-gobbler-scripts'
 export async function detailLoader({ params }: LoaderFunctionArgs): Promise<DetailsParams> {
   const collectionId = params.collectionId as string
   const pageData = await StorageUtils.getPageData(collectionId)
-  const storageSvg = pageData.data.find((item) => item.id === params.id) as StorageSvg
+  const svg = pageData.data.find((item) => item.id === params.id) as StorageSvg
   const user = (await StorageUtils.getStorageData<UserState>('user')) ?? initUserState
 
   return {
     collectionId,
-    id: storageSvg.id,
-    originalString: storageSvg.svg,
+    svg,
     user,
   }
 }
