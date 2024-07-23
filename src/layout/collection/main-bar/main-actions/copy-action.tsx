@@ -27,9 +27,11 @@ export const CopyItemModal = () => {
     (collection) => collection.id !== collectionState.collectionId,
   )
 
+  const isDisabled = dashboardState.collections.length === 1
+
   return (
     <Fragment>
-      <Button onClick={openModal} size="xs" variant="ghost">
+      <Button disabled={isDisabled} onClick={openModal} size="xs" variant="ghost">
         {loc('main_copy')}
       </Button>
       <Modal open={isModalOpen} setOpen={setModalOpen}>

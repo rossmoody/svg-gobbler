@@ -96,7 +96,7 @@
     "message": "File type"
   },
   "export_export_filename": {
-    "message": "Export file name"
+    "message": "Zip file name"
   },
   "export_filename_prefix": {
     "message": "File prefix"
@@ -769,5 +769,11 @@
   },
   "name": {
     "message": "Name"
+  },
+  "export_prefix_names": {
+    "message": "Prefix file names"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "Override associated icon names with an enumerated prefix"
   }
 }
