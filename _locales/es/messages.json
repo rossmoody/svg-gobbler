@@ -769,5 +769,11 @@
   },
   "name": {
     "message": "Nombre"
+  },
+  "export_prefix_names": {
+    "message": "Prefijo de nombres"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "Prefijo que se añadirá al inicio de cada nombre de archivo"
   }
 }

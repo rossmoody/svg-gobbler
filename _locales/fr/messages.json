@@ -769,5 +769,11 @@
   },
   "name": {
     "message": "Nom"
+  },
+  "export_prefix_names": {
+    "message": "Préfixer les noms"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "Ajoute un préfixe au nom de chaque fichier exporté"
   }
 }

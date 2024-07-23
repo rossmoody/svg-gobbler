@@ -769,5 +769,11 @@
   },
   "name": {
     "message": "नाम"
+  },
+  "export_prefix_names": {
+    "message": "एक अंकित प्रीफिक्स के साथ नामों को अधिलेखित करें"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "एक अंकित प्रीफिक्स के साथ नामों को अधिलेखित करें"
   }
 }
