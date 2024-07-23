@@ -769,5 +769,11 @@
   },
   "name": {
     "message": "名称"
+  },
+  "export_prefix_names": {
+    "message": "导出前缀名称"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "将添加到每个导出文件名的前缀。"
   }
 }

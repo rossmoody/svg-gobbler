@@ -769,5 +769,11 @@
   },
   "name": {
     "message": "Имя"
+  },
+  "export_prefix_names": {
+    "message": "Префикс имен"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "Префикс, который будет добавлен в начало каждого имени файла."
   }
 }
