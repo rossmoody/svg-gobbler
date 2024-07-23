@@ -766,5 +766,8 @@
   },
   "zoom_out": {
     "message": "Alejar"
+  },
+  "name": {
+    "message": "Nombre"
   }
 }

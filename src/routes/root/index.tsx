@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { Await, Navigate, useLoaderData } from 'react-router-dom'
 import { FullPageLoader } from 'src/components/full-page-loader'
+import { useNavigation } from 'src/hooks/use-navigation'
 
 /**
  * This is a lonely route that is used to initialize the app via chrome messages between client and background scripts.
@@ -9,6 +10,9 @@ import { FullPageLoader } from 'src/components/full-page-loader'
  */
 export const RootRoute = () => {
   const { collectionId } = useLoaderData() as { collectionId: Promise<string> }
+
+  // Global hooks
+  useNavigation()
 
   return (
     <Suspense fallback={<FullPageLoader />}>

@@ -19,6 +19,11 @@ export type ExportState = {
    */
   filenamePrefix: string
   /**
+   * Whether or not to prefix file names based on a provided string
+   * instead of using the icon names.
+   */
+  prefixFilenames: boolean
+  /**
    * The setting configurations for each file type.
    */
   settings: {
@@ -88,6 +93,7 @@ export type ExportAction =
   | { payload: SvgoPlugin; type: 'remove-svgo-plugin' }
   | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
   | { payload: boolean; type: 'set-optimize-exports' }
+  | { payload: boolean; type: 'set-prefix-filenames' }
   | { payload: boolean; type: 'set-prettify' }
   | { payload: number; type: 'set-float-precision' }
   | { payload: number; type: 'set-jpeg-quality' }
@@ -103,6 +109,7 @@ export const initExportState: ExportState = {
   fileType: 'svg',
   filename: 'svg-gobbler',
   filenamePrefix: 'svg',
+  prefixFilenames: false,
   settings: {
     jpeg: {
       quality: 0.92,
@@ -127,6 +134,13 @@ export const initExportState: ExportState = {
 
 export const exportReducer = (state: ExportState, action: ExportAction): ExportState => {
   switch (action.type) {
+    case 'set-prefix-filenames': {
+      return {
+        ...state,
+        prefixFilenames: action.payload,
+      }
+    }
+
     case 'set-webp-quality': {
       return {
         ...state,

@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
+import { transitions } from 'src/constants/transitions'
 import { useCollection } from 'src/providers'
 import { CollectionData } from 'src/types'
 import { loc } from 'src/utils/i18n'
@@ -36,15 +37,7 @@ export const ViewPopover = () => {
           <ChevronDownIcon aria-hidden className="h-3 w-3" />
         </Popover.Button>
 
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
+        <Transition as={Fragment} {...transitions.popover}>
           <Popover.Panel
             className={clsx(
               'absolute right-0 z-10 mt-2 origin-top-left rounded-md p-4',

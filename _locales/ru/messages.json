@@ -766,5 +766,8 @@
   },
   "zoom_out": {
     "message": "Уменьшить"
+  },
+  "name": {
+    "message": "Имя"
   }
 }

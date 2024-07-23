@@ -1,8 +1,8 @@
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
-import { StorageSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
+import { StorageSvg } from 'svg-gobbler-scripts'
 
 export const useMainActions = () => {
   const { revalidate } = useRevalidator()

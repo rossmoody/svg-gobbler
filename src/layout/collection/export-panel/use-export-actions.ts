@@ -7,6 +7,11 @@ import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'
 
+export type ExportSvg = {
+  name: string
+  payload: string
+}
+
 export const useExportActions = () => {
   const { state } = useExport()
 
@@ -21,50 +26,68 @@ export const useExportActions = () => {
     plugins: state.settings.svg.svgoPlugins,
   }
 
-  const processWithExportConfig = async (svgs: Svg[]) => {
+  const processWithExportConfig = async (svgs: Svg[]): Promise<ExportSvg[]> => {
     const { jpeg, png, webp } = state.settings
 
     switch (state.fileType) {
       case 'svg': {
         return svgs.map((svg) => {
           const { data } = optimize(svg.originalString, svgoConfig)
-          return data as string
+          return {
+            name: svg.name,
+            payload: data as string,
+          }
         })
       }
 
       case 'png': {
         return await Promise.all(
-          svgs.map((svg) => FormUtils.convertToDataUrl(svg.presentationSvg, png.size, 'image/png')),
+          svgs.map(async (svg) => ({
+            name: svg.name,
+            payload: await FormUtils.convertToDataUrl(svg.presentationSvg, png.size, 'image/png'),
+          })),
         ).catch(() => {
           logger.error('Failed to convert SVG to PNG')
-          return ['']
+          return []
         })
       }
 
       case 'webp': {
         return await Promise.all(
-          svgs.map((svg) =>
-            FormUtils.convertToDataUrl(svg.presentationSvg, webp.size, 'image/webp', webp.quality),
-          ),
+          svgs.map(async (svg) => ({
+            name: svg.name,
+            payload: await FormUtils.convertToDataUrl(
+              svg.presentationSvg,
+              webp.size,
+              'image/webp',
+              webp.quality,
+            ),
+          })),
         ).catch(() => {
-          logger.error('Failed to convert SVG to WebP')
-          return ['']
+          logger.error('Failed to convert SVG to PNG')
+          return []
         })
       }
 
       case 'jpeg': {
         return await Promise.all(
-          svgs.map((svg) =>
-            FormUtils.convertToDataUrl(svg.presentationSvg, jpeg.size, 'image/jpeg', jpeg.quality),
-          ),
+          svgs.map(async (svg) => ({
+            name: svg.name,
+            payload: await FormUtils.convertToDataUrl(
+              svg.presentationSvg,
+              jpeg.size,
+              'image/jpeg',
+              jpeg.quality,
+            ),
+          })),
         ).catch(() => {
-          logger.error('Failed to convert SVG to JPEG')
-          return ['']
+          logger.error('Failed to convert SVG to PNG')
+          return []
         })
       }
 
       default: {
-        return ['']
+        return []
       }
     }
   }

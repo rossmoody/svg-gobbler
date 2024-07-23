@@ -134,6 +134,24 @@ export const collectionReducer = (
           })
           break
         }
+
+        case 'last-asc': {
+          processedData.sort((a, b) => {
+            const aDate = new Date(a.lastEdited).getTime()
+            const bDate = new Date(b.lastEdited).getTime()
+            return bDate - aDate
+          })
+          break
+        }
+
+        case 'last-desc': {
+          processedData.sort((a, b) => {
+            const aDate = new Date(a.lastEdited).getTime()
+            const bDate = new Date(b.lastEdited).getTime()
+            return aDate - bDate
+          })
+          break
+        }
       }
 
       return {

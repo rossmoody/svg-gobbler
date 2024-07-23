@@ -36,10 +36,10 @@
     "message": "Try changing your filter, search, or view settings to display SVGs"
   },
   "review_title": {
-    "message": "Finding SVG Gobbler useful?"
+    "message": "Please leave a review"
   },
   "review_desc": {
-    "message": "Please consider leaving a review to help others discover it."
+    "message": "SVG Gobbler is free and open-source. Help others discover it."
   },
   "review_primary_action": {
     "message": "Review"
@@ -96,7 +96,7 @@
     "message": "File type"
   },
   "export_export_filename": {
-    "message": "Export file name"
+    "message": "Zip file name"
   },
   "export_filename_prefix": {
     "message": "File prefix"
@@ -402,7 +402,7 @@
     "message": "Sort"
   },
   "topbar_sort_last_asc": {
-    "message": "Last edited: most recent"
+    "message": "Last edited: recent"
   },
   "topbar_sort_last_desc": {
     "message": "Last edited: oldest"
@@ -766,5 +766,14 @@
   },
   "zoom_out": {
     "message": "Zoom out"
+  },
+  "name": {
+    "message": "Name"
+  },
+  "export_prefix_names": {
+    "message": "Prefix file names"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "Override associated icon names with an enumerated prefix"
   }
 }

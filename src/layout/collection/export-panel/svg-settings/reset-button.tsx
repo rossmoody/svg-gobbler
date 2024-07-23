@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
 import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
+import { transitions } from 'src/constants/transitions'
 import { useExport } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
@@ -40,15 +41,7 @@ export const ResetButton = () => {
           {loc('export_apply')} <ChevronDownIcon className="h-4 w-4" />
         </Menu.Button>
 
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
+        <Transition as={Fragment} {...transitions.menu}>
           <Menu.Items
             className={clsx(
               'absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md',

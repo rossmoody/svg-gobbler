@@ -1,4 +1,12 @@
-import type { DocumentData, GElement, Image, Inline, Svg, SvgSymbol } from 'svg-gobbler-scripts'
+import type {
+  DocumentData,
+  GElement,
+  Image,
+  Inline,
+  StorageSvg,
+  Svg,
+  SvgSymbol,
+} from 'svg-gobbler-scripts'
 
 import { type UserState } from './providers'
 
@@ -13,21 +21,6 @@ export type BackgroundMessage = {
 }
 
 /**
- * The shape of the svg data stored in chrome storage as part of page data. This data
- * gets processed in and out of SVGTypes.
- */
-export type StorageSvg = {
-  /**
-   * Unique ID
-   */
-  id: string
-  /**
-   * The svg string of the item.
-   */
-  svg: string
-}
-
-/**
  * The model for data stored and gathered from the document
  */
 export type PageData = {
@@ -38,6 +31,10 @@ export type PageData = {
  * The model of a collection that is stored in local storage.
  */
 export type Collection = {
+  /**
+   * The emoji used to represent the collection in the sidebar.
+   */
+  emoji?: string
   /**
    * The id of the collection. Used to identify the collection in local storage
    * and also as the id for routing to a given collection.
@@ -95,7 +92,7 @@ export type CollectionData = {
     /**
      * The sort order of the collection
      */
-    sort: 'file-asc' | 'file-desc' | 'none'
+    sort: 'file-asc' | 'file-desc' | 'last-asc' | 'last-desc' | 'none'
   }
 }
 
@@ -108,13 +105,9 @@ export type DetailsParams = {
    */
   collectionId: string
   /**
-   * The id of the svg in storage
+   * The svg data from storage.
    */
-  id: string
-  /**
-   * The original svg string upon load.
-   */
-  originalString: string
+  svg: StorageSvg
   /**
    * The user state from storage.
    */

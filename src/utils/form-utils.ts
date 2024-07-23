@@ -1,5 +1,6 @@
 import JSZip from 'jszip'
-import { FileType } from 'src/providers'
+import { ExportSvg } from 'src/layout/collection/export-panel/use-export-actions'
+import { ExportState, FileType } from 'src/providers'
 
 /**
  * Utility class for form related operations like upload, download, and copy.
@@ -124,23 +125,24 @@ export class FormUtils {
   /**
    * Downloads a given array of data urls as a zip file.
    */
-  static async downloadDataUrlsZip(
-    dataUrls: string[],
-    baseFileName: string,
-    type: FileType,
-    filenamePrefix: string,
-  ) {
+  static async downloadDataUrlsZip(exportSvgs: ExportSvg[], exportState: ExportState) {
     const zip = new JSZip()
 
-    dataUrls.forEach((dataUrl, index) => {
-      const base64Data = dataUrl.split(',')[1]
-      zip.file(`${filenamePrefix}_${index}.${type}`, base64Data, { base64: true })
+    exportSvgs.forEach((file, index) => {
+      let filename = `${file.name}.${exportState.fileType}`
+      const base64Data = file.payload.split(',')[1]
+
+      if (exportState.prefixFilenames) {
+        filename = `${exportState.filenamePrefix}_${index}.${exportState.fileType}`
+      }
+
+      zip.file(filename, base64Data, { base64: true })
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
     const zipUrl = URL.createObjectURL(zipContent)
     const downloadLink = document.createElement('a')
-    downloadLink.download = `${baseFileName}.zip`
+    downloadLink.download = `${exportState.filename}.zip`
     downloadLink.href = zipUrl
     downloadLink.click()
   }
@@ -148,17 +150,13 @@ export class FormUtils {
   /**
    * Downloads a given array of data urls as a file or zip file depending on the number of urls.
    */
-  static downloadImageContent(
-    dataUrls: string[],
-    baseFileName: string,
-    type: FileType,
-    filenamePrefix: string,
-  ) {
-    if (dataUrls.length === 1) {
-      return this.downloadImageDataUrl(dataUrls[0], baseFileName, type)
+  static downloadImageContent(exportSvgs: ExportSvg[], exportState: ExportState) {
+    if (exportSvgs.length === 1) {
+      this.downloadImageDataUrl(exportSvgs[0].payload, exportState.filename, exportState.fileType)
+      return
     }
 
-    this.downloadDataUrlsZip(dataUrls, baseFileName, type, filenamePrefix)
+    this.downloadDataUrlsZip(exportSvgs, exportState)
   }
 
   /**
@@ -176,12 +174,13 @@ export class FormUtils {
   /**
    * Downloads a given array of strings as a file or zip file depending on the number of strings.
    */
-  static downloadSvgContent(svgStrings: string[], baseFileName: string, filenamePrefix: string) {
-    if (svgStrings.length === 1) {
-      return this.downloadSvgString(svgStrings[0], baseFileName)
+  static downloadSvgContent(exportSvgs: ExportSvg[], exportState: ExportState) {
+    if (exportSvgs.length === 1) {
+      this.downloadSvgString(exportSvgs[0].payload, exportState.filename)
+      return
     }
 
-    this.downloadSvgStringsZip(svgStrings, baseFileName, filenamePrefix)
+    this.downloadSvgStringsZip(exportSvgs, exportState)
   }
 
   /**
@@ -199,21 +198,23 @@ export class FormUtils {
   /**
    * Downloads a given array of SVG strings as a zip file.
    */
-  static async downloadSvgStringsZip(
-    files: string[],
-    baseFileName: string,
-    filenamePrefix: string,
-  ) {
+  static async downloadSvgStringsZip(exportSvgs: ExportSvg[], exportState: ExportState) {
     const zip = new JSZip()
 
-    files.forEach((file, index) => {
-      zip.file(`${filenamePrefix}_${index}.svg`, file)
+    exportSvgs.forEach((file, index) => {
+      let filename = `${file.name}.svg`
+
+      if (exportState.prefixFilenames) {
+        filename = `${exportState.filenamePrefix}_${index}.svg`
+      }
+
+      zip.file(filename, file.payload)
     })
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
     const zipUrl = URL.createObjectURL(zipContent)
     const downloadLink = document.createElement('a')
-    downloadLink.download = `${baseFileName}.zip`
+    downloadLink.download = `${exportState.filename}.zip`
     downloadLink.href = zipUrl
     downloadLink.click()
   }

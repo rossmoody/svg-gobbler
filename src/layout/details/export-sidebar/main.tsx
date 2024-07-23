@@ -10,8 +10,8 @@ import { SvgoOption } from './svgo-option'
 export const ExportDetailMain = () => {
   const { dispatch, state } = useDetails()
 
-  const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.value, type: 'update-export-filename' })
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: e.target.value, type: 'update-name' })
     dispatch({ type: 'process-current-string' })
   }
 
@@ -27,18 +27,17 @@ export const ExportDetailMain = () => {
 
   return (
     <div>
-      {/* Settings */}
       <div className="flex flex-col gap-2">
         <div>
-          <label className="export-label" htmlFor="file-name">
-            {loc('export_filename')}
+          <label className="export-label" htmlFor="name">
+            {loc('name')}
           </label>
           <input
             className="export-input"
-            id="file-name"
-            onChange={handleFileNameChange}
+            id="name"
+            onChange={handleNameChange}
             type="text"
-            value={state.export.filename}
+            value={state.name}
           />
         </div>
         <div>

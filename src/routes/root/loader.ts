@@ -26,7 +26,7 @@ export async function rootLoader() {
       const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
       try {
-        // Get the strings from the client page
+        // Get the strings from the client page. This will fail on refresh and force the catch
         const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
 
         // On a settings page and has a collection, send to the first collection

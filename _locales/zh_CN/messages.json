@@ -766,5 +766,8 @@
   },
   "zoom_out": {
     "message": "缩小"
+  },
+  "name": {
+    "message": "名称"
   }
 }

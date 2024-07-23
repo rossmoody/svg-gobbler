@@ -13,7 +13,7 @@ export const useCardActions = (data: Svg) => {
   const { revalidate } = useRevalidator()
 
   async function duplicateItem() {
-    const svgDuplicate = new Inline(data.originalString, nanoid())
+    const svgDuplicate = new Inline(data.originalString, nanoid(), new Date().toISOString())
     const newData = [svgDuplicate, ...state.data]
     const pageData = await StorageUtils.getPageData(state.collectionId)
     StorageUtils.setPageData(state.collectionId, {

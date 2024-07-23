@@ -14,18 +14,18 @@ export const Footer = () => {
 
   const handleCopy = async () => {
     setLabel(loc('export_copied'))
-    const results = (await processWithExportConfig(collectionState.selected))[0]
+    const payload = (await processWithExportConfig(collectionState.selected))[0].payload
 
     switch (exportState.fileType) {
       case 'svg': {
-        FormUtils.copyStringToClipboard(results)
+        FormUtils.copyStringToClipboard(payload)
         break
       }
 
       case 'png':
       case 'webp':
       case 'jpeg': {
-        FormUtils.copyImageToClipboard(results)
+        FormUtils.copyImageToClipboard(payload)
         break
       }
     }
@@ -34,19 +34,18 @@ export const Footer = () => {
   }
 
   const handleDownload = async () => {
-    const results = await processWithExportConfig(collectionState.selected)
-    const prefix = exportState.filenamePrefix || 'gobbler'
+    const exportSvgs = await processWithExportConfig(collectionState.selected)
 
     switch (exportState.fileType) {
       case 'svg': {
-        FormUtils.downloadSvgContent(results, exportState.filename, prefix)
+        FormUtils.downloadSvgContent(exportSvgs, exportState)
         break
       }
 
       case 'png':
       case 'webp':
       case 'jpeg': {
-        FormUtils.downloadImageContent(results, exportState.filename, exportState.fileType, prefix)
+        FormUtils.downloadImageContent(exportSvgs, exportState)
         break
       }
     }

@@ -766,5 +766,8 @@
   },
   "zoom_out": {
     "message": "Zoom arrière"
+  },
+  "name": {
+    "message": "Nom"
   }
 }

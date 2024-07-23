@@ -53,7 +53,8 @@ export const SidebarContent = () => {
               ))}
             </ul>
           </li>
-          <li className="mt-auto pt-8">
+          <span className="flex-1" />
+          <li className="pt-8">
             <NavLink className="collection-item" to="settings">
               <Cog6ToothIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
               {loc('sidebar_settings')}
