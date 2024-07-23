@@ -7,7 +7,7 @@
 
 ## 🚀 Where to install
 
-This extension is available on:
+This extension is available at:
 
 - [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
 - [Firefox Addon Marketplace (locked to v3)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
