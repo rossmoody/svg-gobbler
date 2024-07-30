@@ -37,10 +37,8 @@ export const GeneralSettings = () => {
           </Item.Description>
         </Item.Setting>
         <Item.Setting>
-          <Item.Heading>Importing</Item.Heading>
-          <Item.Description>
-            Default configuration settings for importing collections.
-          </Item.Description>
+          <Item.Heading>{loc('settings_importing')}</Item.Heading>
+          <Item.Description>{loc('settings_importing_desc')}</Item.Description>
         </Item.Setting>
         <div className="flex gap-2">
           <input
@@ -52,12 +50,9 @@ export const GeneralSettings = () => {
           />
           <div>
             <label className="block pb-1 text-sm font-medium leading-4" htmlFor="import-merging">
-              Merge collections with the same source URL
+              {loc('settings_merge_label')}
             </label>
-            <span className="text-muted">
-              Identical SVG content within a collection that shares the same source URL is
-              automatically merged
-            </span>
+            <span className="text-muted">{loc('settings_merge_tooltip')}</span>
           </div>
         </div>
       </Item>
