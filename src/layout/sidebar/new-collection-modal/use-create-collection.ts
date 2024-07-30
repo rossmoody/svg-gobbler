@@ -23,10 +23,12 @@ export const useCreateCollection = (files: File[]) => {
     const pageData: PageData = {
       data: svgStorageData,
       host: '',
+      href: '',
       origin: '',
     }
 
     const collection: Collection = {
+      href: '',
       id,
       name,
       origin: '',

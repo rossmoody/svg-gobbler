@@ -1,8 +1,10 @@
+import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
-import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
-import { initUserState } from 'src/providers'
+import { SvgoPlugin } from 'src/constants/svgo-plugins'
+import { CollectionState, type UserState, initCollectionState, initUserState } from 'src/providers'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
+import { RootUtils } from 'src/utils/root-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
 import { svgFactory } from 'svg-gobbler-scripts'
@@ -17,10 +19,19 @@ export async function rootLoader() {
   return defer({
     collectionId: (async () => {
       // Initialize user
-      const user = await StorageUtils.getStorageData('user')
-      if (!user) {
-        await StorageUtils.setStorageData('user', initUserState)
-      }
+      let user = await StorageUtils.getStorageData<UserState>('user')
+      user = _.merge(initUserState, user)
+      await StorageUtils.setStorageData('user', user)
+
+      // Initialize the view state
+      let view = await StorageUtils.getStorageData<CollectionState['view']>('view')
+      view = _.merge(initCollectionState.view, view)
+      await StorageUtils.setStorageData('view', view)
+
+      // Initialize the plugins for the export panel
+      let plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
+      plugins = _.assign([], plugins)
+      await StorageUtils.setStorageData('plugins', plugins)
 
       // Get all collections from storage for sidenav
       const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
@@ -36,29 +47,41 @@ export async function rootLoader() {
 
         // Create classes and process the raw svg elements
         const svgClasses = await svgFactory.process(data)
-
-        // Create storage svgs from the svg classes
         const storageSvgs = SvgUtils.createStorageSvgs(svgClasses)
 
-        // Create the page data object
-        const pageData: PageData = {
+        // Create the sourced page data object
+        let pageData: PageData = {
           data: storageSvgs,
           host: data.host,
+          href: data.href,
           origin: data.origin,
         }
 
-        const collection: Collection = {
+        // Create a new collection
+        let collection: Collection = {
+          href: pageData.href,
           id: nanoid(),
           name: pageData.host,
           origin: pageData.origin,
         }
 
-        await StorageUtils.setPageData(collection.id, pageData)
-        await StorageUtils.setStorageData('collections', [collection, ...prevCollections])
+        // Establish the collections array
+        let collections = [...prevCollections]
 
-        // Initialize the plugins for the export panel if it doesn't exist
-        const plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
-        if (!plugins) await StorageUtils.setStorageData('plugins', defaultSvgoPlugins)
+        // Merge the collections if the user has the setting and the URL is a duplicate
+        if (
+          user.settings.mergeCollections &&
+          RootUtils.isDuplicateURL(pageData.href, prevCollections)
+        ) {
+          collection = RootUtils.getExistingCollection(pageData.href, prevCollections)! // Because we checked for duplicates
+          const existingPageData = await StorageUtils.getPageData(collection.id)
+          pageData = RootUtils.mergePageData(existingPageData, pageData)
+        } else {
+          collections = [collection, ...prevCollections]
+        }
+
+        await StorageUtils.setStorageData('collections', collections)
+        await StorageUtils.setPageData(collection.id, pageData)
 
         return collection.id
       } catch (error) {

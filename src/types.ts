@@ -36,6 +36,10 @@ export type Collection = {
    */
   emoji?: string
   /**
+   * The original URL of the source. This is used to merge collections based on the URL.
+   */
+  href: string
+  /**
    * The id of the collection. Used to identify the collection in local storage
    * and also as the id for routing to a given collection.
    */

@@ -5,6 +5,7 @@ import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 import { Category } from './category'
+import { Item } from './item'
 
 export const ExportSettings = () => {
   const [storagePlugins, setStoragePlugins] = useState<SvgoPlugin[]>([])
@@ -38,12 +39,12 @@ export const ExportSettings = () => {
     }
 
   return (
-    <Category description={loc('settings_export_desc')} title={loc('settings_export_desc')}>
-      <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
-        <div className="mb-5">
-          <h3 className="text-base font-semibold leading-7">{loc('settings_default_svgo')}</h3>
-          <p className="text-muted mt-1 text-sm leading-6">{loc('settings_default_svgo_desc')}</p>
-        </div>
+    <Category description={loc('settings_export_desc')} title={loc('settings_export')}>
+      <Item>
+        <Item.Setting>
+          <Item.Heading>{loc('settings_default_svgo')}</Item.Heading>
+          <Item.Description>{loc('settings_default_svgo_desc')}</Item.Description>
+        </Item.Setting>
         {_.sortBy(svgoPlugins, 'name').map((plugin) => (
           <div className="mt-4 flex gap-2" key={plugin.name}>
             <input
@@ -54,14 +55,14 @@ export const ExportSettings = () => {
               type="checkbox"
             />
             <div>
-              <label className="block leading-4" htmlFor={plugin.name}>
+              <label className="block font-medium leading-4" htmlFor={plugin.name}>
                 {plugin.label}
               </label>
               <span className="text-muted">{plugin.description}</span>
             </div>
           </div>
         ))}
-      </div>
+      </Item>
     </Category>
   )
 }

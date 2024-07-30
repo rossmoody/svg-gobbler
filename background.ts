@@ -66,6 +66,7 @@ class Background {
       let data = {
         data: [],
         host: 'Collection',
+        href: '',
         origin: '',
       } as DocumentData
 
