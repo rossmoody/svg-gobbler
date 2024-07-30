@@ -9,7 +9,7 @@ const Description = ({ children }: PropsWithChildren) => {
 }
 
 export const Setting = ({ children }: PropsWithChildren) => {
-  return <div className="mb-4">{children}</div>
+  return <div className="mb-5">{children}</div>
 }
 
 export const Item = ({ children }: PropsWithChildren) => {

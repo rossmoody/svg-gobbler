@@ -39,7 +39,7 @@ export const ExportSettings = () => {
     }
 
   return (
-    <Category description={loc('settings_export_desc')} title={loc('settings_export_desc')}>
+    <Category description={loc('settings_export_desc')} title={loc('settings_export')}>
       <Item>
         <Item.Setting>
           <Item.Heading>{loc('settings_default_svgo')}</Item.Heading>
@@ -55,7 +55,7 @@ export const ExportSettings = () => {
               type="checkbox"
             />
             <div>
-              <label className="block leading-4" htmlFor={plugin.name}>
+              <label className="block font-medium leading-4" htmlFor={plugin.name}>
                 {plugin.label}
               </label>
               <span className="text-muted">{plugin.description}</span>

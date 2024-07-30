@@ -28,7 +28,9 @@ export const SettingsLayout = () => {
       {/* Settings forms */}
       <main className="pb-20">
         <GeneralSettings />
+        <div className="h-px bg-gray-200 dark:bg-gray-700" />
         <ExportSettings />
+        <div className="h-px bg-gray-200 dark:bg-gray-700" />
         <AboutSettings />
       </main>
     </Transition>
