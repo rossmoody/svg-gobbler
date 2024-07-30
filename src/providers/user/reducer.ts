@@ -25,6 +25,15 @@ export type UserState = {
      */
     viewedReview: boolean
   }
+  /**
+   * The settings for the user. Managed in the settings page.
+   */
+  settings: {
+    /**
+     * To merge collections based on the URL.
+     */
+    mergeCollections: boolean
+  }
 }
 
 export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'reset' }
@@ -35,6 +44,9 @@ export const initUserState: UserState = {
     viewedEditSvg: false,
     viewedFeatureRequest: false,
     viewedReview: false,
+  },
+  settings: {
+    mergeCollections: true,
   },
 }
 
