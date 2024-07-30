@@ -1,6 +1,7 @@
 import { loc } from 'src/utils/i18n'
 
 import { Category } from './category'
+import { Item } from './item'
 import { KeyboardShortcut } from './keyboard-shortcut'
 
 export const GeneralSettings = () => {
@@ -10,16 +11,28 @@ export const GeneralSettings = () => {
 
   return (
     <Category description={loc('settings_general_desc')} title={loc('settings_general')}>
-      <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
-        <h3 className="text-base font-semibold leading-7">{loc('settings_kbd')}</h3>
-        <p className="text-muted mt-1 text-sm leading-6">
-          {loc('settings_kbd_desc')} <KeyboardShortcut />. {loc('settings_kbd_desc_2')},{' '}
-          <span className="anchor" onClick={handleOpenKeyboardShortcuts}>
-            {loc('settings_kbd_desc_3')}
-          </span>
-          .
-        </p>
-      </div>
+      <Item>
+        <Item.Setting>
+          <Item.Heading>{loc('settings_kbd')}</Item.Heading>
+          <Item.Description>
+            {loc('settings_kbd_desc')} <KeyboardShortcut />. {loc('settings_kbd_desc_2')},{' '}
+            <span className="anchor" onClick={handleOpenKeyboardShortcuts}>
+              {loc('settings_kbd_desc_3')}
+            </span>
+            .
+          </Item.Description>
+        </Item.Setting>
+        <Item.Setting>
+          <Item.Heading>{loc('settings_kbd')}</Item.Heading>
+          <Item.Description>
+            {loc('settings_kbd_desc')} <KeyboardShortcut />. {loc('settings_kbd_desc_2')},{' '}
+            <span className="anchor" onClick={handleOpenKeyboardShortcuts}>
+              {loc('settings_kbd_desc_3')}
+            </span>
+            .
+          </Item.Description>
+        </Item.Setting>
+      </Item>
     </Category>
   )
 }

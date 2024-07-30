@@ -2,42 +2,37 @@ import { links } from 'src/constants/links'
 import { loc } from 'src/utils/i18n'
 
 import { Category } from './category'
+import { Item } from './item'
 
-export const AboutSettings = () => {
-  return (
-    <Category description={loc('settings_about_desc')} title={loc('settings_about')}>
-      <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
-        <div className="mb-8">
-          <h3 className="text-base font-semibold leading-7">{loc('settings_contribute')}</h3>
-          <p className="text-muted mt-1 text-sm leading-6">
-            {loc('settings_contribute_desc')}{' '}
-            <a className="anchor" href={links.githubRepository}>
-              {loc('settings_contribute_desc_2')}
-            </a>
-            .
-          </p>
-        </div>
+export const AboutSettings = () => (
+  <Category description={loc('settings_about_desc')} title={loc('settings_about')}>
+    <Item>
+      <Item.Setting>
+        <Item.Heading>{loc('settings_contribute')}</Item.Heading>
+        <Item.Description>
+          {loc('settings_contribute_desc')}{' '}
+          <a className="anchor" href={links.githubRepository}>
+            {loc('settings_contribute_desc_2')}
+          </a>
+          .
+        </Item.Description>
+      </Item.Setting>
 
-        <div className="mb-8">
-          <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
-            <h3 className="text-base font-semibold leading-7">{loc('settings_bug')}</h3>
-            <p className="text-muted mt-1 text-sm leading-6">
-              {loc('settings_bug_desc')}{' '}
-              <a className="anchor" href={links.githubIssues}>
-                {loc('settings_open_issue')}
-              </a>
-              .
-            </p>
-          </div>
-        </div>
+      <Item.Setting>
+        <Item.Heading>{loc('settings_bug')}</Item.Heading>
+        <Item.Description>
+          {loc('settings_bug_desc')}{' '}
+          <a className="anchor" href={links.githubIssues}>
+            {loc('settings_open_issue')}
+          </a>
+          .
+        </Item.Description>
+      </Item.Setting>
 
-        <div className="mb-8">
-          <div className="sm:max-w-xl sm:grid-cols-6 md:col-span-2">
-            <h3 className="text-base font-semibold leading-7">{loc('settings_disclaimer')}</h3>
-            <p className="text-muted mt-1 text-sm leading-6">{loc('settings_disclaimer_desc')}</p>
-          </div>
-        </div>
-      </div>
-    </Category>
-  )
-}
+      <Item.Setting>
+        <Item.Heading>{loc('settings_disclaimer')}</Item.Heading>
+        <Item.Description>{loc('settings_disclaimer_desc')}</Item.Description>
+      </Item.Setting>
+    </Item>
+  </Category>
+)
