@@ -14,6 +14,13 @@ This extension is available on:
 
 ---
 
+<div align="center">
+ <a href="https://svggobbler.com">
+  <img src="assets/local/gobbler-screenshot.png">
+ </a>
+ <br>
+</div>
+
 ## Features
 
 SVG Gobbler is a browser extension that finds the SVG content in your current tab and lets you
