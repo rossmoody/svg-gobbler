@@ -12,6 +12,7 @@ export const ResetEnvironment = () => {
     await chrome.storage.local.clear()
 
     const collectionOne: Collection = {
+      href: '',
       id: nanoid(),
       name: 'Collection One',
       origin: '',
@@ -27,10 +28,12 @@ export const ResetEnvironment = () => {
         ),
       ],
       host: '',
+      href: '',
       origin: '',
     }
 
     const collectionTwo: Collection = {
+      href: 'https://signal.org',
       id: nanoid(),
       name: 'signal.org',
       origin: 'signal.org',
@@ -49,6 +52,7 @@ export const ResetEnvironment = () => {
         ),
       ],
       host: 'signal.org',
+      href: 'https://signal.org',
       origin: 'signal.org',
     }
 

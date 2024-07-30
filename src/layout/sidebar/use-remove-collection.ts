@@ -20,10 +20,12 @@ export function useRemoveCollection() {
       const pageData: PageData = {
         data: [],
         host: '',
+        href: '',
         origin: '',
       }
 
       const collection: Collection = {
+        href: '',
         id: nanoid(),
         name: loc('sidebar_new_collection'),
         origin: '',
