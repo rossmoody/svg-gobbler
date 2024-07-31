@@ -4,6 +4,7 @@ import { useCollection } from 'src/providers'
 
 import { type CardData } from '.'
 import { CardActionMenu } from './card-actions/action-menu'
+import { CardCopy } from './card-actions/card-copy'
 import { CardSelect } from './card-actions/card-select'
 
 /**
@@ -16,6 +17,7 @@ export const DefaultActions = ({ children, data }: PropsWithChildren<CardData>) 
     <Fragment>
       <CardActionMenu data={data} />
       <CardSelect data={data} />
+      <CardCopy data={data} />
       <Link
         className="flex h-full w-full items-center justify-center"
         to={`/details/${state.collectionId}/${data.id}`}

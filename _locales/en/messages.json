@@ -57,10 +57,13 @@
     "message": "Right click for context menu"
   },
   "card_action_copy": {
-    "message": "Copy to clipboard"
+    "message": "Copy original"
+  },
+  "card_action_copy_optimized": {
+    "message": "Copy optimized"
   },
   "card_action_download": {
-    "message": "Download"
+    "message": "Download original"
   },
   "card_action_duplicate": {
     "message": "Duplicate"
@@ -456,7 +459,7 @@
     "message": "Reset environment"
   },
   "sidebar_review": {
-    "message": "Leave a review"
+    "message": "Review SVG Gobbler"
   },
   "sidebar_support": {
     "message": "Support SVG Gobbler"

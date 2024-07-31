@@ -7,6 +7,7 @@ import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
 import { Inline } from 'svg-gobbler-scripts'
+import { optimize } from 'svgo'
 
 export const useCardActions = (data: Svg) => {
   const { state } = useCollection()
@@ -37,12 +38,18 @@ export const useCardActions = (data: Svg) => {
     FormUtils.copyStringToClipboard(data.originalString)
   }
 
+  async function copyOptimized() {
+    const optimizedString = optimize(data.originalString)
+    FormUtils.copyStringToClipboard(optimizedString.data)
+  }
+
   async function downloadOriginal() {
     const pageData = await StorageUtils.getPageData(state.collectionId)
     FormUtils.downloadSvgString(data.originalString, pageData.host)
   }
 
   return {
+    copyOptimized,
     copyOriginal,
     deleteItem,
     downloadOriginal,
