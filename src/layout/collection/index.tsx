@@ -19,6 +19,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   useEffect(() => {
     dispatch({ payload: data, type: 'set-data' })
     dispatch({ type: 'process-data' })
+    return () => dispatch({ type: 'reset' })
   }, [data, dispatch])
 
   const filteredResultLength = useMemo(() => {

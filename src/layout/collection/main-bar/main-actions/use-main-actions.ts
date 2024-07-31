@@ -6,13 +6,18 @@ import { StorageSvg } from 'svg-gobbler-scripts'
 
 export const useMainActions = () => {
   const { revalidate } = useRevalidator()
-  const { state: collectionState } = useCollection()
+  const { dispatch, state: collectionState } = useCollection()
 
   const { collectionId } = collectionState
   const selectedItems = collectionState.selected
   const nonSelectedItems = collectionState.data.filter((item) => !selectedItems.includes(item))
   const nonSelectedItemStorageSvgs: StorageSvg[] = SvgUtils.createStorageSvgs(nonSelectedItems)
   const selectedItemsStorageSvgs: StorageSvg[] = SvgUtils.createStorageSvgs(selectedItems)
+
+  function resetCollection() {
+    dispatch({ type: 'unselect-all' })
+    revalidate()
+  }
 
   const deleteSelectedItems = async () => {
     const currentPageData = await StorageUtils.getPageData(collectionId)
@@ -22,7 +27,7 @@ export const useMainActions = () => {
       data: nonSelectedItemStorageSvgs,
     })
 
-    revalidate()
+    resetCollection()
   }
 
   const moveSelectedItems = async (targetCollectionId: string) => {
@@ -39,7 +44,7 @@ export const useMainActions = () => {
       data: nonSelectedItemStorageSvgs,
     })
 
-    revalidate()
+    resetCollection()
   }
 
   const copySelectedItems = async (targetCollectionId: string) => {
@@ -49,6 +54,8 @@ export const useMainActions = () => {
       ...targetPageData,
       data: [...selectedItemsStorageSvgs, ...targetPageData.data],
     })
+
+    resetCollection()
   }
 
   return { copySelectedItems, deleteSelectedItems, moveSelectedItems }
