@@ -18,7 +18,7 @@ export const CardCopy = ({ data }: CardData) => {
   }
 
   return (
-    <div className="absolute bottom-4 left-4 right-4 z-10 opacity-0 transition-all duration-300 ease-in-out group-hover/card:opacity-100">
+    <div className="absolute bottom-3 left-3 right-3 z-10 opacity-0 transition-all duration-300 ease-in-out group-hover/card:opacity-100">
       <Button
         className="w-full justify-center bg-white dark:bg-gray-800/90"
         onClick={handleCopy}
