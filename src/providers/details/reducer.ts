@@ -275,6 +275,13 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
     case 'update-name': {
       return {
         ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            path: action.payload,
+          },
+        },
         name: action.payload,
       }
     }
@@ -305,6 +312,13 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
         ...state,
         collectionId: action.payload.collectionId,
         currentString: action.payload.svg.svg,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            path: action.payload.svg.name,
+          },
+        },
         id: action.payload.svg.id,
         name: action.payload.svg.name,
         originalName: action.payload.svg.name,
