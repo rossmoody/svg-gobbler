@@ -5,7 +5,7 @@ const Heading = ({ children }: PropsWithChildren) => {
 }
 
 const Description = ({ children }: PropsWithChildren) => {
-  return <p className="text-muted mb-6 mt-1 text-sm leading-6">{children}</p>
+  return <p className="text-muted mb-6 text-sm leading-6">{children}</p>
 }
 
 const Setting = ({ children }: PropsWithChildren) => {

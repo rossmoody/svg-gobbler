@@ -804,7 +804,7 @@
     "message": "Clear all collections and data from local storage related to SVG Gobbler. This will reset SVG Gobbler to initialized state"
   },
   "settings_reset_action": {
-    "message": "Clear history"
+    "message": "Reset SVG Gobbler"
   },
   "settings_export_data": {
     "message": "Export data"

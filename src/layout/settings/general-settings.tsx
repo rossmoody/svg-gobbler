@@ -64,15 +64,7 @@ export const GeneralSettings = () => {
               </div>
             </div>
           </Item.Setting>
-          <Item.Setting>
-            <label className="block pb-1 text-sm font-medium leading-4">
-              {loc('settings_reset_title')}
-            </label>
-            <span className="text-muted mb-3 block">{loc('settings_reset_desc')}</span>
-            <Button onClick={reset} size="md" variant="secondary">
-              {loc('settings_reset_action')}
-            </Button>
-          </Item.Setting>
+          <hr className="py-4" />
           <Item.Setting>
             <label className="block pb-1 text-sm font-medium leading-4">
               {loc('settings_export_data')}
@@ -80,6 +72,15 @@ export const GeneralSettings = () => {
             <span className="text-muted mb-3 block">{loc('settings_export_data_desc')}</span>
             <Button onClick={exportData} size="md" variant="secondary">
               {loc('settings_export_data')}
+            </Button>
+          </Item.Setting>
+          <Item.Setting>
+            <label className="block pb-1 text-sm font-medium leading-4">
+              {loc('settings_reset_title')}
+            </label>
+            <span className="text-muted mb-3 block">{loc('settings_reset_desc')}</span>
+            <Button onClick={reset} size="md" variant="secondary">
+              {loc('settings_reset_action')}
             </Button>
           </Item.Setting>
         </Item.Section>
