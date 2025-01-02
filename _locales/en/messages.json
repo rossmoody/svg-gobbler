@@ -792,9 +792,24 @@
     "message": "Default configuration settings for importing collections."
   },
   "settings_collections_title": {
-    "message": "Collections"
+    "message": "Data"
   },
   "settings_collections_desc": {
-    "message": "Settings and congiguration options for the collection history"
+    "message": "Settings and configuration options for data and collection history"
+  },
+  "settings_reset_title": {
+    "message": "Reset SVG Gobbler"
+  },
+  "settings_reset_desc": {
+    "message": "Clear all collections and data from local storage related to SVG Gobbler. This will reset SVG Gobbler to initialized state"
+  },
+  "settings_reset_action": {
+    "message": "Clear history"
+  },
+  "settings_export_data": {
+    "message": "Export data"
+  },
+  "settings_export_data_desc": {
+    "message": "Download all collections and data from local storage related to SVG Gobbler. This will create a JSON file that contains all information stored."
   }
 }
