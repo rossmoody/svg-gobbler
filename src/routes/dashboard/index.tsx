@@ -13,7 +13,7 @@ export const DashboardRoute = () => (
           <ExportProvider>
             <UserProvider>
               <Sidebar />
-              <div className="relative min-h-screen overflow-hidden transition-all lg:pl-72">
+              <div className="relative h-screen min-h-screen overflow-hidden transition-all lg:pl-72">
                 <Outlet />
               </div>
             </UserProvider>
