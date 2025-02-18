@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
     "target": "es2016",
     "module": "commonjs",
     "esModuleInterop": true,
     "strict": true,
-    "outDir": "dist",
     "jsx": "react"
   },
   "include": ["index.ts"],
