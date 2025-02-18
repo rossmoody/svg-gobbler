@@ -29,7 +29,7 @@
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
     "mini-svg-data-uri": "^1.4.4",
-    "nanoid": "^5.0.2",
+    "nanoid": "^5.0.9",
     "pretty-bytes": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
