@@ -9,13 +9,19 @@
     "message": "SVG अपलोड करें"
   },
   "error_title": {
-    "message": "उफ़! एक त्रुटि हुई"
+    "message": "अरे! एक त्रुटि हुई"
   },
   "error_desc": {
-    "message": "पृष्ठ को ताज़ा करने या होम पेज पर वापस जाने का प्रयास करें"
+    "message": "इस त्रुटि के दौरान आप क्या कर रहे थे, इसके बारे में कोई भी विवरण साझा करें"
   },
   "error_action": {
-    "message": "ताज़ा करें"
+    "message": "रिफ़्रेश करें"
+  },
+  "error_primary_action": {
+    "message": "भेजें"
+  },
+  "error_input_label": {
+    "message": "त्रुटि का विवरण"
   },
   "feedback_title": {
     "message": "जल्दी बताएं, आपको क्या लगता है कि SVG Gobbler में कौन सी सुविधा गायब है?"

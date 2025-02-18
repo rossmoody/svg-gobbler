@@ -12,10 +12,16 @@
     "message": "哎呀！发生了错误"
   },
   "error_desc": {
-    "message": "尝试刷新页面或返回主页"
+    "message": "请分享在发生此错误时您正在做的任何相关信息"
   },
   "error_action": {
     "message": "刷新"
+  },
+  "error_primary_action": {
+    "message": "发送"
+  },
+  "error_input_label": {
+    "message": "错误详情"
   },
   "feedback_title": {
     "message": "快速反馈，您觉得 SVG Gobbler 缺少哪一项功能？"

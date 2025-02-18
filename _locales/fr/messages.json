@@ -9,13 +9,19 @@
     "message": "Télécharger des SVG"
   },
   "error_title": {
-    "message": "Oups ! Une erreur est survenue"
+    "message": "Oups! Une erreur s’est produite"
   },
   "error_desc": {
-    "message": "Essayez de rafraîchir la page ou de revenir à la page d'accueil"
+    "message": "Partagez tous les détails sur ce que vous faisiez lorsque cette erreur s’est produite"
   },
   "error_action": {
     "message": "Rafraîchir"
+  },
+  "error_primary_action": {
+    "message": "Envoyer"
+  },
+  "error_input_label": {
+    "message": "Détails de l’erreur"
   },
   "feedback_title": {
     "message": "Très rapidement, quelle est la fonctionnalité qui manque selon vous à SVG Gobbler ?"
