@@ -817,5 +817,8 @@
   },
   "settings_export_data_desc": {
     "message": "Download all collections and data from local storage related to SVG Gobbler. This will create a JSON file that contains all information stored."
+  },
+  "onboarding_card_color": {
+    "message": "Having trouble seeing white SVGs? Change the canvas color 🎨"
   }
 }
