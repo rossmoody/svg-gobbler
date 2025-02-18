@@ -12,10 +12,16 @@
     "message": "Oops! There was an error"
   },
   "error_desc": {
-    "message": "Try refreshing the page or navigating back to the home page"
+    "message": "Provide any helpful details or source page URLs you are comfortable sharing when this error occurred so we can fix it"
   },
   "error_action": {
     "message": "Refresh"
+  },
+  "error_primary_action": {
+    "message": "Send"
+  },
+  "error_input_label": {
+    "message": "Error details"
   },
   "feedback_title": {
     "message": "Real quick, what is one feature you think SVG Gobbler is missing?"
@@ -811,5 +817,8 @@
   },
   "settings_export_data_desc": {
     "message": "Download all collections and data from local storage related to SVG Gobbler. This will create a JSON file that contains all information stored."
+  },
+  "onboarding_card_color": {
+    "message": "Having trouble seeing white SVGs? Change the canvas color 🎨"
   }
 }

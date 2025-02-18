@@ -12,10 +12,16 @@
     "message": "哎呀！发生了错误"
   },
   "error_desc": {
-    "message": "尝试刷新页面或返回主页"
+    "message": "请分享在发生此错误时您正在做的任何相关信息"
   },
   "error_action": {
     "message": "刷新"
+  },
+  "error_primary_action": {
+    "message": "发送"
+  },
+  "error_input_label": {
+    "message": "错误详情"
   },
   "feedback_title": {
     "message": "快速反馈，您觉得 SVG Gobbler 缺少哪一项功能？"
@@ -786,6 +792,9 @@
     "message": "正在导入"
   },
   "settings_importing_desc": {
-    "message": "导入集合的默认配置设置。"
+    "message": "导入集合的默,认配置设置。"
+  },
+  "onboarding_card_color": {
+    "message": "看不清白色 SVG？更改画布颜色 🎨"
   }
 }

@@ -9,13 +9,19 @@
     "message": "Subir SVGs"
   },
   "error_title": {
-    "message": "¡Ups! Ocurrió un error"
+    "message": "¡Ups! Ha ocurrido un error"
   },
   "error_desc": {
-    "message": "Intente actualizar la página o navegar de vuelta a la página de inicio"
+    "message": "Comparte cualquier detalle sobre lo que estabas haciendo cuando ocurrió este error"
   },
   "error_action": {
     "message": "Actualizar"
+  },
+  "error_primary_action": {
+    "message": "Enviar"
+  },
+  "error_input_label": {
+    "message": "Detalles del error"
   },
   "feedback_title": {
     "message": "Rápidamente, ¿qué función crees que le falta a SVG Gobbler?"
@@ -787,5 +793,8 @@
   },
   "settings_importing_desc": {
     "message": "Configuración predeterminada para importar colecciones."
+  },
+  "onboarding_card_color": {
+    "message": "¿Tienes problemas para ver SVG blancos? Cambia el color del lienzo 🎨"
   }
 }

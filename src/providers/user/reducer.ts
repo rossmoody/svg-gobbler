@@ -13,6 +13,10 @@ export type UserState = {
    */
   onboarding: {
     /**
+     * The user has viewed the tooltip for the new card color.
+     */
+    viewedCardColor: boolean
+    /**
      * The user has viewed the tooltip for editing the svg in detail view.
      */
     viewedEditSvg: boolean
@@ -41,6 +45,7 @@ export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'res
 export const initUserState: UserState = {
   installDate: new Date().toISOString(),
   onboarding: {
+    viewedCardColor: false,
     viewedEditSvg: false,
     viewedFeatureRequest: false,
     viewedReview: false,

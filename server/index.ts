@@ -11,24 +11,39 @@ export type SVGRMessage = {
   svg: string
 }
 
-export type FeedbackMessage = {
-  feedback: string
+export type StringMessage = {
+  message: string
 }
 
 export type ServerMessage =
-  | { payload: FeedbackMessage; type: 'feedback' }
   | { payload: SVGRMessage; type: 'svgr' }
+  | { payload: StringMessage; type: 'error' }
+  | { payload: StringMessage; type: 'feedback' }
 
 ff.http('svgr', async (req: ff.Request, res: ff.Response) => {
   switch (req.body.type) {
     case 'feedback': {
       try {
-        const { feedback } = req.body.payload as FeedbackMessage
+        const { message } = req.body.payload as StringMessage
         const bucketName = 'svg-gobbler'
-        const destFileName = `feedback-${Date.now()}.txt`
-        await storage.bucket(bucketName).file(destFileName).save(feedback)
+        const destFileName = `feedback/feedback-${Date.now()}.txt`
+        await storage.bucket(bucketName).file(destFileName).save(message)
       } catch (error) {
         console.error(error)
+        res.send('Unable to upload message to database 😥')
+      }
+      break
+    }
+
+    case 'error': {
+      try {
+        const { message } = req.body.payload as StringMessage
+        const bucketName = 'svg-gobbler'
+        const destFileName = `error/error-${Date.now()}.txt`
+        await storage.bucket(bucketName).file(destFileName).save(message)
+      } catch (error) {
+        console.error(error)
+        res.send('Unable to upload message to database 😥')
       }
       break
     }

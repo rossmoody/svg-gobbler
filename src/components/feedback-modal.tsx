@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { serverEndpoint } from 'src/constants/server-config'
+import { useDatabase } from 'src/hooks'
 import { UserState, useDashboard, useUser } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { logger } from 'src/utils/logger'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 import { Button } from './button'
@@ -11,6 +10,7 @@ import { Modal } from './modal'
 export const FeedbackModal = () => {
   const [open, setOpen] = useState(false)
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const sendMessage = useDatabase('feedback')
   const { dispatch, state: userState } = useUser()
 
   const {
@@ -45,23 +45,7 @@ export const FeedbackModal = () => {
   }
 
   const handleRequestPrompt = async () => {
-    const feedbackMessage = {
-      payload: {
-        feedback: textAreaRef.current?.value ?? '',
-      },
-      type: 'feedback',
-    }
-
-    try {
-      fetch(serverEndpoint.svgr, {
-        body: JSON.stringify(feedbackMessage),
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-      })
-    } catch (error) {
-      logger.error('Could not send feature request.', error)
-    }
-
+    sendMessage(textAreaRef.current?.value ?? 'No feedback message')
     onClose()
   }
 
