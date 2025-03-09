@@ -1,13 +1,26 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
-import { PropsWithChildren } from 'react'
-import { useUser } from 'src/providers'
+import { PropsWithChildren, useMemo } from 'react'
+import { useCollection, useUser } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 
 export const CardColorOnboarding = ({ children }: PropsWithChildren) => {
-  const { state } = useUser()
+  const { state: userState } = useUser()
+  const { state: collectionState } = useCollection()
 
-  if (state.onboarding.viewedCardColor) {
+  const collectionHasSvgWithWhite = useMemo(() => {
+    const whiteValues = ['white', '#fff', '#ffffff']
+
+    return collectionState.processedData.some(({ presentationSvg }) =>
+      whiteValues.some((whiteValue) => presentationSvg.includes(whiteValue)),
+    )
+  }, [collectionState.processedData])
+
+  const shouldShowCardColorOnboarding = useMemo(() => {
+    return collectionHasSvgWithWhite && !userState.onboarding.viewedCardColor
+  }, [collectionHasSvgWithWhite, userState.onboarding.viewedCardColor])
+
+  if (!shouldShowCardColorOnboarding) {
     return children
   }
 
