@@ -38,4 +38,17 @@ export class SvgUtils {
     const bytes = new TextEncoder().encode(svgString).length
     return prettyBytes(bytes, options)
   }
+
+  /**
+   * Check if a given string is a valid svg.
+   */
+  static isValidSvg(text: string) {
+    try {
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(text, 'image/svg+xml')
+      return !!doc.querySelector('svg')
+    } catch (error) {
+      return false
+    }
+  }
 }

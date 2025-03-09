@@ -13,6 +13,10 @@ export type UserState = {
    */
   onboarding: {
     /**
+     * The user has pasted an SVG one time into the app.
+     */
+    hasPastedSvg: boolean
+    /**
      * The user has viewed the tooltip for the new card color.
      */
     viewedCardColor: boolean
@@ -28,6 +32,10 @@ export type UserState = {
      * The user has viewed the tooltip for submitting a review.
      */
     viewedReview: boolean
+    /**
+     * The user has viewed the toast notification for noticing a SVG in the clipboard.
+     */
+    viewedSvgInClipboard: boolean
   }
   /**
    * The settings for the user. Managed in the settings page.
@@ -45,10 +53,12 @@ export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'res
 export const initUserState: UserState = {
   installDate: new Date().toISOString(),
   onboarding: {
+    hasPastedSvg: false,
     viewedCardColor: false,
     viewedEditSvg: false,
     viewedFeatureRequest: false,
     viewedReview: false,
+    viewedSvgInClipboard: false,
   },
   settings: {
     mergeCollections: true,
