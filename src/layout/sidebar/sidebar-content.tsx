@@ -1,8 +1,9 @@
 import { Transition } from '@headlessui/react'
-import { Cog6ToothIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, MegaphoneIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
+import { links } from 'src/constants/links'
 import { isDevEnv } from 'src/constants/server-config'
 import { useDashboard } from 'src/providers'
 import { loc } from 'src/utils/i18n'
@@ -10,11 +11,14 @@ import { loc } from 'src/utils/i18n'
 import { CollectionItem } from './collection-item'
 import { NewCollectionModal } from './new-collection-modal'
 import { ResetEnvironment } from './reset-environment'
-import { ReviewModal } from './review-modal'
 
 export const SidebarContent = () => {
   const [open, setOpen] = useState(false)
   const { state } = useDashboard()
+
+  function navigateToChromeWebStore() {
+    window.open(links.chromeWebstore, '_blank')
+  }
 
   return (
     <div className="surface flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 px-6 pb-5 dark:border-gray-800">
@@ -61,7 +65,10 @@ export const SidebarContent = () => {
             </NavLink>
           </li>
           <li>
-            <ReviewModal />
+            <button className="collection-item" onClick={navigateToChromeWebStore}>
+              <MegaphoneIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
+              {loc('sidebar_review')}
+            </button>
           </li>
           {isDevEnv && (
             <li>
