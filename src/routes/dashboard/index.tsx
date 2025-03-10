@@ -1,4 +1,4 @@
-import { Provider as ToastProvider } from '@radix-ui/react-toast'
+import { Provider as ToastProvider, Viewport } from '@radix-ui/react-toast'
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip'
 import { Outlet } from 'react-router-dom'
 import { Sidebar } from 'src/layout/sidebar'
@@ -21,6 +21,6 @@ export const DashboardRoute = () => (
         </CollectionProvider>
       </DashboardProvider>
     </TooltipProvider>
-    <ToastProvider />
+    <Viewport className="toast-viewport" />
   </ToastProvider>
 )

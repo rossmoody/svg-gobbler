@@ -3,6 +3,9 @@ import type { ServerMessage } from 'server'
 import { serverEndpoint } from 'src/constants/server-config'
 import { logger } from 'src/utils/logger'
 
+/**
+ * Send a message to the database for logging user feedback or errors that are provided.
+ */
 export const useDatabase = (type: 'error' | 'feedback') => {
   return async (message: string = '') => {
     const feedbackMessage: ServerMessage = {

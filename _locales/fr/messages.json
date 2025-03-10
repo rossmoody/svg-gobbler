@@ -796,5 +796,14 @@
   },
   "onboarding_card_color": {
     "message": "Des difficultés à voir les SVG blancs ? Changez la couleur de la toile 🎨"
+  },
+  "paste_cue_title": {
+    "message": "Saviez-vous que vous pouvez coller des SVG ici ?"
+  },
+  "paste_cue_desc": {
+    "message": "Ajoutez rapidement des SVG à n'importe quelle collection en les collant directement dans la vue de la collection."
+  },
+  "paste_cue_action": {
+    "message": "Terminé"
   }
 }

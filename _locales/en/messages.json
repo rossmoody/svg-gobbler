@@ -820,5 +820,14 @@
   },
   "onboarding_card_color": {
     "message": "Having trouble seeing white SVGs? Change the canvas color 🎨"
+  },
+  "paste_cue_title": {
+    "message": "Did you know you can paste SVGs here?"
+  },
+  "paste_cue_desc": {
+    "message": "Quickly add SVGs to any collection by pasting it directly into the collection view."
+  },
+  "paste_cue_action": {
+    "message": "Done"
   }
 }
