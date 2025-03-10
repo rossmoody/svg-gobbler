@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react'
-import { Provider as ToastProvider } from '@radix-ui/react-toast'
+import { Provider as ToastProvider, Viewport } from '@radix-ui/react-toast'
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip'
 import { Fragment } from 'react'
 import { DetailsLayout } from 'src/layout/details'
@@ -24,6 +24,7 @@ export const DetailsRoute = () => {
           </DetailsProvider>
         </UserProvider>
       </TooltipProvider>
+      <Viewport className="toast-viewport" />
     </ToastProvider>
   )
 }

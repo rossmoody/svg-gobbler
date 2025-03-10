@@ -796,5 +796,14 @@
   },
   "onboarding_card_color": {
     "message": "¿Tienes problemas para ver SVG blancos? Cambia el color del lienzo 🎨"
+  },
+  "paste_cue_title": {
+    "message": "¿Sabías que puedes pegar SVGs aquí?"
+  },
+  "paste_cue_desc": {
+    "message": "Agrega rápidamente SVGs a cualquier colección pegándolos directamente en la vista de la colección."
+  },
+  "paste_cue_action": {
+    "message": "Hecho"
   }
 }

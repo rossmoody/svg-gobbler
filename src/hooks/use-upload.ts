@@ -5,10 +5,8 @@ import { SvgUtils } from 'src/utils/svg-utils'
 import { Inline, StorageSvg } from 'svg-gobbler-scripts'
 
 /**
- * Upload a given array of svg strings to chrome storage, update the
- * collection context and reset the route to reflect the new data for the current
- * collection. This function is used by the upload button in the collection
- * header.
+ * Upload a given array of svg strings to chrome storage, update the collection
+ * context and reset the route to reflect the new data for the current collection.
  */
 export const useUpload = () => {
   const { dispatch, state } = useCollection()

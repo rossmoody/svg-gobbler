@@ -1,9 +1,9 @@
 import { Menu, Transition } from '@headlessui/react'
 import {
   ArrowDownTrayIcon,
-  ChevronDownIcon,
   ClipboardDocumentIcon,
   DocumentDuplicateIcon,
+  EllipsisHorizontalIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
@@ -30,7 +30,7 @@ export const CardActionMenu = ({ data }: CardData) => {
         <Menu.Button as="div">
           <label className="flex cursor-pointer items-center justify-center rounded-lg p-2 group-hover/select:bg-gray-100/70 group-hover/select:dark:bg-gray-800">
             <IconButton className="rounded-md" size="xs" variant="secondary">
-              <ChevronDownIcon aria-hidden="true" className="h-3 w-3" />
+              <EllipsisHorizontalIcon aria-hidden="true" className="h-3 w-3" />
             </IconButton>
           </label>
         </Menu.Button>

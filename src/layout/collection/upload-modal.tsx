@@ -5,14 +5,17 @@ import { useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
+import { type UserState, useUser } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 import { loc } from 'src/utils/i18n'
+import { StorageUtils } from 'src/utils/storage-utils'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {
   const [error, setError] = useState(false)
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
   const ref = useRef<HTMLTextAreaElement>(null)
   const upload = useUpload()
+  const { dispatch, state } = useUser()
 
   const { getInputProps, getRootProps, isDragActive } = useDropzone({
     accept: { 'image/svg+xml': ['.svg'] },
@@ -29,6 +32,16 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
     // Early return if there's a clipboard value and it's invalid
     if (clipboardValue && !FormUtils.isValidSVG(clipboardValue)) {
       return setError(true)
+    }
+
+    // Set the onboarding flag if the user pastes an SVG
+    if (clipboardValue) {
+      const payload: UserState = {
+        ...state,
+        onboarding: { ...state.onboarding, hasPastedSvg: true },
+      }
+      StorageUtils.setStorageData('user', payload)
+      dispatch({ payload, type: 'set-user' })
     }
 
     // Determine the source of files
@@ -142,6 +155,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
           {loc('main_cancel')}
         </Button>
       </Modal.Footer>
+      <span id="upload-modal" />
     </Modal>
   )
 }

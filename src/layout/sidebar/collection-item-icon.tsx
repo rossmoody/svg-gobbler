@@ -1,8 +1,7 @@
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import { Popover } from '@headlessui/react'
-import clsx from 'clsx'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useDashboard } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
 
@@ -21,14 +20,17 @@ export const CollectionItemIcon = ({ collection }: CollectionItemProps) => {
   const { dispatch, state } = useDashboard()
   const { emoji, name, origin } = collection
 
-  const setCollectionEmoji = ({ native }: EmojiMartData) => {
-    const updatedCollection = { ...collection, emoji: native }
-    const collections = state.collections.map((c) =>
-      c.id === collection.id ? updatedCollection : c,
-    )
-    dispatch({ payload: updatedCollection, type: 'set-collection-icon' })
-    StorageUtils.setStorageData('collections', collections)
-  }
+  const setCollectionEmoji = useCallback(
+    ({ native }: EmojiMartData) => {
+      const updatedCollection = { ...collection, emoji: native }
+      const updatedCollections = state.collections.map((c) =>
+        c.id === collection.id ? updatedCollection : c,
+      )
+      dispatch({ payload: updatedCollection, type: 'set-collection-icon' })
+      StorageUtils.setStorageData('collections', updatedCollections)
+    },
+    [collection, state.collections, dispatch],
+  )
 
   const collectionIcon = useMemo(() => {
     if (emoji) {
@@ -55,10 +57,17 @@ export const CollectionItemIcon = ({ collection }: CollectionItemProps) => {
           {collectionIcon}
         </div>
       </Popover.Button>
-      <Popover.Panel className={clsx('fixed z-20 mt-6')}>
-        <Popover.Button as="button">
-          <Picker data={data} onEmojiSelect={setCollectionEmoji} perLine={7} />
-        </Popover.Button>
+      <Popover.Panel className="fixed z-20 mt-6">
+        {({ close }) => (
+          <Picker
+            data={data}
+            onEmojiSelect={(emojiMartData: EmojiMartData) => {
+              setCollectionEmoji(emojiMartData)
+              close()
+            }}
+            perLine={7}
+          />
+        )}
       </Popover.Panel>
     </Popover>
   )
