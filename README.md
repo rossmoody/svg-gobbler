@@ -68,7 +68,7 @@ cd svg-gobbler
 SVG Gobbler uses yarn to build the necessary dependencies.
 
 ```shell
-yarn
+pnpm i
 ```
 
 ### 3. Start and watch a build
@@ -76,7 +76,7 @@ yarn
 For development with hot reloading use Vite:
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 This will build to the `dist` folder. To load the extension, open the Extensions Dashboard, enable
@@ -84,10 +84,10 @@ This will build to the `dist` folder. To load the extension, open the Extensions
 
 When you make changes in src the background script and any content script will reload automatically.
 
-### 4. Start the server
+### 4. Start the server (optional)
 
-For a majority of the functionality you won't need a server. If you want to make some local fetch
-calls related to Node processes in a separate terminal session cd into the `server` directory.
+Most functionality works without a server, but if you need to make local fetch calls, open a
+separate terminal, navigate to the `server` directory, and start the server from there.
 
 ```bash
 cd server
@@ -96,19 +96,19 @@ cd server
 Install the necessary dependencies
 
 ```bash
-yarn
+pnpm i
 ```
 
 From this directory, compile the server function to the `dist` folder.
 
 ```bash
-yarn build
+pnpm build
 ```
 
 In a separate terminal session serve the function on a local server.
 
 ```bash
-yarn serve
+pnpm serve
 ```
 
 This will startup the server and restart it any time a change is recompiled.
@@ -117,7 +117,7 @@ This will startup the server and restart it any time a change is recompiled.
 
 ## About
 
-5 versions and 5+ years ago, this started as a pet project to improve the
+5 versions and 7+ years ago, this started as a pet project to improve the
 [SVG Crowbar](https://github.com/nytimes/svg-crowbar) tool that is no longer being maintained by NY
 Times.
 
