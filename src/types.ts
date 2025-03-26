@@ -127,3 +127,17 @@ export type SvgType = GElement | Image | Inline | SvgSymbol
  * The database keys
  */
 export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
+
+/**
+ * The model for SVG files imported from the local file system.
+ */
+export type FileSvg = {
+  /**
+   * The file name of the SVG file
+   */
+  name: string
+  /**
+   * The SVG string of the file
+   */
+  svg: string
+}

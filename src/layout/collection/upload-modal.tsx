@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { DocumentCheckIcon, DocumentPlusIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import { nanoid } from 'nanoid'
 import { useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
@@ -45,10 +46,12 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
     }
 
     // Determine the source of files
-    const files = clipboardValue ? [clipboardValue] : await FormUtils.handleUpload(acceptedFiles)
+    const svgFiles = clipboardValue
+      ? [{ name: nanoid(), svg: clipboardValue }]
+      : await FormUtils.handleUpload(acceptedFiles)
 
     // Perform the upload and clear states
-    await upload(files)
+    await upload(svgFiles)
     onClose()
   }
 

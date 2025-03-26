@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { type UserState, useUser } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
@@ -23,7 +24,7 @@ export const usePastedSvg = () => {
 
       if (pastedText && SvgUtils.isValidSvg(pastedText)) {
         event.preventDefault()
-        upload([pastedText])
+        upload([{ name: nanoid(), svg: pastedText }])
 
         const payload: UserState = {
           ...state,

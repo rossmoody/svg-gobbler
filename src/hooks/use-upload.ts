@@ -1,5 +1,6 @@
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
+import { type FileSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
 import { Inline, StorageSvg } from 'svg-gobbler-scripts'
@@ -12,12 +13,12 @@ export const useUpload = () => {
   const { dispatch, state } = useCollection()
   const { revalidate } = useRevalidator()
 
-  return async function (data: string[]) {
+  return async function (fileSvgs: FileSvg[]) {
     const { collectionId } = state
 
     // Get current page data for storage
     let pageData = await StorageUtils.getPageData(collectionId)
-    const newData: StorageSvg[] = data.map(SvgUtils.createStorageSvg)
+    const newData: StorageSvg[] = fileSvgs.map(SvgUtils.createStorageSvg)
 
     // Append new strings to collection's page data
     pageData = {

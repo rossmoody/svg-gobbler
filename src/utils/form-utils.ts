@@ -1,6 +1,7 @@
 import JSZip from 'jszip'
 import { ExportSvg } from 'src/layout/collection/export-panel/use-export-actions'
 import { ExportState, FileType } from 'src/providers'
+import { type FileSvg } from 'src/types'
 
 /**
  * Utility class for form related operations like upload, download, and copy.
@@ -223,15 +224,17 @@ export class FormUtils {
    * Process and returns the string SVG values associated with a
    * given file list.
    */
-  static handleUpload(entryValues: File[]) {
+  static handleUpload(entryValues: File[]): Promise<FileSvg[]> {
     const promises = entryValues.map((file) => {
-      return new Promise<string>((resolve, reject) => {
+      const fileName = file.name.trim().replace(/\.svg$/i, '')
+
+      return new Promise<FileSvg>((resolve, reject) => {
         const fileReader = new FileReader()
 
         fileReader.onload = (event) => {
           const result = event.target?.result
           if (typeof result === 'string') {
-            resolve(result)
+            resolve({ name: fileName, svg: result } as FileSvg)
           } else {
             reject(new Error('File read result is not a string'))
           }

@@ -27,9 +27,8 @@ export const EmptyState = () => {
   })
 
   async function onDropAccepted(files: File[]) {
-    // TODO: The `onDropAccepted` callback is called twice when dropping files because of the modal
-    const svgStrings = await FormUtils.handleUpload(files)
-    upload(svgStrings)
+    const fileSvgs = await FormUtils.handleUpload(files)
+    upload(fileSvgs)
   }
 
   return (
