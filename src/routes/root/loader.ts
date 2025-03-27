@@ -47,7 +47,11 @@ export async function rootLoader() {
 
         // Create classes and process the raw svg elements
         const svgClasses = await svgFactory.process(data)
-        const storageSvgs = SvgUtils.createStorageSvgs(svgClasses)
+
+        const storageSvgs = SvgUtils.renameStorageSvgs(
+          SvgUtils.createStorageSvgs(svgClasses),
+          data.host,
+        )
 
         // Create the sourced page data object
         let pageData: PageData = {
