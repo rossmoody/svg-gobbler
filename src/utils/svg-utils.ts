@@ -50,14 +50,4 @@ export class SvgUtils {
       return false
     }
   }
-
-  /**
-   * Rename a set of storage svgs in sequential order based on a prefixed name.
-   */
-  static renameStorageSvgs(storageSvgs: StorageSvg[], name: string) {
-    return storageSvgs.map((svg, index) => ({
-      ...svg,
-      name: `${name}-${index + 1}`,
-    }))
-  }
 }
