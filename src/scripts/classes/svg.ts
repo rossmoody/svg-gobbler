@@ -5,31 +5,6 @@
  */
 export class Svg {
   /**
-   * The name of the SVG element. Defaults to the id
-   * if not supplied.
-   */
-  public name: string
-
-  /**
-   * Last edited date. Defaults to creation date.
-   */
-  public lastEdited: string
-
-  /**
-   * A unique identifier. This must be supplied as a matching identifier
-   * from the SVG element in storage.
-   */
-  public id: string
-
-  /**
-   * The original string of the SVG element in the DOM.
-   * It is processed into an <svg> string through the svg factory.
-   *
-   * If it fails to do so, it is invalid or cors restricted.
-   */
-  public originalString: string
-
-  /**
    * The original string is parsed and assigned to this property as an element.
    * If it is undefined, the SVG factory was unable to parse or
    * manually create the SVG element from parts.
@@ -42,24 +17,36 @@ export class Svg {
    */
   public corsRestricted = false
 
+  /**
+   * A unique identifier. This must be supplied as a matching identifier
+   * from the SVG element in storage.
+   */
+  public id: string
+
+  /**
+   * Last edited date. Defaults to creation date.
+   */
+  public lastEdited: string
+
+  /**
+   * The name of the SVG element. Defaults to the id
+   * if not supplied.
+   */
+  public name: string
+
+  /**
+   * The original string of the SVG element in the DOM.
+   * It is processed into an <svg> string through the svg factory.
+   *
+   * If it fails to do so, it is invalid or cors restricted.
+   */
+  public originalString: string
+
   constructor(originalString: string, id: string, lastEdited: string, name: string) {
     this.originalString = originalString
     this.id = id
     this.lastEdited = lastEdited
     this.name = name
-  }
-
-  /**
-   * Rebuild the SVG element from the original string
-   */
-  parseFromString() {
-    const parser = new DOMParser()
-    const { documentElement } = parser.parseFromString(this.originalString, 'image/svg+xml')
-    if (!documentElement.querySelector('parsererror')) {
-      return documentElement
-    }
-
-    console.error(`Failed to parse SVG element: ${this.originalString}`)
   }
 
   /**
@@ -69,6 +56,16 @@ export class Svg {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns', 'http://www.w3.org/2000/svg')
     return svg
+  }
+
+  /**
+   * Creates a new empty symbol element with the correct namespace and
+   * id attribute set to the id passed in for the relevant g or use
+   */
+  createSymbolElement(id: string) {
+    const symbol = document.createElementNS('http://www.w3.org/2000/svg', 'symbol')
+    symbol.setAttribute('id', id)
+    return symbol
   }
 
   /**
@@ -82,13 +79,16 @@ export class Svg {
   }
 
   /**
-   * Creates a new empty symbol element with the correct namespace and
-   * id attribute set to the id passed in for the relevant g or use
+   * Rebuild the SVG element from the original string
    */
-  createSymbolElement(id: string) {
-    const symbol = document.createElementNS('http://www.w3.org/2000/svg', 'symbol')
-    symbol.setAttribute('id', id)
-    return symbol
+  parseFromString() {
+    const parser = new DOMParser()
+    const { documentElement } = parser.parseFromString(this.originalString, 'image/svg+xml')
+    if (!documentElement.querySelector('parsererror')) {
+      return documentElement
+    }
+
+    console.error(`Failed to parse SVG element: ${this.originalString}`)
   }
 
   /**

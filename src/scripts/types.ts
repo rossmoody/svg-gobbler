@@ -17,13 +17,13 @@ export type StorageSvg = {
    */
   lastEdited: string
   /**
-   * The svg string of the item.
-   */
-  svg: string
-  /**
    * The name of the item. Defaults to ID on creation.
    */
   name: string
+  /**
+   * The svg string of the item.
+   */
+  svg: string
 }
 
 /**
@@ -39,18 +39,18 @@ export type DocumentData = {
    */
   host: string
   /**
+   * The specific URL of the document. Used in merging collections based on the URL.
+   */
+  href: string
+  /**
    * A string containing the canonical form of the origin of the specific location.
    * This is used to rebuild the SVGs in the content script. Especially related to
    * image sources and cors restrictions.
    */
   origin: string
-  /**
-   * The specific URL of the document. Used in merging collections based on the URL.
-   */
-  href: string
 }
 
 /**
  * A union of all the svg types that are returned from the svgFactory
  */
-export type SvgType = Inline | Image | SvgSymbol | GElement
+export type SvgType = GElement | Image | Inline | SvgSymbol

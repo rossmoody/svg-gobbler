@@ -7,11 +7,6 @@ export class GElement extends Svg {
     this.processG()
   }
 
-  private removeXlinkHref() {
-    // parseFromString fails to parse xlink:href as it is deprecated
-    this.originalString = this.originalString.replace(/xlink:href/g, 'href')
-  }
-
   private processG() {
     const offDomContainer = document.createElement('div')
     offDomContainer.style.visibility = 'hidden'
@@ -29,5 +24,10 @@ export class GElement extends Svg {
 
     this.asElement = svg
     this.originalString = svg.outerHTML
+  }
+
+  private removeXlinkHref() {
+    // parseFromString fails to parse xlink:href as it is deprecated
+    this.originalString = this.originalString.replace(/xlink:href/g, 'href')
   }
 }

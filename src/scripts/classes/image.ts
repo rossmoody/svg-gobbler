@@ -26,54 +26,6 @@ export class Image extends Svg {
     this.processImage()
   }
 
-  processImage() {
-    const src = this.originalString.match(/src="([^"]*)"/)?.[1] ?? ''
-
-    switch (true) {
-      // Base 64
-      case src.includes('data:image/svg+xml;base64'): {
-        const base64Index = src.indexOf(',') + 1
-        const base64String = src.slice(base64Index, src.length)
-        this.originalString = this.base64DecodeUnicode(base64String)
-        this.asElement = this.parseFromString()
-        break
-      }
-
-      // Utf 8
-      case src.includes('data:image/svg+xml;utf8'): {
-        const svgStart = src.indexOf('<svg')
-        const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
-        const svgString = src.slice(svgStart, svgEnd)
-        this.originalString = svgString[0]
-        this.asElement = this.parseFromString()
-        break
-      }
-
-      // URL Encoded SVG
-      case src.startsWith('data:image/svg+xml,'): {
-        const svgString = decodeURIComponent(src.split(',')[1])
-        this.originalString = svgString
-        this.asElement = this.parseFromString()
-        break
-      }
-
-      // Need to fetch asynchronously
-      case src.includes('.svg'): {
-        this.parseAndSetElement()
-        this.absoluteImageUrl = this.getAbsoluteImageSrc()
-        break
-      }
-    }
-  }
-
-  /**
-   * Creates an absolute URL from the image src of an image element.
-   */
-  private getAbsoluteImageSrc() {
-    const src = this.asElement?.getAttribute('src') ?? ''
-    return src.startsWith('http') ? src : `${this.origin.replace(/\/$/, '')}${src}`
-  }
-
   /**
    * * Decodes a base64-encoded Unicode string.
    *
@@ -93,6 +45,14 @@ export class Image extends Svg {
     } catch (error) {
       return str
     }
+  }
+
+  /**
+   * Creates an absolute URL from the image src of an image element.
+   */
+  private getAbsoluteImageSrc() {
+    const src = this.asElement?.getAttribute('src') ?? ''
+    return src.startsWith('http') ? src : `${this.origin.replace(/\/$/, '')}${src}`
   }
 
   /**
@@ -141,5 +101,45 @@ export class Image extends Svg {
     }
 
     return this
+  }
+
+  processImage() {
+    const src = this.originalString.match(/src="([^"]*)"/)?.[1] ?? ''
+
+    switch (true) {
+      // Base 64
+      case src.includes('data:image/svg+xml;base64'): {
+        const base64Index = src.indexOf(',') + 1
+        const base64String = src.slice(base64Index, src.length)
+        this.originalString = this.base64DecodeUnicode(base64String)
+        this.asElement = this.parseFromString()
+        break
+      }
+
+      // Utf 8
+      case src.includes('data:image/svg+xml;utf8'): {
+        const svgStart = src.indexOf('<svg')
+        const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
+        const svgString = src.slice(svgStart, svgEnd)
+        this.originalString = svgString[0]
+        this.asElement = this.parseFromString()
+        break
+      }
+
+      // URL Encoded SVG
+      case src.startsWith('data:image/svg+xml,'): {
+        const svgString = decodeURIComponent(src.split(',')[1])
+        this.originalString = svgString
+        this.asElement = this.parseFromString()
+        break
+      }
+
+      // Need to fetch asynchronously
+      case src.includes('.svg'): {
+        this.parseAndSetElement()
+        this.absoluteImageUrl = this.getAbsoluteImageSrc()
+        break
+      }
+    }
   }
 }
