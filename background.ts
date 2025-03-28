@@ -1,4 +1,4 @@
-import { DocumentData, findSvg } from 'svg-gobbler-scripts'
+import { DocumentData, findSvg } from 'src/scripts'
 
 import Chrome from './src/utils/chrome-utils'
 

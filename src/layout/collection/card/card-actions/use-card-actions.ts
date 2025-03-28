@@ -1,12 +1,12 @@
-import type { Svg } from 'svg-gobbler-scripts'
+import type { Svg } from 'src/scripts'
 
 import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
+import { Inline } from 'src/scripts'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
-import { Inline } from 'svg-gobbler-scripts'
 import { optimize } from 'svgo'
 
 export const useCardActions = (data: Svg) => {
@@ -14,7 +14,12 @@ export const useCardActions = (data: Svg) => {
   const { revalidate } = useRevalidator()
 
   async function duplicateItem() {
-    const svgDuplicate = new Inline(data.originalString, nanoid(), new Date().toISOString())
+    const svgDuplicate = new Inline(
+      data.originalString,
+      nanoid(),
+      new Date().toISOString(),
+      data.name,
+    )
     const newData = [svgDuplicate, ...state.data]
     const pageData = await StorageUtils.getPageData(state.collectionId)
     StorageUtils.setPageData(state.collectionId, {

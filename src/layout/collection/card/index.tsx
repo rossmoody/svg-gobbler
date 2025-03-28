@@ -1,4 +1,4 @@
-import type { Image, Svg } from 'svg-gobbler-scripts'
+import type { Image, Svg } from 'src/scripts'
 
 import clsx from 'clsx'
 import { HTMLAttributes, forwardRef, useMemo } from 'react'

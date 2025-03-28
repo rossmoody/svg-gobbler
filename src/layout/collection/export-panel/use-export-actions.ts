@@ -1,4 +1,4 @@
-import type { Svg } from 'svg-gobbler-scripts'
+import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'

@@ -1,5 +1,5 @@
 import type { Options } from 'pretty-bytes'
-import type { StorageSvg, Svg } from 'svg-gobbler-scripts'
+import type { StorageSvg, Svg } from 'src/scripts'
 
 import { nanoid } from 'nanoid'
 import prettyBytes from 'pretty-bytes'

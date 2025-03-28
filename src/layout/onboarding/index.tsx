@@ -2,8 +2,8 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { Logo } from 'src/components'
 import { links } from 'src/constants/links'
+import { findSvg } from 'src/scripts'
 import { loc } from 'src/utils/i18n'
-import { findSvg } from 'svg-gobbler-scripts'
 
 import graphic from './onboarding-graphic.png'
 

@@ -1,8 +1,8 @@
 import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import { Fragment, PropsWithChildren } from 'react'
 import { Button, Tooltip } from 'src/components'
+import { type Image } from 'src/scripts'
 import { loc } from 'src/utils/i18n'
-import { type Image } from 'svg-gobbler-scripts'
 
 import { type CardData } from '.'
 

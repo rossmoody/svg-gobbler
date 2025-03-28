@@ -1,12 +1,4 @@
-import type {
-  DocumentData,
-  GElement,
-  Image,
-  Inline,
-  StorageSvg,
-  Svg,
-  SvgSymbol,
-} from 'svg-gobbler-scripts'
+import type { DocumentData, GElement, Image, Inline, StorageSvg, Svg, SvgSymbol } from 'src/scripts'
 
 import { type UserState } from './providers'
 

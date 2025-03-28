@@ -1,5 +1,5 @@
+import type { Svg } from 'src/scripts'
 import type { CollectionData } from 'src/types'
-import type { Svg } from 'svg-gobbler-scripts'
 
 import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'

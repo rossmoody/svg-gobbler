@@ -3,11 +3,11 @@ import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, type UserState, initCollectionState, initUserState } from 'src/providers'
+import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { RootUtils } from 'src/utils/root-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
-import { svgFactory } from 'svg-gobbler-scripts'
 
 /**
  * The primary initialization function for the root route.
