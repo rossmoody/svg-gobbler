@@ -30,9 +30,7 @@ export const useUpload = () => {
     await StorageUtils.setPageData(collectionId, pageData)
 
     // Update the collection context state
-    const newSvgClasses = newData.map(
-      (item) => new Inline(item.svg, item.id, item.lastEdited, item.name),
-    )
+    const newSvgClasses = newData.map((item) => new Inline(item))
     dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
     dispatch({ type: 'process-data' })
     revalidate()

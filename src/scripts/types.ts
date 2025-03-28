@@ -5,7 +5,9 @@ import type { SvgSymbol } from './classes/symbol'
 
 /**
  * The shape of the svg data stored in chrome storage as part of page data. This data
- * gets processed in and out of SVGTypes.
+ * gets processed in and out of SVGTypes. We do this to save space in storage and
+ * to make it easier to work with the data in the content script. This is the only information
+ * we keep track of persistently for the SVGs.
  */
 export type StorageSvg = {
   /**

@@ -1,8 +1,9 @@
+import { StorageSvg } from '../types'
 import { Svg } from './svg'
 
 export class GElement extends Svg {
-  constructor(originalString: string, id: string, lastModified: string, name: string) {
-    super(originalString, id, lastModified, name)
+  constructor(storageSvg: StorageSvg) {
+    super(storageSvg)
     this.removeXlinkHref()
     this.processG()
   }

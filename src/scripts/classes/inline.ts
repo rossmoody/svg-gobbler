@@ -1,11 +1,12 @@
+import { StorageSvg } from '../types'
 import { Svg } from './svg'
 
 /**
  * Inline SVGs are SVGs that are directly in the DOM.
  */
 export class Inline extends Svg {
-  constructor(originalString: string, id: string, lastModified: string, name: string) {
-    super(originalString, id, lastModified, name)
+  constructor(storageSvg: StorageSvg) {
+    super(storageSvg)
     this.asElement = this.parseFromString()
     this.setViewBox()
   }

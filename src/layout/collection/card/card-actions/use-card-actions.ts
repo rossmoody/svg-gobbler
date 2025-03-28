@@ -1,4 +1,4 @@
-import type { Svg } from 'src/scripts'
+import type { StorageSvg, Svg } from 'src/scripts'
 
 import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
@@ -14,13 +14,13 @@ export const useCardActions = (data: Svg) => {
   const { revalidate } = useRevalidator()
 
   async function duplicateItem() {
-    const svgDuplicate = new Inline(
-      data.originalString,
-      nanoid(),
-      new Date().toISOString(),
-      data.name,
-    )
-    const newData = [svgDuplicate, ...state.data]
+    const storageSvgDuplicate: StorageSvg = {
+      id: nanoid(),
+      lastEdited: new Date().toISOString(),
+      name: data.name,
+      svg: data.originalString,
+    }
+    const newData = [new Inline(storageSvgDuplicate), ...state.data]
     const pageData = await StorageUtils.getPageData(state.collectionId)
     StorageUtils.setPageData(state.collectionId, {
       ...pageData,

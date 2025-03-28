@@ -1,8 +1,10 @@
+import { nanoid } from 'nanoid'
+
 import { GElement } from './classes/g-element'
 import { Image } from './classes/image'
 import { Inline } from './classes/inline'
 import { SvgSymbol } from './classes/symbol'
-import { DocumentData, SvgType } from './types'
+import { DocumentData, StorageSvg, SvgType } from './types'
 
 /**
  * The primary SVG factory that processes document data and returns an array of SVG classes.
@@ -11,27 +13,21 @@ class SvgFactory {
   /**
    * Process a single SVG element and return an SVG class.
    */
-  private createSvgElement(
-    svg: string,
-    id: string,
-    lastEdited: string,
-    origin: string,
-    name: string,
-  ): SvgType | null {
+  private createSvgElement(storageSvg: StorageSvg, origin: string): SvgType | null {
     try {
       const parser = new DOMParser()
-      const doc = parser.parseFromString(svg, 'image/svg+xml')
+      const doc = parser.parseFromString(storageSvg.svg, 'image/svg+xml')
       const { tagName } = doc.documentElement
 
       switch (tagName) {
         case 'svg':
-          return new Inline(svg, id, lastEdited, name)
+          return new Inline(storageSvg)
         case 'symbol':
-          return new SvgSymbol(svg, id, lastEdited, name)
+          return new SvgSymbol(storageSvg)
         case 'g':
-          return new GElement(svg, id, lastEdited, name)
+          return new GElement(storageSvg)
         case 'img':
-          return new Image(svg, id, lastEdited, origin, name)
+          return new Image(storageSvg, origin)
         default:
           return null
       }
@@ -59,8 +55,15 @@ class SvgFactory {
   private extractAndPushElements(image: Image, selector: 'g' | 'symbol', results: SvgType[]): void {
     const elements = image.asElement?.querySelectorAll(selector)
     elements?.forEach((element) => {
+      const storageSvg: StorageSvg = {
+        id: nanoid(),
+        lastEdited: image.lastEdited,
+        name: image.name,
+        svg: element.outerHTML,
+      }
+
       const constructor = selector === 'symbol' ? SvgSymbol : GElement
-      results.push(new constructor(element.outerHTML, image.id, image.lastEdited, image.name))
+      results.push(new constructor(storageSvg))
     })
   }
 
@@ -85,9 +88,7 @@ class SvgFactory {
     // Create SVG elements from the message data
     const initialData: SvgType[] = message.data
       // Last edited is destructured with a default value to prevent undefined from old data
-      .map(({ id, lastEdited = new Date().toISOString(), name, svg }) =>
-        this.createSvgElement(svg, id, lastEdited, message.origin, name),
-      )
+      .map((storageSvg) => this.createSvgElement(storageSvg, message.origin))
       .filter((item): item is SvgType => !!item)
 
     // If an item is an Image, fetch its SVG content; otherwise, leave it as is

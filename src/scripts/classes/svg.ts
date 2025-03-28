@@ -1,3 +1,5 @@
+import { StorageSvg } from '../types'
+
 /**
  * The root SVG class. This is the base class for all SVG types. It doesn't actually
  * produce a "valid" SVG element, but it is used to store the original string and
@@ -42,11 +44,11 @@ export class Svg {
    */
   public originalString: string
 
-  constructor(originalString: string, id: string, lastEdited: string, name: string) {
-    this.originalString = originalString
-    this.id = id
-    this.lastEdited = lastEdited
-    this.name = name
+  constructor(storageSvg: StorageSvg) {
+    this.id = storageSvg.id
+    this.lastEdited = storageSvg.lastEdited
+    this.name = storageSvg.name || storageSvg.id
+    this.originalString = storageSvg.svg
   }
 
   /**

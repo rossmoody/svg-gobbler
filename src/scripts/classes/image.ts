@@ -1,3 +1,4 @@
+import { StorageSvg } from '../types'
 import { Svg } from './svg'
 
 export class Image extends Svg {
@@ -14,14 +15,8 @@ export class Image extends Svg {
    */
   origin: string
 
-  constructor(
-    originalString: string,
-    id: string,
-    lastModified: string,
-    origin: string,
-    name: string,
-  ) {
-    super(originalString, id, lastModified, name)
+  constructor(storageSvg: StorageSvg, origin: string) {
+    super(storageSvg)
     this.origin = origin
     this.processImage()
   }
