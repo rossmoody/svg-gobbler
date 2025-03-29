@@ -14,6 +14,9 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
   // Storage for dynamically added SVGs
   const dynamicSvgs: string[] = []
 
+  // Cache for external SVG requests to avoid duplicate fetches
+  const externalSvgCache: Map<string, Promise<string>> = new Map()
+
   /**
    * Helper function to safely create a new image element with the provided source.
    * This strips out sensitive data due to security restrictions on client page access.
@@ -34,7 +37,7 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
   }
 
   /**
-   * Checks if a string contains any SVG-related patterns
+   * Improved SVG detection with additional patterns
    */
   const isSvgRelated = (str: string): boolean => {
     if (!str) return false
@@ -46,27 +49,67 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
       // Check for inline SVG in data URIs
       (str.includes('data:') && str.includes('<svg')) ||
       // Check for SVG XML namespace
-      str.includes('http://www.w3.org/2000/svg')
+      str.includes('http://www.w3.org/2000/svg') ||
+      // Check for SVG elements
+      /<(?:svg|path|circle|rect|g)\s/i.test(str) ||
+      // Check for viewBox attribute
+      /viewBox\s*=\s*["']/i.test(str)
     )
   }
 
   /**
-   * Attempts to fetch an external SVG and return its content
+   * Improved external SVG fetching with caching
    */
   const fetchExternalSvg = async (url: string): Promise<string> => {
-    try {
-      const response = await fetch(url, { mode: 'cors' })
-      if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`)
-
-      const contentType = response.headers.get('content-type')
-      if (contentType && contentType.includes('image/svg+xml')) {
-        const svgText = await response.text()
-        return svgText
-      }
-    } catch (error) {
-      console.warn(`Failed to fetch SVG from ${url}:`, error)
+    // Return from cache if already requested
+    if (externalSvgCache.has(url)) {
+      return externalSvgCache.get(url) as Promise<string>
     }
-    return ''
+
+    // Create new fetch promise
+    // eslint-disable-next-line no-async-promise-executor
+    const fetchPromise = new Promise<string>(async (resolve) => {
+      try {
+        // Add a timeout to prevent hanging
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
+
+        const response = await fetch(url, {
+          mode: 'cors',
+          signal: controller.signal,
+        })
+
+        clearTimeout(timeoutId)
+
+        if (!response.ok) {
+          resolve('')
+          return
+        }
+
+        const contentType = response.headers.get('content-type')
+        if (
+          contentType &&
+          (contentType.includes('image/svg+xml') ||
+            contentType.includes('text/xml') ||
+            contentType.includes('application/xml'))
+        ) {
+          const svgText = await response.text()
+          // Verify it's actually SVG content
+          if (svgText.includes('<svg') || svgText.includes('xmlns="http://www.w3.org/2000/svg"')) {
+            resolve(svgText)
+            return
+          }
+        }
+        resolve('')
+      } catch (error) {
+        console.warn(`Failed to fetch SVG from ${url}:`, error)
+        resolve('')
+      }
+    })
+
+    // Store in cache
+    externalSvgCache.set(url, fetchPromise)
+    return fetchPromise
   }
 
   /**
@@ -235,7 +278,7 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
   }
 
   /**
-   * Gathers SVGs from Shadow DOM
+   * Improved Shadow DOM SVG gathering with nested shadow roots support
    */
   const gatherShadowDomSvgs = (): string[] => {
     const results: string[] = []
@@ -244,7 +287,7 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
       // Query all elements that might have shadow roots
       const elements = document.querySelectorAll('*')
 
-      elements.forEach((element) => {
+      const processNode = (element: Element) => {
         // Check if the element has a shadow root
         const shadowRoot = element.shadowRoot
         if (shadowRoot) {
@@ -263,7 +306,17 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
                 results.push(createImage(el.data))
               }
             })
+
+          // Process nested shadow roots recursively
+          shadowRoot.querySelectorAll('*').forEach((child) => {
+            processNode(child)
+          })
         }
+      }
+
+      // Start processing at top level
+      elements.forEach((element) => {
+        processNode(element)
       })
     } catch (error) {
       console.warn('Error gathering SVGs from Shadow DOM:', error)
@@ -345,44 +398,6 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     }
 
     return results.filter(Boolean)
-  }
-
-  /**
-   * Sets up monitoring for dynamically added SVGs
-   */
-  const monitorDomForDynamicSvgs = (): (() => void) => {
-    try {
-      // Create a MutationObserver to watch for dynamically added SVGs
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.type === 'childList') {
-            mutation.addedNodes.forEach((node) => {
-              if (node instanceof SVGElement) {
-                // Add to our collection
-                dynamicSvgs.push(node.outerHTML)
-              } else if (node instanceof Element) {
-                // Check if the added element contains SVGs
-                node.querySelectorAll('svg').forEach((svg) => {
-                  dynamicSvgs.push(svg.outerHTML)
-                })
-              }
-            })
-          }
-        })
-      })
-
-      // Start observing the entire document
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      })
-
-      // Return cleanup function to disconnect observer when done
-      return () => observer.disconnect()
-    } catch (error) {
-      console.warn('Error setting up dynamic SVG monitoring:', error)
-      return () => {}
-    }
   }
 
   /**
@@ -521,14 +536,6 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     return results.filter(Boolean)
   }
 
-  // Start monitoring for dynamic SVGs
-  const cleanupObserver = monitorDomForDynamicSvgs()
-
-  // Small delay to let the observer catch any SVGs added right after page load
-  setTimeout(() => {
-    cleanupObserver()
-  }, 500)
-
   /**
    * Creates a promise to fetch SVGs from external links
    * This will attempt to fetch the actual SVG content for key external sources
@@ -542,23 +549,18 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
       const imgElements = document.querySelectorAll('img[src$=".svg"]')
       const objectElements = document.querySelectorAll('object[type="image/svg+xml"]')
 
-      // Get up to 5 image SVG sources
-      for (let i = 0; i < Math.min(imgElements.length, 5); i++) {
-        const img = imgElements[i] as HTMLImageElement
-        if (img.src && !img.src.startsWith('data:')) {
+      imgElements.forEach((img) => {
+        if (img instanceof HTMLImageElement && img.src && !img.src.startsWith('data:')) {
           externalSources.push(img.src)
         }
-      }
+      })
 
-      // Get up to 5 object SVG sources
-      for (let i = 0; i < Math.min(objectElements.length, 5); i++) {
-        const obj = objectElements[i] as HTMLObjectElement
-        if (obj.data && !obj.data.startsWith('data:')) {
+      objectElements.forEach((obj) => {
+        if (obj instanceof HTMLObjectElement && obj.data && !obj.data.startsWith('data:')) {
           externalSources.push(obj.data)
         }
-      }
+      })
 
-      // Fetch them in parallel
       const fetchPromises = externalSources.map((src) => fetchExternalSvg(src))
       const fetchedSvgs = await Promise.all(fetchPromises)
 
@@ -573,11 +575,9 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     return results
   }
 
-  // Fetch some external SVGs if possible
   let externalSvgData: string[] = []
   try {
-    // Using Promise.race with a timeout to prevent blocking
-    const timeoutPromise = new Promise<string[]>((resolve) => setTimeout(() => resolve([]), 500))
+    const timeoutPromise = new Promise<string[]>((resolve) => setTimeout(() => resolve([]), 1000)) // Increased from 500ms to 1000ms
     externalSvgData = await Promise.race([fetchExternalSvgs(), timeoutPromise])
   } catch (error) {
     console.warn('Error in external SVG fetching:', error)
@@ -602,15 +602,13 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     ...externalSvgData,
   ]
 
-  // Use Set to efficiently remove duplicates
   const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg.trim().length > 0)
 
-  // Generate the final document data
   return {
     data: uniqueSvgData.map((svg, i) => {
       try {
         return {
-          id: crypto.randomUUID?.() || `svg-${Date.now()}-${i}`, // Fallback for environments without randomUUID
+          id: crypto.randomUUID?.() || `svg-${Date.now()}-${i}`,
           lastEdited: new Date().toISOString(),
           name: `${location?.host || 'unknown'}-${i}`,
           svg,
