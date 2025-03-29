@@ -31,23 +31,19 @@ export class Svg {
   public lastEdited: string
 
   /**
-   * The name of the SVG element. Defaults to the id
-   * if not supplied.
+   * The name of the SVG file
    */
   public name: string
 
   /**
-   * The original string of the SVG element in the DOM.
-   * It is processed into an <svg> string through the svg factory.
-   *
-   * If it fails to do so, it is invalid or cors restricted.
+   * The current working SVG string
    */
   public svg: string
 
   constructor(storageSvg: StorageSvg) {
     this.id = storageSvg.id
     this.lastEdited = storageSvg.lastEdited
-    this.name = storageSvg.name || storageSvg.id
+    this.name = storageSvg.name
     this.svg = storageSvg.svg
   }
 

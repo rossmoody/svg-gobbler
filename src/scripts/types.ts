@@ -22,16 +22,19 @@ export type DocumentData = {
   data: StorageSvg[]
   /**
    * The host URL of the document.
+   * teams.microsoft.com
    */
   host: string
   /**
    * The specific URL of the document. Used in merging collections based on the URL.
+   * "https://teams.microsoft.com/v2/"
    */
   href: string
   /**
    * A string containing the canonical form of the origin of the specific location.
    * This is used to rebuild the SVGs in the content script. Especially related to
    * image sources and cors restrictions.
+   * "https://teams.microsoft.com"
    */
   origin: string
 }
