@@ -1,32 +1,16 @@
 import type { GElement } from './classes/g-element'
 import type { Image } from './classes/image'
 import type { Inline } from './classes/inline'
+import type { Svg } from './classes/svg'
 import type { SvgSymbol } from './classes/symbol'
 
 /**
  * The shape of the svg data stored in chrome storage as part of page data. This data
- * gets processed in and out of SVGTypes. We do this to save space in storage and
+ * gets processed in and out of SVGType. We do this to save space in storage and
  * to make it easier to work with the data in the content script. This is the only information
  * we keep track of persistently for the SVGs.
  */
-export type StorageSvg = {
-  /**
-   * Unique ID
-   */
-  id: string
-  /**
-   * The last edited date
-   */
-  lastEdited: string
-  /**
-   * The name of the item. Defaults to ID on creation.
-   */
-  name: string
-  /**
-   * The svg string of the item.
-   */
-  svg: string
-}
+export type StorageSvg = Pick<Svg, 'id' | 'lastEdited' | 'name' | 'svg'>
 
 /**
  * The shape of the data that is gathered from the document.

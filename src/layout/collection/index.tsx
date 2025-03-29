@@ -73,7 +73,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
             enter="transition-all duration-300 ease-in-out"
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
-            key={svg.originalString + i}
+            key={svg.svg + i}
             show
           >
             <Card data={svg} style={{ transitionDelay: calculateDelay(i) }} />

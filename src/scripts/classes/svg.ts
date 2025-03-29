@@ -42,13 +42,13 @@ export class Svg {
    *
    * If it fails to do so, it is invalid or cors restricted.
    */
-  public originalString: string
+  public svg: string
 
   constructor(storageSvg: StorageSvg) {
     this.id = storageSvg.id
     this.lastEdited = storageSvg.lastEdited
     this.name = storageSvg.name || storageSvg.id
-    this.originalString = storageSvg.svg
+    this.svg = storageSvg.svg
   }
 
   /**
@@ -85,12 +85,12 @@ export class Svg {
    */
   parseFromString() {
     const parser = new DOMParser()
-    const { documentElement } = parser.parseFromString(this.originalString, 'image/svg+xml')
+    const { documentElement } = parser.parseFromString(this.svg, 'image/svg+xml')
     if (!documentElement.querySelector('parsererror')) {
       return documentElement
     }
 
-    console.error(`Failed to parse SVG element: ${this.originalString}`)
+    console.error(`Failed to parse SVG element: ${this.svg}`)
   }
 
   /**

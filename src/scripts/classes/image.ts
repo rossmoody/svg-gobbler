@@ -58,7 +58,7 @@ export class Image extends Svg {
    * important for correctly interpreting the HTML structure and any associated resources.
    */
   private parseAndSetElement() {
-    const htmlSource = `<!DOCTYPE html><html><head><base href=${this.origin}/></head><body>${this.originalString}</body></html>`
+    const htmlSource = `<!DOCTYPE html><html><head><base href=${this.origin}/></head><body>${this.svg}</body></html>`
 
     try {
       const element = new DOMParser().parseFromString(htmlSource, 'text/html')
@@ -88,9 +88,9 @@ export class Image extends Svg {
       const response = await fetch(this.absoluteImageUrl, { mode: 'cors', signal })
       clearTimeout(timeoutId)
       const text = await response.text()
-      this.originalString = text
+      this.svg = text
       this.asElement = this.parseFromString()
-      this.originalString = this.asElement!.outerHTML
+      this.svg = this.asElement!.outerHTML
     } catch (error) {
       this.corsRestricted = true
     }
@@ -99,14 +99,14 @@ export class Image extends Svg {
   }
 
   processImage() {
-    const src = this.originalString.match(/src="([^"]*)"/)?.[1] ?? ''
+    const src = this.svg.match(/src="([^"]*)"/)?.[1] ?? ''
 
     switch (true) {
       // Base 64
       case src.includes('data:image/svg+xml;base64'): {
         const base64Index = src.indexOf(',') + 1
         const base64String = src.slice(base64Index, src.length)
-        this.originalString = this.base64DecodeUnicode(base64String)
+        this.svg = this.base64DecodeUnicode(base64String)
         this.asElement = this.parseFromString()
         break
       }
@@ -116,7 +116,7 @@ export class Image extends Svg {
         const svgStart = src.indexOf('<svg')
         const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
         const svgString = src.slice(svgStart, svgEnd)
-        this.originalString = svgString[0]
+        this.svg = svgString[0]
         this.asElement = this.parseFromString()
         break
       }
@@ -124,7 +124,7 @@ export class Image extends Svg {
       // URL Encoded SVG
       case src.startsWith('data:image/svg+xml,'): {
         const svgString = decodeURIComponent(src.split(',')[1])
-        this.originalString = svgString
+        this.svg = svgString
         this.asElement = this.parseFromString()
         break
       }

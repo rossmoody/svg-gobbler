@@ -15,7 +15,7 @@ export class GElement extends Svg {
 
     const svg = this.createSvgElement()
     offDomContainer.appendChild(svg)
-    svg.innerHTML = this.originalString
+    svg.innerHTML = this.svg
 
     const gElement = svg.querySelector('g') as SVGGElement
     const bBox = gElement.getBBox()
@@ -24,11 +24,11 @@ export class GElement extends Svg {
     svg.setAttribute('viewBox', `${bBox.x} ${bBox.y} ${bBox.width} ${bBox.height}`)
 
     this.asElement = svg
-    this.originalString = svg.outerHTML
+    this.svg = svg.outerHTML
   }
 
   private removeXlinkHref() {
     // parseFromString fails to parse xlink:href as it is deprecated
-    this.originalString = this.originalString.replace(/xlink:href/g, 'href')
+    this.svg = this.svg.replace(/xlink:href/g, 'href')
   }
 }

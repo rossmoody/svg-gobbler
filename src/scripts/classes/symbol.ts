@@ -26,6 +26,6 @@ export class SvgSymbol extends Svg {
     svg.append(symbol, useElement)
 
     this.asElement = svg
-    this.originalString = svg.outerHTML
+    this.svg = svg.outerHTML
   }
 }

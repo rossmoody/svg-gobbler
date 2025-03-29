@@ -26,7 +26,7 @@ export class SvgUtils {
       id: svg.id,
       lastEdited: svg.lastEdited,
       name: svg.name,
-      svg: svg.originalString,
+      svg: svg.svg,
     }))
   }
 

@@ -18,7 +18,7 @@ export const useCardActions = (data: Svg) => {
       id: nanoid(),
       lastEdited: new Date().toISOString(),
       name: data.name,
-      svg: data.originalString,
+      svg: data.svg,
     }
     const newData = [new Inline(storageSvgDuplicate), ...state.data]
     const pageData = await StorageUtils.getPageData(state.collectionId)
@@ -40,17 +40,17 @@ export const useCardActions = (data: Svg) => {
   }
 
   function copyOriginal() {
-    FormUtils.copyStringToClipboard(data.originalString)
+    FormUtils.copyStringToClipboard(data.svg)
   }
 
   async function copyOptimized() {
-    const optimizedString = optimize(data.originalString)
+    const optimizedString = optimize(data.svg)
     FormUtils.copyStringToClipboard(optimizedString.data)
   }
 
   async function downloadOriginal() {
     const pageData = await StorageUtils.getPageData(state.collectionId)
-    FormUtils.downloadSvgString(data.originalString, pageData.host)
+    FormUtils.downloadSvgString(data.svg, pageData.host)
   }
 
   return {
