@@ -1,9 +1,9 @@
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
+import { Inline, StorageSvg } from 'src/scripts'
 import { type FileSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
-import { Inline, StorageSvg } from 'svg-gobbler-scripts'
 
 /**
  * Upload a given array of svg strings to chrome storage, update the collection
@@ -30,7 +30,7 @@ export const useUpload = () => {
     await StorageUtils.setPageData(collectionId, pageData)
 
     // Update the collection context state
-    const newSvgClasses = newData.map((item) => new Inline(item.svg, item.id, item.lastEdited))
+    const newSvgClasses = newData.map((item) => new Inline(item))
     dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
     dispatch({ type: 'process-data' })
     revalidate()

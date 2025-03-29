@@ -1,4 +1,4 @@
-import type { Svg } from 'svg-gobbler-scripts'
+import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
@@ -32,7 +32,7 @@ export const useExportActions = () => {
     switch (state.fileType) {
       case 'svg': {
         return svgs.map((svg) => {
-          const { data } = optimize(svg.originalString, svgoConfig)
+          const { data } = optimize(svg.svg, svgoConfig)
           return {
             name: svg.name,
             payload: data as string,

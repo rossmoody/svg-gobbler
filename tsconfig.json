@@ -8,7 +8,6 @@
     "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],
-      "data/*": ["data/*"],
       "types": ["src/types.ts"]
     },
 

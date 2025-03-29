@@ -52,9 +52,6 @@ optimize, download, copy, edit, or export.
 Before making edits you will need to build the extension locally and side load it as a developer
 extension to test any changes.
 
-> The sourcing and processing logic is abstracted into a separate package called
-> `svg-gobbler-scripts` [here](https://github.com/rossmoody/svg-gobbler-scripts).
-
 ### 1. Clone the repo
 
 Clone the repo to your local machine and navigate into the root directory.

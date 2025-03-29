@@ -1,4 +1,4 @@
-import type { Image } from 'svg-gobbler-scripts'
+import type { Image } from 'src/scripts'
 
 import clsx from 'clsx'
 

@@ -1,5 +1,5 @@
+import type { Svg } from 'src/scripts'
 import type { CollectionData } from 'src/types'
-import type { Svg } from 'svg-gobbler-scripts'
 
 export type CollectionState = {
   /**
@@ -119,8 +119,8 @@ export const collectionReducer = (
       switch (state.view.sort) {
         case 'file-asc': {
           processedData.sort((a, b) => {
-            const aSize = new Blob([a.originalString]).size
-            const bSize = new Blob([b.originalString]).size
+            const aSize = new Blob([a.svg]).size
+            const bSize = new Blob([b.svg]).size
             return aSize - bSize
           })
           break
@@ -128,8 +128,8 @@ export const collectionReducer = (
 
         case 'file-desc': {
           processedData.sort((a, b) => {
-            const aSize = new Blob([a.originalString]).size
-            const bSize = new Blob([b.originalString]).size
+            const aSize = new Blob([a.svg]).size
+            const bSize = new Blob([b.svg]).size
             return bSize - aSize
           })
           break

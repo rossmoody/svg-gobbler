@@ -1,12 +1,4 @@
-import type {
-  DocumentData,
-  GElement,
-  Image,
-  Inline,
-  StorageSvg,
-  Svg,
-  SvgSymbol,
-} from 'svg-gobbler-scripts'
+import type { DocumentData, GElement, Image, Inline, StorageSvg, Svg, SvgSymbol } from 'src/scripts'
 
 import { type UserState } from './providers'
 
@@ -21,7 +13,8 @@ export type BackgroundMessage = {
 }
 
 /**
- * The model for data stored and gathered from the document
+ * The model for data stored and gathered from the document.
+ * This is really collection data.
  */
 export type PageData = {
   data: StorageSvg[]
