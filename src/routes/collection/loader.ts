@@ -16,7 +16,7 @@ export async function collectionLoader({ params }: LoaderFunctionArgs) {
 
   return defer({
     collectionId: params.id,
-    data: svgFactory.process(pageData), // Returns [] if no data
+    data: svgFactory.process(pageData),
     plugins,
     user,
     view,

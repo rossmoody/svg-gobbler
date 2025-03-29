@@ -13,7 +13,8 @@ export type BackgroundMessage = {
 }
 
 /**
- * The model for data stored and gathered from the document
+ * The model for data stored and gathered from the document.
+ * This is really collection data.
  */
 export type PageData = {
   data: StorageSvg[]
