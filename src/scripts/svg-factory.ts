@@ -54,12 +54,12 @@ class SvgFactory {
 
   private extractAndPushElements(image: Image, selector: 'g' | 'symbol', results: SvgType[]): void {
     const elements = image.asElement?.querySelectorAll(selector)
-    elements?.forEach((element) => {
+    elements?.forEach((element, i) => {
       const storageSvg: StorageSvg = {
         corsRestricted: image.corsRestricted,
         id: nanoid(),
         lastEdited: image.lastEdited,
-        name: image.name,
+        name: `${image.name}-${selector}-${i}`,
         svg: element.outerHTML,
       }
 
