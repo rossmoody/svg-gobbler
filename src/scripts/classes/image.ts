@@ -47,7 +47,15 @@ export class Image extends Svg {
    */
   private getAbsoluteImageSrc() {
     const src = this.asElement?.getAttribute('src') ?? ''
-    return src.startsWith('http') ? src : `${this.origin.replace(/\/$/, '')}${src}`
+
+    // Handle various URL formats
+    if (src.startsWith('http') || src.startsWith('//')) {
+      return src
+    } else if (src.startsWith('/')) {
+      return `${this.origin.replace(/\/$/, '')}${src}`
+    } else {
+      return `${this.origin.replace(/\/$/, '')}/${src.replace(/^\.\//, '')}`
+    }
   }
 
   /**
@@ -58,7 +66,7 @@ export class Image extends Svg {
    * important for correctly interpreting the HTML structure and any associated resources.
    */
   private parseAndSetElement() {
-    const htmlSource = `<!DOCTYPE html><html><head><base href=${this.origin}/></head><body>${this.svg}</body></html>`
+    const htmlSource = `<!DOCTYPE html><html><head><base href="${this.origin.replace(/"/g, '&quot;')}/"></head><body>${this.svg}</body></html>`
 
     try {
       const element = new DOMParser().parseFromString(htmlSource, 'text/html')
@@ -85,12 +93,26 @@ export class Image extends Svg {
     const timeoutId = setTimeout(() => controller.abort(), 3000)
 
     try {
-      const response = await fetch(this.absoluteImageUrl, { mode: 'cors', signal })
+      const response = await fetch(this.absoluteImageUrl, {
+        headers: {
+          Accept: 'image/svg+xml, text/xml, application/xml, */*',
+        },
+        mode: 'cors',
+        signal,
+      })
       clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        this.corsRestricted = true
+        return this
+      }
+
       const text = await response.text()
       this.svg = text
       this.asElement = this.parseFromString()
-      this.svg = this.asElement!.outerHTML
+      if (this.asElement) {
+        this.svg = this.asElement.outerHTML
+      }
     } catch (error) {
       this.corsRestricted = true
     }
@@ -99,7 +121,19 @@ export class Image extends Svg {
   }
 
   processImage() {
-    const src = this.svg.match(/src="([^"]*)"/)?.[1] ?? ''
+    // Early return if the SVG has already been processed and proven to be CORS restricted
+    // This is a massive performance imrprovement as we process SVGs in and out twice every load
+    if (this.corsRestricted) return
+
+    // Support both double and single quotes in src attribute
+    const srcMatch = this.svg.match(/src=["']([^"']*)["']/)
+    const src = srcMatch ? srcMatch[1] : ''
+
+    // If no src found but the content appears to be direct SVG
+    if (!src && this.svg.includes('<svg') && this.svg.includes('</svg>')) {
+      this.asElement = this.parseFromString()
+      return
+    }
 
     switch (true) {
       // Base 64
@@ -115,25 +149,42 @@ export class Image extends Svg {
       case src.includes('data:image/svg+xml;utf8'): {
         const svgStart = src.indexOf('<svg')
         const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
-        const svgString = src.slice(svgStart, svgEnd)
-        this.svg = svgString[0]
-        this.asElement = this.parseFromString()
+        if (svgStart >= 0 && svgEnd > svgStart) {
+          const svgString = src.slice(svgStart, svgEnd)
+          this.svg = svgString // Fix: this was using only first character with [0]
+          this.asElement = this.parseFromString()
+        }
         break
       }
 
       // URL Encoded SVG
       case src.startsWith('data:image/svg+xml,'): {
-        const svgString = decodeURIComponent(src.split(',')[1])
-        this.svg = svgString
-        this.asElement = this.parseFromString()
+        try {
+          const svgString = decodeURIComponent(src.split(',')[1])
+          this.svg = svgString
+          this.asElement = this.parseFromString()
+        } catch (error) {
+          console.warn('Error decoding URL-encoded SVG:', error)
+        }
         break
       }
 
       // Need to fetch asynchronously
-      case src.includes('.svg'): {
+      case src.endsWith('.svg') ||
+        src.includes('.svg?') ||
+        src.includes('/svg/') ||
+        src.includes('.svg#'): {
         this.parseAndSetElement()
         this.absoluteImageUrl = this.getAbsoluteImageSrc()
         break
+      }
+
+      default: {
+        // Attempt to parse element for any other case
+        this.parseAndSetElement()
+        if (this.asElement?.getAttribute('src')?.includes('.svg')) {
+          this.absoluteImageUrl = this.getAbsoluteImageSrc()
+        }
       }
     }
   }
