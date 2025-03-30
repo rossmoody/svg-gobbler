@@ -23,7 +23,7 @@ export const CardSelect = ({ data }: CardData) => {
   return (
     <div
       className={clsx(
-        'absolute right-1 top-1 opacity-0 group-hover/card:opacity-100',
+        'absolute left-1 top-1 opacity-0 group-hover/card:opacity-100',
         'group/select z-10 transition-all duration-300 ease-in-out',
         isSelected && 'opacity-100',
       )}
