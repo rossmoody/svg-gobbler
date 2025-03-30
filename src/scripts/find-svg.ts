@@ -464,8 +464,6 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
 
   const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg.trim().length > 0)
 
-  console.log('Unique SVG data:', uniqueSvgData)
-
   return {
     data: uniqueSvgData.map((svg, i) => {
       try {
