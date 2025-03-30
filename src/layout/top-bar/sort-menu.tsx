@@ -31,7 +31,7 @@ export const SortMenu = () => {
   }
 
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative z-50 inline-block text-left">
       <Menu.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
         {loc('topbar_sort')}
         <ChevronDownIcon aria-hidden className="h-3 w-3" />
