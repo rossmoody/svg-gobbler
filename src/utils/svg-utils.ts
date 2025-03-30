@@ -11,6 +11,7 @@ export class SvgUtils {
    */
   static createStorageSvg(fileSvg: FileSvg): StorageSvg {
     return {
+      corsRestricted: false,
       id: nanoid(),
       lastEdited: new Date().toISOString(),
       name: fileSvg.name,
@@ -23,6 +24,7 @@ export class SvgUtils {
    */
   static createStorageSvgs(svgArray: Svg[]): StorageSvg[] {
     return svgArray.map((svg) => ({
+      corsRestricted: svg.corsRestricted,
       id: svg.id,
       lastEdited: svg.lastEdited,
       name: svg.name,

@@ -15,6 +15,7 @@ export const useCardActions = (data: Svg) => {
 
   async function duplicateItem() {
     const storageSvgDuplicate: StorageSvg = {
+      corsRestricted: data.corsRestricted,
       id: nanoid(),
       lastEdited: new Date().toISOString(),
       name: data.name,

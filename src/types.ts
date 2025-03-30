@@ -1,4 +1,4 @@
-import type { DocumentData, GElement, Image, Inline, StorageSvg, Svg, SvgSymbol } from 'src/scripts'
+import type { DocumentData, StorageSvg, Svg } from 'src/scripts'
 
 import { type UserState } from './providers'
 
@@ -110,11 +110,6 @@ export type DetailsParams = {
    */
   user: UserState
 }
-
-/**
- * A union of all the svg types that are returned from the svgFactory
- */
-export type SvgType = GElement | Image | Inline | SvgSymbol
 
 /**
  * The database keys

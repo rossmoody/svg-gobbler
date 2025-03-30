@@ -470,6 +470,7 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     data: uniqueSvgData.map((svg, i) => {
       try {
         return {
+          corsRestricted: false,
           id: crypto.randomUUID?.() || `svg-${Date.now()}-${i}`,
           lastEdited: new Date().toISOString(),
           name: `${location?.host || 'unknown'}-${i}`,
@@ -478,6 +479,7 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
       } catch (error) {
         console.warn('Error creating SVG data object:', error)
         return {
+          corsRestricted: false,
           id: `svg-fallback-${i}`,
           lastEdited: new Date().toISOString(),
           name: `unknown-${i}`,

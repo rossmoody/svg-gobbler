@@ -56,6 +56,7 @@ class SvgFactory {
     const elements = image.asElement?.querySelectorAll(selector)
     elements?.forEach((element) => {
       const storageSvg: StorageSvg = {
+        corsRestricted: image.corsRestricted,
         id: nanoid(),
         lastEdited: image.lastEdited,
         name: image.name,

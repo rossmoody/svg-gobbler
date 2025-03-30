@@ -10,7 +10,7 @@ import type { SvgSymbol } from './classes/symbol'
  * to make it easier to work with the data in the content script. This is the only information
  * we keep track of persistently for the SVGs.
  */
-export type StorageSvg = Pick<Svg, 'id' | 'lastEdited' | 'name' | 'svg'>
+export type StorageSvg = Pick<Svg, 'corsRestricted' | 'id' | 'lastEdited' | 'name' | 'svg'>
 
 /**
  * The shape of the data that is gathered from the document.
