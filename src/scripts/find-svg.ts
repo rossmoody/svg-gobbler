@@ -11,19 +11,10 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
   const document = documentParam ?? window.document
   const location = document.location
 
-  // Storage for dynamically added SVGs
-  const dynamicSvgs: string[] = []
-
-  // Cache for external SVG requests to avoid duplicate fetches
-  const externalSvgCache: Map<string, Promise<string>> = new Map()
-
   /**
    * Helper function to safely create a new image element with the provided source.
    * This strips out sensitive data due to security restrictions on client page access.
    * Centralizes handling of async srcs, base64 srcs, and data URLs.
-   *
-   * @param src The image source URL
-   * @returns The HTML representation of the image
    */
   const createImage = (src: string): string => {
     try {
@@ -37,7 +28,8 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
   }
 
   /**
-   * Improved SVG detection with additional patterns
+   * Checks if a string is related to SVG content.
+   * This includes various formats like data URIs, XML namespaces, and inline SVG.
    */
   const isSvgRelated = (str: string): boolean => {
     if (!str) return false
@@ -55,61 +47,6 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
       // Check for viewBox attribute
       /viewBox\s*=\s*["']/i.test(str)
     )
-  }
-
-  /**
-   * Improved external SVG fetching with caching
-   */
-  const fetchExternalSvg = async (url: string): Promise<string> => {
-    // Return from cache if already requested
-    if (externalSvgCache.has(url)) {
-      return externalSvgCache.get(url) as Promise<string>
-    }
-
-    // Create new fetch promise
-    // eslint-disable-next-line no-async-promise-executor
-    const fetchPromise = new Promise<string>(async (resolve) => {
-      try {
-        // Add a timeout to prevent hanging
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
-
-        const response = await fetch(url, {
-          mode: 'cors',
-          signal: controller.signal,
-        })
-
-        clearTimeout(timeoutId)
-
-        if (!response.ok) {
-          resolve('')
-          return
-        }
-
-        const contentType = response.headers.get('content-type')
-        if (
-          contentType &&
-          (contentType.includes('image/svg+xml') ||
-            contentType.includes('text/xml') ||
-            contentType.includes('application/xml'))
-        ) {
-          const svgText = await response.text()
-          // Verify it's actually SVG content
-          if (svgText.includes('<svg') || svgText.includes('xmlns="http://www.w3.org/2000/svg"')) {
-            resolve(svgText)
-            return
-          }
-        }
-        resolve('')
-      } catch (error) {
-        console.warn(`Failed to fetch SVG from ${url}:`, error)
-        resolve('')
-      }
-    })
-
-    // Store in cache
-    externalSvgCache.set(url, fetchPromise)
-    return fetchPromise
   }
 
   /**
@@ -236,38 +173,17 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     try {
       const elements = document.querySelectorAll('use')
 
-      // Check for use elements that call to a remote sprite source
       elements.forEach((element) => {
         // Check href attribute (modern standard)
         const href = element.getAttribute('href')
         if (href && isSvgRelated(href)) {
-          // Create image with href for immediate use
           results.push(createImage(href))
-
-          // Try to fetch the actual SVG content for better results
-          fetchExternalSvg(href)
-            .then((svgContent) => {
-              if (svgContent) results.push(svgContent)
-            })
-            .catch(() => {
-              // Silently fail - we already have the image version as fallback
-            })
         }
 
         // Check xlink:href attribute (older standard, but still widely used)
         const xLinkHref = element.getAttribute('xlink:href')
         if (xLinkHref && isSvgRelated(xLinkHref)) {
-          // Create image with xlink:href for immediate use
           results.push(createImage(xLinkHref))
-
-          // Try to fetch the actual SVG content for better results
-          fetchExternalSvg(xLinkHref)
-            .then((svgContent) => {
-              if (svgContent) results.push(svgContent)
-            })
-            .catch(() => {
-              // Silently fail - we already have the image version as fallback
-            })
         }
       })
     } catch (error) {
@@ -284,14 +200,11 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     const results: string[] = []
 
     try {
-      // Query all elements that might have shadow roots
       const elements = document.querySelectorAll('*')
 
       const processNode = (element: Element) => {
-        // Check if the element has a shadow root
         const shadowRoot = element.shadowRoot
         if (shadowRoot) {
-          // Find SVGs inside shadow DOM
           shadowRoot.querySelectorAll('svg').forEach((svg) => {
             results.push(svg.outerHTML)
           })
@@ -314,7 +227,6 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
         }
       }
 
-      // Start processing at top level
       elements.forEach((element) => {
         processNode(element)
       })
@@ -376,13 +288,11 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     const results: string[] = []
 
     try {
-      // Get all custom elements
       const customElements = Array.from(document.querySelectorAll('*')).filter((el) =>
         el.tagName.includes('-'),
       ) // Custom elements contain a hyphen
 
       customElements.forEach((element) => {
-        // Check if element has slot content
         const slots = element.querySelectorAll('slot')
         slots.forEach((slot) => {
           const assignedNodes = slot.assignedNodes()
@@ -536,54 +446,6 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     return results.filter(Boolean)
   }
 
-  /**
-   * Creates a promise to fetch SVGs from external links
-   * This will attempt to fetch the actual SVG content for key external sources
-   */
-  const fetchExternalSvgs = async (): Promise<string[]> => {
-    const results: string[] = []
-    const externalSources: string[] = []
-
-    try {
-      // Collect links to external SVGs (only process a reasonable number)
-      const imgElements = document.querySelectorAll('img[src$=".svg"]')
-      const objectElements = document.querySelectorAll('object[type="image/svg+xml"]')
-
-      imgElements.forEach((img) => {
-        if (img instanceof HTMLImageElement && img.src && !img.src.startsWith('data:')) {
-          externalSources.push(img.src)
-        }
-      })
-
-      objectElements.forEach((obj) => {
-        if (obj instanceof HTMLObjectElement && obj.data && !obj.data.startsWith('data:')) {
-          externalSources.push(obj.data)
-        }
-      })
-
-      const fetchPromises = externalSources.map((src) => fetchExternalSvg(src))
-      const fetchedSvgs = await Promise.all(fetchPromises)
-
-      // Add all successfully fetched SVGs
-      fetchedSvgs.forEach((svg) => {
-        if (svg) results.push(svg)
-      })
-    } catch (error) {
-      console.warn('Error fetching external SVGs:', error)
-    }
-
-    return results
-  }
-
-  let externalSvgData: string[] = []
-  try {
-    const timeoutPromise = new Promise<string[]>((resolve) => setTimeout(() => resolve([]), 1000)) // Increased from 500ms to 1000ms
-    externalSvgData = await Promise.race([fetchExternalSvgs(), timeoutPromise])
-  } catch (error) {
-    console.warn('Error in external SVG fetching:', error)
-    externalSvgData = []
-  }
-
   // Gather all SVG data from various sources
   const allSvgData = [
     ...parseSrcAndBgImages(),
@@ -598,11 +460,11 @@ export async function findSvg(documentParam?: Document): Promise<DocumentData> {
     ...gatherTemplateSvgs(),
     ...parseCssSpriteSheets(),
     ...gatherPictureElementSvgs(),
-    ...dynamicSvgs,
-    ...externalSvgData,
   ]
 
   const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg.trim().length > 0)
+
+  console.log('Unique SVG data:', uniqueSvgData)
 
   return {
     data: uniqueSvgData.map((svg, i) => {
