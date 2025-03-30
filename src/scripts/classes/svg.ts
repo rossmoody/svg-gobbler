@@ -1,3 +1,5 @@
+import { SvgUtils } from 'src/utils/svg-utils'
+
 import { StorageSvg } from '../types'
 
 /**
@@ -87,6 +89,13 @@ export class Svg {
     }
 
     console.error(`Failed to parse SVG element: ${this.svg}`)
+  }
+
+  /**
+   * A pleasantly formatted represntation of the SVG file size.
+   */
+  get fileSize() {
+    return SvgUtils.getPrettyBytes(this.svg)
   }
 
   /**
