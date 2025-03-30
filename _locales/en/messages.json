@@ -813,10 +813,19 @@
     "message": "Reset SVG Gobbler"
   },
   "settings_export_data": {
-    "message": "Export data"
+    "message": "Export data as JSON"
   },
   "settings_export_data_desc": {
-    "message": "Download all collections and data from local storage related to SVG Gobbler. This will create a JSON file that contains all information stored."
+    "message": "Export all collections and data related to SVG Gobbler as a JSON file."
+  },
+  "settings_export_all_svg_title": {
+    "message": "Export SVGs as zip"
+  },
+  "settings_export_all_svg_desc": {
+    "message": "Download all data as SVG from all collections as a zip file."
+  },
+  "settings_export_all_svg_button": {
+    "message": "Export SVGs"
   },
   "onboarding_card_color": {
     "message": "Having trouble seeing white SVGs? Change the canvas color 🎨"
