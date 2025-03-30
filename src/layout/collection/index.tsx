@@ -7,8 +7,6 @@ import { NoResults } from 'src/components/no-results'
 import { usePastedSvg } from 'src/hooks'
 import { useCollection } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
 
 import { Card } from './card'
 import { ShowPasteCue } from './show-paste-cue'
@@ -30,26 +28,6 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     dispatch({ type: 'process-data' })
     return () => dispatch({ type: 'reset' })
   }, [data, dispatch])
-
-  /**
-   * Set the page data again after the data is processed.
-   * We should really exhaustively fetch async image sources until they are resolved
-   * but we instead just set the data again over time so the load time isn't so long initially.
-   *
-   * The entire suite of svgs is run through the process() twice one each new invocation. This is
-   * usually enough to flush out the image sources we're fetching SVGs from.
-   */
-  useEffect(() => {
-    ;(async () => {
-      const currentPageData = await StorageUtils.getPageData(state.collectionId)
-      const storageSvgs = SvgUtils.createStorageSvgs(data)
-
-      StorageUtils.setPageData(state.collectionId, {
-        ...currentPageData,
-        data: storageSvgs,
-      })
-    })()
-  }, [])
 
   const filteredResultLength = useMemo(() => {
     if (state.view.filters['hide-cors']) {
