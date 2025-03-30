@@ -13,7 +13,7 @@ export const FullPageLoader = () => {
         enterTo="opacity-100"
         show
       >
-        <Logo className="rotate-full h-8 w-8" />
+        <Logo className="h-10 w-10 animate-bounce" />
       </Transition>
     </div>
   )
