@@ -841,5 +841,8 @@
   },
   "download_all": {
     "message": "Скачать все"
+  },
+  "selected": {
+    "message": "Выбрано"
   }
 }

@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useCollection } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const SelectedQuantity = () => {
   const { state } = useCollection()
@@ -14,8 +15,8 @@ export const SelectedQuantity = () => {
 
   return (
     <div className="hidden leading-none md:block">
-      <span className="font-medium">{state.selected.length}</span> of{' '}
-      <span className="font-medium">{filteredResultLength}</span> selected
+      <span className="font-medium">{state.selected.length}</span> {loc('main_of')}{' '}
+      <span className="font-medium">{filteredResultLength}</span> {loc('selected')}
     </div>
   )
 }

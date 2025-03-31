@@ -844,5 +844,8 @@
   },
   "download_all": {
     "message": "Download all"
+  },
+  "selected": {
+    "message": "selected"
   }
 }

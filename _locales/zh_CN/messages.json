@@ -842,5 +842,8 @@
   },
   "download_all": {
     "message": "下载全部"
+  },
+  "selected": {
+    "message": "已选择"
   }
 }

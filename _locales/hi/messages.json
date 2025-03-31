@@ -841,5 +841,8 @@
   },
   "download_all": {
     "message": "सभी डाउनलोड करें"
+  },
+  "selected": {
+    "message": "चुना हुआ"
   }
 }

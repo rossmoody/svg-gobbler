@@ -841,5 +841,8 @@
   },
   "download_all": {
     "message": "Descargar todo"
+  },
+  "selected": {
+    "message": "Seleccionado"
   }
 }
