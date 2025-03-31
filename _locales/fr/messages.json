@@ -835,5 +835,11 @@
   },
   "paste_cue_action": {
     "message": "Terminé"
+  },
+  "view_always_show_size": {
+    "message": "Toujours afficher la taille du fichier"
+  },
+  "download_all": {
+    "message": "Tout télécharger"
   }
 }

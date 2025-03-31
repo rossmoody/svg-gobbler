@@ -835,5 +835,11 @@
   },
   "paste_cue_action": {
     "message": "Готово"
+  },
+  "view_always_show_size": {
+    "message": "Всегда показывать размер файла"
+  },
+  "download_all": {
+    "message": "Скачать все"
   }
 }

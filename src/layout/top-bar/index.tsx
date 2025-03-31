@@ -1,3 +1,4 @@
+import { Transition } from '@headlessui/react'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { ArrowDownTrayIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
@@ -18,6 +19,8 @@ export const TopBar = () => {
   const [open, setOpen] = useState(false)
   const { state } = useCollection()
   const { exportCurrentCollectionDataAsZip } = useExportData()
+
+  const shouldShowDownloadAll = state.data.length > 1
 
   function handleOpen() {
     setOpen(true)
@@ -50,10 +53,21 @@ export const TopBar = () => {
               <span className="hidden md:inline-block">{loc('topbar_upload')}</span>
               <PlusIcon className="h-4 w-4" />
             </Button>
-            <Button onClick={handleDownloadAll} variant="primary">
-              <span className="hidden md:inline-block">Download All</span>
-              <ArrowDownTrayIcon className="h-4 w-4" />
-            </Button>
+            <Transition
+              as="span"
+              enter="transition-all duration-500"
+              enterFrom="opacity-0 scale-60"
+              enterTo="opacity-100 scale-100"
+              leave="transition-all duration-300"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-50"
+              show={shouldShowDownloadAll}
+            >
+              <Button onClick={handleDownloadAll} variant="primary">
+                <span className="hidden md:inline-block">{loc('download_all')}</span>
+                <ArrowDownTrayIcon className="h-4 w-4" />
+              </Button>
+            </Transition>
           </div>
         </div>
       </div>

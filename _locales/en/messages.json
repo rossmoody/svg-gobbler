@@ -838,5 +838,11 @@
   },
   "paste_cue_action": {
     "message": "Done"
+  },
+  "view_always_show_size": {
+    "message": "Always show file size"
+  },
+  "download_all": {
+    "message": "Download all"
   }
 }

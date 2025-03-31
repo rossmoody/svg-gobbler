@@ -835,5 +835,11 @@
   },
   "paste_cue_action": {
     "message": "हो गया"
+  },
+  "view_always_show_size": {
+    "message": "हमेशा फ़ाइल का आकार दिखाएँ"
+  },
+  "download_all": {
+    "message": "सभी डाउनलोड करें"
   }
 }

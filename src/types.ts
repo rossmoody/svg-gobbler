@@ -81,6 +81,10 @@ export type CollectionData = {
        * Whether to hide icons that restrict via cors
        */
       'hide-cors': boolean
+      /**
+       * Show or hide the size of the icon on the card
+       */
+      'show-size': boolean
     }
     /**
      * The size of the icons in the collection

@@ -836,5 +836,11 @@
   },
   "paste_cue_action": {
     "message": "完成"
+  },
+  "view_always_show_size": {
+    "message": "始终显示文件大小"
+  },
+  "download_all": {
+    "message": "下载全部"
   }
 }
