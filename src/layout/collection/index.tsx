@@ -1,18 +1,26 @@
 import type { CollectionData } from 'src/types'
 
 import { Transition } from '@headlessui/react'
-import { Fragment, useEffect, useMemo } from 'react'
-import { Button, FeedbackModal, ReviewPrompt } from 'src/components'
+import { Fragment, useEffect } from 'react'
+import { FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
+import { useIntersectionObserver } from 'src/hooks'
 import { useCollection } from 'src/providers'
 import { SvgType } from 'src/scripts'
-import { loc } from 'src/utils/i18n'
 
 import { Card } from './card'
 import { ShowPasteCue } from './show-paste-cue'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { dispatch, state } = useCollection()
+
+  const { elementRef, isIntersecting } = useIntersectionObserver()
+
+  useEffect(() => {
+    if (isIntersecting) {
+      dispatch({ type: 'load-more' })
+    }
+  }, [isIntersecting, dispatch])
 
   /**
    * We do this here instead of routes because data is awaited in
@@ -23,14 +31,6 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     dispatch({ type: 'process-data' })
     return () => dispatch({ type: 'reset' })
   }, [data, dispatch])
-
-  const filteredResultLength = useMemo(() => {
-    if (state.view.filters['hide-cors']) {
-      return state.data.filter((svg) => !svg.corsRestricted).length
-    }
-
-    return state.data.length
-  }, [state.data, state.view.filters])
 
   function generateMinSize() {
     switch (state.view.size) {
@@ -74,18 +74,9 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
             <Card data={svg as SvgType} style={{ transitionDelay: calculateDelay(i) }} />
           </Transition>
         ))}
+        {/* Intersection observer */}
+        <li ref={elementRef as React.RefObject<HTMLLIElement>} />
       </ul>
-      <Transition
-        className="my-12 flex justify-center"
-        enter="transition-opacity duration-300 ease-in-out"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        show={state.processedData.length < filteredResultLength}
-      >
-        <Button onClick={() => dispatch({ type: 'load-more' })} size="lg" variant="secondary">
-          {loc('main_load_more')}
-        </Button>
-      </Transition>
 
       {/* Solicitation*/}
       <ReviewPrompt />

@@ -48,6 +48,8 @@ export const initCollectionState: CollectionState = {
   },
 }
 
+const PAGE_SIZE = 100
+
 export const collectionReducer = (
   state: CollectionState,
   action: CollectionAction,
@@ -69,7 +71,7 @@ export const collectionReducer = (
         pageCount: state.pageCount + 1,
         processedData: [
           ...state.processedData,
-          ...state.data.slice(state.pageCount * 300, (state.pageCount + 1) * 300),
+          ...state.data.slice(state.pageCount * PAGE_SIZE, (state.pageCount + 1) * PAGE_SIZE),
         ],
       }
     }
@@ -158,7 +160,7 @@ export const collectionReducer = (
       return {
         ...state,
         pageCount: 1,
-        processedData: processedData.slice(0, 300),
+        processedData: processedData.slice(0, PAGE_SIZE),
       }
     }
 
