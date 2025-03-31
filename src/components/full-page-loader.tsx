@@ -9,11 +9,14 @@ export const FullPageLoader = () => {
         appear
         as="div"
         enter="transition-all duration-500"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
+        enterFrom="opacity-0 scale-50"
+        enterTo="opacity-100 scale-100"
+        leave="transition-all duration-500"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-50"
         show
       >
-        <Logo className="rotate-full h-8 w-8" />
+        <Logo className="h-10 w-10 animate-bounce" />
       </Transition>
     </div>
   )

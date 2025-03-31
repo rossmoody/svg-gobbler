@@ -1,10 +1,11 @@
+import type { Svg } from 'src/scripts'
 import type { CollectionData } from 'src/types'
-import type { Svg } from 'svg-gobbler-scripts'
 
 import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'
 import { EmptyState } from 'src/components'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
+import { usePastedSvg } from 'src/hooks'
 import { Collection } from 'src/layout/collection'
 import { ExportPanel } from 'src/layout/collection/export-panel'
 import { Mainbar } from 'src/layout/collection/main-bar'
@@ -27,12 +28,16 @@ export const CollectionRoute = () => {
   const { dispatch: exportDispatch } = useExport()
   const { dispatch: userDispatch } = useUser()
 
+  /**
+   * Global listeners
+   */
+  usePastedSvg()
+
   useEffect(() => {
     collectionDispatch({ payload: collectionId, type: 'set-collection-id' })
     collectionDispatch({ payload: view, type: 'set-view' })
     exportDispatch({ payload: plugins, type: 'set-svgo-plugins' })
     userDispatch({ payload: user, type: 'set-user' })
-    collectionDispatch({ type: 'process-data' })
   }, [collectionId, collectionDispatch, view, exportDispatch, plugins, user, userDispatch])
 
   return (

@@ -3,10 +3,10 @@ import type { Collection, PageData } from 'src/types'
 import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
+import { StorageSvg } from 'src/scripts'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
-import { StorageSvg } from 'svg-gobbler-scripts'
 
 export const useCreateCollection = (files: File[]) => {
   const navigate = useNavigate()

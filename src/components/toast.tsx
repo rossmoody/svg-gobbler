@@ -56,7 +56,7 @@ export const Toast: FC<ToastComponentProps> = ({
               <div className="flex h-0 flex-1">
                 <RToast.Action
                   altText={actionText}
-                  className="flex w-full items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-red-600 hover:bg-gray-50 focus:z-10 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75 dark:text-red-500 dark:hover:bg-gray-900"
+                  className="flex w-full items-center justify-center rounded-lg border border-transparent bg-red-50 px-3 py-2 text-sm font-medium text-red-600 hover:bg-gray-100 focus:z-10 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75 dark:text-red-500 dark:hover:bg-gray-900"
                   onClick={onAction}
                 >
                   {actionText}

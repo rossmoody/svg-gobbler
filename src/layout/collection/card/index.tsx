@@ -1,4 +1,4 @@
-import type { Image, Svg } from 'svg-gobbler-scripts'
+import type { SvgType } from 'src/scripts'
 
 import clsx from 'clsx'
 import { HTMLAttributes, forwardRef, useMemo } from 'react'
@@ -7,9 +7,10 @@ import { useCollection } from 'src/providers'
 import { CardContent } from './card-content'
 import { CorsRestrictedActions } from './cors-restricted-actions'
 import { DefaultActions } from './default-actions'
+import { SvgSize } from './svg-size'
 
 export type CardData = {
-  data: Image | Svg
+  data: SvgType
 }
 
 export type CardProps = CardData & HTMLAttributes<HTMLLIElement>
@@ -34,7 +35,8 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
       ref={ref}
       style={{ backgroundColor: state.view.canvas }}
     >
-      <Actions data={data as Image}>
+      <SvgSize data={data} />
+      <Actions data={data}>
         <div
           className="relative overflow-hidden transition-all duration-100 ease-in"
           style={{ height: state.view.size, width: state.view.size }}

@@ -83,9 +83,6 @@ importers:
       server:
         specifier: file:./server
         version: file:server(typescript@5.4.5)
-      svg-gobbler-scripts:
-        specifier: 1.5.8
-        version: 1.5.8
       svgo:
         specifier: ^3.0.3
         version: 3.3.2
@@ -3023,9 +3020,6 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
-
-  svg-gobbler-scripts@1.5.8:
-    resolution: {integrity: sha512-hZPvpssBkZszs6XXfR70FIq1Ao1J3jpUE1BLJnLMbBliQSAtyULzjbEyd31JZ+zAWfCb1Kr0G60pqt9HHxjsdA==}
 
   svg-parser@2.0.4:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
@@ -6232,8 +6226,6 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
-
-  svg-gobbler-scripts@1.5.8: {}
 
   svg-parser@2.0.4: {}
 

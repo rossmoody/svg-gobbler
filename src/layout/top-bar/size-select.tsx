@@ -8,6 +8,7 @@ export const sizes = [
   { label: '20px', value: 20 },
   { label: '24px', value: 24 },
   { label: '40px', value: 40 },
+  { label: '48px', value: 48 },
   { label: '64px', value: 64 },
   { label: '96px', value: 96 },
   { label: '128px', value: 128 },

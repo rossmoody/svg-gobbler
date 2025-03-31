@@ -11,10 +11,13 @@ import { StorageUtils } from 'src/utils/storage-utils'
 
 type ViewOption = {
   label: string
-  value: string
+  value: keyof CollectionData['view']['filters']
 }
 
-const viewOptions: ViewOption[] = [{ label: loc('topbar_hide_cors'), value: 'hide-cors' }]
+const viewOptions: ViewOption[] = [
+  { label: loc('topbar_hide_cors'), value: 'hide-cors' },
+  { label: loc('view_always_show_size'), value: 'show-size' },
+]
 
 export const ViewPopover = () => {
   const { dispatch, state } = useCollection()
@@ -42,7 +45,7 @@ export const ViewPopover = () => {
             className={clsx(
               'absolute right-0 z-10 mt-2 origin-top-left rounded-md p-4',
               'bg-white shadow-2xl ring-1 ring-black dark:bg-gray-800 dark:ring-white',
-              'ring-opacity-5 focus:outline-none dark:ring-opacity-5',
+              'flex flex-col gap-y-2 ring-opacity-5 focus:outline-none dark:ring-opacity-5',
             )}
           >
             {viewOptions.map((option) => (
@@ -61,7 +64,7 @@ export const ViewPopover = () => {
                   className="text ml-3 cursor-pointer whitespace-nowrap pr-4 text-sm font-medium"
                   htmlFor={option.value}
                 >
-                  {option.label} ({corsRestrictedCount})
+                  {option.label} {option.value === 'hide-cors' && `(${corsRestrictedCount})`}
                 </label>
               </div>
             ))}

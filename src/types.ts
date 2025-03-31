@@ -1,12 +1,4 @@
-import type {
-  DocumentData,
-  GElement,
-  Image,
-  Inline,
-  StorageSvg,
-  Svg,
-  SvgSymbol,
-} from 'svg-gobbler-scripts'
+import type { DocumentData, StorageSvg, Svg } from 'src/scripts'
 
 import { type UserState } from './providers'
 
@@ -21,7 +13,8 @@ export type BackgroundMessage = {
 }
 
 /**
- * The model for data stored and gathered from the document
+ * The model for data stored and gathered from the document.
+ * This is really collection data.
  */
 export type PageData = {
   data: StorageSvg[]
@@ -88,6 +81,10 @@ export type CollectionData = {
        * Whether to hide icons that restrict via cors
        */
       'hide-cors': boolean
+      /**
+       * Show or hide the size of the icon on the card
+       */
+      'show-size': boolean
     }
     /**
      * The size of the icons in the collection
@@ -117,11 +114,6 @@ export type DetailsParams = {
    */
   user: UserState
 }
-
-/**
- * A union of all the svg types that are returned from the svgFactory
- */
-export type SvgType = GElement | Image | Inline | SvgSymbol
 
 /**
  * The database keys

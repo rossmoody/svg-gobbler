@@ -31,6 +31,7 @@ export const Header = () => {
       data: collectionData.data.map((item) =>
         item.id === id
           ? {
+              corsRestricted: item.corsRestricted,
               id: item.id,
               lastEdited: new Date().toISOString(),
               name,

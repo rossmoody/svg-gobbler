@@ -1,5 +1,5 @@
 import type { Options } from 'pretty-bytes'
-import type { StorageSvg, Svg } from 'svg-gobbler-scripts'
+import type { StorageSvg, Svg } from 'src/scripts'
 
 import { nanoid } from 'nanoid'
 import prettyBytes from 'pretty-bytes'
@@ -11,6 +11,7 @@ export class SvgUtils {
    */
   static createStorageSvg(fileSvg: FileSvg): StorageSvg {
     return {
+      corsRestricted: false,
       id: nanoid(),
       lastEdited: new Date().toISOString(),
       name: fileSvg.name,
@@ -23,10 +24,11 @@ export class SvgUtils {
    */
   static createStorageSvgs(svgArray: Svg[]): StorageSvg[] {
     return svgArray.map((svg) => ({
+      corsRestricted: svg.corsRestricted,
       id: svg.id,
       lastEdited: svg.lastEdited,
       name: svg.name,
-      svg: svg.originalString,
+      svg: svg.svg,
     }))
   }
 

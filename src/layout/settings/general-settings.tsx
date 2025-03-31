@@ -11,7 +11,7 @@ import { KeyboardShortcut } from './keyboard-shortcut'
 export const GeneralSettings = () => {
   const { dispatch, state } = useUser()
   const { reset } = useResetEnvironment()
-  const { exportData } = useExportData()
+  const { exportAllDataAsJson, exportAllDataAsZip } = useExportData()
 
   const handleOpenKeyboardShortcuts = () => {
     chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
@@ -70,8 +70,17 @@ export const GeneralSettings = () => {
               {loc('settings_export_data')}
             </label>
             <span className="text-muted mb-3 block">{loc('settings_export_data_desc')}</span>
-            <Button onClick={exportData} size="md" variant="secondary">
+            <Button onClick={exportAllDataAsJson} size="md" variant="secondary">
               {loc('settings_export_data')}
+            </Button>
+          </Item.Setting>
+          <Item.Setting>
+            <label className="block pb-1 text-sm font-medium leading-4">
+              {loc('settings_export_all_svg_title')}
+            </label>
+            <span className="text-muted mb-3 block">{loc('settings_export_all_svg_desc')}</span>
+            <Button onClick={exportAllDataAsZip} size="md" variant="secondary">
+              {loc('settings_export_all_svg_button')}
             </Button>
           </Item.Setting>
           <Item.Setting>
