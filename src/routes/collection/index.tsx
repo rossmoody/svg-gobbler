@@ -5,6 +5,7 @@ import React, { Fragment, useEffect } from 'react'
 import { Await, useLoaderData } from 'react-router-dom'
 import { EmptyState } from 'src/components'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
+import { usePastedSvg } from 'src/hooks'
 import { Collection } from 'src/layout/collection'
 import { ExportPanel } from 'src/layout/collection/export-panel'
 import { Mainbar } from 'src/layout/collection/main-bar'
@@ -26,6 +27,11 @@ export const CollectionRoute = () => {
   const { dispatch: collectionDispatch } = useCollection()
   const { dispatch: exportDispatch } = useExport()
   const { dispatch: userDispatch } = useUser()
+
+  /**
+   * Global listeners
+   */
+  usePastedSvg()
 
   useEffect(() => {
     collectionDispatch({ payload: collectionId, type: 'set-collection-id' })

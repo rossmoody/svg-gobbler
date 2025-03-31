@@ -4,8 +4,8 @@ import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useMemo } from 'react'
 import { Button, FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
-import { usePastedSvg } from 'src/hooks'
 import { useCollection } from 'src/providers'
+import { SvgType } from 'src/scripts'
 import { loc } from 'src/utils/i18n'
 
 import { Card } from './card'
@@ -13,11 +13,6 @@ import { ShowPasteCue } from './show-paste-cue'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { dispatch, state } = useCollection()
-
-  /**
-   * Global listeners
-   */
-  usePastedSvg()
 
   /**
    * We do this here instead of routes because data is awaited in
@@ -76,7 +71,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
             key={svg.svg + i}
             show
           >
-            <Card data={svg} style={{ transitionDelay: calculateDelay(i) }} />
+            <Card data={svg as SvgType} style={{ transitionDelay: calculateDelay(i) }} />
           </Transition>
         ))}
       </ul>
