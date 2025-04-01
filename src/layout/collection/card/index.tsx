@@ -13,9 +13,9 @@ export type CardData = {
   data: SvgType
 }
 
-export type CardProps = CardData & HTMLAttributes<HTMLLIElement>
+export type CardProps = CardData & HTMLAttributes<HTMLDivElement>
 
-export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
+export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const { className, data, ...rest } = props
   const { state } = useCollection()
 
@@ -24,7 +24,7 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
   }, [data.corsRestricted])
 
   return (
-    <li
+    <div
       {...rest}
       className={clsx(
         'text relative rounded-2xl',
@@ -44,6 +44,6 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
           <CardContent data={data} />
         </div>
       </Actions>
-    </li>
+    </div>
   )
 })

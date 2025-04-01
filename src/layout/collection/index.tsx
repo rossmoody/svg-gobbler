@@ -1,7 +1,7 @@
 import type { CollectionData } from 'src/types'
 
 import { Transition } from '@headlessui/react'
-import { Fragment, useEffect } from 'react'
+import { useEffect } from 'react'
 import { FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
 import { useIntersectionObserver } from 'src/hooks'
@@ -48,7 +48,7 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   }
 
   function calculateDelay(index: number) {
-    return index > 199 ? '100ms' : `${index * 8}ms`
+    return index > 199 ? '100ms' : `${index * 15}ms`
   }
 
   if (state.processedData.length === 0) {
@@ -64,14 +64,15 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
         {state.processedData.map((svg, i) => (
           <Transition
             appear
-            as={Fragment}
+            as="li"
             enter="transition-all duration-300 ease-in-out"
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
             key={svg.svg + i}
             show
+            style={{ transitionDelay: calculateDelay(i) }}
           >
-            <Card data={svg as SvgType} style={{ transitionDelay: calculateDelay(i) }} />
+            <Card data={svg as SvgType} />
           </Transition>
         ))}
         {/* Intersection observer */}
