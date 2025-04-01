@@ -8,7 +8,7 @@ export const CardSelect = ({ data }: CardData) => {
   const { dispatch, state } = useCollection()
 
   const isSelected = useMemo(() => {
-    return state.selected.includes(data)
+    return state.selected.some((svg) => svg.id === data.id)
   }, [state.selected, data])
 
   const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
