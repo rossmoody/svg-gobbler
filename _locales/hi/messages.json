@@ -844,5 +844,17 @@
   },
   "selected": {
     "message": "चुना हुआ"
+  },
+  "export_sprite_prefix": {
+    "message": "प्रीफिक्स ID"
+  },
+  "export_sprite_suffix": {
+    "message": "सफिक्स ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "प्रत्यय ID के साथ प्रत्यय दें"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "प्रत्यय ID के साथ प्रत्यय दें"
   }
 }

@@ -1,3 +1,4 @@
+export * from './badge'
 export * from './button'
 export * from './collection-panel-btn'
 export * from './empty-state'

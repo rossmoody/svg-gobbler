@@ -844,5 +844,17 @@
   },
   "selected": {
     "message": "Выбрано"
+  },
+  "export_sprite_prefix": {
+    "message": "Префикс ID"
+  },
+  "export_sprite_suffix": {
+    "message": "Суффикс ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "Добавьте префикс к ID каждого иконки"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "Добавьте суффикс к ID каждого иконки"
   }
 }

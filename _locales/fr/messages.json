@@ -844,5 +844,17 @@
   },
   "selected": {
     "message": "sélectionné"
+  },
+  "export_sprite_prefix": {
+    "message": "Préfixe ID"
+  },
+  "export_sprite_suffix": {
+    "message": "Suffixe ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "Ajoute un préfixe à l'ID de chaque icône"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "Ajoute un suffixe à l'ID de chaque icône"
   }
 }

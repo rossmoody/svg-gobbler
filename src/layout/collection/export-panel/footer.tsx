@@ -4,7 +4,7 @@ import { useCollection, useExport } from 'src/providers'
 import { FormUtils } from 'src/utils/form-utils'
 import { loc } from 'src/utils/i18n'
 
-import { useExportActions } from './use-export-actions'
+import { ExportSvg, useExportActions } from './use-export-actions'
 
 export const Footer = () => {
   const [label, setLabel] = useState(loc('export_copy_clipboard'))
@@ -34,7 +34,7 @@ export const Footer = () => {
   }
 
   const handleDownload = async () => {
-    const exportSvgs = await processWithExportConfig(collectionState.selected)
+    let exportSvgs: ExportSvg[] = await processWithExportConfig(collectionState.selected)
 
     switch (exportState.fileType) {
       case 'svg': {
@@ -48,6 +48,17 @@ export const Footer = () => {
         FormUtils.downloadImageContent(exportSvgs, exportState)
         break
       }
+
+      case 'sprite': {
+        exportSvgs = collectionState.selected.map((svg) => {
+          return {
+            name: svg.name,
+            payload: svg.svg,
+          }
+        })
+        FormUtils.downloadSpriteZip(exportSvgs, exportState)
+        break
+      }
     }
   }
 
@@ -56,16 +67,20 @@ export const Footer = () => {
       ? ` ${collectionState.selected.length} ${loc('export_files')}`
       : ''
 
+  const buttonLabel =
+    exportState.fileType === 'sprite'
+      ? loc('export_download_sprite')
+      : loc('export_download') + downloadQuantityString
+
   return (
     <footer className="flex flex-col gap-2 px-1 pb-6 pt-4">
-      {collectionState.selected.length < 2 && (
+      {collectionState.selected.length < 2 && exportState.fileType !== 'sprite' && (
         <Button className="justify-center transition-all" onClick={handleCopy} variant="secondary">
           {label}
         </Button>
       )}
       <Button className="justify-center" onClick={handleDownload}>
-        {loc('export_download')}
-        {downloadQuantityString}
+        {buttonLabel}
       </Button>
     </footer>
   )

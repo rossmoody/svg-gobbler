@@ -2,21 +2,24 @@ import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
-import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
+import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { transitions } from 'src/constants/transitions'
 import { useCollection } from 'src/providers'
 import { CollectionData } from 'src/types'
 import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
+type ViewOptionValue = keyof CollectionData['view']['filters']
+
 type ViewOption = {
   label: string
-  value: keyof CollectionData['view']['filters']
+  value: ViewOptionValue
 }
 
 const viewOptions: ViewOption[] = [
-  { label: loc('topbar_hide_cors'), value: 'hide-cors' },
   { label: loc('view_always_show_size'), value: 'show-size' },
+  { label: loc('view_show_name'), value: 'show-name' },
+  { label: loc('topbar_hide_cors'), value: 'hide-cors' },
 ]
 
 export const ViewPopover = () => {
@@ -43,17 +46,15 @@ export const ViewPopover = () => {
         <Transition as={Fragment} {...transitions.popover}>
           <Popover.Panel
             className={clsx(
-              'absolute right-0 z-10 mt-2 origin-top-left rounded-md p-4',
+              'absolute right-0 z-50 mt-2 origin-top-left rounded-md p-5',
               'bg-white shadow-2xl ring-1 ring-black dark:bg-gray-800 dark:ring-white',
-              'flex flex-col gap-y-2 ring-opacity-5 focus:outline-none dark:ring-opacity-5',
+              'flex flex-col gap-y-3 ring-opacity-5 focus:outline-none dark:ring-opacity-5',
             )}
           >
             {viewOptions.map((option) => (
               <div className="flex items-center" key={option.value}>
                 <input
-                  checked={
-                    state.view.filters[option.value as keyof CollectionData['view']['filters']]
-                  }
+                  checked={state.view.filters[option.value]}
                   className="checkbox"
                   id={option.value}
                   name={option.value}
@@ -64,7 +65,10 @@ export const ViewPopover = () => {
                   className="text ml-3 cursor-pointer whitespace-nowrap pr-4 text-sm font-medium"
                   htmlFor={option.value}
                 >
-                  {option.label} {option.value === 'hide-cors' && `(${corsRestrictedCount})`}
+                  {option.label}
+                  {option.value === 'hide-cors' && (
+                    <Badge text={`${corsRestrictedCount}`} className="ml-2" />
+                  )}
                 </label>
               </div>
             ))}

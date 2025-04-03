@@ -27,13 +27,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
     <div
       {...rest}
       className={clsx(
+        state.view.filters['show-name'] && 'rounded-b-none',
         'text relative rounded-2xl',
         'group/card transition-all duration-300 ease-in-out',
-        'flex aspect-square items-center justify-center hover:shadow-md',
+        'flex aspect-square items-center justify-center',
         className,
       )}
       ref={ref}
-      style={{ backgroundColor: state.view.canvas }}
     >
       <SvgSize data={data} />
       <Actions data={data}>

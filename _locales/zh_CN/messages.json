@@ -845,5 +845,17 @@
   },
   "selected": {
     "message": "已选择"
+  },
+  "export_sprite_prefix": {
+    "message": "前缀 ID"
+  },
+  "export_sprite_suffix": {
+    "message": "后缀 ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "为每个图标添加前缀 ID"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "为每个图标添加后缀 ID"
   }
 }

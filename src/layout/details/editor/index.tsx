@@ -41,10 +41,10 @@ export const DetailsEditor = () => {
           lineNumbers: false,
         }}
         className="h-full"
+        theme={tokyoNightStorm}
         extensions={[html(), EditorView.lineWrapping]}
         onChange={onChange}
         onFocus={onFocus}
-        theme={tokyoNightStorm}
         value={state.currentString}
       />
     </section>

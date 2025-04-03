@@ -3,11 +3,13 @@ import clsx from 'clsx'
 import { FileType, fileTypes, useCollection, useExport } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 
+import { fileTypeLabels } from 'src/constants/file-type-labels'
 import { Filename } from './file-name'
 import { Footer } from './footer'
 import { Header } from './header'
 import { JpegSettings } from './jpeg-settings'
 import { PngSettings } from './png-settings'
+import { SpriteSettings } from './sprite-settings'
 import { SvgSettings } from './svg-settings'
 import { WebPSettings } from './webp-settings'
 
@@ -61,7 +63,7 @@ export const ExportPanel = () => {
                 >
                   {fileTypes.map((type) => (
                     <option key={type} value={type}>
-                      {type.toUpperCase()}
+                      {fileTypeLabels[type]}
                     </option>
                   ))}
                 </select>
@@ -82,6 +84,9 @@ export const ExportPanel = () => {
                 </Transition>
                 <Transition as="div" show={exportState.fileType === 'jpeg'} {...transitionConfig}>
                   <JpegSettings />
+                </Transition>
+                <Transition as="div" show={exportState.fileType === 'sprite'} {...transitionConfig}>
+                  <SpriteSettings />
                 </Transition>
               </div>
             </main>

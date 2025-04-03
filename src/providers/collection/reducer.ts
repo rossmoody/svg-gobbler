@@ -42,6 +42,7 @@ export const initCollectionState: CollectionState = {
     filters: {
       'hide-cors': false,
       'show-size': false,
+      'show-name': false,
     },
     size: 96,
     sort: 'file-desc',

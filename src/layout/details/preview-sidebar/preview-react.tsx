@@ -1,6 +1,7 @@
 import { javascript } from '@codemirror/lang-javascript'
+import { EditorView } from '@codemirror/view'
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
-import CodeMirror, { EditorView } from '@uiw/react-codemirror'
+import CodeMirror from '@uiw/react-codemirror'
 import { debounce } from 'lodash'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
@@ -41,9 +42,8 @@ export const PreviewReact = () => {
         <CodeMirror
           basicSetup={{ highlightActiveLine: false }}
           className="cm-padding-fix h-1/2"
-          extensions={[javascript(), EditorView.lineWrapping]}
+          extensions={[javascript(), EditorView.lineWrapping, tokyoNightStorm]}
           readOnly
-          theme={tokyoNightStorm}
           value={result}
         />
       )}

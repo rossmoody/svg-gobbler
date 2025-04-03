@@ -43,7 +43,6 @@ export const CollectionTitle = () => {
     >
       <h1
         className="focus -ml-2 whitespace-nowrap rounded-md px-2 py-1 text-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-800"
-        // @ts-ignore https://github.com/facebook/react/issues/27619
         contentEditable="plaintext-only"
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}

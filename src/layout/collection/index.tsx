@@ -9,6 +9,7 @@ import { useCollection } from 'src/providers'
 import { SvgType } from 'src/scripts'
 
 import { Card } from './card'
+import { SvgName } from './card/svg-name'
 import { ShowPasteCue } from './show-paste-cue'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
@@ -47,10 +48,6 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     }
   }
 
-  function calculateDelay(index: number) {
-    return index > 199 ? '100ms' : `${index * 15}ms`
-  }
-
   if (state.processedData.length === 0) {
     return <NoResults />
   }
@@ -70,16 +67,17 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
             enterTo="opacity-100 scale-100"
             key={svg.svg + i}
             show
-            style={{ transitionDelay: calculateDelay(i) }}
+            className="rounded-xl transition-all duration-300 ease-in-out hover:shadow-md"
+            style={{ backgroundColor: state.view.canvas }}
           >
             <Card data={svg as SvgType} />
+            <SvgName data={svg as SvgType} />
           </Transition>
         ))}
         {/* Intersection observer */}
         <li ref={elementRef as React.RefObject<HTMLLIElement>} />
       </ul>
 
-      {/* Solicitation*/}
       <ReviewPrompt />
       <FeedbackModal />
       <ShowPasteCue />
