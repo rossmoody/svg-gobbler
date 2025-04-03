@@ -4,10 +4,11 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { transitions } from 'src/constants/transitions'
-import { useCollection } from 'src/providers'
+import { useCollection, UserState, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
 import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
+import { ViewNameFeatureNotice } from './view-name-feature-notice'
 
 type ViewOptionValue = keyof CollectionData['view']['filters']
 
@@ -24,6 +25,7 @@ const viewOptions: ViewOption[] = [
 
 export const ViewPopover = () => {
   const { dispatch, state } = useCollection()
+  const { state: userState, dispatch: userDispatch } = useUser()
 
   function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { checked, name } = e.currentTarget
@@ -33,13 +35,33 @@ export const ViewPopover = () => {
     dispatch({ type: 'process-data' })
   }
 
+  function handleViewNameFeatureNoticeClick() {
+    if (!userState.features.viewedNameFeature) {
+      const user: UserState = {
+        ...userState,
+        features: { ...userState.features, viewedNameFeature: true },
+      }
+
+      userDispatch({
+        payload: user,
+        type: 'set-user',
+      })
+
+      StorageUtils.setStorageData('user', user)
+    }
+  }
+
   const corsRestrictedCount = state.data.filter((svg) => svg.corsRestricted).length
 
   return (
     <Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
       <Popover className="relative inline-block px-4 text-left">
-        <Popover.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
+        <Popover.Button
+          className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}
+          onClick={handleViewNameFeatureNoticeClick}
+        >
           {loc('topbar_view')}
+          <ViewNameFeatureNotice />
           <ChevronDownIcon aria-hidden className="h-3 w-3" />
         </Popover.Button>
 
