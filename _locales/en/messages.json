@@ -868,5 +868,8 @@
   },
   "view_show_feature_notice": {
     "message": "New Views!"
+  },
+  "sidebar_feedback": {
+    "message": "Send feedback"
   }
 }

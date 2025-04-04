@@ -862,5 +862,8 @@
   },
   "view_show_feature_notice": {
     "message": "Nouvelles vues !"
+  },
+  "sidebar_feedback": {
+    "message": "Envoyer des commentaires"
   }
 }

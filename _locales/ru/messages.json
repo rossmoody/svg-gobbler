@@ -862,5 +862,8 @@
   },
   "view_show_feature_notice": {
     "message": "Новые представления!"
+  },
+  "sidebar_feedback": {
+    "message": "Отправить отзыв"
   }
 }

@@ -862,5 +862,8 @@
   },
   "view_show_feature_notice": {
     "message": "नयी दृश्य!"
+  },
+  "sidebar_feedback": {
+    "message": "प्रतिक्रिया भेजें"
   }
 }

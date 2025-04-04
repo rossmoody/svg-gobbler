@@ -863,5 +863,8 @@
   },
   "view_show_feature_notice": {
     "message": "新视图！"
+  },
+  "sidebar_feedback": {
+    "message": "发送反馈"
   }
 }

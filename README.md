@@ -34,6 +34,7 @@ optimize, download, copy, edit, or export.
 
 ### Export SVGs
 
+- Create SVG Sprites from a collection of icons
 - Export as SVG, PNG, WEBP, JPEG and various other formats
 - Transform SVGs into minified Data URIs
 - Transform SVGs into React components with SVGR
