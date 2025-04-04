@@ -17,7 +17,11 @@ export const CardColorOnboarding = () => {
   }, [collectionState.processedData])
 
   const shouldShowCardColorOnboarding = useMemo(() => {
-    return collectionHasSvgWithWhite && !userState.onboarding.viewedCardColor
+    return (
+      collectionHasSvgWithWhite &&
+      !userState.onboarding.viewedCardColor &&
+      process.env.NODE_ENV === 'production'
+    )
   }, [collectionHasSvgWithWhite, userState.onboarding.viewedCardColor])
 
   if (shouldShowCardColorOnboarding) {

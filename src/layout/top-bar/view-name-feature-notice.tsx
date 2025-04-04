@@ -2,6 +2,7 @@ import * as Tooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useUser } from 'src/providers'
+import { loc } from 'src/utils/i18n'
 
 export const ViewNameFeatureNotice = () => {
   const { state: userState } = useUser()
@@ -34,7 +35,7 @@ export const ViewNameFeatureNotice = () => {
             side="bottom"
             sideOffset={20}
           >
-            New Views!
+            {loc('view_show_feature_notice')}
             <Tooltip.Arrow className="fill-current text-gray-800 dark:text-gray-200" />
           </Tooltip.Content>
         </Tooltip.Portal>

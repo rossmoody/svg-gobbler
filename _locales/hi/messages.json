@@ -856,5 +856,11 @@
   },
   "export_sprite_suffix_tooltip": {
     "message": "प्रत्यय ID के साथ प्रत्यय दें"
+  },
+  "view_show_name": {
+    "message": "SVG नाम देखें"
+  },
+  "view_show_feature_notice": {
+    "message": "नयी दृश्य!"
   }
 }

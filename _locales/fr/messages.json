@@ -856,5 +856,11 @@
   },
   "export_sprite_suffix_tooltip": {
     "message": "Ajoute un suffixe à l'ID de chaque icône"
+  },
+  "view_show_name": {
+    "message": "Afficher les noms des SVG"
+  },
+  "view_show_feature_notice": {
+    "message": "Nouvelles vues !"
   }
 }

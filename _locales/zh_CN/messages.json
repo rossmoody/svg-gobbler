@@ -857,5 +857,11 @@
   },
   "export_sprite_suffix_tooltip": {
     "message": "为每个图标添加后缀 ID"
+  },
+  "view_show_name": {
+    "message": "查看 SVG 名称"
+  },
+  "view_show_feature_notice": {
+    "message": "新视图！"
   }
 }

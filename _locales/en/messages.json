@@ -840,7 +840,7 @@
     "message": "Done"
   },
   "view_always_show_size": {
-    "message": "View file sizes"
+    "message": "View SVG sizes"
   },
   "download_all": {
     "message": "Download all"
@@ -849,13 +849,13 @@
     "message": "selected"
   },
   "export_download_sprite": {
-    "message": "Download sprite"
+    "message": "Download"
   },
   "export_sprite_prefix": {
-    "message": "Prefix ID"
+    "message": "Prefix IDs"
   },
   "export_sprite_suffix": {
-    "message": "Suffix ID"
+    "message": "Suffix IDs"
   },
   "export_sprite_prefix_tooltip": {
     "message": "Add a prefix to the ID of each icon"
@@ -864,6 +864,9 @@
     "message": "Add a suffix to the ID of each icon"
   },
   "view_show_name": {
-    "message": "View icon names"
+    "message": "View SVG names"
+  },
+  "view_show_feature_notice": {
+    "message": "New Views!"
   }
 }

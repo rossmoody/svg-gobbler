@@ -856,5 +856,11 @@
   },
   "export_sprite_suffix_tooltip": {
     "message": "Añadir un sufijo al ID de cada icono"
+  },
+  "view_show_name": {
+    "message": "Ver nombres de SVG"
+  },
+  "view_show_feature_notice": {
+    "message": "Nuevas vistas!"
   }
 }
