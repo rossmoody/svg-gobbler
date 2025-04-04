@@ -1,30 +1,21 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useCollection, useUser } from 'src/providers'
+import { useUser } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 
-export const CardColorOnboarding = () => {
+export const ViewNameFeatureNotice = () => {
   const { state: userState } = useUser()
-  const { state: collectionState } = useCollection()
 
-  const collectionHasSvgWithWhite = useMemo(() => {
-    const whiteValues = ['white', '#fff', '#ffffff']
-
-    return collectionState.processedData.some(({ presentationSvg }) =>
-      whiteValues.some((whiteValue) => presentationSvg.includes(whiteValue)),
-    )
-  }, [collectionState.processedData])
-
-  const shouldShowCardColorOnboarding = useMemo(() => {
+  const shouldShowNewFeatureTooltip = useMemo(() => {
     return (
-      collectionHasSvgWithWhite &&
-      !userState.onboarding.viewedCardColor &&
-      process.env.NODE_ENV === 'production'
+      !userState.features.viewedNameFeature &&
+      userState.onboarding.viewedCardColor &&
+      new Date(userState.installDate) < new Date('2025-04-02')
     )
-  }, [collectionHasSvgWithWhite, userState.onboarding.viewedCardColor])
+  }, [userState])
 
-  if (shouldShowCardColorOnboarding) {
+  if (shouldShowNewFeatureTooltip) {
     return (
       <Tooltip.Root open>
         <Tooltip.Trigger asChild>
@@ -44,7 +35,7 @@ export const CardColorOnboarding = () => {
             side="bottom"
             sideOffset={20}
           >
-            {loc('onboarding_card_color')}
+            {loc('view_show_feature_notice')}
             <Tooltip.Arrow className="fill-current text-gray-800 dark:text-gray-200" />
           </Tooltip.Content>
         </Tooltip.Portal>

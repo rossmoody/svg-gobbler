@@ -842,5 +842,29 @@
   },
   "download_all": {
     "message": "下载全部"
+  },
+  "selected": {
+    "message": "已选择"
+  },
+  "export_sprite_prefix": {
+    "message": "前缀 ID"
+  },
+  "export_sprite_suffix": {
+    "message": "后缀 ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "为每个图标添加前缀 ID"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "为每个图标添加后缀 ID"
+  },
+  "view_show_name": {
+    "message": "查看 SVG 名称"
+  },
+  "view_show_feature_notice": {
+    "message": "新视图！"
+  },
+  "sidebar_feedback": {
+    "message": "发送反馈"
   }
 }

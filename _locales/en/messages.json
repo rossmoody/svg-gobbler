@@ -840,9 +840,36 @@
     "message": "Done"
   },
   "view_always_show_size": {
-    "message": "Always show file size"
+    "message": "View SVG sizes"
   },
   "download_all": {
     "message": "Download all"
+  },
+  "selected": {
+    "message": "selected"
+  },
+  "export_download_sprite": {
+    "message": "Download"
+  },
+  "export_sprite_prefix": {
+    "message": "Prefix IDs"
+  },
+  "export_sprite_suffix": {
+    "message": "Suffix IDs"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "Add a prefix to the ID of each icon"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "Add a suffix to the ID of each icon"
+  },
+  "view_show_name": {
+    "message": "View SVG names"
+  },
+  "view_show_feature_notice": {
+    "message": "New Views!"
+  },
+  "sidebar_feedback": {
+    "message": "Send feedback"
   }
 }

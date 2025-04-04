@@ -122,4 +122,12 @@ export class Svg {
     clone.removeAttribute('style') // Risky, may remove
     return clone.outerHTML
   }
+
+  /**
+   * Update the name of the SVG
+   */
+  updateName(name: string) {
+    this.name = name
+    this.lastEdited = new Date().toISOString()
+  }
 }

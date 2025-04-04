@@ -13,9 +13,9 @@ export type CardData = {
   data: SvgType
 }
 
-export type CardProps = CardData & HTMLAttributes<HTMLLIElement>
+export type CardProps = CardData & HTMLAttributes<HTMLDivElement>
 
-export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
+export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const { className, data, ...rest } = props
   const { state } = useCollection()
 
@@ -24,16 +24,16 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
   }, [data.corsRestricted])
 
   return (
-    <li
+    <div
       {...rest}
       className={clsx(
+        state.view.filters['show-name'] && 'rounded-b-none',
         'text relative rounded-2xl',
         'group/card transition-all duration-300 ease-in-out',
-        'flex aspect-square items-center justify-center hover:shadow-md',
+        'flex aspect-square items-center justify-center',
         className,
       )}
       ref={ref}
-      style={{ backgroundColor: state.view.canvas }}
     >
       <SvgSize data={data} />
       <Actions data={data}>
@@ -44,6 +44,6 @@ export const Card = forwardRef<HTMLLIElement, CardProps>((props, ref) => {
           <CardContent data={data} />
         </div>
       </Actions>
-    </li>
+    </div>
   )
 })

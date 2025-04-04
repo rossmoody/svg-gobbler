@@ -2,7 +2,7 @@ import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 
 import { defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 
-export const fileTypes = ['svg', 'png', 'webp', 'jpeg'] as const
+export const fileTypes = ['svg', 'png', 'jpeg', 'webp', 'sprite'] as const
 export type FileType = (typeof fileTypes)[number]
 
 export type ExportState = {
@@ -27,6 +27,19 @@ export type ExportState = {
    * The setting configurations for each file type.
    */
   settings: {
+    /**
+     * The setting configurations for sprite exports.
+     */
+    sprite: {
+      /**
+       * The prefix to use when exporting multiple files.
+       */
+      prefix: string
+      /**
+       * The suffix to use when exporting multiple files.
+       */
+      suffix: string
+    }
     /**
      * JPEG export settings.
      */
@@ -103,6 +116,8 @@ export type ExportAction =
   | { payload: number; type: 'set-webp-size' }
   | { payload: string; type: 'set-filename' }
   | { payload: string; type: 'set-filename-prefix' }
+  | { payload: string; type: 'set-sprite-prefix' }
+  | { payload: string; type: 'set-sprite-suffix' }
   | { type: 'reset' }
 
 export const initExportState: ExportState = {
@@ -111,6 +126,10 @@ export const initExportState: ExportState = {
   filenamePrefix: 'svg',
   prefixFilenames: false,
   settings: {
+    sprite: {
+      prefix: '',
+      suffix: '',
+    },
     jpeg: {
       quality: 0.92,
       size: 512,
@@ -138,6 +157,32 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
       return {
         ...state,
         prefixFilenames: action.payload,
+      }
+    }
+
+    case 'set-sprite-prefix': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          sprite: {
+            ...state.settings.sprite,
+            prefix: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-sprite-suffix': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          sprite: {
+            ...state.settings.sprite,
+            suffix: action.payload,
+          },
+        },
       }
     }
 

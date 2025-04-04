@@ -1,14 +1,14 @@
 import { Transition } from '@headlessui/react'
-import { Cog6ToothIcon, MegaphoneIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon, PencilSquareIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
 import { links } from 'src/constants/links'
-import { isDevEnv } from 'src/constants/server-config'
 import { useDashboard } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 
 import { CollectionItem } from './collection-item'
+import { FeedbackItem } from './feedback-item'
 import { NewCollectionModal } from './new-collection-modal'
 import { ResetEnvironment } from './reset-environment'
 
@@ -65,16 +65,17 @@ export const SidebarContent = () => {
             </NavLink>
           </li>
           <li>
+            <FeedbackItem />
+          </li>
+          <li>
             <button className="collection-item" onClick={navigateToChromeWebStore}>
-              <MegaphoneIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
+              <PencilSquareIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
               {loc('sidebar_review')}
             </button>
           </li>
-          {isDevEnv && (
-            <li>
-              <ResetEnvironment />
-            </li>
-          )}
+          <li>
+            <ResetEnvironment />
+          </li>
         </ul>
       </nav>
     </div>

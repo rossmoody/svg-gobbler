@@ -841,5 +841,29 @@
   },
   "download_all": {
     "message": "सभी डाउनलोड करें"
+  },
+  "selected": {
+    "message": "चुना हुआ"
+  },
+  "export_sprite_prefix": {
+    "message": "प्रीफिक्स ID"
+  },
+  "export_sprite_suffix": {
+    "message": "सफिक्स ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "प्रत्यय ID के साथ प्रत्यय दें"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "प्रत्यय ID के साथ प्रत्यय दें"
+  },
+  "view_show_name": {
+    "message": "SVG नाम देखें"
+  },
+  "view_show_feature_notice": {
+    "message": "नयी दृश्य!"
+  },
+  "sidebar_feedback": {
+    "message": "प्रतिक्रिया भेजें"
   }
 }

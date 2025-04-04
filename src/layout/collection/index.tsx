@@ -1,18 +1,27 @@
 import type { CollectionData } from 'src/types'
 
 import { Transition } from '@headlessui/react'
-import { Fragment, useEffect, useMemo } from 'react'
-import { Button, FeedbackModal, ReviewPrompt } from 'src/components'
+import { useEffect } from 'react'
+import { FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
+import { useIntersectionObserver } from 'src/hooks'
 import { useCollection } from 'src/providers'
 import { SvgType } from 'src/scripts'
-import { loc } from 'src/utils/i18n'
 
 import { Card } from './card'
+import { SvgName } from './card/svg-name'
 import { ShowPasteCue } from './show-paste-cue'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { dispatch, state } = useCollection()
+
+  const { elementRef, isIntersecting } = useIntersectionObserver()
+
+  useEffect(() => {
+    if (isIntersecting) {
+      dispatch({ type: 'load-more' })
+    }
+  }, [isIntersecting, dispatch])
 
   /**
    * We do this here instead of routes because data is awaited in
@@ -23,14 +32,6 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     dispatch({ type: 'process-data' })
     return () => dispatch({ type: 'reset' })
   }, [data, dispatch])
-
-  const filteredResultLength = useMemo(() => {
-    if (state.view.filters['hide-cors']) {
-      return state.data.filter((svg) => !svg.corsRestricted).length
-    }
-
-    return state.data.length
-  }, [state.data, state.view.filters])
 
   function generateMinSize() {
     switch (state.view.size) {
@@ -47,10 +48,6 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
     }
   }
 
-  function calculateDelay(index: number) {
-    return index > 199 ? '100ms' : `${index * 8}ms`
-  }
-
   if (state.processedData.length === 0) {
     return <NoResults />
   }
@@ -64,30 +61,23 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
         {state.processedData.map((svg, i) => (
           <Transition
             appear
-            as={Fragment}
+            as="li"
             enter="transition-all duration-300 ease-in-out"
             enterFrom="opacity-0 scale-90"
             enterTo="opacity-100 scale-100"
             key={svg.svg + i}
             show
+            className="rounded-xl transition-all duration-300 ease-in-out hover:shadow-md"
+            style={{ backgroundColor: state.view.canvas }}
           >
-            <Card data={svg as SvgType} style={{ transitionDelay: calculateDelay(i) }} />
+            <Card data={svg as SvgType} />
+            <SvgName data={svg as SvgType} />
           </Transition>
         ))}
+        {/* Intersection observer */}
+        <li ref={elementRef as React.RefObject<HTMLLIElement>} />
       </ul>
-      <Transition
-        className="my-12 flex justify-center"
-        enter="transition-opacity duration-300 ease-in-out"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        show={state.processedData.length < filteredResultLength}
-      >
-        <Button onClick={() => dispatch({ type: 'load-more' })} size="lg" variant="secondary">
-          {loc('main_load_more')}
-        </Button>
-      </Transition>
 
-      {/* Solicitation*/}
       <ReviewPrompt />
       <FeedbackModal />
       <ShowPasteCue />

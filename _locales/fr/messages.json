@@ -841,5 +841,29 @@
   },
   "download_all": {
     "message": "Tout télécharger"
+  },
+  "selected": {
+    "message": "sélectionné"
+  },
+  "export_sprite_prefix": {
+    "message": "Préfixe ID"
+  },
+  "export_sprite_suffix": {
+    "message": "Suffixe ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "Ajoute un préfixe à l'ID de chaque icône"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "Ajoute un suffixe à l'ID de chaque icône"
+  },
+  "view_show_name": {
+    "message": "Afficher les noms des SVG"
+  },
+  "view_show_feature_notice": {
+    "message": "Nouvelles vues !"
+  },
+  "sidebar_feedback": {
+    "message": "Envoyer des commentaires"
   }
 }

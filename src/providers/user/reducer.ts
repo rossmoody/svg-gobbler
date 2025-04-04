@@ -37,6 +37,13 @@ export type UserState = {
      */
     viewedSvgInClipboard: boolean
   }
+  features: {
+    /**
+     * The user has viewed the tooltip for the new view settings in April 2025.
+     * User installed after this date will not see the tooltip.
+     */
+    viewedNameFeature: boolean
+  }
   /**
    * The settings for the user. Managed in the settings page.
    */
@@ -59,6 +66,9 @@ export const initUserState: UserState = {
     viewedFeatureRequest: false,
     viewedReview: false,
     viewedSvgInClipboard: false,
+  },
+  features: {
+    viewedNameFeature: false,
   },
   settings: {
     mergeCollections: true,

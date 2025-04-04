@@ -15,7 +15,11 @@ export const ReviewPrompt = () => {
   } = useDashboard()
 
   useEffect(() => {
-    if (collections.length >= 3 && !userState.onboarding.viewedReview) {
+    if (
+      collections.length >= 3 &&
+      !userState.onboarding.viewedReview &&
+      process.env.NODE_ENV === 'production'
+    ) {
       setShow(true)
     }
   }, [collections.length, userState.onboarding.viewedReview])

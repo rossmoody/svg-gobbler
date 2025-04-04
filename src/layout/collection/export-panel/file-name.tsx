@@ -34,7 +34,7 @@ export const Filename = () => {
   }
 
   //// If there is only one selected item, render a single input for the file name
-  if (collectionState.selected.length === 1) {
+  if (collectionState.selected.length === 1 || exportState.fileType === 'sprite') {
     return (
       <>
         <label className="export-label" htmlFor="file-name">

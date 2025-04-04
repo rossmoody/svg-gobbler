@@ -85,6 +85,10 @@ export type CollectionData = {
        * Show or hide the size of the icon on the card
        */
       'show-size': boolean
+      /**
+       * Whether to show the name of the icon on the card
+       */
+      'show-name': boolean
     }
     /**
      * The size of the icons in the collection

@@ -841,5 +841,29 @@
   },
   "download_all": {
     "message": "Скачать все"
+  },
+  "selected": {
+    "message": "Выбрано"
+  },
+  "export_sprite_prefix": {
+    "message": "Префикс ID"
+  },
+  "export_sprite_suffix": {
+    "message": "Суффикс ID"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "Добавьте префикс к ID каждого иконки"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "Добавьте суффикс к ID каждого иконки"
+  },
+  "view_show_name": {
+    "message": "Показать имена SVG"
+  },
+  "view_show_feature_notice": {
+    "message": "Новые представления!"
+  },
+  "sidebar_feedback": {
+    "message": "Отправить отзыв"
   }
 }
