@@ -3,14 +3,6 @@ import { Svg } from './svg'
 
 export class Image extends Svg {
   /**
-   * The absolute URL of the image source. If this is present, the SVG
-   * is an image element with an external source. It will require a fetch
-   * to get the SVG source. If it fails, the image is retained with the cors
-   * src url.
-   */
-  absoluteImageUrl?: string
-
-  /**
    * The document.location.origin of the SVG element in the DOM. Can be blank.
    */
   origin: string
@@ -43,14 +35,23 @@ export class Image extends Svg {
   }
 
   /**
-   * Creates an absolute URL from the image src of an image element.
+   * The absolute URL of the image source. If this is present, the SVG
+   * is an image element with an external source. It will require a fetch
+   * to get the SVG source. If it fails, the image is retained with the cors
+   * src url.
    */
-  private getAbsoluteImageSrc() {
+  public get absoluteImageUrl() {
     const src = this.asElement?.getAttribute('src') ?? ''
 
     // Handle various URL formats
-    if (src.startsWith('http') || src.startsWith('//')) {
+    if (src.startsWith('data:')) {
       return src
+    } else if (src.startsWith('http://') || src.startsWith('https://')) {
+      return src
+    } else if (src.startsWith('//')) {
+      return `https:${src}`
+    } else if (src.startsWith('www.')) {
+      return `https://${src}`
     } else if (src.startsWith('/')) {
       return `${this.origin.replace(/\/$/, '')}${src}`
     } else {
@@ -86,8 +87,6 @@ export class Image extends Svg {
    *
    */
   async fetchSvgContent() {
-    if (!this.absoluteImageUrl) return this
-
     const controller = new AbortController()
     const signal = controller.signal
     const timeoutId = setTimeout(() => controller.abort(), 3000)
@@ -175,16 +174,11 @@ export class Image extends Svg {
         src.includes('/svg/') ||
         src.includes('.svg#'): {
         this.parseAndSetElement()
-        this.absoluteImageUrl = this.getAbsoluteImageSrc()
         break
       }
 
       default: {
-        // Attempt to parse element for any other case
         this.parseAndSetElement()
-        if (this.asElement?.getAttribute('src')?.includes('.svg')) {
-          this.absoluteImageUrl = this.getAbsoluteImageSrc()
-        }
       }
     }
   }
