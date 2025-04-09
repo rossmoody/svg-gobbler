@@ -71,7 +71,7 @@ export const initUserState: UserState = {
     viewedNameFeature: false,
   },
   settings: {
-    mergeCollections: true,
+    mergeCollections: false,
   },
 }
 
