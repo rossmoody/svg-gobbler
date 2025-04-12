@@ -123,7 +123,7 @@ export class Image extends Svg {
 
   processImage() {
     // Early return if the SVG has already been processed and proven to be CORS restricted
-    // This is a massive performance imrprovement as we process SVGs in and out twice every load
+    // This is a massive performance improvement as we process SVGs in and out twice every load
     if (this.corsRestricted) return
 
     // Support both double and single quotes in src attribute
@@ -146,7 +146,7 @@ export class Image extends Svg {
         break
       }
 
-      // Utf 8
+      // UTF 8
       case src.includes('data:image/svg+xml;utf8'): {
         const svgStart = src.indexOf('<svg')
         const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
@@ -167,15 +167,6 @@ export class Image extends Svg {
         } catch (error) {
           console.warn('Error decoding URL-encoded SVG:', error)
         }
-        break
-      }
-
-      // Need to fetch asynchronously
-      case src.endsWith('.svg') ||
-        src.includes('.svg?') ||
-        src.includes('/svg/') ||
-        src.includes('.svg#'): {
-        this.parseAndSetElement()
         break
       }
 
