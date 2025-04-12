@@ -1,10 +1,19 @@
+import type {
+  TabGroupProps,
+  TabListProps,
+  TabPanelProps,
+  TabPanelsProps,
+  TabProps,
+} from '@headlessui/react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import clsx from 'clsx'
-import { HTMLAttributes, PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
-const Group = (props: PropsWithChildren) => <HeadlessTab.Group {...props} />
+const Group = (props: PropsWithChildren<TabGroupProps<typeof HeadlessTab.Group>>) => (
+  <HeadlessTab.Group {...props} />
+)
 
-const List = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => {
+const List = (props: PropsWithChildren<TabListProps<typeof HeadlessTab.List>>) => {
   const { className, ...rest } = props
 
   return (
@@ -15,15 +24,15 @@ const List = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => {
   )
 }
 
-const Panels = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => (
+const Panels = (props: PropsWithChildren<TabPanelsProps<typeof HeadlessTab.Panels>>) => (
   <HeadlessTab.Panels {...props} />
 )
 
-const Panel = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => (
+const Panel = (props: PropsWithChildren<TabPanelProps<typeof HeadlessTab.Panel>>) => (
   <HeadlessTab.Panel {...props} />
 )
 
-const Tab = (props: PropsWithChildren) => (
+const Tab = (props: PropsWithChildren<TabProps<typeof HeadlessTab>>) => (
   <HeadlessTab
     {...props}
     className={clsx(

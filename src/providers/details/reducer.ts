@@ -1,7 +1,6 @@
 import type { Config, State } from '@svgr/core'
 import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 import type { DetailsParams } from 'src/types'
-import type { Config as SvgoConfig } from 'svgo'
 
 import { optimize } from 'svgo'
 
@@ -17,10 +16,16 @@ export type DetailsState = {
   currentString: string
   export: {
     svgoConfig: {
-      js2svg: SvgoConfig['js2svg']
+      js2svg: {
+        indent: number
+        pretty: boolean
+      }
       multipass: boolean
       plugins: SvgoPlugin[]
-    } & SvgoConfig
+      floatPrecision?: number
+      path?: string
+      datauri?: 'base64' | 'enc' | 'unenc'
+    }
   }
   id: string // The id of the svg
   name: string

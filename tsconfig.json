@@ -18,6 +18,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "exactOptionalPropertyTypes": true,
 
     /* Linting */
     "strict": true,

@@ -1,3 +1,4 @@
+import { type } from 'arktype'
 import type { DocumentData, StorageSvg, Svg } from 'src/scripts'
 
 import { type UserState } from './providers'
@@ -27,7 +28,7 @@ export type Collection = {
   /**
    * The emoji used to represent the collection in the sidebar.
    */
-  emoji?: string
+  emoji: string | undefined
   /**
    * The original URL of the source. This is used to merge collections based on the URL.
    */
@@ -127,13 +128,15 @@ export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
 /**
  * The model for SVG files imported from the local file system.
  */
-export type FileSvg = {
+export const FileSvg = type({
   /**
    * The file name of the SVG file
    */
-  name: string
+  name: 'string',
   /**
    * The SVG string of the file
    */
-  svg: string
-}
+  svg: 'string',
+})
+
+export type FileSvgType = typeof FileSvg.infer
