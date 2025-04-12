@@ -871,5 +871,14 @@
   },
   "sidebar_feedback": {
     "message": "Send feedback"
+  },
+  "feedback_email": {
+    "message": "Email"
+  },
+  "feedback_email_optional": {
+    "message": "(optional for reply)"
+  },
+  "feedback_feedback": {
+    "message": "Feedback"
   }
 }

@@ -865,5 +865,14 @@
   },
   "sidebar_feedback": {
     "message": "Отправить отзыв"
+  },
+  "feedback_email": {
+    "message": "Email"
+  },
+  "feedback_email_optional": {
+    "message": "(опционально для ответа)"
+  },
+  "feedback_feedback": {
+    "message": "Отзыв"
   }
 }

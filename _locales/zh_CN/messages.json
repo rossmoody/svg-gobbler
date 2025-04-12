@@ -866,5 +866,14 @@
   },
   "sidebar_feedback": {
     "message": "发送反馈"
+  },
+  "feedback_email": {
+    "message": "电子邮件"
+  },
+  "feedback_email_optional": {
+    "message": "(可选回复)"
+  },
+  "feedback_feedback": {
+    "message": "反馈"
   }
 }

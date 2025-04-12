@@ -865,5 +865,14 @@
   },
   "sidebar_feedback": {
     "message": "प्रतिक्रिया भेजें"
+  },
+  "feedback_email": {
+    "message": "ईमेल"
+  },
+  "feedback_email_optional": {
+    "message": "(उत्तर के लिए वैकल्पिक)"
+  },
+  "feedback_feedback": {
+    "message": "प्रतिक्रिया"
   }
 }
