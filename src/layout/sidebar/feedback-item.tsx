@@ -40,6 +40,9 @@ export const FeedbackItem = () => {
             {loc('feedback_email')}{' '}
             <span className="text-xs text-gray-500">{loc('feedback_email_optional')}</span>
           </label>
+          <div className="mb-2 text-xs text-gray-600 dark:text-gray-400">
+            {loc('feedback_email_optional_description')}
+          </div>
           <input className="input mb-4" id="feedback-email" type="email" name="feedback-email" />
           <label className="label" htmlFor="feedback-textarea">
             {loc('feedback_feedback')}

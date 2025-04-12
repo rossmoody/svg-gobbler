@@ -874,5 +874,8 @@
   },
   "feedback_feedback": {
     "message": "Отзыв"
+  },
+  "feedback_email_optional_description": {
+    "message": "Для ответа от разработчика и кредита за отзыв"
   }
 }

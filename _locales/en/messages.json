@@ -876,9 +876,12 @@
     "message": "Email"
   },
   "feedback_email_optional": {
-    "message": "(optional for reply)"
+    "message": "(optional)"
   },
   "feedback_feedback": {
     "message": "Feedback"
+  },
+  "feedback_email_optional_description": {
+    "message": "For if you want a reply from the developer and credit for the feedback"
   }
 }

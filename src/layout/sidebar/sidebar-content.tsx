@@ -1,5 +1,10 @@
 import { Transition } from '@headlessui/react'
-import { Cog6ToothIcon, PencilSquareIcon, PlusIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowTopRightOnSquareIcon,
+  Cog6ToothIcon,
+  PencilSquareIcon,
+  PlusIcon,
+} from '@heroicons/react/24/outline'
 import { Fragment, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from 'src/components'
@@ -68,9 +73,13 @@ export const SidebarContent = () => {
             <FeedbackItem />
           </li>
           <li>
-            <button className="collection-item" onClick={navigateToChromeWebStore}>
+            <button className="collection-item group" onClick={navigateToChromeWebStore}>
               <PencilSquareIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
               {loc('sidebar_review')}
+              <ArrowTopRightOnSquareIcon
+                aria-hidden="true"
+                className="h-0 w-0 shrink-0 transition-all duration-150 group-hover:h-4 group-hover:w-4"
+              />
             </button>
           </li>
           <li>

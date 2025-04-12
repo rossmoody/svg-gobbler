@@ -875,5 +875,8 @@
   },
   "feedback_feedback": {
     "message": "反馈"
+  },
+  "feedback_email_optional_description": {
+    "message": "如果您希望收到开发人员的回复并感谢您的反馈"
   }
 }

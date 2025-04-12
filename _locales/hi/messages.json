@@ -874,5 +874,8 @@
   },
   "feedback_feedback": {
     "message": "प्रतिक्रिया"
+  },
+  "feedback_email_optional_description": {
+    "message": "यदि आप विकल्प हैं तो विकल्प के लिए एक उत्तर चाहते हैं"
   }
 }

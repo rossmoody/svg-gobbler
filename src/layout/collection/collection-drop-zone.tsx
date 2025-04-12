@@ -30,8 +30,7 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <div {...getRootProps()}>
-      {children}
+    <div {...getRootProps()} className="group">
       <div
         className={clsx(
           'pointer-events-none fixed z-50 flex items-center justify-center',
@@ -52,7 +51,7 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
           <div
             className={clsx(
               'flex flex-col items-center justify-center transition-opacity duration-500 ease-in-out',
-              isDragActive ? 'opacity-100' : 'opacity-0',
+              isDragActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
             )}
           >
             <DocumentPlusIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
@@ -67,6 +66,7 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
         </div>
       </div>
       <input {...getInputProps()} className="sr-only" />
+      {children}
     </div>
   )
 }

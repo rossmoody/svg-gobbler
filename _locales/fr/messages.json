@@ -874,5 +874,8 @@
   },
   "feedback_feedback": {
     "message": "Commentaires"
+  },
+  "feedback_email_optional_description": {
+    "message": "Pour si vous voulez une réponse du développeur et crédit pour le commentaire"
   }
 }
