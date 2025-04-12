@@ -1,8 +1,7 @@
-import { type } from 'arktype'
 import JSZip from 'jszip'
 import { ExportSvg } from 'src/layout/collection/export-panel/use-export-actions'
 import { ExportState, FileType } from 'src/providers'
-import { type FileSvgType, FileSvg } from 'src/types'
+import { type FileSvg } from 'src/types'
 import { buildSpriteAndDemo } from './sprite-builder'
 
 /**
@@ -218,21 +217,19 @@ export class FormUtils {
    * Process and returns the string SVG values associated with a
    * given file list.
    */
-  static handleUpload(entryValues: File[]): Promise<FileSvgType[]> {
+  static handleUpload(entryValues: File[]): Promise<FileSvg[]> {
     const promises = entryValues.map((file) => {
       const fileName = file.name.trim().replace(/\.svg$/i, '')
 
-      return new Promise<FileSvgType>((resolve, reject) => {
+      return new Promise<FileSvg>((resolve, reject) => {
         const fileReader = new FileReader()
 
         fileReader.onload = (event) => {
           const result = event.target?.result
-          const fileSvg = FileSvg({ name: fileName, svg: result })
-
-          if (fileSvg instanceof type.errors) {
-            reject(fileSvg.summary)
+          if (typeof result === 'string') {
+            resolve({ name: fileName, svg: result } as FileSvg)
           } else {
-            resolve(fileSvg)
+            reject(new Error('File read result is not a string'))
           }
         }
 

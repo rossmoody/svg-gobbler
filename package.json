@@ -23,7 +23,6 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@uiw/react-codemirror": "^4.21.20",
-    "arktype": "^2.1.19",
     "clsx": "^2.0.0",
     "emoji-mart": "^5.6.0",
     "jszip": "^3.10.1",
@@ -67,7 +66,7 @@
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^3.3.5",
     "tailwindcss-radix": "^2.8.0",
-    "typescript": "^5.8.3",
+    "typescript": "^5.0.2",
     "vite": "^6.0.12"
   }
 }

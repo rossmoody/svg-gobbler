@@ -13,7 +13,7 @@ export class Svg {
    * If it is undefined, the SVG factory was unable to parse or
    * manually create the SVG element from parts.
    */
-  public asElement?: Element | undefined
+  public asElement?: Element
 
   /**
    * Defaults to false and only flips true if the element is an

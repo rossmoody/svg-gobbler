@@ -5,9 +5,5 @@
       "url": "https://json.schemastore.org/chrome-manifest.json"
     }
   ],
-  "css.customData": [".vscode/tailwind.json"],
-  "editor.quickSuggestions": {
-    "strings": "on"
-  },
-  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["^(node:)?os$"]
+  "css.customData": [".vscode/tailwind.json"]
 }

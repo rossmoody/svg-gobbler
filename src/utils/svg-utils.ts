@@ -3,13 +3,13 @@ import type { StorageSvg, Svg } from 'src/scripts'
 
 import { nanoid } from 'nanoid'
 import prettyBytes from 'pretty-bytes'
-import { FileSvgType } from 'src/types'
+import { FileSvg } from 'src/types'
 
 export class SvgUtils {
   /**
    * Creates a storage svg object with an id and the svg string.
    */
-  static createStorageSvg(fileSvg: FileSvgType): StorageSvg {
+  static createStorageSvg(fileSvg: FileSvg): StorageSvg {
     return {
       corsRestricted: false,
       id: nanoid(),
