@@ -28,7 +28,7 @@ export type Collection = {
   /**
    * The emoji used to represent the collection in the sidebar.
    */
-  emoji: string | undefined
+  emoji?: string | undefined
   /**
    * The original URL of the source. This is used to merge collections based on the URL.
    */
