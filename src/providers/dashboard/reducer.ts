@@ -38,8 +38,7 @@ export const dashboardReducer = (state: DashboardState, action: DashboardAction)
     }
 
     case 'set-collections': {
-      const sortedCollections = action.payload.sort((a, b) => a.name.localeCompare(b.name))
-      return { ...state, collections: sortedCollections }
+      return { ...state, collections: action.payload }
     }
 
     case 'set-open': {
