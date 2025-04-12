@@ -108,8 +108,10 @@ export class Image extends Svg {
 
       const text = await response.text()
       this.svg = text
-      this.asElement = this.parseFromString()
-      if (this.asElement) {
+      const element = this.parseFromString()
+
+      if (element) {
+        this.asElement = element
         this.svg = this.asElement.outerHTML
       }
     } catch (error) {
