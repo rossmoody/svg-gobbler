@@ -82,9 +82,6 @@ export async function rootLoader() {
           collections = [collection, ...prevCollections]
         }
 
-        // Sort the collections by name
-        collections = collections.sort((a, b) => a.name.localeCompare(b.name))
-
         await StorageUtils.setStorageData('collections', collections)
         await StorageUtils.setPageData(collection.id, pageData)
 
