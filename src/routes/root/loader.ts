@@ -5,6 +5,7 @@ import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, type UserState, initCollectionState, initUserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
+import { logger } from 'src/utils/logger'
 import { RootUtils } from 'src/utils/root-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
 import { SvgUtils } from 'src/utils/svg-utils'
@@ -86,6 +87,7 @@ export async function rootLoader() {
 
         return collection.id
       } catch (error) {
+        logger.error(error)
         // This catch is reached more than you'd think
         // 1. The listener has been removed, so the background script is no longer listening on refresh
         // 2. Send the user to the first collection if they invoke on a browser system page

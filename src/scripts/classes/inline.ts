@@ -13,7 +13,6 @@ export class Inline extends Svg {
 
   /**
    * An earnest effort to set a viewBox so we can handle resizing and displaying the SVGs.
-   * Returns a clone of the SVG.
    */
   setViewBox() {
     if (!this.asElement) return
@@ -22,11 +21,27 @@ export class Inline extends Svg {
     const viewBox = svg.getAttribute('viewBox')
     if (viewBox) return
 
-    const height = svg.getAttribute('height')?.replace('px', '')
-    const width = svg.getAttribute('width')?.replace('px', '')
-    if (height && width) {
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
-      return
+    const width = svg.getAttribute('width')
+    const height = svg.getAttribute('height')
+
+    if (width && height) {
+      const cleanWidth = width.replace(/[^0-9.]/g, '')
+      const cleanHeight = height.replace(/[^0-9.]/g, '')
+
+      if (cleanWidth && cleanHeight) {
+        svg.setAttribute('viewBox', `0 0 ${cleanWidth} ${cleanHeight}`)
+        return
+      }
+    }
+
+    try {
+      const bBox = svg.getBBox()
+      if (bBox.width > 0 && bBox.height > 0) {
+        svg.setAttribute('viewBox', `${bBox.x} ${bBox.y} ${bBox.width} ${bBox.height}`)
+        return
+      }
+    } catch (error) {
+      console.warn('Failed to get SVG dimensions using getBBox(): ', this.name)
     }
   }
 }

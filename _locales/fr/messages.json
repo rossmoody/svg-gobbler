@@ -865,5 +865,17 @@
   },
   "sidebar_feedback": {
     "message": "Envoyer des commentaires"
+  },
+  "feedback_email": {
+    "message": "Email"
+  },
+  "feedback_email_optional": {
+    "message": "(optionnel pour répondre)"
+  },
+  "feedback_feedback": {
+    "message": "Commentaires"
+  },
+  "feedback_email_optional_description": {
+    "message": "Pour si vous voulez une réponse du développeur et crédit pour le commentaire"
   }
 }

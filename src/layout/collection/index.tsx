@@ -4,24 +4,17 @@ import { Transition } from '@headlessui/react'
 import { useEffect } from 'react'
 import { FeedbackModal, ReviewPrompt } from 'src/components'
 import { NoResults } from 'src/components/no-results'
-import { useIntersectionObserver } from 'src/hooks'
 import { useCollection } from 'src/providers'
 import { SvgType } from 'src/scripts'
 
 import { Card } from './card'
 import { SvgName } from './card/svg-name'
+import { CollectionDropZone } from './collection-drop-zone'
+import { InfiniteScroll } from './infinite-scroll'
 import { ShowPasteCue } from './show-paste-cue'
 
 export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   const { dispatch, state } = useCollection()
-
-  const { elementRef, isIntersecting } = useIntersectionObserver()
-
-  useEffect(() => {
-    if (isIntersecting) {
-      dispatch({ type: 'load-more' })
-    }
-  }, [isIntersecting, dispatch])
 
   /**
    * We do this here instead of routes because data is awaited in
@@ -53,34 +46,35 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
   }
 
   return (
-    <section className="border-gray-200 transition-colors dark:border-gray-800">
-      <ul
-        className="grid justify-between gap-4"
-        style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))` }}
-      >
-        {state.processedData.map((svg, i) => (
-          <Transition
-            appear
-            as="li"
-            enter="transition-all duration-300 ease-in-out"
-            enterFrom="opacity-0 scale-90"
-            enterTo="opacity-100 scale-100"
-            key={svg.svg + i}
-            show
-            className="rounded-xl transition-all duration-300 ease-in-out hover:shadow-md"
-            style={{ backgroundColor: state.view.canvas }}
-          >
-            <Card data={svg as SvgType} />
-            <SvgName data={svg as SvgType} />
-          </Transition>
-        ))}
-        {/* Intersection observer */}
-        <li ref={elementRef as React.RefObject<HTMLLIElement>} />
-      </ul>
+    <CollectionDropZone>
+      <section className="border-gray-200 transition-colors dark:border-gray-800">
+        <ul
+          className="grid justify-between gap-4"
+          style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))` }}
+        >
+          {state.processedData.map((svg, i) => (
+            <Transition
+              appear
+              as="li"
+              enter="transition-all duration-300 ease-in-out"
+              enterFrom="opacity-0 scale-90"
+              enterTo="opacity-100 scale-100"
+              key={svg.svg + i}
+              show
+              className="rounded-xl transition-all duration-300 ease-in-out hover:shadow-md"
+              style={{ backgroundColor: state.view.canvas }}
+            >
+              <Card data={svg as SvgType} />
+              <SvgName data={svg as SvgType} />
+            </Transition>
+          ))}
+          <InfiniteScroll />
+        </ul>
 
-      <ReviewPrompt />
-      <FeedbackModal />
-      <ShowPasteCue />
-    </section>
+        <ReviewPrompt />
+        <FeedbackModal />
+        <ShowPasteCue />
+      </section>
+    </CollectionDropZone>
   )
 }

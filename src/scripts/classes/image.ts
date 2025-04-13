@@ -3,14 +3,6 @@ import { Svg } from './svg'
 
 export class Image extends Svg {
   /**
-   * The absolute URL of the image source. If this is present, the SVG
-   * is an image element with an external source. It will require a fetch
-   * to get the SVG source. If it fails, the image is retained with the cors
-   * src url.
-   */
-  absoluteImageUrl?: string
-
-  /**
    * The document.location.origin of the SVG element in the DOM. Can be blank.
    */
   origin: string
@@ -43,14 +35,23 @@ export class Image extends Svg {
   }
 
   /**
-   * Creates an absolute URL from the image src of an image element.
+   * The absolute URL of the image source. If this is present, the SVG
+   * is an image element with an external source. It will require a fetch
+   * to get the SVG source. If it fails, the image is retained with the cors
+   * src url.
    */
-  private getAbsoluteImageSrc() {
+  public get absoluteImageUrl() {
     const src = this.asElement?.getAttribute('src') ?? ''
 
     // Handle various URL formats
-    if (src.startsWith('http') || src.startsWith('//')) {
+    if (src.startsWith('data:')) {
       return src
+    } else if (src.startsWith('http://') || src.startsWith('https://')) {
+      return src
+    } else if (src.startsWith('//')) {
+      return `https:${src}`
+    } else if (src.startsWith('www.')) {
+      return `https://${src}`
     } else if (src.startsWith('/')) {
       return `${this.origin.replace(/\/$/, '')}${src}`
     } else {
@@ -86,8 +87,6 @@ export class Image extends Svg {
    *
    */
   async fetchSvgContent() {
-    if (!this.absoluteImageUrl) return this
-
     const controller = new AbortController()
     const signal = controller.signal
     const timeoutId = setTimeout(() => controller.abort(), 3000)
@@ -109,8 +108,10 @@ export class Image extends Svg {
 
       const text = await response.text()
       this.svg = text
-      this.asElement = this.parseFromString()
-      if (this.asElement) {
+      const element = this.parseFromString()
+
+      if (element) {
+        this.asElement = element
         this.svg = this.asElement.outerHTML
       }
     } catch (error) {
@@ -122,7 +123,7 @@ export class Image extends Svg {
 
   processImage() {
     // Early return if the SVG has already been processed and proven to be CORS restricted
-    // This is a massive performance imrprovement as we process SVGs in and out twice every load
+    // This is a massive performance improvement as we process SVGs in and out twice every load
     if (this.corsRestricted) return
 
     // Support both double and single quotes in src attribute
@@ -145,7 +146,7 @@ export class Image extends Svg {
         break
       }
 
-      // Utf 8
+      // UTF 8
       case src.includes('data:image/svg+xml;utf8'): {
         const svgStart = src.indexOf('<svg')
         const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
@@ -169,22 +170,8 @@ export class Image extends Svg {
         break
       }
 
-      // Need to fetch asynchronously
-      case src.endsWith('.svg') ||
-        src.includes('.svg?') ||
-        src.includes('/svg/') ||
-        src.includes('.svg#'): {
-        this.parseAndSetElement()
-        this.absoluteImageUrl = this.getAbsoluteImageSrc()
-        break
-      }
-
       default: {
-        // Attempt to parse element for any other case
         this.parseAndSetElement()
-        if (this.asElement?.getAttribute('src')?.includes('.svg')) {
-          this.absoluteImageUrl = this.getAbsoluteImageSrc()
-        }
       }
     }
   }
