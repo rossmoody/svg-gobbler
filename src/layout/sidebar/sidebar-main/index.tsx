@@ -1,33 +1,37 @@
-import { DndContext } from '@dnd-kit/core'
-import { Transition } from '@headlessui/react'
-import { Fragment } from 'react/jsx-runtime'
+import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { useCallback } from 'react'
 import { useDashboard } from 'src/providers'
+import { StorageUtils } from 'src/utils/storage-utils'
 import { CollectionItem } from '../collection-item'
-
 export const SidebarMain = () => {
-  const { state } = useDashboard()
+  const { state, dispatch } = useDashboard()
+
+  const handleDragEnd = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      if (!over || active.id === over.id) return
+
+      const oldIndex = state.collections.findIndex((collection) => collection.id === active.id)
+      const newIndex = state.collections.findIndex((collection) => collection.id === over.id)
+
+      const newCollections = arrayMove(state.collections, oldIndex, newIndex)
+      dispatch({ type: 'set-collections', payload: newCollections })
+      StorageUtils.setStorageData('collections', newCollections)
+    },
+    [dispatch, state.collections],
+  )
 
   return (
-    <DndContext>
+    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <ul className="flex flex-col gap-1.5" role="list">
-        {state.collections.map((collection, i) => (
-          <Transition
-            appear
-            as={Fragment}
-            enter="transition-all duration-300 ease-in-out"
-            enterFrom="opacity-0 translate-y-2 scale-95"
-            enterTo="opacity-100 translate-y-0 scale-100"
-            key={collection.id}
-            leave="transition-all duration-300 ease-in-out"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            show
-          >
-            <li key={collection.id} style={{ transitionDelay: `${i * 15}ms` }}>
-              <CollectionItem collection={collection} />
-            </li>
-          </Transition>
-        ))}
+        <SortableContext
+          items={state.collections.map((collection) => collection.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          {state.collections.map((collection) => (
+            <CollectionItem key={collection.id} collection={collection} />
+          ))}
+        </SortableContext>
       </ul>
     </DndContext>
   )

@@ -15,7 +15,7 @@ export const SideFooter = () => {
   }
 
   return (
-    <div>
+    <footer>
       <h2 id="settings-heading" className="sr-only">
         User Settings
       </h2>
@@ -43,6 +43,6 @@ export const SideFooter = () => {
           <ResetEnvironment />
         </li>
       </ul>
-    </div>
+    </footer>
   )
 }

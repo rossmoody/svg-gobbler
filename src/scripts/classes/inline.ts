@@ -41,7 +41,7 @@ export class Inline extends Svg {
         return
       }
     } catch (error) {
-      console.warn('Failed to get SVG dimensions using getBBox()', error)
+      console.warn('Failed to get SVG dimensions using getBBox(): ', this.name)
     }
   }
 }
