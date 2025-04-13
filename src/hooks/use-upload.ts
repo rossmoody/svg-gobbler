@@ -1,4 +1,3 @@
-import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { Inline, StorageSvg } from 'src/scripts'
 import { type FileSvg } from 'src/types'
@@ -11,7 +10,6 @@ import { SvgUtils } from 'src/utils/svg-utils'
  */
 export const useUpload = () => {
   const { dispatch, state } = useCollection()
-  const { revalidate } = useRevalidator()
 
   return async function (fileSvgs: FileSvg[]) {
     const { collectionId } = state
@@ -33,6 +31,5 @@ export const useUpload = () => {
     const newSvgClasses = newData.map((item) => new Inline(item))
     dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
     dispatch({ type: 'process-data' })
-    revalidate()
   }
 }

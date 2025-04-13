@@ -25,7 +25,7 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
     }
 
     if (fileRejections.length > 0) {
-      console.log('fileRejections', fileRejections)
+      // TODO: Handle file rejections
     }
   }
 
@@ -39,19 +39,15 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
       >
         <div
           className={clsx(
-            'rounded-2xl shadow-lg transition-all duration-200 ease-in-out',
+            'rounded-2xl shadow-lg transition-all duration-100 ease-in-out',
             'border-2 border-dashed border-red-300/70 ring-0 dark:border-red-500/70',
-            'flex items-center justify-center overflow-hidden',
-            {
-              'h-0 w-0 bg-white/60': !isDragActive,
-              'h-full w-full bg-white/95 dark:bg-gray-700/95': isDragActive,
-            },
+            'h-full w-full items-center justify-center overflow-hidden bg-white/95 dark:bg-gray-700/95',
+            isDragActive ? 'flex' : 'hidden',
           )}
         >
           <div
             className={clsx(
               'flex flex-col items-center justify-center transition-opacity duration-500 ease-in-out',
-              isDragActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
             )}
           >
             <DocumentPlusIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
