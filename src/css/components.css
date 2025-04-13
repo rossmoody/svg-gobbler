@@ -90,7 +90,8 @@ button:disabled {
 
 .transparent {
   background-color: white;
-  background-image: linear-gradient(45deg, #ebebeb 25%, transparent 25%),
+  background-image:
+    linear-gradient(45deg, #ebebeb 25%, transparent 25%),
     linear-gradient(135deg, #ebebeb 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, #ebebeb 75%),
     linear-gradient(135deg, transparent 75%, #ebebeb 75%);
@@ -118,7 +119,7 @@ button:disabled {
 
 .top-bar,
 .main-bar {
-  @apply text surface flex h-16 shrink-0 items-center gap-x-4 border-b 
+  @apply text surface flex h-16 shrink-0 items-center gap-x-2 border-b 
   border-gray-200 px-2 dark:border-gray-800 sm:px-6 lg:gap-x-4 lg:px-8;
 }
 

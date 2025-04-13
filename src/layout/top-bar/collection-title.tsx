@@ -31,6 +31,8 @@ export const CollectionTitle = () => {
       sidebarDispatch({ payload: newCollections, type: 'set-collections' })
       StorageUtils.setStorageData('collections', newCollections)
     }
+    // Reset scroll position for overflow-ellipsis
+    event.currentTarget.scrollLeft = 0
   }
 
   return (
@@ -40,9 +42,10 @@ export const CollectionTitle = () => {
       enterFrom="opacity-0 translate-y-1"
       enterTo="opacity-100 translate-y-0"
       show={!!title}
+      className="-ml-2 hidden min-w-0 flex-1 rounded-md md:flex"
     >
       <h1
-        className="focus -ml-2 whitespace-nowrap rounded-md px-2 py-1 text-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="focus min-w-0 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-md px-2 py-1 text-lg font-semibold hover:bg-gray-100 focus:text-clip dark:hover:bg-gray-800"
         contentEditable="plaintext-only"
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
