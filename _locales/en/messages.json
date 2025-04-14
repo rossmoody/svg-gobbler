@@ -798,7 +798,7 @@
     "message": "Default configuration settings for importing collections."
   },
   "settings_collections_title": {
-    "message": "Data"
+    "message": "Collections"
   },
   "settings_collections_desc": {
     "message": "Settings and configuration options for data and collection history"
@@ -885,9 +885,21 @@
     "message": "For if you want a reply from the developer and credit for the feedback"
   },
   "topbar_sort_alphabetical_asc": {
-    "message": "Alphabetical: A-Z"
+    "message": "Alphabetical: A -> Z"
   },
   "topbar_sort_alphabetical_desc": {
-    "message": "Alphabetical: Z-A"
+    "message": "Alphabetical: Z -> A"
+  },
+  "settings_sort_collections_label": {
+    "message": "Sort collections alphabetically"
+  },
+  "settings_sort_collections_desc": {
+    "message": "Automatically sort collections in the sidebar alphabetically on every launch of SVG Gobbler"
+  },
+  "settings_export_title": {
+    "message": "Export"
+  },
+  "settings_export__desc": {
+    "message": "Manage and export data in various formats from within SVG Gobbler."
   }
 }

@@ -10,8 +10,8 @@ import { loc } from 'src/utils/i18n'
 import { SidebarContent } from './sidebar-content'
 
 export const Sidebar = () => {
-  const { dispatch, state } = useDashboard()
   const collections = useLoaderData() as Collection[]
+  const { dispatch, state } = useDashboard()
 
   useEffect(() => {
     dispatch({ payload: collections, type: 'set-collections' })

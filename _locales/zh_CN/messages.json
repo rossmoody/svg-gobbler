@@ -884,5 +884,17 @@
   },
   "topbar_sort_alphabetical_desc": {
     "message": "字母顺序：Z-A"
+  },
+  "settings_sort_collections_label": {
+    "message": "按字母顺序排序集合"
+  },
+  "settings_sort_collections_desc": {
+    "message": "按字母顺序排序集合"
+  },
+  "settings_export_title": {
+    "message": "导出"
+  },
+  "settings_export__desc": {
+    "message": "管理并导出SVG Gobbler中的数据"
   }
 }

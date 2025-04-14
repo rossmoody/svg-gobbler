@@ -883,5 +883,17 @@
   },
   "topbar_sort_alphabetical_desc": {
     "message": "Alphabetique: Z-A"
+  },
+  "settings_sort_collections_label": {
+    "message": "Trier les collections par ordre alphabétique"
+  },
+  "settings_sort_collections_desc": {
+    "message": "Trier les collections par ordre alphabétique dans le côté gauche de SVG Gobbler"
+  },
+  "settings_export_title": {
+    "message": "Exporter"
+  },
+  "settings_export__desc": {
+    "message": "Gérer et exporter des données dans divers formats depuis SVG Gobbler."
   }
 }
