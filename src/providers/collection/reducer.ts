@@ -156,6 +156,16 @@ export const collectionReducer = (
           })
           break
         }
+
+        case 'alphabetical-asc': {
+          processedData.sort((a, b) => a.name.localeCompare(b.name))
+          break
+        }
+
+        case 'alphabetical-desc': {
+          processedData.sort((a, b) => b.name.localeCompare(a.name))
+          break
+        }
       }
 
       return {

@@ -82,6 +82,11 @@ export async function rootLoader() {
           collections = [collection, ...prevCollections]
         }
 
+        // Sort the collections alphabetically if the user has the setting
+        if (user.settings.sortCollections) {
+          collections = collections.sort((a, b) => a.name.localeCompare(b.name))
+        }
+
         await StorageUtils.setStorageData('collections', collections)
         await StorageUtils.setPageData(collection.id, pageData)
 

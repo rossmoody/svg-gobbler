@@ -52,6 +52,10 @@ export type UserState = {
      * To merge collections based on the URL.
      */
     mergeCollections: boolean
+    /**
+     * To sort collections in the sidebar alphabetically.
+     */
+    sortCollections: boolean
   }
 }
 
@@ -72,6 +76,7 @@ export const initUserState: UserState = {
   },
   settings: {
     mergeCollections: false,
+    sortCollections: false,
   },
 }
 

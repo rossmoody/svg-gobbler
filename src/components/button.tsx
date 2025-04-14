@@ -8,6 +8,8 @@ export const btnVariantStyles = {
   primary: 'bg-red-600 hover:bg-red-500 text-white shadow-sm',
   secondary:
     'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-sm',
+  destructive:
+    'ring-1 ring-inset ring-red-300 dark:ring-red-700 hover:bg-red-100 dark:hover:bg-red-800 shadow-sm text-red-600',
 }
 
 export const btnSizeStyles = {

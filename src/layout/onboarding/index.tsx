@@ -9,9 +9,12 @@ import graphic from './onboarding-graphic.png'
 
 export const OnboardingLayout = () => {
   const launchSvgGobbler = async () => {
+    const { data } = await findSvg()
+
     chrome.runtime.sendMessage({
       data: {
-        ...findSvg(),
+        data,
+        href: links.svgGobblerHomepage,
         host: loc('onboarding_title'),
         origin: links.svgGobblerHomepage,
       },

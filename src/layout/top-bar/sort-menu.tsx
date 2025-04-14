@@ -14,6 +14,8 @@ type SortOption = {
 
 const sortOptions: SortOption[] = [
   { label: loc('topbar_sort_none'), value: 'none' },
+  { label: loc('topbar_sort_alphabetical_asc'), value: 'alphabetical-asc' },
+  { label: loc('topbar_sort_alphabetical_desc'), value: 'alphabetical-desc' },
   { label: loc('topbar_sort_size_asc'), value: 'file-asc' },
   { label: loc('topbar_sort_size_desc'), value: 'file-desc' },
   { label: loc('topbar_sort_last_asc'), value: 'last-asc' },
