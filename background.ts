@@ -28,20 +28,27 @@ class Background {
    * Launches the extension from the onboarding page.
    */
   static launchExtensionFromOnboarding() {
-    chrome.runtime.onMessage.addListener(async function onboardingListener(req) {
+    const onboardingListener = async function (req: { data: DocumentData; type: string }) {
       const { data, type } = req
 
       if (type === 'launch-svg-gobbler-from-onboarding') {
-        chrome.runtime.onMessage.addListener(function listener(req, __, sendResponse) {
+        const listener = function (
+          req: string,
+          __: chrome.runtime.MessageSender,
+          sendResponse: (response: any) => void,
+        ) {
           if (req === 'gobble') {
             sendResponse({ data })
             chrome.runtime.onMessage.removeListener(listener)
           }
-        })
+        }
+        chrome.runtime.onMessage.addListener(listener)
 
         await Chrome.createNewTab()
       }
-    })
+    }
+
+    chrome.runtime.onMessage.addListener(onboardingListener)
   }
 
   /**
@@ -71,9 +78,15 @@ class Background {
 
       const activeTab = await Chrome.getActiveTab()
 
+      // Check if we have a valid active tab
+      if (!activeTab || !activeTab.id) {
+        console.error('No active tab found or tab ID is missing')
+        return
+      }
+
       // Check if the active tab is a system page
       if (!activeTab.url?.includes('chrome://')) {
-        data = await Chrome.executeScript(activeTab.id!, findSvg)
+        data = await Chrome.executeScript(activeTab.id, findSvg)
       }
 
       // Add a listener
