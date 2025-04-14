@@ -137,7 +137,7 @@ importers:
         version: 4.22.2(@codemirror/language@6.10.2)(@codemirror/state@6.4.1)(@codemirror/view@6.27.0)
       '@vitejs/plugin-react-swc':
         specifier: ^3.7.2
-        version: 3.7.2(vite@6.2.3(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3))
+        version: 3.7.2(vite@6.2.6(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3))
       archiver:
         specifier: ^6.0.1
         version: 6.0.2
@@ -178,8 +178,8 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       vite:
-        specifier: ^6.0.12
-        version: 6.2.3(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3)
+        specifier: ^6.2.6
+        version: 6.2.6(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3)
 
 packages:
 
@@ -3191,8 +3191,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite@6.2.3:
-    resolution: {integrity: sha512-IzwM54g4y9JA/xAeBPNaDXiBF8Jsgl3VBQ2YQ/wOY6fyW3xMdSoltIV3Bo59DErdqdE6RxUfv8W69DvUorE4Eg==}
+  vite@6.2.6:
+    resolution: {integrity: sha512-9xpjNl3kR4rVDZgPNdTL0/c6ao4km69a/2ihNQbcANz8RuCOK3hQBmLSJf3bRKVQjVMda+YvizNE8AwvogcPbw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -4517,10 +4517,10 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react-swc@3.7.2(vite@6.2.3(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3))':
+  '@vitejs/plugin-react-swc@3.7.2(vite@6.2.6(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3))':
     dependencies:
       '@swc/core': 1.10.4
-      vite: 6.2.3(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3)
+      vite: 6.2.6(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -6433,7 +6433,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@6.2.3(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3):
+  vite@6.2.6(@types/node@20.14.2)(jiti@1.21.3)(yaml@2.4.3):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3
