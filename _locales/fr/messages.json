@@ -877,5 +877,11 @@
   },
   "feedback_email_optional_description": {
     "message": "Pour si vous voulez une réponse du développeur et crédit pour le commentaire"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "Alphabetique: A-Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "Alphabetique: Z-A"
   }
 }

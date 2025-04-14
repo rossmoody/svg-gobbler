@@ -877,5 +877,11 @@
   },
   "feedback_email_optional_description": {
     "message": "यदि आप विकल्प हैं तो विकल्प के लिए एक उत्तर चाहते हैं"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "अक्षरानेक्सिकल: A-Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "अक्षरानेक्सिकल: Z-A"
   }
 }

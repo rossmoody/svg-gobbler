@@ -877,5 +877,11 @@
   },
   "feedback_email_optional_description": {
     "message": "Для ответа от разработчика и кредита за отзыв"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "Алфавитный: A-Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "Алфавитный: Z-A"
   }
 }

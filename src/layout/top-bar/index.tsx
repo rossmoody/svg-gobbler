@@ -33,10 +33,7 @@ export const TopBar = () => {
   return (
     <section className="top-bar">
       <CollectionPanelButton />
-      <div
-        aria-hidden
-        className="hidden h-6 min-w-px bg-gray-200 dark:bg-gray-700 md:flex lg:hidden"
-      />
+      <div aria-hidden className="mr-2 flex h-6 min-w-px bg-gray-200 dark:bg-gray-700 lg:hidden" />
       <CollectionTitle />
       <div className="ml-auto hidden shrink-0 items-center gap-x-3 sm:flex lg:gap-x-4">
         <div className="flex items-center gap-x-2">

@@ -878,5 +878,11 @@
   },
   "feedback_email_optional_description": {
     "message": "如果您希望收到开发人员的回复并感谢您的反馈"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "字母顺序：A-Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "字母顺序：Z-A"
   }
 }

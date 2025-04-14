@@ -883,5 +883,11 @@
   },
   "feedback_email_optional_description": {
     "message": "For if you want a reply from the developer and credit for the feedback"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "Alphabetical: A-Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "Alphabetical: Z-A"
   }
 }
