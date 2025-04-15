@@ -82,13 +82,13 @@ export type CollectionData = {
        */
       'hide-cors': boolean
       /**
-       * Show or hide the size of the icon on the card
-       */
-      'show-size': boolean
-      /**
        * Whether to show the name of the icon on the card
        */
       'show-name': boolean
+      /**
+       * Show or hide the size of the icon on the card
+       */
+      'show-size': boolean
     }
     /**
      * The size of the icons in the collection
@@ -98,13 +98,13 @@ export type CollectionData = {
      * The sort order of the collection
      */
     sort:
+      | 'alphabetical-asc'
+      | 'alphabetical-desc'
       | 'file-asc'
       | 'file-desc'
       | 'last-asc'
       | 'last-desc'
       | 'none'
-      | 'alphabetical-asc'
-      | 'alphabetical-desc'
   }
 }
 

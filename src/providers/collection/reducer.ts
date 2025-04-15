@@ -41,8 +41,8 @@ export const initCollectionState: CollectionState = {
     colorMode: 'light',
     filters: {
       'hide-cors': false,
-      'show-size': false,
       'show-name': false,
+      'show-size': false,
     },
     size: 96,
     sort: 'file-desc',

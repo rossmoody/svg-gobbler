@@ -4,10 +4,11 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { transitions } from 'src/constants/transitions'
-import { useCollection, UserState, useUser } from 'src/providers'
+import { UserState, useCollection, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
 import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
+
 import { ViewNameFeatureNotice } from './view-name-feature-notice'
 
 type ViewOptionValue = keyof CollectionData['view']['filters']
@@ -25,7 +26,7 @@ const viewOptions: ViewOption[] = [
 
 export const ViewPopover = () => {
   const { dispatch, state } = useCollection()
-  const { state: userState, dispatch: userDispatch } = useUser()
+  const { dispatch: userDispatch, state: userState } = useUser()
 
   function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { checked, name } = e.currentTarget
@@ -89,7 +90,7 @@ export const ViewPopover = () => {
                 >
                   {option.label}
                   {option.value === 'hide-cors' && (
-                    <Badge text={`${corsRestrictedCount}`} className="ml-2" />
+                    <Badge className="ml-2" text={`${corsRestrictedCount}`} />
                   )}
                 </label>
               </div>

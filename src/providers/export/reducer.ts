@@ -28,19 +28,6 @@ export type ExportState = {
    */
   settings: {
     /**
-     * The setting configurations for sprite exports.
-     */
-    sprite: {
-      /**
-       * The prefix to use when exporting multiple files.
-       */
-      prefix: string
-      /**
-       * The suffix to use when exporting multiple files.
-       */
-      suffix: string
-    }
-    /**
      * JPEG export settings.
      */
     jpeg: {
@@ -61,6 +48,19 @@ export type ExportState = {
        * The size of the PNG to export.
        */
       size: number
+    }
+    /**
+     * The setting configurations for sprite exports.
+     */
+    sprite: {
+      /**
+       * The prefix to use when exporting multiple files.
+       */
+      prefix: string
+      /**
+       * The suffix to use when exporting multiple files.
+       */
+      suffix: string
     }
     svg: {
       /**
@@ -126,16 +126,16 @@ export const initExportState: ExportState = {
   filenamePrefix: 'svg',
   prefixFilenames: false,
   settings: {
-    sprite: {
-      prefix: '',
-      suffix: '',
-    },
     jpeg: {
       quality: 0.92,
       size: 512,
     },
     png: {
       size: 512,
+    },
+    sprite: {
+      prefix: '',
+      suffix: '',
     },
     svg: {
       floatPrecision: 3,
