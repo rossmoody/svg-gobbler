@@ -37,6 +37,14 @@ export async function rootLoader() {
       // Get all collections from storage for sidenav
       const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
+      // Early return if the user is refreshing
+      const navigationEntries = performance.getEntriesByType(
+        'navigation',
+      ) as PerformanceNavigationTiming[]
+      if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
+        return prevCollections[0].id
+      }
+
       try {
         // Get the strings from the client page. This will fail on refresh and force the catch
         const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage

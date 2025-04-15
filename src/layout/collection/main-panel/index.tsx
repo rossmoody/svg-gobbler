@@ -4,6 +4,7 @@ import { Tabs } from 'src/components'
 import { useCollection } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 
+import { EditPanel } from './edit-panel'
 import { ExportFooter } from './export-footer'
 import { ExportPanel } from './export-panel'
 
@@ -38,8 +39,8 @@ export const MainPanel = () => {
                 <ExportPanel />
                 <ExportFooter />
               </Tabs.Panel>
-              <Tabs.Panel>
-                Bulk Edit stuff goes in here and stuff here that is awesome hello here
+              <Tabs.Panel className="flex h-full flex-col">
+                <EditPanel />
               </Tabs.Panel>
             </Tabs.Panels>
           </Tabs.Group>
