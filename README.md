@@ -10,7 +10,7 @@
 This extension is available on:
 
 - [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
-- [Firefox Addon Marketplace (locked to v3)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
+- [Firefox Addon Marketplace](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
 ---
 
