@@ -18,8 +18,34 @@ const output = fs.createWriteStream(outputPath)
 const archive = archiver('zip')
 
 output.on('close', () => {
-  console.log(`${archive.pointer()} total bytes`)
-  console.log(`File ${fileName} has been created`)
+  console.log('---')
+  console.log(`File ${fileName} has been created for Chrome`)
+
+  // Amend the manifest file for Firefox
+  const manifestPath = path.join(distPath, 'manifest.json')
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
+
+  manifest.browser_specific_settings = {
+    gecko: {
+      id: '{7962ff4a-5985-4cf2-9777-4bb642ad05b8}',
+    },
+  }
+
+  manifest.background = {
+    scripts: ['service-worker-loader.js'],
+    type: 'module',
+  }
+
+  manifest.web_accessible_resources = [
+    {
+      matches: ['<all_urls>'],
+      resources: ['assets/prod/**/*.png', 'assets/dev/**/*.png'],
+    },
+  ]
+
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
+  console.log('---')
+  console.log('Firefox manifest updated and ready for bundle')
 })
 
 archive.pipe(output)
