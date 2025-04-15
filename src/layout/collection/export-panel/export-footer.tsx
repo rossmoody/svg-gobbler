@@ -6,7 +6,7 @@ import { loc } from 'src/utils/i18n'
 
 import { ExportSvg, useExportActions } from './use-export-actions'
 
-export const Footer = () => {
+export const ExportFooter = () => {
   const [label, setLabel] = useState(loc('export_copy_clipboard'))
   const { state: collectionState } = useCollection()
   const { state: exportState } = useExport()
@@ -73,7 +73,7 @@ export const Footer = () => {
       : loc('export_download') + downloadQuantityString
 
   return (
-    <footer className="flex flex-col gap-2 px-1 pb-6 pt-4">
+    <footer className="flex shrink-0 flex-col gap-2 border-t border-gray-200 px-4 py-6 dark:border-gray-700">
       {collectionState.selected.length < 2 && exportState.fileType !== 'sprite' && (
         <Button className="justify-center transition-all" onClick={handleCopy} variant="secondary">
           {label}

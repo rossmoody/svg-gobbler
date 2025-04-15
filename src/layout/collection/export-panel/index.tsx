@@ -5,8 +5,8 @@ import { loc } from 'src/utils/i18n'
 
 import { Tabs } from 'src/components'
 import { fileTypeLabels } from 'src/constants/file-type-labels'
+import { ExportFooter } from './export-footer'
 import { Filename } from './file-name'
-import { Footer } from './footer'
 import { JpegSettings } from './jpeg-settings'
 import { PngSettings } from './png-settings'
 import { SpriteSettings } from './sprite-settings'
@@ -48,14 +48,14 @@ export const ExportPanel = () => {
         )}
       >
         <div className="flex h-full flex-col">
-          <main className="flex-grow overflow-y-auto">
-            <Tabs.Group>
-              <Tabs.List className="flex h-12">
-                <Tabs.Tab>{loc('export_export')}</Tabs.Tab>
-                <Tabs.Tab>Edit</Tabs.Tab>
-              </Tabs.List>
-              <Tabs.Panels className="flex-grow overflow-auto p-4">
-                <Tabs.Panel>
+          <Tabs.Group>
+            <Tabs.List className="flex h-12 shrink-0 items-end">
+              <Tabs.Tab>{loc('export_export')}</Tabs.Tab>
+              <Tabs.Tab>Edit</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panels className="min-h-0 flex-1">
+              <Tabs.Panel className="flex h-full flex-col">
+                <div className="flex-1 overflow-y-auto p-4">
                   <div className="mb-3">
                     <label className="export-label" htmlFor="file-type">
                       {loc('export_filetype')}
@@ -72,56 +72,56 @@ export const ExportPanel = () => {
                         </option>
                       ))}
                     </select>
+                    <div className="mb-5">
+                      <Filename />
+                    </div>
+                    <h2 className="my-3 text-sm font-medium">{loc('export_settings')}</h2>
+                    <div className="relative">
+                      <Transition
+                        as="div"
+                        show={exportState.fileType === 'svg'}
+                        {...transitionConfig}
+                      >
+                        <SvgSettings />
+                      </Transition>
+                      <Transition
+                        as="div"
+                        show={exportState.fileType === 'png'}
+                        {...transitionConfig}
+                      >
+                        <PngSettings />
+                      </Transition>
+                      <Transition
+                        as="div"
+                        show={exportState.fileType === 'webp'}
+                        {...transitionConfig}
+                      >
+                        <WebPSettings />
+                      </Transition>
+                      <Transition
+                        as="div"
+                        show={exportState.fileType === 'jpeg'}
+                        {...transitionConfig}
+                      >
+                        <JpegSettings />
+                      </Transition>
+                      <Transition
+                        as="div"
+                        show={exportState.fileType === 'sprite'}
+                        {...transitionConfig}
+                      >
+                        <SpriteSettings />
+                      </Transition>
+                    </div>
                   </div>
-                  <div className="mb-5">
-                    <Filename />
-                  </div>
-                  <h2 className="my-3 text-sm font-medium">{loc('export_settings')}</h2>
-                  <div className="relative">
-                    <Transition
-                      as="div"
-                      show={exportState.fileType === 'svg'}
-                      {...transitionConfig}
-                    >
-                      <SvgSettings />
-                    </Transition>
-                    <Transition
-                      as="div"
-                      show={exportState.fileType === 'png'}
-                      {...transitionConfig}
-                    >
-                      <PngSettings />
-                    </Transition>
-                    <Transition
-                      as="div"
-                      show={exportState.fileType === 'webp'}
-                      {...transitionConfig}
-                    >
-                      <WebPSettings />
-                    </Transition>
-                    <Transition
-                      as="div"
-                      show={exportState.fileType === 'jpeg'}
-                      {...transitionConfig}
-                    >
-                      <JpegSettings />
-                    </Transition>
-                    <Transition
-                      as="div"
-                      show={exportState.fileType === 'sprite'}
-                      {...transitionConfig}
-                    >
-                      <SpriteSettings />
-                    </Transition>
-                  </div>
-                </Tabs.Panel>
-                <Tabs.Panel>
-                  Bulk Edit stuff goes in here and stuff here that is awesome hello here
-                </Tabs.Panel>
-              </Tabs.Panels>
-            </Tabs.Group>
-          </main>
-          <Footer />
+                </div>
+                <ExportFooter />
+              </Tabs.Panel>
+              <Tabs.Panel>
+                Bulk Edit stuff goes in here and stuff here that is awesome hello here
+              </Tabs.Panel>
+            </Tabs.Panels>
+          </Tabs.Group>
         </div>
       </aside>
     </Transition>
