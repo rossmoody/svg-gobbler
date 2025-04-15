@@ -1,7 +1,9 @@
 import { Transition } from '@headlessui/react'
+import { forwardRef } from 'react'
 import { fileTypeLabels } from 'src/constants/file-type-labels'
 import { FileType, fileTypes, useExport } from 'src/providers'
 import { loc } from 'src/utils/i18n'
+
 import { Filename } from './file-name'
 import { JpegSettings } from './jpeg-settings'
 import { PngSettings } from './png-settings'
@@ -18,7 +20,7 @@ const transitionConfig = {
   leaveTo: 'opacity-0 h-0 translate-y-2',
 }
 
-export const ExportPanel = () => {
+export const ExportPanel = forwardRef<HTMLDivElement>((props, ref) => {
   const { dispatch: exportDispatch, state: exportState } = useExport()
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -26,7 +28,7 @@ export const ExportPanel = () => {
   }
 
   return (
-    <>
+    <div ref={ref} {...props} className="flex-1 overflow-y-auto p-4">
       <div className="mb-3">
         <label className="export-label" htmlFor="file-type">
           {loc('export_filetype')}
@@ -65,6 +67,6 @@ export const ExportPanel = () => {
           <SpriteSettings />
         </Transition>
       </div>
-    </>
+    </div>
   )
-}
+})

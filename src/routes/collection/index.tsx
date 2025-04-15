@@ -7,8 +7,8 @@ import { EmptyState } from 'src/components'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { usePastedSvg } from 'src/hooks'
 import { Collection } from 'src/layout/collection'
-import { ExportPanel } from 'src/layout/collection/export-panel'
 import { Mainbar } from 'src/layout/collection/main-bar'
+import { MainPanel } from 'src/layout/collection/main-panel'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { TopBar } from 'src/layout/top-bar'
 import { UserState, useCollection, useExport, useUser } from 'src/providers'
@@ -59,7 +59,7 @@ export const CollectionRoute = () => {
             </React.Suspense>
           </div>
         </main>
-        <ExportPanel />
+        <MainPanel />
       </div>
     </Fragment>
   )

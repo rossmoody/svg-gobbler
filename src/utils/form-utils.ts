@@ -1,5 +1,5 @@
 import JSZip from 'jszip'
-import { ExportSvg } from 'src/layout/collection/export-panel/use-export-actions'
+import { ExportSvg } from 'src/layout/collection/main-panel/use-export-actions'
 import { ExportState, FileType } from 'src/providers'
 import { type FileSvg } from 'src/types'
 import { buildSpriteAndDemo } from './sprite-builder'

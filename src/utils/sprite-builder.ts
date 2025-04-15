@@ -1,6 +1,6 @@
 import htmlParser from 'prettier/plugins/html'
 import { format } from 'prettier/standalone'
-import type { ExportSvg } from 'src/layout/collection/export-panel/use-export-actions'
+import type { ExportSvg } from 'src/layout/collection/main-panel/use-export-actions'
 import type { ExportState } from 'src/providers'
 import { logger } from './logger'
 
