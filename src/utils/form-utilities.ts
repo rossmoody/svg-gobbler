@@ -8,7 +8,7 @@ import { buildSpriteAndDemo } from './sprite-builder'
 /**
  * Utility class for form related operations like upload, download, and copy.
  */
-export const FormUtils = {
+export const FormUtilities = {
   /**
    * Builds a valid SVG element from a given string.
    *
@@ -93,9 +93,9 @@ export const FormUtils = {
         resolve(dataURL)
       })
 
-      img.onerror = () => {
+      img.addEventListener('error', () => {
         reject(new Error('Error loading image'))
-      }
+      })
 
       img.src = url
     })
@@ -106,7 +106,7 @@ export const FormUtils = {
    */
   async copyImageToClipboard(dataUrl: string) {
     try {
-      const blob = await fetch(dataUrl).then((res) => res.blob())
+      const blob = await fetch(dataUrl).then((response) => response.blob())
       const item = new ClipboardItem({ [blob.type]: blob })
       await navigator.clipboard.write([item])
     } catch (error) {
@@ -162,7 +162,7 @@ export const FormUtils = {
    * Downloads a given data url as a file.
    */
   async downloadImageDataUrl(dataUrl: string, baseFileName: string, type: FileType) {
-    const blob = await fetch(dataUrl).then((res) => res.blob())
+    const blob = await fetch(dataUrl).then((response) => response.blob())
     const blobUrl = URL.createObjectURL(blob)
     const downloadLink = document.createElement('a')
     downloadLink.download = `${baseFileName}.${type}`
@@ -245,24 +245,14 @@ export const FormUtils = {
     const promises = entryValues.map((file) => {
       const fileName = file.name.trim().replace(/\.svg$/i, '')
 
-      return new Promise<FileSvg>((resolve, reject) => {
-        const fileReader = new FileReader()
-
-        fileReader.addEventListener('load', (event) => {
-          const result = event.target?.result
-          if (typeof result === 'string') {
-            resolve({ name: fileName, svg: result } as FileSvg)
-          } else {
-            reject(new Error('File read result is not a string'))
-          }
+      return file
+        .text()
+        .then((result) => {
+          return { name: fileName, svg: result } as FileSvg
         })
-
-        fileReader.onerror = () => {
-          reject(new Error('Error reading file'))
-        }
-
-        fileReader.readAsText(file)
-      })
+        .catch(() => {
+          throw new Error('Error reading file')
+        })
     })
 
     return Promise.all(promises)
@@ -289,4 +279,4 @@ export const FormUtils = {
     // Additionally check if the root element is an SVG element
     return document_.documentElement.nodeName === 'svg'
   },
-};
+}

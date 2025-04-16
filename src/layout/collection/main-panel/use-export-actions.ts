@@ -1,7 +1,7 @@
 import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
-import { FormUtils } from 'src/utils/form-utils'
+import { FormUtilities } from 'src/utils/form-utilities'
 import { logger } from 'src/utils/logger'
 import { Config } from 'svgo'
 // @ts-ignore
@@ -34,7 +34,7 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map(async (svg) => ({
             name: svg.name,
-            payload: await FormUtils.convertToDataUrl(
+            payload: await FormUtilities.convertToDataUrl(
               svg.presentationSvg,
               jpeg.size,
               'image/jpeg',
@@ -51,7 +51,11 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map(async (svg) => ({
             name: svg.name,
-            payload: await FormUtils.convertToDataUrl(svg.presentationSvg, png.size, 'image/png'),
+            payload: await FormUtilities.convertToDataUrl(
+              svg.presentationSvg,
+              png.size,
+              'image/png',
+            ),
           })),
         ).catch(() => {
           logger.error('Failed to convert SVG to PNG')
@@ -73,7 +77,7 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map(async (svg) => ({
             name: svg.name,
-            payload: await FormUtils.convertToDataUrl(
+            payload: await FormUtilities.convertToDataUrl(
               svg.presentationSvg,
               webp.size,
               'image/webp',

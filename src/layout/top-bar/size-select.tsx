@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useCollection } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 export const sizes = [
   { label: '16px', value: 16 },
@@ -22,7 +22,7 @@ export const SizeSelect = () => {
   function handleSizeChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const view = { ...state.view, size: Number(event.target.value) }
     dispatch({ payload: view, type: 'set-view' })
-    StorageUtils.setStorageData('view', view)
+    StorageUtilities.setStorageData('view', view)
   }
 
   return (

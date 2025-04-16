@@ -2,7 +2,7 @@ import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useCallback } from 'react'
 import { useDashboard } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { CollectionItem } from '../collection-item'
 export const SidebarMain = () => {
@@ -17,7 +17,7 @@ export const SidebarMain = () => {
 
       const newCollections = arrayMove(state.collections, oldIndex, newIndex)
       dispatch({ payload: newCollections, type: 'set-collections' })
-      StorageUtils.setStorageData('collections', newCollections)
+      StorageUtilities.setStorageData('collections', newCollections)
     },
     [dispatch, state.collections],
   )

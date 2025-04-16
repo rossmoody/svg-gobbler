@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { type UserState, useUser } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { SvgUtilities } from '../utils/svg-utilities'
 import { useUpload } from './use-upload'
@@ -30,7 +30,7 @@ export const usePastedSvg = () => {
           ...state,
           onboarding: { ...state.onboarding, hasPastedSvg: true, viewedSvgInClipboard: true },
         }
-        StorageUtils.setStorageData('user', payload)
+        StorageUtilities.setStorageData('user', payload)
         dispatch({ payload, type: 'set-user' })
       }
     }

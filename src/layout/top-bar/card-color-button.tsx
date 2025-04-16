@@ -4,7 +4,7 @@ import { useCallback, useRef } from 'react'
 import { IconButton, Tooltip } from 'src/components'
 import { useCollection, useUser } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { CardColorOnboarding } from './card-color-onboarding'
 
@@ -19,14 +19,14 @@ export const CardColorButton = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ payload: event.target.value, type: 'set-canvas-color' })
-    StorageUtils.setStorageData('view', { ...state.view, canvas: event.target.value })
+    StorageUtilities.setStorageData('view', { ...state.view, canvas: event.target.value })
   }
 
   const onFocus = useCallback(() => {
     if (!userState.onboarding.viewedCardColor) {
       const newUser = merge(userState, { onboarding: { viewedCardColor: true } })
       userDispatch({ payload: newUser, type: 'set-user' })
-      StorageUtils.setStorageData('user', newUser)
+      StorageUtilities.setStorageData('user', newUser)
     }
   }, [userDispatch, userState])
 

@@ -4,7 +4,7 @@ import { useExportData, useResetEnvironment } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
 import { Collection } from 'src/types'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { Category } from './category'
 import { Item } from './item'
@@ -23,7 +23,7 @@ export const GeneralSettings = () => {
     }
 
     dispatch({ payload: userState, type: 'set-user' })
-    StorageUtils.setStorageData('user', userState)
+    StorageUtilities.setStorageData('user', userState)
   }
 
   const handleSortCollections = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,14 +33,14 @@ export const GeneralSettings = () => {
     }
 
     dispatch({ payload: userState, type: 'set-user' })
-    StorageUtils.setStorageData('user', userState)
+    StorageUtilities.setStorageData('user', userState)
 
     // Sort the collections alphabetically if the user opts in
     if (userState.settings.sortCollections) {
-      const collections = await StorageUtils.getStorageData<Collection[]>('collections')
+      const collections = await StorageUtilities.getStorageData<Collection[]>('collections')
       if (collections) {
         collections.sort((a, b) => a.name.localeCompare(b.name))
-        StorageUtils.setStorageData('collections', collections)
+        StorageUtilities.setStorageData('collections', collections)
       }
 
       revalidate()

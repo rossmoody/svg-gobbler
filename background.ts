@@ -1,5 +1,5 @@
 import { DocumentData, findSvg } from 'src/scripts'
-import Chrome from 'src/utils/chrome-utils'
+import Chrome from 'src/utils/chrome-utilities'
 
 /**
  * Functions related to initializing the extension. This includes setting the
@@ -35,6 +35,7 @@ const Background = {
         const listener = function (
           request: string,
           __: chrome.runtime.MessageSender,
+          // eslint-disable-next-line
           sendResponse: (response: any) => void,
         ) {
           if (request === 'gobble') {
@@ -121,6 +122,6 @@ const Background = {
       })
     }
   },
-};
+}
 
 Background.init()

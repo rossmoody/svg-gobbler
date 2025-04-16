@@ -1,7 +1,7 @@
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 import { SvgUtilities } from 'src/utils/svg-utilities'
 
 export const useMainActions = () => {
@@ -20,9 +20,9 @@ export const useMainActions = () => {
   }
 
   const deleteSelectedItems = async () => {
-    const currentPageData = await StorageUtils.getPageData(collectionId)
+    const currentPageData = await StorageUtilities.getPageData(collectionId)
 
-    await StorageUtils.setPageData(collectionId, {
+    await StorageUtilities.setPageData(collectionId, {
       ...currentPageData,
       data: nonSelectedItemStorageSvgs,
     })
@@ -31,15 +31,15 @@ export const useMainActions = () => {
   }
 
   const moveSelectedItems = async (targetCollectionId: string) => {
-    const targetPageData = await StorageUtils.getPageData(targetCollectionId)
-    const currentPageData = await StorageUtils.getPageData(collectionId)
+    const targetPageData = await StorageUtilities.getPageData(targetCollectionId)
+    const currentPageData = await StorageUtilities.getPageData(collectionId)
 
-    await StorageUtils.setPageData(targetCollectionId, {
+    await StorageUtilities.setPageData(targetCollectionId, {
       ...targetPageData,
       data: [...selectedItemsStorageSvgs, ...targetPageData.data],
     })
 
-    await StorageUtils.setPageData(collectionId, {
+    await StorageUtilities.setPageData(collectionId, {
       ...currentPageData,
       data: nonSelectedItemStorageSvgs,
     })
@@ -48,9 +48,9 @@ export const useMainActions = () => {
   }
 
   const copySelectedItems = async (targetCollectionId: string) => {
-    const targetPageData = await StorageUtils.getPageData(targetCollectionId)
+    const targetPageData = await StorageUtilities.getPageData(targetCollectionId)
 
-    await StorageUtils.setPageData(targetCollectionId, {
+    await StorageUtilities.setPageData(targetCollectionId, {
       ...targetPageData,
       data: [...selectedItemsStorageSvgs, ...targetPageData.data],
     })

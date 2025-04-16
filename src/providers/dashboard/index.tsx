@@ -2,12 +2,12 @@ import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useRed
 
 import { DashboardAction, dashboardReducer, DashboardState, initDashboardState } from './reducer'
 
-export type DashboardContextProps = {
+export type DashboardContextProperties = {
   dispatch: Dispatch<DashboardAction>
   state: DashboardState
 }
 
-const DashboardContext = createContext({} as DashboardContextProps)
+const DashboardContext = createContext({} as DashboardContextProperties)
 
 export const DashboardProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(dashboardReducer, initDashboardState)

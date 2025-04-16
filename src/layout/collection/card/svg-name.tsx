@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react'
 import { useCollection } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { CardData } from '.'
 
@@ -15,9 +15,9 @@ export const SvgName = ({ data }: CardData) => {
     if (!name || name === data.name) return
 
     data.updateName(name)
-    const pageData = await StorageUtils.getPageData(state.collectionId)
+    const pageData = await StorageUtilities.getPageData(state.collectionId)
     pageData.data = pageData.data.map((svg) => (svg.id === data.id ? data : svg))
-    StorageUtils.setPageData(state.collectionId, pageData)
+    StorageUtilities.setPageData(state.collectionId, pageData)
     dispatch({ type: 'process-data' })
   }
 

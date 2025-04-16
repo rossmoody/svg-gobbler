@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
-import { FormUtils } from 'src/utils/form-utils'
+import { FormUtilities } from 'src/utils/form-utilities'
 import { loc } from 'src/utils/i18n'
 
 import { ExportSvg, useExportActions } from './use-export-actions'
@@ -21,11 +21,11 @@ export const ExportFooter = () => {
 
       case 'png':
       case 'webp': {
-        FormUtils.copyImageToClipboard(payload)
+        FormUtilities.copyImageToClipboard(payload)
         break
       }
       case 'svg': {
-        FormUtils.copyStringToClipboard(payload)
+        FormUtilities.copyStringToClipboard(payload)
         break
       }
     }
@@ -41,7 +41,7 @@ export const ExportFooter = () => {
 
       case 'png':
       case 'webp': {
-        FormUtils.downloadImageContent(exportSvgs, exportState)
+        FormUtilities.downloadImageContent(exportSvgs, exportState)
         break
       }
       case 'sprite': {
@@ -51,12 +51,12 @@ export const ExportFooter = () => {
             payload: svg.svg,
           }
         })
-        FormUtils.downloadSpriteZip(exportSvgs, exportState)
+        FormUtilities.downloadSpriteZip(exportSvgs, exportState)
         break
       }
 
       case 'svg': {
-        FormUtils.downloadSvgContent(exportSvgs, exportState)
+        FormUtilities.downloadSvgContent(exportSvgs, exportState)
         break
       }
     }

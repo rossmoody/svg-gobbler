@@ -6,8 +6,8 @@ import { CollectionState, initCollectionState, initUserState, type UserState } f
 import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { logger } from 'src/utils/logger'
-import { RootUtils } from 'src/utils/root-utils'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { RootUtilities } from 'src/utils/root-utilities'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 import { SvgUtilities } from 'src/utils/svg-utilities'
 
 /**
@@ -20,23 +20,23 @@ export async function rootLoader() {
   return defer({
     collectionId: (async () => {
       // Initialize user
-      let user = await StorageUtils.getStorageData<UserState>('user')
+      let user = await StorageUtilities.getStorageData<UserState>('user')
       user = _.merge(initUserState, user)
-      await StorageUtils.setStorageData('user', user)
+      await StorageUtilities.setStorageData('user', user)
 
       // Initialize the view state
-      let view = await StorageUtils.getStorageData<CollectionState['view']>('view')
+      let view = await StorageUtilities.getStorageData<CollectionState['view']>('view')
       view = _.merge(initCollectionState.view, view)
-      await StorageUtils.setStorageData('view', view)
+      await StorageUtilities.setStorageData('view', view)
 
       // Initialize the plugins for the export panel
-      let plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
+      let plugins = await StorageUtilities.getStorageData<SvgoPlugin[]>('plugins')
       plugins = _.assign([], plugins)
-      await StorageUtils.setStorageData('plugins', plugins)
+      await StorageUtilities.setStorageData('plugins', plugins)
 
       // Get all collections from storage for sidenav
       const previousCollections =
-        (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+        (await StorageUtilities.getStorageData<Collection[]>('collections')) ?? []
 
       // Early return if the user is refreshing
       const navigationEntries = performance.getEntriesByType(
@@ -82,11 +82,11 @@ export async function rootLoader() {
         // Merge the collections if the user has the setting and the URL is a duplicate
         if (
           user.settings.mergeCollections &&
-          RootUtils.isDuplicateURL(pageData.href, previousCollections)
+          RootUtilities.isDuplicateURL(pageData.href, previousCollections)
         ) {
-          collection = RootUtils.getExistingCollection(pageData.href, previousCollections)! // Because we checked for duplicates
-          const existingPageData = await StorageUtils.getPageData(collection.id)
-          pageData = RootUtils.mergePageData(existingPageData, pageData)
+          collection = RootUtilities.getExistingCollection(pageData.href, previousCollections)! // Because we checked for duplicates
+          const existingPageData = await StorageUtilities.getPageData(collection.id)
+          pageData = RootUtilities.mergePageData(existingPageData, pageData)
         } else {
           collections = [collection, ...previousCollections]
         }
@@ -96,8 +96,8 @@ export async function rootLoader() {
           collections = collections.sort((a, b) => a.name.localeCompare(b.name))
         }
 
-        await StorageUtils.setStorageData('collections', collections)
-        await StorageUtils.setPageData(collection.id, pageData)
+        await StorageUtilities.setStorageData('collections', collections)
+        await StorageUtilities.setPageData(collection.id, pageData)
 
         return collection.id
       } catch (error) {

@@ -201,7 +201,7 @@ function buildDemoDocument(sprite: SVGElement, exportSvgs: ExportSvg[], exportSt
   const body = document.createElement('body')
 
   // Add meta tags
-  head.append(createElementNS('', 'meta', { charset: 'UTF-8' }))
+  head.append(createElementNS('', 'meta', { charset: 'utf8' }))
   head.append(
     createElementNS('', 'meta', {
       content: 'width=device-width, initial-scale=1.0',

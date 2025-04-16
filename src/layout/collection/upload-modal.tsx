@@ -7,9 +7,9 @@ import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
-import { FormUtils } from 'src/utils/form-utils'
+import { FormUtilities } from 'src/utils/form-utilities'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {
   const [error, setError] = useState(false)
@@ -31,7 +31,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
     const clipboardValue = reference.current?.value
 
     // Early return if there's a clipboard value and it's invalid
-    if (clipboardValue && !FormUtils.isValidSVG(clipboardValue)) {
+    if (clipboardValue && !FormUtilities.isValidSVG(clipboardValue)) {
       return setError(true)
     }
 
@@ -41,14 +41,14 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
         ...state,
         onboarding: { ...state.onboarding, hasPastedSvg: true },
       }
-      StorageUtils.setStorageData('user', payload)
+      StorageUtilities.setStorageData('user', payload)
       dispatch({ payload, type: 'set-user' })
     }
 
     // Determine the source of files
     const svgFiles = clipboardValue
       ? [{ name: nanoid(), svg: clipboardValue }]
-      : await FormUtils.handleUpload(acceptedFiles)
+      : await FormUtilities.handleUpload(acceptedFiles)
 
     // Perform the upload and clear states
     await upload(svgFiles)

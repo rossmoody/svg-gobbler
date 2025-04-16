@@ -2,12 +2,12 @@ import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useRed
 
 import { EditAction, editReducer, EditState, initEditState } from './reducer'
 
-export type EditContextProps = {
+export type EditContextProperties = {
   dispatch: Dispatch<EditAction>
   state: EditState
 }
 
-const EditContext = createContext({} as EditContextProps)
+const EditContext = createContext({} as EditContextProperties)
 
 export const EditProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(editReducer, initEditState)

@@ -3,7 +3,7 @@ import Picker from '@emoji-mart/react'
 import { Popover } from '@headlessui/react'
 import { useCallback, useMemo } from 'react'
 import { useDashboard } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { type CollectionItemProperties } from './collection-item'
 
@@ -27,7 +27,7 @@ export const CollectionItemIcon = ({ collection }: CollectionItemProperties) => 
         c.id === collection.id ? updatedCollection : c,
       )
       dispatch({ payload: updatedCollection, type: 'set-collection-icon' })
-      StorageUtils.setStorageData('collections', updatedCollections)
+      StorageUtilities.setStorageData('collections', updatedCollections)
     },
     [collection, state.collections, dispatch],
   )

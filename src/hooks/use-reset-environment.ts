@@ -2,7 +2,7 @@ import type { Collection } from 'src/types'
 
 import { nanoid } from 'nanoid'
 import { PageData } from 'src/types'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 import { SvgUtilities } from 'src/utils/svg-utilities'
 
 export const useResetEnvironment = () => {
@@ -28,8 +28,8 @@ export const useResetEnvironment = () => {
       origin: 'svggobbler.com',
     }
 
-    await StorageUtils.setPageData(collection.id, pageData)
-    await StorageUtils.setStorageData('collections', [collection])
+    await StorageUtilities.setPageData(collection.id, pageData)
+    await StorageUtilities.setStorageData('collections', [collection])
     globalThis.location.reload()
   }
 

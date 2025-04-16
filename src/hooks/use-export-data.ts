@@ -1,14 +1,14 @@
 import type { Collection, PageData } from 'src/types'
 
 import JSZip from 'jszip'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 async function exportAllDataAsJson() {
   const data: Promise<PageData>[] = []
-  const collections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+  const collections = (await StorageUtilities.getStorageData<Collection[]>('collections')) ?? []
 
   for (const collection of collections) {
-    data.push(StorageUtils.getPageData(collection.id))
+    data.push(StorageUtilities.getPageData(collection.id))
   }
 
   await Promise.all(data)
@@ -27,7 +27,7 @@ async function exportAllDataAsJson() {
 }
 
 async function exportAllDataAsZip() {
-  const collections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+  const collections = (await StorageUtilities.getStorageData<Collection[]>('collections')) ?? []
 
   const zip = new JSZip()
 
@@ -36,7 +36,7 @@ async function exportAllDataAsZip() {
       const directory = zip.folder(collection.name)
       if (!directory) return
 
-      const collectionData = await StorageUtils.getPageData(collection.id)
+      const collectionData = await StorageUtilities.getPageData(collection.id)
       for (const item of collectionData.data) {
         const svg = item.svg
         const name = item.name
@@ -60,8 +60,8 @@ async function exportAllDataAsZip() {
 }
 
 async function exportCurrentCollectionDataAsZip(collectionId: string) {
-  const collection = await StorageUtils.getPageData(collectionId)
-  const collections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+  const collection = await StorageUtilities.getPageData(collectionId)
+  const collections = (await StorageUtilities.getStorageData<Collection[]>('collections')) ?? []
   const collectionName = collections.find((c) => c.id === collectionId)?.name || 'collection-data'
 
   const zip = new JSZip()

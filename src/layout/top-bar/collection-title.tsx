@@ -2,7 +2,7 @@ import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
 import { useCollection, useDashboard } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 export const CollectionTitle = () => {
   const { state: mainState } = useCollection()
@@ -23,7 +23,7 @@ export const CollectionTitle = () => {
         return c
       })
       sidebarDispatch({ payload: newCollections, type: 'set-collections' })
-      StorageUtils.setStorageData('collections', newCollections)
+      StorageUtilities.setStorageData('collections', newCollections)
     }
     // Reset scroll position for overflow-ellipsis
     event.currentTarget.scrollLeft = 0

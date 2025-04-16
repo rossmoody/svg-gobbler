@@ -1,7 +1,7 @@
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
-import { FormUtils } from 'src/utils/form-utils'
+import { FormUtilities } from 'src/utils/form-utilities'
 import { loc } from 'src/utils/i18n'
 
 export const ExportDetailFooter = () => {
@@ -13,7 +13,7 @@ export const ExportDetailFooter = () => {
   }
 
   const handleDownload = async () => {
-    FormUtils.downloadSvgString(state.currentString, state.name)
+    FormUtilities.downloadSvgString(state.currentString, state.name)
   }
 
   return (

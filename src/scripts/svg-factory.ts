@@ -42,7 +42,7 @@ class SvgFactory {
   /**
    * Process a single SVG element and return an SVG class.
    */
-  private createSvgElement(storageSvg: StorageSvg, origin: string): null | SvgType {
+  private createSvgElement(storageSvg: StorageSvg, origin: string): SvgType | undefined {
     try {
       const parser = new DOMParser()
       const document_ = parser.parseFromString(storageSvg.svg, 'image/svg+xml')
@@ -62,12 +62,12 @@ class SvgFactory {
           return new SvgSymbol(storageSvg)
         }
         default: {
-          return null
+          return
         }
       }
     } catch (error) {
       console.error(error)
-      return null
+      return
     }
   }
 
@@ -88,18 +88,19 @@ class SvgFactory {
 
   private extractAndPushElements(image: Image, selector: 'g' | 'symbol', results: SvgType[]): void {
     const elements = image.asElement?.querySelectorAll(selector)
-    if (elements) for (const [index, element] of elements.entries()) {
-      const storageSvg: StorageSvg = {
-        corsRestricted: image.corsRestricted,
-        id: nanoid(),
-        lastEdited: image.lastEdited,
-        name: `${image.name}-${selector}-${index}`,
-        svg: element.outerHTML,
-      }
+    if (elements)
+      for (const [index, element] of elements.entries()) {
+        const storageSvg: StorageSvg = {
+          corsRestricted: image.corsRestricted,
+          id: nanoid(),
+          lastEdited: image.lastEdited,
+          name: `${image.name}-${selector}-${index}`,
+          svg: element.outerHTML,
+        }
 
-      const constructor = selector === 'symbol' ? SvgSymbol : GElement
-      results.push(new constructor(storageSvg))
-    }
+        const constructor = selector === 'symbol' ? SvgSymbol : GElement
+        results.push(new constructor(storageSvg))
+      }
   }
 
   /**

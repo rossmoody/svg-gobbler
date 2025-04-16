@@ -7,7 +7,7 @@ import { transitions } from 'src/constants/transitions'
 import { useCollection, UserState, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { ViewNameFeatureNotice } from './view-name-feature-notice'
 
@@ -31,7 +31,7 @@ export const ViewPopover = () => {
   function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { checked, name } = e.currentTarget
     const filters = { ...state.view.filters, [name]: checked }
-    StorageUtils.setStorageData('view', { ...state.view, filters })
+    StorageUtilities.setStorageData('view', { ...state.view, filters })
     dispatch({ payload: { ...state.view, filters }, type: 'set-view' })
     dispatch({ type: 'process-data' })
   }
@@ -48,7 +48,7 @@ export const ViewPopover = () => {
         type: 'set-user',
       })
 
-      StorageUtils.setStorageData('user', user)
+      StorageUtilities.setStorageData('user', user)
     }
   }
 

@@ -2,7 +2,7 @@ import { LoaderFunctionArgs } from 'react-router-dom'
 import { UserState } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
 import { DetailsParameters } from 'src/types'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 /**
  * The primary initialization function for the details route. Gets the svg and id from storage
@@ -10,7 +10,7 @@ import { StorageUtils } from 'src/utils/storage-utils'
  */
 export async function detailLoader({ params }: LoaderFunctionArgs): Promise<DetailsParameters> {
   const collectionId = params.collectionId as string
-  const pageData = await StorageUtils.getPageData(collectionId)
+  const pageData = await StorageUtilities.getPageData(collectionId)
 
   if (!pageData.data) {
     throw new Error(`No data found for collection ${collectionId}`)
@@ -22,7 +22,7 @@ export async function detailLoader({ params }: LoaderFunctionArgs): Promise<Deta
     throw new Error(`No SVG found with ID ${params.id} in collection ${collectionId}`)
   }
 
-  const user = (await StorageUtils.getStorageData<UserState>('user')) as UserState
+  const user = (await StorageUtilities.getStorageData<UserState>('user')) as UserState
 
   return {
     collectionId,

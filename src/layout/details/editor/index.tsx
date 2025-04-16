@@ -5,7 +5,7 @@ import CodeMirror from '@uiw/react-codemirror'
 import { merge } from 'lodash'
 import { useCallback } from 'react'
 import { useDetails, useUser } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { ActionBar } from './action-bar'
 import { EditorOnboarding } from './editor-onboarding'
@@ -25,7 +25,7 @@ export const DetailsEditor = () => {
     if (!userState.onboarding.viewedEditSvg) {
       const newUser = merge(userState, { onboarding: { viewedEditSvg: true } })
       userDispatch({ payload: newUser, type: 'set-user' })
-      StorageUtils.setStorageData('user', newUser)
+      StorageUtilities.setStorageData('user', newUser)
     }
   }, [userDispatch, userState])
 

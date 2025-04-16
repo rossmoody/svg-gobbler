@@ -4,12 +4,12 @@ import type { CollectionAction, CollectionState } from './reducer'
 
 import { collectionReducer, initCollectionState } from './reducer'
 
-export type CollectionContextProps = {
+export type CollectionContextProperties = {
   dispatch: Dispatch<CollectionAction>
   state: CollectionState
 }
 
-const CollectionContext = createContext({} as CollectionContextProps)
+const CollectionContext = createContext({} as CollectionContextProperties)
 
 export const CollectionProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(collectionReducer, initCollectionState)

@@ -5,7 +5,7 @@ import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
 /**
  * A helper for working with Chrome storage and automating compression.
  */
-export const StorageUtils = {
+export const StorageUtilities = {
   /**
    * Stringify and compress a string to base64.
    */
@@ -63,4 +63,4 @@ export const StorageUtils = {
       [key]: this.compressToBase64(data),
     })
   },
-};
+}

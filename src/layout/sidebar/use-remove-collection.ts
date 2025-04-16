@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()
@@ -32,12 +32,12 @@ export function useRemoveCollection() {
       }
 
       filteredCollections.push(collection)
-      StorageUtils.setPageData(collection.id, pageData)
+      StorageUtilities.setPageData(collection.id, pageData)
     }
 
     dispatch({ payload: filteredCollections, type: 'set-collections' })
     chrome.storage.local.remove(collection.id)
-    StorageUtils.setStorageData('collections', filteredCollections)
+    StorageUtilities.setStorageData('collections', filteredCollections)
 
     if (isActiveCollection) {
       return navigate(`collection/${filteredCollections[0].id}`)

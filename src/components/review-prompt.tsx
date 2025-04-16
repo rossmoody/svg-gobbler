@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { links } from 'src/constants/links'
 import { useDashboard, useUser } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 import { Toast } from './toast'
 
@@ -26,7 +26,7 @@ export const ReviewPrompt = () => {
 
   const setReviewPromptViewed = () => {
     const payload = { ...userState, onboarding: { ...userState.onboarding, viewedReview: true } }
-    StorageUtils.setStorageData('user', payload)
+    StorageUtilities.setStorageData('user', payload)
     dispatch({ payload, type: 'set-user' })
     setShow(false)
   }

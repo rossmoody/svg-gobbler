@@ -2,12 +2,12 @@ import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useRed
 
 import { ExportAction, exportReducer, ExportState, initExportState } from './reducer'
 
-export type ExportContextProps = {
+export type ExportContextProperties = {
   dispatch: Dispatch<ExportAction>
   state: ExportState
 }
 
-const ExportContext = createContext({} as ExportContextProps)
+const ExportContext = createContext({} as ExportContextProperties)
 
 export const ExportProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(exportReducer, initExportState)

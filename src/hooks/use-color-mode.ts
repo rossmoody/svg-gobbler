@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { CollectionState, useCollection } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 export function useColorMode() {
   const { dispatch, state } = useCollection()
@@ -21,7 +21,7 @@ export function useColorMode() {
 
     document.body.classList.toggle('dark', colorMode === 'dark')
     dispatch({ payload: view, type: 'set-view' })
-    StorageUtils.setStorageData('view', view)
+    StorageUtilities.setStorageData('view', view)
   }
 
   return { colorMode: state.view.colorMode, toggleColorMode }

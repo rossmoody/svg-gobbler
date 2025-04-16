@@ -5,7 +5,7 @@ import { Fragment } from 'react'
 import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { CollectionState, useCollection } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utils/storage-utilities'
 
 type SortOption = {
   label: string
@@ -27,7 +27,7 @@ export const SortMenu = () => {
 
   function handleSortChange(value: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const sort = value.currentTarget.dataset.value as SortOption['value']
-    StorageUtils.setStorageData('view', { ...state.view, sort })
+    StorageUtilities.setStorageData('view', { ...state.view, sort })
     dispatch({ payload: { ...state.view, sort }, type: 'set-view' })
     dispatch({ type: 'process-data' })
   }
