@@ -12,12 +12,6 @@ export const CollectionTitle = () => {
     return sidebarState.collections.find((c) => c.id === mainState.collectionId)?.name
   }, [mainState.collectionId, sidebarState.collections])
 
-  function handleKeyDown(event: React.KeyboardEvent<HTMLHeadingElement>) {
-    if (event.key === 'Enter') {
-      event.currentTarget.blur()
-    }
-  }
-
   function handleBlur(event: React.FocusEvent<HTMLHeadingElement>) {
     const newTitle = event.target.textContent ?? loc('topbar_collection')
 
@@ -55,4 +49,10 @@ export const CollectionTitle = () => {
       </h1>
     </Transition>
   )
+}
+
+function handleKeyDown(event: React.KeyboardEvent<HTMLHeadingElement>) {
+  if (event.key === 'Enter') {
+    event.currentTarget.blur()
+  }
 }

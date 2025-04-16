@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 
 export const DataURI = () => {
   const { copyToClipboard, text } = useClipboard()
@@ -32,7 +32,8 @@ export const DataURI = () => {
       {uriData.map((item) => (
         <section className="group mb-6" key={item.name}>
           <span className="label">
-            {item.name} - <span className="text-muted">{SvgUtils.getPrettyBytes(item.value)}</span>
+            {item.name} -{' '}
+            <span className="text-muted">{SvgUtilities.getPrettyBytes(item.value)}</span>
           </span>
           <div className="relative rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700/50 dark:bg-gray-800/50">
             <Button

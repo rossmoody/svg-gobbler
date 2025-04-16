@@ -6,7 +6,7 @@ export const ResetEnvironment = () => {
   const { reset } = useResetEnvironment()
 
   if (process.env.NODE_ENV === 'production') {
-    return null
+    return
   }
 
   return (

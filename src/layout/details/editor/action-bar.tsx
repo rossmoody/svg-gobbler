@@ -2,7 +2,7 @@ import { ArrowRightIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outl
 import { useMemo } from 'react'
 import { useDetails } from 'src/providers'
 import { loc } from 'src/utils/i18n'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 
 import { useOptimize } from '../use-optimize'
 
@@ -21,8 +21,8 @@ export const ActionBar = () => {
 
   const bytes = useMemo(() => {
     return {
-      after: SvgUtils.getPrettyBytes(state.currentString),
-      before: SvgUtils.getPrettyBytes(state.originalString),
+      after: SvgUtilities.getPrettyBytes(state.currentString),
+      before: SvgUtilities.getPrettyBytes(state.originalString),
     }
   }, [state.currentString, state.originalString])
 

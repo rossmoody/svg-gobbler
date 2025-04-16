@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { type UserState, useUser } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
 
-import { SvgUtils as SvgUtilities } from '../utils/svg-utils'
+import { SvgUtilities } from '../utils/svg-utilities'
 import { useUpload } from './use-upload'
 
 /**

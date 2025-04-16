@@ -11,10 +11,6 @@ import { FeedbackItem } from './feedback-item'
 import { ResetEnvironment } from './reset-environment'
 
 export const SideFooter = () => {
-  function navigateToChromeWebStore() {
-    window.open(links.chromeWebstore, '_blank')
-  }
-
   return (
     <footer>
       <h2 className="sr-only" id="settings-heading">
@@ -46,4 +42,8 @@ export const SideFooter = () => {
       </ul>
     </footer>
   )
+}
+
+function navigateToChromeWebStore() {
+  window.open(links.chromeWebstore, '_blank')
 }

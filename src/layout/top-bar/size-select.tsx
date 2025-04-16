@@ -19,8 +19,8 @@ export const sizes = [
 export const SizeSelect = () => {
   const { dispatch, state } = useCollection()
 
-  function handleSizeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const view = { ...state.view, size: Number(e.target.value) }
+  function handleSizeChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const view = { ...state.view, size: Number(event.target.value) }
     dispatch({ payload: view, type: 'set-view' })
     StorageUtils.setStorageData('view', view)
   }

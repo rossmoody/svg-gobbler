@@ -16,24 +16,20 @@ export const GeneralSettings = () => {
   const { exportAllDataAsJson, exportAllDataAsZip } = useExportData()
   const { revalidate } = useRevalidator()
 
-  const handleOpenKeyboardShortcuts = () => {
-    chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
-  }
-
-  const handleImportMerging = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImportMerging = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
       ...state,
-      settings: { ...state.settings, mergeCollections: e.target.checked },
+      settings: { ...state.settings, mergeCollections: event.target.checked },
     }
 
     dispatch({ payload: userState, type: 'set-user' })
     StorageUtils.setStorageData('user', userState)
   }
 
-  const handleSortCollections = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSortCollections = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
       ...state,
-      settings: { ...state.settings, sortCollections: e.target.checked },
+      settings: { ...state.settings, sortCollections: event.target.checked },
     }
 
     dispatch({ payload: userState, type: 'set-user' })
@@ -144,4 +140,8 @@ export const GeneralSettings = () => {
       </Item>
     </Category>
   )
+}
+
+function handleOpenKeyboardShortcuts() {
+  chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
 }

@@ -10,14 +10,14 @@ import { useDashboard, useUser } from 'src/providers'
 import { CollectionItemIcon } from './collection-item-icon'
 import { useRemoveCollection } from './use-remove-collection'
 
-export type CollectionItemProps = {
+export type CollectionItemProperties = {
   /**
    * The collection from which to render the item
    */
   collection: Collection
 }
 
-export const CollectionItem = ({ collection }: CollectionItemProps) => {
+export const CollectionItem = ({ collection }: CollectionItemProperties) => {
   const { dispatch: sidebarDispatch } = useDashboard()
   const { state: userState } = useUser()
   const handleRemoveCollection = useRemoveCollection()

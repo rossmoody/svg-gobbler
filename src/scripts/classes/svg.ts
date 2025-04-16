@@ -1,4 +1,4 @@
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 
 import { StorageSvg } from '../types'
 
@@ -46,7 +46,7 @@ export class Svg {
    * A pleasantly formatted represntation of the SVG file size.
    */
   get fileSize() {
-    return SvgUtils.getPrettyBytes(this.svg)
+    return SvgUtilities.getPrettyBytes(this.svg)
   }
 
   /**

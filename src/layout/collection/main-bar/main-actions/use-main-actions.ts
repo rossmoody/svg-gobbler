@@ -2,7 +2,7 @@ import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 
 export const useMainActions = () => {
   const { revalidate } = useRevalidator()
@@ -11,8 +11,8 @@ export const useMainActions = () => {
   const { collectionId } = collectionState
   const selectedItems = collectionState.selected
   const nonSelectedItems = collectionState.data.filter((item) => !selectedItems.includes(item))
-  const nonSelectedItemStorageSvgs: StorageSvg[] = SvgUtils.createStorageSvgs(nonSelectedItems)
-  const selectedItemsStorageSvgs: StorageSvg[] = SvgUtils.createStorageSvgs(selectedItems)
+  const nonSelectedItemStorageSvgs: StorageSvg[] = SvgUtilities.createStorageSvgs(nonSelectedItems)
+  const selectedItemsStorageSvgs: StorageSvg[] = SvgUtilities.createStorageSvgs(selectedItems)
 
   function resetCollection() {
     dispatch({ type: 'unselect-all' })

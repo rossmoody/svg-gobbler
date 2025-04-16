@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 import prettyBytes from 'pretty-bytes'
 import { FileSvg } from 'src/types'
 
-export const SvgUtils = {
+export const SvgUtilities = {
   /**
    * Creates a storage svg object with an id and the svg string.
    */
@@ -52,4 +52,4 @@ export const SvgUtils = {
       return false
     }
   },
-};
+}

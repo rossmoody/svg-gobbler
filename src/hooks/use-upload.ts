@@ -3,7 +3,7 @@ import { useCollection } from 'src/providers'
 import { Inline, StorageSvg } from 'src/scripts'
 import { type FileSvg } from 'src/types'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 
 /**
  * Upload a given array of svg strings to chrome storage, update the collection
@@ -18,7 +18,7 @@ export const useUpload = () => {
 
     // Get current page data for storage
     let pageData = await StorageUtils.getPageData(collectionId)
-    const newData: StorageSvg[] = fileSvgs.map(SvgUtils.createStorageSvg)
+    const newData: StorageSvg[] = fileSvgs.map(SvgUtilities.createStorageSvg)
 
     // Append new strings to collection's page data
     pageData = {

@@ -17,9 +17,9 @@ export const CardColorButton = () => {
     colorInputReference.current?.click()
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.value, type: 'set-canvas-color' })
-    StorageUtils.setStorageData('view', { ...state.view, canvas: e.target.value })
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: event.target.value, type: 'set-canvas-color' })
+    StorageUtils.setStorageData('view', { ...state.view, canvas: event.target.value })
   }
 
   const onFocus = useCallback(() => {

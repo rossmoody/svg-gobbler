@@ -6,7 +6,7 @@ import { useCollection } from 'src/providers'
 import { Inline } from 'src/scripts'
 import { FormUtils } from 'src/utils/form-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 import { optimize } from 'svgo'
 
 export const useCardActions = (data: Svg) => {
@@ -25,7 +25,7 @@ export const useCardActions = (data: Svg) => {
     const pageData = await StorageUtils.getPageData(state.collectionId)
     StorageUtils.setPageData(state.collectionId, {
       ...pageData,
-      data: SvgUtils.createStorageSvgs(newData),
+      data: SvgUtilities.createStorageSvgs(newData),
     })
     revalidate()
   }
@@ -35,7 +35,7 @@ export const useCardActions = (data: Svg) => {
     const pageData = await StorageUtils.getPageData(state.collectionId)
     StorageUtils.setPageData(state.collectionId, {
       ...pageData,
-      data: SvgUtils.createStorageSvgs(filteredData),
+      data: SvgUtilities.createStorageSvgs(filteredData),
     })
     revalidate()
   }

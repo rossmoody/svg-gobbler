@@ -8,9 +8,9 @@ export const FeedbackItem = () => {
   const [open, setOpen] = useState(false)
   const sendMessage = useDatabase('feedback')
 
-  const handleRequestPrompt = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.target as HTMLFormElement)
+  const handleRequestPrompt = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
     const email = formData.get('feedback-email')
     const feedback = formData.get('feedback-textarea')
     const message = `Email: ${email}\nFeedback: ${feedback}`

@@ -8,7 +8,7 @@ import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { logger } from 'src/utils/logger'
 import { RootUtils } from 'src/utils/root-utils'
 import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { SvgUtilities } from 'src/utils/svg-utilities'
 
 /**
  * The primary initialization function for the root route.
@@ -35,7 +35,8 @@ export async function rootLoader() {
       await StorageUtils.setStorageData('plugins', plugins)
 
       // Get all collections from storage for sidenav
-      const previousCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+      const previousCollections =
+        (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
       // Early return if the user is refreshing
       const navigationEntries = performance.getEntriesByType(
@@ -57,7 +58,7 @@ export async function rootLoader() {
         // Create classes and process the raw svg elements
         const svgClasses = await svgFactory.process(data)
 
-        const storageSvgs = SvgUtils.createStorageSvgs(svgClasses)
+        const storageSvgs = SvgUtilities.createStorageSvgs(svgClasses)
 
         // Create the sourced page data object
         let pageData: PageData = {

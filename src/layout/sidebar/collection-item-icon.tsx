@@ -5,7 +5,7 @@ import { useCallback, useMemo } from 'react'
 import { useDashboard } from 'src/providers'
 import { StorageUtils } from 'src/utils/storage-utils'
 
-import { type CollectionItemProps as CollectionItemProperties } from './collection-item'
+import { type CollectionItemProperties } from './collection-item'
 
 type EmojiMartData = {
   id: string

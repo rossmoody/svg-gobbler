@@ -43,7 +43,7 @@ output.on('close', () => {
     },
   ]
 
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, undefined, 2))
   console.log('---')
   console.log('Firefox manifest updated and ready for bundle')
 })

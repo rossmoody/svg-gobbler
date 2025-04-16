@@ -8,7 +8,7 @@ import { useCollection } from 'src/providers'
 import { loc } from 'src/utils/i18n'
 
 import { UploadModal } from '../collection/upload-modal'
-import { CardColorButton } from './card-color-btn'
+import { CardColorButton } from './card-color-button'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { SortMenu } from './sort-menu'
