@@ -3,7 +3,7 @@ import Picker from '@emoji-mart/react'
 import { Popover } from '@headlessui/react'
 import { useCallback, useMemo } from 'react'
 import { useDashboard } from 'src/providers'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { type CollectionItemProperties } from './collection-item'
 

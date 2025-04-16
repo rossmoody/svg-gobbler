@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from 'src/components'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { type CardData } from '..'
 import { useCardActions } from './use-card-actions'

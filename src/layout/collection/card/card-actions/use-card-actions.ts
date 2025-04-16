@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { Inline } from 'src/scripts'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { StorageUtilities } from 'src/utils/storage-utilities'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 import { optimize } from 'svgo'
 
 export const useCardActions = (data: Svg) => {

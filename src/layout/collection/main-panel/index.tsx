@@ -2,7 +2,7 @@ import { Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { Tabs } from 'src/components'
 import { useCollection } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { EditPanel } from './edit-panel'
 import { ExportFooter } from './export-footer'

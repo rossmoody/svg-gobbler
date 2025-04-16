@@ -2,7 +2,7 @@ import { MegaphoneIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { useDatabase } from 'src/hooks'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const FeedbackItem = () => {
   const [open, setOpen] = useState(false)

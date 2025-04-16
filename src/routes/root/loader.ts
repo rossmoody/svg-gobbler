@@ -5,10 +5,10 @@ import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
-import { logger } from 'src/utils/logger'
-import { RootUtilities } from 'src/utils/root-utilities'
-import { StorageUtilities } from 'src/utils/storage-utilities'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { logger } from 'src/utilities/logger'
+import { RootUtilities } from 'src/utilities/root-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 /**
  * The primary initialization function for the root route.

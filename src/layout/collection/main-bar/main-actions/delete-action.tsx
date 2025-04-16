@@ -1,5 +1,5 @@
 import { Button } from 'src/components'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { useMainActions } from './use-main-actions'
 

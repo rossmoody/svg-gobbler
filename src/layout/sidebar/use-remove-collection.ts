@@ -3,8 +3,8 @@ import type { Collection, PageData } from 'src/types'
 import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export function useRemoveCollection() {
   const navigate = useNavigate()

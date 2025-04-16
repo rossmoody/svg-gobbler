@@ -1,8 +1,8 @@
 import { ArrowRightIcon, BoltIcon, SparklesIcon } from '@heroicons/react/24/outline'
 import { useMemo } from 'react'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { loc } from 'src/utilities/i18n'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 import { useOptimize } from '../use-optimize'
 

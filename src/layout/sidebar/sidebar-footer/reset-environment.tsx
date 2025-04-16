@@ -1,6 +1,6 @@
 import { ArrowUturnDownIcon } from '@heroicons/react/24/outline'
 import { useResetEnvironment } from 'src/hooks'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const ResetEnvironment = () => {
   const { reset } = useResetEnvironment()

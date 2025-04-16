@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { Fragment } from 'react/jsx-runtime'
 import { IconButton } from 'src/components'
 import { transitions } from 'src/constants/transitions'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { CardData } from '..'
 import { ActionMenuItem } from './action-menu-item'

@@ -5,7 +5,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
 import { links } from 'src/constants/links'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { FeedbackItem } from './feedback-item'
 import { ResetEnvironment } from './reset-environment'

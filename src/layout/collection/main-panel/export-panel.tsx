@@ -2,7 +2,7 @@ import { Transition } from '@headlessui/react'
 import { forwardRef } from 'react'
 import { fileTypeLabels } from 'src/constants/file-type-labels'
 import { FileType, fileTypes, useExport } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { Filename } from './file-name'
 import { JpegSettings } from './jpeg-settings'
@@ -11,7 +11,7 @@ import { SpriteSettings } from './sprite-settings'
 import { SvgSettings } from './svg-settings'
 import { WebPSettings } from './webp-settings'
 
-const transitionConfig = {
+export const transitionConfig = {
   enter: 'transition-all duration-500 ease-in',
   enterFrom: 'opacity-0 h-0 translate-y-2',
   enterTo: 'opacity-100 h-20 translate-y-0',

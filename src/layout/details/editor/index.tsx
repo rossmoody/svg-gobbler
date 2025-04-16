@@ -5,7 +5,7 @@ import CodeMirror from '@uiw/react-codemirror'
 import { merge } from 'lodash'
 import { useCallback } from 'react'
 import { useDetails, useUser } from 'src/providers'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { ActionBar } from './action-bar'
 import { EditorOnboarding } from './editor-onboarding'

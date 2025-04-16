@@ -2,8 +2,8 @@ import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { Inline, StorageSvg } from 'src/scripts'
 import { type FileSvg } from 'src/types'
-import { StorageUtilities } from 'src/utils/storage-utilities'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 /**
  * Upload a given array of svg strings to chrome storage, update the collection

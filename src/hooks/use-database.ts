@@ -1,7 +1,7 @@
 import type { ServerMessage } from 'server'
 
 import { serverEndpoint } from 'src/constants/server-config'
-import { logger } from 'src/utils/logger'
+import { logger } from 'src/utilities/logger'
 
 /**
  * Send a message to the database for logging user feedback or errors that are provided.

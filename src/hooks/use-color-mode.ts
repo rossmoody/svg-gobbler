@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { CollectionState, useCollection } from 'src/providers'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export function useColorMode() {
   const { dispatch, state } = useCollection()

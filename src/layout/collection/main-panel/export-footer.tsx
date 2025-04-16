@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { loc } from 'src/utils/i18n'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { loc } from 'src/utilities/i18n'
 
 import { ExportSvg, useExportActions } from './use-export-actions'
 

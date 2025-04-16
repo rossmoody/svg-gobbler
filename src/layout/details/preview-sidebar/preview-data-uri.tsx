@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 export const DataURI = () => {
   const { copyToClipboard, text } = useClipboard()

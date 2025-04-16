@@ -2,7 +2,7 @@ import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useCallback } from 'react'
 import { useDashboard } from 'src/providers'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { CollectionItem } from '../collection-item'
 export const SidebarMain = () => {

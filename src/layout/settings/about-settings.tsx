@@ -1,5 +1,5 @@
 import { links } from 'src/constants/links'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { Category } from './category'
 import { Item } from './item'

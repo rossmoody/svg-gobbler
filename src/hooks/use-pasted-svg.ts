@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { type UserState, useUser } from 'src/providers'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-import { SvgUtilities } from '../utils/svg-utilities'
+import { SvgUtilities } from '../utilities/svg-utilities'
 import { useUpload } from './use-upload'
 
 /**

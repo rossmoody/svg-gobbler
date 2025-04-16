@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 /**
  * The empty state used when there are no results to show based on the current

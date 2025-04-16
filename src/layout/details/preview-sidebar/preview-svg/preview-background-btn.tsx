@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { btnBaseStyles, Tooltip } from 'src/components'
 import { PreviewBackgroundClass, useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 type PreviewBackgroundButtonProperties = {
   type: PreviewBackgroundClass

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { serverEndpoint } from 'src/constants/server-config'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { logger } from 'src/utils/logger'
+import { loc } from 'src/utilities/i18n'
+import { logger } from 'src/utilities/logger'
 
 import { ServerMessage } from '../../../../server/index'
 

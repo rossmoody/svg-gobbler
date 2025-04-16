@@ -1,7 +1,7 @@
 import { HelpIcon } from 'src/components'
 import { useMountEffect } from 'src/hooks'
 import { useCollection, useDashboard, useExport } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const Filename = () => {
   const { dispatch } = useExport()

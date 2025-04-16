@@ -4,8 +4,8 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const ResetButton = () => {
   const { dispatch, state } = useDetails()

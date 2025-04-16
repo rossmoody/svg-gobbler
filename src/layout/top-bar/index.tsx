@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Button, CollectionPanelButton } from 'src/components'
 import { useExportData } from 'src/hooks'
 import { useCollection } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { UploadModal } from '../collection/upload-modal'
 import { CardColorButton } from './card-color-button'

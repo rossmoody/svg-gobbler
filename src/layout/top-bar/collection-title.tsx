@@ -1,8 +1,8 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
 import { useCollection, useDashboard } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const CollectionTitle = () => {
   const { state: mainState } = useCollection()

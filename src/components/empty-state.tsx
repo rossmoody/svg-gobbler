@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useUpload } from 'src/hooks'
 import { UploadModal } from 'src/layout/collection/upload-modal'
-import { FormUtilities } from 'src/utils/form-utilities'
+import { FormUtilities } from 'src/utilities/form-utilities'
 
 import { Button } from '.'
-import { loc } from '../utils/i18n'
+import { loc } from '../utilities/i18n'
 
 /**
  * This is displayed when there are no SVGs found sourcing the client page.

@@ -7,9 +7,9 @@ import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {
   const [error, setError] = useState(false)

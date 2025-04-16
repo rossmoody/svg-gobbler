@@ -2,7 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Logo } from 'src/components'
 import { links } from 'src/constants/links'
 import { findSvg } from 'src/scripts'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import graphic from './onboarding-graphic.png'
 

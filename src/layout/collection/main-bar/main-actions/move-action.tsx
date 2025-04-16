@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { useCollection, useDashboard } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { useMainActions } from './use-main-actions'
 

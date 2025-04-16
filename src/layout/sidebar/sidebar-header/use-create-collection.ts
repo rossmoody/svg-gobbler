@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { StorageUtilities } from 'src/utils/storage-utilities'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 export const useCreateCollection = (files: File[]) => {
   const navigate = useNavigate()

@@ -34,7 +34,7 @@ export const StorageUtilities = {
   },
 
   /**
-   * Get collections data from storage. Automatically decompresses data.
+   * Get various types of collection data from storage. Automatically decompresses data.
    */
   async getStorageData<T>(key: DatabaseKey): Promise<T | undefined> {
     try {

@@ -1,8 +1,8 @@
 import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { logger } from 'src/utils/logger'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { logger } from 'src/utilities/logger'
 import { Config } from 'svgo'
 // @ts-ignore
 import { optimize } from 'svgo/dist/svgo.browser'

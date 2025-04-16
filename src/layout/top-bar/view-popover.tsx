@@ -6,8 +6,8 @@ import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/compo
 import { transitions } from 'src/constants/transitions'
 import { useCollection, UserState, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { ViewNameFeatureNotice } from './view-name-feature-notice'
 

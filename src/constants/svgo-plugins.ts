@@ -1,6 +1,6 @@
 import type { PluginConfig } from 'svgo'
 
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 /**
  * A standard plugin config for SVGO. The types for PluginConfig are weird but to make it play

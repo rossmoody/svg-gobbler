@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { links } from 'src/constants/links'
 import { useDashboard, useUser } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { Toast } from './toast'
 

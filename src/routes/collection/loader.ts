@@ -2,8 +2,8 @@ import { defer, LoaderFunctionArgs } from 'react-router-dom'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
-import { logger } from 'src/utils/logger'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { logger } from 'src/utilities/logger'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export async function collectionLoader({ params }: LoaderFunctionArgs) {
   const id = params.id as string

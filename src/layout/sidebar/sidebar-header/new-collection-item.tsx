@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal } from 'src/components'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { useCreateCollection } from './use-create-collection'
 

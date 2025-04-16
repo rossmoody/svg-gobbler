@@ -3,8 +3,8 @@ import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 import { FileRejection, useDropzone } from 'react-dropzone'
 import { useUpload } from 'src/hooks'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { loc } from 'src/utils/i18n'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { loc } from 'src/utilities/i18n'
 
 export const CollectionDropZone = ({ children }: PropsWithChildren) => {
   const upload = useUpload()

@@ -1,7 +1,7 @@
 import type { Collection, PageData } from 'src/types'
 
 import JSZip from 'jszip'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 async function exportAllDataAsJson() {
   const data: Promise<PageData>[] = []

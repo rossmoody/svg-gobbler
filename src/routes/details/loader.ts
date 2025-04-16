@@ -2,7 +2,7 @@ import { LoaderFunctionArgs } from 'react-router-dom'
 import { UserState } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
 import { DetailsParameters } from 'src/types'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 /**
  * The primary initialization function for the details route. Gets the svg and id from storage

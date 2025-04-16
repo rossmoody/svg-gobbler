@@ -1,4 +1,4 @@
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 import { StorageSvg } from '../types'
 
@@ -82,6 +82,23 @@ export class Svg {
   }
 
   /**
+   * Creates a clone of the current SVG instance
+   * @returns A new SVG element with the same properties as this one
+   */
+  createClone() {
+    const clone = new Svg({
+      corsRestricted: this.corsRestricted,
+      id: this.id,
+      lastEdited: this.lastEdited,
+      name: this.name,
+      svg: this.svg,
+    })
+
+    clone.asElement = this.asElement?.cloneNode(true) as Element
+    return clone
+  }
+
+  /**
    * Create and return a new empty SVG Element with the correct namespace
    */
   createSvgElement() {
@@ -124,10 +141,17 @@ export class Svg {
   }
 
   /**
+   * Update the last edited date to the current date and time
+   */
+  stampLastEdited() {
+    this.lastEdited = new Date().toISOString()
+  }
+
+  /**
    * Update the name of the SVG
    */
   updateName(name: string) {
     this.name = name
-    this.lastEdited = new Date().toISOString()
+    this.stampLastEdited()
   }
 }

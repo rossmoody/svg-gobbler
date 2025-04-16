@@ -1,6 +1,6 @@
 import { HelpIcon } from 'src/components'
 import { useExport } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const SpriteSettings = () => {
   const { dispatch, state } = useExport()

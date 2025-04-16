@@ -3,8 +3,8 @@ import { merge } from 'lodash'
 import { useCallback, useRef } from 'react'
 import { IconButton, Tooltip } from 'src/components'
 import { useCollection, useUser } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { CardColorOnboarding } from './card-color-onboarding'
 

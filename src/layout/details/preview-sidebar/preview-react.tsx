@@ -6,7 +6,7 @@ import { debounce } from 'lodash'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { useSvgr } from './use-svgr'
 

@@ -2,8 +2,8 @@ import type { Collection } from 'src/types'
 
 import { nanoid } from 'nanoid'
 import { PageData } from 'src/types'
-import { StorageUtilities } from 'src/utils/storage-utilities'
-import { SvgUtilities } from 'src/utils/svg-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 export const useResetEnvironment = () => {
   const reset = async () => {

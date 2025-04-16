@@ -1,4 +1,4 @@
-import { StorageUtilities } from 'src/utils/storage-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 /**
  * The primary initialization function for sidebar collections context.

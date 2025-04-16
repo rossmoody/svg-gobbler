@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useExport } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { ResetButton } from './reset-button'
 import { SvgoOption } from './svgo-option'

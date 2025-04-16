@@ -901,5 +901,11 @@
   },
   "settings_export__desc": {
     "message": "Manage and export data in various formats from within SVG Gobbler."
+  },
+  "edit_apply": {
+    "message": "Apply"
+  },
+  "edit_applied": {
+    "message": "Applied"
   }
 }

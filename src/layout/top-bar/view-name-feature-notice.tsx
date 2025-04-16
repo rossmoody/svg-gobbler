@@ -2,7 +2,7 @@ import * as Tooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useUser } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const ViewNameFeatureNotice = () => {
   const { state: userState } = useUser()

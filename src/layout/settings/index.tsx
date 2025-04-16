@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react'
 import { CollectionPanelButton } from 'src/components'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { AboutSettings } from './about-settings'
 import { ExportSettings } from './export-settings'

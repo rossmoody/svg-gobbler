@@ -1,5 +1,5 @@
 import { DocumentData, findSvg } from 'src/scripts'
-import Chrome from 'src/utils/chrome-utilities'
+import Chrome from 'src/utilities/chrome-utilities'
 
 /**
  * Functions related to initializing the extension. This includes setting the

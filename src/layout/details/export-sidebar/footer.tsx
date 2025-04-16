@@ -1,8 +1,8 @@
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
 import { useDetails } from 'src/providers'
-import { FormUtilities } from 'src/utils/form-utilities'
-import { loc } from 'src/utils/i18n'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { loc } from 'src/utilities/i18n'
 
 export const ExportDetailFooter = () => {
   const { state } = useDetails()
