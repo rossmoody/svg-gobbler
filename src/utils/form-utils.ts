@@ -2,6 +2,7 @@ import JSZip from 'jszip'
 import { ExportSvg } from 'src/layout/collection/main-panel/use-export-actions'
 import { ExportState, FileType } from 'src/providers'
 import { type FileSvg } from 'src/types'
+
 import { buildSpriteAndDemo } from './sprite-builder'
 
 /**
@@ -169,6 +170,18 @@ export class FormUtils {
     downloadLink.click()
   }
 
+  static async downloadSpriteZip(exportSvgs: ExportSvg[], exportState: ExportState) {
+    const zip = new JSZip()
+
+    const { demoHtml, sprite } = buildSpriteAndDemo(exportSvgs, exportState)
+
+    zip.file('sprite.svg', sprite.outerHTML)
+    zip.file('demo.html', demoHtml)
+
+    const zipContent = await zip.generateAsync({ type: 'blob' })
+    this.downloadZipFile(zipContent, `${exportState.filename}.zip`)
+  }
+
   /**
    * Downloads a given array of strings as a file or zip file depending on the number of strings.
    */
@@ -211,6 +224,17 @@ export class FormUtils {
 
     const zipContent = await zip.generateAsync({ type: 'blob' })
     this.downloadZipFile(zipContent, `${exportState.filename}.zip`)
+  }
+
+  /**
+   * Downloads a given zip file
+   */
+  static downloadZipFile(zip: Blob, filename: string) {
+    const zipUrl = URL.createObjectURL(zip)
+    const downloadLink = document.createElement('a')
+    downloadLink.download = filename
+    downloadLink.href = zipUrl
+    downloadLink.click()
   }
 
   /**
@@ -264,28 +288,5 @@ export class FormUtils {
 
     // Additionally check if the root element is an SVG element
     return doc.documentElement.nodeName === 'svg'
-  }
-
-  static async downloadSpriteZip(exportSvgs: ExportSvg[], exportState: ExportState) {
-    const zip = new JSZip()
-
-    const { sprite, demoHtml } = buildSpriteAndDemo(exportSvgs, exportState)
-
-    zip.file('sprite.svg', sprite.outerHTML)
-    zip.file('demo.html', demoHtml)
-
-    const zipContent = await zip.generateAsync({ type: 'blob' })
-    this.downloadZipFile(zipContent, `${exportState.filename}.zip`)
-  }
-
-  /**
-   * Downloads a given zip file
-   */
-  static downloadZipFile(zip: Blob, filename: string) {
-    const zipUrl = URL.createObjectURL(zip)
-    const downloadLink = document.createElement('a')
-    downloadLink.download = filename
-    downloadLink.href = zipUrl
-    downloadLink.click()
   }
 }
