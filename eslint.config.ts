@@ -9,9 +9,9 @@ import tseslint from 'typescript-eslint'
 export default tseslint.config([
   eslint.configs.recommended,
   tseslint.configs.recommended,
+  unicornPlugin.configs.recommended,
   reactHooks.configs['recommended-latest'],
   perfectionist.configs['recommended-natural'],
-  unicornPlugin.configs.recommended,
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
