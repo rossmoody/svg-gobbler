@@ -141,9 +141,7 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
    */
   const gatherGElements = (): string[] => {
     try {
-      return [...document.querySelectorAll('g')]
-        .map((g) => g.outerHTML)
-        .filter(Boolean)
+      return [...document.querySelectorAll('g')].map((g) => g.outerHTML).filter(Boolean)
     } catch (error) {
       console.warn('Error gathering G elements:', error)
       return []
@@ -210,14 +208,15 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
           }
 
           // Also check for SVG images, objects, etc. inside shadow DOM
-          for (const element_ of shadowRoot
-            .querySelectorAll('img[src*=".svg"], object[type="image/svg+xml"]')) {
-              if (element_ instanceof HTMLImageElement) {
-                results.push(createImage(element_.src))
-              } else if (element_ instanceof HTMLObjectElement) {
-                results.push(createImage(element_.data))
-              }
+          for (const element_ of shadowRoot.querySelectorAll(
+            'img[src*=".svg"], object[type="image/svg+xml"]',
+          )) {
+            if (element_ instanceof HTMLImageElement) {
+              results.push(createImage(element_.src))
+            } else if (element_ instanceof HTMLObjectElement) {
+              results.push(createImage(element_.data))
             }
+          }
 
           // Process nested shadow roots recursively
           for (const child of shadowRoot.querySelectorAll('*')) {
@@ -247,7 +246,7 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
       for (const sheet of document.styleSheets) {
         try {
           // Access might be blocked due to CORS
-          const rules = [...sheet.cssRules || []]
+          const rules = [...(sheet.cssRules || [])]
 
           for (const rule of rules) {
             if (rule instanceof CSSStyleRule) {
@@ -324,13 +323,16 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
           const style = globalThis.getComputedStyle(element)
           const content = style.getPropertyValue('content')
 
-          if (content && isSvgRelated(content) && // Extract SVG content from CSS content property
-            content.includes('url(')) {
-              const match = content.match(/url\(['"]?([^'"()]+)['"]?\)/)
-              if (match && match[1]) {
-                results.push(createImage(match[1]))
-              }
+          if (
+            content &&
+            isSvgRelated(content) && // Extract SVG content from CSS content property
+            content.includes('url(')
+          ) {
+            const match = content.match(/url\(['"]?([^'"()]+)['"]?\)/)
+            if (match && match[1]) {
+              results.push(createImage(match[1]))
             }
+          }
         } catch (error) {
           // Some elements might throw errors when accessing computed style
           console.warn('Error accessing CSS content property:', error)
@@ -360,7 +362,9 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
         }
 
         // Find SVG images, objects, etc.
-        for (const element of content.querySelectorAll('img[src*=".svg"], object[type="image/svg+xml"]')) {
+        for (const element of content.querySelectorAll(
+          'img[src*=".svg"], object[type="image/svg+xml"]',
+        )) {
           if (element instanceof HTMLImageElement) {
             results.push(createImage(element.src))
           } else if (element instanceof HTMLObjectElement) {

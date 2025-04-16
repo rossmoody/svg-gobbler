@@ -1,4 +1,4 @@
-import type { DetailsParams } from 'src/types'
+import type { DetailsParameters } from 'src/types'
 
 import { forwardRef, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
@@ -11,7 +11,7 @@ import { Header } from './header'
 import { PreviewSidebar } from './preview-sidebar'
 
 export const DetailsLayout = forwardRef<HTMLDivElement>((_, reference) => {
-  const data = useLoaderData() as DetailsParams
+  const data = useLoaderData() as DetailsParameters
   const { dispatch: detailsDispatch } = useDetails()
   const { dispatch: userDispatch } = useUser()
 

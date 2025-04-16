@@ -1,6 +1,6 @@
 import type { Config, State } from '@svgr/core'
 import type { SvgoPlugin } from 'src/constants/svgo-plugins'
-import type { DetailsParams } from 'src/types'
+import type { DetailsParameters } from 'src/types'
 import type { Config as SvgoConfig } from 'svgo'
 
 import { optimize } from 'svgo'
@@ -8,7 +8,7 @@ import { optimize } from 'svgo'
 export type DetailsAction =
   | { payload: boolean; type: 'set-prettify' }
   | { payload: Config; type: 'set-svgr-config' }
-  | { payload: DetailsParams; type: 'init' }
+  | { payload: DetailsParameters; type: 'init' }
   | { payload: number; type: 'set-float-precision' }
   | { payload: PreviewBackgroundClass; type: 'set-preview-background' }
   | { payload: string; type: 'set-preview-scale' }

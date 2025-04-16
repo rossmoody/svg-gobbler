@@ -1,4 +1,3 @@
-import js from '@eslint/js'
 import eslint from '@eslint/js'
 import tsparser from '@typescript-eslint/parser'
 import perfectionist from 'eslint-plugin-perfectionist'
@@ -8,7 +7,6 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config([
-  js.configs.recommended,
   eslint.configs.recommended,
   tseslint.configs.recommended,
   reactHooks.configs['recommended-latest'],
@@ -26,6 +24,9 @@ export default tseslint.config([
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
+    },
+    rules: {
+      'unicorn/consistent-function-scoping': 'off',
     },
   },
   {

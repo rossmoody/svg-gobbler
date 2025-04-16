@@ -108,7 +108,7 @@ export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
 /**
  * The params passed to a standard details route.
  */
-export type DetailsParams = {
+export type DetailsParameters = {
   /**
    * The id of the collection.
    */
