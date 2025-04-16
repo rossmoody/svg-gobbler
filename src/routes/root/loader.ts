@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
-import { CollectionState, type UserState, initCollectionState, initUserState } from 'src/providers'
+import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
 import { logger } from 'src/utils/logger'
@@ -35,14 +35,14 @@ export async function rootLoader() {
       await StorageUtils.setStorageData('plugins', plugins)
 
       // Get all collections from storage for sidenav
-      const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+      const previousCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
       // Early return if the user is refreshing
       const navigationEntries = performance.getEntriesByType(
         'navigation',
       ) as PerformanceNavigationTiming[]
       if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
-        return prevCollections[0].id
+        return previousCollections[0].id
       }
 
       try {
@@ -50,7 +50,7 @@ export async function rootLoader() {
         const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
 
         // On a settings page and has a collection, send to the first collection
-        if (!data.origin && prevCollections.length) {
+        if (!data.origin && previousCollections.length > 0) {
           throw new Error('Browser system page, send to first collection')
         }
 
@@ -76,18 +76,18 @@ export async function rootLoader() {
         }
 
         // Establish the collections array
-        let collections = [...prevCollections]
+        let collections = [...previousCollections]
 
         // Merge the collections if the user has the setting and the URL is a duplicate
         if (
           user.settings.mergeCollections &&
-          RootUtils.isDuplicateURL(pageData.href, prevCollections)
+          RootUtils.isDuplicateURL(pageData.href, previousCollections)
         ) {
-          collection = RootUtils.getExistingCollection(pageData.href, prevCollections)! // Because we checked for duplicates
+          collection = RootUtils.getExistingCollection(pageData.href, previousCollections)! // Because we checked for duplicates
           const existingPageData = await StorageUtils.getPageData(collection.id)
           pageData = RootUtils.mergePageData(existingPageData, pageData)
         } else {
-          collections = [collection, ...prevCollections]
+          collections = [collection, ...previousCollections]
         }
 
         // Sort the collections alphabetically if the user has the setting
@@ -104,7 +104,7 @@ export async function rootLoader() {
         // This catch is reached more than you'd think
         // 1. The listener has been removed, so the background script is no longer listening on refresh
         // 2. Send the user to the first collection if they invoke on a browser system page
-        return prevCollections[0].id
+        return previousCollections[0].id
       }
     })(),
   })

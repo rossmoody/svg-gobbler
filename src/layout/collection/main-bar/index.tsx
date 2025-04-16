@@ -10,7 +10,7 @@ export const Mainbar = () => {
   const { state } = useCollection()
 
   const MainbarContextInfo = useMemo(() => {
-    return state.selected.length ? SelectedQuantity : Pagination
+    return state.selected.length > 0 ? SelectedQuantity : Pagination
   }, [state.selected.length])
 
   return (

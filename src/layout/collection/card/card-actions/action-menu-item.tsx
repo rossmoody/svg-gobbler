@@ -2,11 +2,11 @@ import { Menu } from '@headlessui/react'
 import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 
-type Props = {
+type Properties = {
   onClick: () => void
 }
 
-export const ActionMenuItem = ({ children, onClick }: PropsWithChildren<Props>) => (
+export const ActionMenuItem = ({ children, onClick }: PropsWithChildren<Properties>) => (
   <Menu.Item>
     {({ active }) => (
       <span

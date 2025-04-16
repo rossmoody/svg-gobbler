@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, defer } from 'react-router-dom'
+import { defer, LoaderFunctionArgs } from 'react-router-dom'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'

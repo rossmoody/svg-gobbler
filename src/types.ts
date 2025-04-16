@@ -13,14 +13,6 @@ export type BackgroundMessage = {
 }
 
 /**
- * The model for data stored and gathered from the document.
- * This is really collection data.
- */
-export type PageData = {
-  data: StorageSvg[]
-} & DocumentData
-
-/**
  * The model of a collection that is stored in local storage.
  */
 export type Collection = {
@@ -109,6 +101,11 @@ export type CollectionData = {
 }
 
 /**
+ * The database keys
+ */
+export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
+
+/**
  * The params passed to a standard details route.
  */
 export type DetailsParams = {
@@ -127,11 +124,6 @@ export type DetailsParams = {
 }
 
 /**
- * The database keys
- */
-export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
-
-/**
  * The model for SVG files imported from the local file system.
  */
 export type FileSvg = {
@@ -143,4 +135,12 @@ export type FileSvg = {
    * The SVG string of the file
    */
   svg: string
+}
+
+/**
+ * The model for data stored and gathered from the document.
+ * This is really collection data.
+ */
+export type PageData = DocumentData & {
+  data: StorageSvg[]
 }

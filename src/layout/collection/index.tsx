@@ -28,16 +28,21 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
 
   function generateMinSize() {
     switch (state.view.size) {
-      case 96:
+      case 96: {
         return '10rem'
-      case 128:
+      }
+      case 128: {
         return '12.5rem'
-      case 192:
+      }
+      case 192: {
         return '15rem'
-      case 256:
+      }
+      case 256: {
         return '17.5rem'
-      default:
+      }
+      default: {
         return '8.75rem'
+      }
     }
   }
 
@@ -52,16 +57,16 @@ export const Collection = ({ data }: Pick<CollectionData, 'data'>) => {
           className="grid justify-between gap-4"
           style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${generateMinSize()}, 1fr))` }}
         >
-          {state.processedData.map((svg, i) => (
+          {state.processedData.map((svg, index) => (
             <Transition
               appear
               as="li"
+              className="rounded-xl transition-all duration-300 ease-in-out hover:shadow-md"
               enter="transition-all duration-300 ease-in-out"
               enterFrom="opacity-0 scale-90"
               enterTo="opacity-100 scale-100"
-              key={svg.svg + i}
+              key={svg.svg + index}
               show
-              className="rounded-xl transition-all duration-300 ease-in-out hover:shadow-md"
               style={{ backgroundColor: state.view.canvas }}
             >
               <Card data={svg as SvgType} />

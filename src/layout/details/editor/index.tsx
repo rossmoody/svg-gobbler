@@ -15,8 +15,8 @@ export const DetailsEditor = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
 
   const onChange = useCallback(
-    (val: string) => {
-      dispatch({ payload: val, type: 'update-current-string' })
+    (value: string) => {
+      dispatch({ payload: value, type: 'update-current-string' })
     },
     [dispatch],
   )
@@ -41,10 +41,10 @@ export const DetailsEditor = () => {
           lineNumbers: false,
         }}
         className="h-full"
-        theme={tokyoNightStorm}
         extensions={[html(), EditorView.lineWrapping]}
         onChange={onChange}
         onFocus={onFocus}
+        theme={tokyoNightStorm}
         value={state.currentString}
       />
     </section>

@@ -2,12 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const useExportResize = () => {
   const [width, setWidth] = useState(320)
-  const ref = useRef<HTMLElement>(null)
+  const reference = useRef<HTMLElement>(null)
   const resizeSide = useRef<'right' | null>(null)
 
   const onMouseMove = useCallback((e: MouseEvent) => {
-    if (ref.current && resizeSide.current === 'right') {
-      const newWidth = e.clientX - ref.current.getBoundingClientRect().left
+    if (reference.current && resizeSide.current === 'right') {
+      const newWidth = e.clientX - reference.current.getBoundingClientRect().left
       if (newWidth > 0) setWidth(newWidth)
     }
   }, [])
@@ -20,8 +20,8 @@ export const useExportResize = () => {
 
   const onMouseDown = useCallback(
     (e: MouseEvent) => {
-      if (ref.current) {
-        const boundingRect = ref.current.getBoundingClientRect()
+      if (reference.current) {
+        const boundingRect = reference.current.getBoundingClientRect()
         const threshold = 20 // pixels from the edge to detect resize
 
         if (
@@ -38,7 +38,7 @@ export const useExportResize = () => {
   )
 
   useEffect(() => {
-    const element = ref.current
+    const element = reference.current
 
     if (element) {
       element.addEventListener('mousedown', onMouseDown)
@@ -51,5 +51,5 @@ export const useExportResize = () => {
     }
   }, [onMouseDown])
 
-  return { ref, width }
+  return { ref: reference, width }
 }

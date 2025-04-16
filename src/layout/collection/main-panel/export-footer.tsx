@@ -17,15 +17,15 @@ export const ExportFooter = () => {
     const payload = (await processWithExportConfig(collectionState.selected))[0].payload
 
     switch (exportState.fileType) {
-      case 'svg': {
-        FormUtils.copyStringToClipboard(payload)
-        break
-      }
+      case 'jpeg':
 
       case 'png':
-      case 'webp':
-      case 'jpeg': {
+      case 'webp': {
         FormUtils.copyImageToClipboard(payload)
+        break
+      }
+      case 'svg': {
+        FormUtils.copyStringToClipboard(payload)
         break
       }
     }
@@ -37,18 +37,13 @@ export const ExportFooter = () => {
     let exportSvgs: ExportSvg[] = await processWithExportConfig(collectionState.selected)
 
     switch (exportState.fileType) {
-      case 'svg': {
-        FormUtils.downloadSvgContent(exportSvgs, exportState)
-        break
-      }
+      case 'jpeg':
 
       case 'png':
-      case 'webp':
-      case 'jpeg': {
+      case 'webp': {
         FormUtils.downloadImageContent(exportSvgs, exportState)
         break
       }
-
       case 'sprite': {
         exportSvgs = collectionState.selected.map((svg) => {
           return {
@@ -57,6 +52,11 @@ export const ExportFooter = () => {
           }
         })
         FormUtils.downloadSpriteZip(exportSvgs, exportState)
+        break
+      }
+
+      case 'svg': {
+        FormUtils.downloadSvgContent(exportSvgs, exportState)
         break
       }
     }

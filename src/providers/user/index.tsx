@@ -1,6 +1,6 @@
-import { Dispatch, PropsWithChildren, createContext, useContext, useMemo, useReducer } from 'react'
+import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
 
-import { UserAction, UserState, initUserState, userReducer } from './reducer'
+import { initUserState, UserAction, userReducer, UserState } from './reducer'
 
 export type UserContextProps = {
   dispatch: Dispatch<UserAction>

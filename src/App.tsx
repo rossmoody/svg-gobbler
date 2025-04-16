@@ -1,16 +1,16 @@
-import { RouterProvider, createMemoryRouter } from 'react-router-dom'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { ErrorState } from 'src/components'
 import {
-  CollectionRoute,
-  DashboardRoute,
-  DetailsRoute,
-  RootRoute,
-  SettingsRoute,
   collectionLoader,
+  CollectionRoute,
   dashboardLoader,
+  DashboardRoute,
   detailLoader,
+  DetailsRoute,
   rootLoader,
+  RootRoute,
   settingsLoader,
+  SettingsRoute,
 } from 'src/routes'
 
 export default function App() {

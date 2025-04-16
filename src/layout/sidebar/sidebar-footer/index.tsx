@@ -6,6 +6,7 @@ import {
 import { NavLink } from 'react-router-dom'
 import { links } from 'src/constants/links'
 import { loc } from 'src/utils/i18n'
+
 import { FeedbackItem } from './feedback-item'
 import { ResetEnvironment } from './reset-environment'
 
@@ -16,7 +17,7 @@ export const SideFooter = () => {
 
   return (
     <footer>
-      <h2 id="settings-heading" className="sr-only">
+      <h2 className="sr-only" id="settings-heading">
         User Settings
       </h2>
       <ul aria-labelledby="settings-heading">

@@ -11,10 +11,10 @@ import { CardColorOnboarding } from './card-color-onboarding'
 export const CardColorButton = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
   const { dispatch, state } = useCollection()
-  const colorInputRef = useRef<HTMLInputElement>(null)
+  const colorInputReference = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
-    colorInputRef.current?.click()
+    colorInputReference.current?.click()
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ export const CardColorButton = () => {
         <input
           className="sr-only"
           onChange={handleChange}
-          ref={colorInputRef}
+          ref={colorInputReference}
           type="color"
           value={state.view.canvas}
         />

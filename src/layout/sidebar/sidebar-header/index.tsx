@@ -1,6 +1,7 @@
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
 import { loc } from 'src/utils/i18n'
+
 import { NewCollectionModal } from './new-collection-item'
 
 export const SidebarHeader = () => {

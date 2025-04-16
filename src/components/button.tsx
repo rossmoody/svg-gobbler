@@ -4,12 +4,12 @@ export const btnBaseStyles =
   'rounded-lg flex items-center gap-1 font-semibold transition-all duration-200 ease-in-out focus justify-center'
 
 export const btnVariantStyles = {
+  destructive:
+    'ring-1 ring-inset ring-red-300 dark:ring-red-700 hover:bg-red-100 dark:hover:bg-red-800 shadow-sm text-red-600',
   ghost: 'bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800',
   primary: 'bg-red-600 hover:bg-red-500 text-white shadow-sm',
   secondary:
     'ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 shadow-sm',
-  destructive:
-    'ring-1 ring-inset ring-red-300 dark:ring-red-700 hover:bg-red-100 dark:hover:bg-red-800 shadow-sm text-red-600',
 }
 
 export const btnSizeStyles = {
@@ -20,17 +20,17 @@ export const btnSizeStyles = {
   xs: 'px-2 py-1 text-xs',
 }
 
-export type ButtonProps = {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: keyof typeof btnSizeStyles
   variant?: keyof typeof btnVariantStyles
-} & ButtonHTMLAttributes<HTMLButtonElement>
+}
 
 /**
  * General Button component.
  * Uses 20px icons for all sizes except xs, which uses 16px icons.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = '', size = 'md', type = 'button', variant = 'primary', ...rest }, ref) => {
+  ({ className = '', size = 'md', type = 'button', variant = 'primary', ...rest }, reference) => {
     const combinedClassName = [
       btnBaseStyles,
       btnVariantStyles[variant],
@@ -40,6 +40,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       .join(' ')
       .trim()
 
-    return <button className={combinedClassName} ref={ref} {...rest} type={type} />
+    return <button className={combinedClassName} ref={reference} {...rest} type={type} />
   },
 )

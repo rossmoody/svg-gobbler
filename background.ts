@@ -5,39 +5,39 @@ import Chrome from 'src/utils/chrome-utils'
  * Functions related to initializing the extension. This includes setting the
  * extension icons and launching the onboarding experience.
  */
-class Background {
+const Background = {
   /**
    * Sets the uninstall URL for the extension.
    */
-  static handleUninstall() {
+  handleUninstall() {
     chrome.runtime.setUninstallURL('https://svggobbler.com/uninstall')
-  }
+  },
 
   /**
    * Initializes the extension.
    */
-  static init() {
+  init() {
     Background.setExtensionIcons()
     Background.launchOnboardingExperience()
     Background.launchExtensionFromOnboarding()
     Background.launchSvgGobbler()
     Background.handleUninstall()
-  }
+  },
 
   /**
    * Launches the extension from the onboarding page.
    */
-  static launchExtensionFromOnboarding() {
-    const onboardingListener = async function (req: { data: DocumentData; type: string }) {
-      const { data, type } = req
+  launchExtensionFromOnboarding() {
+    const onboardingListener = async function (request: { data: DocumentData; type: string }) {
+      const { data, type } = request
 
       if (type === 'launch-svg-gobbler-from-onboarding') {
         const listener = function (
-          req: string,
+          request: string,
           __: chrome.runtime.MessageSender,
           sendResponse: (response: any) => void,
         ) {
-          if (req === 'gobble') {
+          if (request === 'gobble') {
             sendResponse({ data })
             chrome.runtime.onMessage.removeListener(listener)
           }
@@ -49,25 +49,25 @@ class Background {
     }
 
     chrome.runtime.onMessage.addListener(onboardingListener)
-  }
+  },
 
   /**
    * If the extension is installed for the first time, open the onboarding page.
    */
-  static launchOnboardingExperience() {
+  launchOnboardingExperience() {
     chrome.runtime.onInstalled.addListener(async (details) => {
       if (details.reason === 'install') {
         await Chrome.createNewTab('onboarding.html')
       }
     })
-  }
+  },
 
   /**
    * Initializes SVG Gobbler conditionally based on the type of page the user is
    * currently on. Responsible for getting data from the active tab and sending
    * it to the content script.
    */
-  static launchSvgGobbler() {
+  launchSvgGobbler() {
     const onClickHandler = async () => {
       let data = {
         data: [],
@@ -90,8 +90,8 @@ class Background {
       }
 
       // Add a listener
-      chrome.runtime.onMessage.addListener(function listener(req, __, sendResponse) {
-        if (req === 'gobble') {
+      chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
+        if (request === 'gobble') {
           sendResponse({ data })
           chrome.runtime.onMessage.removeListener(listener)
         }
@@ -102,12 +102,12 @@ class Background {
     }
 
     chrome.action.onClicked.addListener(onClickHandler)
-  }
+  },
 
   /**
    * Load the development icon if the extension is running in development mode.
    */
-  static setExtensionIcons() {
+  setExtensionIcons() {
     if (!('update_url' in chrome.runtime.getManifest())) {
       // The extension is running as an unpacked extension
       chrome.action.setIcon({
@@ -120,7 +120,7 @@ class Background {
         },
       })
     }
-  }
-}
+  },
+};
 
 Background.init()

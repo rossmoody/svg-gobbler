@@ -20,7 +20,7 @@ const transitionConfig = {
   leaveTo: 'opacity-0 h-0 translate-y-2',
 }
 
-export const ExportPanel = forwardRef<HTMLDivElement>((props, ref) => {
+export const ExportPanel = forwardRef<HTMLDivElement>((properties, reference) => {
   const { dispatch: exportDispatch, state: exportState } = useExport()
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -28,7 +28,7 @@ export const ExportPanel = forwardRef<HTMLDivElement>((props, ref) => {
   }
 
   return (
-    <div ref={ref} {...props} className="flex-1 overflow-y-auto p-4">
+    <div ref={reference} {...properties} className="flex-1 overflow-y-auto p-4">
       <div className="mb-3">
         <label className="export-label" htmlFor="file-type">
           {loc('export_filetype')}

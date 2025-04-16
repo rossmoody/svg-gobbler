@@ -2,12 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const usePreviewResize = () => {
   const [width, setWidth] = useState(400)
-  const ref = useRef<HTMLElement>(null)
+  const reference = useRef<HTMLElement>(null)
   const resizeSide = useRef<null | string>(null)
 
   const onMouseMove = useCallback((e: MouseEvent) => {
-    if (ref.current && resizeSide.current === 'left') {
-      const newWidth = ref.current.getBoundingClientRect().right - e.clientX
+    if (reference.current && resizeSide.current === 'left') {
+      const newWidth = reference.current.getBoundingClientRect().right - e.clientX
       if (newWidth > 0) setWidth(newWidth)
     }
   }, [])
@@ -20,8 +20,8 @@ export const usePreviewResize = () => {
 
   const onMouseDown = useCallback(
     (e: MouseEvent) => {
-      if (ref.current) {
-        const boundingRect = ref.current.getBoundingClientRect()
+      if (reference.current) {
+        const boundingRect = reference.current.getBoundingClientRect()
         const threshold = 20 // pixels from the edge to detect resize
 
         if (
@@ -38,7 +38,7 @@ export const usePreviewResize = () => {
   )
 
   useEffect(() => {
-    const element = ref.current
+    const element = reference.current
     if (element) {
       element.addEventListener('mousedown', onMouseDown)
     }
@@ -49,5 +49,5 @@ export const usePreviewResize = () => {
     }
   }, [onMouseDown])
 
-  return { ref, width }
+  return { ref: reference, width }
 }

@@ -1,3 +1,5 @@
+export type EditAction = { type: 'reset' }
+
 export type EditState = {
   /**
    * The height to apply to the selected SVGs.
@@ -8,8 +10,6 @@ export type EditState = {
    */
   width: string
 }
-
-export type EditAction = { type: 'reset' }
 
 export const initEditState: EditState = {
   height: '',

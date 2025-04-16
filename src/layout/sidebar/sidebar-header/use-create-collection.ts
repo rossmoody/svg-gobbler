@@ -42,6 +42,6 @@ export const useCreateCollection = (files: File[]) => {
     navigate(`/dashboard/collection/${id}`)
 
     // Close the modal, I'm being lazy here
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
   }
 }

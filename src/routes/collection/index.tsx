@@ -11,16 +11,16 @@ import { Mainbar } from 'src/layout/collection/main-bar'
 import { MainPanel } from 'src/layout/collection/main-panel'
 import { SkeletonCollection } from 'src/layout/collection/skeleton-collection'
 import { TopBar } from 'src/layout/top-bar'
-import { UserState, useCollection, useExport, useUser } from 'src/providers'
+import { useCollection, useExport, UserState, useUser } from 'src/providers'
 
 /**
  * This is really collection data with a promise we await for the svg data.
  */
-type LoaderData = {
+type LoaderData = CollectionData & {
   data: Promise<Svg[]>
   plugins: SvgoPlugin[]
   user: UserState
-} & CollectionData
+}
 
 export const CollectionRoute = () => {
   const { collectionId, data, plugins, user, view } = useLoaderData() as LoaderData

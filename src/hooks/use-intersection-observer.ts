@@ -6,10 +6,10 @@ import { useEffect, useRef, useState } from 'react'
  */
 export const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
   const [isIntersecting, setIsIntersecting] = useState<boolean>(false)
-  const elementRef = useRef<HTMLElement>(null)
+  const elementReference = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const element = elementRef.current
+    const element = elementReference.current
     if (!element) return
 
     const observer = new IntersectionObserver(([entry]) => {
@@ -23,5 +23,5 @@ export const useIntersectionObserver = (options: IntersectionObserverInit = {}) 
     }
   }, [options])
 
-  return { elementRef, isIntersecting }
+  return { elementRef: elementReference, isIntersecting }
 }

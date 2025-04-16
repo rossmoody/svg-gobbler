@@ -1,13 +1,13 @@
-import { Fragment, forwardRef } from 'react'
+import { forwardRef, Fragment } from 'react'
 import { Button } from 'src/components'
 import { EditState } from 'src/providers'
-
-export type EditStateKey = keyof EditState
 
 export type EditField = {
   label: string
   value: EditStateKey
 }
+
+export type EditStateKey = keyof EditState
 
 const editFields: EditField[] = [
   { label: 'Height', value: 'height' },
@@ -15,10 +15,10 @@ const editFields: EditField[] = [
 ]
 
 export const EditPanel = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  (props, ref) => {
+  (properties, reference) => {
     return (
       <Fragment>
-        <div ref={ref} {...props} className="flex-1 overflow-y-auto p-4">
+        <div ref={reference} {...properties} className="flex-1 overflow-y-auto p-4">
           <div className="flex flex-col gap-2">
             {editFields.map((field) => (
               <div className="flex flex-col" key={field.value}>

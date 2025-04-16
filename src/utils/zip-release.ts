@@ -1,11 +1,11 @@
 import archiver from 'archiver'
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 
 import packageJson from '../../package.json' assert { type: 'json' }
 
 const rootPath = process.cwd()
-const distPath = path.join(rootPath, 'dist')
+const distributionPath = path.join(rootPath, 'dist')
 const fileName = `${packageJson.version}.zip`
 const outputPath = path.join(rootPath, 'releases', fileName)
 
@@ -22,8 +22,8 @@ output.on('close', () => {
   console.log(`File ${fileName} has been created for Chrome`)
 
   // Amend the manifest file for Firefox
-  const manifestPath = path.join(distPath, 'manifest.json')
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
+  const manifestPath = path.join(distributionPath, 'manifest.json')
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
 
   manifest.browser_specific_settings = {
     gecko: {
@@ -49,5 +49,5 @@ output.on('close', () => {
 })
 
 archive.pipe(output)
-archive.directory(distPath, false)
+archive.directory(distributionPath, false)
 archive.finalize()

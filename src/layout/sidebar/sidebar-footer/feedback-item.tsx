@@ -1,9 +1,8 @@
+import { MegaphoneIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
+import { Button, Modal } from 'src/components'
 import { useDatabase } from 'src/hooks'
 import { loc } from 'src/utils/i18n'
-
-import { MegaphoneIcon } from '@heroicons/react/24/outline'
-import { Button, Modal } from 'src/components'
 
 export const FeedbackItem = () => {
   const [open, setOpen] = useState(false)
@@ -43,7 +42,7 @@ export const FeedbackItem = () => {
           <div className="mb-2 text-xs text-gray-600 dark:text-gray-400">
             {loc('feedback_email_optional_description')}
           </div>
-          <input className="input mb-4" id="feedback-email" type="email" name="feedback-email" />
+          <input className="input mb-4" id="feedback-email" name="feedback-email" type="email" />
           <label className="label" htmlFor="feedback-textarea">
             {loc('feedback_feedback')}
           </label>
@@ -54,7 +53,7 @@ export const FeedbackItem = () => {
             required
           />
           <Modal.Footer>
-            <Button type="submit" size="lg">
+            <Button size="lg" type="submit">
               {loc('feedback_primary_action')}
             </Button>
             <Button onClick={onClose} size="lg" type="button" variant="secondary">

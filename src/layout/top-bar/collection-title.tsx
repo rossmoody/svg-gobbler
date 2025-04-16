@@ -38,11 +38,11 @@ export const CollectionTitle = () => {
   return (
     <Transition
       appear
+      className="-ml-2 flex min-w-0 flex-1 rounded-md"
       enter="transition-all ease-linear duration-500"
       enterFrom="opacity-0 translate-y-1"
       enterTo="opacity-100 translate-y-0"
       show={!!title}
-      className="-ml-2 flex min-w-0 flex-1 rounded-md"
     >
       <h1
         className="focus min-w-0 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-md px-2 py-1 text-lg font-semibold hover:bg-gray-100 focus:text-clip dark:hover:bg-gray-800"

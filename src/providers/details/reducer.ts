@@ -5,7 +5,25 @@ import type { Config as SvgoConfig } from 'svgo'
 
 import { optimize } from 'svgo'
 
-export type PreviewBackgroundClass = 'black' | 'gray' | 'transparent' | 'white'
+export type DetailsAction =
+  | { payload: boolean; type: 'set-prettify' }
+  | { payload: Config; type: 'set-svgr-config' }
+  | { payload: DetailsParams; type: 'init' }
+  | { payload: number; type: 'set-float-precision' }
+  | { payload: PreviewBackgroundClass; type: 'set-preview-background' }
+  | { payload: string; type: 'set-preview-scale' }
+  | { payload: string; type: 'set-svgr-result' }
+  | { payload: string; type: 'set-svgr-state-name' }
+  | { payload: string; type: 'update-current-string' }
+  | { payload: string; type: 'update-name' }
+  | { payload: string; type: 'update-original-name' }
+  | { payload: string; type: 'update-original-string' }
+  | { payload: SvgoPlugin; type: 'add-plugin' }
+  | { payload: SvgoPlugin; type: 'remove-plugin' }
+  | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
+  | { payload: { key: string; value: boolean | string }; type: 'set-svgr-config-value' }
+  | { type: 'process-current-string' }
+  | { type: 'reset' }
 
 /**
  * This is similar in many ways to ExportState. The primary reason we don't colocate them
@@ -16,11 +34,11 @@ export type DetailsState = {
   collectionId: string
   currentString: string
   export: {
-    svgoConfig: {
+    svgoConfig: SvgoConfig & {
       js2svg: SvgoConfig['js2svg']
       multipass: boolean
       plugins: SvgoPlugin[]
-    } & SvgoConfig
+    }
   }
   id: string // The id of the svg
   name: string
@@ -39,25 +57,7 @@ export type DetailsState = {
   }
 }
 
-export type DetailsAction =
-  | { payload: { key: string; value: boolean | string }; type: 'set-svgr-config-value' }
-  | { payload: Config; type: 'set-svgr-config' }
-  | { payload: DetailsParams; type: 'init' }
-  | { payload: PreviewBackgroundClass; type: 'set-preview-background' }
-  | { payload: SvgoPlugin; type: 'add-plugin' }
-  | { payload: SvgoPlugin; type: 'remove-plugin' }
-  | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
-  | { payload: boolean; type: 'set-prettify' }
-  | { payload: number; type: 'set-float-precision' }
-  | { payload: string; type: 'set-preview-scale' }
-  | { payload: string; type: 'set-svgr-result' }
-  | { payload: string; type: 'set-svgr-state-name' }
-  | { payload: string; type: 'update-current-string' }
-  | { payload: string; type: 'update-name' }
-  | { payload: string; type: 'update-original-name' }
-  | { payload: string; type: 'update-original-string' }
-  | { type: 'process-current-string' }
-  | { type: 'reset' }
+export type PreviewBackgroundClass = 'black' | 'gray' | 'transparent' | 'white'
 
 export const initDetailsState: DetailsState = {
   collectionId: '',
@@ -109,14 +109,90 @@ export const initDetailsState: DetailsState = {
 
 export const detailsReducer = (state: DetailsState, action: DetailsAction): DetailsState => {
   switch (action.type) {
-    case 'set-preview-scale': {
+    case 'add-plugin': {
       return {
         ...state,
-        preview: {
-          ...state.preview,
-          svg: {
-            ...state.preview.svg,
-            scale: parseFloat(action.payload),
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            plugins: [...state.export.svgoConfig.plugins, action.payload],
+          },
+        },
+      }
+    }
+
+    case 'init': {
+      return {
+        ...state,
+        collectionId: action.payload.collectionId,
+        currentString: action.payload.svg.svg,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            path: action.payload.svg.name,
+          },
+        },
+        id: action.payload.svg.id,
+        name: action.payload.svg.name,
+        originalName: action.payload.svg.name,
+        originalString: action.payload.svg.svg,
+      }
+    }
+
+    case 'process-current-string': {
+      const { data } = optimize(state.originalString, state.export.svgoConfig)
+
+      return {
+        ...state,
+        currentString: data,
+      }
+    }
+
+    case 'remove-plugin': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            plugins: state.export.svgoConfig.plugins.filter(
+              (plugin: SvgoPlugin) => plugin.name !== action.payload.name,
+            ),
+          },
+        },
+      }
+    }
+
+    case 'reset': {
+      return initDetailsState
+    }
+
+    case 'set-float-precision': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            floatPrecision: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-prettify': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            js2svg: {
+              ...state.export.svgoConfig.js2svg,
+              pretty: action.payload,
+            },
           },
         },
       }
@@ -135,17 +211,27 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       }
     }
 
-    case 'set-svgr-state-name': {
+    case 'set-preview-scale': {
       return {
         ...state,
         preview: {
           ...state.preview,
-          svgr: {
-            ...state.preview.svgr,
-            state: {
-              ...state.preview.svgr.state,
-              componentName: action.payload,
-            },
+          svg: {
+            ...state.preview.svg,
+            scale: Number.parseFloat(action.payload),
+          },
+        },
+      }
+    }
+
+    case 'set-svgo-plugins': {
+      return {
+        ...state,
+        export: {
+          ...state.export,
+          svgoConfig: {
+            ...state.export.svgoConfig,
+            plugins: action.payload,
           },
         },
       }
@@ -193,82 +279,26 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       }
     }
 
-    case 'set-float-precision': {
+    case 'set-svgr-state-name': {
       return {
         ...state,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            floatPrecision: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'process-current-string': {
-      const { data } = optimize(state.originalString, state.export.svgoConfig)
-
-      return {
-        ...state,
-        currentString: data,
-      }
-    }
-
-    case 'set-prettify': {
-      return {
-        ...state,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            js2svg: {
-              ...state.export.svgoConfig.js2svg,
-              pretty: action.payload,
+        preview: {
+          ...state.preview,
+          svgr: {
+            ...state.preview.svgr,
+            state: {
+              ...state.preview.svgr.state,
+              componentName: action.payload,
             },
           },
         },
       }
     }
 
-    case 'set-svgo-plugins': {
+    case 'update-current-string': {
       return {
         ...state,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            plugins: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'add-plugin': {
-      return {
-        ...state,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            plugins: [...state.export.svgoConfig.plugins, action.payload],
-          },
-        },
-      }
-    }
-
-    case 'remove-plugin': {
-      return {
-        ...state,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            plugins: state.export.svgoConfig.plugins.filter(
-              (plugin: SvgoPlugin) => plugin.name !== action.payload.name,
-            ),
-          },
-        },
+        currentString: action.payload,
       }
     }
 
@@ -286,13 +316,6 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       }
     }
 
-    case 'update-original-string': {
-      return {
-        ...state,
-        originalString: action.payload,
-      }
-    }
-
     case 'update-original-name': {
       return {
         ...state,
@@ -300,34 +323,11 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
       }
     }
 
-    case 'update-current-string': {
+    case 'update-original-string': {
       return {
         ...state,
-        currentString: action.payload,
+        originalString: action.payload,
       }
-    }
-
-    case 'init': {
-      return {
-        ...state,
-        collectionId: action.payload.collectionId,
-        currentString: action.payload.svg.svg,
-        export: {
-          ...state.export,
-          svgoConfig: {
-            ...state.export.svgoConfig,
-            path: action.payload.svg.name,
-          },
-        },
-        id: action.payload.svg.id,
-        name: action.payload.svg.name,
-        originalName: action.payload.svg.name,
-        originalString: action.payload.svg.svg,
-      }
-    }
-
-    case 'reset': {
-      return initDetailsState
     }
 
     default: {

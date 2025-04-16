@@ -2,10 +2,10 @@ import { Tab as HeadlessTab } from '@headlessui/react'
 import clsx from 'clsx'
 import { HTMLAttributes, PropsWithChildren } from 'react'
 
-const Group = (props: PropsWithChildren) => <HeadlessTab.Group {...props} />
+const Group = (properties: PropsWithChildren) => <HeadlessTab.Group {...properties} />
 
-const List = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => {
-  const { className, ...rest } = props
+const List = (properties: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => {
+  const { className, ...rest } = properties
 
   return (
     <HeadlessTab.List
@@ -15,17 +15,17 @@ const List = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => {
   )
 }
 
-const Panels = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => (
-  <HeadlessTab.Panels {...props} />
+const Panels = (properties: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => (
+  <HeadlessTab.Panels {...properties} />
 )
 
-const Panel = (props: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => (
-  <HeadlessTab.Panel {...props} />
+const Panel = (properties: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) => (
+  <HeadlessTab.Panel {...properties} />
 )
 
-const Tab = (props: PropsWithChildren) => (
+const Tab = (properties: PropsWithChildren) => (
   <HeadlessTab
-    {...props}
+    {...properties}
     className={clsx(
       'ui-selected:border-red-500 ui-selected:font-medium ui-selected:text-red-500',
       'border-transparent text-gray-600 hover:border-gray-200 ui-not-selected:dark:text-gray-400',

@@ -1,11 +1,11 @@
+import { useRevalidator } from 'react-router-dom'
 import { Button } from 'src/components'
 import { useExportData, useResetEnvironment } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
+import { Collection } from 'src/types'
 import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
-import { useRevalidator } from 'react-router-dom'
-import { Collection } from 'src/types'
 import { Category } from './category'
 import { Item } from './item'
 import { KeyboardShortcut } from './keyboard-shortcut'

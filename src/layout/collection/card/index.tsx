@@ -1,7 +1,7 @@
 import type { SvgType } from 'src/scripts'
 
 import clsx from 'clsx'
-import { HTMLAttributes, forwardRef, useMemo } from 'react'
+import { forwardRef, HTMLAttributes, useMemo } from 'react'
 import { useCollection } from 'src/providers'
 
 import { CardContent } from './card-content'
@@ -15,8 +15,8 @@ export type CardData = {
 
 export type CardProps = CardData & HTMLAttributes<HTMLDivElement>
 
-export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
-  const { className, data, ...rest } = props
+export const Card = forwardRef<HTMLDivElement, CardProps>((properties, reference) => {
+  const { className, data, ...rest } = properties
   const { state } = useCollection()
 
   const Actions = useMemo(() => {
@@ -33,7 +33,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
         'flex aspect-square items-center justify-center',
         className,
       )}
-      ref={ref}
+      ref={reference}
     >
       <SvgSize data={data} />
       <Actions data={data}>

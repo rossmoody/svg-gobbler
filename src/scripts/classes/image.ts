@@ -7,33 +7,6 @@ export class Image extends Svg {
    */
   origin: string
 
-  constructor(storageSvg: StorageSvg, origin: string) {
-    super(storageSvg)
-    this.origin = origin
-    this.processImage()
-  }
-
-  /**
-   * * Decodes a base64-encoded Unicode string.
-   *
-   * This function first decodes the base64 string using the built-in `atob` function.
-   * It then splits the resulting string into an array of characters and encodes each character
-   * into its hexadecimal representation. The encoded characters are then assembled into a string
-   * and decoded using `decodeURIComponent` to handle any special Unicode characters.
-   */
-  private base64DecodeUnicode(str: string): string {
-    try {
-      return decodeURIComponent(
-        atob(str)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join(''),
-      )
-    } catch (error) {
-      return str
-    }
-  }
-
   /**
    * The absolute URL of the image source. If this is present, the SVG
    * is an image element with an external source. It will require a fetch
@@ -41,46 +14,28 @@ export class Image extends Svg {
    * src url.
    */
   public get absoluteImageUrl() {
-    const src = this.asElement?.getAttribute('src') ?? ''
+    const source = this.asElement?.getAttribute('src') ?? ''
 
     // Handle various URL formats
-    if (src.startsWith('data:')) {
-      return src
-    } else if (src.startsWith('http://') || src.startsWith('https://')) {
-      return src
-    } else if (src.startsWith('//')) {
-      return `https:${src}`
-    } else if (src.startsWith('www.')) {
-      return `https://${src}`
-    } else if (src.startsWith('/')) {
-      return `${this.origin.replace(/\/$/, '')}${src}`
+    if (source.startsWith('data:')) {
+      return source
+    } else if (source.startsWith('http://') || source.startsWith('https://')) {
+      return source
+    } else if (source.startsWith('//')) {
+      return `https:${source}`
+    } else if (source.startsWith('www.')) {
+      return `https://${source}`
+    } else if (source.startsWith('/')) {
+      return `${this.origin.replace(/\/$/, '')}${source}`
     } else {
-      return `${this.origin.replace(/\/$/, '')}/${src.replace(/^\.\//, '')}`
+      return `${this.origin.replace(/\/$/, '')}/${source.replace(/^\.\//, '')}`
     }
   }
 
-  /**
-   * Parses a given HTML string and returns the first element in its body.
-   *
-   * This function constructs a complete HTML document by embedding the original HTML string (`this.originalString`)
-   * inside the body tags. This ensures that the string is parsed in the context of a full HTML document, which can be
-   * important for correctly interpreting the HTML structure and any associated resources.
-   */
-  private parseAndSetElement() {
-    const htmlSource = `<!DOCTYPE html><html><head><base href="${this.origin.replace(/"/g, '&quot;')}/"></head><body>${this.svg}</body></html>`
-
-    try {
-      const element = new DOMParser().parseFromString(htmlSource, 'text/html')
-
-      if (!element.body.firstElementChild || element.querySelector('parsererror')) {
-        console.error('Parsing error in parseAndSetElement')
-        return
-      }
-
-      this.asElement = element.body.firstElementChild as Element
-    } catch (error) {
-      console.error('Error in parseAndSetElement:', error)
-    }
+  constructor(storageSvg: StorageSvg, origin: string) {
+    super(storageSvg)
+    this.origin = origin
+    this.processImage()
   }
 
   /**
@@ -114,7 +69,7 @@ export class Image extends Svg {
         this.asElement = element
         this.svg = this.asElement.outerHTML
       }
-    } catch (error) {
+    } catch {
       this.corsRestricted = true
     }
 
@@ -127,31 +82,31 @@ export class Image extends Svg {
     if (this.corsRestricted) return
 
     // Support both double and single quotes in src attribute
-    const srcMatch = this.svg.match(/src=["']([^"']*)["']/)
-    const src = srcMatch ? srcMatch[1] : ''
+    const sourceMatch = this.svg.match(/src=["']([^"']*)["']/)
+    const source = sourceMatch ? sourceMatch[1] : ''
 
     // If no src found but the content appears to be direct SVG
-    if (!src && this.svg.includes('<svg') && this.svg.includes('</svg>')) {
+    if (!source && this.svg.includes('<svg') && this.svg.includes('</svg>')) {
       this.asElement = this.parseFromString()
       return
     }
 
     switch (true) {
       // Base 64
-      case src.includes('data:image/svg+xml;base64'): {
-        const base64Index = src.indexOf(',') + 1
-        const base64String = src.slice(base64Index, src.length)
+      case source.includes('data:image/svg+xml;base64'): {
+        const base64Index = source.indexOf(',') + 1
+        const base64String = source.slice(base64Index)
         this.svg = this.base64DecodeUnicode(base64String)
         this.asElement = this.parseFromString()
         break
       }
 
       // UTF 8
-      case src.includes('data:image/svg+xml;utf8'): {
-        const svgStart = src.indexOf('<svg')
-        const svgEnd = src.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
-        if (svgStart >= 0 && svgEnd > svgStart) {
-          const svgString = src.slice(svgStart, svgEnd)
+      case source.includes('data:image/svg+xml;utf8'): {
+        const svgStart = source.indexOf('<svg')
+        const svgEnd = source.lastIndexOf('</svg>') + 6 // 6 is the length of "</svg>"
+        if (svgStart !== -1 && svgEnd > svgStart) {
+          const svgString = source.slice(svgStart, svgEnd)
           this.svg = svgString // Fix: this was using only first character with [0]
           this.asElement = this.parseFromString()
         }
@@ -159,9 +114,9 @@ export class Image extends Svg {
       }
 
       // URL Encoded SVG
-      case src.startsWith('data:image/svg+xml,'): {
+      case source.startsWith('data:image/svg+xml,'): {
         try {
-          const svgString = decodeURIComponent(src.split(',')[1])
+          const svgString = decodeURIComponent(source.split(',')[1])
           this.svg = svgString
           this.asElement = this.parseFromString()
         } catch (error) {
@@ -173,6 +128,51 @@ export class Image extends Svg {
       default: {
         this.parseAndSetElement()
       }
+    }
+  }
+
+  /**
+   * * Decodes a base64-encoded Unicode string.
+   *
+   * This function first decodes the base64 string using the built-in `atob` function.
+   * It then splits the resulting string into an array of characters and encodes each character
+   * into its hexadecimal representation. The encoded characters are then assembled into a string
+   * and decoded using `decodeURIComponent` to handle any special Unicode characters.
+   */
+  private base64DecodeUnicode(string_: string): string {
+    try {
+      return decodeURIComponent(
+        atob(string_)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join(''),
+      )
+    } catch {
+      return string_
+    }
+  }
+
+  /**
+   * Parses a given HTML string and returns the first element in its body.
+   *
+   * This function constructs a complete HTML document by embedding the original HTML string (`this.originalString`)
+   * inside the body tags. This ensures that the string is parsed in the context of a full HTML document, which can be
+   * important for correctly interpreting the HTML structure and any associated resources.
+   */
+  private parseAndSetElement() {
+    const htmlSource = `<!DOCTYPE html><html><head><base href="${this.origin.replaceAll('"', '&quot;')}/"></head><body>${this.svg}</body></html>`
+
+    try {
+      const element = new DOMParser().parseFromString(htmlSource, 'text/html')
+
+      if (!element.body.firstElementChild || element.querySelector('parsererror')) {
+        console.error('Parsing error in parseAndSetElement')
+        return
+      }
+
+      this.asElement = element.body.firstElementChild as Element
+    } catch (error) {
+      console.error('Error in parseAndSetElement:', error)
     }
   }
 }

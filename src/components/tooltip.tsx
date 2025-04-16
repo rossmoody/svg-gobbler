@@ -2,7 +2,7 @@ import * as RTooltip from '@radix-ui/react-tooltip'
 import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 
-type TooltipProps = {
+type TooltipProperties = {
   /**
    * The content of the tooltip.
    */
@@ -18,7 +18,7 @@ export const Tooltip = ({
   children,
   content,
   side = 'bottom',
-}: PropsWithChildren<TooltipProps>) => (
+}: PropsWithChildren<TooltipProperties>) => (
   <RTooltip.Root delayDuration={300}>
     <RTooltip.Trigger asChild>{children}</RTooltip.Trigger>
     <RTooltip.Portal>

@@ -1,7 +1,7 @@
-import { HTMLAttributes, forwardRef } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 
-export const Logo = forwardRef<SVGSVGElement, HTMLAttributes<SVGSVGElement>>((props, ref) => (
-  <svg fill="none" ref={ref} viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" {...props}>
+export const Logo = forwardRef<SVGSVGElement, HTMLAttributes<SVGSVGElement>>((properties, reference) => (
+  <svg fill="none" ref={reference} viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" {...properties}>
     <rect fill="#FB575E" height="256" rx="60" width="256" />
     <circle cx="42" cy="81" fill="white" r="20" />
     <circle cx="214" cy="81" fill="white" r="20" />

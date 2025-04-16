@@ -1,7 +1,20 @@
 import type { Svg } from 'src/scripts'
 import type { CollectionData } from 'src/types'
 
-export type CollectionState = {
+export type CollectionAction =
+  | { payload: CollectionState['view']; type: 'set-view' }
+  | { payload: string; type: 'set-canvas-color' }
+  | { payload: string; type: 'set-collection-id' }
+  | { payload: Svg; type: 'add-selected' }
+  | { payload: Svg; type: 'remove-selected' }
+  | { payload: Svg[]; type: 'set-data' }
+  | { type: 'load-more' }
+  | { type: 'process-data' }
+  | { type: 'reset' }
+  | { type: 'select-all' }
+  | { type: 'unselect-all' }
+
+export type CollectionState = CollectionData & {
   /**
    * Pagination increment count for loading more items.
    */
@@ -15,20 +28,7 @@ export type CollectionState = {
    * The selected SVGs in the collection.
    */
   selected: Svg[]
-} & CollectionData
-
-export type CollectionAction =
-  | { payload: CollectionState['view']; type: 'set-view' }
-  | { payload: Svg; type: 'add-selected' }
-  | { payload: Svg; type: 'remove-selected' }
-  | { payload: Svg[]; type: 'set-data' }
-  | { payload: string; type: 'set-canvas-color' }
-  | { payload: string; type: 'set-collection-id' }
-  | { type: 'load-more' }
-  | { type: 'process-data' }
-  | { type: 'reset' }
-  | { type: 'select-all' }
-  | { type: 'unselect-all' }
+}
 
 export const initCollectionState: CollectionState = {
   collectionId: '',
@@ -56,13 +56,10 @@ export const collectionReducer = (
   action: CollectionAction,
 ): CollectionState => {
   switch (action.type) {
-    case 'set-canvas-color': {
+    case 'add-selected': {
       return {
         ...state,
-        view: {
-          ...state.view,
-          canvas: action.payload,
-        },
+        selected: [...state.selected, action.payload],
       }
     }
 
@@ -77,39 +74,11 @@ export const collectionReducer = (
       }
     }
 
-    case 'select-all': {
-      return {
-        ...state,
-        selected: state.data.filter((item) => !item.corsRestricted),
-      }
-    }
-
-    case 'unselect-all': {
-      return {
-        ...state,
-        selected: [],
-      }
-    }
-
-    case 'add-selected': {
-      return {
-        ...state,
-        selected: [...state.selected, action.payload],
-      }
-    }
-
-    case 'remove-selected': {
-      return {
-        ...state,
-        selected: state.selected.filter((svg) => svg !== action.payload),
-      }
-    }
-
     case 'process-data': {
       let processedData = [...state.data]
 
       // Process filters
-      Object.entries(state.view.filters).forEach(([filter, value]) => {
+      for (const [filter, value] of Object.entries(state.view.filters)) {
         switch (filter) {
           case 'hide-cors': {
             if (!value) break
@@ -117,10 +86,20 @@ export const collectionReducer = (
             break
           }
         }
-      })
+      }
 
       // Process sorting
       switch (state.view.sort) {
+        case 'alphabetical-asc': {
+          processedData.sort((a, b) => a.name.localeCompare(b.name))
+          break
+        }
+
+        case 'alphabetical-desc': {
+          processedData.sort((a, b) => b.name.localeCompare(a.name))
+          break
+        }
+
         case 'file-asc': {
           processedData.sort((a, b) => {
             const aSize = new Blob([a.svg]).size
@@ -156,16 +135,6 @@ export const collectionReducer = (
           })
           break
         }
-
-        case 'alphabetical-asc': {
-          processedData.sort((a, b) => a.name.localeCompare(b.name))
-          break
-        }
-
-        case 'alphabetical-desc': {
-          processedData.sort((a, b) => b.name.localeCompare(a.name))
-          break
-        }
       }
 
       return {
@@ -175,10 +144,31 @@ export const collectionReducer = (
       }
     }
 
-    case 'set-view': {
+    case 'remove-selected': {
       return {
         ...state,
-        view: action.payload,
+        selected: state.selected.filter((svg) => svg !== action.payload),
+      }
+    }
+
+    case 'reset': {
+      return initCollectionState
+    }
+
+    case 'select-all': {
+      return {
+        ...state,
+        selected: state.data.filter((item) => !item.corsRestricted),
+      }
+    }
+
+    case 'set-canvas-color': {
+      return {
+        ...state,
+        view: {
+          ...state.view,
+          canvas: action.payload,
+        },
       }
     }
 
@@ -196,8 +186,18 @@ export const collectionReducer = (
       }
     }
 
-    case 'reset': {
-      return initCollectionState
+    case 'set-view': {
+      return {
+        ...state,
+        view: action.payload,
+      }
+    }
+
+    case 'unselect-all': {
+      return {
+        ...state,
+        selected: [],
+      }
     }
 
     default: {

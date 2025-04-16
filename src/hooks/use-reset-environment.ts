@@ -30,7 +30,7 @@ export const useResetEnvironment = () => {
 
     await StorageUtils.setPageData(collection.id, pageData)
     await StorageUtils.setStorageData('collections', [collection])
-    window.location.reload()
+    globalThis.location.reload()
   }
 
   return { reset }

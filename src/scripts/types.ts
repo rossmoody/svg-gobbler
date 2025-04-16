@@ -5,14 +5,6 @@ import type { Svg } from './classes/svg'
 import type { SvgSymbol } from './classes/symbol'
 
 /**
- * The shape of the svg data stored in chrome storage as part of page data. This data
- * gets processed in and out of SVGType. We do this to save space in storage and
- * to make it easier to work with the data in the content script. This is the only information
- * we keep track of persistently for the SVGs.
- */
-export type StorageSvg = Pick<Svg, 'corsRestricted' | 'id' | 'lastEdited' | 'name' | 'svg'>
-
-/**
  * The shape of the data that is gathered from the document.
  */
 export type DocumentData = {
@@ -38,6 +30,14 @@ export type DocumentData = {
    */
   origin: string
 }
+
+/**
+ * The shape of the svg data stored in chrome storage as part of page data. This data
+ * gets processed in and out of SVGType. We do this to save space in storage and
+ * to make it easier to work with the data in the content script. This is the only information
+ * we keep track of persistently for the SVGs.
+ */
+export type StorageSvg = Pick<Svg, 'corsRestricted' | 'id' | 'lastEdited' | 'name' | 'svg'>
 
 /**
  * A union of all the svg types that are returned from the svgFactory

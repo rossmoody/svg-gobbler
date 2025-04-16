@@ -4,19 +4,19 @@ import clsx from 'clsx'
 import { Fragment } from 'react'
 import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
 import { transitions } from 'src/constants/transitions'
-import { UserState, useCollection, useUser } from 'src/providers'
+import { useCollection, UserState, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
 import { loc } from 'src/utils/i18n'
 import { StorageUtils } from 'src/utils/storage-utils'
 
 import { ViewNameFeatureNotice } from './view-name-feature-notice'
 
-type ViewOptionValue = keyof CollectionData['view']['filters']
-
 type ViewOption = {
   label: string
   value: ViewOptionValue
 }
+
+type ViewOptionValue = keyof CollectionData['view']['filters']
 
 const viewOptions: ViewOption[] = [
   { label: loc('view_always_show_size'), value: 'show-size' },

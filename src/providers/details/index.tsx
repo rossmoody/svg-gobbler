@@ -1,6 +1,6 @@
-import { Dispatch, PropsWithChildren, createContext, useContext, useMemo, useReducer } from 'react'
+import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
 
-import { DetailsAction, DetailsState, detailsReducer, initDetailsState } from './reducer'
+import { DetailsAction, detailsReducer, DetailsState, initDetailsState } from './reducer'
 
 export type DetailsContextProps = {
   dispatch: Dispatch<DetailsAction>

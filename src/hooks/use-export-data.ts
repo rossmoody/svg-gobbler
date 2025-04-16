@@ -8,9 +8,9 @@ export const useExportData = () => {
     const data: Promise<PageData>[] = []
     const collections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
 
-    collections.forEach((collection) => {
+    for (const collection of collections) {
       data.push(StorageUtils.getPageData(collection.id))
-    })
+    }
 
     await Promise.all(data)
       .then((data) => {
@@ -38,11 +38,11 @@ export const useExportData = () => {
         if (!dir) return
 
         const collectionData = await StorageUtils.getPageData(collection.id)
-        collectionData.data.forEach((item) => {
+        for (const item of collectionData.data) {
           const svg = item.svg
           const name = item.name
           dir.file(`${name}.svg`, svg)
-        })
+        }
       }),
     )
 
@@ -69,11 +69,11 @@ export const useExportData = () => {
     const dir = zip.folder(collectionName)
     if (!dir) return
 
-    collection.data.forEach((item) => {
+    for (const item of collection.data) {
       const svg = item.svg
       const name = item.name
       dir.file(`${name}.svg`, svg)
-    })
+    }
 
     try {
       const content = await zip.generateAsync({ type: 'blob' })

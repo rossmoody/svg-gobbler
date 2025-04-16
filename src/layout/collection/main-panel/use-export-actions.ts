@@ -30,13 +30,20 @@ export const useExportActions = () => {
     const { jpeg, png, webp } = state.settings
 
     switch (state.fileType) {
-      case 'svg': {
-        return svgs.map((svg) => {
-          const { data } = optimize(svg.svg, svgoConfig)
-          return {
+      case 'jpeg': {
+        return await Promise.all(
+          svgs.map(async (svg) => ({
             name: svg.name,
-            payload: data as string,
-          }
+            payload: await FormUtils.convertToDataUrl(
+              svg.presentationSvg,
+              jpeg.size,
+              'image/jpeg',
+              jpeg.quality,
+            ),
+          })),
+        ).catch(() => {
+          logger.error('Failed to convert SVG to PNG')
+          return []
         })
       }
 
@@ -52,6 +59,16 @@ export const useExportActions = () => {
         })
       }
 
+      case 'svg': {
+        return svgs.map((svg) => {
+          const { data } = optimize(svg.svg, svgoConfig)
+          return {
+            name: svg.name,
+            payload: data as string,
+          }
+        })
+      }
+
       case 'webp': {
         return await Promise.all(
           svgs.map(async (svg) => ({
@@ -61,23 +78,6 @@ export const useExportActions = () => {
               webp.size,
               'image/webp',
               webp.quality,
-            ),
-          })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
-          return []
-        })
-      }
-
-      case 'jpeg': {
-        return await Promise.all(
-          svgs.map(async (svg) => ({
-            name: svg.name,
-            payload: await FormUtils.convertToDataUrl(
-              svg.presentationSvg,
-              jpeg.size,
-              'image/jpeg',
-              jpeg.quality,
             ),
           })),
         ).catch(() => {

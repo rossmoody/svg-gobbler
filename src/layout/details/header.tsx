@@ -48,7 +48,7 @@ export const Header = () => {
 
   const navigateBack = () => {
     if (isDirty) {
-      if (window.confirm(loc('details_are_you_sure'))) {
+      if (globalThis.confirm(loc('details_are_you_sure'))) {
         navigate(-1)
       }
       return

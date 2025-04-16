@@ -11,73 +11,6 @@ import { DocumentData, StorageSvg, SvgType } from './types'
  */
 class SvgFactory {
   /**
-   * Process a single SVG element and return an SVG class.
-   */
-  private createSvgElement(storageSvg: StorageSvg, origin: string): SvgType | null {
-    try {
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(storageSvg.svg, 'image/svg+xml')
-      const { tagName } = doc.documentElement
-
-      switch (tagName) {
-        case 'svg':
-          return new Inline(storageSvg)
-        case 'symbol':
-          return new SvgSymbol(storageSvg)
-        case 'g':
-          return new GElement(storageSvg)
-        case 'img':
-          return new Image(storageSvg, origin)
-        default:
-          return null
-      }
-    } catch (error) {
-      console.error(error)
-      return null
-    }
-  }
-
-  /**
-   * This is a helper function to extract the symbol and g elements from an image
-   * after it has been fetched. This is necessary because the image element is
-   * not in the DOM and therefore cannot be queried.
-   */
-  private expandImageToElements(item: SvgType): SvgType[] {
-    if (item instanceof Image) {
-      const results: SvgType[] = [item]
-      this.extractAndPushElements(item, 'symbol', results)
-      this.extractAndPushElements(item, 'g', results)
-      return results
-    }
-    return [item]
-  }
-
-  private extractAndPushElements(image: Image, selector: 'g' | 'symbol', results: SvgType[]): void {
-    const elements = image.asElement?.querySelectorAll(selector)
-    elements?.forEach((element, i) => {
-      const storageSvg: StorageSvg = {
-        corsRestricted: image.corsRestricted,
-        id: nanoid(),
-        lastEdited: image.lastEdited,
-        name: `${image.name}-${selector}-${i}`,
-        svg: element.outerHTML,
-      }
-
-      const constructor = selector === 'symbol' ? SvgSymbol : GElement
-      results.push(new constructor(storageSvg))
-    })
-  }
-
-  /**
-   * Filter out any invalid SVGs and expand any images into their constituent parts.
-   */
-  private processAsyncData(data: SvgType[]): SvgType[] {
-    return data
-      .filter((item) => item && item.isValid)
-      .flatMap((item) => this.expandImageToElements(item))
-  }
-
-  /**
    * Process the page data and return an array of SVG classes.
    */
   async process(message: DocumentData | null): Promise<SvgType[]> {
@@ -104,6 +37,78 @@ class SvgFactory {
     const uniqueData = [...new Set(this.processAsyncData(resolvedData))]
 
     return uniqueData
+  }
+
+  /**
+   * Process a single SVG element and return an SVG class.
+   */
+  private createSvgElement(storageSvg: StorageSvg, origin: string): null | SvgType {
+    try {
+      const parser = new DOMParser()
+      const document_ = parser.parseFromString(storageSvg.svg, 'image/svg+xml')
+      const { tagName } = document_.documentElement
+
+      switch (tagName) {
+        case 'g': {
+          return new GElement(storageSvg)
+        }
+        case 'img': {
+          return new Image(storageSvg, origin)
+        }
+        case 'svg': {
+          return new Inline(storageSvg)
+        }
+        case 'symbol': {
+          return new SvgSymbol(storageSvg)
+        }
+        default: {
+          return null
+        }
+      }
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
+  /**
+   * This is a helper function to extract the symbol and g elements from an image
+   * after it has been fetched. This is necessary because the image element is
+   * not in the DOM and therefore cannot be queried.
+   */
+  private expandImageToElements(item: SvgType): SvgType[] {
+    if (item instanceof Image) {
+      const results: SvgType[] = [item]
+      this.extractAndPushElements(item, 'symbol', results)
+      this.extractAndPushElements(item, 'g', results)
+      return results
+    }
+    return [item]
+  }
+
+  private extractAndPushElements(image: Image, selector: 'g' | 'symbol', results: SvgType[]): void {
+    const elements = image.asElement?.querySelectorAll(selector)
+    if (elements) for (const [index, element] of elements.entries()) {
+      const storageSvg: StorageSvg = {
+        corsRestricted: image.corsRestricted,
+        id: nanoid(),
+        lastEdited: image.lastEdited,
+        name: `${image.name}-${selector}-${index}`,
+        svg: element.outerHTML,
+      }
+
+      const constructor = selector === 'symbol' ? SvgSymbol : GElement
+      results.push(new constructor(storageSvg))
+    }
+  }
+
+  /**
+   * Filter out any invalid SVGs and expand any images into their constituent parts.
+   */
+  private processAsyncData(data: SvgType[]): SvgType[] {
+    return data
+      .filter((item) => item && item.isValid)
+      .flatMap((item) => this.expandImageToElements(item))
   }
 }
 
