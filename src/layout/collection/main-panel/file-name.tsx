@@ -21,16 +21,16 @@ export const Filename = () => {
     dispatch({ payload, type: 'set-filename' })
   })
 
-  const handleFileNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exportDispatch({ payload: e.target.value, type: 'set-filename' })
+  const handleFileNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    exportDispatch({ payload: event.target.value, type: 'set-filename' })
   }
 
-  const handleFileNamePrefixChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exportDispatch({ payload: e.target.value, type: 'set-filename-prefix' })
+  const handleFileNamePrefixChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    exportDispatch({ payload: event.target.value, type: 'set-filename-prefix' })
   }
 
-  const handlePrefixFilenamesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exportDispatch({ payload: e.target.checked, type: 'set-prefix-filenames' })
+  const handlePrefixFilenamesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    exportDispatch({ payload: event.target.checked, type: 'set-prefix-filenames' })
   }
 
   //// If there is only one selected item, render a single input for the file name

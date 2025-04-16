@@ -7,8 +7,8 @@ import { imageTooltip } from '../webp-settings'
 export const PngSettings = () => {
   const { dispatch, state } = useExport()
 
-  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-png-size' })
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-png-size' })
   }
 
   return (

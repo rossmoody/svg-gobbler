@@ -5,12 +5,12 @@ import { loc } from 'src/utils/i18n'
 export const SpriteSettings = () => {
   const { dispatch, state } = useExport()
 
-  function handlePrefixChange(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ payload: e.target.value, type: 'set-sprite-prefix' })
+  function handlePrefixChange(event: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({ payload: event.target.value, type: 'set-sprite-prefix' })
   }
 
-  function handleSuffixChange(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ payload: e.target.value, type: 'set-sprite-suffix' })
+  function handleSuffixChange(event: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({ payload: event.target.value, type: 'set-sprite-suffix' })
   }
 
   const useExample = `<use href="#${state.settings.sprite.prefix}icon${state.settings.sprite.suffix}" />`

@@ -25,8 +25,8 @@ export default defineConfig({
   plugins: [react(), crx({ manifest })],
   resolve: {
     alias: {
-      scripts: path.resolve(__dirname, 'scripts'),
-      src: path.resolve(__dirname, 'src'),
+      scripts: path.resolve(new URL('.', import.meta.url).pathname, 'scripts'),
+      src: path.resolve(new URL('.', import.meta.url).pathname, 'src'),
     },
   },
   server: {

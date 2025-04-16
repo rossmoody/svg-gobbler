@@ -28,8 +28,8 @@ export const ViewPopover = () => {
   const { dispatch, state } = useCollection()
   const { dispatch: userDispatch, state: userState } = useUser()
 
-  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { checked, name } = e.currentTarget
+  function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { checked, name } = event.currentTarget
     const filters = { ...state.view.filters, [name]: checked }
     StorageUtilities.setStorageData('view', { ...state.view, filters })
     dispatch({ payload: { ...state.view, filters }, type: 'set-view' })

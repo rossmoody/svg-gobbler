@@ -142,9 +142,8 @@ export class Image extends Svg {
   private base64DecodeUnicode(string_: string): string {
     try {
       return decodeURIComponent(
-        atob(string_)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        [...atob(string_)]
+          .map((c) => '%' + ('00' + c.codePointAt(0)?.toString(16)).slice(-2))
           .join(''),
       )
     } catch {

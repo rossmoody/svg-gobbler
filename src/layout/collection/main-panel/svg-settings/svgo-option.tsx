@@ -14,8 +14,8 @@ export const SvgoOption = ({ plugin }: SvgoOptionProperties) => {
     return state.settings.svg.svgoPlugins.some((p) => p.name === plugin.name)
   }, [state.settings.svg.svgoPlugins, plugin])
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.checked) {
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    switch (event.target.checked) {
       case false: {
         dispatch({ payload: plugin, type: 'remove-svgo-plugin' })
         break

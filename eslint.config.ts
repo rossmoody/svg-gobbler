@@ -27,6 +27,7 @@ export default tseslint.config([
     },
     rules: {
       'unicorn/consistent-function-scoping': 'off',
+      'unicorn/no-array-callback-reference': 'off',
     },
   },
   {

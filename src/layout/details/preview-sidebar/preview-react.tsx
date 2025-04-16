@@ -16,8 +16,8 @@ export const PreviewReact = () => {
   const { copyToClipboard, text } = useClipboard()
   const { loading } = useSvgr()
 
-  const handleBooleanChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked, id } = e.target
+  const handleBooleanChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, id } = event.target
     dispatch({ payload: { key: id, value: checked }, type: 'set-svgr-config-value' })
   }
 
@@ -25,8 +25,8 @@ export const PreviewReact = () => {
     dispatch({ payload, type: 'set-svgr-state-name' })
   }, 700)
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    debouncedFunction(e.target.value)
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedFunction(event.target.value)
   }
 
   const handleCopy = () => {

@@ -12,16 +12,16 @@ import { SvgoOption } from './svgo-option'
 export const SvgSettings = () => {
   const { dispatch, state } = useExport()
 
-  const handleOptimizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.checked, type: 'set-optimize-exports' })
+  const handleOptimizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: event.target.checked, type: 'set-optimize-exports' })
   }
 
-  const handlePrettifyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.checked, type: 'set-prettify' })
+  const handlePrettifyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: event.target.checked, type: 'set-prettify' })
   }
 
-  const handleFloatPrecisionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-float-precision' })
+  const handleFloatPrecisionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-float-precision' })
   }
 
   return (

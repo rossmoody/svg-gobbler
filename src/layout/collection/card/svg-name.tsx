@@ -7,8 +7,8 @@ import { CardData } from '.'
 export const SvgName = ({ data }: CardData) => {
   const { dispatch, state } = useCollection()
 
-  const handleChange = async (e: React.FormEvent<HTMLSpanElement>) => {
-    const name = (e.target as HTMLSpanElement).textContent
+  const handleChange = async (event: React.FormEvent<HTMLSpanElement>) => {
+    const name = (event.target as HTMLSpanElement).textContent
       ?.replace(/[\r\n]+/g, ' ')
       .replaceAll(/\s+/g, ' ')
       .trim()

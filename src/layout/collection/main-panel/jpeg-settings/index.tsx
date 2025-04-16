@@ -7,12 +7,12 @@ import { imageTooltip } from '../webp-settings'
 export const JpegSettings = () => {
   const { dispatch, state } = useExport()
 
-  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-jpeg-size' })
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-jpeg-size' })
   }
 
-  const handleQualityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-jpeg-quality' })
+  const handleQualityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-jpeg-quality' })
   }
 
   return (

@@ -8,12 +8,12 @@ export const imageTooltip =
 export const WebPSettings = () => {
   const { dispatch, state } = useExport()
 
-  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-webp-size' })
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-webp-size' })
   }
 
-  const handleQualityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-webp-quality' })
+  const handleQualityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-webp-quality' })
   }
 
   return (

@@ -23,8 +23,8 @@ const transitionConfig = {
 export const ExportPanel = forwardRef<HTMLDivElement>((properties, reference) => {
   const { dispatch: exportDispatch, state: exportState } = useExport()
 
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    exportDispatch({ payload: e.target.value as FileType, type: 'set-file-type' })
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    exportDispatch({ payload: event.target.value as FileType, type: 'set-file-type' })
   }
 
   return (
