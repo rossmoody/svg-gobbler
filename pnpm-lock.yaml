@@ -156,9 +156,6 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.24.0(jiti@1.21.3))
-      eslint-plugin-react-refresh:
-        specifier: ^0.4.19
-        version: 0.4.19(eslint@9.24.0(jiti@1.21.3))
       postcss:
         specifier: ^8.4.38
         version: 8.4.38
@@ -1918,11 +1915,6 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
-
-  eslint-plugin-react-refresh@0.4.19:
-    resolution: {integrity: sha512-eyy8pcr/YxSYjBoqIFSrlbn9i/xvxUFa8CjzAYo9cFjgGXqq1hyjihcpZvxRLalpaWmueWR81xn7vuKmAFijDQ==}
-    peerDependencies:
-      eslint: '>=8.40'
 
   eslint-scope@8.3.0:
     resolution: {integrity: sha512-pUNxi75F8MJ/GdeKtVLSbYg4ZI34J6C0C7sbL4YOp2exGwen7ZsuBqKzUhXd0qMQ362yET3z+uPwKeg/0C2XCQ==}
@@ -5143,10 +5135,6 @@ snapshots:
       - typescript
 
   eslint-plugin-react-hooks@5.2.0(eslint@9.24.0(jiti@1.21.3)):
-    dependencies:
-      eslint: 9.24.0(jiti@1.21.3)
-
-  eslint-plugin-react-refresh@0.4.19(eslint@9.24.0(jiti@1.21.3)):
     dependencies:
       eslint: 9.24.0(jiti@1.21.3)
 
