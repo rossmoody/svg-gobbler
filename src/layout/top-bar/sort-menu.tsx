@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
-import { btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
+import { buttonBaseStyles, buttonSizeStyles, buttonVariantStyles } from 'src/components'
 import { CollectionState, useCollection } from 'src/providers'
 import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
@@ -34,7 +34,9 @@ export const SortMenu = () => {
 
   return (
     <Menu as="div" className="relative z-50 inline-block text-left">
-      <Menu.Button className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}>
+      <Menu.Button
+        className={clsx(buttonBaseStyles, buttonVariantStyles.ghost, buttonSizeStyles.md)}
+      >
         {loc('topbar_sort')}
         <ChevronDownIcon aria-hidden className="h-3 w-3" />
       </Menu.Button>

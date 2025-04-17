@@ -4,14 +4,14 @@ import clsx from 'clsx'
 import { nanoid } from 'nanoid'
 import { useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Button, Modal, ModalProps, Tabs } from 'src/components'
+import { Button, Modal, ModalProperties, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
 import { FormUtilities } from 'src/utilities/form-utilities'
 import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-export const UploadModal = ({ open, setOpen }: ModalProps) => {
+export const UploadModal = ({ open, setOpen }: ModalProperties) => {
   const [error, setError] = useState(false)
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
   const reference = useRef<HTMLTextAreaElement>(null)

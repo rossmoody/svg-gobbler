@@ -4,7 +4,7 @@ import { Fragment, PropsWithChildren } from 'react'
 
 import { IconButton } from '.'
 
-export type ModalProps = PropsWithChildren<{
+export type ModalProperties = PropsWithChildren<{
   /**
    * Optional callback for when the modal is closed from the close button or clicking the overlay.
    */
@@ -19,7 +19,7 @@ export type ModalProps = PropsWithChildren<{
   setOpen: (open: boolean) => void
 }>
 
-export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<ModalProps>) => {
+export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<ModalProperties>) => {
   const handleClose = () => {
     onClose?.()
     setOpen(false)

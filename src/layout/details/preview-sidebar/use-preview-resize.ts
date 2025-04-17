@@ -5,9 +5,9 @@ export const usePreviewResize = () => {
   const reference = useRef<HTMLElement>(null)
   const resizeSide = useRef<null | string>(null)
 
-  const onMouseMove = useCallback((e: MouseEvent) => {
+  const onMouseMove = useCallback((event: MouseEvent) => {
     if (reference.current && resizeSide.current === 'left') {
-      const newWidth = reference.current.getBoundingClientRect().right - e.clientX
+      const newWidth = reference.current.getBoundingClientRect().right - event.clientX
       if (newWidth > 0) setWidth(newWidth)
     }
   }, [])
@@ -15,18 +15,19 @@ export const usePreviewResize = () => {
   const onMouseUp = useCallback(() => {
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
+    // eslint-disable-next-line unicorn/no-null
     resizeSide.current = null
   }, [onMouseMove])
 
   const onMouseDown = useCallback(
-    (e: MouseEvent) => {
+    (event: MouseEvent) => {
       if (reference.current) {
         const boundingRect = reference.current.getBoundingClientRect()
         const threshold = 20 // pixels from the edge to detect resize
 
         if (
-          e.clientX >= boundingRect.left - threshold &&
-          e.clientX <= boundingRect.left + threshold
+          event.clientX >= boundingRect.left - threshold &&
+          event.clientX <= boundingRect.left + threshold
         ) {
           resizeSide.current = 'left'
           document.addEventListener('mousemove', onMouseMove)

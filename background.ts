@@ -109,6 +109,11 @@ const Background = {
    * Load the development icon if the extension is running in development mode.
    */
   setExtensionIcons() {
+    // @ts-ignore
+    if (typeof browser !== 'undefined') {
+      return
+    }
+
     if (!('update_url' in chrome.runtime.getManifest())) {
       // The extension is running as an unpacked extension
       chrome.action.setIcon({
