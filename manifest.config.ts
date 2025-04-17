@@ -1,7 +1,6 @@
 import type { ManifestV3Export } from '@crxjs/vite-plugin'
 
 import packageJson from './package.json'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { serverEndpoint } from './src/constants/server-config'
 
