@@ -9,7 +9,7 @@ export const useEditData = () => {
     const { collectionId, data, selected } = collectionState
     const { custom, standard } = editState
 
-    const updatedSvgs = selected.map((svg) => {
+    const updatedSelectedSvgs = selected.map((svg) => {
       const svgClone = svg.createClone()
 
       for (const [key, value] of Object.entries(standard)) {
@@ -30,13 +30,14 @@ export const useEditData = () => {
     })
 
     const updatedCollection = data.map((svg) => {
-      const updatedSvg = updatedSvgs.find((updated) => updated.id === svg.id)
+      const updatedSvg = updatedSelectedSvgs.find((updated) => updated.id === svg.id)
       return updatedSvg || svg
     })
 
     const pageData = await StorageUtilities.getPageData(collectionId)
     StorageUtilities.setPageData(collectionId, { ...pageData, data: updatedCollection })
     collectionDispatch({ payload: updatedCollection, type: 'set-data' })
+    collectionDispatch({ payload: updatedSelectedSvgs, type: 'set-selected' })
     collectionDispatch({ type: 'process-data' })
   }
 

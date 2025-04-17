@@ -896,5 +896,71 @@
   },
   "settings_export__desc": {
     "message": "管理并导出SVG Gobbler中的数据"
+  },
+  "edit_apply": {
+    "message": "应用"
+  },
+  "edit_applied": {
+    "message": "已应用"
+  },
+  "edit_properties": {
+    "message": "属性"
+  },
+  "edit_custom_name": {
+    "message": "自定义名称"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "应用于SVG元素的属性名称"
+  },
+  "edit_custom_value": {
+    "message": "自定义值"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "应用于SVG元素的属性值"
+  },
+  "edit_reset": {
+    "message": "重置"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "类"
+  },
+  "edit_style": {
+    "message": "样式"
+  },
+  "edit_height": {
+    "message": "高度"
+  },
+  "edit_width": {
+    "message": "宽度"
+  },
+  "edit_viewbox": {
+    "message": "视图框"
+  },
+  "edit_fill": {
+    "message": "填充"
+  },
+  "edit_id_tooltip": {
+    "message": "应用于所选SVG的id属性的字符串。将替换现有id"
+  },
+  "edit_class_tooltip": {
+    "message": "应用于所选SVG的class属性的字符串。将替换现有类"
+  },
+  "edit_style_tooltip": {
+    "message": "应用于所选SVG的style属性的字符串。将替换现有样式"
+  },
+  "edit_height_tooltip": {
+    "message": "应用于所选SVG的height属性的字符串。将替换现有高度"
+  },
+  "edit_width_tooltip": {
+    "message": "应用于所选SVG的width属性的字符串。将替换现有宽度"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "应用于所选SVG的viewBox属性的字符串。将替换现有视图框"
+  },
+  "edit_fill_tooltip": {
+    "message": "应用于所选SVG的fill属性的字符串。将替换现有填充"
   }
 }

@@ -1,40 +1,35 @@
 import { EditField } from 'src/layout/collection/main-panel/edit-panel'
+import { loc } from 'src/utilities/i18n'
 
 export const editFields: EditField[] = [
   {
-    label: 'ID',
-    tooltip:
-      'The string to apply to the id property on the selected SVGs. Will replace the existing id',
+    label: loc('edit_id'),
+    tooltip: loc('edit_id_tooltip'),
     value: 'id',
   },
   {
-    label: 'Height',
-    tooltip:
-      'The string to apply to the height property on the selected SVGs. Will replace the existing height',
+    label: loc('edit_height'),
+    tooltip: loc('edit_height_tooltip'),
     value: 'height',
   },
   {
-    label: 'Width',
-    tooltip:
-      'The string to apply to the width property on the selected SVGs. Will replace the existing width value',
+    label: loc('edit_width'),
+    tooltip: loc('edit_width_tooltip'),
     value: 'width',
   },
   {
-    label: 'Class',
-    tooltip:
-      'The string to apply to the class property on the selected SVGs. Will replace the existing class value',
+    label: loc('edit_class'),
+    tooltip: loc('edit_class_tooltip'),
     value: 'class',
   },
   {
-    label: 'viewBox',
-    tooltip:
-      'The string to apply to the viewBox property on the selected SVGs. Will replace the existing viewBox value',
+    label: loc('edit_viewbox'),
+    tooltip: loc('edit_viewbox_tooltip'),
     value: 'viewBox',
   },
   {
-    label: 'Fill',
-    tooltip:
-      'The string to apply to the fill property on the selected SVGs. Will replace the existing fill value',
+    label: loc('edit_fill'),
+    tooltip: loc('edit_fill_tooltip'),
     value: 'fill',
   },
 ]

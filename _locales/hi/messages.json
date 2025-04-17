@@ -895,5 +895,71 @@
   },
   "settings_export__desc": {
     "message": "संग्रहों और डेटा को विभिन्न स्वरूपों में व्यवस्थित करें और निर्यात करें"
+  },
+  "edit_apply": {
+    "message": "लागू करें"
+  },
+  "edit_applied": {
+    "message": "लागू किया गया"
+  },
+  "edit_properties": {
+    "message": "गुणधर्म"
+  },
+  "edit_custom_name": {
+    "message": "कस्टम नाम"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "SVG तत्व पर लागू करने के लिए संपत्ति का नाम"
+  },
+  "edit_custom_value": {
+    "message": "कस्टम मान"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "SVG तत्व पर लागू करने के लिए संपत्ति का मान"
+  },
+  "edit_reset": {
+    "message": "रीसेट करें"
+  },
+  "edit_id": {
+    "message": "आईडी"
+  },
+  "edit_class": {
+    "message": "क्लास"
+  },
+  "edit_style": {
+    "message": "स्टाइल"
+  },
+  "edit_height": {
+    "message": "ऊंचाई"
+  },
+  "edit_width": {
+    "message": "चौड़ाई"
+  },
+  "edit_viewbox": {
+    "message": "व्यूबॉक्स"
+  },
+  "edit_fill": {
+    "message": "भरण"
+  },
+  "edit_id_tooltip": {
+    "message": "चयनित SVG पर id संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा id को बदल देगा"
+  },
+  "edit_class_tooltip": {
+    "message": "चयनित SVG पर class संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा क्लास को बदल देगा"
+  },
+  "edit_style_tooltip": {
+    "message": "चयनित SVG पर style संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा स्टाइल को बदल देगा"
+  },
+  "edit_height_tooltip": {
+    "message": "चयनित SVG पर height संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा ऊंचाई को बदल देगा"
+  },
+  "edit_width_tooltip": {
+    "message": "चयनित SVG पर width संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा चौड़ाई को बदल देगा"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "चयनित SVG पर viewBox संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा viewBox को बदल देगा"
+  },
+  "edit_fill_tooltip": {
+    "message": "चयनित SVG पर fill संपत्ति पर लागू करने के लिए स्ट्रिंग। मौजूदा भरण को बदल देगा"
   }
 }

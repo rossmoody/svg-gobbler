@@ -895,5 +895,71 @@
   },
   "settings_export__desc": {
     "message": "Управление и экспорт данных в различных форматах из внутри SVG Gobbler."
+  },
+  "edit_apply": {
+    "message": "Применить"
+  },
+  "edit_applied": {
+    "message": "Применено"
+  },
+  "edit_properties": {
+    "message": "Свойства"
+  },
+  "edit_custom_name": {
+    "message": "Пользовательское имя"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "Имя свойства для применения к элементу SVG"
+  },
+  "edit_custom_value": {
+    "message": "Пользовательское значение"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "Значение свойства для применения к элементу SVG"
+  },
+  "edit_reset": {
+    "message": "Сбросить"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "Класс"
+  },
+  "edit_style": {
+    "message": "Стиль"
+  },
+  "edit_height": {
+    "message": "Высота"
+  },
+  "edit_width": {
+    "message": "Ширина"
+  },
+  "edit_viewbox": {
+    "message": "viewBox"
+  },
+  "edit_fill": {
+    "message": "Заливка"
+  },
+  "edit_id_tooltip": {
+    "message": "Строка для применения к свойству id выбранных SVG. Заменит существующий id"
+  },
+  "edit_class_tooltip": {
+    "message": "Строка для применения к свойству class выбранных SVG. Заменит существующий класс"
+  },
+  "edit_style_tooltip": {
+    "message": "Строка для применения к свойству style выбранных SVG. Заменит существующий стиль"
+  },
+  "edit_height_tooltip": {
+    "message": "Строка для применения к свойству height выбранных SVG. Заменит существующую высоту"
+  },
+  "edit_width_tooltip": {
+    "message": "Строка для применения к свойству width выбранных SVG. Заменит существующую ширину"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "Строка для применения к свойству viewBox выбранных SVG. Заменит существующий viewBox"
+  },
+  "edit_fill_tooltip": {
+    "message": "Строка для применения к свойству fill выбранных SVG. Заменит существующую заливку"
   }
 }

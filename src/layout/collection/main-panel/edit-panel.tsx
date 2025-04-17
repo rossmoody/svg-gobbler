@@ -80,14 +80,14 @@ export const EditPanel = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
     return (
       <Fragment>
         <div ref={reference} {...properties} className="flex-1 overflow-y-auto p-4">
-          <h2 className="my-3 text-sm font-medium">Properties</h2>
+          <h2 className="mb-3 text-sm font-medium">{loc('edit_properties')}</h2>
           <div className="flex flex-col gap-2">
             <div className="group">
               <div className="flex items-center gap-0.5">
                 <label className="export-label" htmlFor="custom-name">
-                  Custom name
+                  {loc('edit_custom_name')}
                 </label>
-                <HelpIcon content="The name of the property to apply to the SVG element" />
+                <HelpIcon content={loc('edit_custom_name_tooltip')} />
               </div>
               <input
                 className="export-input"
@@ -100,9 +100,9 @@ export const EditPanel = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
             <div className="group">
               <div className="flex items-center gap-0.5">
                 <label className="export-label" htmlFor="custom-value">
-                  Custom value
+                  {loc('edit_custom_value')}
                 </label>
-                <HelpIcon content="The value of the custom property to apply to the SVG element" />
+                <HelpIcon content={loc('edit_custom_value_tooltip')} />
               </div>
               <input
                 className="export-input"
@@ -139,7 +139,7 @@ export const EditPanel = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
         <footer className="flex shrink-0 flex-col gap-2 border-t border-gray-200 px-4 pb-6 pt-4 dark:border-gray-700">
           <Transition as="div" className="flex-1" show={isDirtyState} {...transitionConfig}>
             <Button className="w-full" onClick={handleReset} variant="secondary">
-              Reset
+              {loc('edit_reset')}
             </Button>
           </Transition>
           <Button disabled={!isDirtyState} onClick={handleApplyChanges}>

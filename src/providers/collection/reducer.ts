@@ -8,6 +8,7 @@ export type CollectionAction =
   | { payload: Svg; type: 'add-selected' }
   | { payload: Svg; type: 'remove-selected' }
   | { payload: Svg[]; type: 'set-data' }
+  | { payload: Svg[]; type: 'set-selected' }
   | { type: 'load-more' }
   | { type: 'process-data' }
   | { type: 'reset' }
@@ -183,6 +184,13 @@ export const collectionReducer = (
       return {
         ...state,
         data: action.payload,
+      }
+    }
+
+    case 'set-selected': {
+      return {
+        ...state,
+        selected: action.payload,
       }
     }
 

@@ -895,5 +895,71 @@
   },
   "settings_export__desc": {
     "message": "Gestionar y exportar datos en varios formatos desde dentro de SVG Gobbler."
+  },
+  "edit_apply": {
+    "message": "Aplicar"
+  },
+  "edit_applied": {
+    "message": "Aplicado"
+  },
+  "edit_properties": {
+    "message": "Propiedades"
+  },
+  "edit_custom_name": {
+    "message": "Nombre personalizado"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "El nombre de la propiedad para aplicar al elemento SVG"
+  },
+  "edit_custom_value": {
+    "message": "Valor personalizado"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "El valor de la propiedad para aplicar al elemento SVG"
+  },
+  "edit_reset": {
+    "message": "Restablecer"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "Clase"
+  },
+  "edit_style": {
+    "message": "Estilo"
+  },
+  "edit_height": {
+    "message": "Altura"
+  },
+  "edit_width": {
+    "message": "Anchura"
+  },
+  "edit_viewbox": {
+    "message": "viewBox"
+  },
+  "edit_fill": {
+    "message": "Relleno"
+  },
+  "edit_id_tooltip": {
+    "message": "La cadena para aplicar a la propiedad id en los SVG seleccionados. Reemplazará el id existente"
+  },
+  "edit_class_tooltip": {
+    "message": "La cadena para aplicar a la propiedad class en los SVG seleccionados. Reemplazará la clase existente"
+  },
+  "edit_style_tooltip": {
+    "message": "La cadena para aplicar a la propiedad style en los SVG seleccionados. Reemplazará el estilo existente"
+  },
+  "edit_height_tooltip": {
+    "message": "La cadena para aplicar a la propiedad height en los SVG seleccionados. Reemplazará la altura existente"
+  },
+  "edit_width_tooltip": {
+    "message": "La cadena para aplicar a la propiedad width en los SVG seleccionados. Reemplazará el ancho existente"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "La cadena para aplicar a la propiedad viewBox en los SVG seleccionados. Reemplazará el viewBox existente"
+  },
+  "edit_fill_tooltip": {
+    "message": "La cadena para aplicar a la propiedad fill en los SVG seleccionados. Reemplazará el relleno existente"
   }
 }
