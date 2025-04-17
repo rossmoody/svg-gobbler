@@ -31,10 +31,7 @@ export default defineConfig({
   },
   server: {
     cors: {
-      origin: [
-        // See https://github.com/crxjs/chrome-extension-tools/issues/971 for more info
-        /chrome-extension:\/\//,
-      ],
+      origin: [/chrome-extension:\/\//],
     },
   },
 })

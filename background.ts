@@ -1,5 +1,5 @@
 import { DocumentData, findSvg } from 'src/scripts'
-import Chrome from 'src/utilities/chrome-utilities'
+import Extension from 'src/utilities/extension-utilities'
 
 /**
  * Functions related to initializing the extension. This includes setting the
@@ -44,8 +44,7 @@ const Background = {
           }
         }
         chrome.runtime.onMessage.addListener(listener)
-
-        await Chrome.createNewTab()
+        await Extension.createNewTab()
       }
     }
 
@@ -58,7 +57,7 @@ const Background = {
   launchOnboardingExperience() {
     chrome.runtime.onInstalled.addListener(async (details) => {
       if (details.reason === 'install') {
-        await Chrome.createNewTab('onboarding.html')
+        await Extension.createNewTab('onboarding.html')
       }
     })
   },
@@ -77,20 +76,10 @@ const Background = {
         origin: '',
       } as DocumentData
 
-      const activeTab = await Chrome.getActiveTab()
+      const activeTab = await Extension.getActiveTab()
+      if (Extension.isExtensionTab(activeTab)) return
+      data = await Extension.executeScript(activeTab.id!, findSvg)
 
-      // Check if we have a valid active tab
-      if (!activeTab || !activeTab.id) {
-        console.error('No active tab found or tab ID is missing')
-        return
-      }
-
-      // Check if the active tab is a system page
-      if (!activeTab.url?.includes('chrome://')) {
-        data = await Chrome.executeScript(activeTab.id, findSvg)
-      }
-
-      // Add a listener
       chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
         if (request === 'gobble') {
           sendResponse({ data })
@@ -98,8 +87,7 @@ const Background = {
         }
       })
 
-      // Open the SVG Gobbler page
-      await Chrome.createNewTab()
+      await Extension.createNewTab()
     }
 
     chrome.action.onClicked.addListener(onClickHandler)
@@ -108,9 +96,8 @@ const Background = {
   /**
    * Load the development icon if the extension is running in development mode.
    */
-  setExtensionIcons() {
-    // @ts-ignore
-    if (typeof browser !== 'undefined') {
+  async setExtensionIcons() {
+    if (Extension.isFirefox) {
       return
     }
 

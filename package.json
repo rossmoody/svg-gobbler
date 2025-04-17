@@ -11,7 +11,8 @@
     "clean": "rm -rf dist",
     "dev": "vite",
     "release": "pnpm build && npx ts-node --esm src/utilities/zip-release.ts && pnpm release-ff",
-    "release-ff": "cd dist && web-ext build -o -a ../releases"
+    "release-ff": "cd dist && web-ext build -o -a ../releases",
+    "dev-ff": "cd dist && web-ext run"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.9",
@@ -54,6 +55,7 @@
     "@types/archiver": "^6.0.2",
     "@types/chrome": "^0.0.248",
     "@types/dompurify": "^3.0.5",
+    "@types/firefox-webext-browser": "^120.0.4",
     "@types/lodash": "^4.17.4",
     "@types/node": "^20.14.2",
     "@types/react": "^18.3.3",
