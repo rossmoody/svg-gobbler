@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { btnBaseStyles, Tooltip } from 'src/components'
+import { buttonBaseStyles, Tooltip } from 'src/components'
 import { PreviewBackgroundClass, useDetails } from 'src/providers'
 import { loc } from 'src/utilities/i18n'
 
@@ -20,7 +20,7 @@ export const PreviewBackgroundButton = ({ type }: PreviewBackgroundButtonPropert
   return (
     <Tooltip content={loc('details_background_color')}>
       <button
-        className={clsx('h-6 w-6 ring-1', type, btnBaseStyles, ringStyle)}
+        className={clsx('h-6 w-6 ring-1', type, buttonBaseStyles, ringStyle)}
         onClick={handleBackgroundChange}
       />
     </Tooltip>

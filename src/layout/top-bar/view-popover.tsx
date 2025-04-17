@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
-import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/components'
+import { Badge, buttonBaseStyles, buttonSizeStyles, buttonVariantStyles } from 'src/components'
 import { transitions } from 'src/constants/transitions'
 import { useCollection, UserState, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
@@ -58,7 +58,7 @@ export const ViewPopover = () => {
     <Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
       <Popover className="relative inline-block px-4 text-left">
         <Popover.Button
-          className={clsx(btnBaseStyles, btnVariantStyles.ghost, btnSizeStyles.md)}
+          className={clsx(buttonBaseStyles, buttonVariantStyles.ghost, buttonSizeStyles.md)}
           onClick={handleViewNameFeatureNoticeClick}
         >
           {loc('topbar_view')}
