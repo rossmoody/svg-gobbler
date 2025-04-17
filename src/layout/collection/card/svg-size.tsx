@@ -10,7 +10,7 @@ export const SvgSize = ({ data }: CardData) => {
   } = useCollection()
 
   if (data.corsRestricted) {
-    return null
+    return
   }
 
   if (filters['show-size']) {

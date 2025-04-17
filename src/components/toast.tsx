@@ -3,7 +3,7 @@ import * as RToast from '@radix-ui/react-toast'
 import clsx from 'clsx'
 import { FC } from 'react'
 
-export type ToastComponentProps = {
+export type ToastComponentProperties = {
   actionText?: string
   className?: string
   description: string
@@ -14,7 +14,7 @@ export type ToastComponentProps = {
   title: string
 }
 
-export const Toast: FC<ToastComponentProps> = ({
+export const Toast: FC<ToastComponentProperties> = ({
   actionText,
   description,
   onAction,

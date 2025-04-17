@@ -13,9 +13,9 @@ export type CardData = {
   data: SvgType
 }
 
-export type CardProps = CardData & HTMLAttributes<HTMLDivElement>
+export type CardProperties = CardData & HTMLAttributes<HTMLDivElement>
 
-export const Card = forwardRef<HTMLDivElement, CardProps>((properties, reference) => {
+export const Card = forwardRef<HTMLDivElement, CardProperties>((properties, reference) => {
   const { className, data, ...rest } = properties
   const { state } = useCollection()
 

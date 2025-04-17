@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
 import { FormUtilities } from 'src/utilities/form-utilities'
 import { logger } from 'src/utilities/logger'
 import { Config } from 'svgo'
-// @ts-ignore
+// @ts-expect-error
 import { optimize } from 'svgo/dist/svgo.browser'
 
 export type ExportSvg = {

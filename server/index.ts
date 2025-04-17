@@ -20,7 +20,7 @@ export type SVGRMessage = {
   svg: string
 }
 
-ff.http('svgr', async (request: ff.Request, res: ff.Response) => {
+ff.http('svgr', async (request: ff.Request, response: ff.Response) => {
   switch (request.body.type) {
     case 'error': {
       try {
@@ -30,7 +30,7 @@ ff.http('svgr', async (request: ff.Request, res: ff.Response) => {
         await storage.bucket(bucketName).file(destinationFileName).save(message)
       } catch (error) {
         console.error(error)
-        res.send('Unable to upload message to database 😥')
+        response.send('Unable to upload message to database 😥')
       }
       break
     }
@@ -43,7 +43,7 @@ ff.http('svgr', async (request: ff.Request, res: ff.Response) => {
         await storage.bucket(bucketName).file(destinationFileName).save(message)
       } catch (error) {
         console.error(error)
-        res.send('Unable to upload message to database 😥')
+        response.send('Unable to upload message to database 😥')
       }
       break
     }
@@ -54,18 +54,19 @@ ff.http('svgr', async (request: ff.Request, res: ff.Response) => {
         const result = await transform(svg, config, state)
         const formatted = await format(result, {
           parser: 'babel-ts',
+          // eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module
           plugins: [require('prettier/plugins/babel')],
         })
-        res.send(formatted)
+        response.send(formatted)
       } catch (error) {
         console.error(error)
-        res.send('Unable to transform SVG 😥')
+        response.send('Unable to transform SVG 😥')
       }
       break
     }
 
     default: {
-      res.send('Unable to process request 😥')
+      response.send('Unable to process request 😥')
     }
   }
 })

@@ -1,7 +1,6 @@
 import type { ManifestV3Export } from '@crxjs/vite-plugin'
 
 import packageJson from './package.json'
-// @ts-ignore
 import { serverEndpoint } from './src/constants/server-config'
 
 export default <ManifestV3Export>{

@@ -3,7 +3,7 @@ import { IconButton, Tooltip } from 'src/components'
 import { useDetails } from 'src/providers'
 import { loc } from 'src/utilities/i18n'
 
-import { PreviewBackgroundButton } from './preview-background-btn'
+import { PreviewBackgroundButton } from './preview-background-button'
 
 export const PreviewSvgFooter = () => {
   const { dispatch, state } = useDetails()

@@ -14,11 +14,11 @@ export const ExportFooter = () => {
 
   const handleCopy = async () => {
     setLabel(loc('export_copied'))
-    const payload = (await processWithExportConfig(collectionState.selected))[0].payload
+    const processed = await processWithExportConfig(collectionState.selected)
+    const payload = processed[0].payload
 
     switch (exportState.fileType) {
       case 'jpeg':
-
       case 'png':
       case 'webp': {
         FormUtilities.copyImageToClipboard(payload)
@@ -38,7 +38,6 @@ export const ExportFooter = () => {
 
     switch (exportState.fileType) {
       case 'jpeg':
-
       case 'png':
       case 'webp': {
         FormUtilities.downloadImageContent(exportSvgs, exportState)

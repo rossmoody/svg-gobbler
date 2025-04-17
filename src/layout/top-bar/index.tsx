@@ -12,7 +12,7 @@ import { CardColorButton } from './card-color-button'
 import { CollectionTitle } from './collection-title'
 import { SizeSelect } from './size-select'
 import { SortMenu } from './sort-menu'
-import { ThemeButton } from './theme-btn'
+import { ThemeButton } from './theme-button'
 import { ViewPopover } from './view-popover'
 
 export const TopBar = () => {
