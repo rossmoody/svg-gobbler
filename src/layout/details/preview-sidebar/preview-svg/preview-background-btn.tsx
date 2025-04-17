@@ -1,13 +1,13 @@
 import clsx from 'clsx'
-import { Tooltip, btnBaseStyles } from 'src/components'
+import { btnBaseStyles, Tooltip } from 'src/components'
 import { PreviewBackgroundClass, useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
-type PreviewBackgroundButtonProps = {
+type PreviewBackgroundButtonProperties = {
   type: PreviewBackgroundClass
 }
 
-export const PreviewBackgroundButton = ({ type }: PreviewBackgroundButtonProps) => {
+export const PreviewBackgroundButton = ({ type }: PreviewBackgroundButtonProperties) => {
   const { dispatch, state } = useDetails()
 
   const handleBackgroundChange = () => {

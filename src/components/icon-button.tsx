@@ -1,15 +1,15 @@
 import { forwardRef } from 'react'
 
-import { ButtonProps, btnBaseStyles, btnVariantStyles } from '.'
+import { btnBaseStyles as buttonBaseStyles, ButtonProps as ButtonProperties, btnVariantStyles as buttonVariantStyles } from '.'
 
-type IconButtonProps = ButtonProps
+type IconButtonProperties = ButtonProperties
 
 /**
  * General Icon Button component.
  * 20px icons are used for all sizes except xs, which uses 16px icons.
  */
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
-  const { className, size = 'md', type = 'button', variant = 'primary', ...rest } = props
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProperties>((properties, reference) => {
+  const { className, size = 'md', type = 'button', variant = 'primary', ...rest } = properties
 
   const sizeStyles = {
     lg: 'px-2 py-2',
@@ -19,7 +19,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props,
     xs: 'px-1 py-1',
   }
 
-  const combinedClassName = `${btnBaseStyles} ${btnVariantStyles[variant]} ${sizeStyles[size]} ${className}`
+  const combinedClassName = `${buttonBaseStyles} ${buttonVariantStyles[variant]} ${sizeStyles[size]} ${className}`
 
-  return <button ref={ref} {...rest} className={combinedClassName} type={type} />
+  return <button ref={reference} {...rest} className={combinedClassName} type={type} />
 })

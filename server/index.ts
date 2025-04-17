@@ -5,29 +5,29 @@ import { format } from 'prettier'
 
 const storage = new Storage()
 
+export type ServerMessage =
+  | { payload: StringMessage; type: 'error' }
+  | { payload: StringMessage; type: 'feedback' }
+  | { payload: SVGRMessage; type: 'svgr' }
+
+export type StringMessage = {
+  message: string
+}
+
 export type SVGRMessage = {
   config: Config
   state: State
   svg: string
 }
 
-export type StringMessage = {
-  message: string
-}
-
-export type ServerMessage =
-  | { payload: SVGRMessage; type: 'svgr' }
-  | { payload: StringMessage; type: 'error' }
-  | { payload: StringMessage; type: 'feedback' }
-
-ff.http('svgr', async (req: ff.Request, res: ff.Response) => {
-  switch (req.body.type) {
-    case 'feedback': {
+ff.http('svgr', async (request: ff.Request, res: ff.Response) => {
+  switch (request.body.type) {
+    case 'error': {
       try {
-        const { message } = req.body.payload as StringMessage
+        const { message } = request.body.payload as StringMessage
         const bucketName = 'svg-gobbler'
-        const destFileName = `feedback/feedback-${Date.now()}.txt`
-        await storage.bucket(bucketName).file(destFileName).save(message)
+        const destinationFileName = `error/error-${Date.now()}.txt`
+        await storage.bucket(bucketName).file(destinationFileName).save(message)
       } catch (error) {
         console.error(error)
         res.send('Unable to upload message to database 😥')
@@ -35,12 +35,12 @@ ff.http('svgr', async (req: ff.Request, res: ff.Response) => {
       break
     }
 
-    case 'error': {
+    case 'feedback': {
       try {
-        const { message } = req.body.payload as StringMessage
+        const { message } = request.body.payload as StringMessage
         const bucketName = 'svg-gobbler'
-        const destFileName = `error/error-${Date.now()}.txt`
-        await storage.bucket(bucketName).file(destFileName).save(message)
+        const destinationFileName = `feedback/feedback-${Date.now()}.txt`
+        await storage.bucket(bucketName).file(destinationFileName).save(message)
       } catch (error) {
         console.error(error)
         res.send('Unable to upload message to database 😥')
@@ -50,7 +50,7 @@ ff.http('svgr', async (req: ff.Request, res: ff.Response) => {
 
     case 'svgr': {
       try {
-        const { config, state, svg } = req.body.payload as SVGRMessage
+        const { config, state, svg } = request.body.payload as SVGRMessage
         const result = await transform(svg, config, state)
         const formatted = await format(result, {
           parser: 'babel-ts',

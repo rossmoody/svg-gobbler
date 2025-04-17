@@ -901,5 +901,71 @@
   },
   "settings_export__desc": {
     "message": "Manage and export data in various formats from within SVG Gobbler."
+  },
+  "edit_apply": {
+    "message": "Apply"
+  },
+  "edit_applied": {
+    "message": "Applied"
+  },
+  "edit_properties": {
+    "message": "Properties"
+  },
+  "edit_custom_name": {
+    "message": "Custom name"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "The name of the property to apply to the SVG element"
+  },
+  "edit_custom_value": {
+    "message": "Custom value"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "The value of the property to apply to the SVG element"
+  },
+  "edit_reset": {
+    "message": "Reset"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "Class"
+  },
+  "edit_style": {
+    "message": "Style"
+  },
+  "edit_height": {
+    "message": "Height"
+  },
+  "edit_width": {
+    "message": "Width"
+  },
+  "edit_viewbox": {
+    "message": "viewBox"
+  },
+  "edit_fill": {
+    "message": "Fill"
+  },
+  "edit_id_tooltip": {
+    "message": "The string to apply to the id property on the selected SVGs. Will replace the existing id"
+  },
+  "edit_class_tooltip": {
+    "message": "The string to apply to the class property on the selected SVGs. Will replace the existing class"
+  },
+  "edit_style_tooltip": {
+    "message": "The string to apply to the style property on the selected SVGs. Will replace the existing style"
+  },
+  "edit_height_tooltip": {
+    "message": "The string to apply to the height property on the selected SVGs. Will replace the existing height"
+  },
+  "edit_width_tooltip": {
+    "message": "The string to apply to the width property on the selected SVGs. Will replace the existing width"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "The string to apply to the viewBox property on the selected SVGs. Will replace the existing viewBox"
+  },
+  "edit_fill_tooltip": {
+    "message": "The string to apply to the fill property on the selected SVGs. Will replace the existing fill"
   }
 }

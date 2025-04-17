@@ -2,16 +2,16 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment } from 'react'
-import { SvgoPlugin, defaultSvgoPlugins } from 'src/constants/svgo-plugins'
+import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const ResetButton = () => {
   const { dispatch, state } = useDetails()
 
   const resetToDefault = async () => {
-    const plugins = (await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')) ?? []
+    const plugins = (await StorageUtilities.getStorageData<SvgoPlugin[]>('plugins')) ?? []
     dispatch({ payload: plugins, type: 'set-svgo-plugins' })
     dispatch({ type: 'process-current-string' })
   }
@@ -27,7 +27,7 @@ export const ResetButton = () => {
   }
 
   const setAsDefault = async () => {
-    StorageUtils.setStorageData('plugins', state.export.svgoConfig.plugins)
+    StorageUtilities.setStorageData('plugins', state.export.svgoConfig.plugins)
   }
 
   const menuItem = [

@@ -3,13 +3,27 @@ import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { defaultSvgoPlugins } from 'src/constants/svgo-plugins'
 
 export const fileTypes = ['svg', 'png', 'jpeg', 'webp', 'sprite'] as const
-export type FileType = (typeof fileTypes)[number]
+export type ExportAction =
+  | { payload: boolean; type: 'set-optimize-exports' }
+  | { payload: boolean; type: 'set-prefix-filenames' }
+  | { payload: boolean; type: 'set-prettify' }
+  | { payload: FileType; type: 'set-file-type' }
+  | { payload: number; type: 'set-float-precision' }
+  | { payload: number; type: 'set-jpeg-quality' }
+  | { payload: number; type: 'set-jpeg-size' }
+  | { payload: number; type: 'set-png-size' }
+  | { payload: number; type: 'set-webp-quality' }
+  | { payload: number; type: 'set-webp-size' }
+  | { payload: string; type: 'set-filename' }
+  | { payload: string; type: 'set-filename-prefix' }
+  | { payload: string; type: 'set-sprite-prefix' }
+  | { payload: string; type: 'set-sprite-suffix' }
+  | { payload: SvgoPlugin; type: 'add-svgo-plugin' }
+  | { payload: SvgoPlugin; type: 'remove-svgo-plugin' }
+  | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
+  | { type: 'reset' }
 
 export type ExportState = {
-  /**
-   * The current file type to export. Modifies all other export settings.
-   */
-  fileType: FileType
   /**
    * The filename to use when exporting.
    */
@@ -19,6 +33,10 @@ export type ExportState = {
    */
   filenamePrefix: string
   /**
+   * The current file type to export. Modifies all other export settings.
+   */
+  fileType: FileType
+  /**
    * Whether or not to prefix file names based on a provided string
    * instead of using the icon names.
    */
@@ -27,19 +45,6 @@ export type ExportState = {
    * The setting configurations for each file type.
    */
   settings: {
-    /**
-     * The setting configurations for sprite exports.
-     */
-    sprite: {
-      /**
-       * The prefix to use when exporting multiple files.
-       */
-      prefix: string
-      /**
-       * The suffix to use when exporting multiple files.
-       */
-      suffix: string
-    }
     /**
      * JPEG export settings.
      */
@@ -61,6 +66,19 @@ export type ExportState = {
        * The size of the PNG to export.
        */
       size: number
+    }
+    /**
+     * The setting configurations for sprite exports.
+     */
+    sprite: {
+      /**
+       * The prefix to use when exporting multiple files.
+       */
+      prefix: string
+      /**
+       * The suffix to use when exporting multiple files.
+       */
+      suffix: string
     }
     svg: {
       /**
@@ -100,42 +118,24 @@ export type ExportState = {
   }
 }
 
-export type ExportAction =
-  | { payload: FileType; type: 'set-file-type' }
-  | { payload: SvgoPlugin; type: 'add-svgo-plugin' }
-  | { payload: SvgoPlugin; type: 'remove-svgo-plugin' }
-  | { payload: SvgoPlugin[]; type: 'set-svgo-plugins' }
-  | { payload: boolean; type: 'set-optimize-exports' }
-  | { payload: boolean; type: 'set-prefix-filenames' }
-  | { payload: boolean; type: 'set-prettify' }
-  | { payload: number; type: 'set-float-precision' }
-  | { payload: number; type: 'set-jpeg-quality' }
-  | { payload: number; type: 'set-jpeg-size' }
-  | { payload: number; type: 'set-png-size' }
-  | { payload: number; type: 'set-webp-quality' }
-  | { payload: number; type: 'set-webp-size' }
-  | { payload: string; type: 'set-filename' }
-  | { payload: string; type: 'set-filename-prefix' }
-  | { payload: string; type: 'set-sprite-prefix' }
-  | { payload: string; type: 'set-sprite-suffix' }
-  | { type: 'reset' }
+export type FileType = (typeof fileTypes)[number]
 
 export const initExportState: ExportState = {
-  fileType: 'svg',
   filename: 'svg-gobbler',
   filenamePrefix: 'svg',
+  fileType: 'svg',
   prefixFilenames: false,
   settings: {
-    sprite: {
-      prefix: '',
-      suffix: '',
-    },
     jpeg: {
       quality: 0.92,
       size: 512,
     },
     png: {
       size: 512,
+    },
+    sprite: {
+      prefix: '',
+      suffix: '',
     },
     svg: {
       floatPrecision: 3,
@@ -153,10 +153,148 @@ export const initExportState: ExportState = {
 
 export const exportReducer = (state: ExportState, action: ExportAction): ExportState => {
   switch (action.type) {
+    case 'add-svgo-plugin': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            svgoPlugins: [...state.settings.svg.svgoPlugins, action.payload],
+          },
+        },
+      }
+    }
+
+    case 'remove-svgo-plugin': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            svgoPlugins: state.settings.svg.svgoPlugins.filter(
+              (plugin) => plugin.name !== action.payload.name,
+            ),
+          },
+        },
+      }
+    }
+
+    case 'reset': {
+      return initExportState
+    }
+
+    case 'set-file-type': {
+      return {
+        ...state,
+        fileType: action.payload,
+      }
+    }
+
+    case 'set-filename': {
+      return {
+        ...state,
+        filename: action.payload,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            path: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-filename-prefix': {
+      return {
+        ...state,
+        filenamePrefix: action.payload,
+      }
+    }
+
+    case 'set-float-precision': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            floatPrecision: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-jpeg-quality': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          jpeg: {
+            ...state.settings.jpeg,
+            quality: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-jpeg-size': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          jpeg: {
+            ...state.settings.jpeg,
+            size: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-optimize-exports': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            optimizeExports: action.payload,
+          },
+        },
+      }
+    }
+
+    case 'set-png-size': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          png: {
+            ...state.settings.png,
+            size: action.payload,
+          },
+        },
+      }
+    }
+
     case 'set-prefix-filenames': {
       return {
         ...state,
         prefixFilenames: action.payload,
+      }
+    }
+
+    case 'set-prettify': {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          svg: {
+            ...state.settings.svg,
+            prettify: action.payload,
+          },
+        },
       }
     }
 
@@ -186,58 +324,6 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
       }
     }
 
-    case 'set-webp-quality': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          webp: {
-            ...state.settings.webp,
-            quality: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'set-jpeg-size': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          jpeg: {
-            ...state.settings.jpeg,
-            size: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'set-jpeg-quality': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          jpeg: {
-            ...state.settings.jpeg,
-            quality: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'set-float-precision': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          svg: {
-            ...state.settings.svg,
-            floatPrecision: action.payload,
-          },
-        },
-      }
-    }
-
     case 'set-svgo-plugins': {
       return {
         ...state,
@@ -251,14 +337,14 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
       }
     }
 
-    case 'set-png-size': {
+    case 'set-webp-quality': {
       return {
         ...state,
         settings: {
           ...state.settings,
-          png: {
-            ...state.settings.png,
-            size: action.payload,
+          webp: {
+            ...state.settings.webp,
+            quality: action.payload,
           },
         },
       }
@@ -275,92 +361,6 @@ export const exportReducer = (state: ExportState, action: ExportAction): ExportS
           },
         },
       }
-    }
-
-    case 'set-filename': {
-      return {
-        ...state,
-        filename: action.payload,
-        settings: {
-          ...state.settings,
-          svg: {
-            ...state.settings.svg,
-            path: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'set-filename-prefix': {
-      return {
-        ...state,
-        filenamePrefix: action.payload,
-      }
-    }
-
-    case 'set-prettify': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          svg: {
-            ...state.settings.svg,
-            prettify: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'add-svgo-plugin': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          svg: {
-            ...state.settings.svg,
-            svgoPlugins: [...state.settings.svg.svgoPlugins, action.payload],
-          },
-        },
-      }
-    }
-
-    case 'remove-svgo-plugin': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          svg: {
-            ...state.settings.svg,
-            svgoPlugins: state.settings.svg.svgoPlugins.filter(
-              (plugin) => plugin.name !== action.payload.name,
-            ),
-          },
-        },
-      }
-    }
-
-    case 'set-optimize-exports': {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          svg: {
-            ...state.settings.svg,
-            optimizeExports: action.payload,
-          },
-        },
-      }
-    }
-
-    case 'set-file-type': {
-      return {
-        ...state,
-        fileType: action.payload,
-      }
-    }
-
-    case 'reset': {
-      return initExportState
     }
 
     default: {

@@ -1,4 +1,4 @@
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { ExportDetailFooter } from './footer'
 import { ExportDetailMain } from './main'

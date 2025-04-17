@@ -2,10 +2,11 @@ import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useCallback } from 'react'
 import { useDashboard } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+
 import { CollectionItem } from '../collection-item'
 export const SidebarMain = () => {
-  const { state, dispatch } = useDashboard()
+  const { dispatch, state } = useDashboard()
 
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
@@ -15,8 +16,8 @@ export const SidebarMain = () => {
       const newIndex = state.collections.findIndex((collection) => collection.id === over.id)
 
       const newCollections = arrayMove(state.collections, oldIndex, newIndex)
-      dispatch({ type: 'set-collections', payload: newCollections })
-      StorageUtils.setStorageData('collections', newCollections)
+      dispatch({ payload: newCollections, type: 'set-collections' })
+      StorageUtilities.setStorageData('collections', newCollections)
     },
     [dispatch, state.collections],
   )
@@ -29,7 +30,7 @@ export const SidebarMain = () => {
           strategy={verticalListSortingStrategy}
         >
           {state.collections.map((collection) => (
-            <CollectionItem key={collection.id} collection={collection} />
+            <CollectionItem collection={collection} key={collection.id} />
           ))}
         </SortableContext>
       </ul>

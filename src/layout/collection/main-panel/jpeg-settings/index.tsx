@@ -1,19 +1,18 @@
 import { HelpIcon } from 'src/components'
 import { useExport } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
-export const imageTooltip =
-  'Applied to the largest side (height or width) of the image while scaling proportionally.'
+import { imageTooltip } from '../webp-settings'
 
-export const WebPSettings = () => {
+export const JpegSettings = () => {
   const { dispatch, state } = useExport()
 
-  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-webp-size' })
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-jpeg-size' })
   }
 
-  const handleQualityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-webp-quality' })
+  const handleQualityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-jpeg-quality' })
   }
 
   return (
@@ -30,7 +29,7 @@ export const WebPSettings = () => {
           id="size"
           onChange={handleSizeChange}
           type="text"
-          value={state.settings.webp.size}
+          value={state.settings.png.size}
         />
       </div>
       <div>
@@ -45,7 +44,7 @@ export const WebPSettings = () => {
           onChange={handleQualityChange}
           step={0.01}
           type="number"
-          value={state.settings.webp.quality}
+          value={state.settings.jpeg.quality}
         />
       </div>
     </div>

@@ -18,9 +18,9 @@ export const useNavigation = () => {
     }
   }
 
-  window.addEventListener('keydown', handleNavigation)
+  globalThis.addEventListener('keydown', handleNavigation)
 
   return () => {
-    window.removeEventListener('keydown', handleNavigation)
+    globalThis.removeEventListener('keydown', handleNavigation)
   }
 }

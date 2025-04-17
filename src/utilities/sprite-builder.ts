@@ -1,54 +1,25 @@
+import type { ExportSvg } from 'src/layout/collection/main-panel/use-export-actions'
+import type { ExportState } from 'src/providers'
+
 import htmlParser from 'prettier/plugins/html'
 import { format } from 'prettier/standalone'
-import type { ExportSvg } from 'src/layout/collection/export-panel/use-export-actions'
-import type { ExportState } from 'src/providers'
+
 import { logger } from './logger'
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 const XMLNS_NS = 'http://www.w3.org/2000/xmlns/'
 
-function createElementNS(namespace: string, tag: string, attributes: Record<string, string> = {}) {
-  const element = document.createElementNS(namespace, tag)
-  Object.entries(attributes).forEach(([key, value]) => {
-    if (key === 'xmlns') {
-      element.setAttributeNS(XMLNS_NS, key, value)
-    } else {
-      element.setAttribute(key, value)
-    }
-  })
-  return element
-}
-
-function extractAttribute(svgString: string, attribute: string): string {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(svgString, 'image/svg+xml')
-  const svg = doc.documentElement
-  const value = svg.getAttribute(attribute)
-  if (!value) {
-    throw new Error(`No ${attribute} found`)
-  }
-  return value
-}
-
-function getInnerSvgContent(svgString: string): string {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(svgString, 'image/svg+xml')
-  const svg = doc.documentElement
-  return Array.from(svg.childNodes)
-    .map((node) => {
-      if (node instanceof Element) {
-        return node.outerHTML
-      }
-      return node.textContent || ''
-    })
-    .join('')
-}
-
 function buildInvisibleSpriteSvg() {
   return createElementNS(SVG_NS, 'svg', {
-    xmlns: SVG_NS,
     display: 'none',
+    xmlns: SVG_NS,
   }) as SVGElement
+}
+
+function buildSpriteSvg(exportSvgs: ExportSvg[], exportState: ExportState) {
+  const sprite = buildInvisibleSpriteSvg()
+  for (const exportSvg of exportSvgs) sprite.append(buildSymbolElement(exportSvg, exportState))
+  return sprite
 }
 
 function buildSymbolElement(exportSvg: ExportSvg, exportState: ExportState) {
@@ -77,10 +48,41 @@ function buildUseElement(symbolId: string, exportState: ExportState) {
   })
 }
 
-function buildSpriteSvg(exportSvgs: ExportSvg[], exportState: ExportState) {
-  const sprite = buildInvisibleSpriteSvg()
-  exportSvgs.forEach((exportSvg) => sprite.appendChild(buildSymbolElement(exportSvg, exportState)))
-  return sprite
+function createElementNS(namespace: string, tag: string, attributes: Record<string, string> = {}) {
+  const element = document.createElementNS(namespace, tag)
+  for (const [key, value] of Object.entries(attributes)) {
+    if (key === 'xmlns') {
+      element.setAttributeNS(XMLNS_NS, key, value)
+    } else {
+      element.setAttribute(key, value)
+    }
+  }
+  return element
+}
+
+function extractAttribute(svgString: string, attribute: string): string {
+  const parser = new DOMParser()
+  const document_ = parser.parseFromString(svgString, 'image/svg+xml')
+  const svg = document_.documentElement
+  const value = svg.getAttribute(attribute)
+  if (!value) {
+    throw new Error(`No ${attribute} found`)
+  }
+  return value
+}
+
+function getInnerSvgContent(svgString: string): string {
+  const parser = new DOMParser()
+  const document_ = parser.parseFromString(svgString, 'image/svg+xml')
+  const svg = document_.documentElement
+  return [...svg.childNodes]
+    .map((node) => {
+      if (node instanceof Element) {
+        return node.outerHTML
+      }
+      return node.textContent || ''
+    })
+    .join('')
 }
 
 // Demo document styles
@@ -168,6 +170,16 @@ const DEMO_STYLES = `
   }
 `
 
+export function buildSpriteAndDemo(exportSvgs: ExportSvg[], exportState: ExportState) {
+  const sprite = buildSpriteSvg(exportSvgs, exportState)
+  const demoHtml = buildDemoDocument(sprite, exportSvgs, exportState)
+
+  return {
+    demoHtml,
+    sprite,
+  }
+}
+
 function buildDemoDocument(sprite: SVGElement, exportSvgs: ExportSvg[], exportState: ExportState) {
   const USAGE_EXAMPLE = `<!-- Include the sprite SVG in your HTML -->
   <svg style="display: none;">
@@ -189,25 +201,25 @@ function buildDemoDocument(sprite: SVGElement, exportSvgs: ExportSvg[], exportSt
   const body = document.createElement('body')
 
   // Add meta tags
-  head.appendChild(createElementNS('', 'meta', { charset: 'UTF-8' }))
-  head.appendChild(
+  head.append(createElementNS('', 'meta', { charset: 'utf8' }))
+  head.append(
     createElementNS('', 'meta', {
-      name: 'viewport',
       content: 'width=device-width, initial-scale=1.0',
+      name: 'viewport',
     }),
   )
 
   // Add title and styles
   const title = document.createElement('title')
   title.textContent = 'SVG Sprite Demo'
-  head.appendChild(title)
+  head.append(title)
 
   const style = document.createElement('style')
   style.textContent = DEMO_STYLES
-  head.appendChild(style)
+  head.append(style)
 
   // Add sprite to document
-  body.appendChild(sprite)
+  body.append(sprite)
 
   // Create container and header
   const container = document.createElement('div')
@@ -223,12 +235,12 @@ function buildDemoDocument(sprite: SVGElement, exportSvgs: ExportSvg[], exportSt
   description.textContent = `This demo demonstrates ${exportSvgs.length} icons from your sprite sheet.`
 
   header.append(h1, description)
-  container.appendChild(header)
+  container.append(header)
 
   const iconsGrid = document.createElement('div')
   iconsGrid.classList.add('icons-grid')
 
-  exportSvgs.forEach((exportSvg) => {
+  for (const exportSvg of exportSvgs) {
     const demo = document.createElement('div')
     demo.classList.add('icon-demo')
 
@@ -236,18 +248,18 @@ function buildDemoDocument(sprite: SVGElement, exportSvgs: ExportSvg[], exportSt
       class: 'icon-svg',
     })
 
-    svg.appendChild(buildUseElement(exportSvg.name, exportState))
-    demo.appendChild(svg)
+    svg.append(buildUseElement(exportSvg.name, exportState))
+    demo.append(svg)
 
     const name = document.createElement('p')
     name.classList.add('icon-name')
     name.textContent = `${exportState.settings.sprite.prefix}${exportSvg.name}${exportState.settings.sprite.suffix}`
-    demo.appendChild(name)
+    demo.append(name)
 
-    iconsGrid.appendChild(demo)
-  })
+    iconsGrid.append(demo)
+  }
 
-  container.appendChild(iconsGrid)
+  container.append(iconsGrid)
 
   const usageExample = document.createElement('div')
   usageExample.classList.add('usage-example')
@@ -259,29 +271,19 @@ function buildDemoDocument(sprite: SVGElement, exportSvgs: ExportSvg[], exportSt
   usageCode.textContent = USAGE_EXAMPLE
 
   usageExample.append(usageTitle, usageCode)
-  container.appendChild(usageExample)
+  container.append(usageExample)
 
-  body.appendChild(container)
+  body.append(container)
   html.append(head, body)
-  document.appendChild(html)
+  document.append(html)
 
   return format(document.documentElement.outerHTML, {
     parser: 'html',
     plugins: [htmlParser],
     printWidth: 100,
-    tabWidth: 2,
-    useTabs: false,
     semi: true,
     singleQuote: true,
+    tabWidth: 2,
+    useTabs: false,
   })
-}
-
-export function buildSpriteAndDemo(exportSvgs: ExportSvg[], exportState: ExportState) {
-  const sprite = buildSpriteSvg(exportSvgs, exportState)
-  const demoHtml = buildDemoDocument(sprite, exportSvgs, exportState)
-
-  return {
-    sprite,
-    demoHtml,
-  }
 }

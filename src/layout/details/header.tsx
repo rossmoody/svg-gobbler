@@ -6,8 +6,8 @@ import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const Header = () => {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export const Header = () => {
   }
 
   const handleSave = async () => {
-    const collectionData = await StorageUtils.getPageData(collectionId)
+    const collectionData = await StorageUtilities.getPageData(collectionId)
 
     const pageData: PageData = {
       ...collectionData,
@@ -41,14 +41,14 @@ export const Header = () => {
       ),
     }
 
-    await StorageUtils.setPageData(collectionId, pageData)
+    await StorageUtilities.setPageData(collectionId, pageData)
     dispatch({ payload: currentString, type: 'update-original-string' })
     dispatch({ payload: name, type: 'update-original-name' })
   }
 
   const navigateBack = () => {
     if (isDirty) {
-      if (window.confirm(loc('details_are_you_sure'))) {
+      if (globalThis.confirm(loc('details_are_you_sure'))) {
         navigate(-1)
       }
       return

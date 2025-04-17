@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
-import { FormUtils } from 'src/utils/form-utils'
-import { loc } from 'src/utils/i18n'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { loc } from 'src/utilities/i18n'
 
 import { ExportSvg, useExportActions } from './use-export-actions'
 
-export const Footer = () => {
+export const ExportFooter = () => {
   const [label, setLabel] = useState(loc('export_copy_clipboard'))
   const { state: collectionState } = useCollection()
   const { state: exportState } = useExport()
@@ -17,15 +17,15 @@ export const Footer = () => {
     const payload = (await processWithExportConfig(collectionState.selected))[0].payload
 
     switch (exportState.fileType) {
-      case 'svg': {
-        FormUtils.copyStringToClipboard(payload)
-        break
-      }
+      case 'jpeg':
 
       case 'png':
-      case 'webp':
-      case 'jpeg': {
-        FormUtils.copyImageToClipboard(payload)
+      case 'webp': {
+        FormUtilities.copyImageToClipboard(payload)
+        break
+      }
+      case 'svg': {
+        FormUtilities.copyStringToClipboard(payload)
         break
       }
     }
@@ -37,18 +37,13 @@ export const Footer = () => {
     let exportSvgs: ExportSvg[] = await processWithExportConfig(collectionState.selected)
 
     switch (exportState.fileType) {
-      case 'svg': {
-        FormUtils.downloadSvgContent(exportSvgs, exportState)
-        break
-      }
+      case 'jpeg':
 
       case 'png':
-      case 'webp':
-      case 'jpeg': {
-        FormUtils.downloadImageContent(exportSvgs, exportState)
+      case 'webp': {
+        FormUtilities.downloadImageContent(exportSvgs, exportState)
         break
       }
-
       case 'sprite': {
         exportSvgs = collectionState.selected.map((svg) => {
           return {
@@ -56,7 +51,12 @@ export const Footer = () => {
             payload: svg.svg,
           }
         })
-        FormUtils.downloadSpriteZip(exportSvgs, exportState)
+        FormUtilities.downloadSpriteZip(exportSvgs, exportState)
+        break
+      }
+
+      case 'svg': {
+        FormUtilities.downloadSvgContent(exportSvgs, exportState)
         break
       }
     }
@@ -73,7 +73,7 @@ export const Footer = () => {
       : loc('export_download') + downloadQuantityString
 
   return (
-    <footer className="flex flex-col gap-2 px-1 pb-6 pt-4">
+    <footer className="flex shrink-0 flex-col gap-2 border-t border-gray-200 px-4 py-6 dark:border-gray-700">
       {collectionState.selected.length < 2 && exportState.fileType !== 'sprite' && (
         <Button className="justify-center transition-all" onClick={handleCopy} variant="secondary">
           {label}

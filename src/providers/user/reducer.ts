@@ -1,8 +1,17 @@
+export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'reset' }
+
 /**
  * The general state of the user and application. Identical state
  * in the local storage under the key `user`.
  */
 export type UserState = {
+  features: {
+    /**
+     * The user has viewed the tooltip for the new view settings in April 2025.
+     * User installed after this date will not see the tooltip.
+     */
+    viewedNameFeature: boolean
+  }
   /**
    * The date the user installed/first initialized the application.
    */
@@ -37,13 +46,6 @@ export type UserState = {
      */
     viewedSvgInClipboard: boolean
   }
-  features: {
-    /**
-     * The user has viewed the tooltip for the new view settings in April 2025.
-     * User installed after this date will not see the tooltip.
-     */
-    viewedNameFeature: boolean
-  }
   /**
    * The settings for the user. Managed in the settings page.
    */
@@ -59,9 +61,10 @@ export type UserState = {
   }
 }
 
-export type UserAction = { payload: UserState; type: 'set-user' } | { type: 'reset' }
-
 export const initUserState: UserState = {
+  features: {
+    viewedNameFeature: false,
+  },
   installDate: new Date().toISOString(),
   onboarding: {
     hasPastedSvg: false,
@@ -71,9 +74,6 @@ export const initUserState: UserState = {
     viewedReview: false,
     viewedSvgInClipboard: false,
   },
-  features: {
-    viewedNameFeature: false,
-  },
   settings: {
     mergeCollections: false,
     sortCollections: false,
@@ -82,15 +82,15 @@ export const initUserState: UserState = {
 
 export const userReducer = (state: UserState, action: UserAction): UserState => {
   switch (action.type) {
+    case 'reset': {
+      return initUserState
+    }
+
     case 'set-user': {
       return {
         ...state,
         ...action.payload,
       }
-    }
-
-    case 'reset': {
-      return initUserState
     }
 
     default: {

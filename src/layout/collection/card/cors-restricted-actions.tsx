@@ -2,7 +2,7 @@ import { ArrowTopRightOnSquareIcon, InformationCircleIcon } from '@heroicons/rea
 import { Fragment, PropsWithChildren } from 'react'
 import { Button, Tooltip } from 'src/components'
 import { type Image } from 'src/scripts'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { type CardData } from '.'
 

@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { HelpIcon } from 'src/components'
 import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { ResetButton } from './reset-button'
 import { SvgoOption } from './svgo-option'
@@ -10,18 +10,18 @@ import { SvgoOption } from './svgo-option'
 export const ExportDetailMain = () => {
   const { dispatch, state } = useDetails()
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.value, type: 'update-name' })
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: event.target.value, type: 'update-name' })
     dispatch({ type: 'process-current-string' })
   }
 
-  const handlePrettifyMarkupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.checked, type: 'set-prettify' })
+  const handlePrettifyMarkupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: event.target.checked, type: 'set-prettify' })
     dispatch({ type: 'process-current-string' })
   }
 
-  const handleFloatPrecisionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: Number(e.target.value), type: 'set-float-precision' })
+  const handleFloatPrecisionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: Number(event.target.value), type: 'set-float-precision' })
     dispatch({ type: 'process-current-string' })
   }
 

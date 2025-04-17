@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Toast } from 'src/components'
 import { type UserState, useUser } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 /**
  * A toast that educates the user about the ability to paste SVGs into the app.
@@ -24,7 +24,7 @@ export const ShowPasteCue = () => {
       ...userState,
       onboarding: { ...userState.onboarding, viewedSvgInClipboard: true },
     }
-    StorageUtils.setStorageData('user', payload)
+    StorageUtilities.setStorageData('user', payload)
     userDispatch({ payload, type: 'set-user' })
     setShow(false)
   }

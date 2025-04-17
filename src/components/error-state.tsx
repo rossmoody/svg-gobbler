@@ -1,20 +1,20 @@
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { useRef } from 'react'
 import { useDatabase } from 'src/hooks'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { Button } from '.'
 
 export const ErrorState = () => {
   const sendMessage = useDatabase('error')
-  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const textAreaReference = useRef<HTMLTextAreaElement>(null)
 
   const refresh = () => {
-    window.location.reload()
+    globalThis.location.reload()
   }
 
   const sendMessageHandler = () => {
-    sendMessage(textAreaRef.current?.value ?? 'No error message')
+    sendMessage(textAreaReference.current?.value ?? 'No error message')
     refresh()
   }
 
@@ -31,7 +31,12 @@ export const ErrorState = () => {
           <label className="sr-only" htmlFor="error-input">
             {loc('error_input_label')}
           </label>
-          <textarea autoFocus className="input mt-6 h-32" id="error-input" ref={textAreaRef} />
+          <textarea
+            autoFocus
+            className="input mt-6 h-32"
+            id="error-input"
+            ref={textAreaReference}
+          />
           <div className="mt-6 flex justify-center gap-2">
             <Button className="flex-1" onClick={refresh} size="lg" variant="secondary">
               {loc('error_action')}

@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useUpload } from 'src/hooks'
 import { UploadModal } from 'src/layout/collection/upload-modal'
-import { FormUtils } from 'src/utils/form-utils'
+import { FormUtilities } from 'src/utilities/form-utilities'
 
 import { Button } from '.'
-import { loc } from '../utils/i18n'
+import { loc } from '../utilities/i18n'
 
 /**
  * This is displayed when there are no SVGs found sourcing the client page.
@@ -27,7 +27,7 @@ export const EmptyState = () => {
   })
 
   async function onDropAccepted(files: File[]) {
-    const fileSvgs = await FormUtils.handleUpload(files)
+    const fileSvgs = await FormUtilities.handleUpload(files)
     upload(fileSvgs)
   }
 

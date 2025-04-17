@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { SvgoPlugin, svgoPlugins } from 'src/constants/svgo-plugins'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { Category } from './category'
 import { Item } from './item'
@@ -12,7 +12,7 @@ export const ExportSettings = () => {
 
   useEffect(() => {
     const fetchSvgoPlugins = async () => {
-      const plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
+      const plugins = await StorageUtilities.getStorageData<SvgoPlugin[]>('plugins')
       setStoragePlugins(plugins ?? [])
     }
 
@@ -30,11 +30,11 @@ export const ExportSettings = () => {
       if (checked) {
         const plugins = [...storagePlugins, plugin]
         setStoragePlugins(plugins)
-        StorageUtils.setStorageData('plugins', plugins)
+        StorageUtilities.setStorageData('plugins', plugins)
       } else {
         const filteredPlugins = storagePlugins.filter((p) => p.name !== plugin.name)
         setStoragePlugins(filteredPlugins)
-        StorageUtils.setStorageData('plugins', filteredPlugins)
+        StorageUtilities.setStorageData('plugins', filteredPlugins)
       }
     }
 

@@ -1,11 +1,11 @@
+import { useRevalidator } from 'react-router-dom'
 import { Button } from 'src/components'
 import { useExportData, useResetEnvironment } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
-
-import { useRevalidator } from 'react-router-dom'
 import { Collection } from 'src/types'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+
 import { Category } from './category'
 import { Item } from './item'
 import { KeyboardShortcut } from './keyboard-shortcut'
@@ -16,35 +16,31 @@ export const GeneralSettings = () => {
   const { exportAllDataAsJson, exportAllDataAsZip } = useExportData()
   const { revalidate } = useRevalidator()
 
-  const handleOpenKeyboardShortcuts = () => {
-    chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
-  }
-
-  const handleImportMerging = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImportMerging = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
       ...state,
-      settings: { ...state.settings, mergeCollections: e.target.checked },
+      settings: { ...state.settings, mergeCollections: event.target.checked },
     }
 
     dispatch({ payload: userState, type: 'set-user' })
-    StorageUtils.setStorageData('user', userState)
+    StorageUtilities.setStorageData('user', userState)
   }
 
-  const handleSortCollections = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSortCollections = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
       ...state,
-      settings: { ...state.settings, sortCollections: e.target.checked },
+      settings: { ...state.settings, sortCollections: event.target.checked },
     }
 
     dispatch({ payload: userState, type: 'set-user' })
-    StorageUtils.setStorageData('user', userState)
+    StorageUtilities.setStorageData('user', userState)
 
     // Sort the collections alphabetically if the user opts in
     if (userState.settings.sortCollections) {
-      const collections = await StorageUtils.getStorageData<Collection[]>('collections')
+      const collections = await StorageUtilities.getStorageData<Collection[]>('collections')
       if (collections) {
         collections.sort((a, b) => a.name.localeCompare(b.name))
-        StorageUtils.setStorageData('collections', collections)
+        StorageUtilities.setStorageData('collections', collections)
       }
 
       revalidate()
@@ -144,4 +140,8 @@ export const GeneralSettings = () => {
       </Item>
     </Category>
   )
+}
+
+function handleOpenKeyboardShortcuts() {
+  chrome.tabs.update({ url: 'chrome://extensions/shortcuts' })
 }

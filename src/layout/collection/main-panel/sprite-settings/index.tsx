@@ -1,16 +1,16 @@
 import { HelpIcon } from 'src/components'
 import { useExport } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const SpriteSettings = () => {
   const { dispatch, state } = useExport()
 
-  function handlePrefixChange(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ type: 'set-sprite-prefix', payload: e.target.value })
+  function handlePrefixChange(event: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({ payload: event.target.value, type: 'set-sprite-prefix' })
   }
 
-  function handleSuffixChange(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({ type: 'set-sprite-suffix', payload: e.target.value })
+  function handleSuffixChange(event: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({ payload: event.target.value, type: 'set-sprite-suffix' })
   }
 
   const useExample = `<use href="#${state.settings.sprite.prefix}icon${state.settings.sprite.suffix}" />`
@@ -27,8 +27,8 @@ export const SpriteSettings = () => {
         <input
           className="export-input"
           id="id-prefix"
-          type="text"
           onChange={handlePrefixChange}
+          type="text"
           value={state.settings.sprite.prefix}
         />
         {state.settings.sprite.prefix && (
@@ -47,8 +47,8 @@ export const SpriteSettings = () => {
         <input
           className="export-input"
           id="id-suffix"
-          type="text"
           onChange={handleSuffixChange}
+          type="text"
           value={state.settings.sprite.suffix}
         />
         {state.settings.sprite.suffix && (

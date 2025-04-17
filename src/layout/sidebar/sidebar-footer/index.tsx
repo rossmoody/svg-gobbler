@@ -5,18 +5,15 @@ import {
 } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
 import { links } from 'src/constants/links'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
+
 import { FeedbackItem } from './feedback-item'
 import { ResetEnvironment } from './reset-environment'
 
 export const SideFooter = () => {
-  function navigateToChromeWebStore() {
-    window.open(links.chromeWebstore, '_blank')
-  }
-
   return (
     <footer>
-      <h2 id="settings-heading" className="sr-only">
+      <h2 className="sr-only" id="settings-heading">
         User Settings
       </h2>
       <ul aria-labelledby="settings-heading">
@@ -45,4 +42,8 @@ export const SideFooter = () => {
       </ul>
     </footer>
   )
+}
+
+function navigateToChromeWebStore() {
+  window.open(links.chromeWebstore, '_blank')
 }

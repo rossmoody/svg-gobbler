@@ -10,9 +10,9 @@ export const SidebarContent = () => {
       <div className="mt-2 flex h-16 shrink-0 items-center">
         <Logo className="h-8 w-auto" />
       </div>
-      <nav className="flex flex-1 flex-col" aria-label="Main Navigation">
+      <nav aria-label="Main Navigation" className="flex flex-1 flex-col">
         <div className="-mx-2 flex flex-1 flex-col gap-1.5">
-          <h2 id="collections-heading" className="sr-only">
+          <h2 className="sr-only" id="collections-heading">
             Collections
           </h2>
           <SidebarHeader />

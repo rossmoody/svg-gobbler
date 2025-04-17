@@ -7,14 +7,14 @@ import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProps, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
-import { FormUtils } from 'src/utils/form-utils'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const UploadModal = ({ open, setOpen }: ModalProps) => {
   const [error, setError] = useState(false)
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
-  const ref = useRef<HTMLTextAreaElement>(null)
+  const reference = useRef<HTMLTextAreaElement>(null)
   const upload = useUpload()
   const { dispatch, state } = useUser()
 
@@ -23,15 +23,15 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
     maxSize: 10 * 1024 * 1024,
     multiple: true,
     onDropAccepted: (files) => {
-      setAcceptedFiles((prevFiles) => [...prevFiles, ...files])
+      setAcceptedFiles((previousFiles) => [...previousFiles, ...files])
     },
   })
 
   async function onSubmit() {
-    const clipboardValue = ref.current?.value
+    const clipboardValue = reference.current?.value
 
     // Early return if there's a clipboard value and it's invalid
-    if (clipboardValue && !FormUtils.isValidSVG(clipboardValue)) {
+    if (clipboardValue && !FormUtilities.isValidSVG(clipboardValue)) {
       return setError(true)
     }
 
@@ -41,14 +41,14 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
         ...state,
         onboarding: { ...state.onboarding, hasPastedSvg: true },
       }
-      StorageUtils.setStorageData('user', payload)
+      StorageUtilities.setStorageData('user', payload)
       dispatch({ payload, type: 'set-user' })
     }
 
     // Determine the source of files
     const svgFiles = clipboardValue
       ? [{ name: nanoid(), svg: clipboardValue }]
-      : await FormUtils.handleUpload(acceptedFiles)
+      : await FormUtilities.handleUpload(acceptedFiles)
 
     // Perform the upload and clear states
     await upload(svgFiles)
@@ -92,7 +92,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
                 leave="transition-all duration-300 ease-in-out"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-70"
-                show={acceptedFiles.length < 1}
+                show={acceptedFiles.length === 0}
                 unmount={false}
               >
                 <DocumentPlusIcon
@@ -137,7 +137,7 @@ export const UploadModal = ({ open, setOpen }: ModalProps) => {
             <textarea
               className={clsx('input mt-4 h-52', error && 'input-invalid')}
               onFocus={() => setError(false)}
-              ref={ref}
+              ref={reference}
             />
             {error && (
               <span

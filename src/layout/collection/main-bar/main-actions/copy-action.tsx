@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { useCollection, useDashboard } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { useMainActions } from './use-main-actions'
 
@@ -10,14 +10,14 @@ export const CopyItemModal = () => {
   const { state: dashboardState } = useDashboard()
   const { state: collectionState } = useCollection()
   const { copySelectedItems } = useMainActions()
-  const collectionSelectRef = useRef<HTMLSelectElement>(null)
+  const collectionSelectReference = useRef<HTMLSelectElement>(null)
 
   const openModal = () => {
     setModalOpen(true)
   }
 
   const copyItemsToCollection = () => {
-    const selectedCollectionId = collectionSelectRef.current?.value
+    const selectedCollectionId = collectionSelectReference.current?.value
     if (!selectedCollectionId) return
     copySelectedItems(selectedCollectionId)
     setModalOpen(false)
@@ -40,7 +40,7 @@ export const CopyItemModal = () => {
           <label className="label" htmlFor="collection">
             {loc('main_name')}
           </label>
-          <select className="select" id="collection" ref={collectionSelectRef}>
+          <select className="select" id="collection" ref={collectionSelectReference}>
             {options.map((collection) => (
               <option key={collection.id} value={collection.id}>
                 {collection.name}

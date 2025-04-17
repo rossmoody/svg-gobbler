@@ -11,15 +11,15 @@ export class GElement extends Svg {
   private processG() {
     const offDomContainer = document.createElement('div')
     offDomContainer.style.visibility = 'hidden'
-    document.body.appendChild(offDomContainer)
+    document.body.append(offDomContainer)
 
     const svg = this.createSvgElement()
-    offDomContainer.appendChild(svg)
+    offDomContainer.append(svg)
     svg.innerHTML = this.svg
 
     const gElement = svg.querySelector('g') as SVGGElement
     const bBox = gElement.getBBox()
-    document.body.removeChild(offDomContainer)
+    offDomContainer.remove()
 
     svg.setAttribute('viewBox', `${bBox.x} ${bBox.y} ${bBox.width} ${bBox.height}`)
 
@@ -29,6 +29,6 @@ export class GElement extends Svg {
 
   private removeXlinkHref() {
     // parseFromString fails to parse xlink:href as it is deprecated
-    this.svg = this.svg.replace(/xlink:href/g, 'href')
+    this.svg = this.svg.replaceAll('xlink:href', 'href')
   }
 }

@@ -21,7 +21,9 @@ export class SvgSymbol extends Svg {
     symbol.setAttribute('id', id)
 
     const viewBox = symbol.getAttribute('viewBox')
-    viewBox && svg.setAttribute('viewBox', viewBox)
+    if (viewBox) {
+      svg.setAttribute('viewBox', viewBox)
+    }
 
     svg.append(symbol, useElement)
 

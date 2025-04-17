@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { IconButton, Tooltip } from 'src/components'
 import { useDetails } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { PreviewBackgroundButton } from './preview-background-btn'
 

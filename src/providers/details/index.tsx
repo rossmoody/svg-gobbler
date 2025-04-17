@@ -1,13 +1,13 @@
-import { Dispatch, PropsWithChildren, createContext, useContext, useMemo, useReducer } from 'react'
+import { createContext, Dispatch, PropsWithChildren, useContext, useMemo, useReducer } from 'react'
 
-import { DetailsAction, DetailsState, detailsReducer, initDetailsState } from './reducer'
+import { DetailsAction, detailsReducer, DetailsState, initDetailsState } from './reducer'
 
-export type DetailsContextProps = {
+export type DetailsContextProperties = {
   dispatch: Dispatch<DetailsAction>
   state: DetailsState
 }
 
-const DetailsContext = createContext({} as DetailsContextProps)
+const DetailsContext = createContext({} as DetailsContextProperties)
 
 export const DetailsProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(detailsReducer, initDetailsState)

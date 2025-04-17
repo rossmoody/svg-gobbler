@@ -1,7 +1,7 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 import { IconButton, Tooltip } from 'src/components'
 import { useColorMode } from 'src/hooks'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const ThemeButton = () => {
   const { colorMode, toggleColorMode } = useColorMode()

@@ -1,11 +1,11 @@
 import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef } from 'react'
 import { useCollection } from 'src/providers'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 export const SelectionControl = () => {
   const { dispatch: collectionDispatch, state: collectionState } = useCollection()
-  const checkboxRef = useRef<HTMLInputElement>(null)
+  const checkboxReference = useRef<HTMLInputElement>(null)
 
   const selectedItems = collectionState.selected.length
   const availableItems = collectionState.data.filter((item) => !item.corsRestricted).length
@@ -20,8 +20,8 @@ export const SelectionControl = () => {
   }
 
   useEffect(() => {
-    if (checkboxRef.current === null) return
-    checkboxRef.current.indeterminate = selectedItems > 0 && !allItemsAreSelected
+    if (checkboxReference.current === null) return
+    checkboxReference.current.indeterminate = selectedItems > 0 && !allItemsAreSelected
   }, [selectedItems, availableItems, allItemsAreSelected])
 
   return (
@@ -41,7 +41,7 @@ export const SelectionControl = () => {
           className="checkbox"
           id="select"
           onChange={handleCheckboxChange}
-          ref={checkboxRef}
+          ref={checkboxReference}
           type="checkbox"
         />
         <label className="cursor-pointer text-xs font-medium leading-none" htmlFor="select">

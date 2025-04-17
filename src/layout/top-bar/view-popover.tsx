@@ -6,16 +6,17 @@ import { Badge, btnBaseStyles, btnSizeStyles, btnVariantStyles } from 'src/compo
 import { transitions } from 'src/constants/transitions'
 import { useCollection, UserState, useUser } from 'src/providers'
 import { CollectionData } from 'src/types'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
-import { ViewNameFeatureNotice } from './view-name-feature-notice'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-type ViewOptionValue = keyof CollectionData['view']['filters']
+import { ViewNameFeatureNotice } from './view-name-feature-notice'
 
 type ViewOption = {
   label: string
   value: ViewOptionValue
 }
+
+type ViewOptionValue = keyof CollectionData['view']['filters']
 
 const viewOptions: ViewOption[] = [
   { label: loc('view_always_show_size'), value: 'show-size' },
@@ -25,12 +26,12 @@ const viewOptions: ViewOption[] = [
 
 export const ViewPopover = () => {
   const { dispatch, state } = useCollection()
-  const { state: userState, dispatch: userDispatch } = useUser()
+  const { dispatch: userDispatch, state: userState } = useUser()
 
-  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { checked, name } = e.currentTarget
+  function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { checked, name } = event.currentTarget
     const filters = { ...state.view.filters, [name]: checked }
-    StorageUtils.setStorageData('view', { ...state.view, filters })
+    StorageUtilities.setStorageData('view', { ...state.view, filters })
     dispatch({ payload: { ...state.view, filters }, type: 'set-view' })
     dispatch({ type: 'process-data' })
   }
@@ -47,7 +48,7 @@ export const ViewPopover = () => {
         type: 'set-user',
       })
 
-      StorageUtils.setStorageData('user', user)
+      StorageUtilities.setStorageData('user', user)
     }
   }
 
@@ -89,7 +90,7 @@ export const ViewPopover = () => {
                 >
                   {option.label}
                   {option.value === 'hide-cors' && (
-                    <Badge text={`${corsRestrictedCount}`} className="ml-2" />
+                    <Badge className="ml-2" text={`${corsRestrictedCount}`} />
                   )}
                 </label>
               </div>

@@ -5,7 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { useDashboard } from 'src/providers/dashboard'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { SidebarContent } from './sidebar-content'
 

@@ -895,5 +895,71 @@
   },
   "settings_export__desc": {
     "message": "Gérer et exporter des données dans divers formats depuis SVG Gobbler."
+  },
+  "edit_apply": {
+    "message": "Appliquer"
+  },
+  "edit_applied": {
+    "message": "Appliqué"
+  },
+  "edit_properties": {
+    "message": "Propriétés"
+  },
+  "edit_custom_name": {
+    "message": "Nom personnalisé"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "Le nom de la propriété à appliquer à l'élément SVG"
+  },
+  "edit_custom_value": {
+    "message": "Valeur personnalisée"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "La valeur de la propriété à appliquer à l'élément SVG"
+  },
+  "edit_reset": {
+    "message": "Réinitialiser"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "Classe"
+  },
+  "edit_style": {
+    "message": "Style"
+  },
+  "edit_height": {
+    "message": "Hauteur"
+  },
+  "edit_width": {
+    "message": "Largeur"
+  },
+  "edit_viewbox": {
+    "message": "viewBox"
+  },
+  "edit_fill": {
+    "message": "Remplissage"
+  },
+  "edit_id_tooltip": {
+    "message": "La chaîne à appliquer à la propriété id sur les SVG sélectionnés. Remplacera l'id existant"
+  },
+  "edit_class_tooltip": {
+    "message": "La chaîne à appliquer à la propriété class sur les SVG sélectionnés. Remplacera la classe existante"
+  },
+  "edit_style_tooltip": {
+    "message": "La chaîne à appliquer à la propriété style sur les SVG sélectionnés. Remplacera le style existant"
+  },
+  "edit_height_tooltip": {
+    "message": "La chaîne à appliquer à la propriété height sur les SVG sélectionnés. Remplacera la hauteur existante"
+  },
+  "edit_width_tooltip": {
+    "message": "La chaîne à appliquer à la propriété width sur les SVG sélectionnés. Remplacera la largeur existante"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "La chaîne à appliquer à la propriété viewBox sur les SVG sélectionnés. Remplacera le viewBox existant"
+  },
+  "edit_fill_tooltip": {
+    "message": "La chaîne à appliquer à la propriété fill sur les SVG sélectionnés. Remplacera le remplissage existant"
   }
 }

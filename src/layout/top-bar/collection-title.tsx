@@ -1,8 +1,8 @@
 import { Transition } from '@headlessui/react'
 import { useMemo } from 'react'
 import { useCollection, useDashboard } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const CollectionTitle = () => {
   const { state: mainState } = useCollection()
@@ -11,12 +11,6 @@ export const CollectionTitle = () => {
   const title = useMemo(() => {
     return sidebarState.collections.find((c) => c.id === mainState.collectionId)?.name
   }, [mainState.collectionId, sidebarState.collections])
-
-  function handleKeyDown(event: React.KeyboardEvent<HTMLHeadingElement>) {
-    if (event.key === 'Enter') {
-      event.currentTarget.blur()
-    }
-  }
 
   function handleBlur(event: React.FocusEvent<HTMLHeadingElement>) {
     const newTitle = event.target.textContent ?? loc('topbar_collection')
@@ -29,7 +23,7 @@ export const CollectionTitle = () => {
         return c
       })
       sidebarDispatch({ payload: newCollections, type: 'set-collections' })
-      StorageUtils.setStorageData('collections', newCollections)
+      StorageUtilities.setStorageData('collections', newCollections)
     }
     // Reset scroll position for overflow-ellipsis
     event.currentTarget.scrollLeft = 0
@@ -38,11 +32,11 @@ export const CollectionTitle = () => {
   return (
     <Transition
       appear
+      className="-ml-2 flex min-w-0 flex-1 rounded-md"
       enter="transition-all ease-linear duration-500"
       enterFrom="opacity-0 translate-y-1"
       enterTo="opacity-100 translate-y-0"
       show={!!title}
-      className="-ml-2 flex min-w-0 flex-1 rounded-md"
     >
       <h1
         className="focus min-w-0 overflow-hidden overflow-ellipsis whitespace-nowrap rounded-md px-2 py-1 text-lg font-semibold hover:bg-gray-100 focus:text-clip dark:hover:bg-gray-800"
@@ -55,4 +49,10 @@ export const CollectionTitle = () => {
       </h1>
     </Transition>
   )
+}
+
+function handleKeyDown(event: React.KeyboardEvent<HTMLHeadingElement>) {
+  if (event.key === 'Enter') {
+    event.currentTarget.blur()
+  }
 }

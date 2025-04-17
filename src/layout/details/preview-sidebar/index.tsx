@@ -1,5 +1,5 @@
 import { Tabs } from 'src/components'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { DataURI } from './preview-data-uri'
 import { PreviewReact } from './preview-react'

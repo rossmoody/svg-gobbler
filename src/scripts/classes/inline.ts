@@ -25,8 +25,8 @@ export class Inline extends Svg {
     const height = svg.getAttribute('height')
 
     if (width && height) {
-      const cleanWidth = width.replace(/[^0-9.]/g, '')
-      const cleanHeight = height.replace(/[^0-9.]/g, '')
+      const cleanWidth = width.replaceAll(/[^0-9.]/g, '')
+      const cleanHeight = height.replaceAll(/[^0-9.]/g, '')
 
       if (cleanWidth && cleanHeight) {
         svg.setAttribute('viewBox', `0 0 ${cleanWidth} ${cleanHeight}`)
@@ -40,8 +40,8 @@ export class Inline extends Svg {
         svg.setAttribute('viewBox', `${bBox.x} ${bBox.y} ${bBox.width} ${bBox.height}`)
         return
       }
-    } catch (error) {
-      console.warn('Failed to get SVG dimensions using getBBox(): ', this.name)
+    } catch {
+      console.warn('Failed to get SVG dimensions using getBBox():', this.name)
     }
   }
 }

@@ -2,13 +2,13 @@ import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
-import { CollectionState, type UserState, initCollectionState, initUserState } from 'src/providers'
+import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
-import { logger } from 'src/utils/logger'
-import { RootUtils } from 'src/utils/root-utils'
-import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { logger } from 'src/utilities/logger'
+import { RootUtilities } from 'src/utilities/root-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 /**
  * The primary initialization function for the root route.
@@ -20,36 +20,45 @@ export async function rootLoader() {
   return defer({
     collectionId: (async () => {
       // Initialize user
-      let user = await StorageUtils.getStorageData<UserState>('user')
+      let user = await StorageUtilities.getStorageData<UserState>('user')
       user = _.merge(initUserState, user)
-      await StorageUtils.setStorageData('user', user)
+      await StorageUtilities.setStorageData('user', user)
 
       // Initialize the view state
-      let view = await StorageUtils.getStorageData<CollectionState['view']>('view')
+      let view = await StorageUtilities.getStorageData<CollectionState['view']>('view')
       view = _.merge(initCollectionState.view, view)
-      await StorageUtils.setStorageData('view', view)
+      await StorageUtilities.setStorageData('view', view)
 
       // Initialize the plugins for the export panel
-      let plugins = await StorageUtils.getStorageData<SvgoPlugin[]>('plugins')
+      let plugins = await StorageUtilities.getStorageData<SvgoPlugin[]>('plugins')
       plugins = _.assign([], plugins)
-      await StorageUtils.setStorageData('plugins', plugins)
+      await StorageUtilities.setStorageData('plugins', plugins)
 
       // Get all collections from storage for sidenav
-      const prevCollections = (await StorageUtils.getStorageData<Collection[]>('collections')) ?? []
+      const previousCollections =
+        (await StorageUtilities.getStorageData<Collection[]>('collections')) ?? []
+
+      // Early return if the user is refreshing
+      const navigationEntries = performance.getEntriesByType(
+        'navigation',
+      ) as PerformanceNavigationTiming[]
+      if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
+        return previousCollections[0].id
+      }
 
       try {
         // Get the strings from the client page. This will fail on refresh and force the catch
         const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
 
         // On a settings page and has a collection, send to the first collection
-        if (!data.origin && prevCollections.length) {
+        if (!data.origin && previousCollections.length > 0) {
           throw new Error('Browser system page, send to first collection')
         }
 
         // Create classes and process the raw svg elements
         const svgClasses = await svgFactory.process(data)
 
-        const storageSvgs = SvgUtils.createStorageSvgs(svgClasses)
+        const storageSvgs = SvgUtilities.createStorageSvgs(svgClasses)
 
         // Create the sourced page data object
         let pageData: PageData = {
@@ -68,18 +77,18 @@ export async function rootLoader() {
         }
 
         // Establish the collections array
-        let collections = [...prevCollections]
+        let collections = [...previousCollections]
 
         // Merge the collections if the user has the setting and the URL is a duplicate
         if (
           user.settings.mergeCollections &&
-          RootUtils.isDuplicateURL(pageData.href, prevCollections)
+          RootUtilities.isDuplicateURL(pageData.href, previousCollections)
         ) {
-          collection = RootUtils.getExistingCollection(pageData.href, prevCollections)! // Because we checked for duplicates
-          const existingPageData = await StorageUtils.getPageData(collection.id)
-          pageData = RootUtils.mergePageData(existingPageData, pageData)
+          collection = RootUtilities.getExistingCollection(pageData.href, previousCollections)! // Because we checked for duplicates
+          const existingPageData = await StorageUtilities.getPageData(collection.id)
+          pageData = RootUtilities.mergePageData(existingPageData, pageData)
         } else {
-          collections = [collection, ...prevCollections]
+          collections = [collection, ...previousCollections]
         }
 
         // Sort the collections alphabetically if the user has the setting
@@ -87,8 +96,8 @@ export async function rootLoader() {
           collections = collections.sort((a, b) => a.name.localeCompare(b.name))
         }
 
-        await StorageUtils.setStorageData('collections', collections)
-        await StorageUtils.setPageData(collection.id, pageData)
+        await StorageUtilities.setStorageData('collections', collections)
+        await StorageUtilities.setPageData(collection.id, pageData)
 
         return collection.id
       } catch (error) {
@@ -96,7 +105,7 @@ export async function rootLoader() {
         // This catch is reached more than you'd think
         // 1. The listener has been removed, so the background script is no longer listening on refresh
         // 2. Send the user to the first collection if they invoke on a browser system page
-        return prevCollections[0].id
+        return previousCollections[0].id
       }
     })(),
   })

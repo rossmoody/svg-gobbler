@@ -1,8 +1,8 @@
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 /**
  * The primary initialization function for sidebar collections context.
  */
 export async function dashboardLoader() {
-  return await StorageUtils.getStorageData('collections')
+  return await StorageUtilities.getStorageData('collections')
 }

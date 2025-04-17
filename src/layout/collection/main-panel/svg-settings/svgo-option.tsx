@@ -3,26 +3,28 @@ import { HelpIcon } from 'src/components'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { useExport } from 'src/providers'
 
-type SvgoOptionProps = {
+type SvgoOptionProperties = {
   plugin: SvgoPlugin
 }
 
-export const SvgoOption = ({ plugin }: SvgoOptionProps) => {
+export const SvgoOption = ({ plugin }: SvgoOptionProperties) => {
   const { dispatch, state } = useExport()
 
   const isChecked = useMemo(() => {
     return state.settings.svg.svgoPlugins.some((p) => p.name === plugin.name)
   }, [state.settings.svg.svgoPlugins, plugin])
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.checked) {
-      case true:
-        dispatch({ payload: plugin, type: 'add-svgo-plugin' })
-        break
-
-      case false:
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    switch (event.target.checked) {
+      case false: {
         dispatch({ payload: plugin, type: 'remove-svgo-plugin' })
         break
+      }
+
+      case true: {
+        dispatch({ payload: plugin, type: 'add-svgo-plugin' })
+        break
+      }
     }
   }
 

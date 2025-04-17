@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid'
 import { useEffect } from 'react'
 import { type UserState, useUser } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-import { SvgUtils } from '../utils/svg-utils'
+import { SvgUtilities } from '../utilities/svg-utilities'
 import { useUpload } from './use-upload'
 
 /**
@@ -17,12 +17,12 @@ export const usePastedSvg = () => {
   useEffect(() => {
     const handlePaste = (event: ClipboardEvent) => {
       // Prevent pasting SVGs when the upload modal is visible
-      const uploadModalVisible = document.getElementById('upload-modal')
+      const uploadModalVisible = document.querySelector('#upload-modal')
       if (uploadModalVisible) return
 
       const pastedText = event.clipboardData?.getData('text/plain')
 
-      if (pastedText && SvgUtils.isValidSvg(pastedText)) {
+      if (pastedText && SvgUtilities.isValidSvg(pastedText)) {
         event.preventDefault()
         upload([{ name: nanoid(), svg: pastedText }])
 
@@ -30,14 +30,14 @@ export const usePastedSvg = () => {
           ...state,
           onboarding: { ...state.onboarding, hasPastedSvg: true, viewedSvgInClipboard: true },
         }
-        StorageUtils.setStorageData('user', payload)
+        StorageUtilities.setStorageData('user', payload)
         dispatch({ payload, type: 'set-user' })
       }
     }
 
-    window.addEventListener('paste', handlePaste)
+    globalThis.addEventListener('paste', handlePaste)
     return () => {
-      window.removeEventListener('paste', handlePaste)
+      globalThis.removeEventListener('paste', handlePaste)
     }
   }, [upload, state, dispatch])
 }

@@ -13,10 +13,12 @@ export const CardSelect = ({ data }: CardData) => {
 
   const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.checked) {
-      case true:
-        return dispatch({ payload: data, type: 'add-selected' })
-      case false:
+      case false: {
         return dispatch({ payload: data, type: 'remove-selected' })
+      }
+      case true: {
+        return dispatch({ payload: data, type: 'add-selected' })
+      }
     }
   }
 

@@ -4,16 +4,16 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button, Modal } from 'src/components'
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 import { useCreateCollection } from './use-create-collection'
 
-type Props = {
+type Properties = {
   open: boolean
   setOpen: (open: boolean) => void
 }
 
-export const NewCollectionModal = ({ open, setOpen }: Props) => {
+export const NewCollectionModal = ({ open, setOpen }: Properties) => {
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
   const onSubmitForm = useCreateCollection(acceptedFiles)
 
@@ -22,7 +22,7 @@ export const NewCollectionModal = ({ open, setOpen }: Props) => {
     maxSize: 10 * 1024 * 1024,
     multiple: true,
     onDropAccepted: (files) => {
-      setAcceptedFiles((prevFiles) => [...prevFiles, ...files])
+      setAcceptedFiles((previousFiles) => [...previousFiles, ...files])
     },
   })
 
@@ -57,7 +57,7 @@ export const NewCollectionModal = ({ open, setOpen }: Props) => {
             leave="transition-all duration-300 ease-in-out"
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-70"
-            show={acceptedFiles.length < 1}
+            show={acceptedFiles.length === 0}
             unmount={false}
           >
             <DocumentPlusIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />

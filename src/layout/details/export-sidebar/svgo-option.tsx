@@ -3,11 +3,11 @@ import { HelpIcon } from 'src/components'
 import { SvgoPlugin } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
 
-type Props = {
+type Properties = {
   plugin: SvgoPlugin
 }
 
-export const SvgoOption = ({ plugin }: Props) => {
+export const SvgoOption = ({ plugin }: Properties) => {
   const { dispatch, state } = useDetails()
 
   const isChecked = useMemo(() => {

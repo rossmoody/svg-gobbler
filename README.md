@@ -12,8 +12,6 @@ This extension is available on:
 - [Chrome Web store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
 - [Firefox Addon Marketplace](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
----
-
 <div align="center">
  <a href="https://svggobbler.com">
   <img src="assets/local/gobbler-screenshot.png">
@@ -28,9 +26,9 @@ optimize, download, copy, edit, or export.
 
 ### Find SVGs
 
-- Quickly find SVGs from a site by various placement methods like `base64` or `background src`
-- Handle CORs restricted SVGs from a page
-- Find individual sprite SVG instances
+- Quickly find SVGs from a site by various `mime` types
+- Handle CORs restricted SVGs
+- Find and rebuild individual sprite SVG instances
 
 ### Export SVGs
 
@@ -45,8 +43,6 @@ optimize, download, copy, edit, or export.
 - Group and categorize SVGs by their primary domain or custom collection name
 - Move, copy, duplicate, and optimize icons before sharing
 - Save and store a set of uploaded SVGs for optimization
-
----
 
 ## Local development
 
@@ -63,7 +59,7 @@ cd svg-gobbler
 
 ### 2. Install dependencies
 
-SVG Gobbler uses yarn to build the necessary dependencies.
+SVG Gobbler uses pnpm to build the necessary dependencies.
 
 ```shell
 pnpm i
@@ -71,20 +67,22 @@ pnpm i
 
 ### 3. Start and watch a build
 
-For development with hot reloading use Vite:
+On the initial build of the extension, you will need to build the assets for the bundle.
+
+```bash
+pnpm start
+```
+
+This will build the assets to the `dist` folder and watch for changes. For subsequent builds you
+only need to run:
 
 ```bash
 pnpm dev
 ```
 
-This will build to the `dist` folder. To load the extension, open the Extensions Dashboard, enable
-"Developer mode", click "Load unpacked", and choose the `dist` folder.
-
-When you make changes in src the background script and any content script will reload automatically.
-
 ### 4. Start the server (optional)
 
-Most functionality works without a server, but if you need to make local fetch calls, open a
+Most functionality works without a server, but if you want to make local fetch calls, open a
 separate terminal, navigate to the `server` directory, and start the server from there.
 
 ```bash
@@ -111,11 +109,26 @@ pnpm serve
 
 This will startup the server and restart it any time a change is recompiled.
 
----
+## Loading the Extension
+
+### 1. Open the extensions page in your browser
+
+To load the extension, open the extensions area within your browser by navigating to
+`chrome://extensions`
+
+### 2. Enable "Developer mode"
+
+Click the toggle in the top right of the screen to enable developer mode.
+
+### 3. Load the extnesion
+
+Click "Load unpacked", and choose the `dist` folder
+
+When you make changes in src the background script and any content script will reload automatically.
 
 ## About
 
-5 versions and 7+ years ago, this started as a pet project to improve the
+5 major versions and 7+ years ago, this started as a pet project to improve the
 [SVG Crowbar](https://github.com/nytimes/svg-crowbar) tool that is no longer being maintained by NY
 Times.
 
@@ -133,6 +146,7 @@ This project benefits from some incredibly talented folks.
 - [JSZip](https://stuk.github.io/jszip/): Zipping files for download
 - [Mini SVG Data URI](https://github.com/tigt/mini-svg-data-uri): Minify SVG data URIs
 - [React Router](https://reactrouter.com/en/main): App routing
+- [DND-Kit](https://dndkit.com/): Drag and drop functionality
 
 ### Open source
 

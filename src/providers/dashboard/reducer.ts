@@ -1,5 +1,11 @@
 import type { Collection } from 'src/types'
 
+export type DashboardAction =
+  | { payload: boolean; type: 'set-open' }
+  | { payload: Collection; type: 'set-collection-icon' }
+  | { payload: Collection[]; type: 'set-collections' }
+  | { type: 'reset' }
+
 export type DashboardState = {
   /**
    * The collections that are available to the user.
@@ -11,12 +17,6 @@ export type DashboardState = {
   isOpen: boolean
 }
 
-export type DashboardAction =
-  | { payload: Collection; type: 'set-collection-icon' }
-  | { payload: Collection[]; type: 'set-collections' }
-  | { payload: boolean; type: 'set-open' }
-  | { type: 'reset' }
-
 export const initDashboardState: DashboardState = {
   collections: [],
   isOpen: false,
@@ -24,6 +24,10 @@ export const initDashboardState: DashboardState = {
 
 export const dashboardReducer = (state: DashboardState, action: DashboardAction) => {
   switch (action.type) {
+    case 'reset': {
+      return initDashboardState
+    }
+
     case 'set-collection-icon': {
       return {
         ...state,
@@ -43,10 +47,6 @@ export const dashboardReducer = (state: DashboardState, action: DashboardAction)
 
     case 'set-open': {
       return { ...state, isOpen: action.payload }
-    }
-
-    case 'reset': {
-      return initDashboardState
     }
 
     default: {

@@ -13,14 +13,6 @@ export type BackgroundMessage = {
 }
 
 /**
- * The model for data stored and gathered from the document.
- * This is really collection data.
- */
-export type PageData = {
-  data: StorageSvg[]
-} & DocumentData
-
-/**
  * The model of a collection that is stored in local storage.
  */
 export type Collection = {
@@ -82,13 +74,13 @@ export type CollectionData = {
        */
       'hide-cors': boolean
       /**
-       * Show or hide the size of the icon on the card
-       */
-      'show-size': boolean
-      /**
        * Whether to show the name of the icon on the card
        */
       'show-name': boolean
+      /**
+       * Show or hide the size of the icon on the card
+       */
+      'show-size': boolean
     }
     /**
      * The size of the icons in the collection
@@ -98,20 +90,25 @@ export type CollectionData = {
      * The sort order of the collection
      */
     sort:
+      | 'alphabetical-asc'
+      | 'alphabetical-desc'
       | 'file-asc'
       | 'file-desc'
       | 'last-asc'
       | 'last-desc'
       | 'none'
-      | 'alphabetical-asc'
-      | 'alphabetical-desc'
   }
 }
 
 /**
+ * The database keys
+ */
+export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
+
+/**
  * The params passed to a standard details route.
  */
-export type DetailsParams = {
+export type DetailsParameters = {
   /**
    * The id of the collection.
    */
@@ -127,11 +124,6 @@ export type DetailsParams = {
 }
 
 /**
- * The database keys
- */
-export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
-
-/**
  * The model for SVG files imported from the local file system.
  */
 export type FileSvg = {
@@ -143,4 +135,12 @@ export type FileSvg = {
    * The SVG string of the file
    */
   svg: string
+}
+
+/**
+ * The model for data stored and gathered from the document.
+ * This is really collection data.
+ */
+export type PageData = DocumentData & {
+  data: StorageSvg[]
 }

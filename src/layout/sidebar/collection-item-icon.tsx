@@ -3,9 +3,9 @@ import Picker from '@emoji-mart/react'
 import { Popover } from '@headlessui/react'
 import { useCallback, useMemo } from 'react'
 import { useDashboard } from 'src/providers'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-import { type CollectionItemProps } from './collection-item'
+import { type CollectionItemProperties } from './collection-item'
 
 type EmojiMartData = {
   id: string
@@ -16,7 +16,7 @@ type EmojiMartData = {
   unified: string
 }
 
-export const CollectionItemIcon = ({ collection }: CollectionItemProps) => {
+export const CollectionItemIcon = ({ collection }: CollectionItemProperties) => {
   const { dispatch, state } = useDashboard()
   const { emoji, name, origin } = collection
 
@@ -27,7 +27,7 @@ export const CollectionItemIcon = ({ collection }: CollectionItemProps) => {
         c.id === collection.id ? updatedCollection : c,
       )
       dispatch({ payload: updatedCollection, type: 'set-collection-icon' })
-      StorageUtils.setStorageData('collections', updatedCollections)
+      StorageUtilities.setStorageData('collections', updatedCollections)
     },
     [collection, state.collections, dispatch],
   )

@@ -3,30 +3,30 @@ import { merge } from 'lodash'
 import { useCallback, useRef } from 'react'
 import { IconButton, Tooltip } from 'src/components'
 import { useCollection, useUser } from 'src/providers'
-import { loc } from 'src/utils/i18n'
-import { StorageUtils } from 'src/utils/storage-utils'
+import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 import { CardColorOnboarding } from './card-color-onboarding'
 
 export const CardColorButton = () => {
   const { dispatch: userDispatch, state: userState } = useUser()
   const { dispatch, state } = useCollection()
-  const colorInputRef = useRef<HTMLInputElement>(null)
+  const colorInputReference = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
-    colorInputRef.current?.click()
+    colorInputReference.current?.click()
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ payload: e.target.value, type: 'set-canvas-color' })
-    StorageUtils.setStorageData('view', { ...state.view, canvas: e.target.value })
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ payload: event.target.value, type: 'set-canvas-color' })
+    StorageUtilities.setStorageData('view', { ...state.view, canvas: event.target.value })
   }
 
   const onFocus = useCallback(() => {
     if (!userState.onboarding.viewedCardColor) {
       const newUser = merge(userState, { onboarding: { viewedCardColor: true } })
       userDispatch({ payload: newUser, type: 'set-user' })
-      StorageUtils.setStorageData('user', newUser)
+      StorageUtilities.setStorageData('user', newUser)
     }
   }, [userDispatch, userState])
 
@@ -43,7 +43,7 @@ export const CardColorButton = () => {
         <input
           className="sr-only"
           onChange={handleChange}
-          ref={colorInputRef}
+          ref={colorInputReference}
           type="color"
           value={state.view.canvas}
         />

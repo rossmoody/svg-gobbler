@@ -1,12 +1,12 @@
 import type { PluginConfig } from 'svgo'
 
-import { loc } from 'src/utils/i18n'
+import { loc } from 'src/utilities/i18n'
 
 /**
  * A standard plugin config for SVGO. The types for PluginConfig are weird but to make it play
  * nicely with the optimize function we include it and re-add the properties.
  */
-export type SvgoPlugin = {
+export type SvgoPlugin = Extract<PluginConfig, { name: string }> & {
   /**
    * The help text to display for this plugin to explain generally what it does
    */
@@ -19,7 +19,7 @@ export type SvgoPlugin = {
    * The default params for this plugin
    */
   params?: Record<string, unknown>
-} & Extract<PluginConfig, { name: string }>
+}
 
 export const defaultSvgoPlugins: SvgoPlugin[] = [
   {

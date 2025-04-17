@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
-import { FormUtils } from 'src/utils/form-utils'
-import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 export const useCreateCollection = (files: File[]) => {
   const navigate = useNavigate()
@@ -17,8 +17,8 @@ export const useCreateCollection = (files: File[]) => {
     const formData = new FormData(event.currentTarget)
     const name = formData.get('name') as string
     const id = nanoid()
-    const svgFileData = await FormUtils.handleUpload(files)
-    const svgStorageData: StorageSvg[] = svgFileData.map(SvgUtils.createStorageSvg)
+    const svgFileData = await FormUtilities.handleUpload(files)
+    const svgStorageData: StorageSvg[] = svgFileData.map(SvgUtilities.createStorageSvg)
 
     const pageData: PageData = {
       data: svgStorageData,
@@ -36,12 +36,12 @@ export const useCreateCollection = (files: File[]) => {
 
     const collections = [collection, ...state.collections]
 
-    await StorageUtils.setPageData(id, pageData)
-    await StorageUtils.setStorageData('collections', collections)
+    await StorageUtilities.setPageData(id, pageData)
+    await StorageUtilities.setStorageData('collections', collections)
     dispatch({ payload: collections, type: 'set-collections' })
     navigate(`/dashboard/collection/${id}`)
 
     // Close the modal, I'm being lazy here
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
   }
 }

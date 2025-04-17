@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { Inline } from 'src/scripts'
-import { FormUtils } from 'src/utils/form-utils'
-import { StorageUtils } from 'src/utils/storage-utils'
-import { SvgUtils } from 'src/utils/svg-utils'
+import { FormUtilities } from 'src/utilities/form-utilities'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 import { optimize } from 'svgo'
 
 export const useCardActions = (data: Svg) => {
@@ -22,36 +22,36 @@ export const useCardActions = (data: Svg) => {
       svg: data.svg,
     }
     const newData = [new Inline(storageSvgDuplicate), ...state.data]
-    const pageData = await StorageUtils.getPageData(state.collectionId)
-    StorageUtils.setPageData(state.collectionId, {
+    const pageData = await StorageUtilities.getPageData(state.collectionId)
+    StorageUtilities.setPageData(state.collectionId, {
       ...pageData,
-      data: SvgUtils.createStorageSvgs(newData),
+      data: SvgUtilities.createStorageSvgs(newData),
     })
     revalidate()
   }
 
   async function deleteItem() {
     const filteredData = state.data.filter((item) => item.id !== data.id)
-    const pageData = await StorageUtils.getPageData(state.collectionId)
-    StorageUtils.setPageData(state.collectionId, {
+    const pageData = await StorageUtilities.getPageData(state.collectionId)
+    StorageUtilities.setPageData(state.collectionId, {
       ...pageData,
-      data: SvgUtils.createStorageSvgs(filteredData),
+      data: SvgUtilities.createStorageSvgs(filteredData),
     })
     revalidate()
   }
 
   function copyOriginal() {
-    FormUtils.copyStringToClipboard(data.svg)
+    FormUtilities.copyStringToClipboard(data.svg)
   }
 
   async function copyOptimized() {
     const optimizedString = optimize(data.svg)
-    FormUtils.copyStringToClipboard(optimizedString.data)
+    FormUtilities.copyStringToClipboard(optimizedString.data)
   }
 
   async function downloadOriginal() {
-    const pageData = await StorageUtils.getPageData(state.collectionId)
-    FormUtils.downloadSvgString(data.svg, pageData.host)
+    const pageData = await StorageUtilities.getPageData(state.collectionId)
+    FormUtilities.downloadSvgString(data.svg, pageData.host)
   }
 
   return {
