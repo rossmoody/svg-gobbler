@@ -26,6 +26,7 @@ export default tseslint.config([
       },
     },
     rules: {
+      '@typescript-eslint/ban-ts-comment': 'off',
       'unicorn/consistent-function-scoping': 'off',
       'unicorn/no-array-callback-reference': 'off',
     },

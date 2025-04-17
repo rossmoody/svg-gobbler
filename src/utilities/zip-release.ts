@@ -6,7 +6,7 @@ import packageJson from '../../package.json' assert { type: 'json' }
 
 const rootPath = process.cwd()
 const distributionPath = path.join(rootPath, 'dist')
-const fileName = `${packageJson.version}.zip`
+const fileName = `chrome-${packageJson.version}.zip`
 const outputPath = path.join(rootPath, 'releases', fileName)
 
 // Create releases folder if not exists

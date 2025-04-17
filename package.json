@@ -10,8 +10,8 @@
     "build": "tsc && vite build",
     "clean": "rm -rf dist",
     "dev": "vite",
-    "release": "pnpm build && npx ts-node --esm src/utils/zip-release.ts && pnpm release-ff",
-    "release-ff": "cd dist && web-ext build -o"
+    "release": "pnpm build && npx ts-node --esm src/utilities/zip-release.ts && pnpm release-ff",
+    "release-ff": "cd dist && web-ext build -o -a ../releases"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.9",
