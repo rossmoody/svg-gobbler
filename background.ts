@@ -77,7 +77,19 @@ const Background = {
       } as DocumentData
 
       const activeTab = await Extension.getActiveTab()
-      if (Extension.isExtensionTab(activeTab)) return
+
+      // If the extensions is on a system page we bail entirely
+      if (Extension.isExtensionTab(activeTab)) {
+        return
+      }
+
+      // If the extension is on a new tab page we create a new tab and bail early
+      // The extension won't have a listener on the new tab page and will fail gracefully
+      if (Extension.isNewTabPage(activeTab)) {
+        Extension.createNewTab()
+        return
+      }
+
       data = await Extension.executeScript(activeTab.id!, findSvg)
 
       chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {

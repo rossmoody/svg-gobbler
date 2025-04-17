@@ -78,6 +78,18 @@ class Extension {
         activeTab.url.startsWith('moz-extension://'))
     )
   }
+
+  /**
+   * Checks if the extension is on a new tab page
+   */
+  isNewTabPage(activeTab: chrome.tabs.Tab) {
+    return (
+      activeTab &&
+      activeTab.id &&
+      activeTab.url &&
+      (activeTab.url.startsWith('chrome://newtab') || activeTab.url.startsWith('about:newtab'))
+    )
+  }
 }
 
 export default new Extension()
