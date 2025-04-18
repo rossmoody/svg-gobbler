@@ -1,5 +1,5 @@
 import { DocumentData, findSvg } from 'src/scripts'
-import Extension from 'src/utilities/extension-utilities'
+import { extension } from 'src/utilities/extension-utilities'
 
 /**
  * Functions related to initializing the extension. This includes setting the
@@ -44,7 +44,7 @@ const Background = {
           }
         }
         chrome.runtime.onMessage.addListener(listener)
-        await Extension.createNewTab()
+        await extension.createNewTab()
       }
     }
 
@@ -57,7 +57,7 @@ const Background = {
   launchOnboardingExperience() {
     chrome.runtime.onInstalled.addListener(async (details) => {
       if (details.reason === 'install') {
-        await Extension.createNewTab('onboarding.html')
+        await extension.createNewTab('onboarding.html')
       }
     })
   },
@@ -76,21 +76,21 @@ const Background = {
         origin: '',
       } as DocumentData
 
-      const activeTab = await Extension.getActiveTab()
+      const activeTab = await extension.getActiveTab()
 
       // If the extensions is on a system page we bail entirely
-      if (Extension.isExtensionTab(activeTab)) {
+      if (extension.isExtensionTab(activeTab)) {
         return
       }
 
       // If the extension is on a new tab page we create a new tab and bail early
       // The extension won't have a listener on the new tab page and will fail gracefully
-      if (Extension.isNewTabPage(activeTab)) {
-        Extension.createNewTab()
+      if (extension.isNewTabPage(activeTab)) {
+        extension.createNewTab()
         return
       }
 
-      data = await Extension.executeScript(activeTab.id!, findSvg)
+      data = await extension.executeScript(activeTab.id!, findSvg)
 
       chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
         if (request === 'gobble') {
@@ -99,7 +99,7 @@ const Background = {
         }
       })
 
-      await Extension.createNewTab()
+      await extension.createNewTab()
     }
 
     chrome.action.onClicked.addListener(onClickHandler)
@@ -109,7 +109,7 @@ const Background = {
    * Load the development icon if the extension is running in development mode.
    */
   async setExtensionIcons() {
-    if (Extension.isFirefox) {
+    if (extension.isFirefox) {
       return
     }
 

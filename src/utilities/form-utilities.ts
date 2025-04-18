@@ -8,7 +8,7 @@ import { buildSpriteAndDemo } from './sprite-builder'
 /**
  * Utility class for form related operations like upload, download, and copy.
  */
-export const FormUtilities = {
+export const formUtilities = {
   /**
    * Builds a valid SVG element from a given string.
    *

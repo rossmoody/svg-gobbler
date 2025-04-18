@@ -7,7 +7,7 @@ import { useDropzone } from 'react-dropzone'
 import { Button, Modal, ModalProperties, Tabs } from 'src/components'
 import { useUpload } from 'src/hooks'
 import { type UserState, useUser } from 'src/providers'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
@@ -31,7 +31,7 @@ export const UploadModal = ({ open, setOpen }: ModalProperties) => {
     const clipboardValue = reference.current?.value
 
     // Early return if there's a clipboard value and it's invalid
-    if (clipboardValue && !FormUtilities.isValidSVG(clipboardValue)) {
+    if (clipboardValue && !formUtilities.isValidSVG(clipboardValue)) {
       return setError(true)
     }
 
@@ -48,7 +48,7 @@ export const UploadModal = ({ open, setOpen }: ModalProperties) => {
     // Determine the source of files
     const svgFiles = clipboardValue
       ? [{ name: nanoid(), svg: clipboardValue }]
-      : await FormUtilities.handleUpload(acceptedFiles)
+      : await formUtilities.handleUpload(acceptedFiles)
 
     // Perform the upload and clear states
     await upload(svgFiles)

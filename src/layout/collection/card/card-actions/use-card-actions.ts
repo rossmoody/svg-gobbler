@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { Inline } from 'src/scripts'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 import { SvgUtilities } from 'src/utilities/svg-utilities'
 import { optimize } from 'svgo'
@@ -41,17 +41,17 @@ export const useCardActions = (data: Svg) => {
   }
 
   function copyOriginal() {
-    FormUtilities.copyStringToClipboard(data.svg)
+    formUtilities.copyStringToClipboard(data.svg)
   }
 
   async function copyOptimized() {
     const optimizedString = optimize(data.svg)
-    FormUtilities.copyStringToClipboard(optimizedString.data)
+    formUtilities.copyStringToClipboard(optimizedString.data)
   }
 
   async function downloadOriginal() {
     const pageData = await StorageUtilities.getPageData(state.collectionId)
-    FormUtilities.downloadSvgString(data.svg, pageData.host)
+    formUtilities.downloadSvgString(data.svg, pageData.host)
   }
 
   return {
