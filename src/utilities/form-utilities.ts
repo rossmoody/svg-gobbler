@@ -52,6 +52,7 @@ export const formUtilities = {
     type: 'image/jpeg' | 'image/png' | 'image/webp',
     quality?: number,
   ): Promise<string> {
+    debugger
     return new Promise((resolve, reject) => {
       const sanitizedSvg = this.buildSvgElementFromString(svgString)
       const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml;charset=utf-8' })
