@@ -1,4 +1,4 @@
-import type { ExportSvg } from 'src/layout/collection/main-panel/use-export-actions'
+import type { ExportSvg } from 'src/hooks/use-export-actions'
 import type { ExportState } from 'src/providers'
 
 import htmlParser from 'prettier/plugins/html'

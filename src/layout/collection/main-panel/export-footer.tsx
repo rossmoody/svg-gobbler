@@ -4,7 +4,7 @@ import { useCollection, useExport } from 'src/providers'
 import { formUtilities } from 'src/utilities/form-utilities'
 import { loc } from 'src/utilities/i18n'
 
-import { ExportSvg, useExportActions } from './use-export-actions'
+import { ExportSvg, useExportActions } from '../../../hooks/use-export-actions'
 
 export const ExportFooter = () => {
   const [label, setLabel] = useState(loc('export_copy_clipboard'))
