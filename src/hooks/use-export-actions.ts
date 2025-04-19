@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
@@ -42,8 +41,8 @@ export const useExportActions = () => {
               jpeg.quality,
             ),
           })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
+        ).catch((error: Error) => {
+          logger.error('Failed to convert SVG to PNG:', error.message)
           return []
         })
       }
@@ -58,8 +57,8 @@ export const useExportActions = () => {
               'image/png',
             ),
           })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
+        ).catch((error: Error) => {
+          logger.error('Failed to convert SVG to PNG:', error.message)
           return []
         })
       }
@@ -85,8 +84,8 @@ export const useExportActions = () => {
               webp.quality,
             ),
           })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
+        ).catch((error: Error) => {
+          logger.error('Failed to convert SVG to PNG:', error.message)
           return []
         })
       }
