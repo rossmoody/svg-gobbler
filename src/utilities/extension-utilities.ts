@@ -1,4 +1,4 @@
-class Chrome {
+export const extension = {
   /**
    * Awaits the loading of a newly created tab and return the tab config.
    * @param url The url to open relative to the extension. Defaults to index.html.
@@ -25,7 +25,7 @@ class Chrome {
         chrome.tabs.onUpdated.addListener(listener)
       })
     })
-  }
+  },
 
   /**
    * Helper function for executing scripts in the active tab.
@@ -48,8 +48,7 @@ class Chrome {
     }
 
     return results[0].result as T
-  }
-
+  },
   /**
    * Gets the active tab to inject scripts into.
    * @returns The ID of the active tab
@@ -57,7 +56,36 @@ class Chrome {
   async getActiveTab() {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
     return tabs[0]
-  }
-}
+  },
 
-export default new Chrome()
+  /**
+   * Determines if the extension is running in an extension tab
+   * @param activeTab The active tab to check.
+   */
+  isExtensionTab(activeTab: chrome.tabs.Tab) {
+    return (
+      activeTab &&
+      activeTab.url &&
+      (activeTab.url.startsWith('chrome-extension://') ||
+        activeTab.url.startsWith('moz-extension://'))
+    )
+  },
+
+  /**
+   * Determines if the extension is running in a Firefox browser.
+   */
+  get isFirefox() {
+    return navigator.userAgent.includes('Firefox')
+  },
+
+  /**
+   * Checks if the extension is on a new tab page
+   */
+  isNewTabPage(activeTab: chrome.tabs.Tab) {
+    return (
+      activeTab &&
+      activeTab.url &&
+      (activeTab.url.startsWith('chrome://newtab') || activeTab.url.startsWith('about:newtab'))
+    )
+  },
+}

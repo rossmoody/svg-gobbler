@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { links } from 'src/constants/links'
 import { useDashboard, useUser } from 'src/providers'
+import { extension } from 'src/utilities/extension-utilities'
 import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
@@ -33,7 +34,8 @@ export const ReviewPrompt = () => {
 
   const handleReviewPrompt = () => {
     setReviewPromptViewed()
-    window.open(links.chromeWebstore, '_blank')
+    const link = extension.isFirefox ? links.firefoxWebstore : links.chromeWebstore
+    window.open(link, '_blank')
   }
 
   return (

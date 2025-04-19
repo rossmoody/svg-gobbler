@@ -51,7 +51,7 @@ export async function rootLoader() {
         const { data } = (await chrome.runtime.sendMessage('gobble')) as BackgroundMessage
 
         // On a settings page and has a collection, send to the first collection
-        if (!data.origin && previousCollections.length > 0) {
+        if (!data.origin || !data.href || data.href.startsWith('about:')) {
           throw new Error('Browser system page, send to first collection')
         }
 
@@ -104,7 +104,8 @@ export async function rootLoader() {
         logger.error(error)
         // This catch is reached more than you'd think
         // 1. The listener has been removed, so the background script is no longer listening on refresh
-        // 2. Send the user to the first collection if they invoke on a browser system page
+        // 2. Send the user to the first collection if they invoke on a browser system page or new tab page
+        // 3. This happens everytime the extension page is opened without a listener present
         return previousCollections[0].id
       }
     })(),

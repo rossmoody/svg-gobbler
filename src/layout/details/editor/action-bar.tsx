@@ -32,7 +32,7 @@ export const ActionBar = () => {
         <BoltIcon className="h-4 w-4 opacity-50" />
         {loc('details_optimize')}
       </button>
-      <span className="flex items-center gap-2 text-center">
+      <span className="flex items-center gap-2 text-center text-xs">
         {bytes.before} <ArrowRightIcon className="inline h-2.5 w-2.5" /> {bytes.after}
       </span>
       <button className="editor-btn" onClick={onFormat}>

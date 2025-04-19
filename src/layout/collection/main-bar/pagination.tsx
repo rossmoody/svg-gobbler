@@ -14,7 +14,7 @@ export const Pagination = () => {
   }, [state.data, state.view.filters])
 
   return (
-    <div className="hidden leading-none md:block">
+    <div className="hidden text-xs leading-none md:block">
       {loc('main_showing')} <span className="font-medium">{state.processedData.length}</span>{' '}
       {loc('main_of')} <span className="font-medium">{filteredResultLength}</span>{' '}
       {loc('main_results')}

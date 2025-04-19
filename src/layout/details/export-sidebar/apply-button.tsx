@@ -7,7 +7,7 @@ import { useDetails } from 'src/providers'
 import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-export const ResetButton = () => {
+export const ApplyButton = () => {
   const { dispatch, state } = useDetails()
 
   const resetToDefault = async () => {
@@ -39,7 +39,7 @@ export const ResetButton = () => {
   return (
     <Fragment>
       <Menu>
-        <Menu.Button className="flex items-center gap-1">
+        <Menu.Button className="flex items-center gap-1 text-sm">
           {loc('export_apply')} <ChevronDownIcon className="h-4 w-4" />
         </Menu.Button>
 

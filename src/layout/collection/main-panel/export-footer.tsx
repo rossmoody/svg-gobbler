@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 import { loc } from 'src/utilities/i18n'
 
-import { ExportSvg, useExportActions } from './use-export-actions'
+import { ExportSvg, useExportActions } from '../../../hooks/use-export-actions'
 
 export const ExportFooter = () => {
   const [label, setLabel] = useState(loc('export_copy_clipboard'))
@@ -21,11 +21,11 @@ export const ExportFooter = () => {
       case 'jpeg':
       case 'png':
       case 'webp': {
-        FormUtilities.copyImageToClipboard(payload)
+        formUtilities.copyImageToClipboard(payload)
         break
       }
       case 'svg': {
-        FormUtilities.copyStringToClipboard(payload)
+        formUtilities.copyStringToClipboard(payload)
         break
       }
     }
@@ -40,7 +40,7 @@ export const ExportFooter = () => {
       case 'jpeg':
       case 'png':
       case 'webp': {
-        FormUtilities.downloadImageContent(exportSvgs, exportState)
+        formUtilities.downloadImageContent(exportSvgs, exportState)
         break
       }
       case 'sprite': {
@@ -50,12 +50,12 @@ export const ExportFooter = () => {
             payload: svg.svg,
           }
         })
-        FormUtilities.downloadSpriteZip(exportSvgs, exportState)
+        formUtilities.downloadSpriteZip(exportSvgs, exportState)
         break
       }
 
       case 'svg': {
-        FormUtilities.downloadSvgContent(exportSvgs, exportState)
+        formUtilities.downloadSvgContent(exportSvgs, exportState)
         break
       }
     }

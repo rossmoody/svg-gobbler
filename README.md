@@ -109,6 +109,36 @@ pnpm serve
 
 This will startup the server and restart it any time a change is recompiled.
 
+## Build for Firefox
+
+To build the extension for Firefox, the manifest needs manually revised with a build script. First
+run:
+
+### 1. Build a release
+
+```bash
+pnpm release
+```
+
+This will build a loadable zip file in the `releases` directory.
+
+### 2. Launch the extension
+
+```bash
+pnpm dev-ff
+```
+
+This will build the extension loaded within an instance of Firefox. It will automatically be updated
+as you build new version.
+
+### 3. Rebuild on changes
+
+For now the extension must be rebuilt with CLI to see changes reflected in Firefox.
+
+```bash
+pnpm release
+```
+
 ## Loading the Extension
 
 ### 1. Open the extensions page in your browser

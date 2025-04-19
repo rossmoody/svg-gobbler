@@ -5,6 +5,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
 import { links } from 'src/constants/links'
+import { extension } from 'src/utilities/extension-utilities'
 import { loc } from 'src/utilities/i18n'
 
 import { FeedbackItem } from './feedback-item'
@@ -45,5 +46,6 @@ export const SideFooter = () => {
 }
 
 function navigateToChromeWebStore() {
-  window.open(links.chromeWebstore, '_blank')
+  const link = extension.isFirefox ? links.firefoxWebstore : links.chromeWebstore
+  window.open(link, '_blank')
 }

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useUpload } from 'src/hooks'
 import { UploadModal } from 'src/layout/collection/upload-modal'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 
 import { Button } from '.'
 import { loc } from '../utilities/i18n'
@@ -27,7 +27,7 @@ export const EmptyState = () => {
   })
 
   async function onDropAccepted(files: File[]) {
-    const fileSvgs = await FormUtilities.handleUpload(files)
+    const fileSvgs = await formUtilities.handleUpload(files)
     upload(fileSvgs)
   }
 
