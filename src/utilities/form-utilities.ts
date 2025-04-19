@@ -10,40 +10,6 @@ import { buildSpriteAndDemo } from './sprite-builder'
  */
 export const formUtilities = {
   /**
-   * Builds a valid SVG element from a given string.
-   *
-   * This is used to strip the SVG of competing styles related to class, explicit height,
-   * or explicit width attributes to allow the SVG to scale responsively in PNG creations.
-   * Attempts to add a viewBox attribute if one is not present based on width or height.
-   */
-  buildSvgElementFromString(svgString: string): string {
-    const parser = new DOMParser()
-    const { documentElement: svg } = parser.parseFromString(svgString, 'image/svg+xml')
-
-    if (svg.querySelector('parsererror')) {
-      throw new Error('Invalid SVG string')
-    }
-
-    if (!svg.getAttribute('xmlns')) {
-      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-    }
-
-    const width = svg.getAttribute('width')
-    const height = svg.getAttribute('height')
-    const viewBox = svg.getAttribute('viewBox')
-
-    svg.removeAttribute('height')
-    svg.removeAttribute('width')
-    svg.removeAttribute('style')
-
-    if (!viewBox && width && height) {
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
-    }
-
-    return svg.outerHTML
-  },
-
-  /**
    * Creates a data url from a given SVG string.
    */
   convertToDataUrl(
@@ -52,28 +18,16 @@ export const formUtilities = {
     type: 'image/jpeg' | 'image/png' | 'image/webp',
     quality?: number,
   ): Promise<string> {
-    debugger
     return new Promise((resolve, reject) => {
-      const sanitizedSvg = this.buildSvgElementFromString(svgString)
+      const sanitizedSvg = this.prepareSvgForImages(svgString, size)
       const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml;charset=utf-8' })
       const url = URL.createObjectURL(svgBlob)
 
       const img = new Image()
       img.addEventListener('load', () => {
-        let height, width
-        const aspectRatio = img.width / img.height
-
-        if (img.width > img.height) {
-          width = size
-          height = size / aspectRatio
-        } else {
-          height = size
-          width = size * aspectRatio
-        }
-
         const canvas = document.createElement('canvas')
-        canvas.width = width
-        canvas.height = height
+        canvas.width = img.width
+        canvas.height = img.height
 
         const context = canvas.getContext('2d')
         if (!context) {
@@ -84,10 +38,10 @@ export const formUtilities = {
         // Fill background with white for JPEGs
         if (type === 'image/jpeg') {
           context.fillStyle = '#FFF'
-          context.fillRect(0, 0, width, height)
+          context.fillRect(0, 0, img.width, img.height)
         }
 
-        context.drawImage(img, 0, 0, width, height)
+        context.drawImage(img, 0, 0, img.width, img.height)
 
         const dataURL = canvas.toDataURL(type, quality)
         URL.revokeObjectURL(url)
@@ -279,5 +233,51 @@ export const formUtilities = {
 
     // Additionally check if the root element is an SVG element
     return document_.documentElement.nodeName === 'svg'
+  },
+
+  /**
+   * Builds a valid SVG element from a given string.
+   *
+   * This is used to strip the SVG of competing styles related to class, explicit height,
+   * or explicit width attributes to allow the SVG to scale responsively in PNG creations.
+   * Attempts to add a viewBox attribute if one is not present based on width or height.
+   */
+  prepareSvgForImages(svgString: string, size: number): string {
+    const parser = new DOMParser()
+    const { documentElement: svg } = parser.parseFromString(svgString, 'image/svg+xml')
+
+    if (svg.querySelector('parsererror')) {
+      throw new Error('Invalid SVG string')
+    }
+
+    if (!svg.getAttribute('xmlns')) {
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    }
+
+    // Remove all style attributes & ensure xmlns for Firefox
+    svg.removeAttribute('style')
+    svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns', 'http://www.w3.org/2000/svg')
+
+    const viewBox =
+      svg.getAttribute('viewBox') ||
+      `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`
+    let width = Number.parseInt(viewBox.split(' ')[2])
+    let height = Number.parseInt(viewBox.split(' ')[3])
+
+    const aspectRatio = width / height
+
+    if (width > height) {
+      width = size
+      height = size / aspectRatio
+    } else {
+      height = size
+      width = size * aspectRatio
+    }
+
+    svg.setAttribute('viewBox', viewBox)
+    svg.setAttribute('width', `${width}`)
+    svg.setAttribute('height', `${height}`)
+
+    return svg.outerHTML
   },
 }
