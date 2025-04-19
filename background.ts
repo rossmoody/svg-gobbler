@@ -34,10 +34,12 @@ const Background = {
       if (type === 'launch-svg-gobbler-from-onboarding') {
         const listener = function (
           request: string,
-          __: chrome.runtime.MessageSender,
+          _: chrome.runtime.MessageSender,
           // eslint-disable-next-line
           sendResponse: (response: any) => void,
         ) {
+          // We manually create a listener to handle the message
+          // from the newly created page below
           if (request === 'gobble') {
             sendResponse({ data })
             chrome.runtime.onMessage.removeListener(listener)
@@ -99,7 +101,8 @@ const Background = {
         }
       })
 
-      await extension.createNewTab()
+      // Create the tab that calls the listener we just created
+      extension.createNewTab()
     }
 
     chrome.action.onClicked.addListener(onClickHandler)
