@@ -7,6 +7,7 @@ import { loc } from 'src/utilities/i18n'
 import { ExportSvg, useExportActions } from '../../../hooks/use-export-actions'
 
 export const ExportFooter = () => {
+  const [loading, setLoading] = useState(false)
   const [label, setLabel] = useState(loc('export_copy_clipboard'))
   const { state: collectionState } = useCollection()
   const { state: exportState } = useExport()
@@ -34,13 +35,14 @@ export const ExportFooter = () => {
   }
 
   const handleDownload = async () => {
+    setLoading(true)
     let exportSvgs: ExportSvg[] = await processWithExportConfig(collectionState.selected)
 
     switch (exportState.fileType) {
       case 'jpeg':
       case 'png':
       case 'webp': {
-        formUtilities.downloadImageContent(exportSvgs, exportState)
+        await formUtilities.downloadImageContent(exportSvgs, exportState)
         break
       }
       case 'sprite': {
@@ -50,15 +52,17 @@ export const ExportFooter = () => {
             payload: svg.svg,
           }
         })
-        formUtilities.downloadSpriteZip(exportSvgs, exportState)
+        await formUtilities.downloadSpriteZip(exportSvgs, exportState)
         break
       }
 
       case 'svg': {
-        formUtilities.downloadSvgContent(exportSvgs, exportState)
+        await formUtilities.downloadSvgContent(exportSvgs, exportState)
         break
       }
     }
+
+    setLoading(false)
   }
 
   const downloadQuantityString =
@@ -78,7 +82,7 @@ export const ExportFooter = () => {
           {label}
         </Button>
       )}
-      <Button className="justify-center" onClick={handleDownload}>
+      <Button className="justify-center" loading={loading} onClick={handleDownload}>
         {buttonLabel}
       </Button>
     </footer>

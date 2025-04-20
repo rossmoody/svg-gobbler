@@ -1,5 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 
+import { Spinner } from './spinner'
+
 export const buttonBaseStyles =
   'rounded-lg flex items-center gap-1 font-semibold transition-all duration-200 ease-in-out focus justify-center'
 
@@ -21,6 +23,7 @@ export const buttonSizeStyles = {
 }
 
 export type ButtonProperties = ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean
   size?: keyof typeof buttonSizeStyles
   variant?: keyof typeof buttonVariantStyles
 }
@@ -30,7 +33,19 @@ export type ButtonProperties = ButtonHTMLAttributes<HTMLButtonElement> & {
  * Uses 20px icons for all sizes except xs, which uses 16px icons.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProperties>(
-  ({ className = '', size = 'md', type = 'button', variant = 'primary', ...rest }, reference) => {
+  (
+    {
+      children,
+      className = '',
+      disabled,
+      loading,
+      size = 'md',
+      type = 'button',
+      variant = 'primary',
+      ...rest
+    },
+    reference,
+  ) => {
     const combinedClassName = [
       buttonBaseStyles,
       buttonVariantStyles[variant],
@@ -40,6 +55,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProperties>(
       .join(' ')
       .trim()
 
-    return <button className={combinedClassName} ref={reference} {...rest} type={type} />
+    return (
+      <button
+        className={combinedClassName}
+        ref={reference}
+        {...rest}
+        aria-busy={loading}
+        disabled={disabled || loading}
+        type={type}
+      >
+        {loading ? <Spinner className="h-6 w-6" /> : children}
+      </button>
+    )
   },
 )

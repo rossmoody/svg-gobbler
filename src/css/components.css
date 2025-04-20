@@ -143,3 +143,9 @@ button:disabled {
   focus:ring-red-500 dark:border-gray-600 dark:bg-white/5 dark:text-white
   dark:placeholder-gray-400 dark:ring-white/10 dark:focus:border-red-500 dark:focus:ring-red-500;
 }
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

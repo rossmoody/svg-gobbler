@@ -104,13 +104,17 @@ export const formUtilities = {
   /**
    * Downloads a given array of data urls as a file or zip file depending on the number of urls.
    */
-  downloadImageContent(exportSvgs: ExportSvg[], exportState: ExportState) {
+  async downloadImageContent(exportSvgs: ExportSvg[], exportState: ExportState) {
     if (exportSvgs.length === 1) {
-      this.downloadImageDataUrl(exportSvgs[0].payload, exportState.filename, exportState.fileType)
+      await this.downloadImageDataUrl(
+        exportSvgs[0].payload,
+        exportState.filename,
+        exportState.fileType,
+      )
       return
     }
 
-    this.downloadDataUrlsZip(exportSvgs, exportState)
+    await this.downloadDataUrlsZip(exportSvgs, exportState)
   },
 
   /**
@@ -140,13 +144,13 @@ export const formUtilities = {
   /**
    * Downloads a given array of strings as a file or zip file depending on the number of strings.
    */
-  downloadSvgContent(exportSvgs: ExportSvg[], exportState: ExportState) {
+  async downloadSvgContent(exportSvgs: ExportSvg[], exportState: ExportState) {
     if (exportSvgs.length === 1) {
-      this.downloadSvgString(exportSvgs[0].payload, exportState.filename)
+      await this.downloadSvgString(exportSvgs[0].payload, exportState.filename)
       return
     }
 
-    this.downloadSvgStringsZip(exportSvgs, exportState)
+    await this.downloadSvgStringsZip(exportSvgs, exportState)
   },
 
   /**
