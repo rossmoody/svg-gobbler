@@ -1,5 +1,5 @@
 import JSZip from 'jszip'
-import { ExportSvg } from 'src/layout/collection/main-panel/use-export-actions'
+import { ExportSvg } from 'src/hooks/use-export-actions'
 import { ExportState, FileType } from 'src/providers'
 import { type FileSvg } from 'src/types'
 
@@ -8,41 +8,7 @@ import { buildSpriteAndDemo } from './sprite-builder'
 /**
  * Utility class for form related operations like upload, download, and copy.
  */
-export const FormUtilities = {
-  /**
-   * Builds a valid SVG element from a given string.
-   *
-   * This is used to strip the SVG of competing styles related to class, explicit height,
-   * or explicit width attributes to allow the SVG to scale responsively in PNG creations.
-   * Attempts to add a viewBox attribute if one is not present based on width or height.
-   */
-  buildSvgElementFromString(svgString: string): string {
-    const parser = new DOMParser()
-    const { documentElement: svg } = parser.parseFromString(svgString, 'image/svg+xml')
-
-    if (svg.querySelector('parsererror')) {
-      throw new Error('Invalid SVG string')
-    }
-
-    if (!svg.getAttribute('xmlns')) {
-      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-    }
-
-    const width = svg.getAttribute('width')
-    const height = svg.getAttribute('height')
-    const viewBox = svg.getAttribute('viewBox')
-
-    svg.removeAttribute('height')
-    svg.removeAttribute('width')
-    svg.removeAttribute('style')
-
-    if (!viewBox && width && height) {
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
-    }
-
-    return svg.outerHTML
-  },
-
+export const formUtilities = {
   /**
    * Creates a data url from a given SVG string.
    */
@@ -53,26 +19,15 @@ export const FormUtilities = {
     quality?: number,
   ): Promise<string> {
     return new Promise((resolve, reject) => {
-      const sanitizedSvg = this.buildSvgElementFromString(svgString)
+      const sanitizedSvg = this.prepareSvgForImages(svgString, size)
       const svgBlob = new Blob([sanitizedSvg], { type: 'image/svg+xml;charset=utf-8' })
       const url = URL.createObjectURL(svgBlob)
 
       const img = new Image()
       img.addEventListener('load', () => {
-        let height, width
-        const aspectRatio = img.width / img.height
-
-        if (img.width > img.height) {
-          width = size
-          height = size / aspectRatio
-        } else {
-          height = size
-          width = size * aspectRatio
-        }
-
         const canvas = document.createElement('canvas')
-        canvas.width = width
-        canvas.height = height
+        canvas.width = img.width
+        canvas.height = img.height
 
         const context = canvas.getContext('2d')
         if (!context) {
@@ -83,10 +38,10 @@ export const FormUtilities = {
         // Fill background with white for JPEGs
         if (type === 'image/jpeg') {
           context.fillStyle = '#FFF'
-          context.fillRect(0, 0, width, height)
+          context.fillRect(0, 0, img.width, img.height)
         }
 
-        context.drawImage(img, 0, 0, width, height)
+        context.drawImage(img, 0, 0, img.width, img.height)
 
         const dataURL = canvas.toDataURL(type, quality)
         URL.revokeObjectURL(url)
@@ -149,13 +104,17 @@ export const FormUtilities = {
   /**
    * Downloads a given array of data urls as a file or zip file depending on the number of urls.
    */
-  downloadImageContent(exportSvgs: ExportSvg[], exportState: ExportState) {
+  async downloadImageContent(exportSvgs: ExportSvg[], exportState: ExportState) {
     if (exportSvgs.length === 1) {
-      this.downloadImageDataUrl(exportSvgs[0].payload, exportState.filename, exportState.fileType)
+      await this.downloadImageDataUrl(
+        exportSvgs[0].payload,
+        exportState.filename,
+        exportState.fileType,
+      )
       return
     }
 
-    this.downloadDataUrlsZip(exportSvgs, exportState)
+    await this.downloadDataUrlsZip(exportSvgs, exportState)
   },
 
   /**
@@ -185,13 +144,13 @@ export const FormUtilities = {
   /**
    * Downloads a given array of strings as a file or zip file depending on the number of strings.
    */
-  downloadSvgContent(exportSvgs: ExportSvg[], exportState: ExportState) {
+  async downloadSvgContent(exportSvgs: ExportSvg[], exportState: ExportState) {
     if (exportSvgs.length === 1) {
-      this.downloadSvgString(exportSvgs[0].payload, exportState.filename)
+      await this.downloadSvgString(exportSvgs[0].payload, exportState.filename)
       return
     }
 
-    this.downloadSvgStringsZip(exportSvgs, exportState)
+    await this.downloadSvgStringsZip(exportSvgs, exportState)
   },
 
   /**
@@ -278,5 +237,51 @@ export const FormUtilities = {
 
     // Additionally check if the root element is an SVG element
     return document_.documentElement.nodeName === 'svg'
+  },
+
+  /**
+   * Builds a valid SVG element from a given string.
+   *
+   * This is used to strip the SVG of competing styles related to class, explicit height,
+   * or explicit width attributes to allow the SVG to scale responsively in PNG creations.
+   * Attempts to add a viewBox attribute if one is not present based on width or height.
+   */
+  prepareSvgForImages(svgString: string, size: number): string {
+    const parser = new DOMParser()
+    const { documentElement: svg } = parser.parseFromString(svgString, 'image/svg+xml')
+
+    if (svg.querySelector('parsererror')) {
+      throw new Error('Invalid SVG string')
+    }
+
+    if (!svg.getAttribute('xmlns')) {
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    }
+
+    // Remove all style attributes & ensure xmlns for Firefox
+    svg.removeAttribute('style')
+    svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns', 'http://www.w3.org/2000/svg')
+
+    const viewBox =
+      svg.getAttribute('viewBox') ||
+      `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`
+    let width = Number.parseInt(viewBox.split(' ')[2])
+    let height = Number.parseInt(viewBox.split(' ')[3])
+
+    const aspectRatio = width / height
+
+    if (width > height) {
+      width = size
+      height = size / aspectRatio
+    } else {
+      height = size
+      width = size * aspectRatio
+    }
+
+    svg.setAttribute('viewBox', viewBox)
+    svg.setAttribute('width', `${width}`)
+    svg.setAttribute('height', `${height}`)
+
+    return svg.outerHTML
   },
 }

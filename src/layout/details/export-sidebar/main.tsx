@@ -4,7 +4,7 @@ import { svgoPlugins } from 'src/constants/svgo-plugins'
 import { useDetails } from 'src/providers'
 import { loc } from 'src/utilities/i18n'
 
-import { ResetButton } from './reset-button'
+import { ApplyButton } from './apply-button'
 import { SvgoOption } from './svgo-option'
 
 export const ExportDetailMain = () => {
@@ -74,7 +74,7 @@ export const ExportDetailMain = () => {
       {/* Plugins */}
       <div className="mt-5 flex items-center justify-between">
         <h2 className="text-sm font-medium">{loc('details_plugin')}</h2>
-        <ResetButton />
+        <ApplyButton />
       </div>
       <div className="mt-4 flex flex-col gap-3 pb-8">
         {_.sortBy(svgoPlugins, 'label').map((plugin) => (

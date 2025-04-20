@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { PropsWithChildren } from 'react'
 import { FileRejection, useDropzone } from 'react-dropzone'
 import { useUpload } from 'src/hooks'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 import { loc } from 'src/utilities/i18n'
 
 export const CollectionDropZone = ({ children }: PropsWithChildren) => {
@@ -20,7 +20,7 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
 
   async function onDrop(acceptedFiles: File[], fileRejections: FileRejection[]) {
     if (acceptedFiles.length > 0) {
-      const fileSvgs = await FormUtilities.handleUpload(acceptedFiles)
+      const fileSvgs = await formUtilities.handleUpload(acceptedFiles)
       upload(fileSvgs)
     }
 

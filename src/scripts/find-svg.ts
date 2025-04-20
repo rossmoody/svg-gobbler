@@ -470,9 +470,9 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
       try {
         return {
           corsRestricted: false,
-          id: crypto.randomUUID?.() || `svg-${Date.now()}-${index}`,
+          id: crypto.randomUUID(),
           lastEdited: new Date().toISOString(),
-          name: `${location?.host || 'unknown'}-${index}`,
+          name: `${location?.host}-${index}`,
           svg,
         }
       } catch (error) {

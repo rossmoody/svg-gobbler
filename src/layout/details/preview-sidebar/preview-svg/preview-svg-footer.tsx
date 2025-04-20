@@ -21,7 +21,7 @@ export const PreviewSvgFooter = () => {
 
   return (
     <div className="border-t border-gray-200 px-4 py-3 dark:border-gray-800">
-      <div className="flex justify-between">
+      <div className="flex justify-between text-xs">
         <section className="flex items-center gap-2">
           <Tooltip content={loc('zoom_out')}>
             <IconButton onClick={handleZoomOut} variant="secondary">

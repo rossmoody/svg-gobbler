@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { Svg } from 'src/scripts'
 
 import { useExport } from 'src/providers'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 import { logger } from 'src/utilities/logger'
 import { Config } from 'svgo'
 // @ts-expect-error
@@ -35,15 +34,15 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map(async (svg) => ({
             name: svg.name,
-            payload: await FormUtilities.convertToDataUrl(
+            payload: await formUtilities.convertToDataUrl(
               svg.presentationSvg,
               jpeg.size,
               'image/jpeg',
               jpeg.quality,
             ),
           })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
+        ).catch((error: Error) => {
+          logger.error('Failed to convert SVG to PNG:', error.message)
           return []
         })
       }
@@ -52,14 +51,14 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map(async (svg) => ({
             name: svg.name,
-            payload: await FormUtilities.convertToDataUrl(
+            payload: await formUtilities.convertToDataUrl(
               svg.presentationSvg,
               png.size,
               'image/png',
             ),
           })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
+        ).catch((error: Error) => {
+          logger.error('Failed to convert SVG to PNG:', error.message)
           return []
         })
       }
@@ -78,15 +77,15 @@ export const useExportActions = () => {
         return await Promise.all(
           svgs.map(async (svg) => ({
             name: svg.name,
-            payload: await FormUtilities.convertToDataUrl(
+            payload: await formUtilities.convertToDataUrl(
               svg.presentationSvg,
               webp.size,
               'image/webp',
               webp.quality,
             ),
           })),
-        ).catch(() => {
-          logger.error('Failed to convert SVG to PNG')
+        ).catch((error: Error) => {
+          logger.error('Failed to convert SVG to PNG:', error.message)
           return []
         })
       }

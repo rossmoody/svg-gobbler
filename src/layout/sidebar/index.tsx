@@ -1,16 +1,15 @@
-import type { Collection } from 'src/types'
-
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { useDashboard } from 'src/providers/dashboard'
+import { DashboardLoaderData } from 'src/routes'
 import { loc } from 'src/utilities/i18n'
 
 import { SidebarContent } from './sidebar-content'
 
 export const Sidebar = () => {
-  const collections = useLoaderData() as Collection[]
+  const { collections } = useLoaderData() as DashboardLoaderData
   const { dispatch, state } = useDashboard()
 
   useEffect(() => {

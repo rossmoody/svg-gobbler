@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 import { useNavigate } from 'react-router-dom'
 import { useDashboard } from 'src/providers'
 import { StorageSvg } from 'src/scripts'
-import { FormUtilities } from 'src/utilities/form-utilities'
+import { formUtilities } from 'src/utilities/form-utilities'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 import { SvgUtilities } from 'src/utilities/svg-utilities'
 
@@ -17,7 +17,7 @@ export const useCreateCollection = (files: File[]) => {
     const formData = new FormData(event.currentTarget)
     const name = formData.get('name') as string
     const id = nanoid()
-    const svgFileData = await FormUtilities.handleUpload(files)
+    const svgFileData = await formUtilities.handleUpload(files)
     const svgStorageData: StorageSvg[] = svgFileData.map(SvgUtilities.createStorageSvg)
 
     const pageData: PageData = {
