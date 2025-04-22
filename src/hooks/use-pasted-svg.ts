@@ -21,7 +21,6 @@ export const usePastedSvg = () => {
       if (uploadModalVisible) return
 
       const pastedText = event.clipboardData?.getData('text/plain')
-
       if (pastedText && SvgUtilities.isValidSvg(pastedText)) {
         event.preventDefault()
         upload([{ name: nanoid(), svg: pastedText }])
