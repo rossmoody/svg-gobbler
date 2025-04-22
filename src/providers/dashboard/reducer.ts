@@ -1,9 +1,12 @@
 import type { Collection } from 'src/types'
 
+import { DashboardLoaderData } from 'src/routes'
+
 export type DashboardAction =
   | { payload: boolean; type: 'set-open' }
   | { payload: Collection; type: 'set-collection-icon' }
   | { payload: Collection[]; type: 'set-collections' }
+  | { payload: DashboardLoaderData; type: 'init' }
   | { type: 'reset' }
 
 export type DashboardState = {
@@ -24,6 +27,12 @@ export const initDashboardState: DashboardState = {
 
 export const dashboardReducer = (state: DashboardState, action: DashboardAction) => {
   switch (action.type) {
+    case 'init': {
+      return {
+        ...state,
+        collections: action.payload.collections,
+      }
+    }
     case 'reset': {
       return initDashboardState
     }

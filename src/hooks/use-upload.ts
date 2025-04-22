@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useRevalidator } from 'react-router-dom'
 import { useCollection } from 'src/providers'
 import { Inline, StorageSvg } from 'src/scripts'
@@ -13,26 +14,29 @@ export const useUpload = () => {
   const { dispatch, state } = useCollection()
   const { revalidate } = useRevalidator()
 
-  return async function (fileSvgs: FileSvg[]) {
-    const { collectionId } = state
+  return useCallback(
+    async function (fileSvgs: FileSvg[]) {
+      const { collectionId } = state
 
-    // Get current page data for storage
-    let pageData = await StorageUtilities.getPageData(collectionId)
-    const newData: StorageSvg[] = fileSvgs.map(SvgUtilities.createStorageSvg)
+      // Get current page data for storage
+      let pageData = await StorageUtilities.getPageData(collectionId)
+      const newData: StorageSvg[] = fileSvgs.map(SvgUtilities.createStorageSvg)
 
-    // Append new strings to collection's page data
-    pageData = {
-      ...pageData,
-      data: [...newData, ...pageData.data],
-    }
+      // Append new strings to collection's page data
+      pageData = {
+        ...pageData,
+        data: [...newData, ...pageData.data],
+      }
 
-    // Update the collection's page data
-    await StorageUtilities.setPageData(collectionId, pageData)
+      // Update the collection's page data
+      await StorageUtilities.setPageData(collectionId, pageData)
 
-    // Update the collection context state
-    const newSvgClasses = newData.map((item) => new Inline(item))
-    dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
-    dispatch({ type: 'process-data' })
-    revalidate()
-  }
+      // Update the collection context state
+      const newSvgClasses = newData.map((item) => new Inline(item))
+      dispatch({ payload: [...state.data, ...newSvgClasses], type: 'set-data' })
+      dispatch({ type: 'process-data' })
+      revalidate()
+    },
+    [dispatch, state, revalidate],
+  )
 }

@@ -1,7 +1,5 @@
 import type { SvgoPlugin } from 'src/constants/svgo-plugins'
 
-import { defaultSvgoPlugins } from 'src/constants/svgo-plugins'
-
 export const fileTypes = ['svg', 'png', 'jpeg', 'webp', 'sprite'] as const
 export type ExportAction =
   | { payload: boolean; type: 'set-optimize-exports' }
@@ -142,7 +140,7 @@ export const initExportState: ExportState = {
       optimizeExports: true,
       path: 'svg-gobbler',
       prettify: false,
-      svgoPlugins: defaultSvgoPlugins,
+      svgoPlugins: [],
     },
     webp: {
       quality: 0.92,

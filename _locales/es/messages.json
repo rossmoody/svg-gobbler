@@ -961,5 +961,11 @@
   },
   "edit_fill_tooltip": {
     "message": "La cadena para aplicar a la propiedad fill en los SVG seleccionados. Reemplazará el relleno existente"
+  },
+  "drop_files": {
+    "message": "Suelta los archivos aquí"
+  },
+  "to_upload": {
+    "message": "para subir"
   }
 }

@@ -11,13 +11,11 @@ import { StorageUtilities } from 'src/utilities/storage-utilities'
 export async function detailLoader({ params }: LoaderFunctionArgs): Promise<DetailsParameters> {
   const collectionId = params.collectionId as string
   const pageData = await StorageUtilities.getPageData(collectionId)
-
   if (!pageData.data) {
     throw new Error(`No data found for collection ${collectionId}`)
   }
 
   const svg = pageData.data.find((item) => item.id === params.id) as StorageSvg
-
   if (!svg) {
     throw new Error(`No SVG found with ID ${params.id} in collection ${collectionId}`)
   }

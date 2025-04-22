@@ -36,12 +36,12 @@ export const StorageUtilities = {
   /**
    * Get various types of collection data from storage. Automatically decompresses data.
    */
-  async getStorageData<T>(key: DatabaseKey): Promise<T> {
+  async getStorageData<T>(key: DatabaseKey): Promise<T | undefined> {
     try {
       const data = await chrome.storage.local.get(key)
       return this.decompressFromBase64(data[key])
     } catch {
-      throw new Error(`Failed to get data for key: ${key}`)
+      return
     }
   },
 

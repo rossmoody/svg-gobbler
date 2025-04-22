@@ -1,11 +1,13 @@
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { useRef } from 'react'
+import { useRouteError } from 'react-router-dom'
 import { useDatabase } from 'src/hooks'
 import { loc } from 'src/utilities/i18n'
 
 import { Button } from '.'
 
 export const ErrorState = () => {
+  const error = useRouteError()
   const sendMessage = useDatabase('error')
   const textAreaReference = useRef<HTMLTextAreaElement>(null)
 
@@ -34,6 +36,7 @@ export const ErrorState = () => {
           <textarea
             autoFocus
             className="input mt-6 h-32"
+            defaultValue={error as string}
             id="error-input"
             ref={textAreaReference}
           />

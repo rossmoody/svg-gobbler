@@ -1,9 +1,8 @@
 import type { Collection, PageData } from 'src/types'
 
-import { nanoid } from 'nanoid'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { initCollection } from 'src/constants/collection'
 import { useDashboard } from 'src/providers'
-import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export function useRemoveCollection() {
@@ -24,15 +23,8 @@ export function useRemoveCollection() {
         origin: '',
       }
 
-      const collection: Collection = {
-        href: '',
-        id: nanoid(),
-        name: loc('sidebar_new_collection'),
-        origin: '',
-      }
-
-      filteredCollections.push(collection)
-      StorageUtilities.setPageData(collection.id, pageData)
+      filteredCollections.push(initCollection)
+      StorageUtilities.setPageData(initCollection.id, pageData)
     }
 
     dispatch({ payload: filteredCollections, type: 'set-collections' })

@@ -4,7 +4,9 @@ import { useCallback } from 'react'
 import { useDashboard } from 'src/providers'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-import { CollectionItem } from '../collection-item'
+import { Collection } from './collection'
+import { CollectionItem } from './collection-item'
+
 export const SidebarMain = () => {
   const { dispatch, state } = useDashboard()
 
@@ -26,11 +28,13 @@ export const SidebarMain = () => {
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <ul className="flex flex-col gap-1.5" role="list">
         <SortableContext
-          items={state.collections.map((collection) => collection.id)}
+          items={state.collections.map(({ id }) => id)}
           strategy={verticalListSortingStrategy}
         >
           {state.collections.map((collection) => (
-            <CollectionItem collection={collection} key={collection.id} />
+            <CollectionItem collection={collection} key={collection.id}>
+              <Collection collection={collection} />
+            </CollectionItem>
           ))}
         </SortableContext>
       </ul>
