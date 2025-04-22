@@ -961,5 +961,11 @@
   },
   "edit_fill_tooltip": {
     "message": "La chaîne à appliquer à la propriété fill sur les SVG sélectionnés. Remplacera le remplissage existant"
+  },
+  "drop_files": {
+    "message": "Déposez les fichiers ici"
+  },
+  "to_upload": {
+    "message": "para subir"
   }
 }

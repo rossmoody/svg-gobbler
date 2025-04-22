@@ -53,8 +53,10 @@ export const CollectionDropZone = ({ children }: PropsWithChildren) => {
             <DocumentPlusIcon aria-hidden="true" className="text-muted mx-auto mb-3 h-12 w-12" />
             <div className="text flex text-sm leading-6">
               <p className="pl-1">
-                <span className="font-semibold text-red-600 dark:text-red-500">Drop files</span> to
-                upload
+                <span className="font-semibold text-red-600 dark:text-red-500">
+                  {loc('drop_files')}
+                </span>{' '}
+                {loc('to_upload')}
               </p>
             </div>
             <p className="text-xs leading-5">{loc('upload_file_limit')}</p>

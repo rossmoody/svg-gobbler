@@ -967,5 +967,11 @@
   },
   "edit_fill_tooltip": {
     "message": "The string to apply to the fill property on the selected SVGs. Will replace the existing fill"
+  },
+  "drop_files": {
+    "message": "Drop files"
+  },
+  "to_upload": {
+    "message": "to upload"
   }
 }

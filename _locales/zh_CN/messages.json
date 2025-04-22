@@ -962,5 +962,11 @@
   },
   "edit_fill_tooltip": {
     "message": "应用于所选SVG的fill属性的字符串。将替换现有填充"
+  },
+  "drop_files": {
+    "message": "拖放文件"
+  },
+  "to_upload": {
+    "message": "上传文件"
   }
 }
