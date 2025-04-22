@@ -9,12 +9,12 @@ import { loc } from 'src/utilities/i18n'
 import { SidebarContent } from './sidebar-content'
 
 export const Sidebar = () => {
-  const { collections } = useLoaderData() as DashboardLoaderData
+  const loaderData = useLoaderData() as DashboardLoaderData
   const { dispatch, state } = useDashboard()
 
   useEffect(() => {
-    dispatch({ payload: collections, type: 'set-collections' })
-  }, [collections, dispatch])
+    dispatch({ payload: loaderData, type: 'init' })
+  }, [loaderData, dispatch])
 
   function closeSidebar() {
     dispatch({ payload: false, type: 'set-open' })

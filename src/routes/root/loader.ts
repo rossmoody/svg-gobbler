@@ -1,7 +1,8 @@
 import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
-import { SvgoPlugin } from 'src/constants/svgo-plugins'
+import { initCollection } from 'src/constants/collection'
+import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
 import { BackgroundMessage, Collection, PageData } from 'src/types'
@@ -27,23 +28,25 @@ export async function rootLoader() {
       // Initialize the view state
       let view = await StorageUtilities.getStorageData<CollectionState['view']>('view')
       view = _.merge(initCollectionState.view, view)
-      await StorageUtilities.setStorageData('view', view)
+      StorageUtilities.setStorageData('view', view)
 
       // Initialize the plugins for the export panel
       let plugins = await StorageUtilities.getStorageData<SvgoPlugin[]>('plugins')
-      plugins = _.assign([], plugins)
-      await StorageUtilities.setStorageData('plugins', plugins)
+      if (plugins === undefined) plugins = defaultSvgoPlugins
+      StorageUtilities.setStorageData('plugins', plugins)
 
-      // Get all collections from storage for sidenav
-      const previousCollections =
-        (await StorageUtilities.getStorageData<Collection[]>('collections')) ?? []
+      // Get all collections from storage to process and use for routing
+      let collections = await StorageUtilities.getStorageData<Collection[]>('collections')
+      if (collections === undefined) collections = [initCollection]
+
+      StorageUtilities.setStorageData('collections', collections)
 
       // Early return if the user is refreshing
       const navigationEntries = performance.getEntriesByType(
         'navigation',
       ) as PerformanceNavigationTiming[]
       if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
-        return previousCollections[0].id
+        return collections[0].id
       }
 
       try {
@@ -76,19 +79,16 @@ export async function rootLoader() {
           origin: pageData.origin,
         }
 
-        // Establish the collections array
-        let collections = [...previousCollections]
-
         // Merge the collections if the user has the setting and the URL is a duplicate
         if (
           user.settings.mergeCollections &&
-          RootUtilities.isDuplicateURL(pageData.href, previousCollections)
+          RootUtilities.isDuplicateURL(pageData.href, collections)
         ) {
-          collection = RootUtilities.getExistingCollection(pageData.href, previousCollections)! // Because we checked for duplicates
+          collection = RootUtilities.getExistingCollection(pageData.href, collections)! // Because we checked for duplicates
           const existingPageData = await StorageUtilities.getPageData(collection.id)
           pageData = RootUtilities.mergePageData(existingPageData, pageData)
         } else {
-          collections = [collection, ...previousCollections]
+          collections = [collection, ...collections]
         }
 
         // Sort the collections alphabetically if the user has the setting
@@ -106,7 +106,7 @@ export async function rootLoader() {
         // 1. The listener has been removed, so the background script is no longer listening on refresh
         // 2. Send the user to the first collection if they invoke on a browser system page or new tab page
         // 3. This happens everytime the extension page is opened without a listener present
-        return previousCollections[0].id
+        return collections[0].id
       }
     })(),
   })
