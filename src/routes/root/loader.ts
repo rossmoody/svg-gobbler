@@ -37,7 +37,7 @@ export async function rootLoader() {
 
       // Get all collections from storage to process and use for routing
       let collections = await StorageUtilities.getStorageData<Collection[]>('collections')
-      if (collections === undefined) collections = [initCollection]
+      if (collections === undefined) collections = [initCollection()]
 
       StorageUtilities.setStorageData('collections', collections)
 

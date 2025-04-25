@@ -10,6 +10,10 @@ const Background = {
    * Sets the uninstall URL for the extension.
    */
   handleUninstall() {
+    if (process.env.NODE_ENV === 'development') {
+      return
+    }
+
     chrome.runtime.setUninstallURL('https://svggobbler.com/uninstall')
   },
 

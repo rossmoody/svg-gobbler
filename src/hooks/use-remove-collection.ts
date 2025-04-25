@@ -12,10 +12,10 @@ export function useRemoveCollection() {
 
   return function (collection: Collection) {
     const isActiveCollection = pathname.includes(collection.id)
-    const filteredCollections = state.collections.filter(({ id }) => id !== collection.id)
+    const collectionsWithoutRemoved = state.collections.filter(({ id }) => id !== collection.id)
 
     // If there are no collections left, create an empty one
-    if (filteredCollections.length === 0) {
+    if (collectionsWithoutRemoved.length === 0) {
       const pageData: PageData = {
         data: [],
         host: '',
@@ -23,16 +23,17 @@ export function useRemoveCollection() {
         origin: '',
       }
 
-      filteredCollections.push(initCollection)
-      StorageUtilities.setPageData(initCollection.id, pageData)
+      const newCollection = initCollection()
+      collectionsWithoutRemoved.push(newCollection)
+      StorageUtilities.setPageData(newCollection.id, pageData)
     }
 
-    dispatch({ payload: filteredCollections, type: 'set-collections' })
+    dispatch({ payload: collectionsWithoutRemoved, type: 'set-collections' })
     chrome.storage.local.remove(collection.id)
-    StorageUtilities.setStorageData('collections', filteredCollections)
+    StorageUtilities.setStorageData('collections', collectionsWithoutRemoved)
 
     if (isActiveCollection) {
-      return navigate(`collection/${filteredCollections[0].id}`)
+      return navigate(`collection/${collectionsWithoutRemoved[0].id}`)
     }
   }
 }
