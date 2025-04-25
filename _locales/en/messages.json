@@ -885,10 +885,10 @@
     "message": "For if you want a reply from the developer and credit for the feedback"
   },
   "topbar_sort_alphabetical_asc": {
-    "message": "Alphabetical: A -> Z"
+    "message": "Alphabetical: A to Z"
   },
   "topbar_sort_alphabetical_desc": {
-    "message": "Alphabetical: Z -> A"
+    "message": "Alphabetical: Z to A"
   },
   "settings_sort_collections_label": {
     "message": "Sort collections alphabetically"
