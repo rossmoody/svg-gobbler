@@ -1,7 +1,8 @@
-import type { Collection, PageData } from 'src/types'
+import type { Collection } from 'src/types'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import { initCollection } from 'src/constants/collection'
+import { pageData } from 'src/constants/page-data'
 import { useDashboard } from 'src/providers'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
@@ -16,13 +17,6 @@ export function useRemoveCollection() {
 
     // If there are no collections left, create an empty one
     if (collectionsWithoutRemoved.length === 0) {
-      const pageData: PageData = {
-        data: [],
-        host: '',
-        href: '',
-        origin: '',
-      }
-
       const newCollection = initCollection()
       collectionsWithoutRemoved.push(newCollection)
       StorageUtilities.setPageData(newCollection.id, pageData)
