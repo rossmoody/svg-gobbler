@@ -50,7 +50,7 @@ export const CollectionRoute = () => {
             <React.Suspense fallback={<SkeletonCollection />}>
               <Await resolve={data}>
                 {(resolvedData: CollectionData['data']) => {
-                  if (resolvedData.length === 0) {
+                  if (resolvedData.length === 0 || resolvedData === undefined) {
                     return <EmptyState />
                   }
                   return <Collection data={resolvedData} />

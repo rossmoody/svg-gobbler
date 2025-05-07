@@ -5,6 +5,7 @@ export type CollectionAction =
   | { payload: CollectionState['view']; type: 'set-view' }
   | { payload: string; type: 'set-canvas-color' }
   | { payload: string; type: 'set-collection-id' }
+  | { payload: string; type: 'set-search' }
   | { payload: Svg; type: 'add-selected' }
   | { payload: Svg; type: 'remove-selected' }
   | { payload: Svg[]; type: 'set-data' }
@@ -26,6 +27,10 @@ export type CollectionState = CollectionData & {
    */
   processedData: Svg[]
   /**
+   * The search string used to filter the collection.
+   */
+  search: string
+  /**
    * The selected SVGs in the collection.
    */
   selected: Svg[]
@@ -36,6 +41,7 @@ export const initCollectionState: CollectionState = {
   data: [],
   pageCount: 1,
   processedData: [],
+  search: '',
   selected: [],
   view: {
     canvas: '#ffffff',
@@ -87,6 +93,16 @@ export const collectionReducer = (
             break
           }
         }
+      }
+
+      // Process search
+      if (state.search) {
+        processedData = processedData.filter((svg) => {
+          const name = svg.name.toLowerCase()
+          const search = state.search.toLowerCase()
+          const svgString = svg.svg.toLowerCase()
+          return name.includes(search) || svgString.includes(search)
+        })
       }
 
       // Process sorting
@@ -184,6 +200,13 @@ export const collectionReducer = (
       return {
         ...state,
         data: action.payload,
+      }
+    }
+
+    case 'set-search': {
+      return {
+        ...state,
+        search: action.payload,
       }
     }
 
