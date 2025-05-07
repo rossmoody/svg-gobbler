@@ -132,10 +132,10 @@
     "message": "Settings"
   },
   "main_copy": {
-    "message": "Copy"
+    "message": "Duplicate"
   },
   "main_copy_collection": {
-    "message": "Copy items to collection"
+    "message": "Duplicate items to collection"
   },
   "main_name": {
     "message": "Name"
