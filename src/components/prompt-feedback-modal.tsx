@@ -57,21 +57,23 @@ export const FeedbackModal = () => {
     <Modal onClose={onClose} open={open} setOpen={setOpen}>
       <form onSubmit={handleRequestPrompt}>
         <Modal.Header>👋 {loc('feedback_title')}</Modal.Header>
-        <label className="label" htmlFor="feedback-email">
-          {loc('feedback_email')}{' '}
-          <span className="text-xs text-gray-500">{loc('feedback_email_optional')}</span>
-        </label>
-        <input className="input mb-4" id="feedback-email" name="feedback-email" type="email" />
-        <label className="label" htmlFor="feedback-textarea">
-          {loc('feedback_feedback')}
-        </label>
-        <textarea
-          className="input h-32"
-          id="feedback-textarea"
-          name="feedback-textarea"
-          placeholder={loc('feedback_placeholder')}
-          required
-        />
+        <Modal.Main>
+          <label className="label" htmlFor="feedback-email">
+            {loc('feedback_email')}{' '}
+            <span className="text-xs text-gray-500">{loc('feedback_email_optional')}</span>
+          </label>
+          <input className="input mb-4" id="feedback-email" name="feedback-email" type="email" />
+          <label className="label" htmlFor="feedback-textarea">
+            {loc('feedback_feedback')}
+          </label>
+          <textarea
+            className="input h-32"
+            id="feedback-textarea"
+            name="feedback-textarea"
+            placeholder={loc('feedback_placeholder')}
+            required
+          />
+        </Modal.Main>
         <Modal.Footer>
           <Button size="lg" type="submit">
             {loc('feedback_primary_action')}

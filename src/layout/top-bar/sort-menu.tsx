@@ -33,7 +33,7 @@ export const SortMenu = () => {
   }
 
   return (
-    <Menu as="div" className="relative z-50 inline-block text-left">
+    <Menu as="div" className="relative z-20 inline-block text-left">
       <Menu.Button
         className={clsx(buttonBaseStyles, buttonVariantStyles.ghost, buttonSizeStyles.md)}
       >

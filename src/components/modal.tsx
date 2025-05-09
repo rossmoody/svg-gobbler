@@ -1,10 +1,15 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
 import { Fragment, PropsWithChildren } from 'react'
 
 import { IconButton } from '.'
 
 export type ModalProperties = PropsWithChildren<{
+  /**
+   * Full screen modal.
+   */
+  fullScreen?: boolean
   /**
    * Optional callback for when the modal is closed from the close button or clicking the overlay.
    */
@@ -19,7 +24,13 @@ export type ModalProperties = PropsWithChildren<{
   setOpen: (open: boolean) => void
 }>
 
-export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<ModalProperties>) => {
+export const Modal = ({
+  children,
+  fullScreen,
+  onClose,
+  open,
+  setOpen,
+}: PropsWithChildren<ModalProperties>) => {
   const handleClose = () => {
     onClose?.()
     setOpen(false)
@@ -42,7 +53,7 @@ export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<Mo
         </Transition.Child>
 
         {/* Modal container */}
-        <div className="fixed inset-0 w-screen overflow-y-auto">
+        <div className="fixed inset-0 w-screen">
           <div className="flex min-h-full items-center justify-center p-4">
             <Transition.Child
               as={Fragment}
@@ -54,7 +65,13 @@ export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<Mo
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               {/* Modal content */}
-              <Dialog.Panel className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-800">
+              <Dialog.Panel
+                className={clsx(
+                  fullScreen ? 'fixed inset-2' : 'relative w-full max-w-lg',
+                  'overflow-hidden rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-800',
+                  'flex flex-col',
+                )}
+              >
                 <IconButton
                   className="absolute right-4 top-4"
                   onClick={handleClose}
@@ -63,7 +80,7 @@ export const Modal = ({ children, onClose, open, setOpen }: PropsWithChildren<Mo
                 >
                   <XMarkIcon className="h-5 w-5" />
                 </IconButton>
-                <main>{children}</main>
+                {children}
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -82,8 +99,13 @@ const Header = ({ children }: PropsWithChildren) => (
 )
 
 const Footer = ({ children }: PropsWithChildren) => (
-  <footer className="mt-10 flex flex-row-reverse gap-2">{children}</footer>
+  <footer className="mt-6 flex flex-row-reverse gap-2">{children}</footer>
+)
+
+const Main = ({ children }: PropsWithChildren) => (
+  <main className="flex-1 overflow-y-auto">{children}</main>
 )
 
 Modal.Header = Header
 Modal.Footer = Footer
+Modal.Main = Main

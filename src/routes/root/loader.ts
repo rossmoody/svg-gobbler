@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import { initCollection } from 'src/constants/collection'
+import { isDevelopmentEnvironment } from 'src/constants/server-config'
 import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
@@ -77,6 +78,18 @@ export async function rootLoader() {
           id: nanoid(),
           name: pageData.host,
           origin: pageData.origin,
+        }
+
+        // Debug storage and logging helpers
+        if (isDevelopmentEnvironment) {
+          StorageUtilities.setStorageData('debug-data', {
+            'All Collections': collections,
+            'Current Collection': collection,
+            'findSvg() Strings': data,
+            'Page Data': pageData,
+            User: user,
+            View: view,
+          })
         }
 
         // Merge the collections if the user has the setting and the URL is a duplicate

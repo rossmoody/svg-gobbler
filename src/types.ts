@@ -103,7 +103,7 @@ export type CollectionData = {
 /**
  * The database keys
  */
-export type DatabaseKey = 'collections' | 'plugins' | 'user' | 'view'
+export type DatabaseKey = 'collections' | 'debug-data' | 'plugins' | 'user' | 'view'
 
 /**
  * The params passed to a standard details route.

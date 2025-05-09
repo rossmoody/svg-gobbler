@@ -42,7 +42,7 @@ export const PreviewReact = () => {
         <CodeMirror
           basicSetup={{ highlightActiveLine: false }}
           className="cm-padding-fix h-1/2"
-          extensions={[javascript(), EditorView.lineWrapping]}
+          extensions={[javascript({ jsx: true }), EditorView.lineWrapping]}
           readOnly
           theme={tokyoNightStorm}
           value={result}

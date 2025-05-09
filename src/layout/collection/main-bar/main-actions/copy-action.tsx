@@ -31,18 +31,20 @@ export const CopyItemModal = () => {
       </Button>
       <Modal open={isModalOpen} setOpen={setModalOpen}>
         <Modal.Header>{loc('main_copy_collection')}</Modal.Header>
-        <div className="py-3">
-          <label className="label" htmlFor="collection">
-            {loc('main_name')}
-          </label>
-          <select className="select" id="collection" ref={collectionSelectReference}>
-            {dashboardState.collections.map((collection) => (
-              <option key={collection.id} value={collection.id}>
-                {collection.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Modal.Main>
+          <div className="py-3">
+            <label className="label" htmlFor="collection">
+              {loc('main_name')}
+            </label>
+            <select className="select" id="collection" ref={collectionSelectReference}>
+              {dashboardState.collections.map((collection) => (
+                <option key={collection.id} value={collection.id}>
+                  {collection.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </Modal.Main>
         <Modal.Footer>
           <Button onClick={duplicateItemsToCollection}>{loc('main_submit')}</Button>
           <Button onClick={() => setModalOpen(false)} variant="secondary">
