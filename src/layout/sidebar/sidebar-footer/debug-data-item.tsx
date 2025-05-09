@@ -1,7 +1,7 @@
-import { html } from '@codemirror/lang-html'
+import { json } from '@codemirror/lang-json'
 import { CodeBracketIcon } from '@heroicons/react/24/outline'
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
-import CodeMirror from '@uiw/react-codemirror'
+import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { logger } from 'src/utilities/logger'
@@ -34,9 +34,13 @@ export const DebugData = () => {
         <Modal.Header>Debug Data</Modal.Header>
         <Modal.Main>
           <CodeMirror
-            basicSetup={{ foldGutter: true, lineNumbers: true }}
+            basicSetup={{
+              closeBrackets: true,
+              foldGutter: true,
+              lineNumbers: true,
+            }}
             className="h-full"
-            extensions={[html()]}
+            extensions={[json(), EditorView.lineWrapping]}
             theme={tokyoNightStorm}
             value={debugData}
           />

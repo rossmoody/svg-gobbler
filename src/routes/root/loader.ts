@@ -83,12 +83,12 @@ export async function rootLoader() {
         // Debug storage and logging helpers
         if (isDevelopmentEnvironment) {
           StorageUtilities.setStorageData('debug-data', {
-            'All Collections': collections,
-            'Current Collection': collection,
-            'findSvg() Strings': data,
-            'Page Data': pageData,
-            User: user,
-            View: view,
+            '1. Source Page Data': pageData,
+            '2. Source SVG Classes': svgClasses,
+            '3. Current Collection': collection,
+            '4. All Collections': collections,
+            '5. User': user,
+            '6. View': view,
           })
         }
 

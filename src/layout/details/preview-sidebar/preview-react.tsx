@@ -1,7 +1,6 @@
 import { javascript } from '@codemirror/lang-javascript'
-import { EditorView } from '@codemirror/view'
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
-import CodeMirror from '@uiw/react-codemirror'
+import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { debounce } from 'lodash'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'

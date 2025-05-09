@@ -1,7 +1,6 @@
 import { html } from '@codemirror/lang-html'
-import { EditorView } from '@codemirror/view'
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
-import CodeMirror from '@uiw/react-codemirror'
+import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { merge } from 'lodash'
 import { useCallback } from 'react'
 import { useDetails, useUser } from 'src/providers'
