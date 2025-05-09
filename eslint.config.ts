@@ -29,6 +29,7 @@ export default tseslint.config([
       '@typescript-eslint/ban-ts-comment': 'off',
       'unicorn/consistent-function-scoping': 'off',
       'unicorn/no-array-callback-reference': 'off',
+      'unicorn/prefer-module': 'off',
     },
   },
   {

@@ -1,4 +1,4 @@
-import { html } from '@codemirror/lang-html'
+import { xml } from '@codemirror/lang-xml'
 import { tokyoNightStorm } from '@uiw/codemirror-theme-tokyo-night-storm'
 import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { merge } from 'lodash'
@@ -40,7 +40,7 @@ export const DetailsEditor = () => {
           lineNumbers: false,
         }}
         className="h-full"
-        extensions={[html(), EditorView.lineWrapping]}
+        extensions={[xml(), EditorView.lineWrapping]}
         onChange={onChange}
         onFocus={onFocus}
         theme={tokyoNightStorm}
