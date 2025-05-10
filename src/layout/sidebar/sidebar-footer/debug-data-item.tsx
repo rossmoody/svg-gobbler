@@ -28,7 +28,7 @@ export const DebugData = () => {
     <li>
       <button className="collection-item" onClick={onOpen}>
         <CodeBracketIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
-        View SVG Data
+        Debug Data
       </button>
       <Modal fullScreen open={open} setOpen={setOpen}>
         <Modal.Header>Debug Data</Modal.Header>
