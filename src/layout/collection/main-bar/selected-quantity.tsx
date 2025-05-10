@@ -14,7 +14,7 @@ export const SelectedQuantity = () => {
   }, [state.data, state.view.filters])
 
   return (
-    <div className="hidden leading-none md:block">
+    <div className="hidden text-right leading-none md:block">
       <span className="font-medium">{state.selected.length}</span> {loc('main_of')}{' '}
       <span className="font-medium">{filteredResultLength}</span> {loc('selected')}
     </div>

@@ -43,6 +43,11 @@ export class Svg {
   public svg: string
 
   /**
+   * The class name of the SVG element
+   */
+  public svgType: string
+
+  /**
    * A pleasantly formatted represntation of the SVG file size.
    */
   get fileSize() {
@@ -79,6 +84,7 @@ export class Svg {
     this.lastEdited = storageSvg.lastEdited
     this.name = storageSvg.name
     this.svg = storageSvg.svg
+    this.svgType = this.constructor.name
   }
 
   /**

@@ -1,6 +1,9 @@
 import type { DatabaseKey, PageData } from 'src/types'
 
 import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
+import { pageData } from 'src/constants/page-data'
+
+import { logger } from './logger'
 
 /**
  * A helper for working with Chrome storage and automating compression.
@@ -22,14 +25,16 @@ export const StorageUtilities = {
 
   /**
    * Get page data from storage based on collectionId.
-   * Automatically decompresses data.
+   * Automatically decompresses data. Returns an empty PageData object if not found.
+   * This is useful for ensuring that the app can handle missing data gracefully.
    */
   async getPageData(collectionId: string): Promise<PageData> {
     try {
       const pageData = await chrome.storage.local.get(collectionId)
       return this.decompressFromBase64(pageData[collectionId])
-    } catch {
-      return {} as PageData
+    } catch (error) {
+      logger.error('Error getting page data from storage:', error)
+      return pageData
     }
   },
 

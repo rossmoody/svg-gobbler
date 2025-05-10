@@ -16,6 +16,7 @@ export const useMainActions = () => {
 
   function resetCollection() {
     dispatch({ type: 'unselect-all' })
+    dispatch({ type: 'process-data' })
     revalidate()
   }
 
@@ -47,7 +48,7 @@ export const useMainActions = () => {
     resetCollection()
   }
 
-  const copySelectedItems = async (targetCollectionId: string) => {
+  const duplicateItems = async (targetCollectionId: string) => {
     const targetPageData = await StorageUtilities.getPageData(targetCollectionId)
 
     await StorageUtilities.setPageData(targetCollectionId, {
@@ -58,5 +59,5 @@ export const useMainActions = () => {
     resetCollection()
   }
 
-  return { copySelectedItems, deleteSelectedItems, moveSelectedItems }
+  return { deleteSelectedItems, duplicateItems, moveSelectedItems }
 }

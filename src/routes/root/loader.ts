@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
 import { initCollection } from 'src/constants/collection'
+import { isDevelopmentEnvironment } from 'src/constants/server-config'
 import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
@@ -37,7 +38,7 @@ export async function rootLoader() {
 
       // Get all collections from storage to process and use for routing
       let collections = await StorageUtilities.getStorageData<Collection[]>('collections')
-      if (collections === undefined) collections = [initCollection]
+      if (collections === undefined) collections = [initCollection()]
 
       StorageUtilities.setStorageData('collections', collections)
 
@@ -77,6 +78,18 @@ export async function rootLoader() {
           id: nanoid(),
           name: pageData.host,
           origin: pageData.origin,
+        }
+
+        // Debug storage and logging helpers
+        if (isDevelopmentEnvironment) {
+          StorageUtilities.setStorageData('debug-data', {
+            '1. Source SVG Classes': svgClasses,
+            '2. Source Page Data': pageData,
+            '3. Current Collection': collection,
+            '4. All Collections': collections,
+            '5. User': user,
+            '6. View': view,
+          })
         }
 
         // Merge the collections if the user has the setting and the URL is a duplicate

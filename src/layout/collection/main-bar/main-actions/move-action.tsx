@@ -37,16 +37,18 @@ export const MoveItemModal = () => {
 
       <Modal open={isModalOpen} setOpen={setModalOpen}>
         <Modal.Header>{loc('main_move_collection')}</Modal.Header>
-        <label className="label" htmlFor="collection">
-          {loc('main_name')}
-        </label>
-        <select className="select" id="collection" ref={collectionSelectReference}>
-          {options.map((collection) => (
-            <option key={collection.id} value={collection.id}>
-              {collection.name}
-            </option>
-          ))}
-        </select>
+        <Modal.Main>
+          <label className="label" htmlFor="collection">
+            {loc('main_name')}
+          </label>
+          <select className="select" id="collection" ref={collectionSelectReference}>
+            {options.map((collection) => (
+              <option key={collection.id} value={collection.id}>
+                {collection.name}
+              </option>
+            ))}
+          </select>
+        </Modal.Main>
         <Modal.Footer>
           <Button onClick={moveItemsToCollection}>{loc('main_submit')}</Button>
           <Button onClick={() => setModalOpen(false)} variant="secondary">

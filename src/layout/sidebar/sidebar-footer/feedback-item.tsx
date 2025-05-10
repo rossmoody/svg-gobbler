@@ -27,7 +27,7 @@ export const FeedbackItem = () => {
   }
 
   return (
-    <>
+    <li>
       <button className="collection-item" onClick={onOpen}>
         <MegaphoneIcon aria-hidden="true" className="h-4 w-4 shrink-0 " />
         {loc('sidebar_feedback')}
@@ -35,23 +35,25 @@ export const FeedbackItem = () => {
       <Modal onClose={onClose} open={open} setOpen={setOpen}>
         <form onSubmit={handleRequestPrompt}>
           <Modal.Header>{loc('sidebar_feedback')}</Modal.Header>
-          <label className="label" htmlFor="feedback-email">
-            {loc('feedback_email')}{' '}
-            <span className="text-xs text-gray-500">{loc('feedback_email_optional')}</span>
-          </label>
-          <div className="mb-2 text-xs text-gray-600 dark:text-gray-400">
-            {loc('feedback_email_optional_description')}
-          </div>
-          <input className="input mb-4" id="feedback-email" name="feedback-email" type="email" />
-          <label className="label" htmlFor="feedback-textarea">
-            {loc('feedback_feedback')}
-          </label>
-          <textarea
-            className="input h-32"
-            id="feedback-textarea"
-            name="feedback-textarea"
-            required
-          />
+          <Modal.Main>
+            <label className="label" htmlFor="feedback-email">
+              {loc('feedback_email')}{' '}
+              <span className="text-xs text-gray-500">{loc('feedback_email_optional')}</span>
+            </label>
+            <div className="mb-2 text-xs text-gray-600 dark:text-gray-400">
+              {loc('feedback_email_optional_description')}
+            </div>
+            <input className="input mb-4" id="feedback-email" name="feedback-email" type="email" />
+            <label className="label" htmlFor="feedback-textarea">
+              {loc('feedback_feedback')}
+            </label>
+            <textarea
+              className="input h-32"
+              id="feedback-textarea"
+              name="feedback-textarea"
+              required
+            />
+          </Modal.Main>
           <Modal.Footer>
             <Button size="lg" type="submit">
               {loc('feedback_primary_action')}
@@ -62,6 +64,6 @@ export const FeedbackItem = () => {
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+    </li>
   )
 }
