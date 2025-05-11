@@ -303,7 +303,7 @@
     "message": "Save changes"
   },
   "onboarding_title": {
-    "message": "Welcome to SVG Gobbler"
+    "message": "Getting Started"
   },
   "onboarding_new": {
     "message": "What's new"
@@ -312,10 +312,10 @@
     "message": "Version 5"
   },
   "onboarding_desc": {
-    "message": "Launch SVG Gobbler by clicking the extension icon in the toolbar while browsing or through the context menu by right-clicking on the page."
+    "message": "Launch SVG Gobbler by clicking the extension icon in the toolbar or by right-clicking on a page and selecting the SVG Gobbler menu item."
   },
   "onboarding_launch": {
-    "message": "Launch SVG Gobbler"
+    "message": "Gobble this page"
   },
   "onboarding_visit": {
     "message": "Visit GitHub"
