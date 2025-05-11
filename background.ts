@@ -1,3 +1,4 @@
+import { isDevelopmentEnvironment } from 'src/constants/server-config'
 import { DocumentData, findSvg } from 'src/scripts'
 import { extension } from 'src/utilities/extension-utilities'
 
@@ -6,15 +7,27 @@ import { extension } from 'src/utilities/extension-utilities'
  * extension icons and launching the onboarding experience.
  */
 const Background = {
+  createContextMenu() {
+    chrome.contextMenus.create({
+      contexts: ['all'],
+      id: 'svg-gobbler',
+      title: 'Search page for SVGs',
+    })
+
+    chrome.contextMenus.onClicked.addListener((info) => {
+      if (info.menuItemId === 'svg-gobbler') {
+        Background.launchSvgGobbler()
+      }
+    })
+  },
+
   /**
    * Sets the uninstall URL for the extension.
    */
   handleUninstall() {
-    if (process.env.NODE_ENV === 'development') {
-      return
+    if (!isDevelopmentEnvironment) {
+      chrome.runtime.setUninstallURL('https://svggobbler.com/uninstall')
     }
-
-    chrome.runtime.setUninstallURL('https://svggobbler.com/uninstall')
   },
 
   /**
@@ -24,8 +37,18 @@ const Background = {
     Background.setExtensionIcons()
     Background.launchOnboardingExperience()
     Background.launchExtensionFromOnboarding()
-    Background.launchSvgGobbler()
+    Background.launchExtensionFromIcon()
     Background.handleUninstall()
+    Background.createContextMenu()
+  },
+
+  /**
+   * Initializes SVG Gobbler conditionally based on the type of page the user is
+   * currently on. Responsible for getting data from the active tab and sending
+   * it to the content script.
+   */
+  launchExtensionFromIcon() {
+    chrome.action.onClicked.addListener(Background.launchSvgGobbler)
   },
 
   /**
@@ -39,8 +62,7 @@ const Background = {
         const listener = function (
           request: string,
           _: chrome.runtime.MessageSender,
-          // eslint-disable-next-line
-          sendResponse: (response: any) => void,
+          sendResponse: (response: unknown) => void,
         ) {
           // We manually create a listener to handle the message
           // from the newly created page below
@@ -61,55 +83,47 @@ const Background = {
    * If the extension is installed for the first time, open the onboarding page.
    */
   launchOnboardingExperience() {
-    chrome.runtime.onInstalled.addListener(async (details) => {
-      if (details.reason === 'install') {
-        await extension.createNewTab('onboarding.html')
-      }
-    })
-  },
-
-  /**
-   * Initializes SVG Gobbler conditionally based on the type of page the user is
-   * currently on. Responsible for getting data from the active tab and sending
-   * it to the content script.
-   */
-  launchSvgGobbler() {
-    const onClickHandler = async () => {
-      let data = {
-        data: [],
-        host: 'Collection',
-        href: '',
-        origin: '',
-      } as DocumentData
-
-      const activeTab = await extension.getActiveTab()
-
-      // If the extensions is on a system page we bail entirely
-      if (extension.isExtensionTab(activeTab)) {
-        return
-      }
-
-      // If the extension is on a new tab page we create a new tab and bail early
-      // The extension won't have a listener on the new tab page and will fail gracefully
-      if (extension.isNewTabPage(activeTab)) {
-        extension.createNewTab()
-        return
-      }
-
-      data = await extension.executeScript(activeTab.id!, findSvg)
-
-      chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
-        if (request === 'gobble') {
-          sendResponse({ data })
-          chrome.runtime.onMessage.removeListener(listener)
+    if (!isDevelopmentEnvironment) {
+      chrome.runtime.onInstalled.addListener(async (details) => {
+        if (details.reason === 'install') {
+          await extension.createNewTab('onboarding.html')
         }
       })
+    }
+  },
 
-      // Create the tab that calls the listener we just created
-      extension.createNewTab()
+  async launchSvgGobbler() {
+    let data = {
+      data: [],
+      host: 'Collection',
+      href: '',
+      origin: '',
+    } as DocumentData
+
+    const activeTab = await extension.getActiveTab()
+
+    // If the extensions is on a system page we bail entirely
+    if (extension.isExtensionTab(activeTab)) {
+      return
     }
 
-    chrome.action.onClicked.addListener(onClickHandler)
+    // If the extension is on a new tab page we create a new tab and bail early
+    // The extension won't have a listener on the new tab page and will fail gracefully
+    if (extension.isNewTabPage(activeTab)) {
+      extension.createNewTab()
+      return
+    }
+
+    data = await extension.executeScript(activeTab.id!, findSvg)
+
+    chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
+      if (request === 'gobble') {
+        sendResponse({ data })
+        chrome.runtime.onMessage.removeListener(listener)
+      }
+    })
+
+    extension.createNewTab()
   },
 
   /**

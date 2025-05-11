@@ -312,10 +312,7 @@
     "message": "Version 5"
   },
   "onboarding_desc": {
-    "message": "SVG Gobbler is an open-source browser extension created by"
-  },
-  "onboarding_desc_2": {
-    "message": "out in sunny San Francisco. Contribute to the project, share your feature ideas, or submit bugs on Github."
+    "message": "Launch SVG Gobbler by clicking the extension icon in the toolbar while browsing or through the context menu by right-clicking on the page."
   },
   "onboarding_launch": {
     "message": "Launch SVG Gobbler"

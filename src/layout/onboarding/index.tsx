@@ -24,10 +24,12 @@ export const OnboardingLayout = () => {
       origin: links.svgGobblerHomepage,
     }
 
-    chrome.runtime.sendMessage({
+    await chrome.runtime.sendMessage({
       data,
       type: 'launch-svg-gobbler-from-onboarding',
     })
+
+    window.close()
   }
 
   return (
@@ -72,16 +74,7 @@ export const OnboardingLayout = () => {
           <h1 className="mt-10 text-6xl font-bold tracking-tight text-gray-900">
             {loc('onboarding_title')}
           </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            {loc('onboarding_desc')}{' '}
-            <a
-              className="cursor-pointer text-red-600 hover:text-red-500"
-              href={links.rossMoodyHomepage}
-            >
-              Ross Moody
-            </a>{' '}
-            {loc('onboarding_desc_2')}
-          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-600">{loc('onboarding_desc')}</p>
           <div className="mt-10 flex items-center gap-x-6">
             <button
               className="group flex items-center rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
