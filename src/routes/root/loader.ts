@@ -81,14 +81,10 @@ export async function rootLoader() {
 
         // Debug storage and logging helpers
         if (isDevelopmentEnvironment) {
-          StorageUtilities.setStorageData('debug-data', {
-            '1. Source SVG Classes': svgClasses,
-            '2. Source Page Data': pageData,
-            '3. Current Collection': collection,
-            '4. All Collections': collections,
-            '5. User': user,
-            '6. View': view,
-          })
+          StorageUtilities.setStorageData(
+            'debug-data',
+            RootUtilities.createDebugData({ collections, pageData, svgClasses, user, view }),
+          )
         }
 
         // Merge the collections if the user has the setting and the URL is a duplicate
