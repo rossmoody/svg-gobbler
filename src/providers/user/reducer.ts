@@ -55,6 +55,10 @@ export type UserState = {
      */
     mergeCollections: boolean
     /**
+     * Show SVG Gobbler in the context menu when right-clicking on the page.
+     */
+    showInContextMenu: boolean
+    /**
      * To sort collections in the sidebar alphabetically.
      */
     sortCollections: boolean
@@ -76,6 +80,7 @@ export const initUserState: UserState = {
   },
   settings: {
     mergeCollections: false,
+    showInContextMenu: true,
     sortCollections: false,
   },
 }

@@ -970,5 +970,17 @@
   },
   "to_upload": {
     "message": "to upload"
+  },
+  "launch_gobbler": {
+    "message": "Launching SVG Gobbler"
+  },
+  "launch_gobbler_desc": {
+    "message": "Settings for how the extension is launched"
+  },
+  "context_title": {
+    "message": "Show SVG Gobbler in context menu"
+  },
+  "context_desc": {
+    "message": "Show an option to launch the extension in the context menu when right-clicking on the page"
   }
 }

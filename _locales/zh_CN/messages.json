@@ -1,4 +1,16 @@
 {
+  "launch_gobbler": {
+    "message": "启动 SVG Gobbler"
+  },
+  "launch_gobbler_desc": {
+    "message": "扩展启动设置"
+  },
+  "context_title": {
+    "message": "在右键菜单中显示 SVG Gobbler"
+  },
+  "context_desc": {
+    "message": "在页面上右键点击时，在右键菜单中显示启动扩展的选项"
+  },
   "empty_title": {
     "message": "未找到 SVG"
   },

@@ -1,4 +1,16 @@
 {
+  "launch_gobbler": {
+    "message": "Iniciando SVG Gobbler"
+  },
+  "launch_gobbler_desc": {
+    "message": "Configuración para iniciar la extensión"
+  },
+  "context_title": {
+    "message": "Mostrar SVG Gobbler en el menú contextual"
+  },
+  "context_desc": {
+    "message": "Mostrar una opción para iniciar la extensión en el menú contextual al hacer clic derecho en la página"
+  },
   "empty_title": {
     "message": "No se encontraron SVGs"
   },
