@@ -26,6 +26,25 @@ export const GeneralSettings = () => {
     StorageUtilities.setStorageData('user', userState)
   }
 
+  const handleContextMenuToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const userState: UserState = {
+      ...state,
+      settings: { ...state.settings, showInContextMenu: event.target.checked },
+    }
+    dispatch({ payload: userState, type: 'set-user' })
+    StorageUtilities.setStorageData('user', userState)
+
+    if (event.target.checked) {
+      chrome.contextMenus.create({
+        contexts: ['all'],
+        id: 'svg-gobbler',
+        title: 'Search page for SVGs',
+      })
+    } else {
+      chrome.contextMenus.remove('svg-gobbler')
+    }
+  }
+
   const handleSortCollections = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
       ...state,
@@ -51,16 +70,42 @@ export const GeneralSettings = () => {
     <Category description={loc('settings_general_desc')} title={loc('settings_general')}>
       <Item>
         <Item.Section>
-          <Item.Heading>{loc('settings_kbd')}</Item.Heading>
-          <Item.Description>
+          <Item.Heading>{loc('launch_gobbler')}</Item.Heading>
+          <Item.Description>{loc('launch_gobbler_desc')}</Item.Description>
+          <Item.Setting>
+            <div>
+              <span className="block pb-1 text-sm font-medium leading-4">
+                {loc('settings_kbd')}
+              </span>
+            </div>
             {loc('settings_kbd_desc')} <KeyboardShortcut />. {loc('settings_kbd_desc_2')},{' '}
             <span className="anchor" onClick={handleOpenKeyboardShortcuts}>
               {loc('settings_kbd_desc_3')}
             </span>
             .
-          </Item.Description>
+          </Item.Setting>
+          <Item.Setting>
+            <div className="flex gap-2">
+              <input
+                checked={state.settings.showInContextMenu}
+                className="checkbox"
+                id="import-merging"
+                onChange={handleContextMenuToggle}
+                type="checkbox"
+              />
+              <div>
+                <label
+                  className="block pb-1 text-sm font-medium leading-4"
+                  htmlFor="import-merging"
+                >
+                  {loc('context_title')}
+                </label>
+                <span className="text-muted">{loc('context_desc')}</span>
+              </div>
+            </div>
+          </Item.Setting>
         </Item.Section>
-
+        <div className="my-6 h-px bg-gray-200 dark:bg-gray-700" />
         <Item.Section>
           <Item.Heading>{loc('settings_collections_title')}</Item.Heading>
           <Item.Description>{loc('settings_collections_desc')}</Item.Description>

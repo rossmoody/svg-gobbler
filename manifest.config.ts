@@ -27,7 +27,7 @@ export default <ManifestV3Export>{
   },
   manifest_version: 3,
   name: 'SVG Gobbler',
-  permissions: ['activeTab', 'scripting', 'storage'],
+  permissions: ['activeTab', 'scripting', 'storage', 'contextMenus'],
   version: packageJson.version,
   web_accessible_resources: [
     {

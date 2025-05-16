@@ -1,4 +1,16 @@
 {
+  "launch_gobbler": {
+    "message": "SVG गॉब्लर लॉन्च हो रहा है"
+  },
+  "launch_gobbler_desc": {
+    "message": "एक्सटेंशन लॉन्च करने की सेटिंग्स"
+  },
+  "context_title": {
+    "message": "संदर्भ मेनू में SVG गॉब्लर दिखाएं"
+  },
+  "context_desc": {
+    "message": "पेज पर राइट-क्लिक करते समय संदर्भ मेनू में एक्सटेंशन लॉन्च करने का विकल्प दिखाएं"
+  },
   "empty_title": {
     "message": "कोई SVG नहीं मिला"
   },

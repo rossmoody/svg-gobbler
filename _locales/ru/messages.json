@@ -1,4 +1,16 @@
 {
+  "launch_gobbler": {
+    "message": "Запуск SVG Gobbler"
+  },
+  "launch_gobbler_desc": {
+    "message": "Настройки запуска расширения"
+  },
+  "context_title": {
+    "message": "Показать SVG Gobbler в контекстном меню"
+  },
+  "context_desc": {
+    "message": "Показать опцию запуска расширения в контекстном меню при щелчке правой кнопкой мыши на странице"
+  },
   "empty_title": {
     "message": "SVG не найдены"
   },
