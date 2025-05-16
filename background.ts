@@ -1,6 +1,7 @@
 import { isDevelopmentEnvironment } from 'src/constants/server-config'
 import { DocumentData, findSvg } from 'src/scripts'
 import { extension } from 'src/utilities/extension-utilities'
+import { logger } from 'src/utilities/logger'
 
 /**
  * Functions related to initializing the extension. This includes setting the
@@ -15,9 +16,11 @@ const Background = {
     })
 
     chrome.contextMenus.onClicked.addListener((info) => {
-      if (info.menuItemId === 'svg-gobbler') {
-        Background.launchSvgGobbler()
+      if (info.menuItemId !== 'svg-gobbler') {
+        return
       }
+
+      Background.launchSvgGobbler()
     })
   },
 
@@ -93,37 +96,41 @@ const Background = {
   },
 
   async launchSvgGobbler() {
-    let data = {
-      data: [],
-      host: 'Collection',
-      href: '',
-      origin: '',
-    } as DocumentData
+    try {
+      let data = {
+        data: [],
+        host: 'Collection',
+        href: '',
+        origin: '',
+      } as DocumentData
 
-    const activeTab = await extension.getActiveTab()
+      const activeTab = await extension.getActiveTab()
 
-    // If the extensions is on a system page we bail entirely
-    if (extension.isExtensionTab(activeTab)) {
-      return
-    }
-
-    // If the extension is on a new tab page we create a new tab and bail early
-    // The extension won't have a listener on the new tab page and will fail gracefully
-    if (extension.isNewTabPage(activeTab)) {
-      extension.createNewTab()
-      return
-    }
-
-    data = await extension.executeScript(activeTab.id!, findSvg)
-
-    chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
-      if (request === 'gobble') {
-        sendResponse({ data })
-        chrome.runtime.onMessage.removeListener(listener)
+      // If the extensions is on a system page we bail entirely
+      if (extension.isExtensionTab(activeTab)) {
+        return
       }
-    })
 
-    extension.createNewTab()
+      // If the extension is on a new tab page we create a new tab and bail early
+      // The extension won't have a listener on the new tab page and will fail gracefully
+      if (extension.isNewTabPage(activeTab)) {
+        extension.createNewTab()
+        return
+      }
+
+      data = await extension.executeScript(activeTab.id!, findSvg)
+
+      chrome.runtime.onMessage.addListener(function listener(request, __, sendResponse) {
+        if (request === 'gobble') {
+          sendResponse({ data })
+          chrome.runtime.onMessage.removeListener(listener)
+        }
+      })
+
+      extension.createNewTab()
+    } catch (error) {
+      logger.error('Error while trying to gobble SVGs', error)
+    }
   },
 
   /**
