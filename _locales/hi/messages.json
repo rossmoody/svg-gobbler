@@ -1,4 +1,10 @@
 {
+  "optimize": {
+    "message": "अनुकूलित करें"
+  },
+  "optimized": {
+    "message": "अनुकूलित"
+  },
   "launch_gobbler": {
     "message": "SVG गॉब्लर लॉन्च हो रहा है"
   },

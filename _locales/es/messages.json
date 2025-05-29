@@ -1,4 +1,10 @@
 {
+  "optimize": {
+    "message": "Optimizar"
+  },
+  "optimized": {
+    "message": "Optimizado"
+  },
   "launch_gobbler": {
     "message": "Iniciando SVG Gobbler"
   },

@@ -1,4 +1,10 @@
 {
+  "optimize": {
+    "message": "优化"
+  },
+  "optimized": {
+    "message": "已优化"
+  },
   "launch_gobbler": {
     "message": "启动 SVG Gobbler"
   },

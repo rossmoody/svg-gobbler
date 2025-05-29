@@ -1,4 +1,10 @@
 {
+  "optimize": {
+    "message": "Optimize"
+  },
+  "optimized": {
+    "message": "Optimized"
+  },
   "empty_title": {
     "message": "No SVGs found"
   },
@@ -123,7 +129,7 @@
     "message": "Download"
   },
   "export_files": {
-    "message": "Files"
+    "message": "files"
   },
   "export_export": {
     "message": "Export"
