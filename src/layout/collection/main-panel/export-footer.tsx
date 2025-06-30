@@ -1,37 +1,44 @@
 import { useState } from 'react'
 import { Button } from 'src/components'
 import { useCollection, useExport } from 'src/providers'
+import { Svg } from 'src/scripts'
 import { formUtilities } from 'src/utilities/form-utilities'
 import { loc } from 'src/utilities/i18n'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 import { ExportSvg, useExportActions } from '../../../hooks/use-export-actions'
 
 export const ExportFooter = () => {
   const [loading, setLoading] = useState(false)
-  const [label, setLabel] = useState(loc('export_copy_clipboard'))
-  const { state: collectionState } = useCollection()
+  const { dispatch, state: collectionState } = useCollection()
   const { state: exportState } = useExport()
   const { processWithExportConfig } = useExportActions()
 
-  const handleCopy = async () => {
-    setLabel(loc('export_copied'))
-    const processed = await processWithExportConfig(collectionState.selected)
-    const payload = processed[0].payload
+  const handleOptimize = async () => {
+    setLoading(true)
 
-    switch (exportState.fileType) {
-      case 'jpeg':
-      case 'png':
-      case 'webp': {
-        formUtilities.copyImageToClipboard(payload)
-        break
-      }
-      case 'svg': {
-        formUtilities.copyStringToClipboard(payload)
-        break
-      }
-    }
+    const { collectionId, data, selected } = collectionState
+    const optimizedSvgs = await processWithExportConfig(selected)
+    const pageData = await StorageUtilities.getPageData(collectionId)
 
-    setTimeout(() => setLabel(loc('export_copy_clipboard')), 1500)
+    const newData: Svg[] = data.map((svg) => {
+      const selectedSvg = optimizedSvgs.find((s) => s.id === svg.id)
+      if (selectedSvg) {
+        svg.svg = selectedSvg.payload
+        svg.stampLastEdited()
+      }
+      return svg
+    })
+
+    pageData.data = SvgUtilities.createStorageSvgs(newData)
+    await StorageUtilities.setPageData(collectionId, pageData)
+    dispatch({ payload: newData, type: 'set-data' })
+    dispatch({ type: 'process-data' })
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 400)
   }
 
   const handleDownload = async () => {
@@ -48,6 +55,7 @@ export const ExportFooter = () => {
       case 'sprite': {
         exportSvgs = collectionState.selected.map((svg) => {
           return {
+            id: svg.id,
             name: svg.name,
             payload: svg.svg,
           }
@@ -65,25 +73,23 @@ export const ExportFooter = () => {
     setLoading(false)
   }
 
-  const downloadQuantityString =
-    collectionState.selected.length > 1
-      ? ` ${collectionState.selected.length} ${loc('export_files')}`
-      : ''
-
-  const buttonLabel =
-    exportState.fileType === 'sprite'
-      ? loc('export_download_sprite')
-      : loc('export_download') + downloadQuantityString
+  const downloadButtonLabel =
+    exportState.fileType === 'sprite' ? loc('export_download_sprite') : loc('export_export')
 
   return (
     <footer className="flex shrink-0 flex-col gap-2 border-t border-gray-200 px-4 py-6 dark:border-gray-700">
-      {collectionState.selected.length < 2 && exportState.fileType !== 'sprite' && (
-        <Button className="justify-center transition-all" onClick={handleCopy} variant="secondary">
-          {label}
+      {exportState.fileType === 'svg' && (
+        <Button
+          className="justify-center"
+          loading={loading}
+          onClick={handleOptimize}
+          variant="secondary"
+        >
+          {loc('optimize')}
         </Button>
       )}
       <Button className="justify-center" loading={loading} onClick={handleDownload}>
-        {buttonLabel}
+        {downloadButtonLabel}
       </Button>
     </footer>
   )

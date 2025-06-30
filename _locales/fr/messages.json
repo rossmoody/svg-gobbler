@@ -1,4 +1,22 @@
 {
+  "you_sure": {
+    "message": "Êtes-vous sûr de vouloir supprimer"
+  },
+  "undone": {
+    "message": "Cette action ne peut pas être annulée."
+  },
+  "remove": {
+    "message": "Supprimer"
+  },
+  "cancel": {
+    "message": "Annuler"
+  },
+  "optimize": {
+    "message": "Optimiser"
+  },
+  "optimized": {
+    "message": "Optimisé"
+  },
   "launch_gobbler": {
     "message": "Lancement de SVG Gobbler"
   },

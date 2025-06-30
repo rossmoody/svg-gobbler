@@ -1,4 +1,22 @@
 {
+  "you_sure": {
+    "message": "क्या आप वाकई हटाना चाहते हैं"
+  },
+  "undone": {
+    "message": "इस क्रिया को पूर्ववत नहीं किया जा सकता।"
+  },
+  "remove": {
+    "message": "हटाएं"
+  },
+  "cancel": {
+    "message": "रद्द करें"
+  },
+  "optimize": {
+    "message": "अनुकूलित करें"
+  },
+  "optimized": {
+    "message": "अनुकूलित"
+  },
   "launch_gobbler": {
     "message": "SVG गॉब्लर लॉन्च हो रहा है"
   },

@@ -142,7 +142,7 @@ export const detailsReducer = (state: DetailsState, action: DetailsAction): Deta
     }
 
     case 'process-current-string': {
-      const { data } = optimize(state.originalString, state.export.svgoConfig)
+      const { data } = optimize(state.currentString, state.export.svgoConfig)
 
       return {
         ...state,

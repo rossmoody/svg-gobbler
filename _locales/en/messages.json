@@ -1,4 +1,22 @@
 {
+  "you_sure": {
+    "message": "Are you sure you want to remove"
+  },
+  "undone": {
+    "message": "This action cannot be undone."
+  },
+  "remove": {
+    "message": "Remove"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "optimize": {
+    "message": "Optimize"
+  },
+  "optimized": {
+    "message": "Optimized"
+  },
   "empty_title": {
     "message": "No SVGs found"
   },
@@ -123,7 +141,7 @@
     "message": "Download"
   },
   "export_files": {
-    "message": "Files"
+    "message": "files"
   },
   "export_export": {
     "message": "Export"

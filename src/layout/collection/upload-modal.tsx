@@ -12,6 +12,7 @@ import { loc } from 'src/utilities/i18n'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
 export const UploadModal = ({ open, setOpen }: ModalProperties) => {
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
   const reference = useRef<HTMLTextAreaElement>(null)
@@ -35,6 +36,8 @@ export const UploadModal = ({ open, setOpen }: ModalProperties) => {
       return setError(true)
     }
 
+    setLoading(true)
+
     // Set the onboarding flag if the user pastes an SVG
     if (clipboardValue) {
       const payload: UserState = {
@@ -52,6 +55,7 @@ export const UploadModal = ({ open, setOpen }: ModalProperties) => {
 
     // Perform the upload and clear states
     await upload(svgFiles)
+    setLoading(false)
     onClose()
   }
 
@@ -153,10 +157,10 @@ export const UploadModal = ({ open, setOpen }: ModalProperties) => {
         </Tabs.Group>
       </Modal.Main>
       <Modal.Footer>
-        <Button onClick={onSubmit} size="lg">
+        <Button loading={loading} onClick={onSubmit} size="lg">
           {loc('upload_upload')}
         </Button>
-        <Button onClick={onClose} size="lg" type="button" variant="secondary">
+        <Button loading={loading} onClick={onClose} size="lg" type="button" variant="secondary">
           {loc('main_cancel')}
         </Button>
       </Modal.Footer>

@@ -8,6 +8,7 @@ import { Config } from 'svgo'
 import { optimize } from 'svgo/dist/svgo.browser'
 
 export type ExportSvg = {
+  id: string
   name: string
   payload: string
 }
@@ -33,6 +34,7 @@ export const useExportActions = () => {
       case 'jpeg': {
         return await Promise.all(
           svgs.map(async (svg) => ({
+            id: svg.id,
             name: svg.name,
             payload: await formUtilities.convertToDataUrl(
               svg.presentationSvg,
@@ -50,6 +52,7 @@ export const useExportActions = () => {
       case 'png': {
         return await Promise.all(
           svgs.map(async (svg) => ({
+            id: svg.id,
             name: svg.name,
             payload: await formUtilities.convertToDataUrl(
               svg.presentationSvg,
@@ -67,6 +70,7 @@ export const useExportActions = () => {
         return svgs.map((svg) => {
           const { data } = optimize(svg.svg, svgoConfig)
           return {
+            id: svg.id,
             name: svg.name,
             payload: data as string,
           }
@@ -76,6 +80,7 @@ export const useExportActions = () => {
       case 'webp': {
         return await Promise.all(
           svgs.map(async (svg) => ({
+            id: svg.id,
             name: svg.name,
             payload: await formUtilities.convertToDataUrl(
               svg.presentationSvg,

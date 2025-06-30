@@ -1,4 +1,22 @@
 {
+  "you_sure": {
+    "message": "Вы уверены, что хотите удалить"
+  },
+  "undone": {
+    "message": "Это действие нельзя отменить."
+  },
+  "remove": {
+    "message": "Удалить"
+  },
+  "cancel": {
+    "message": "Отмена"
+  },
+  "optimize": {
+    "message": "Оптимизировать"
+  },
+  "optimized": {
+    "message": "Оптимизировано"
+  },
   "launch_gobbler": {
     "message": "Запуск SVG Gobbler"
   },
