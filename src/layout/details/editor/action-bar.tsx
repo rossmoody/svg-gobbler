@@ -11,7 +11,8 @@ export const ActionBar = () => {
   const { format, optimize } = useOptimize()
 
   const onOptimize = () => {
-    dispatch({ payload: optimize(state.currentString), type: 'update-current-string' })
+    const payload = optimize(state.currentString)
+    dispatch({ payload, type: 'update-current-string' })
   }
 
   const onFormat = () => {
