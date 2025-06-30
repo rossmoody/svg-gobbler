@@ -1,4 +1,16 @@
 {
+  "you_sure": {
+    "message": "您确定要删除"
+  },
+  "undone": {
+    "message": "此操作无法撤销。"
+  },
+  "remove": {
+    "message": "删除"
+  },
+  "cancel": {
+    "message": "取消"
+  },
   "optimize": {
     "message": "优化"
   },

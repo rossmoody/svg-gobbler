@@ -1,6 +1,7 @@
 import { CodeBracketIcon } from '@heroicons/react/24/outline'
 import JsonView from '@uiw/react-json-view'
 import { nordTheme } from '@uiw/react-json-view/nord'
+import _ from 'lodash'
 import { useState } from 'react'
 import { Button, Modal } from 'src/components'
 import { logger } from 'src/utilities/logger'
@@ -17,7 +18,8 @@ export const DebugData = () => {
   function onOpen() {
     StorageUtilities.getStorageData('debug-data')
       .then((data) => {
-        setDebugData(data as object)
+        const safeData = _.merge({}, data)
+        setDebugData(safeData)
         setOpen(true)
       })
       .catch(logger.error)

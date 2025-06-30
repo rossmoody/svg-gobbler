@@ -1,4 +1,16 @@
 {
+  "you_sure": {
+    "message": "¿Estás seguro de que quieres eliminar"
+  },
+  "undone": {
+    "message": "Esta acción no se puede deshacer."
+  },
+  "remove": {
+    "message": "Eliminar"
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
   "optimize": {
     "message": "Optimizar"
   },

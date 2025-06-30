@@ -1,4 +1,16 @@
 {
+  "you_sure": {
+    "message": "Are you sure you want to remove"
+  },
+  "undone": {
+    "message": "This action cannot be undone."
+  },
+  "remove": {
+    "message": "Remove"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
   "optimize": {
     "message": "Optimize"
   },

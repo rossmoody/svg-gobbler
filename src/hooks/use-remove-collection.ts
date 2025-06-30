@@ -6,12 +6,12 @@ import { pageData } from 'src/constants/page-data'
 import { useDashboard } from 'src/providers'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
 
-export function useRemoveCollection() {
+export function useRemoveCollection(collection: Collection) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { dispatch, state } = useDashboard()
 
-  return function (collection: Collection) {
+  return function () {
     const isActiveCollection = pathname.includes(collection.id)
     const collectionsWithoutRemoved = state.collections.filter(({ id }) => id !== collection.id)
 
