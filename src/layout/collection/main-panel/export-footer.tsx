@@ -38,7 +38,7 @@ export const ExportFooter = () => {
 
     setTimeout(() => {
       setLoading(false)
-    }, 1000)
+    }, 400)
   }
 
   const handleDownload = async () => {
@@ -73,26 +73,21 @@ export const ExportFooter = () => {
     setLoading(false)
   }
 
-  const fileQuantityString =
-    collectionState.selected.length > 1
-      ? ` ${collectionState.selected.length} ${loc('export_files')}`
-      : ''
-
   const downloadButtonLabel =
-    exportState.fileType === 'sprite'
-      ? loc('export_download_sprite')
-      : loc('export_export') + fileQuantityString
+    exportState.fileType === 'sprite' ? loc('export_download_sprite') : loc('export_export')
 
   return (
     <footer className="flex shrink-0 flex-col gap-2 border-t border-gray-200 px-4 py-6 dark:border-gray-700">
-      <Button
-        className="justify-center"
-        loading={loading}
-        onClick={handleOptimize}
-        variant="secondary"
-      >
-        {loc('optimize') + fileQuantityString}
-      </Button>
+      {exportState.fileType === 'svg' && (
+        <Button
+          className="justify-center"
+          loading={loading}
+          onClick={handleOptimize}
+          variant="secondary"
+        >
+          {loc('optimize')}
+        </Button>
+      )}
       <Button className="justify-center" loading={loading} onClick={handleDownload}>
         {downloadButtonLabel}
       </Button>
