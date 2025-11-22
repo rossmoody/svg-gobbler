@@ -1,4 +1,10 @@
 {
+  "copy_base64_uri": {
+    "message": "复制 Base64 数据 URI"
+  },
+  "copy_uri": {
+    "message": "复制数据 URI"
+  },
   "you_sure": {
     "message": "您确定要删除"
   },

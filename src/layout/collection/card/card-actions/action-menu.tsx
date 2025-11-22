@@ -2,6 +2,8 @@ import { Menu, Transition } from '@headlessui/react'
 import {
   ArrowDownTrayIcon,
   ClipboardDocumentIcon,
+  CodeBracketIcon,
+  CodeBracketSquareIcon,
   DocumentDuplicateIcon,
   EllipsisHorizontalIcon,
   TrashIcon,
@@ -17,7 +19,14 @@ import { ActionMenuItem } from './action-menu-item'
 import { useCardActions } from './use-card-actions'
 
 export const CardActionMenu = ({ data }: CardData) => {
-  const { copyOriginal, deleteItem, downloadOriginal, duplicateItem } = useCardActions(data)
+  const {
+    copyBase64DataUri,
+    copyEncodedDataUri,
+    copyOriginal,
+    deleteItem,
+    downloadOriginal,
+    duplicateItem,
+  } = useCardActions(data)
 
   return (
     <div
@@ -49,6 +58,14 @@ export const CardActionMenu = ({ data }: CardData) => {
             <ActionMenuItem onClick={downloadOriginal}>
               <ArrowDownTrayIcon className="mr-1.5 h-3.5 w-3.5" />
               <span className="flex-grow">{loc('card_action_download')}</span>
+            </ActionMenuItem>
+            <ActionMenuItem onClick={copyEncodedDataUri}>
+              <CodeBracketSquareIcon className="mr-1.5 h-3.5 w-3.5" />
+              <span className="flex-grow">{loc('copy_uri')}</span>
+            </ActionMenuItem>
+            <ActionMenuItem onClick={copyBase64DataUri}>
+              <CodeBracketIcon className="mr-1.5 h-3.5 w-3.5" />
+              <span className="flex-grow">{loc('copy_base64_uri')}</span>
             </ActionMenuItem>
             <span className="my-1 block h-px bg-gray-200 dark:bg-gray-700" />
             <ActionMenuItem onClick={duplicateItem}>

@@ -54,7 +54,25 @@ export const useCardActions = (data: Svg) => {
     formUtilities.downloadSvgString(data.svg, pageData.host)
   }
 
+  async function copyBase64DataUri() {
+    const base64DataUri = SvgUtilities.createBase64DataUri(data.svg)
+    formUtilities.copyStringToClipboard(base64DataUri)
+  }
+
+  async function copyEncodedDataUri() {
+    const encodedDataUri = SvgUtilities.createEncodedDataUri(data.svg)
+    formUtilities.copyStringToClipboard(encodedDataUri)
+  }
+
+  async function copyMinifiedDataUri() {
+    const minifiedDataUri = SvgUtilities.createMinifiedDataUri(data.svg)
+    formUtilities.copyStringToClipboard(minifiedDataUri)
+  }
+
   return {
+    copyBase64DataUri,
+    copyEncodedDataUri,
+    copyMinifiedDataUri,
     copyOptimized,
     copyOriginal,
     deleteItem,

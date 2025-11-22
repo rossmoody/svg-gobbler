@@ -1,4 +1,10 @@
 {
+  "copy_base64_uri": {
+    "message": "Copier la Data URI en Base64"
+  },
+  "copy_uri": {
+    "message": "Copier la Data URI"
+  },
   "you_sure": {
     "message": "Êtes-vous sûr de vouloir supprimer"
   },
