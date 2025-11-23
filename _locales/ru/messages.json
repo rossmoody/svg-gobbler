@@ -1,4 +1,10 @@
 {
+  "confirm_delete_desc": {
+    "message": "Показать диалог подтверждения перед удалением коллекции"
+  },
+  "confirm_delete": {
+    "message": "Подтвердить удаление коллекции"
+  },
   "copy_base64_uri": {
     "message": "Скопировать Data URI в Base64"
   },

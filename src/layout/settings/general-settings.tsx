@@ -16,6 +16,16 @@ export const GeneralSettings = () => {
   const { exportAllDataAsJson, exportAllDataAsZip } = useExportData()
   const { revalidate } = useRevalidator()
 
+  const handleWarnDeleteCollection = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const userState: UserState = {
+      ...state,
+      settings: { ...state.settings, warnOnRemoveCollection: event.target.checked },
+    }
+
+    dispatch({ payload: userState, type: 'set-user' })
+    StorageUtilities.setStorageData('user', userState)
+  }
+
   const handleImportMerging = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
       ...state,
@@ -109,6 +119,26 @@ export const GeneralSettings = () => {
         <Item.Section>
           <Item.Heading>{loc('settings_collections_title')}</Item.Heading>
           <Item.Description>{loc('settings_collections_desc')}</Item.Description>
+          <Item.Setting>
+            <div className="flex gap-2">
+              <input
+                checked={state.settings.warnOnRemoveCollection}
+                className="checkbox"
+                id="warn-collections"
+                onChange={handleWarnDeleteCollection}
+                type="checkbox"
+              />
+              <div>
+                <label
+                  className="block pb-1 text-sm font-medium leading-4"
+                  htmlFor="warn-collections"
+                >
+                  {loc('confirm_delete')}
+                </label>
+                <span className="text-muted">{loc('confirm_delete_desc')}</span>
+              </div>
+            </div>
+          </Item.Setting>
           <Item.Setting>
             <div className="flex gap-2">
               <input

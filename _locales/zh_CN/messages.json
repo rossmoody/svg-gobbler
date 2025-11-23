@@ -1,4 +1,10 @@
 {
+  "confirm_delete_desc": {
+    "message": "删除集合前显示确认对话框"
+  },
+  "confirm_delete": {
+    "message": "确认删除集合"
+  },
   "copy_base64_uri": {
     "message": "复制 Base64 数据 URI"
   },
