@@ -50,8 +50,7 @@ export const useCardActions = (data: Svg) => {
   }
 
   async function downloadOriginal() {
-    const pageData = await StorageUtilities.getPageData(state.collectionId)
-    formUtilities.downloadSvgString(data.svg, pageData.host)
+    formUtilities.downloadSvgString(data.svg, data.name)
   }
 
   async function copyBase64DataUri() {
