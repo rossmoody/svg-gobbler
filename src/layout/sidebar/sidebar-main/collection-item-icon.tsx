@@ -37,6 +37,10 @@ export const CollectionItemIcon = ({ collection }: CollectionItemProperties) => 
       return emoji
     }
 
+    if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+      return '🏡'
+    }
+
     if (origin) {
       return (
         <img

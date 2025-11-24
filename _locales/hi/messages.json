@@ -1,4 +1,16 @@
 {
+  "confirm_delete_desc": {
+    "message": "संग्रह को हटाने से पहले एक पुष्टि संवाद दिखाएं"
+  },
+  "confirm_delete": {
+    "message": "संग्रह हटाने की पुष्टि करें"
+  },
+  "copy_base64_uri": {
+    "message": "Base64 डेटा यूआरआई कॉपी करें"
+  },
+  "copy_uri": {
+    "message": "डेटा यूआरआई कॉपी करें"
+  },
   "you_sure": {
     "message": "क्या आप वाकई हटाना चाहते हैं"
   },

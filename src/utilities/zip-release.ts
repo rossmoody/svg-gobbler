@@ -2,7 +2,7 @@ import archiver from 'archiver'
 import fs from 'node:fs'
 import path from 'node:path'
 
-import packageJson from '../../package.json' assert { type: 'json' }
+import packageJson from '../../package.json' with { type: 'json' }
 
 const rootPath = process.cwd()
 const distributionPath = path.join(rootPath, 'dist')

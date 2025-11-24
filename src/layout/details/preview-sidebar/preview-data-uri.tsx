@@ -1,5 +1,4 @@
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
-import miniUri from 'mini-svg-data-uri'
 import { useMemo } from 'react'
 import { Button } from 'src/components'
 import { useClipboard } from 'src/hooks'
@@ -14,15 +13,15 @@ export const DataURI = () => {
     return [
       {
         name: 'Minifed Data URI',
-        value: miniUri(state.currentString),
+        value: SvgUtilities.createMinifiedDataUri(state.currentString),
       },
       {
         name: 'base64',
-        value: 'data:image/svg+xml;base64,' + btoa(state.currentString),
+        value: SvgUtilities.createBase64DataUri(state.currentString),
       },
       {
         name: 'encodeURIComponent',
-        value: 'data:image/svg+xml,' + encodeURIComponent(state.currentString),
+        value: SvgUtilities.createEncodedDataUri(state.currentString),
       },
     ]
   }, [state.currentString])

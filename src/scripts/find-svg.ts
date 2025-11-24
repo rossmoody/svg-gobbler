@@ -447,6 +447,33 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
     return results.filter(Boolean)
   }
 
+  /**
+   * Generate a best-attempt name for an SVG based on its content and location
+   */
+  const bestAttemptAtName = (svg: string, location: Location, index: number) => {
+    // Try to infer a name from a .svg filename in the string
+    const fileMatch = svg.match(/\/([^/"']+)\.svg/i)
+    if (fileMatch?.[1]) {
+      return fileMatch[1]
+    }
+
+    // Try to infer name from an id
+    const idMatch = svg.match(/id=["']([^"']+)["']/i)
+    if (idMatch?.[1]) {
+      return idMatch[1]
+    }
+
+    // Try to infer name from a title element
+    const titleMatch = svg.match(/<title>([^<]+)<\/title>/i)
+    if (titleMatch?.[1]) {
+      return titleMatch[1]
+    }
+
+    // Fallback to something deterministic based on host + index
+    const host = location?.host || 'unknown'
+    return `${host}-${index + 1}`
+  }
+
   // Gather all SVG data from various sources
   const allSvgData = [
     ...parseSourceAndBgImages(),
@@ -472,7 +499,7 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
           corsRestricted: false,
           id: crypto.randomUUID(),
           lastEdited: new Date().toISOString(),
-          name: `${location?.host}-${index}`,
+          name: bestAttemptAtName(svg, location, index),
           svg,
         }
       } catch (error) {

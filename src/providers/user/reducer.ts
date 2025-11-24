@@ -62,6 +62,10 @@ export type UserState = {
      * To sort collections in the sidebar alphabetically.
      */
     sortCollections: boolean
+    /**
+     * Whether to warn the user when removing a collection.
+     */
+    warnOnRemoveCollection: boolean
   }
 }
 
@@ -82,6 +86,7 @@ export const initUserState: UserState = {
     mergeCollections: false,
     showInContextMenu: true,
     sortCollections: false,
+    warnOnRemoveCollection: false,
   },
 }
 

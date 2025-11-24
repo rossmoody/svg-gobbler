@@ -1,11 +1,33 @@
 import type { Options } from 'pretty-bytes'
 import type { StorageSvg, Svg } from 'src/scripts'
 
+import miniUri from 'mini-svg-data-uri'
 import { nanoid } from 'nanoid'
 import prettyBytes from 'pretty-bytes'
 import { FileSvg } from 'src/types'
 
 export const SvgUtilities = {
+  /**
+   * Creates a base64 data uri from a given svg string.
+   */
+  createBase64DataUri(svgString: string) {
+    return 'data:image/svg+xml;base64,' + btoa(svgString)
+  },
+
+  /**
+   * Creates an encoded data uri from a given svg string.
+   */
+  createEncodedDataUri(svgString: string) {
+    return 'data:image/svg+xml,' + encodeURIComponent(svgString)
+  },
+
+  /**
+   * Creates a minified data uri from a given svg string.
+   */
+  createMinifiedDataUri(svgString: string) {
+    return miniUri(svgString)
+  },
+
   /**
    * Creates a storage svg object with an id and the svg string.
    */
