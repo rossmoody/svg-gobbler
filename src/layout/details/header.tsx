@@ -2,7 +2,7 @@ import type { PageData } from 'src/types'
 
 import { Transition } from '@headlessui/react'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, IconButton } from 'src/components'
 import { useDetails } from 'src/providers'
@@ -23,7 +23,7 @@ export const Header = () => {
     dispatch({ payload: originalName, type: 'update-name' })
   }
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     const collectionData = await StorageUtilities.getPageData(collectionId)
 
     const pageData: PageData = {
@@ -44,7 +44,7 @@ export const Header = () => {
     await StorageUtilities.setPageData(collectionId, pageData)
     dispatch({ payload: currentString, type: 'update-original-string' })
     dispatch({ payload: name, type: 'update-original-name' })
-  }
+  }, [collectionId, currentString, dispatch, id, name])
 
   const navigateBack = () => {
     if (isDirty) {
@@ -55,6 +55,20 @@ export const Header = () => {
     }
     navigate(-1)
   }
+
+  /**
+   * Handle Save Shortcut
+   */
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+        event.preventDefault()
+        handleSave()
+      }
+    }
+    globalThis.addEventListener('keydown', listener)
+    return () => globalThis.removeEventListener('keydown', listener)
+  }, [handleSave])
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
