@@ -4,9 +4,11 @@ import { FullPageLoader } from 'src/components/full-page-loader'
 import { useNavigation } from 'src/hooks/use-navigation'
 
 /**
- * This is a lonely route that is used to initialize the app via chrome messages between client and background scripts.
- * It is immediately forwarded to /dashboard/collection to stop the subsequent attempts at message passing which
- * always fail because there is no listener on the client side.
+ * This is a lonely route that is used to initialize the app via chrome
+ * messages between client and background scripts.
+ *
+ * It is immediately forwarded to /dashboard/collection to stop the
+ * subsequent attempts at message passing which always fail because there is no listener on the client side.
  */
 export const RootRoute = () => {
   const { collectionId } = useLoaderData() as { collectionId: Promise<string> }

@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
-import { isDevelopmentEnvironment } from 'src/constants/server-config'
+import { isDevelopmentEnvironment, serverEndpoint } from 'src/constants/server-config'
 import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
 import { svgFactory } from 'src/scripts'
@@ -86,6 +86,16 @@ export async function rootLoader() {
             RootUtilities.createDebugData({ collections, pageData, svgClasses, user, view }),
           )
         }
+
+        // Log the SVG data count for svggobbler.com
+        fetch(serverEndpoint.svgr, {
+          body: JSON.stringify({
+            payload: { message: storageSvgs.length },
+            type: 'counter',
+          }),
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+        })
 
         // Merge the collections if the user has the setting and the URL is a duplicate
         if (
