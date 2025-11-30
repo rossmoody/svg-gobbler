@@ -939,13 +939,13 @@
     "message": "Properties"
   },
   "edit_custom_name": {
-    "message": "Custom name"
+    "message": "Custom property name"
   },
   "edit_custom_name_tooltip": {
     "message": "The name of the property to apply to the SVG element"
   },
   "edit_custom_value": {
-    "message": "Custom value"
+    "message": "Custom property value"
   },
   "edit_custom_value_tooltip": {
     "message": "The value of the property to apply to the SVG element"
