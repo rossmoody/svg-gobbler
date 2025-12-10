@@ -41,29 +41,13 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
   }
 
   /**
-   * Checks if a string contains SVG-related content
-   */
-  const containsSVGContent = (string_: string): boolean => {
-    if (!string_) return false
-    return (
-      string_.includes('<svg') ||
-      string_.includes('http://www.w3.org/2000/svg') ||
-      /<(?:svg|path|circle|rect|ellipse|line|polyline|polygon|g|defs|use|symbol)\s/i.test(
-        string_,
-      ) ||
-      /viewBox\s*=\s*["']/i.test(string_)
-    )
-  }
-
-  /**
    * Extracts SVG content from a data URI
    */
-  const extractSVGFromDataURI = (dataUri: string): null | string => {
-    if (!dataUri.startsWith('data:image/svg+xml')) return null
+  const extractSVGFromDataURI = (dataUri: string): string | undefined => {
+    if (!dataUri.startsWith('data:image/svg+xml')) return undefined
 
     const commaIndex = dataUri.indexOf(',')
-    if (commaIndex === -1) return null
-
+    if (commaIndex === -1) return undefined
     const header = dataUri.slice(0, Math.max(0, commaIndex))
     const data = dataUri.slice(Math.max(0, commaIndex + 1))
 
@@ -77,7 +61,7 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
       }
     } catch (error) {
       console.warn('Failed to decode SVG data URI:', error)
-      return null
+      return undefined
     }
   }
 
@@ -377,7 +361,7 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
     for (const element of allElements) {
       try {
         const style = globalThis.getComputedStyle(element)
-        const maskImage = style.maskImage || (style as any).webkitMaskImage
+        const maskImage = style.maskImage || style.webkitMaskImage
 
         if (maskImage && maskImage !== 'none') {
           const urls = extractURLsFromCSS(maskImage)
