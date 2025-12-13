@@ -17,8 +17,8 @@ import type { DocumentData } from './types'
  * - <image> elements within SVGs
  * - SVG in pseudo-elements (::before, ::after)
  */
-export async function findSvg(documentParameter?: Document): Promise<DocumentData> {
-  const document = documentParameter ?? globalThis.document
+export async function findSvg(): Promise<DocumentData> {
+  const document = globalThis.document
   const location = document.location
 
   // ============================================================================
