@@ -42,12 +42,24 @@ export class Image extends Svg {
    *
    */
   async fetchSvgContent() {
+    // If we've already determined this image is CORS-restricted, don't retry
+    if (this.corsRestricted) {
+      return this
+    }
+
+    const absoluteUrl = this.absoluteImageUrl
+
+    // Data URIs and already-inline SVGs are handled in processImage; no network needed
+    if (absoluteUrl.startsWith('data:')) {
+      return this
+    }
+
     const controller = new AbortController()
     const signal = controller.signal
     const timeoutId = setTimeout(() => controller.abort(), 3000)
 
     try {
-      const response = await fetch(this.absoluteImageUrl, {
+      const response = await fetch(absoluteUrl, {
         headers: {
           Accept: 'image/svg+xml, text/xml, application/xml, */*',
         },

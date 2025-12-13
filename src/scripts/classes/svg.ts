@@ -80,6 +80,7 @@ export class Svg {
   }
 
   constructor(storageSvg: StorageSvg) {
+    this.corsRestricted = storageSvg.corsRestricted
     this.id = storageSvg.id
     this.lastEdited = storageSvg.lastEdited
     this.name = storageSvg.name
