@@ -1,4 +1,10 @@
 {
+  "storage_warning_title": {
+    "message": "Память почти заполнена"
+  },
+  "storage_warning_desc": {
+    "message": "Удалите коллекции, чтобы избежать ошибок."
+  },
   "confirm_delete_desc": {
     "message": "Показать диалог подтверждения перед удалением коллекции"
   },

@@ -51,6 +51,15 @@ export const StorageUtilities = {
   },
 
   /**
+   * Returns current storage usage as bytes used, quota bytes, and a 0–1 percent.
+   */
+  async getStorageUsage(): Promise<{ bytesInUse: number; percent: number; quotaBytes: number }> {
+    const bytesInUse = await chrome.storage.local.getBytesInUse()
+    const quotaBytes = chrome.storage.local.QUOTA_BYTES
+    return { bytesInUse, percent: bytesInUse / quotaBytes, quotaBytes }
+  },
+
+  /**
    * Set page data in storage based on collectionId.
    * Automatically compresses data.
    */

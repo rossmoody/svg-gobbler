@@ -42,11 +42,19 @@ export const CollectionItemIcon = ({ collection }: CollectionItemProperties) => 
     }
 
     if (origin) {
+      const getDomain = (url: string) => {
+        try {
+          return new URL(url).hostname
+        } catch {
+          return url.replace(/^https?:\/\//, '')
+        }
+      }
+
       return (
         <img
           alt={name}
           className="h-4 w-4 rounded-sm"
-          src={`https://s2.googleusercontent.com/s2/favicons?domain=${origin}`}
+          src={`https://icons.duckduckgo.com/ip3/${getDomain(origin)}.ico`}
         />
       )
     }

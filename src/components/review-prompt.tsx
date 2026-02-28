@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { links } from 'src/constants/links'
+import { isDevelopmentEnvironment } from 'src/constants/server-config'
 import { useDashboard, useUser } from 'src/providers'
 import { extension } from 'src/utilities/extension-utilities'
 import { loc } from 'src/utilities/i18n'
@@ -17,9 +18,9 @@ export const ReviewPrompt = () => {
 
   useEffect(() => {
     if (
-      collections.length >= 3 &&
+      collections.length >= 2 &&
       !userState.onboarding.viewedReview &&
-      process.env.NODE_ENV === 'production'
+      !isDevelopmentEnvironment
     ) {
       setShow(true)
     }

@@ -1,26 +1,78 @@
 import type { DocumentData } from './types'
 
 /**
- * Gathers all relevant SVG data from a given document. Must be isolated self-containing
- * function to make Chrome Manifest V3 security happy.
+ * Comprehensive SVG detection - finds ALL SVGs on a page regardless of visibility.
+ * Self-contained for Chrome Manifest V3 security requirements.
+ *
+ * Detects 24+ SVG embedding methods:
+ * - Inline <svg> elements
+ * - <img>, <object>, <embed>, <iframe> with SVG sources
+ * - <picture> with SVG sources
+ * - <link rel="icon"> SVG favicons
+ * - CSS: background-image, mask-image, clip-path, filter, content, border-image, list-style
+ * - CSS custom properties with SVG data URIs
+ * - Shadow DOM SVGs (open mode only)
+ * - <template> elements containing SVGs
+ * - External <use> references to SVG sprites
+ * - <image> elements within SVGs
+ * - SVG in pseudo-elements (::before, ::after)
  */
-export async function findSvg(documentParameter?: Document): Promise<DocumentData> {
-  /**
-   * The document to search for SVGs. Defaults to window.document.
-   */
-  const document = documentParameter ?? globalThis.document
+export async function findSvg(): Promise<DocumentData> {
+  const document = globalThis.document
   const location = document.location
 
+  // ============================================================================
+  // UTILITY FUNCTIONS (all must be inside this scope for Manifest V3)
+  // ============================================================================
+
   /**
-   * Helper function to safely create a new image element with the provided source.
-   * This strips out sensitive data due to security restrictions on client page access.
-   * Centralizes handling of async srcs, base64 srcs, and data URLs.
+   * Determines if a URL or string represents an SVG resource
    */
-  const createImage = (source: string): string => {
+  const isSVGSource = (source: null | string | undefined): boolean => {
+    if (!source) return false
+    const normalized = source.toLowerCase().trim()
+    return (
+      normalized.endsWith('.svg') ||
+      normalized.includes('.svg#') ||
+      normalized.includes('.svg?') ||
+      normalized.startsWith('data:image/svg+xml') ||
+      normalized.includes('image/svg+xml')
+    )
+  }
+
+  /**
+   * Extracts SVG content from a data URI
+   */
+  const extractSVGFromDataURI = (dataUri: string): string | undefined => {
+    if (!dataUri.startsWith('data:image/svg+xml')) return undefined
+
+    const commaIndex = dataUri.indexOf(',')
+    if (commaIndex === -1) return undefined
+    const header = dataUri.slice(0, Math.max(0, commaIndex))
+    const data = dataUri.slice(Math.max(0, commaIndex + 1))
+
     try {
-      const image = new Image()
-      image.src = source
-      return image.outerHTML
+      if (header.includes('base64')) {
+        return atob(data)
+      } else if (data.includes('%')) {
+        return decodeURIComponent(data)
+      } else {
+        return data
+      }
+    } catch (error) {
+      console.warn('Failed to decode SVG data URI:', error)
+      return undefined
+    }
+  }
+
+  /**
+   * Safely creates an image element with source
+   */
+  const createImageElement = (source: string): string => {
+    try {
+      const img = new Image()
+      img.src = source
+      return img.outerHTML
     } catch (error) {
       console.warn(`Failed to create image from source: ${source}`, error)
       return ''
@@ -28,436 +80,732 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
   }
 
   /**
-   * Checks if a string is related to SVG content.
-   * This includes various formats like data URIs, XML namespaces, and inline SVG.
+   * Serializes an SVG element to string with proper namespace
    */
-  const isSvgRelated = (string_: string): boolean => {
-    if (!string_) return false
-
-    return (
-      string_.includes('.svg') ||
-      string_.includes('data:image/svg+xml') ||
-      string_.includes('image/svg+xml') ||
-      // Check for inline SVG in data URIs
-      (string_.includes('data:') && string_.includes('<svg')) ||
-      // Check for SVG XML namespace
-      string_.includes('http://www.w3.org/2000/svg') ||
-      // Check for SVG elements
-      /<(?:svg|path|circle|rect|g)\s/i.test(string_) ||
-      // Check for viewBox attribute
-      /viewBox\s*=\s*["']/i.test(string_)
-    )
-  }
-
-  /**
-   * Find all the elements with src or background images that contain svg
-   */
-  const parseSourceAndBgImages = (): string[] => {
-    const results: string[] = []
-
+  const serializeSVG = (svg: SVGElement): string => {
     try {
-      // Use specific selectors for better performance
-      const imageElements = document.querySelectorAll(
-        'img[src*=".svg"], img[src*="data:image/svg+xml"]',
-      )
-      const objectElements = document.querySelectorAll('object[type="image/svg+xml"]')
-      const embedElements = document.querySelectorAll(
-        'embed[type="image/svg+xml"], embed[src*=".svg"]',
-      )
-      const iframeElements = document.querySelectorAll('iframe[src*=".svg"]')
+      const serializer = new XMLSerializer()
+      let svgString = serializer.serializeToString(svg)
 
-      // Process image elements
-      for (const element of imageElements) {
-        if (element instanceof HTMLImageElement && isSvgRelated(element.src)) {
-          results.push(createImage(element.src))
-        }
+      // Ensure xmlns is present for standalone validity
+      if (!svgString.includes('xmlns=')) {
+        svgString = svgString.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"')
       }
-
-      // Process object elements
-      for (const element of objectElements) {
-        if (element instanceof HTMLObjectElement) {
-          results.push(createImage(element.data))
-        }
-      }
-
-      // Process embed elements
-      for (const element of embedElements) {
-        if (element instanceof HTMLEmbedElement) {
-          results.push(createImage(element.src))
-        }
-      }
-
-      // Process iframe elements
-      for (const element of iframeElements) {
-        if (element instanceof HTMLIFrameElement) {
-          results.push(createImage(element.src))
-        }
-      }
-
-      // Check for elements with background images
-      const allElements = document.querySelectorAll('*')
-      for (const element of allElements) {
-        if (element instanceof HTMLElement) {
-          try {
-            const backgroundImage = globalThis.getComputedStyle(element).backgroundImage
-            if (backgroundImage && isSvgRelated(backgroundImage)) {
-              // Extract URL from the background-image CSS property
-              const match = backgroundImage.match(/url\(['"]?([^'"()]+)['"]?\)/)
-              if (match && match[1]) {
-                results.push(createImage(match[1]))
-              }
-            }
-          } catch (error) {
-            // Some elements might throw errors when accessing computed style
-            console.warn('Error accessing background image:', error)
-          }
-        }
-      }
+      return svgString
     } catch (error) {
-      console.warn('Error processing elements for SVG content:', error)
-    }
-
-    return results.filter(Boolean)
-  }
-
-  /**
-   * Gathers inline SVG elements, filtering out those with use/symbol references
-   * as they're handled separately
-   */
-  const gatherInlineSvgElements = (): string[] => {
-    try {
-      return [...document.querySelectorAll('svg')]
-        .filter((svg) => !svg.querySelector('use, symbol'))
-        .map((svg) => svg.outerHTML)
-        .filter(Boolean)
-    } catch (error) {
-      console.warn('Error gathering inline SVG elements:', error)
-      return []
+      console.warn('Failed to serialize SVG:', error)
+      return svg.outerHTML || ''
     }
   }
 
   /**
-   * Gathers all g elements (SVG groups)
+   * Extracts URLs from CSS url() functions
    */
-  const gatherGElements = (): string[] => {
-    try {
-      return [...document.querySelectorAll('g')].map((g) => g.outerHTML).filter(Boolean)
-    } catch (error) {
-      console.warn('Error gathering G elements:', error)
-      return []
+  const extractURLsFromCSS = (cssValue: string): string[] => {
+    const urls: string[] = []
+    // Matches: url("..."), url('...'), url(...)
+    const regex = /url\(\s*(['"]?)([^'")]+)\1\s*\)/gi
+    let match
+
+    while ((match = regex.exec(cssValue)) !== null) {
+      urls.push(match[2])
     }
+    return urls
   }
 
-  /**
-   * Gathers all symbol elements (SVG symbols)
-   */
-  const gatherSymbolElements = (): string[] => {
+  // ============================================================================
+  // COLLECTION ARRAYS
+  // ============================================================================
+
+  const allSvgData: string[] = []
+
+  // ============================================================================
+  // 1. INLINE SVG ELEMENTS
+  // ============================================================================
+
+  const findInlineSVGs = (root: Document | Element | ShadowRoot): void => {
     try {
-      return [...document.querySelectorAll('symbol')]
-        .map((symbol) => symbol.outerHTML)
-        .filter(Boolean)
-    } catch (error) {
-      console.warn('Error gathering symbol elements:', error)
-      return []
-    }
-  }
+      const svgs = root.querySelectorAll('svg')
 
-  /**
-   * Gathers use elements that reference external SVG sprites
-   */
-  const gatherUseElements = (): string[] => {
-    const results: string[] = []
+      for (const svg of svgs) {
+        // Skip nested SVGs - parent captures them
+        if (svg.parentElement?.closest('svg')) continue
 
-    try {
-      const elements = document.querySelectorAll('use')
-
-      for (const element of elements) {
-        // Check href attribute (modern standard)
-        const href = element.getAttribute('href')
-        if (href && isSvgRelated(href)) {
-          results.push(createImage(href))
-        }
-
-        // Check xlink:href attribute (older standard, but still widely used)
-        const xLinkHref = element.getAttribute('xlink:href')
-        if (xLinkHref && isSvgRelated(xLinkHref)) {
-          results.push(createImage(xLinkHref))
-        }
-      }
-    } catch (error) {
-      console.warn('Error gathering use elements:', error)
-    }
-
-    return results.filter(Boolean)
-  }
-
-  /**
-   * Improved Shadow DOM SVG gathering with nested shadow roots support
-   */
-  const gatherShadowDomSvgs = (): string[] => {
-    const results: string[] = []
-
-    try {
-      const elements = document.querySelectorAll('*')
-
-      const processNode = (element: Element) => {
-        const shadowRoot = element.shadowRoot
-        if (shadowRoot) {
-          for (const svg of shadowRoot.querySelectorAll('svg')) {
-            results.push(svg.outerHTML)
-          }
-
-          // Also check for SVG images, objects, etc. inside shadow DOM
-          for (const element_ of shadowRoot.querySelectorAll(
-            'img[src*=".svg"], object[type="image/svg+xml"]',
-          )) {
-            if (element_ instanceof HTMLImageElement) {
-              results.push(createImage(element_.src))
-            } else if (element_ instanceof HTMLObjectElement) {
-              results.push(createImage(element_.data))
-            }
-          }
-
-          // Process nested shadow roots recursively
-          for (const child of shadowRoot.querySelectorAll('*')) {
-            processNode(child)
-          }
-        }
-      }
-
-      for (const element of elements) {
-        processNode(element)
-      }
-    } catch (error) {
-      console.warn('Error gathering SVGs from Shadow DOM:', error)
-    }
-
-    return results.filter(Boolean)
-  }
-
-  /**
-   * Gathers SVGs from CSS custom properties
-   */
-  const gatherCssCustomPropertySvgs = (): string[] => {
-    const results: string[] = []
-
-    try {
-      // Check all style sheets
-      for (const sheet of document.styleSheets) {
         try {
-          // Access might be blocked due to CORS
-          const rules = [...(sheet.cssRules || [])]
+          allSvgData.push(serializeSVG(svg as SVGElement))
+        } catch (error) {
+          console.warn('Error processing inline SVG:', error)
+        }
+      }
+    } catch (error) {
+      console.warn('Error finding inline SVGs:', error)
+    }
+  }
 
-          for (const rule of rules) {
-            if (rule instanceof CSSStyleRule) {
-              // Look for CSS custom properties with SVG content
-              const style = rule.style
-              for (let index = 0; index < style.length; index++) {
-                const property = style[index]
-                if (property.startsWith('--')) {
-                  const value = style.getPropertyValue(property)
-                  if (isSvgRelated(value)) {
-                    // Extract SVG URL
-                    const match = value.match(/url\(['"]?([^'"()]+)['"]?\)/)
-                    if (match && match[1]) {
-                      results.push(createImage(match[1]))
-                    }
-                  }
+  findInlineSVGs(document)
+
+  // ============================================================================
+  // 2. <img> ELEMENTS WITH SVG SOURCES
+  // ============================================================================
+
+  try {
+    const images = document.querySelectorAll('img')
+
+    for (const img of images) {
+      // Check multiple source attributes for lazy loading, etc.
+      const sources = [
+        img.src,
+        img.currentSrc,
+        img.dataset.src,
+        img.dataset.lazySrc,
+        img.dataset.srcset,
+      ].filter(Boolean) as string[]
+
+      for (const source of sources) {
+        if (isSVGSource(source)) {
+          // For data URIs, try to extract actual SVG content
+          if (source.startsWith('data:')) {
+            const extracted = extractSVGFromDataURI(source)
+            if (extracted) {
+              allSvgData.push(extracted)
+            } else {
+              allSvgData.push(createImageElement(source))
+            }
+          } else {
+            allSvgData.push(createImageElement(source))
+          }
+          break // Only record once per image
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding img SVGs:', error)
+  }
+
+  // ============================================================================
+  // 3. <object> ELEMENTS WITH SVG
+  // ============================================================================
+
+  try {
+    const objects = document.querySelectorAll('object')
+
+    for (const object of objects) {
+      const data = object.getAttribute('data')
+      const type = object.getAttribute('type')
+
+      if (type === 'image/svg+xml' || isSVGSource(data)) {
+        // Try to access contentDocument for same-origin objects
+        try {
+          const contentDocument = (object as HTMLObjectElement).contentDocument
+          const svg = contentDocument?.querySelector('svg')
+          if (svg) {
+            allSvgData.push(serializeSVG(svg as SVGElement))
+          } else if (data) {
+            allSvgData.push(createImageElement(data))
+          }
+        } catch {
+          // Cross-origin or not loaded yet, use data attribute
+          if (data) {
+            allSvgData.push(createImageElement(data))
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding object SVGs:', error)
+  }
+
+  // ============================================================================
+  // 4. <embed> ELEMENTS WITH SVG (legacy but still valid)
+  // ============================================================================
+
+  try {
+    const embeds = document.querySelectorAll('embed')
+
+    for (const embed of embeds) {
+      const source = embed.getAttribute('src')
+      const type = embed.getAttribute('type')
+
+      if ((type === 'image/svg+xml' || isSVGSource(source)) && source) {
+        allSvgData.push(createImageElement(source))
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding embed SVGs:', error)
+  }
+
+  // ============================================================================
+  // 5. <iframe> ELEMENTS WITH SVG
+  // ============================================================================
+
+  try {
+    const iframes = document.querySelectorAll('iframe')
+
+    for (const iframe of iframes) {
+      const source = iframe.src || iframe.dataset.src
+
+      if (isSVGSource(source)) {
+        try {
+          const contentDocument = (iframe as HTMLIFrameElement).contentDocument
+          const svg = contentDocument?.querySelector('svg')
+          if (svg) {
+            allSvgData.push(serializeSVG(svg as SVGElement))
+          } else if (source) {
+            allSvgData.push(createImageElement(source))
+          }
+        } catch {
+          // Cross-origin
+          if (source) {
+            allSvgData.push(createImageElement(source))
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding iframe SVGs:', error)
+  }
+
+  // ============================================================================
+  // 6. <picture> ELEMENTS WITH SVG SOURCES
+  // ============================================================================
+
+  try {
+    const pictures = document.querySelectorAll('picture')
+
+    for (const picture of pictures) {
+      // Check <source> elements
+      const sources = picture.querySelectorAll('source')
+
+      for (const source of sources) {
+        const type = source.getAttribute('type')
+        const srcset = source.getAttribute('srcset')
+
+        if ((type === 'image/svg+xml' || (srcset && isSVGSource(srcset))) && srcset) {
+          // srcset can contain multiple URLs with descriptors
+          const urls = srcset.split(',').map((s) => s.trim().split(/\s+/)[0])
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              allSvgData.push(createImageElement(url))
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding picture SVGs:', error)
+  }
+
+  // ============================================================================
+  // 7. SVG FAVICONS IN <link> ELEMENTS
+  // ============================================================================
+
+  try {
+    const links = document.querySelectorAll('link[rel*="icon"]')
+
+    for (const link of links) {
+      const href = link.getAttribute('href')
+      const type = link.getAttribute('type')
+
+      if ((type === 'image/svg+xml' || isSVGSource(href)) && href) {
+        allSvgData.push(createImageElement(href))
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding favicon SVGs:', error)
+  }
+
+  // ============================================================================
+  // 8. CSS BACKGROUND-IMAGE WITH SVG
+  // ============================================================================
+
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      try {
+        const style = globalThis.getComputedStyle(element)
+        const backgroundImage = style.backgroundImage
+
+        if (backgroundImage && backgroundImage !== 'none') {
+          const urls = extractURLsFromCSS(backgroundImage)
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              if (url.startsWith('data:')) {
+                const extracted = extractSVGFromDataURI(url)
+                if (extracted) {
+                  allSvgData.push(extracted)
+                } else {
+                  allSvgData.push(createImageElement(url))
                 }
+              } else {
+                allSvgData.push(createImageElement(url))
               }
             }
           }
-        } catch (error) {
-          // CORS restrictions might prevent access to some stylesheets
-          console.warn('Could not access stylesheet due to CORS:', error)
         }
+      } catch {
+        // Some elements may throw when accessing computed style
       }
-    } catch (error) {
-      console.warn('Error gathering SVGs from CSS custom properties:', error)
     }
-
-    return results.filter(Boolean)
+  } catch (error) {
+    console.warn('Error finding CSS background SVGs:', error)
   }
 
-  /**
-   * Gathers SVGs from Web Components
-   */
-  const gatherWebComponentSvgs = (): string[] => {
-    const results: string[] = []
+  // ============================================================================
+  // 9. CSS MASK-IMAGE WITH SVG
+  // ============================================================================
 
-    try {
-      const customElements = [...document.querySelectorAll('*')].filter((element) =>
-        element.tagName.includes('-'),
-      ) // Custom elements contain a hyphen
+  try {
+    const allElements = document.querySelectorAll('*')
 
-      for (const element of customElements) {
-        const slots = element.querySelectorAll('slot')
-        for (const slot of slots) {
-          const assignedNodes = slot.assignedNodes()
-          for (const node of assignedNodes) {
-            if (node instanceof SVGElement) {
-              results.push(node.outerHTML)
+    for (const element of allElements) {
+      try {
+        const style = globalThis.getComputedStyle(element)
+        const maskImage = style.maskImage || style.webkitMaskImage
+
+        if (maskImage && maskImage !== 'none') {
+          const urls = extractURLsFromCSS(maskImage)
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              if (url.startsWith('data:')) {
+                const extracted = extractSVGFromDataURI(url)
+                if (extracted) {
+                  allSvgData.push(extracted)
+                }
+              } else {
+                allSvgData.push(createImageElement(url))
+              }
             }
           }
         }
+      } catch {
+        // Ignore
       }
-    } catch (error) {
-      console.warn('Error gathering SVGs from Web Components:', error)
     }
-
-    return results.filter(Boolean)
+  } catch (error) {
+    console.warn('Error finding CSS mask SVGs:', error)
   }
 
-  /**
-   * Gathers SVGs from CSS content property
-   */
-  const gatherCssContentSvgs = (): string[] => {
-    const results: string[] = []
+  // ============================================================================
+  // 10. CSS CLIP-PATH WITH SVG
+  // ============================================================================
 
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      try {
+        const style = globalThis.getComputedStyle(element)
+        const clipPath = style.clipPath
+
+        if (clipPath && clipPath !== 'none') {
+          const urls = extractURLsFromCSS(clipPath)
+          for (const url of urls) {
+            // clip-path can reference external SVG files or internal IDs
+            if (isSVGSource(url) && !url.startsWith('#')) {
+              allSvgData.push(createImageElement(url))
+            }
+          }
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding CSS clip-path SVGs:', error)
+  }
+
+  // ============================================================================
+  // 11. CSS FILTER WITH SVG
+  // ============================================================================
+
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      try {
+        const style = globalThis.getComputedStyle(element)
+        const filter = style.filter
+
+        if (filter && filter !== 'none') {
+          const urls = extractURLsFromCSS(filter)
+          for (const url of urls) {
+            // filter can reference external SVG files or internal IDs
+            if (isSVGSource(url) && !url.startsWith('#')) {
+              allSvgData.push(createImageElement(url))
+            }
+          }
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding CSS filter SVGs:', error)
+  }
+
+  // ============================================================================
+  // 12. CSS BORDER-IMAGE-SOURCE WITH SVG
+  // ============================================================================
+
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      try {
+        const style = globalThis.getComputedStyle(element)
+        const borderImageSource = style.borderImageSource
+
+        if (borderImageSource && borderImageSource !== 'none') {
+          const urls = extractURLsFromCSS(borderImageSource)
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              if (url.startsWith('data:')) {
+                const extracted = extractSVGFromDataURI(url)
+                if (extracted) {
+                  allSvgData.push(extracted)
+                }
+              } else {
+                allSvgData.push(createImageElement(url))
+              }
+            }
+          }
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding CSS border-image SVGs:', error)
+  }
+
+  // ============================================================================
+  // 13. CSS LIST-STYLE-IMAGE WITH SVG
+  // ============================================================================
+
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      try {
+        const style = globalThis.getComputedStyle(element)
+        const listStyleImage = style.listStyleImage
+
+        if (listStyleImage && listStyleImage !== 'none') {
+          const urls = extractURLsFromCSS(listStyleImage)
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              if (url.startsWith('data:')) {
+                const extracted = extractSVGFromDataURI(url)
+                if (extracted) {
+                  allSvgData.push(extracted)
+                }
+              } else {
+                allSvgData.push(createImageElement(url))
+              }
+            }
+          }
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding CSS list-style SVGs:', error)
+  }
+
+  // ============================================================================
+  // 14. CSS CONTENT PROPERTY (pseudo-elements)
+  // ============================================================================
+
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      // Check ::before
+      try {
+        const beforeStyle = globalThis.getComputedStyle(element, '::before')
+        const beforeContent = beforeStyle.content
+
+        if (beforeContent && beforeContent !== 'none' && beforeContent !== 'normal') {
+          const urls = extractURLsFromCSS(beforeContent)
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              if (url.startsWith('data:')) {
+                const extracted = extractSVGFromDataURI(url)
+                if (extracted) {
+                  allSvgData.push(extracted)
+                }
+              } else {
+                allSvgData.push(createImageElement(url))
+              }
+            }
+          }
+        }
+      } catch {
+        // Ignore
+      }
+
+      // Check ::after
+      try {
+        const afterStyle = globalThis.getComputedStyle(element, '::after')
+        const afterContent = afterStyle.content
+
+        if (afterContent && afterContent !== 'none' && afterContent !== 'normal') {
+          const urls = extractURLsFromCSS(afterContent)
+          for (const url of urls) {
+            if (isSVGSource(url)) {
+              if (url.startsWith('data:')) {
+                const extracted = extractSVGFromDataURI(url)
+                if (extracted) {
+                  allSvgData.push(extracted)
+                }
+              } else {
+                allSvgData.push(createImageElement(url))
+              }
+            }
+          }
+        }
+      } catch {
+        // Ignore
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding CSS content SVGs:', error)
+  }
+
+  // ============================================================================
+  // 15. CSS CUSTOM PROPERTIES WITH SVG DATA URIS
+  // ============================================================================
+
+  try {
+    const svgVariablePattern =
+      /--[\w-]+\s*:\s*url\(\s*(['"]?)(data:image\/svg\+xml[^'")]+)\1\s*\)/gi
+
+    for (const sheet of document.styleSheets) {
+      try {
+        const rules = sheet.cssRules || sheet.rules
+        if (!rules) continue
+
+        for (const rule of rules) {
+          if (!(rule instanceof CSSStyleRule)) continue
+
+          const cssText = rule.cssText
+          let match
+
+          while ((match = svgVariablePattern.exec(cssText)) !== null) {
+            const dataUri = match[2]
+            const extracted = extractSVGFromDataURI(dataUri)
+            if (extracted) {
+              allSvgData.push(extracted)
+            }
+          }
+        }
+      } catch {
+        // Cross-origin stylesheet, skip
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding CSS custom property SVGs:', error)
+  }
+
+  // ============================================================================
+  // 16. SHADOW DOM SVGs (open mode only)
+  // ============================================================================
+
+  const findShadowDOMSVGs = (root: Element | ShadowRoot): void => {
     try {
-      // Get all elements
-      const elements = document.querySelectorAll('*')
+      const elements = root.querySelectorAll('*')
 
       for (const element of elements) {
-        try {
-          const style = globalThis.getComputedStyle(element)
-          const content = style.getPropertyValue('content')
+        const shadowRoot = element.shadowRoot
+        if (!shadowRoot) continue
 
-          if (
-            content &&
-            isSvgRelated(content) && // Extract SVG content from CSS content property
-            content.includes('url(')
-          ) {
-            const match = content.match(/url\(['"]?([^'"()]+)['"]?\)/)
-            if (match && match[1]) {
-              results.push(createImage(match[1]))
-            }
-          }
-        } catch (error) {
-          // Some elements might throw errors when accessing computed style
-          console.warn('Error accessing CSS content property:', error)
-        }
-      }
-    } catch (error) {
-      console.warn('Error gathering SVGs from CSS content property:', error)
-    }
+        // Find inline SVGs in shadow root
+        findInlineSVGs(shadowRoot)
 
-    return results.filter(Boolean)
-  }
-
-  /**
-   * Gathers SVGs from HTML templates
-   */
-  const gatherTemplateSvgs = (): string[] => {
-    const results: string[] = []
-
-    try {
-      // Check <template> elements
-      for (const template of document.querySelectorAll('template')) {
-        const content = template.content
-
-        // Find SVGs in the template content
-        for (const svg of content.querySelectorAll('svg')) {
-          results.push(svg.outerHTML)
-        }
-
-        // Find SVG images, objects, etc.
-        for (const element of content.querySelectorAll(
-          'img[src*=".svg"], object[type="image/svg+xml"]',
-        )) {
-          if (element instanceof HTMLImageElement) {
-            results.push(createImage(element.src))
-          } else if (element instanceof HTMLObjectElement) {
-            results.push(createImage(element.data))
-          }
-        }
-      }
-    } catch (error) {
-      console.warn('Error gathering SVGs from HTML templates:', error)
-    }
-
-    return results.filter(Boolean)
-  }
-
-  /**
-   * Parses CSS sprite sheets for SVGs
-   */
-  const parseCssSpriteSheets = (): string[] => {
-    const results: string[] = []
-
-    try {
-      // Look for elements using sprite sheets via background-position
-      const elements = document.querySelectorAll('[class*="icon"], [class*="sprite"]')
-
-      for (const element of elements) {
-        try {
-          const style = globalThis.getComputedStyle(element)
-          const backgroundImage = style.backgroundImage
-          const backgroundPosition = style.backgroundPosition
-
-          // If there's a background image and position, it might be a sprite
-          if (backgroundImage && backgroundPosition && isSvgRelated(backgroundImage)) {
-            const match = backgroundImage.match(/url\(['"]?([^'"()]+)['"]?\)/)
-            if (match && match[1]) {
-              results.push(createImage(match[1]))
-            }
-          }
-        } catch (error) {
-          console.warn('Error accessing sprite sheet styles:', error)
-        }
-      }
-    } catch (error) {
-      console.warn('Error parsing CSS sprite sheets:', error)
-    }
-
-    return results.filter(Boolean)
-  }
-
-  /**
-   * Gathers SVGs from <picture> elements
-   */
-  const gatherPictureElementSvgs = (): string[] => {
-    const results: string[] = []
-
-    try {
-      // Find all picture elements
-      for (const picture of document.querySelectorAll('picture')) {
-        // Check source elements with SVG type
-        for (const source of picture.querySelectorAll('source[type="image/svg+xml"]')) {
-          const srcset = source.getAttribute('srcset')
-          if (srcset) {
-            // Handle multiple sources in srcset
-            for (const source_ of srcset.split(',')) {
-              const trimmedSource = source_.trim().split(' ')[0] // Remove size descriptors
-              results.push(createImage(trimmedSource))
+        // Also check for SVG images/objects/etc in shadow root
+        const shadowImages = shadowRoot.querySelectorAll('img')
+        for (const img of shadowImages) {
+          if (isSVGSource(img.src)) {
+            if (img.src.startsWith('data:')) {
+              const extracted = extractSVGFromDataURI(img.src)
+              if (extracted) {
+                allSvgData.push(extracted)
+              } else {
+                allSvgData.push(createImageElement(img.src))
+              }
+            } else {
+              allSvgData.push(createImageElement(img.src))
             }
           }
         }
 
-        // Check if the fallback img is SVG
-        const img = picture.querySelector('img')
-        if (img && isSvgRelated(img.src)) {
-          results.push(createImage(img.src))
-        }
+        // Recursively search nested shadow roots
+        findShadowDOMSVGs(shadowRoot)
       }
     } catch (error) {
-      console.warn('Error gathering SVGs from picture elements:', error)
+      console.warn('Error finding Shadow DOM SVGs:', error)
     }
-
-    return results.filter(Boolean)
   }
 
+  findShadowDOMSVGs(document.body)
+
+  // ============================================================================
+  // 17. <template> ELEMENTS CONTAINING SVGs
+  // ============================================================================
+
+  try {
+    const templates = document.querySelectorAll('template')
+
+    for (const template of templates) {
+      const content = template.content
+
+      // Find inline SVGs in template
+      const svgs = content.querySelectorAll('svg')
+      for (const svg of svgs) {
+        allSvgData.push(serializeSVG(svg as SVGElement))
+      }
+
+      // Find SVG images in template
+      const images = content.querySelectorAll('img')
+      for (const img of images) {
+        if (isSVGSource(img.src)) {
+          if (img.src.startsWith('data:')) {
+            const extracted = extractSVGFromDataURI(img.src)
+            if (extracted) {
+              allSvgData.push(extracted)
+            }
+          } else {
+            allSvgData.push(createImageElement(img.src))
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding template SVGs:', error)
+  }
+
+  // ============================================================================
+  // 18. EXTERNAL <use> REFERENCES TO SVG SPRITES
+  // ============================================================================
+
+  try {
+    const useElements = document.querySelectorAll('use')
+
+    for (const use of useElements) {
+      const href = use.getAttribute('href') || use.getAttribute('xlink:href')
+      if (!href) continue
+
+      // Skip internal references (they're part of inline SVGs)
+      if (href.startsWith('#')) continue
+
+      // External reference like "sprites.svg#icon-name"
+      if (isSVGSource(href)) {
+        allSvgData.push(createImageElement(href))
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding use reference SVGs:', error)
+  }
+
+  // ============================================================================
+  // 19. <image> ELEMENTS WITHIN SVGs THAT REFERENCE OTHER SVGs
+  // ============================================================================
+
+  try {
+    // Note: SVG <image> is different from HTML <img>
+    const svgImages = document.querySelectorAll('svg image')
+
+    for (const image of svgImages) {
+      const href = image.getAttribute('href') || image.getAttribute('xlink:href')
+      if (!href || !isSVGSource(href)) continue
+
+      if (href.startsWith('data:')) {
+        const extracted = extractSVGFromDataURI(href)
+        if (extracted) {
+          allSvgData.push(extracted)
+        }
+      } else {
+        allSvgData.push(createImageElement(href))
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding nested SVG image elements:', error)
+  }
+
+  // ============================================================================
+  // 20. INLINE STYLES WITH SVG DATA URIS
+  // ============================================================================
+
+  try {
+    const allElements = document.querySelectorAll('*')
+
+    for (const element of allElements) {
+      const inlineStyle = element.getAttribute('style')
+      if (!inlineStyle) continue
+
+      // Check if inline style contains SVG data URI
+      if (inlineStyle.includes('data:image/svg+xml')) {
+        const urls = extractURLsFromCSS(inlineStyle)
+        for (const url of urls) {
+          if (url.startsWith('data:image/svg+xml')) {
+            const extracted = extractSVGFromDataURI(url)
+            if (extracted) {
+              allSvgData.push(extracted)
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding inline style SVGs:', error)
+  }
+
+  // ============================================================================
+  // 21. SVG CONTENT IN STYLE TAGS
+  // ============================================================================
+
+  try {
+    const styleTags = document.querySelectorAll('style')
+
+    for (const style of styleTags) {
+      const cssText = style.textContent || ''
+
+      // Look for data URIs in CSS
+      if (cssText.includes('data:image/svg+xml')) {
+        const urls = extractURLsFromCSS(cssText)
+        for (const url of urls) {
+          if (url.startsWith('data:image/svg+xml')) {
+            const extracted = extractSVGFromDataURI(url)
+            if (extracted) {
+              allSvgData.push(extracted)
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Error finding style tag SVGs:', error)
+  }
+
+  // ============================================================================
+  // DEDUPLICATE AND FORMAT RESULTS
+  // ============================================================================
+
+  const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg && svg.trim().length > 0)
+
   /**
-   * Generate a best-attempt name for an SVG based on its content and location
+   * Generate a best-attempt name for an SVG
    */
-  const bestAttemptAtName = (svg: string, location: Location, index: number) => {
-    // Try to infer a name from a .svg filename in the string
+  const bestAttemptAtName = (svg: string, index: number): string => {
+    // Try to infer a name from a .svg filename
     const fileMatch = svg.match(/\/([^/"']+)\.svg/i)
     if (fileMatch?.[1]) {
       return fileMatch[1]
     }
 
-    // Try to infer name from an id
+    // Try to infer name from an id attribute
     const idMatch = svg.match(/id=["']([^"']+)["']/i)
     if (idMatch?.[1]) {
       return idMatch[1]
@@ -466,31 +814,19 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
     // Try to infer name from a title element
     const titleMatch = svg.match(/<title>([^<]+)<\/title>/i)
     if (titleMatch?.[1]) {
-      return titleMatch[1]
+      return titleMatch[1].trim()
     }
 
-    // Fallback to something deterministic based on host + index
+    // Try to infer name from aria-label
+    const ariaMatch = svg.match(/aria-label=["']([^"']+)["']/i)
+    if (ariaMatch?.[1]) {
+      return ariaMatch[1].trim()
+    }
+
+    // Fallback to deterministic name based on host + index
     const host = location?.host || 'unknown'
     return `${host}-${index + 1}`
   }
-
-  // Gather all SVG data from various sources
-  const allSvgData = [
-    ...parseSourceAndBgImages(),
-    ...gatherInlineSvgElements(),
-    ...gatherGElements(),
-    ...gatherSymbolElements(),
-    ...gatherUseElements(),
-    ...gatherShadowDomSvgs(),
-    ...gatherCssCustomPropertySvgs(),
-    ...gatherWebComponentSvgs(),
-    ...gatherCssContentSvgs(),
-    ...gatherTemplateSvgs(),
-    ...parseCssSpriteSheets(),
-    ...gatherPictureElementSvgs(),
-  ]
-
-  const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg.trim().length > 0)
 
   return {
     data: uniqueSvgData.map((svg, index) => {
@@ -499,7 +835,7 @@ export async function findSvg(documentParameter?: Document): Promise<DocumentDat
           corsRestricted: false,
           id: crypto.randomUUID(),
           lastEdited: new Date().toISOString(),
-          name: bestAttemptAtName(svg, location, index),
+          name: bestAttemptAtName(svg, index),
           svg,
         }
       } catch (error) {
