@@ -1,0 +1,1022 @@
+{
+  "confirm_delete_desc": {
+    "message": "컬렉션을 삭제하기 전에 확인 대화 상자를 표시합니다"
+  },
+  "confirm_delete": {
+    "message": "컬렉션 삭제 확인"
+  },
+  "copy_base64_uri": {
+    "message": "base64 URI 복사"
+  },
+  "copy_uri": {
+    "message": "데이터 URI 복사"
+  },
+  "you_sure": {
+    "message": "정말로 삭제하시겠습니까?"
+  },
+  "undone": {
+    "message": "이 작업은 되돌릴 수 없습니다."
+  },
+  "remove": {
+    "message": "제거"
+  },
+  "cancel": {
+    "message": "취소"
+  },
+  "optimize": {
+    "message": "최적화"
+  },
+  "optimized": {
+    "message": "최적화됨"
+  },
+  "empty_title": {
+    "message": "SVG를 찾을 수 없습니다"
+  },
+  "empty_desc": {
+    "message": "SVG를 선택하거나 이 영역으로 드래그하여 컬렉션에 업로드하세요"
+  },
+  "empty_action": {
+    "message": "SVG 업로드"
+  },
+  "error_title": {
+    "message": "이런! 오류가 발생했습니다"
+  },
+  "error_desc": {
+    "message": "이 오류가 발생했을 때 공유 가능한 도움이 될 만한 세부 정보나 소스 페이지 URL을 제공해 주시면 수정하겠습니다"
+  },
+  "error_action": {
+    "message": "새로 고침"
+  },
+  "error_primary_action": {
+    "message": "보내기"
+  },
+  "error_input_label": {
+    "message": "오류 세부 정보"
+  },
+  "feedback_title": {
+    "message": "SVG Gobbler에 부족하다고 생각하는 기능이 있다면 무엇인가요?"
+  },
+  "feedback_placeholder": {
+    "message": "SVG Gobbler가 이런 기능을 할 수 있으면 좋겠습니다..."
+  },
+  "feedback_primary_action": {
+    "message": "제출"
+  },
+  "feedback_secondary_action": {
+    "message": "취소"
+  },
+  "no_results_title": {
+    "message": "표시할 SVG가 없습니다"
+  },
+  "no_results_desc": {
+    "message": "SVG를 표시하려면 필터, 검색 또는 보기 설정을 변경해 보세요"
+  },
+  "review_title": {
+    "message": "간단한 리뷰를 남겨주시겠어요?"
+  },
+  "review_desc": {
+    "message": "SVG Gobbler는 무료 오픈 소스입니다. 별 5개로 더 많은 분들이 찾을 수 있도록 도와주세요."
+  },
+  "review_primary_action": {
+    "message": "리뷰 작성"
+  },
+  "review_secondary_action": {
+    "message": "닫기"
+  },
+  "card_open": {
+    "message": "열기"
+  },
+  "card_tooltip_cors": {
+    "message": "이 SVG는 교차 출처 리소스 공유가 제한되어 있어 SVG Gobbler에서 직접 편집하거나 내보낼 수 없습니다"
+  },
+  "card_onboarding_context": {
+    "message": "컨텍스트 메뉴를 보려면 오른쪽 클릭하세요"
+  },
+  "card_action_copy": {
+    "message": "원본 복사"
+  },
+  "card_action_copy_optimized": {
+    "message": "최적화본 복사"
+  },
+  "card_action_download": {
+    "message": "원본 다운로드"
+  },
+  "card_action_duplicate": {
+    "message": "복제"
+  },
+  "card_action_delete": {
+    "message": "삭제"
+  },
+  "card_action_original": {
+    "message": "원본"
+  },
+  "card_action_optimized": {
+    "message": "최적화됨"
+  },
+  "export_size": {
+    "message": "크기"
+  },
+  "export_quality": {
+    "message": "품질"
+  },
+  "export_optimize_exports": {
+    "message": "내보내기 최적화"
+  },
+  "export_pretty": {
+    "message": "보기 좋은 출력"
+  },
+  "export_floating": {
+    "message": "부동소수점 정밀도"
+  },
+  "export_filename": {
+    "message": "파일 이름"
+  },
+  "export_filetype": {
+    "message": "파일 형식"
+  },
+  "export_export_filename": {
+    "message": "Zip 파일 이름"
+  },
+  "export_filename_prefix": {
+    "message": "파일 접두사"
+  },
+  "export_prefix_tooltip": {
+    "message": "각 파일 이름의 시작 부분에 추가될 접두사입니다."
+  },
+  "export_copy_clipboard": {
+    "message": "클립보드에 복사"
+  },
+  "export_copied": {
+    "message": "복사됨"
+  },
+  "export_download": {
+    "message": "다운로드"
+  },
+  "export_files": {
+    "message": "파일"
+  },
+  "export_export": {
+    "message": "내보내기"
+  },
+  "export_settings": {
+    "message": "설정"
+  },
+  "main_copy": {
+    "message": "복사"
+  },
+  "main_copy_collection": {
+    "message": "컬렉션에 항목 복사"
+  },
+  "main_name": {
+    "message": "이름"
+  },
+  "main_submit": {
+    "message": "제출"
+  },
+  "main_cancel": {
+    "message": "취소"
+  },
+  "main_delete": {
+    "message": "삭제"
+  },
+  "main_move": {
+    "message": "이동"
+  },
+  "main_move_collection": {
+    "message": "컬렉션에 항목 이동"
+  },
+  "main_showing": {
+    "message": "표시 중"
+  },
+  "main_of": {
+    "message": "/"
+  },
+  "main_results": {
+    "message": "결과"
+  },
+  "main_select": {
+    "message": "선택"
+  },
+  "main_all": {
+    "message": "모두"
+  },
+  "main_none": {
+    "message": "없음"
+  },
+  "main_load_more": {
+    "message": "더 보기"
+  },
+  "upload_upload": {
+    "message": "업로드"
+  },
+  "upload_file": {
+    "message": "파일"
+  },
+  "upload_clipboard": {
+    "message": "클립보드"
+  },
+  "upload_upload_files": {
+    "message": "파일 업로드"
+  },
+  "upload_drag_files": {
+    "message": "또는 드래그 앤 드롭"
+  },
+  "upload_file_limit": {
+    "message": "10MB 이하의 SVG 파일"
+  },
+  "upload_item": {
+    "message": "항목"
+  },
+  "upload_uploaded": {
+    "message": "업로드됨"
+  },
+  "upload_error": {
+    "message": "유효하지 않은 SVG입니다. 문자열을 다시 확인하고 시도해 주세요"
+  },
+  "details_optimize": {
+    "message": "최적화"
+  },
+  "details_format": {
+    "message": "형식"
+  },
+  "details_live": {
+    "message": "실시간 편집기입니다. 코드를 변경해 보세요"
+  },
+  "details_download": {
+    "message": "다운로드"
+  },
+  "details_settings": {
+    "message": "설정"
+  },
+  "details_floating_tooltip": {
+    "message": "부동소수점 숫자의 정밀도. 이 매개변수를 지원하는 각 플러그인에 전달됩니다."
+  },
+  "details_plugin": {
+    "message": "플러그인"
+  },
+  "details_set_default": {
+    "message": "기본값으로 설정"
+  },
+  "details_default": {
+    "message": "기본 설정"
+  },
+  "details_svgo_default": {
+    "message": "SVGO 기본값"
+  },
+  "details_deselect_all": {
+    "message": "모두 선택 해제"
+  },
+  "details_preview": {
+    "message": "미리보기"
+  },
+  "details_react": {
+    "message": "React"
+  },
+  "details_data_uri": {
+    "message": "데이터 URI"
+  },
+  "details_svgr": {
+    "message": "SVGR 옵션"
+  },
+  "details_component_name": {
+    "message": "컴포넌트 이름"
+  },
+  "details_component_desc": {
+    "message": "내보낼 컴포넌트의 이름"
+  },
+  "details_dimensions": {
+    "message": "치수"
+  },
+  "details_dimensions_desc": {
+    "message": "루트 SVG 태그의 width 및 height 속성 유지"
+  },
+  "details_ref": {
+    "message": "Ref"
+  },
+  "details_ref_desc": {
+    "message": "루트 SVG 태그에 forward ref 제공"
+  },
+  "details_native": {
+    "message": "Native"
+  },
+  "details_native_desc": {
+    "message": "모든 SVG 노드를 대문자로 수정하고 react-native-svg 가져오기를 포함한 특정 템플릿을 사용합니다. 지원되지 않는 모든 노드는 제거됩니다."
+  },
+  "details_typescript": {
+    "message": "TypeScript"
+  },
+  "details_typescript_desc": {
+    "message": "TypeScript용 타입 정의 생성"
+  },
+  "details_memo": {
+    "message": "Memo"
+  },
+  "details_memo_desc": {
+    "message": "내보낸 컴포넌트를 React.memo로 감싸기"
+  },
+  "details_background_color": {
+    "message": "배경색"
+  },
+  "details_svgr_error": {
+    "message": "SVGR 컴포넌트 생성 오류"
+  },
+  "details_are_you_sure": {
+    "message": "정말로 나가시겠습니까? 변경 사항이 손실됩니다."
+  },
+  "details_edit_svg": {
+    "message": "SVG 편집"
+  },
+  "details_reset_changes": {
+    "message": "변경 사항 초기화"
+  },
+  "details_save_changes": {
+    "message": "변경 사항 저장"
+  },
+  "onboarding_title": {
+    "message": "시작하기"
+  },
+  "onboarding_new": {
+    "message": "새로운 기능"
+  },
+  "onboarding_version": {
+    "message": "버전 5"
+  },
+  "onboarding_desc": {
+    "message": "도구 모음의 확장 아이콘을 클릭하거나 페이지에서 마우스 오른쪽 버튼을 클릭하고 SVG Gobbler 메뉴 항목을 선택하여 SVG Gobbler를 실행하세요."
+  },
+  "onboarding_launch": {
+    "message": "이 페이지 Gobble하기"
+  },
+  "onboarding_visit": {
+    "message": "GitHub 방문"
+  },
+  "settings_about": {
+    "message": "정보"
+  },
+  "settings_about_desc": {
+    "message": "SVG Gobbler 확장 프로그램의 간략한 역사와 지원 방법."
+  },
+  "settings_contribute": {
+    "message": "기여"
+  },
+  "settings_contribute_desc": {
+    "message": "SVG Gobbler 확장 프로그램은 오픈 소스이며"
+  },
+  "settings_contribute_desc_2": {
+    "message": "GitHub에서 기여 가능합니다"
+  },
+  "settings_bug": {
+    "message": "버그 신고"
+  },
+  "settings_bug_desc": {
+    "message": "버그를 발견하거나 기능 요청이 있으신가요?"
+  },
+  "settings_open_issue": {
+    "message": "GitHub에서 이슈 열기"
+  },
+  "settings_disclaimer": {
+    "message": "면책 조항"
+  },
+  "settings_disclaimer_desc": {
+    "message": "이 오픈 소스 브라우저 확장 프로그램은 개인적, 교육적 또는 합법적인 전문 용도로 웹사이트에서 SVG 아이콘 다운로드를 용이하게 하기 위해 만들어졌습니다. 사용자는 지적 재산권을 존중해야 하며 저작권 침해나 적절한 권한 없이 상업적 목적으로 이 도구를 사용해서는 안 됩니다."
+  },
+  "settings_default_svgo": {
+    "message": "기본 SVGO 설정"
+  },
+  "settings_default_svgo_desc": {
+    "message": "SVG Gobbler 실행 시 사용될 기본 SVGO 플러그인 구성."
+  },
+  "settings_export": {
+    "message": "내보내기"
+  },
+  "settings_export_desc": {
+    "message": "내보내기 패널의 구성 설정."
+  },
+  "settings_general": {
+    "message": "일반"
+  },
+  "settings_general_desc": {
+    "message": "브라우저에서 SVG Gobbler 작동 방식을 사용자 지정하세요. 이 설정은 이 브라우저 프로필에 한정됩니다."
+  },
+  "settings_kbd": {
+    "message": "키보드 단축키"
+  },
+  "settings_kbd_desc": {
+    "message": "SVG Gobbler를 실행하는 현재 단축키는"
+  },
+  "settings_kbd_desc_2": {
+    "message": "이 단축키를 수정하거나 제거하려면"
+  },
+  "settings_kbd_desc_3": {
+    "message": "확장 단축키 페이지를 방문하세요"
+  },
+  "settings_settings": {
+    "message": "설정"
+  },
+  "topbar_canvas_tooltip": {
+    "message": "캔버스 색상"
+  },
+  "topbar_canvas": {
+    "message": "캔버스 색상 변경"
+  },
+  "topbar_upload": {
+    "message": "업로드"
+  },
+  "topbar_size": {
+    "message": "크기"
+  },
+  "topbar_sort_none": {
+    "message": "없음"
+  },
+  "topbar_sort_size_asc": {
+    "message": "파일 크기: 낮은 순"
+  },
+  "topbar_sort_size_desc": {
+    "message": "파일 크기: 높은 순"
+  },
+  "topbar_sort": {
+    "message": "정렬"
+  },
+  "topbar_sort_last_asc": {
+    "message": "마지막 편집: 최신 순"
+  },
+  "topbar_sort_last_desc": {
+    "message": "마지막 편집: 오래된 순"
+  },
+  "topbar_color_tooltip": {
+    "message": "색상 모드"
+  },
+  "topbar_color": {
+    "message": "색상 모드 전환"
+  },
+  "topbar_view": {
+    "message": "보기"
+  },
+  "topbar_hide_cors": {
+    "message": "CORS 제한 숨기기"
+  },
+  "topbar_collection": {
+    "message": "컬렉션"
+  },
+  "sidebar_create_new": {
+    "message": "새 컬렉션 만들기"
+  },
+  "sidebar_name": {
+    "message": "이름"
+  },
+  "sidebar_upload_files": {
+    "message": "파일 업로드"
+  },
+  "sidebar_drag_files": {
+    "message": "또는 드래그 앤 드롭"
+  },
+  "sidebar_file_limit": {
+    "message": "10MB 이하의 SVG 파일"
+  },
+  "sidebar_item": {
+    "message": "항목"
+  },
+  "sidebar_uploaded": {
+    "message": "업로드됨"
+  },
+  "sidebar_create_collection": {
+    "message": "컬렉션 만들기"
+  },
+  "sidebar_cancel": {
+    "message": "취소"
+  },
+  "sidebar_close": {
+    "message": "사이드바 닫기"
+  },
+  "sidebar_reset": {
+    "message": "환경 초기화"
+  },
+  "sidebar_review": {
+    "message": "리뷰 남기기"
+  },
+  "sidebar_support": {
+    "message": "SVG Gobbler 지원"
+  },
+  "sidebar_free": {
+    "message": "SVG Gobbler는 무료입니다"
+  },
+  "sidebar_open": {
+    "message": "오픈 소스"
+  },
+  "sidebar_support_2": {
+    "message": "이며 긍정적인 에너지로 운영됩니다. 문제가 있거나 누락된 기능을 원하시면 나쁜 리뷰를 남기기 전에 이슈를 제기하거나 ross@rossmoody.com으로 이메일을 보내 주세요."
+  },
+  "sidebar_support_3": {
+    "message": "SVG Gobbler를 즐겁게 사용하고 계시다면 다른 분들이 발견할 수 있도록 리뷰를 남겨 주세요."
+  },
+  "sidebar_support_submit": {
+    "message": "리뷰 제출"
+  },
+  "sidebar_new_collection": {
+    "message": "새 컬렉션"
+  },
+  "sidebar_settings": {
+    "message": "설정"
+  },
+  "export_apply": {
+    "message": "적용"
+  },
+  "svgo_cleanupAttrs": {
+    "message": "속성 정리"
+  },
+  "svgo_cleanupAttrs_desc": {
+    "message": "속성 값에서 중복 공백을 제거합니다. 속성 키는 수정하지 않으며 최적화 후 값이 비어도 제거하지 않습니다."
+  },
+  "svgo_cleanupEnableBackground": {
+    "message": "enable-background 정리"
+  },
+  "svgo_cleanupEnableBackground_desc": {
+    "message": "필터 요소에서 사용되지 않는 경우 enable-background 속성을 제거합니다"
+  },
+  "svgo_cleanupIDs": {
+    "message": "ID 정리"
+  },
+  "svgo_cleanupIDs_desc": {
+    "message": "사용하지 않는 ID를 제거하고, 다른 요소에서 참조되는 ID를 축소합니다."
+  },
+  "svgo_cleanupNumericValues": {
+    "message": "숫자 값 정리"
+  },
+  "svgo_cleanupNumericValues_desc": {
+    "message": "숫자 값을 반올림하고 기본값인 'px' 단위를 제거합니다."
+  },
+  "svgo_collapsGroups": {
+    "message": "그룹 축소"
+  },
+  "svgo_collapsGroups_desc": {
+    "message": "실질적으로 아무 역할도 하지 않는 그룹을 찾아 평탄화하고 그룹 내용을 보존합니다."
+  },
+  "svgo_convertColors": {
+    "message": "색상 변환"
+  },
+  "svgo_convertColors_desc": {
+    "message": "색상 참조를 가장 짧은 동등 표현으로 변환합니다."
+  },
+  "svgo_convertEllipseToCircle": {
+    "message": "타원을 원으로 변환"
+  },
+  "svgo_convertEllipseToCircle_desc": {
+    "message": "반지름이 동일한 타원을 원으로 변환합니다."
+  },
+  "svgo_convertPathData": {
+    "message": "경로 데이터 변환"
+  },
+  "svgo_convertPathData_desc": {
+    "message": "<path>, <glyph>, <missing-glyph> 요소에서 찾은 경로 명령을 최적화합니다. 경로 명령은 d 속성에 사용되는 구문으로, 각 문자는 경로를 그리는 지시를 나타냅니다."
+  },
+  "svgo_convertShapeToPath": {
+    "message": "도형을 경로로 변환"
+  },
+  "svgo_convertShapeToPath_desc": {
+    "message": "기본 도형을 <path> 요소로 변환합니다."
+  },
+  "svgo_convertTransform": {
+    "message": "변환 속성 변환"
+  },
+  "svgo_convertTransform_desc": {
+    "message": "여러 변환을 하나로 합치고 행렬을 짧은 별칭으로 변환합니다"
+  },
+  "svgo_inlineStyles": {
+    "message": "스타일 인라인화"
+  },
+  "svgo_inlineStyles_desc": {
+    "message": "<style> 요소의 스타일을 일치하는 요소의 style 속성으로 병합합니다"
+  },
+  "svgo_mergePaths": {
+    "message": "경로 병합"
+  },
+  "svgo_mergePaths_desc": {
+    "message": "여러 경로를 하나로 병합하거나, 동일한 속성을 가진 경우 <g> 요소로 병합합니다"
+  },
+  "svgo_mergeStyles": {
+    "message": "스타일 병합"
+  },
+  "svgo_mergeStyles_desc": {
+    "message": "여러 style 요소를 하나로 병합합니다"
+  },
+  "svgo_minifyStyles": {
+    "message": "스타일 축소"
+  },
+  "svgo_minifyStyles_desc": {
+    "message": "CSSO로 <style> 요소를 축소합니다"
+  },
+  "svgo_moveElemsAttrsToGroup": {
+    "message": "요소 속성을 그룹으로 이동"
+  },
+  "svgo_moveElemsAttrsToGroup_desc": {
+    "message": "요소의 속성을 해당 요소를 감싸는 그룹으로 이동합니다"
+  },
+  "svgo_moveGroupAttrsToElems": {
+    "message": "그룹 속성을 요소로 이동"
+  },
+  "svgo_moveGroupAttrsToElems_desc": {
+    "message": "일부 그룹 속성을 포함된 요소로 이동합니다"
+  },
+  "svgo_removeComments": {
+    "message": "주석 제거"
+  },
+  "svgo_removeComments_desc": {
+    "message": "문서에서 XML 주석을 제거합니다. XML 주석은 '<!--'과 '-->' 구문 사이의 내용이며 렌더링에 영향을 주지 않습니다"
+  },
+  "svgo_removeDesc": {
+    "message": "설명 제거"
+  },
+  "svgo_removeDesc_desc": {
+    "message": "<desc> 요소가 비어 있거나 편집기 저작권 표시만 포함하는 경우 문서에서 제거합니다"
+  },
+  "svgo_removeDoctype": {
+    "message": "DOCTYPE 제거"
+  },
+  "svgo_removeDoctype_desc": {
+    "message": "SVG에서 DOCTYPE이라고도 하는 문서 형식 정의를 제거합니다"
+  },
+  "svgo_removeEditorsNSData": {
+    "message": "편집기 네임스페이스 데이터 제거"
+  },
+  "svgo_removeEditorsNSData_desc": {
+    "message": "인기 있는 벡터 편집 소프트웨어와 관련된 모든 XML 네임스페이스, 요소, 속성을 제거합니다"
+  },
+  "svgo_removeEmptyAttrs": {
+    "message": "빈 속성 제거"
+  },
+  "svgo_removeEmptyAttrs_desc": {
+    "message": "빈 값을 가진 속성을 제거합니다"
+  },
+  "svgo_removeEmptyContainers": {
+    "message": "빈 컨테이너 제거"
+  },
+  "svgo_removeEmptyContainers_desc": {
+    "message": "자식이 없거나 의미 있는 속성이 없는 컨테이너 요소를 제거합니다"
+  },
+  "svgo_removeEmptyText": {
+    "message": "빈 텍스트 제거"
+  },
+  "svgo_removeEmptyText_desc": {
+    "message": "의미 있는 속성이 없는 텍스트 요소를 제거합니다"
+  },
+  "svgo_removeHiddenElems": {
+    "message": "숨겨진 요소 제거"
+  },
+  "svgo_removeHiddenElems_desc": {
+    "message": "문서에서 숨겨진 또는 보이지 않는 요소를 제거합니다. 너비와 높이가 0으로 정의된 요소나 CSS로 숨겨진 요소가 해당됩니다"
+  },
+  "svgo_removeMetadata": {
+    "message": "메타데이터 제거"
+  },
+  "svgo_removeMetadata_desc": {
+    "message": "문서에서 <metadata> 요소를 제거합니다. 메타데이터는 렌더링에 영향을 주지 않아 최적화 관점에서 항상 안전하게 제거할 수 있습니다"
+  },
+  "svgo_removeNonInheritableGroupAttrs": {
+    "message": "상속 불가 그룹 속성 제거"
+  },
+  "svgo_removeNonInheritableGroupAttrs_desc": {
+    "message": "자식 요소에서 상속 불가 표현 그룹을 제거합니다"
+  },
+  "svgo_removeTitle": {
+    "message": "제목 제거"
+  },
+  "svgo_removeTitle_desc": {
+    "message": "문서에서 <title> 요소를 제거합니다."
+  },
+  "svgo_removeUnknownsAndDefaults": {
+    "message": "알 수 없는 요소 및 기본값 제거"
+  },
+  "svgo_removeUnknownsAndDefaults_desc": {
+    "message": "알 수 없는 요소와 속성, 기본값으로 설정된 속성을 제거합니다"
+  },
+  "svgo_removeUnusedNS": {
+    "message": "사용하지 않는 네임스페이스 제거"
+  },
+  "svgo_removeUnusedNS_desc": {
+    "message": "문서에서 사용하지 않는 네임스페이스 선언을 제거합니다"
+  },
+  "svgo_removeUselessDefs": {
+    "message": "불필요한 defs 제거"
+  },
+  "svgo_removeUselessDefs_desc": {
+    "message": "참조할 ID가 없는 <defs> 요소의 자식을 제거합니다."
+  },
+  "svgo_removeUselessStrokeAndFill": {
+    "message": "불필요한 stroke 및 fill 제거"
+  },
+  "svgo_removeUselessStrokeAndFill_desc": {
+    "message": "불필요한 stroke 및 fill 속성을 제거합니다"
+  },
+  "svgo_removeXMLInstructions": {
+    "message": "XML 지시문 제거"
+  },
+  "svgo_removeXMLInstructions_desc": {
+    "message": "XML 처리 지시문을 제거합니다"
+  },
+  "svgo_sortAttrs": {
+    "message": "속성 정렬"
+  },
+  "svgo_sortAttrs_desc": {
+    "message": "문서의 모든 요소에서 속성을 정렬합니다. SVG 크기를 줄이지는 않지만 가독성을 높이고 압축 알고리즘 성능을 향상시킬 수 있습니다"
+  },
+  "svgo_sortDefsChildren": {
+    "message": "defs 자식 정렬"
+  },
+  "svgo_sortDefsChildren_desc": {
+    "message": "'<defs>' 요소의 모든 자식을 정렬합니다. SVG 크기를 줄이지는 않지만 압축 알고리즘 성능을 향상시킬 수 있습니다"
+  },
+  "svgo_removeViewBox": {
+    "message": "viewBox 제거"
+  },
+  "svgo_removeViewBox_desc": {
+    "message": "height와 width가 동일할 때 viewBox 속성을 제거합니다"
+  },
+  "svgo_cleanupListOfValues": {
+    "message": "값 목록 정리"
+  },
+  "svgo_cleanupListOfValues_desc": {
+    "message": "viewBox, enable-background, points 등의 속성에 있는 숫자 값을 반올림합니다"
+  },
+  "svgo_convertOneStopGradients": {
+    "message": "단일 정지점 그라디언트 변환"
+  },
+  "svgo_convertOneStopGradients_desc": {
+    "message": "사실상 단색인 <linearGradient>와 <radialGradient> 노드를 해당 색상으로 변환합니다"
+  },
+  "svgo_convertStyleToAttrs": {
+    "message": "스타일을 속성으로 변환"
+  },
+  "svgo_convertStyleToAttrs_desc": {
+    "message": "요소 스타일의 표현 속성을 동등한 XML 속성으로 변환합니다"
+  },
+  "svgo_prefixIds": {
+    "message": "ID에 접두사 추가"
+  },
+  "svgo_prefixIds_desc": {
+    "message": "요소 ID와 클래스 이름에 제공된 파일 이름을 접두사로 추가합니다. 기본값은 'prefix__'입니다"
+  },
+  "svgo_removeDimensions": {
+    "message": "치수 제거"
+  },
+  "svgo_removeDimensions_desc": {
+    "message": "지정된 경우 최상위 <svg> 요소에서 width와 height 속성을 제거하고, 누락된 경우 viewBox 속성으로 대체합니다"
+  },
+  "svgo_removeOffCanvasPaths": {
+    "message": "캔버스 외부 경로 제거"
+  },
+  "svgo_removeOffCanvasPaths_desc": {
+    "message": "viewBox 외부에 그려진 <path> 요소를 제거합니다"
+  },
+  "svgo_removeRasterImages": {
+    "message": "래스터 이미지 제거"
+  },
+  "svgo_removeRasterImages_desc": {
+    "message": "문서에서 인라인 JPEG, PNG, GIF를 제거합니다"
+  },
+  "svgo_removeScriptElement": {
+    "message": "스크립트 요소 제거"
+  },
+  "svgo_removeScriptElement_desc": {
+    "message": "문서에서 <script> 요소를 제거합니다"
+  },
+  "svgo_removeStyleElement": {
+    "message": "스타일 요소 제거"
+  },
+  "svgo_removeStyleElement_desc": {
+    "message": "문서에서 <style> 요소를 제거합니다"
+  },
+  "svgo_removeXMLNS": {
+    "message": "XMLNS 제거"
+  },
+  "svgo_removeXMLNS_desc": {
+    "message": "문서의 최상위 <svg> 요소에서 xmlns 속성을 제거합니다"
+  },
+  "svgo_reusePaths": {
+    "message": "경로 재사용"
+  },
+  "svgo_reusePaths_desc": {
+    "message": "유사한 경로에 대한 정의를 생성하고 <path> 요소를 단일 <path> 정의를 참조하는 <use> 요소로 교체합니다"
+  },
+  "zoom_in": {
+    "message": "확대"
+  },
+  "zoom_out": {
+    "message": "축소"
+  },
+  "name": {
+    "message": "이름"
+  },
+  "export_prefix_names": {
+    "message": "파일 이름에 접두사 추가"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "관련 아이콘 이름을 열거된 접두사로 재정의합니다"
+  },
+  "settings_merge_label": {
+    "message": "같은 소스 URL을 가진 컬렉션 병합"
+  },
+  "settings_merge_tooltip": {
+    "message": "동일한 소스 URL을 공유하는 동일한 SVG를 가진 컬렉션을 자동으로 병합합니다"
+  },
+  "settings_importing": {
+    "message": "가져오기"
+  },
+  "settings_importing_desc": {
+    "message": "컬렉션 가져오기의 기본 구성 설정."
+  },
+  "settings_collections_title": {
+    "message": "컬렉션"
+  },
+  "settings_collections_desc": {
+    "message": "데이터 및 컬렉션 기록에 대한 설정 및 구성 옵션"
+  },
+  "settings_reset_title": {
+    "message": "SVG Gobbler 초기화"
+  },
+  "settings_reset_desc": {
+    "message": "SVG Gobbler와 관련된 모든 컬렉션과 데이터를 로컬 스토리지에서 삭제합니다. SVG Gobbler를 초기화된 상태로 재설정합니다"
+  },
+  "settings_reset_action": {
+    "message": "SVG Gobbler 초기화"
+  },
+  "settings_export_data": {
+    "message": "데이터를 JSON으로 내보내기"
+  },
+  "settings_export_data_desc": {
+    "message": "SVG Gobbler와 관련된 모든 컬렉션과 데이터를 JSON 파일로 내보냅니다."
+  },
+  "settings_export_all_svg_title": {
+    "message": "SVG를 zip으로 내보내기"
+  },
+  "settings_export_all_svg_desc": {
+    "message": "모든 컬렉션의 모든 데이터를 SVG로 zip 파일에 다운로드합니다."
+  },
+  "settings_export_all_svg_button": {
+    "message": "SVG 내보내기"
+  },
+  "onboarding_card_color": {
+    "message": "흰색 SVG가 잘 보이지 않으시나요? 캔버스 색상을 변경해 보세요 🎨"
+  },
+  "paste_cue_title": {
+    "message": "SVG를 여기에 붙여넣을 수 있다는 것을 알고 계셨나요?"
+  },
+  "paste_cue_desc": {
+    "message": "컬렉션 보기에 직접 붙여넣어 모든 컬렉션에 SVG를 빠르게 추가하세요."
+  },
+  "paste_cue_action": {
+    "message": "완료"
+  },
+  "view_always_show_size": {
+    "message": "SVG 파일 크기 보기"
+  },
+  "download_all": {
+    "message": "모두 다운로드"
+  },
+  "selected": {
+    "message": "선택됨"
+  },
+  "export_download_sprite": {
+    "message": "다운로드"
+  },
+  "export_sprite_prefix": {
+    "message": "ID 접두사"
+  },
+  "export_sprite_suffix": {
+    "message": "ID 접미사"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "각 아이콘의 ID에 접두사를 추가합니다"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "각 아이콘의 ID에 접미사를 추가합니다"
+  },
+  "view_show_name": {
+    "message": "SVG 이름 보기"
+  },
+  "view_show_feature_notice": {
+    "message": "새로운 보기!"
+  },
+  "sidebar_feedback": {
+    "message": "피드백 보내기"
+  },
+  "feedback_email": {
+    "message": "이메일"
+  },
+  "feedback_email_optional": {
+    "message": "(선택 사항)"
+  },
+  "feedback_feedback": {
+    "message": "피드백"
+  },
+  "feedback_email_optional_description": {
+    "message": "개발자로부터 답변을 받고 피드백에 대한 크레딧을 원하시는 경우"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "알파벳순: A에서 Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "알파벳순: Z에서 A"
+  },
+  "settings_sort_collections_label": {
+    "message": "컬렉션을 알파벳순으로 정렬"
+  },
+  "settings_sort_collections_desc": {
+    "message": "SVG Gobbler를 실행할 때마다 사이드바의 컬렉션을 자동으로 알파벳순으로 정렬합니다"
+  },
+  "settings_export_title": {
+    "message": "내보내기"
+  },
+  "settings_export__desc": {
+    "message": "SVG Gobbler 내에서 다양한 형식으로 데이터를 관리하고 내보냅니다."
+  },
+  "edit_apply": {
+    "message": "적용"
+  },
+  "edit_applied": {
+    "message": "적용됨"
+  },
+  "edit_properties": {
+    "message": "속성"
+  },
+  "edit_custom_name": {
+    "message": "커스텀 속성 이름"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "SVG 요소에 적용할 속성의 이름"
+  },
+  "edit_custom_value": {
+    "message": "커스텀 속성 값"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "SVG 요소에 적용할 속성의 값"
+  },
+  "edit_reset": {
+    "message": "초기화"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "클래스"
+  },
+  "edit_style": {
+    "message": "스타일"
+  },
+  "edit_height": {
+    "message": "높이"
+  },
+  "edit_width": {
+    "message": "너비"
+  },
+  "edit_viewbox": {
+    "message": "viewBox"
+  },
+  "edit_fill": {
+    "message": "채우기"
+  },
+  "edit_id_tooltip": {
+    "message": "선택한 SVG의 id 속성에 적용할 문자열. 기존 id를 대체합니다"
+  },
+  "edit_class_tooltip": {
+    "message": "선택한 SVG의 class 속성에 적용할 문자열. 기존 class를 대체합니다"
+  },
+  "edit_style_tooltip": {
+    "message": "선택한 SVG의 style 속성에 적용할 문자열. 기존 style을 대체합니다"
+  },
+  "edit_height_tooltip": {
+    "message": "선택한 SVG의 height 속성에 적용할 문자열. 기존 height를 대체합니다"
+  },
+  "edit_width_tooltip": {
+    "message": "선택한 SVG의 width 속성에 적용할 문자열. 기존 width를 대체합니다"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "선택한 SVG의 viewBox 속성에 적용할 문자열. 기존 viewBox를 대체합니다"
+  },
+  "edit_fill_tooltip": {
+    "message": "선택한 SVG의 fill 속성에 적용할 문자열. 기존 fill을 대체합니다"
+  },
+  "drop_files": {
+    "message": "파일 놓기"
+  },
+  "to_upload": {
+    "message": "업로드하려면"
+  },
+  "launch_gobbler": {
+    "message": "SVG Gobbler 실행 중"
+  },
+  "launch_gobbler_desc": {
+    "message": "확장 프로그램 실행 방법에 대한 설정"
+  },
+  "context_title": {
+    "message": "컨텍스트 메뉴에 SVG Gobbler 표시"
+  },
+  "context_desc": {
+    "message": "페이지에서 마우스 오른쪽 버튼을 클릭할 때 컨텍스트 메뉴에 확장 프로그램 실행 옵션을 표시합니다"
+  },
+  "storage_warning_title": {
+    "message": "저장 공간이 거의 가득 찼습니다"
+  },
+  "storage_warning_desc": {
+    "message": "오류를 방지하려면 컬렉션을 삭제하세요."
+  }
+}
