@@ -1,4 +1,10 @@
 {
+  "storage_warning_title": {
+    "message": "Stockage presque plein"
+  },
+  "storage_warning_desc": {
+    "message": "Supprimez des collections pour éviter les erreurs."
+  },
   "confirm_delete_desc": {
     "message": "Afficher une boîte de dialogue de confirmation avant de supprimer une collection"
   },

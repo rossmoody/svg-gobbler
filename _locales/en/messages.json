@@ -1012,5 +1012,11 @@
   },
   "context_desc": {
     "message": "Show an option to launch the extension in the context menu when right-clicking on the page"
+  },
+  "storage_warning_title": {
+    "message": "Storage nearly full"
+  },
+  "storage_warning_desc": {
+    "message": "Delete collections to prevent errors."
   }
 }

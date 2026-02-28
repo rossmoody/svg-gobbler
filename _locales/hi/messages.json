@@ -1,4 +1,10 @@
 {
+  "storage_warning_title": {
+    "message": "स्टोरेज लगभग भर गया है"
+  },
+  "storage_warning_desc": {
+    "message": "त्रुटियों से बचने के लिए संग्रह हटाएं।"
+  },
   "confirm_delete_desc": {
     "message": "संग्रह को हटाने से पहले एक पुष्टि संवाद दिखाएं"
   },

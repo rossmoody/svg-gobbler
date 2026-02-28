@@ -3,6 +3,7 @@ import { Logo } from 'src/components'
 import { useDashboard } from 'src/providers'
 
 import { SideFooter } from './sidebar-footer'
+import { StorageWarning } from './sidebar-footer/storage-warning'
 import { SidebarHeader } from './sidebar-header'
 import { SidebarMain } from './sidebar-main'
 
@@ -24,6 +25,7 @@ export const SidebarContent = () => {
           <SidebarHeader />
           <SidebarMain />
           <span className="flex-1" />
+          <StorageWarning />
           <SideFooter />
         </div>
       </nav>

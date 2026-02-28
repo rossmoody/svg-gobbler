@@ -1,4 +1,10 @@
 {
+  "storage_warning_title": {
+    "message": "Almacenamiento casi lleno"
+  },
+  "storage_warning_desc": {
+    "message": "Elimina colecciones para evitar errores."
+  },
   "confirm_delete_desc": {
     "message": "Mostrar un diálogo de confirmación antes de eliminar una colección"
   },

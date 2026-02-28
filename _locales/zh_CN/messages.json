@@ -1,4 +1,10 @@
 {
+  "storage_warning_title": {
+    "message": "存储空间几乎满了"
+  },
+  "storage_warning_desc": {
+    "message": "删除集合以防止错误。"
+  },
   "confirm_delete_desc": {
     "message": "删除集合前显示确认对话框"
   },
