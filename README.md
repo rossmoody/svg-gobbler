@@ -8,14 +8,14 @@
 
 > An open-source browser extension that finds, optimizes, and exports SVG content from any webpage.
 
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/mpbmflcodadhgafbbakjeahpandgcbch)](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/mpbmflcodadhgafbbakjeahpandgcbch)](https://chromewebstore.google.com/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
 [![Firefox Add-ons](https://img.shields.io/amo/v/svg-gobbler)](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
 ## 📦 Installation
 
 Get SVG Gobbler from your browser's extension marketplace:
 
-- [Chrome Web Store](https://chrome.google.com/webstore/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
+- [Chrome Web Store](https://chromewebstore.google.com/detail/svg-gobbler/mpbmflcodadhgafbbakjeahpandgcbch)
 - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/svg-gobbler/)
 
 ## ✨ Features
