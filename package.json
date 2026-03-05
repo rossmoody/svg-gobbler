@@ -45,7 +45,7 @@
     "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.23.1",
     "server": "file:server",
-    "svgo": "^3.3.2"
+    "svgo": "^3.3.3"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.28",
