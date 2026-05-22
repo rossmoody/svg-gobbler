@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@google-cloud/functions-framework':
-        specifier: ^3.3.0
+        specifier: ^3.4.0
         version: 3.4.0
       '@google-cloud/storage':
-        specifier: ^7.11.0
+        specifier: ^7.11.2
         version: 7.11.2
       '@svgr/core':
         specifier: ^8.1.0
@@ -21,14 +21,14 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(@svgr/core@8.1.0(typescript@5.4.5))
       prettier:
-        specifier: ^3.1.0
+        specifier: ^3.3.1
         version: 3.3.1
     devDependencies:
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       typescript:
-        specifier: ^5.3.2
+        specifier: ^5.4.5
         version: 5.4.5
 
 packages:
@@ -231,8 +231,8 @@ packages:
     peerDependencies:
       '@svgr/core': '*'
 
-  '@tootallnate/once@2.0.0':
-    resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
+  '@tootallnate/once@2.0.1':
+    resolution: {integrity: sha512-HqmEUIGRJ5fSXchkVgR5F7qn48bDBzv0kWj/Kfu5e6uci4UlEeng4331LnBkWffb++Ei3FOVLxo8JJWMFBDMeQ==}
     engines: {node: '>= 10'}
 
   '@types/babel__core@7.20.5':
@@ -1045,10 +1045,12 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   validate-npm-package-license@3.0.4:
@@ -1348,7 +1350,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tootallnate/once@2.0.0': {}
+  '@tootallnate/once@2.0.1': {}
 
   '@types/babel__core@7.20.5':
     dependencies:
@@ -1806,7 +1808,7 @@ snapshots:
 
   http-proxy-agent@5.0.0:
     dependencies:
-      '@tootallnate/once': 2.0.0
+      '@tootallnate/once': 2.0.1
       agent-base: 6.0.2
       debug: 4.3.5
     transitivePeerDependencies:
