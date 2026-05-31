@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useRevalidator } from 'react-router-dom'
 import { Button } from 'src/components'
 import { useExportData, useResetEnvironment } from 'src/hooks'
@@ -15,6 +16,26 @@ export const GeneralSettings = () => {
   const { reset } = useResetEnvironment()
   const { exportAllDataAsJson, exportAllDataAsZip } = useExportData()
   const { revalidate } = useRevalidator()
+  const [storageUsage, setStorageUsage] = useState({
+    bytesInUse: 0,
+    percent: 0,
+    quotaBytes: 0,
+  })
+
+  useEffect(() => {
+    async function loadStorageUsage() {
+      const usage = await StorageUtilities.getStorageUsage()
+      setStorageUsage(usage)
+    }
+
+    loadStorageUsage()
+  }, [])
+
+  const usedMB = (storageUsage.bytesInUse / 1024 / 1024).toFixed(2)
+
+  const quotaMB = (storageUsage.quotaBytes / 1024 / 1024).toFixed(2)
+
+  const isNearLimit = storageUsage.percent >= 0.8
 
   const handleWarnDeleteCollection = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userState: UserState = {
@@ -117,6 +138,25 @@ export const GeneralSettings = () => {
         </Item.Section>
         <div className="my-6 h-px bg-gray-200 dark:bg-gray-700" />
         <Item.Section>
+          <Item.Section>
+            <Item.Heading>Storage</Item.Heading>
+
+            <Item.Description>Current extension storage usage</Item.Description>
+
+            <Item.Setting>
+              <div>
+                <div className="font-medium">
+                  {usedMB} MB / {quotaMB} MB used
+                </div>
+
+                {isNearLimit && (
+                  <span className="text-muted">⚠ Storage space is running low.</span>
+                )}
+              </div>
+            </Item.Setting>
+          </Item.Section>
+
+          <hr className="my-6" />
           <Item.Heading>{loc('settings_collections_title')}</Item.Heading>
           <Item.Description>{loc('settings_collections_desc')}</Item.Description>
           <Item.Setting>
