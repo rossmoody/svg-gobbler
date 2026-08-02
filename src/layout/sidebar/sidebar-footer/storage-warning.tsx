@@ -30,7 +30,7 @@ export const StorageWarning = () => {
     return () => chrome.storage.onChanged.removeListener(listener)
   }, [])
 
-  if (!usage || usage.percent < WARN_THRESHOLD) return
+  if (!usage || !Number.isFinite(usage.percent) || usage.percent < WARN_THRESHOLD) return
 
   const isDanger = usage.percent >= DANGER_THRESHOLD
   const percentDisplay = Math.min(Math.round(usage.percent * 100), 100)
