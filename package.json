@@ -37,7 +37,7 @@
     "lodash": "^4.18.1",
     "lz-string": "^1.5.0",
     "mini-svg-data-uri": "^1.4.4",
-    "nanoid": "^5.0.7",
+    "nanoid": "^5.1.16",
     "pretty-bytes": "^6.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
