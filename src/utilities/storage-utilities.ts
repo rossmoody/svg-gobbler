@@ -60,30 +60,15 @@ export const StorageUtilities = {
    * Returns current storage usage as bytes used, quota bytes, and a 0–1 percent.
    * Firefox doesn't define QUOTA_BYTES on storage.local (and only implemented
    * getBytesInUse in v144), so both are guarded to avoid a NaN percent.
-   *
-   * QUOTA_BYTES is a constant that ignores the unlimitedStorage permission, so
-   * when the permission is granted the quota is reported as 0 (no quota).
    */
   async getStorageUsage(): Promise<{ bytesInUse: number; percent: number; quotaBytes: number }> {
     try {
       const bytesInUse = await chrome.storage.local.getBytesInUse()
-      const quotaBytes = this.hasUnlimitedStorage() ? 0 : chrome.storage.local.QUOTA_BYTES
+      const quotaBytes = chrome.storage.local.QUOTA_BYTES
       if (!quotaBytes) return { bytesInUse, percent: 0, quotaBytes: 0 }
       return { bytesInUse, percent: bytesInUse / quotaBytes, quotaBytes }
     } catch {
       return { bytesInUse: 0, percent: 0, quotaBytes: 0 }
-    }
-  },
-
-  /**
-   * True when the manifest grants unlimitedStorage, which lifts the
-   * storage.local quota.
-   */
-  hasUnlimitedStorage(): boolean {
-    try {
-      return chrome.runtime.getManifest().permissions?.includes('unlimitedStorage') ?? false
-    } catch {
-      return false
     }
   },
 

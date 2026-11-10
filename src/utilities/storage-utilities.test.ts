@@ -8,15 +8,11 @@ const set = vi.fn(async (items: Record<string, unknown>) => {
 })
 const get = vi.fn(async (key: string) => ({ [key]: store.get(key) }))
 
-let permissions: string[] = []
-
 beforeEach(() => {
   store.clear()
-  permissions = []
   set.mockClear()
   vi.spyOn(console, 'error').mockImplementation(() => {})
   vi.stubGlobal('chrome', {
-    runtime: { getManifest: () => ({ permissions }) },
     storage: { local: { get, getBytesInUse: async () => 5_242_880, QUOTA_BYTES: 10_485_760, set } },
   })
 })
@@ -64,16 +60,6 @@ describe('StorageUtilities.getStorageUsage', () => {
       bytesInUse: 5_242_880,
       percent: 0.5,
       quotaBytes: 10_485_760,
-    })
-  })
-
-  it('reports no quota when unlimitedStorage is granted', async () => {
-    permissions = ['storage', 'unlimitedStorage']
-
-    expect(await StorageUtilities.getStorageUsage()).toEqual({
-      bytesInUse: 5_242_880,
-      percent: 0,
-      quotaBytes: 0,
     })
   })
 })
