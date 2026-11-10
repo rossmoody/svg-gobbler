@@ -79,15 +79,6 @@ button:disabled {
   font-semibold text-white transition-all duration-200 ease-in-out hover:bg-gray-600/60;
 }
 
-#preview-svg svg:not(:hover) {
-  outline-style: dashed;
-  @apply outline-gray-300;
-}
-
-#preview-svg svg {
-  margin: auto;
-}
-
 .transparent {
   background-color: white;
   background-image:
