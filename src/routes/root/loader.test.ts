@@ -48,7 +48,8 @@ describe('rootLoader', () => {
 
     expect(id).toBeTruthy()
     expect(await storedCollections()).toEqual([expect.objectContaining({ id })])
-    expect((await StorageUtilities.getPageData(id)).data).toEqual([])
+    const pageData = await StorageUtilities.getPageData(id)
+    expect(pageData.data).toEqual([])
   })
 
   it('falls back to the first existing collection', async () => {
@@ -85,6 +86,7 @@ describe('rootLoader', () => {
 
     expect(collections).toHaveLength(1)
     expect(collections?.[0]).toMatchObject({ id, name: 'example.com' })
-    expect((await StorageUtilities.getPageData(id)).data.map((svg) => svg.name)).toEqual(['logo'])
+    const pageData = await StorageUtilities.getPageData(id)
+    expect(pageData.data.map((svg) => svg.name)).toEqual(['logo'])
   })
 })
