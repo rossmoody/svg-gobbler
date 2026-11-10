@@ -1016,5 +1016,11 @@
   },
   "to_upload": {
     "message": "上传文件"
+  },
+  "storage_error_title": {
+    "message": "无法保存更改"
+  },
+  "storage_error_desc": {
+    "message": "SVG Gobbler 无法写入浏览器存储。重新加载页面后，您最近的更改可能会丢失。"
   }
 }

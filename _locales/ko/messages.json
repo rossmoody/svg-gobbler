@@ -1018,5 +1018,11 @@
   },
   "storage_warning_desc": {
     "message": "오류를 방지하려면 컬렉션을 삭제하세요."
+  },
+  "storage_error_title": {
+    "message": "변경 사항을 저장하지 못했습니다"
+  },
+  "storage_error_desc": {
+    "message": "SVG Gobbler가 브라우저 저장소에 쓰지 못했습니다. 페이지를 새로 고치면 최근 변경 사항이 사라질 수 있습니다."
   }
 }

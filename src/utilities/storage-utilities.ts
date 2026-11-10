@@ -6,6 +6,12 @@ import { pageData } from 'src/constants/page-data'
 import { logger } from './logger'
 
 /**
+ * Fired on the global scope whenever a write to storage fails, so the UI can
+ * tell the user their change was not saved.
+ */
+export const STORAGE_WRITE_ERROR_EVENT = 'svg-gobbler:storage-write-error'
+
+/**
  * A helper for working with Chrome storage and automating compression.
  */
 export const StorageUtilities = {
@@ -54,11 +60,14 @@ export const StorageUtilities = {
    * Returns current storage usage as bytes used, quota bytes, and a 0–1 percent.
    * Firefox doesn't define QUOTA_BYTES on storage.local (and only implemented
    * getBytesInUse in v144), so both are guarded to avoid a NaN percent.
+   *
+   * QUOTA_BYTES is a constant that ignores the unlimitedStorage permission, so
+   * when the permission is granted the quota is reported as 0 (no quota).
    */
   async getStorageUsage(): Promise<{ bytesInUse: number; percent: number; quotaBytes: number }> {
     try {
       const bytesInUse = await chrome.storage.local.getBytesInUse()
-      const quotaBytes = chrome.storage.local.QUOTA_BYTES
+      const quotaBytes = this.hasUnlimitedStorage() ? 0 : chrome.storage.local.QUOTA_BYTES
       if (!quotaBytes) return { bytesInUse, percent: 0, quotaBytes: 0 }
       return { bytesInUse, percent: bytesInUse / quotaBytes, quotaBytes }
     } catch {
@@ -67,21 +76,46 @@ export const StorageUtilities = {
   },
 
   /**
-   * Set page data in storage based on collectionId.
-   * Automatically compresses data.
+   * True when the manifest grants unlimitedStorage, which lifts the
+   * storage.local quota.
    */
-  async setPageData(collectionId: string, data: PageData): Promise<void> {
-    await chrome.storage.local.set({
-      [collectionId]: this.compressToBase64(data),
-    })
+  hasUnlimitedStorage(): boolean {
+    try {
+      return chrome.runtime.getManifest().permissions?.includes('unlimitedStorage') ?? false
+    } catch {
+      return false
+    }
+  },
+
+  /**
+   * Set page data in storage based on collectionId. Automatically compresses data.
+   * Resolves to false (and notifies the UI) if the write fails.
+   */
+  async setPageData(collectionId: string, data: PageData): Promise<boolean> {
+    return this.write(collectionId, data)
   },
 
   /**
    * Sets data in storage based on key. Automatically compresses data.
+   * Resolves to false (and notifies the UI) if the write fails.
    */
-  async setStorageData(key: DatabaseKey, data: unknown): Promise<void> {
-    await chrome.storage.local.set({
-      [key]: this.compressToBase64(data),
-    })
+  async setStorageData(key: DatabaseKey, data: unknown): Promise<boolean> {
+    return this.write(key, data)
+  },
+
+  /**
+   * Compress and write a value to storage. Never rejects: most callers don't
+   * await writes, so a failure (e.g. quota exceeded) is logged and broadcast
+   * as STORAGE_WRITE_ERROR_EVENT instead of becoming an unhandled rejection.
+   */
+  async write(key: string, data: unknown): Promise<boolean> {
+    try {
+      await chrome.storage.local.set({ [key]: this.compressToBase64(data) })
+      return true
+    } catch (error) {
+      logger.error(`Error writing "${key}" to storage:`, error)
+      globalThis.dispatchEvent(new CustomEvent(STORAGE_WRITE_ERROR_EVENT, { detail: { key } }))
+      return false
+    }
   },
 }

@@ -1018,5 +1018,11 @@
   },
   "storage_warning_desc": {
     "message": "Exclua coleções para evitar erros."
+  },
+  "storage_error_title": {
+    "message": "Não foi possível salvar as alterações"
+  },
+  "storage_error_desc": {
+    "message": "O SVG Gobbler não conseguiu gravar no armazenamento do navegador. Sua última alteração pode ser perdida ao recarregar a página."
   }
 }

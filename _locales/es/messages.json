@@ -1015,5 +1015,11 @@
   },
   "to_upload": {
     "message": "para subir"
+  },
+  "storage_error_title": {
+    "message": "No se pudieron guardar los cambios"
+  },
+  "storage_error_desc": {
+    "message": "SVG Gobbler no pudo escribir en el almacenamiento del navegador. Es posible que tu último cambio se pierda al recargar la página."
   }
 }
