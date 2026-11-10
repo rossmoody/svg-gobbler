@@ -11,7 +11,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     exclude: ['**/node_modules/**', '**/dist/**'],
-    include: ['src/**/*.test.{ts,tsx}', 'server/**/*.test.ts'],
+    include: ['*.test.ts', 'src/**/*.test.{ts,tsx}', 'server/**/*.test.ts'],
     restoreMocks: true,
   },
 })
