@@ -1,3 +1,4 @@
+import type { StorageSvg, Svg } from 'src/scripts'
 import type { DatabaseKey, PageData } from 'src/types'
 
 import { compressToUTF16, decompressFromUTF16 } from 'lz-string'
@@ -10,6 +11,67 @@ import { logger } from './logger'
  * tell the user their change was not saved.
  */
 export const STORAGE_WRITE_ERROR_EVENT = 'svg-gobbler:storage-write-error'
+
+/**
+ * Pending updates per collection, so each one reads what the previous one wrote.
+ */
+const updateQueues = new Map<string, Promise<boolean>>()
+
+/**
+ * Ids this page has written per collection. For these, storage is the source
+ * of truth; anything else on screen is still only the loader's processed copy.
+ */
+const writtenIds = new Map<string, Set<string>>()
+
+const toStorageSvg = (svg: Svg): StorageSvg => ({
+  corsRestricted: svg.corsRestricted,
+  id: svg.id,
+  lastEdited: svg.lastEdited,
+  name: svg.name,
+  svg: svg.svg,
+})
+
+/**
+ * Bring stored data up to date with what the collection loader produced, without
+ * undoing earlier updates. Loading fetches image content and extracts symbols
+ * and groups under new ids, and none of that is stored until the first write.
+ *
+ * - Stored item this page hasn't written yet: use its loaded (processed) form.
+ * - Loaded item missing from storage and never written: it was extracted while
+ *   loading, so add it after the item it came from.
+ * - Loaded item missing from storage but written before: an earlier update
+ *   removed it, so it stays removed.
+ * - Stored item missing from the loaded data: kept as is.
+ */
+export function reconcileLoadedData(
+  stored: StorageSvg[],
+  loaded: Svg[],
+  written: ReadonlySet<string> = new Set(),
+): StorageSvg[] {
+  const storedIds = new Set(stored.map((item) => item.id))
+  const loadedById = new Map(loaded.map((svg) => [svg.id, svg]))
+  const extracted = new Map<string, StorageSvg[]>()
+
+  // Extracted items found before any stored item are filed under this key.
+  let anchor = ''
+  for (const svg of loaded) {
+    if (storedIds.has(svg.id)) {
+      anchor = svg.id
+    } else if (!written.has(svg.id)) {
+      extracted.set(anchor, [...(extracted.get(anchor) ?? []), toStorageSvg(svg)])
+    }
+  }
+
+  const result = [...(extracted.get('') ?? [])]
+  for (const item of stored) {
+    const fresh = loadedById.get(item.id)
+    result.push(
+      fresh && !written.has(item.id) ? toStorageSvg(fresh) : item,
+      ...(extracted.get(item.id) ?? []),
+    )
+  }
+  return result
+}
 
 /**
  * A helper for working with Chrome storage and automating compression.
@@ -86,6 +148,47 @@ export const StorageUtilities = {
    */
   async setStorageData(key: DatabaseKey, data: unknown): Promise<boolean> {
     return this.write(key, data)
+  },
+
+  /**
+   * Change a collection's page data based on what is in storage right now.
+   * Updates to the same collection run one at a time, each reading the result
+   * of the one before, and the promise resolves once the write has landed, so
+   * two quick edits can't overwrite each other.
+   *
+   * Describe the change against `current` (add, remove or replace items by id)
+   * rather than writing back a copy of the data held in UI state, which may
+   * already be out of date. Pass the collection's loaded data as `loaded` so
+   * `current` includes what the loader fetched or extracted.
+   */
+  async updatePageData(
+    collectionId: string,
+    update: (current: PageData) => PageData,
+    loaded?: Svg[],
+  ): Promise<boolean> {
+    const run = async () => {
+      const stored = await this.getPageData(collectionId)
+      const written = writtenIds.get(collectionId) ?? new Set<string>()
+      const current = loaded
+        ? { ...stored, data: reconcileLoadedData(stored.data, loaded, written) }
+        : stored
+      const next = update(current)
+      const saved = await this.write(collectionId, next)
+      if (saved) {
+        // Include what the update removed, so stale UI state can't bring it back.
+        for (const item of [...current.data, ...next.data]) written.add(item.id)
+        writtenIds.set(collectionId, written)
+      }
+      return saved
+    }
+
+    const queued = (updateQueues.get(collectionId) ?? Promise.resolve(true)).then(run, run)
+    updateQueues.set(collectionId, queued)
+    try {
+      return await queued
+    } finally {
+      if (updateQueues.get(collectionId) === queued) updateQueues.delete(collectionId)
+    }
   },
 
   /**

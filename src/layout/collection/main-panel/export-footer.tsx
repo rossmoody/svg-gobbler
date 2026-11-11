@@ -20,7 +20,6 @@ export const ExportFooter = () => {
 
     const { collectionId, data, selected } = collectionState
     const optimizedSvgs = await processWithExportConfig(selected)
-    const pageData = await StorageUtilities.getPageData(collectionId)
 
     const newData: Svg[] = data.map((svg) => {
       const selectedSvg = optimizedSvgs.find((s) => s.id === svg.id)
@@ -31,8 +30,20 @@ export const ExportFooter = () => {
       return svg
     })
 
-    pageData.data = SvgUtilities.createStorageSvgs(newData)
-    await StorageUtilities.setPageData(collectionId, pageData)
+    const optimizedIds = new Set(optimizedSvgs.map((svg) => svg.id))
+    const optimized = new Map(
+      SvgUtilities.createStorageSvgs(newData.filter((svg) => optimizedIds.has(svg.id))).map(
+        (svg) => [svg.id, svg],
+      ),
+    )
+    await StorageUtilities.updatePageData(
+      collectionId,
+      (current) => ({
+        ...current,
+        data: current.data.map((item) => optimized.get(item.id) ?? item),
+      }),
+      data,
+    )
     dispatch({ payload: newData, type: 'set-data' })
     dispatch({ type: 'process-data' })
 

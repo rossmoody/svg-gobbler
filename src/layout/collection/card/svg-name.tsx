@@ -15,9 +15,15 @@ export const SvgName = ({ data }: CardData) => {
     if (!name || name === data.name) return
 
     data.updateName(name)
-    const pageData = await StorageUtilities.getPageData(state.collectionId)
-    pageData.data = pageData.data.map((svg) => (svg.id === data.id ? data : svg))
-    StorageUtilities.setPageData(state.collectionId, pageData)
+    const { lastEdited } = data
+    StorageUtilities.updatePageData(
+      state.collectionId,
+      (current) => ({
+        ...current,
+        data: current.data.map((svg) => (svg.id === data.id ? { ...svg, lastEdited, name } : svg)),
+      }),
+      state.data,
+    )
     dispatch({ type: 'process-data' })
   }
 
