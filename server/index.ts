@@ -21,8 +21,30 @@ export type SVGRMessage = {
   svg: string
 }
 
+/**
+ * Upper bound on stored feedback and error reports. The endpoint is public, so
+ * without a cap anyone could write arbitrarily large files to the bucket.
+ */
+const MAX_MESSAGE_LENGTH = 10_000
+
+/**
+ * Upper bound on a single counter increment. A page yields at most a few
+ * thousand SVGs; anything larger (or negative) is not a real gobble.
+ */
+const MAX_COUNTER_INCREMENT = 10_000
+
+/**
+ * Returns the message of a string payload trimmed to the storage cap, or
+ * undefined if the payload doesn't carry a non-empty string.
+ */
+const readMessage = (body: unknown): string | undefined => {
+  const message = (body as { payload?: { message?: unknown } })?.payload?.message
+  if (typeof message !== 'string' || message.trim().length === 0) return undefined
+  return message.slice(0, MAX_MESSAGE_LENGTH)
+}
+
 ff.http('svgr', async (request: ff.Request, response: ff.Response) => {
-  switch (request.body.type) {
+  switch (request.body?.type) {
     /**
      * Increment a daily counter stored in a JSON file to show the total sourced SVGs on svggobbler.com
      */
@@ -45,7 +67,8 @@ ff.http('svgr', async (request: ff.Request, response: ff.Response) => {
           }
         }
 
-        const increment = Number.parseInt(message, 10) || 0
+        const parsed = Number.parseInt(message, 10) || 0
+        const increment = Math.min(Math.max(parsed, 0), MAX_COUNTER_INCREMENT)
         const currentCount = data[today] ?? 0
         const newCount = currentCount + increment
         data[today] = newCount
@@ -68,10 +91,17 @@ ff.http('svgr', async (request: ff.Request, response: ff.Response) => {
      */
     case 'error': {
       try {
-        const { message } = request.body.payload as StringMessage
+        const message = readMessage(request.body)
+        if (!message) {
+          response.status(400).send('Message must be a non-empty string')
+          break
+        }
+
         const bucketName = 'svg-gobbler'
         const destinationFileName = `error/error-${Date.now()}.txt`
         await storage.bucket(bucketName).file(destinationFileName).save(message)
+        // Without a response the request stays open until the function times out
+        response.send('Message received')
       } catch (error) {
         console.error(error)
         response.send('Unable to upload message to database 😥')
@@ -84,10 +114,17 @@ ff.http('svgr', async (request: ff.Request, response: ff.Response) => {
      */
     case 'feedback': {
       try {
-        const { message } = request.body.payload as StringMessage
+        const message = readMessage(request.body)
+        if (!message) {
+          response.status(400).send('Message must be a non-empty string')
+          break
+        }
+
         const bucketName = 'svg-gobbler'
         const destinationFileName = `feedback/feedback-${Date.now()}.txt`
         await storage.bucket(bucketName).file(destinationFileName).save(message)
+        // Without a response the request stays open until the function times out
+        response.send('Message received')
       } catch (error) {
         console.error(error)
         response.send('Unable to upload message to database 😥')

@@ -10,9 +10,25 @@ export const useMainActions = () => {
 
   const { collectionId } = collectionState
   const selectedItems = collectionState.selected
-  const nonSelectedItems = collectionState.data.filter((item) => !selectedItems.includes(item))
-  const nonSelectedItemStorageSvgs: StorageSvg[] = SvgUtilities.createStorageSvgs(nonSelectedItems)
+  const selectedIds = new Set(selectedItems.map((item) => item.id))
   const selectedItemsStorageSvgs: StorageSvg[] = SvgUtilities.createStorageSvgs(selectedItems)
+
+  const removeSelected = () =>
+    StorageUtilities.updatePageData(
+      collectionId,
+      (current) => ({
+        ...current,
+        data: current.data.filter((item) => !selectedIds.has(item.id)),
+      }),
+      collectionState.data,
+    )
+
+  const addSelectedTo = (targetCollectionId: string) =>
+    StorageUtilities.updatePageData(
+      targetCollectionId,
+      (current) => ({ ...current, data: [...selectedItemsStorageSvgs, ...current.data] }),
+      targetCollectionId === collectionId ? collectionState.data : undefined,
+    )
 
   function resetCollection() {
     dispatch({ type: 'unselect-all' })
@@ -21,41 +37,20 @@ export const useMainActions = () => {
   }
 
   const deleteSelectedItems = async () => {
-    const currentPageData = await StorageUtilities.getPageData(collectionId)
-
-    await StorageUtilities.setPageData(collectionId, {
-      ...currentPageData,
-      data: nonSelectedItemStorageSvgs,
-    })
-
+    await removeSelected()
     resetCollection()
   }
 
   const moveSelectedItems = async (targetCollectionId: string) => {
-    const targetPageData = await StorageUtilities.getPageData(targetCollectionId)
-    const currentPageData = await StorageUtilities.getPageData(collectionId)
-
-    await StorageUtilities.setPageData(targetCollectionId, {
-      ...targetPageData,
-      data: [...selectedItemsStorageSvgs, ...targetPageData.data],
-    })
-
-    await StorageUtilities.setPageData(collectionId, {
-      ...currentPageData,
-      data: nonSelectedItemStorageSvgs,
-    })
-
+    // Only take the items out of this collection once they are safely in the
+    // other one; a failed write must not leave them in neither.
+    const added = await addSelectedTo(targetCollectionId)
+    if (added) await removeSelected()
     resetCollection()
   }
 
   const duplicateItems = async (targetCollectionId: string) => {
-    const targetPageData = await StorageUtilities.getPageData(targetCollectionId)
-
-    await StorageUtilities.setPageData(targetCollectionId, {
-      ...targetPageData,
-      data: [...selectedItemsStorageSvgs, ...targetPageData.data],
-    })
-
+    await addSelectedTo(targetCollectionId)
     resetCollection()
   }
 

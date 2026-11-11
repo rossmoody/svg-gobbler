@@ -1,6 +1,7 @@
 import { Provider as ToastProvider, Viewport } from '@radix-ui/react-toast'
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip'
 import { Outlet } from 'react-router-dom'
+import { StorageErrorToast } from 'src/components/storage-error-toast'
 import { Sidebar } from 'src/layout/sidebar'
 import { CollectionProvider, DashboardProvider, EditProvider, UserProvider } from 'src/providers'
 import { ExportProvider } from 'src/providers/export'
@@ -23,6 +24,7 @@ export const DashboardRoute = () => (
         </CollectionProvider>
       </DashboardProvider>
     </TooltipProvider>
+    <StorageErrorToast />
     <Viewport className="toast-viewport" />
   </ToastProvider>
 )

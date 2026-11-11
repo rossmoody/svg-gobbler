@@ -1,5 +1,3 @@
-import type { PageData } from 'src/types'
-
 import { Transition } from '@headlessui/react'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { useCallback, useEffect, useMemo } from 'react'
@@ -24,11 +22,9 @@ export const Header = () => {
   }
 
   const handleSave = useCallback(async () => {
-    const collectionData = await StorageUtilities.getPageData(collectionId)
-
-    const pageData: PageData = {
-      ...collectionData,
-      data: collectionData.data.map((item) =>
+    await StorageUtilities.updatePageData(collectionId, (current) => ({
+      ...current,
+      data: current.data.map((item) =>
         item.id === id
           ? {
               corsRestricted: item.corsRestricted,
@@ -39,9 +35,7 @@ export const Header = () => {
             }
           : item,
       ),
-    }
-
-    await StorageUtilities.setPageData(collectionId, pageData)
+    }))
     dispatch({ payload: currentString, type: 'update-original-string' })
     dispatch({ payload: name, type: 'update-original-name' })
   }, [collectionId, currentString, dispatch, id, name])

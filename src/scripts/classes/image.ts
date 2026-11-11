@@ -47,6 +47,13 @@ export class Image extends Svg {
       return this
     }
 
+    // processImage already decoded this image (a data URI) into an SVG element, so
+    // there is no src left to fetch. Without this the URL resolves to the bare page
+    // origin, and the response either replaces the SVG or flags it as CORS restricted.
+    if (this.asElement && this.asElement.tagName.toLowerCase() !== 'img') {
+      return this
+    }
+
     const absoluteUrl = this.absoluteImageUrl
 
     // Data URIs and already-inline SVGs are handled in processImage; no network needed

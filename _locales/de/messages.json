@@ -1018,5 +1018,11 @@
   },
   "storage_warning_desc": {
     "message": "Sammlungen löschen, um Fehler zu vermeiden."
+  },
+  "storage_error_title": {
+    "message": "Änderungen konnten nicht gespeichert werden"
+  },
+  "storage_error_desc": {
+    "message": "SVG Gobbler konnte nicht in den Browserspeicher schreiben. Ihre letzte Änderung geht beim Neuladen der Seite möglicherweise verloren."
   }
 }

@@ -1,6 +1,7 @@
 import type { Image } from 'src/scripts'
 
 import clsx from 'clsx'
+import { ShadowSvg } from 'src/components/shadow-svg'
 
 import { type CardData } from '.'
 
@@ -15,11 +16,11 @@ export const CardContent = ({ data }: CardData) => {
   }
 
   return (
-    <span
+    <ShadowSvg
       className={clsx(
         '[& > svg]:absolute [& > svg]:inset-0 [& > svg]:inline-block relative inline-block w-full overflow-hidden pb-[100%] align-top',
       )}
-      dangerouslySetInnerHTML={{ __html: data.presentationSvg }}
+      markup={data.presentationSvg}
     />
   )
 }

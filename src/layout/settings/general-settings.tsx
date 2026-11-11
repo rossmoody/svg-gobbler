@@ -146,7 +146,9 @@ export const GeneralSettings = () => {
             <Item.Setting>
               <div>
                 <div className="font-medium">
-                  {usedMB} MB / {quotaMB} MB used
+                  {storageUsage.quotaBytes > 0
+                    ? `${usedMB} MB / ${quotaMB} MB used`
+                    : `${usedMB} MB used`}
                 </div>
 
                 {isNearLimit && (

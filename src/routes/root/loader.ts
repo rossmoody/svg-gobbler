@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import { defer } from 'react-router-dom'
+import { initCollection } from 'src/constants/collection'
+import { pageData as emptyPageData } from 'src/constants/page-data'
 import { isDevelopmentEnvironment, serverEndpoint } from 'src/constants/server-config'
 import { defaultSvgoPlugins, SvgoPlugin } from 'src/constants/svgo-plugins'
 import { CollectionState, initCollectionState, initUserState, type UserState } from 'src/providers'
@@ -46,7 +48,7 @@ export async function rootLoader() {
         'navigation',
       ) as PerformanceNavigationTiming[]
       if (navigationEntries.length > 0 && navigationEntries[0].type === 'reload') {
-        return collections[0].id
+        return getFallbackCollectionId(collections)
       }
 
       try {
@@ -124,8 +126,26 @@ export async function rootLoader() {
         // 1. The listener has been removed, so the background script is no longer listening on refresh
         // 2. Send the user to the first collection if they invoke on a browser system page or new tab page
         // 3. This happens everytime the extension page is opened without a listener present
-        return collections[0].id
+        return getFallbackCollectionId(collections)
       }
     })(),
   })
+}
+
+/**
+ * The collection to land on when nothing new was gobbled. A fresh install has no
+ * collections yet, so opening the extension from a new tab or system page (or
+ * reloading it) before the first gobble would otherwise have nothing to route to.
+ * In that case an empty collection is created, the same way removing the last
+ * collection does.
+ */
+async function getFallbackCollectionId(collections: Collection[]): Promise<string> {
+  if (collections.length > 0) {
+    return collections[0].id
+  }
+
+  const collection = initCollection()
+  await StorageUtilities.setPageData(collection.id, emptyPageData)
+  await StorageUtilities.setStorageData('collections', [collection])
+  return collection.id
 }

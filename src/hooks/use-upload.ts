@@ -18,18 +18,16 @@ export const useUpload = () => {
     async function (fileSvgs: FileSvg[]) {
       const { collectionId } = state
 
-      // Get current page data for storage
-      let pageData = await StorageUtilities.getPageData(collectionId)
       const newData: StorageSvg[] = fileSvgs.map(SvgUtilities.createStorageSvg)
 
-      // Append new strings to collection's page data
-      pageData = {
-        ...pageData,
-        data: [...newData, ...pageData.data],
-      }
-
-      // Update the collection's page data
-      await StorageUtilities.setPageData(collectionId, pageData)
+      // Prepend the new strings to whatever the collection holds in storage now
+      const saved = await StorageUtilities.updatePageData(
+        collectionId,
+        (current) => ({ ...current, data: [...newData, ...current.data] }),
+        state.data,
+      )
+      // Don't show items that were never stored
+      if (!saved) return
 
       // Update the collection context state
       const newSvgClasses = newData.map((item) => new Inline(item))

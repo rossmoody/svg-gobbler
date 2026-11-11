@@ -1018,5 +1018,11 @@
   },
   "storage_warning_desc": {
     "message": "エラーを防ぐためにコレクションを削除してください。"
+  },
+  "storage_error_title": {
+    "message": "変更を保存できませんでした"
+  },
+  "storage_error_desc": {
+    "message": "SVG Gobbler はブラウザのストレージに書き込めませんでした。ページを再読み込みすると、最新の変更が失われる可能性があります。"
   }
 }

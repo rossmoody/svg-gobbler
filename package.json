@@ -1,6 +1,6 @@
 {
   "name": "svg-gobbler",
-  "version": "5.32.0",
+  "version": "5.33.0",
   "description": "Find, optimize, organize, edit, and export your SVGs",
   "license": "apache-2.0",
   "author": "Ross Moody<ross@rossmoody.com>",
@@ -9,6 +9,10 @@
     "start": "vite build && vite",
     "build": "tsc && vite build",
     "dev": "vite",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "dev-ff": "cd dist && web-ext run",
     "clean": "rm -rf dist",
     "release": "pnpm build && npx ts-node --esm src/utilities/zip-release.ts && pnpm release-ff",
@@ -52,6 +56,7 @@
     "@eslint/js": "^9.24.0",
     "@svgr/core": "^8.1.0",
     "@tailwindcss/forms": "^0.5.7",
+    "@testing-library/react": "^16.3.3",
     "@types/archiver": "^6.0.2",
     "@types/chrome": "^0.0.248",
     "@types/dompurify": "^3.0.5",
@@ -70,6 +75,7 @@
     "eslint-plugin-perfectionist": "^4.11.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-unicorn": "^58.0.0",
+    "jsdom": "^31.0.0",
     "postcss": "^8.5.10",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
@@ -79,6 +85,13 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.4.1"
+    "vite": "^6.4.1",
+    "vitest": "^5.1.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@codemirror/state": "^6.6.0",
+      "@codemirror/view": "^6.36.5"
+    }
   }
 }

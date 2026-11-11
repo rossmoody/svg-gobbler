@@ -1,7 +1,7 @@
-import type { ServerMessage } from 'server'
-
 import { serverEndpoint } from 'src/constants/server-config'
 import { logger } from 'src/utilities/logger'
+
+import type { ServerMessage } from '../../server/index'
 
 /**
  * Send a message to the database for logging user feedback or errors that are provided.
@@ -17,6 +17,9 @@ export const useDatabase = (type: 'error' | 'feedback') => {
       await fetch(serverEndpoint.svgr, {
         body: JSON.stringify(feedbackMessage),
         headers: { 'Content-Type': 'application/json' },
+        // The error screen reloads the page right after sending, which would
+        // otherwise cancel the request before it leaves the browser
+        keepalive: true,
         method: 'POST',
       })
     } catch (error) {

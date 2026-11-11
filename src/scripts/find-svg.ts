@@ -79,13 +79,233 @@ export async function findSvg(): Promise<DocumentData> {
     }
   }
 
+  const SVG_NAMESPACE = 'http://www.w3.org/2000/svg'
+
+  /**
+   * Presentation properties a page commonly sets on icons from its own CSS.
+   * Visibility, display, transforms and sizing are left out on purpose: they
+   * usually describe UI state (hidden menus, rotated chevrons), not the artwork.
+   */
+  const PAGE_STYLED_PROPERTIES = [
+    'color',
+    'fill',
+    'fill-opacity',
+    'fill-rule',
+    'clip-rule',
+    'stroke',
+    'stroke-width',
+    'stroke-opacity',
+    'stroke-linecap',
+    'stroke-linejoin',
+    'stroke-miterlimit',
+    'stroke-dasharray',
+    'stroke-dashoffset',
+    'stop-color',
+    'stop-opacity',
+    'opacity',
+  ]
+  const PAINT_PROPERTIES = new Set(['fill', 'stop-color', 'stroke'])
+
+  /**
+   * A closed shadow root attached to the page for the duration of the scrape.
+   * A copy of an SVG placed inside it is styled by nothing but its own markup,
+   * which is how it will look once it has left the page.
+   */
+  let isolationHost: HTMLElement | undefined
+  let isolationRoot: ShadowRoot | undefined
+
+  const getIsolationRoot = (): ShadowRoot | undefined => {
+    if (isolationRoot) return isolationRoot
+    try {
+      isolationHost = document.createElement('div')
+      isolationHost.style.setProperty('all', 'initial')
+      isolationHost.style.setProperty('display', 'none')
+      isolationRoot = isolationHost.attachShadow({ mode: 'closed' })
+      document.documentElement.append(isolationHost)
+    } catch {
+      isolationHost = undefined
+      isolationRoot = undefined
+    }
+    return isolationRoot
+  }
+
+  /**
+   * rgb(51, 51, 51) -> #333333. Anything else is returned untouched.
+   */
+  const toHexColor = (value: string): string => {
+    const match = value.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
+    if (!match) return value
+    const hex = match.slice(1).map((part) => Number(part).toString(16).padStart(2, '0'))
+    return `#${hex.join('')}`
+  }
+
+  /**
+   * Computed values as they'd be written by hand: hex colours, unitless pixels.
+   */
+  const toAttributeValue = (value: string): string =>
+    toHexColor(value).replaceAll(/(\d)px\b/g, '$1')
+
+  /**
+   * Writes onto the copy whatever the page's stylesheets contributed to the
+   * original, e.g. `.icon { fill: currentColor }` or `.icon path { stroke: #333 }`.
+   * Only differences from how the copy looks on its own are written, so an SVG
+   * that already carries its styling is left byte-for-byte the same.
+   */
+  const bakePageStyles = (original: SVGElement, copy: SVGElement): void => {
+    const root = getIsolationRoot()
+    if (!root) return
+
+    const wrapper = document.createElement('div')
+    try {
+      // Give the copy the text colour the original inherits, so `currentColor`
+      // resolves the same in both and is not mistaken for page styling.
+      const rootNode = original.getRootNode()
+      const parent =
+        original.parentElement ?? (rootNode instanceof ShadowRoot ? rootNode.host : undefined)
+      if (parent) wrapper.style.setProperty('color', globalThis.getComputedStyle(parent).color)
+      root.append(wrapper)
+      wrapper.append(copy)
+
+      const originals = [original, ...original.querySelectorAll('*')]
+      const copies = [copy, ...copy.querySelectorAll('*')]
+      if (originals.length !== copies.length) return
+
+      for (const [index, element] of originals.entries()) {
+        const target = copies[index]
+        if (target.namespaceURI !== SVG_NAMESPACE) continue
+
+        const onPage = globalThis.getComputedStyle(element)
+        // Live: reflects attributes already written to this copy's ancestors,
+        // so an inherited value is written once, where it was set.
+        const alone = globalThis.getComputedStyle(target)
+
+        for (const property of PAGE_STYLED_PROPERTIES) {
+          // Opacity on the outer element is usually a fade or hover state
+          if (index === 0 && property === 'opacity') continue
+
+          const value = onPage.getPropertyValue(property)
+          if (!value || value === alone.getPropertyValue(property)) continue
+
+          // A paint that matches the text colour is treated as currentColor
+          const followsTextColor = PAINT_PROPERTIES.has(property) && value === onPage.color
+          target.setAttribute(property, followsTextColor ? 'currentColor' : toAttributeValue(value))
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to copy page styles onto SVG:', error)
+    } finally {
+      wrapper.remove()
+    }
+  }
+
+  const getUseTargetId = (use: Element): string | undefined => {
+    const href = use.getAttribute('href') || use.getAttribute('xlink:href')
+    return href?.startsWith('#') && href.length > 1 ? href.slice(1) : undefined
+  }
+
+  /**
+   * Copies in whatever the SVG's <use> elements point at elsewhere on the page,
+   * typically a <symbol> in a hidden sprite. Without it the saved SVG is an
+   * empty reference.
+   *
+   * When the SVG is nothing but a single plain <use> of a symbol, the symbol's
+   * contents and viewBox replace it, giving the icon itself. Otherwise the
+   * targets are added to a <defs> so the references keep working.
+   */
+  const inlineUseTargets = (original: SVGElement, copy: SVGElement): void => {
+    const scope = original.getRootNode()
+    const findOnPage = (id: string): Element | undefined => {
+      // Ids are looked up as-is; a selector would need them escaped
+      /* eslint-disable unicorn/prefer-query-selector */
+      const scoped = scope instanceof ShadowRoot ? scope.getElementById(id) : undefined
+      const found = scoped ?? document.getElementById(id)
+      /* eslint-enable unicorn/prefer-query-selector */
+      if (!found || found.namespaceURI !== SVG_NAMESPACE) return undefined
+      // A target inside this SVG is already part of the copy; one that
+      // contains this SVG would copy the SVG into itself.
+      if (original.contains(found) || found.contains(original)) return undefined
+      return found
+    }
+    const hasId = (id: string) => [...copy.querySelectorAll('[id]')].some((node) => node.id === id)
+
+    // The icon case: <svg><use href="#symbol"/></svg>
+    const children = [...copy.children].filter(
+      (child) => !['desc', 'title'].includes(child.tagName.toLowerCase()),
+    )
+    const [only] = children
+    if (children.length === 1 && only.tagName.toLowerCase() === 'use') {
+      const id = getUseTargetId(only)
+      const symbol = id && !hasId(id) ? findOnPage(id) : undefined
+      const isPlainUse = [...only.attributes].every((attribute) =>
+        ['href', 'xlink:href'].includes(attribute.name),
+      )
+      const symbolViewBox = symbol?.getAttribute('viewBox')
+      const copyViewBox = copy.getAttribute('viewBox')
+
+      if (
+        symbol?.tagName.toLowerCase() === 'symbol' &&
+        isPlainUse &&
+        (!copyViewBox || !symbolViewBox || copyViewBox === symbolViewBox)
+      ) {
+        if (symbolViewBox) copy.setAttribute('viewBox', symbolViewBox)
+        const aspect = symbol.getAttribute('preserveAspectRatio')
+        if (aspect && !copy.hasAttribute('preserveAspectRatio')) {
+          copy.setAttribute('preserveAspectRatio', aspect)
+        }
+        only.replaceWith(...[...symbol.childNodes].map((node) => node.cloneNode(true)))
+      }
+    }
+
+    // Everything else, including references inside what was just copied in
+    let defs: Element | undefined
+    for (let pass = 0; pass < 10; pass++) {
+      let added = false
+
+      for (const use of copy.querySelectorAll('use')) {
+        const id = getUseTargetId(use)
+        if (!id || hasId(id)) continue
+
+        const target = findOnPage(id)
+        if (!target) continue
+
+        if (!defs) {
+          defs = document.createElementNS(SVG_NAMESPACE, 'defs')
+          copy.prepend(defs)
+        }
+        defs.append(target.cloneNode(true))
+        added = true
+      }
+
+      if (!added) break
+    }
+  }
+
+  /**
+   * Returns a copy of an SVG that no longer depends on the page it came from.
+   * SVGs that aren't part of the live page (templates, embedded documents)
+   * have nothing to resolve against and are returned as they are.
+   */
+  const makeSelfContained = (svg: SVGElement): SVGElement => {
+    if (!svg.isConnected || svg.ownerDocument !== document) return svg
+
+    try {
+      const copy = svg.cloneNode(true) as SVGElement
+      bakePageStyles(svg, copy)
+      inlineUseTargets(svg, copy)
+      return copy
+    } catch (error) {
+      console.warn('Failed to make SVG self-contained:', error)
+      return svg
+    }
+  }
+
   /**
    * Serializes an SVG element to string with proper namespace
    */
   const serializeSVG = (svg: SVGElement): string => {
     try {
       const serializer = new XMLSerializer()
-      let svgString = serializer.serializeToString(svg)
+      let svgString = serializer.serializeToString(makeSelfContained(svg))
 
       // Ensure xmlns is present for standalone validity
       if (!svgString.includes('xmlns=')) {
@@ -111,6 +331,45 @@ export async function findSvg(): Promise<DocumentData> {
       urls.push(match[2])
     }
     return urls
+  }
+
+  /**
+   * How a source that turned out to be an SVG gets recorded:
+   * - data-or-image: decode data URIs, falling back to an image element
+   * - data-only: decode data URIs, dropping any that fail to decode
+   * - reference: always an image element, skipping same-document #fragments
+   * Sources that aren't data URIs are always recorded as image elements.
+   */
+  type SourceMode = 'data-only' | 'data-or-image' | 'reference'
+
+  const collectSource = (bucket: string[], source: string, mode: SourceMode): void => {
+    if (mode === 'reference') {
+      if (!source.startsWith('#')) bucket.push(createImageElement(source))
+      return
+    }
+
+    if (!source.startsWith('data:')) {
+      bucket.push(createImageElement(source))
+      return
+    }
+
+    const extracted = extractSVGFromDataURI(source)
+    if (extracted) {
+      bucket.push(extracted)
+    } else if (mode === 'data-or-image') {
+      bucket.push(createImageElement(source))
+    }
+  }
+
+  /**
+   * Records every SVG url() found in a computed CSS value
+   */
+  const collectCssUrls = (bucket: string[], cssValue: string, mode: SourceMode): void => {
+    if (!cssValue || cssValue === 'none' || cssValue === 'normal') return
+
+    for (const url of extractURLsFromCSS(cssValue)) {
+      if (isSVGSource(url)) collectSource(bucket, url, mode)
+    }
   }
 
   // ============================================================================
@@ -163,17 +422,7 @@ export async function findSvg(): Promise<DocumentData> {
 
       for (const source of sources) {
         if (isSVGSource(source)) {
-          // For data URIs, try to extract actual SVG content
-          if (source.startsWith('data:')) {
-            const extracted = extractSVGFromDataURI(source)
-            if (extracted) {
-              allSvgData.push(extracted)
-            } else {
-              allSvgData.push(createImageElement(source))
-            }
-          } else {
-            allSvgData.push(createImageElement(source))
-          }
+          collectSource(allSvgData, source, 'data-or-image')
           break // Only record once per image
         }
       }
@@ -277,16 +526,16 @@ export async function findSvg(): Promise<DocumentData> {
       const sources = picture.querySelectorAll('source')
 
       for (const source of sources) {
-        const type = source.getAttribute('type')
         const srcset = source.getAttribute('srcset')
 
-        if ((type === 'image/svg+xml' || (srcset && isSVGSource(srcset))) && srcset) {
-          // srcset can contain multiple URLs with descriptors
-          const urls = srcset.split(',').map((s) => s.trim().split(/\s+/)[0])
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              allSvgData.push(createImageElement(url))
-            }
+        if (!srcset) continue
+
+        // srcset can contain multiple URLs with descriptors, so each candidate
+        // is checked on its own rather than testing the attribute as a whole
+        const urls = srcset.split(',').map((s) => s.trim().split(/\s+/)[0])
+        for (const url of urls) {
+          if (isSVGSource(url)) {
+            allSvgData.push(createImageElement(url))
           }
         }
       }
@@ -315,8 +564,23 @@ export async function findSvg(): Promise<DocumentData> {
   }
 
   // ============================================================================
-  // 8. CSS BACKGROUND-IMAGE WITH SVG
+  // 8-14. COMPUTED CSS: background-image, mask-image, clip-path, filter,
+  //       border-image-source, list-style-image, and ::before/::after content
   // ============================================================================
+
+  // Every element is visited once and its computed style is read once, rather
+  // than walking the whole document again for each property. Results are
+  // bucketed per property and appended in a fixed order so the output is
+  // grouped the same way regardless of where elements sit in the DOM.
+  const cssBuckets = {
+    background: [] as string[],
+    borderImage: [] as string[],
+    clipPath: [] as string[],
+    content: [] as string[],
+    filter: [] as string[],
+    listStyle: [] as string[],
+    mask: [] as string[],
+  }
 
   try {
     const allElements = document.querySelectorAll('*')
@@ -324,254 +588,41 @@ export async function findSvg(): Promise<DocumentData> {
     for (const element of allElements) {
       try {
         const style = globalThis.getComputedStyle(element)
-        const backgroundImage = style.backgroundImage
 
-        if (backgroundImage && backgroundImage !== 'none') {
-          const urls = extractURLsFromCSS(backgroundImage)
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              if (url.startsWith('data:')) {
-                const extracted = extractSVGFromDataURI(url)
-                if (extracted) {
-                  allSvgData.push(extracted)
-                } else {
-                  allSvgData.push(createImageElement(url))
-                }
-              } else {
-                allSvgData.push(createImageElement(url))
-              }
-            }
-          }
-        }
+        collectCssUrls(cssBuckets.background, style.backgroundImage, 'data-or-image')
+        collectCssUrls(cssBuckets.mask, style.maskImage || style.webkitMaskImage, 'data-only')
+        // clip-path and filter can reference external SVG files or internal IDs
+        collectCssUrls(cssBuckets.clipPath, style.clipPath, 'reference')
+        collectCssUrls(cssBuckets.filter, style.filter, 'reference')
+        collectCssUrls(cssBuckets.borderImage, style.borderImageSource, 'data-only')
+        collectCssUrls(cssBuckets.listStyle, style.listStyleImage, 'data-only')
       } catch {
         // Some elements may throw when accessing computed style
       }
+
+      for (const pseudo of ['::before', '::after']) {
+        try {
+          const content = globalThis.getComputedStyle(element, pseudo).content
+          collectCssUrls(cssBuckets.content, content, 'data-only')
+        } catch {
+          // Ignore
+        }
+      }
     }
   } catch (error) {
-    console.warn('Error finding CSS background SVGs:', error)
+    console.warn('Error finding CSS SVGs:', error)
   }
 
-  // ============================================================================
-  // 9. CSS MASK-IMAGE WITH SVG
-  // ============================================================================
-
-  try {
-    const allElements = document.querySelectorAll('*')
-
-    for (const element of allElements) {
-      try {
-        const style = globalThis.getComputedStyle(element)
-        const maskImage = style.maskImage || style.webkitMaskImage
-
-        if (maskImage && maskImage !== 'none') {
-          const urls = extractURLsFromCSS(maskImage)
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              if (url.startsWith('data:')) {
-                const extracted = extractSVGFromDataURI(url)
-                if (extracted) {
-                  allSvgData.push(extracted)
-                }
-              } else {
-                allSvgData.push(createImageElement(url))
-              }
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-    }
-  } catch (error) {
-    console.warn('Error finding CSS mask SVGs:', error)
-  }
-
-  // ============================================================================
-  // 10. CSS CLIP-PATH WITH SVG
-  // ============================================================================
-
-  try {
-    const allElements = document.querySelectorAll('*')
-
-    for (const element of allElements) {
-      try {
-        const style = globalThis.getComputedStyle(element)
-        const clipPath = style.clipPath
-
-        if (clipPath && clipPath !== 'none') {
-          const urls = extractURLsFromCSS(clipPath)
-          for (const url of urls) {
-            // clip-path can reference external SVG files or internal IDs
-            if (isSVGSource(url) && !url.startsWith('#')) {
-              allSvgData.push(createImageElement(url))
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-    }
-  } catch (error) {
-    console.warn('Error finding CSS clip-path SVGs:', error)
-  }
-
-  // ============================================================================
-  // 11. CSS FILTER WITH SVG
-  // ============================================================================
-
-  try {
-    const allElements = document.querySelectorAll('*')
-
-    for (const element of allElements) {
-      try {
-        const style = globalThis.getComputedStyle(element)
-        const filter = style.filter
-
-        if (filter && filter !== 'none') {
-          const urls = extractURLsFromCSS(filter)
-          for (const url of urls) {
-            // filter can reference external SVG files or internal IDs
-            if (isSVGSource(url) && !url.startsWith('#')) {
-              allSvgData.push(createImageElement(url))
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-    }
-  } catch (error) {
-    console.warn('Error finding CSS filter SVGs:', error)
-  }
-
-  // ============================================================================
-  // 12. CSS BORDER-IMAGE-SOURCE WITH SVG
-  // ============================================================================
-
-  try {
-    const allElements = document.querySelectorAll('*')
-
-    for (const element of allElements) {
-      try {
-        const style = globalThis.getComputedStyle(element)
-        const borderImageSource = style.borderImageSource
-
-        if (borderImageSource && borderImageSource !== 'none') {
-          const urls = extractURLsFromCSS(borderImageSource)
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              if (url.startsWith('data:')) {
-                const extracted = extractSVGFromDataURI(url)
-                if (extracted) {
-                  allSvgData.push(extracted)
-                }
-              } else {
-                allSvgData.push(createImageElement(url))
-              }
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-    }
-  } catch (error) {
-    console.warn('Error finding CSS border-image SVGs:', error)
-  }
-
-  // ============================================================================
-  // 13. CSS LIST-STYLE-IMAGE WITH SVG
-  // ============================================================================
-
-  try {
-    const allElements = document.querySelectorAll('*')
-
-    for (const element of allElements) {
-      try {
-        const style = globalThis.getComputedStyle(element)
-        const listStyleImage = style.listStyleImage
-
-        if (listStyleImage && listStyleImage !== 'none') {
-          const urls = extractURLsFromCSS(listStyleImage)
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              if (url.startsWith('data:')) {
-                const extracted = extractSVGFromDataURI(url)
-                if (extracted) {
-                  allSvgData.push(extracted)
-                }
-              } else {
-                allSvgData.push(createImageElement(url))
-              }
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-    }
-  } catch (error) {
-    console.warn('Error finding CSS list-style SVGs:', error)
-  }
-
-  // ============================================================================
-  // 14. CSS CONTENT PROPERTY (pseudo-elements)
-  // ============================================================================
-
-  try {
-    const allElements = document.querySelectorAll('*')
-
-    for (const element of allElements) {
-      // Check ::before
-      try {
-        const beforeStyle = globalThis.getComputedStyle(element, '::before')
-        const beforeContent = beforeStyle.content
-
-        if (beforeContent && beforeContent !== 'none' && beforeContent !== 'normal') {
-          const urls = extractURLsFromCSS(beforeContent)
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              if (url.startsWith('data:')) {
-                const extracted = extractSVGFromDataURI(url)
-                if (extracted) {
-                  allSvgData.push(extracted)
-                }
-              } else {
-                allSvgData.push(createImageElement(url))
-              }
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-
-      // Check ::after
-      try {
-        const afterStyle = globalThis.getComputedStyle(element, '::after')
-        const afterContent = afterStyle.content
-
-        if (afterContent && afterContent !== 'none' && afterContent !== 'normal') {
-          const urls = extractURLsFromCSS(afterContent)
-          for (const url of urls) {
-            if (isSVGSource(url)) {
-              if (url.startsWith('data:')) {
-                const extracted = extractSVGFromDataURI(url)
-                if (extracted) {
-                  allSvgData.push(extracted)
-                }
-              } else {
-                allSvgData.push(createImageElement(url))
-              }
-            }
-          }
-        }
-      } catch {
-        // Ignore
-      }
-    }
-  } catch (error) {
-    console.warn('Error finding CSS content SVGs:', error)
+  for (const bucket of [
+    cssBuckets.background,
+    cssBuckets.mask,
+    cssBuckets.clipPath,
+    cssBuckets.filter,
+    cssBuckets.borderImage,
+    cssBuckets.listStyle,
+    cssBuckets.content,
+  ]) {
+    for (const svg of bucket) allSvgData.push(svg)
   }
 
   // ============================================================================
@@ -628,16 +679,7 @@ export async function findSvg(): Promise<DocumentData> {
         const shadowImages = shadowRoot.querySelectorAll('img')
         for (const img of shadowImages) {
           if (isSVGSource(img.src)) {
-            if (img.src.startsWith('data:')) {
-              const extracted = extractSVGFromDataURI(img.src)
-              if (extracted) {
-                allSvgData.push(extracted)
-              } else {
-                allSvgData.push(createImageElement(img.src))
-              }
-            } else {
-              allSvgData.push(createImageElement(img.src))
-            }
+            collectSource(allSvgData, img.src, 'data-or-image')
           }
         }
 
@@ -671,14 +713,7 @@ export async function findSvg(): Promise<DocumentData> {
       const images = content.querySelectorAll('img')
       for (const img of images) {
         if (isSVGSource(img.src)) {
-          if (img.src.startsWith('data:')) {
-            const extracted = extractSVGFromDataURI(img.src)
-            if (extracted) {
-              allSvgData.push(extracted)
-            }
-          } else {
-            allSvgData.push(createImageElement(img.src))
-          }
+          collectSource(allSvgData, img.src, 'data-only')
         }
       }
     }
@@ -721,14 +756,7 @@ export async function findSvg(): Promise<DocumentData> {
       const href = image.getAttribute('href') || image.getAttribute('xlink:href')
       if (!href || !isSVGSource(href)) continue
 
-      if (href.startsWith('data:')) {
-        const extracted = extractSVGFromDataURI(href)
-        if (extracted) {
-          allSvgData.push(extracted)
-        }
-      } else {
-        allSvgData.push(createImageElement(href))
-      }
+      collectSource(allSvgData, href, 'data-only')
     }
   } catch (error) {
     console.warn('Error finding nested SVG image elements:', error)
@@ -792,6 +820,8 @@ export async function findSvg(): Promise<DocumentData> {
   // ============================================================================
   // DEDUPLICATE AND FORMAT RESULTS
   // ============================================================================
+
+  isolationHost?.remove()
 
   const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg && svg.trim().length > 0)
 

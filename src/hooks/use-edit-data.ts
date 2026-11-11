@@ -1,5 +1,6 @@
 import { useCollection, useEdit } from 'src/providers'
 import { StorageUtilities } from 'src/utilities/storage-utilities'
+import { SvgUtilities } from 'src/utilities/svg-utilities'
 
 export const useEditData = () => {
   const { state: editState } = useEdit()
@@ -34,8 +35,17 @@ export const useEditData = () => {
       return updatedSvg || svg
     })
 
-    const pageData = await StorageUtilities.getPageData(collectionId)
-    StorageUtilities.setPageData(collectionId, { ...pageData, data: updatedCollection })
+    const updated = new Map(
+      SvgUtilities.createStorageSvgs(updatedSelectedSvgs).map((svg) => [svg.id, svg]),
+    )
+    StorageUtilities.updatePageData(
+      collectionId,
+      (current) => ({
+        ...current,
+        data: current.data.map((item) => updated.get(item.id) ?? item),
+      }),
+      data,
+    )
     collectionDispatch({ payload: updatedCollection, type: 'set-data' })
     collectionDispatch({ payload: updatedSelectedSvgs, type: 'set-selected' })
     collectionDispatch({ type: 'process-data' })

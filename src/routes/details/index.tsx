@@ -2,6 +2,7 @@ import { Transition } from '@headlessui/react'
 import { Provider as ToastProvider, Viewport } from '@radix-ui/react-toast'
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip'
 import { Fragment } from 'react'
+import { StorageErrorToast } from 'src/components/storage-error-toast'
 import { DetailsLayout } from 'src/layout/details'
 import { DetailsProvider, UserProvider } from 'src/providers'
 
@@ -24,6 +25,7 @@ export const DetailsRoute = () => {
           </DetailsProvider>
         </UserProvider>
       </TooltipProvider>
+      <StorageErrorToast />
       <Viewport className="toast-viewport" />
     </ToastProvider>
   )

@@ -1,27 +1,33 @@
+import type { UserState } from 'src/providers/user/reducer'
+
 import { isDevelopmentEnvironment } from 'src/constants/server-config'
 import { DocumentData, findSvg } from 'src/scripts'
 import { extension } from 'src/utilities/extension-utilities'
 import { logger } from 'src/utilities/logger'
+import { StorageUtilities } from 'src/utilities/storage-utilities'
+
+const CONTEXT_MENU_ID = 'svg-gobbler'
 
 /**
  * Functions related to initializing the extension. This includes setting the
  * extension icons and launching the onboarding experience.
  */
 const Background = {
+  /**
+   * Registers the context menu click handler and brings the menu item in line
+   * with the user's setting.
+   */
   createContextMenu() {
-    chrome.contextMenus.create({
-      contexts: ['all'],
-      id: 'svg-gobbler',
-      title: 'Search page for SVGs',
-    })
-
+    // Listeners must be registered synchronously so they survive worker restarts
     chrome.contextMenus.onClicked.addListener((info) => {
-      if (info.menuItemId !== 'svg-gobbler') {
+      if (info.menuItemId !== CONTEXT_MENU_ID) {
         return
       }
 
       Background.launchSvgGobbler()
     })
+
+    Background.syncContextMenu()
   },
 
   /**
@@ -153,6 +159,28 @@ const Background = {
         },
       })
     }
+  },
+
+  /**
+   * Shows the context menu item only if the user hasn't turned it off. This runs
+   * every time the service worker starts, so creating the item unconditionally
+   * would bring it back after the user disabled it in settings. Existing items
+   * are cleared first because they persist across restarts and creating a
+   * duplicate id is an error.
+   */
+  async syncContextMenu() {
+    const user = await StorageUtilities.getStorageData<UserState>('user')
+    const enabled = user?.settings?.showInContextMenu ?? true
+
+    chrome.contextMenus.removeAll(() => {
+      if (!enabled) return
+
+      chrome.contextMenus.create({
+        contexts: ['all'],
+        id: CONTEXT_MENU_ID,
+        title: 'Search page for SVGs',
+      })
+    })
   },
 }
 
