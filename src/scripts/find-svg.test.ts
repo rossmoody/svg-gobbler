@@ -181,4 +181,84 @@ describe('findSvg', () => {
       expect(await names('<svg><path d="M0 0"/></svg>')).toEqual([`${location.host}-1`])
     })
   })
+
+  describe('self-contained capture', () => {
+    const sprite =
+      '<svg style="display:none">' +
+      '<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3 7h7z"/></symbol>' +
+      '<symbol id="box" viewBox="0 0 10 10"><rect width="10" height="10"/></symbol>' +
+      '<symbol id="pair"><use href="#box"/><circle r="2"/></symbol>' +
+      '</svg>'
+    const withId = (svgs: string[], id: string) => svgs.find((svg) => svg.includes(`id="${id}"`))!
+
+    it('replaces a lone sprite reference with the symbol itself', async () => {
+      const svgs = await gobble(`${sprite}<svg id="icon" class="i"><use href="#star"/></svg>`)
+      const icon = withId(svgs, 'icon')
+
+      expect(icon).toContain('viewBox="0 0 24 24"')
+      expect(icon).toContain('<path d="M12 2l3 7h7z"/>')
+      expect(icon).not.toContain('<use')
+      expect(icon).not.toContain('<symbol')
+    })
+
+    it('supports xlink:href references', async () => {
+      const svgs = await gobble(`${sprite}<svg id="icon"><use xlink:href="#star"/></svg>`)
+
+      expect(withId(svgs, 'icon')).toContain('<path d="M12 2l3 7h7z"/>')
+    })
+
+    it('keeps the reference and copies the target in when the use is positioned', async () => {
+      const svgs = await gobble(
+        `${sprite}<svg id="icon" viewBox="0 0 48 48"><use href="#box" x="4" y="4" width="20" height="20"/><circle r="4"/></svg>`,
+      )
+      const icon = withId(svgs, 'icon')
+
+      expect(icon).toContain('viewBox="0 0 48 48"')
+      expect(icon).toContain('<defs><symbol id="box" viewBox="0 0 10 10">')
+      expect(icon).toContain('<use href="#box" x="4"')
+    })
+
+    it('follows references inside what it copies in', async () => {
+      const svgs = await gobble(`${sprite}<svg id="icon"><use href="#pair"/></svg>`)
+      const icon = withId(svgs, 'icon')
+
+      expect(icon).toContain('<circle r="2"/>')
+      expect(icon).toContain('<symbol id="box"')
+    })
+
+    it('leaves references that resolve inside the svg, or nowhere, alone', async () => {
+      const local = '<svg id="local"><defs><path id="p" d="M0 0"/></defs><use href="#p"/></svg>'
+      const missing = '<svg id="missing"><use href="#nope"/></svg>'
+      const svgs = await gobble(local + missing)
+
+      expect(withId(svgs, 'local')).toBe(local.replace('<svg', `<svg ${SVG_NS}`))
+      expect(withId(svgs, 'missing')).toBe(missing.replace('<svg', `<svg ${SVG_NS}`))
+    })
+
+    it('writes styling that came from the page stylesheet onto the svg', async () => {
+      const svgs = await gobble(
+        '<svg id="styled" class="icon"><path class="line" d="M0 0h4"/></svg>',
+        '<style>.icon .line { stroke: rgb(255, 0, 0); stroke-width: 3px; fill: none; }</style>',
+      )
+      const styled = withId(svgs, 'styled')
+
+      expect(styled).toContain('stroke="#ff0000"')
+      expect(styled).toContain('stroke-width="3"')
+      expect(styled).toContain('fill="none"')
+    })
+
+    it('does not touch an svg that already carries its own styling', async () => {
+      const own = '<svg id="own" fill="currentColor"><path fill="#123456" d="M0 0"/></svg>'
+      const svgs = await gobble(own, '<style>body { color: rgb(1, 2, 3); }</style>')
+
+      expect(withId(svgs, 'own')).toBe(own.replace('<svg', `<svg ${SVG_NS}`))
+    })
+
+    it('leaves nothing behind on the page', async () => {
+      await gobble(`${sprite}<svg><use href="#star"/></svg>`)
+
+      expect(document.documentElement.lastElementChild).toBe(document.body)
+      expect(document.querySelectorAll('svg')).toHaveLength(2)
+    })
+  })
 })

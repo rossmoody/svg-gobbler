@@ -79,13 +79,233 @@ export async function findSvg(): Promise<DocumentData> {
     }
   }
 
+  const SVG_NAMESPACE = 'http://www.w3.org/2000/svg'
+
+  /**
+   * Presentation properties a page commonly sets on icons from its own CSS.
+   * Visibility, display, transforms and sizing are left out on purpose: they
+   * usually describe UI state (hidden menus, rotated chevrons), not the artwork.
+   */
+  const PAGE_STYLED_PROPERTIES = [
+    'color',
+    'fill',
+    'fill-opacity',
+    'fill-rule',
+    'clip-rule',
+    'stroke',
+    'stroke-width',
+    'stroke-opacity',
+    'stroke-linecap',
+    'stroke-linejoin',
+    'stroke-miterlimit',
+    'stroke-dasharray',
+    'stroke-dashoffset',
+    'stop-color',
+    'stop-opacity',
+    'opacity',
+  ]
+  const PAINT_PROPERTIES = new Set(['fill', 'stop-color', 'stroke'])
+
+  /**
+   * A closed shadow root attached to the page for the duration of the scrape.
+   * A copy of an SVG placed inside it is styled by nothing but its own markup,
+   * which is how it will look once it has left the page.
+   */
+  let isolationHost: HTMLElement | undefined
+  let isolationRoot: ShadowRoot | undefined
+
+  const getIsolationRoot = (): ShadowRoot | undefined => {
+    if (isolationRoot) return isolationRoot
+    try {
+      isolationHost = document.createElement('div')
+      isolationHost.style.setProperty('all', 'initial')
+      isolationHost.style.setProperty('display', 'none')
+      isolationRoot = isolationHost.attachShadow({ mode: 'closed' })
+      document.documentElement.append(isolationHost)
+    } catch {
+      isolationHost = undefined
+      isolationRoot = undefined
+    }
+    return isolationRoot
+  }
+
+  /**
+   * rgb(51, 51, 51) -> #333333. Anything else is returned untouched.
+   */
+  const toHexColor = (value: string): string => {
+    const match = value.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
+    if (!match) return value
+    const hex = match.slice(1).map((part) => Number(part).toString(16).padStart(2, '0'))
+    return `#${hex.join('')}`
+  }
+
+  /**
+   * Computed values as they'd be written by hand: hex colours, unitless pixels.
+   */
+  const toAttributeValue = (value: string): string =>
+    toHexColor(value).replaceAll(/(\d)px\b/g, '$1')
+
+  /**
+   * Writes onto the copy whatever the page's stylesheets contributed to the
+   * original, e.g. `.icon { fill: currentColor }` or `.icon path { stroke: #333 }`.
+   * Only differences from how the copy looks on its own are written, so an SVG
+   * that already carries its styling is left byte-for-byte the same.
+   */
+  const bakePageStyles = (original: SVGElement, copy: SVGElement): void => {
+    const root = getIsolationRoot()
+    if (!root) return
+
+    const wrapper = document.createElement('div')
+    try {
+      // Give the copy the text colour the original inherits, so `currentColor`
+      // resolves the same in both and is not mistaken for page styling.
+      const rootNode = original.getRootNode()
+      const parent =
+        original.parentElement ?? (rootNode instanceof ShadowRoot ? rootNode.host : undefined)
+      if (parent) wrapper.style.setProperty('color', globalThis.getComputedStyle(parent).color)
+      root.append(wrapper)
+      wrapper.append(copy)
+
+      const originals = [original, ...original.querySelectorAll('*')]
+      const copies = [copy, ...copy.querySelectorAll('*')]
+      if (originals.length !== copies.length) return
+
+      for (const [index, element] of originals.entries()) {
+        const target = copies[index]
+        if (target.namespaceURI !== SVG_NAMESPACE) continue
+
+        const onPage = globalThis.getComputedStyle(element)
+        // Live: reflects attributes already written to this copy's ancestors,
+        // so an inherited value is written once, where it was set.
+        const alone = globalThis.getComputedStyle(target)
+
+        for (const property of PAGE_STYLED_PROPERTIES) {
+          // Opacity on the outer element is usually a fade or hover state
+          if (index === 0 && property === 'opacity') continue
+
+          const value = onPage.getPropertyValue(property)
+          if (!value || value === alone.getPropertyValue(property)) continue
+
+          // A paint that matches the text colour is treated as currentColor
+          const followsTextColor = PAINT_PROPERTIES.has(property) && value === onPage.color
+          target.setAttribute(property, followsTextColor ? 'currentColor' : toAttributeValue(value))
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to copy page styles onto SVG:', error)
+    } finally {
+      wrapper.remove()
+    }
+  }
+
+  const getUseTargetId = (use: Element): string | undefined => {
+    const href = use.getAttribute('href') || use.getAttribute('xlink:href')
+    return href?.startsWith('#') && href.length > 1 ? href.slice(1) : undefined
+  }
+
+  /**
+   * Copies in whatever the SVG's <use> elements point at elsewhere on the page,
+   * typically a <symbol> in a hidden sprite. Without it the saved SVG is an
+   * empty reference.
+   *
+   * When the SVG is nothing but a single plain <use> of a symbol, the symbol's
+   * contents and viewBox replace it, giving the icon itself. Otherwise the
+   * targets are added to a <defs> so the references keep working.
+   */
+  const inlineUseTargets = (original: SVGElement, copy: SVGElement): void => {
+    const scope = original.getRootNode()
+    const findOnPage = (id: string): Element | undefined => {
+      // Ids are looked up as-is; a selector would need them escaped
+      /* eslint-disable unicorn/prefer-query-selector */
+      const scoped = scope instanceof ShadowRoot ? scope.getElementById(id) : undefined
+      const found = scoped ?? document.getElementById(id)
+      /* eslint-enable unicorn/prefer-query-selector */
+      if (!found || found.namespaceURI !== SVG_NAMESPACE) return undefined
+      // A target inside this SVG is already part of the copy; one that
+      // contains this SVG would copy the SVG into itself.
+      if (original.contains(found) || found.contains(original)) return undefined
+      return found
+    }
+    const hasId = (id: string) => [...copy.querySelectorAll('[id]')].some((node) => node.id === id)
+
+    // The icon case: <svg><use href="#symbol"/></svg>
+    const children = [...copy.children].filter(
+      (child) => !['desc', 'title'].includes(child.tagName.toLowerCase()),
+    )
+    const [only] = children
+    if (children.length === 1 && only.tagName.toLowerCase() === 'use') {
+      const id = getUseTargetId(only)
+      const symbol = id && !hasId(id) ? findOnPage(id) : undefined
+      const isPlainUse = [...only.attributes].every((attribute) =>
+        ['href', 'xlink:href'].includes(attribute.name),
+      )
+      const symbolViewBox = symbol?.getAttribute('viewBox')
+      const copyViewBox = copy.getAttribute('viewBox')
+
+      if (
+        symbol?.tagName.toLowerCase() === 'symbol' &&
+        isPlainUse &&
+        (!copyViewBox || !symbolViewBox || copyViewBox === symbolViewBox)
+      ) {
+        if (symbolViewBox) copy.setAttribute('viewBox', symbolViewBox)
+        const aspect = symbol.getAttribute('preserveAspectRatio')
+        if (aspect && !copy.hasAttribute('preserveAspectRatio')) {
+          copy.setAttribute('preserveAspectRatio', aspect)
+        }
+        only.replaceWith(...[...symbol.childNodes].map((node) => node.cloneNode(true)))
+      }
+    }
+
+    // Everything else, including references inside what was just copied in
+    let defs: Element | undefined
+    for (let pass = 0; pass < 10; pass++) {
+      let added = false
+
+      for (const use of copy.querySelectorAll('use')) {
+        const id = getUseTargetId(use)
+        if (!id || hasId(id)) continue
+
+        const target = findOnPage(id)
+        if (!target) continue
+
+        if (!defs) {
+          defs = document.createElementNS(SVG_NAMESPACE, 'defs')
+          copy.prepend(defs)
+        }
+        defs.append(target.cloneNode(true))
+        added = true
+      }
+
+      if (!added) break
+    }
+  }
+
+  /**
+   * Returns a copy of an SVG that no longer depends on the page it came from.
+   * SVGs that aren't part of the live page (templates, embedded documents)
+   * have nothing to resolve against and are returned as they are.
+   */
+  const makeSelfContained = (svg: SVGElement): SVGElement => {
+    if (!svg.isConnected || svg.ownerDocument !== document) return svg
+
+    try {
+      const copy = svg.cloneNode(true) as SVGElement
+      bakePageStyles(svg, copy)
+      inlineUseTargets(svg, copy)
+      return copy
+    } catch (error) {
+      console.warn('Failed to make SVG self-contained:', error)
+      return svg
+    }
+  }
+
   /**
    * Serializes an SVG element to string with proper namespace
    */
   const serializeSVG = (svg: SVGElement): string => {
     try {
       const serializer = new XMLSerializer()
-      let svgString = serializer.serializeToString(svg)
+      let svgString = serializer.serializeToString(makeSelfContained(svg))
 
       // Ensure xmlns is present for standalone validity
       if (!svgString.includes('xmlns=')) {
@@ -600,6 +820,8 @@ export async function findSvg(): Promise<DocumentData> {
   // ============================================================================
   // DEDUPLICATE AND FORMAT RESULTS
   // ============================================================================
+
+  isolationHost?.remove()
 
   const uniqueSvgData = [...new Set(allSvgData)].filter((svg) => svg && svg.trim().length > 0)
 
