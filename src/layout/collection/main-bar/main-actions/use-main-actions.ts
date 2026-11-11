@@ -42,8 +42,10 @@ export const useMainActions = () => {
   }
 
   const moveSelectedItems = async (targetCollectionId: string) => {
-    await addSelectedTo(targetCollectionId)
-    await removeSelected()
+    // Only take the items out of this collection once they are safely in the
+    // other one; a failed write must not leave them in neither.
+    const added = await addSelectedTo(targetCollectionId)
+    if (added) await removeSelected()
     resetCollection()
   }
 
