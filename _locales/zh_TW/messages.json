@@ -1,0 +1,1028 @@
+{
+  "confirm_delete_desc": {
+    "message": "刪除集合前顯示確認對話框"
+  },
+  "confirm_delete": {
+    "message": "確認刪除集合"
+  },
+  "copy_base64_uri": {
+    "message": "複製 base64 URI"
+  },
+  "copy_uri": {
+    "message": "複製資料 URI"
+  },
+  "you_sure": {
+    "message": "確定要移除"
+  },
+  "undone": {
+    "message": "此動作無法復原。"
+  },
+  "remove": {
+    "message": "移除"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "optimize": {
+    "message": "最佳化"
+  },
+  "optimized": {
+    "message": "已最佳化"
+  },
+  "empty_title": {
+    "message": "找不到 SVG"
+  },
+  "empty_desc": {
+    "message": "選取或拖曳 SVG 到此區域，即可上傳至此集合"
+  },
+  "empty_action": {
+    "message": "上傳 SVG"
+  },
+  "error_title": {
+    "message": "哎呀！發生錯誤了"
+  },
+  "error_desc": {
+    "message": "若方便的話，請提供發生此錯誤時的相關細節或來源頁面網址，讓我們能夠修正"
+  },
+  "error_action": {
+    "message": "重新整理"
+  },
+  "error_primary_action": {
+    "message": "傳送"
+  },
+  "error_input_label": {
+    "message": "錯誤詳細資訊"
+  },
+  "feedback_title": {
+    "message": "快速問一下，你覺得 SVG Gobbler 還缺少哪一項功能？"
+  },
+  "feedback_placeholder": {
+    "message": "我希望 SVG Gobbler 能夠……"
+  },
+  "feedback_primary_action": {
+    "message": "提交"
+  },
+  "feedback_secondary_action": {
+    "message": "取消"
+  },
+  "no_results_title": {
+    "message": "沒有可顯示的 SVG"
+  },
+  "no_results_desc": {
+    "message": "請試著變更篩選、搜尋或檢視設定，以顯示 SVG"
+  },
+  "review_title": {
+    "message": "花點時間簡單評價一下？"
+  },
+  "review_desc": {
+    "message": "SVG Gobbler 免費且開放原始碼。給個 5 顆星，幫助更多人發現它。"
+  },
+  "review_primary_action": {
+    "message": "評價"
+  },
+  "review_secondary_action": {
+    "message": "關閉"
+  },
+  "card_open": {
+    "message": "開啟"
+  },
+  "card_tooltip_cors": {
+    "message": "此 SVG 受到跨來源資源共用（CORS）限制，無法直接在 SVG Gobbler 中編輯或匯出"
+  },
+  "card_onboarding_context": {
+    "message": "按一下滑鼠右鍵開啟快顯功能表"
+  },
+  "card_action_copy": {
+    "message": "複製原始檔"
+  },
+  "card_action_copy_optimized": {
+    "message": "複製最佳化版本"
+  },
+  "card_action_download": {
+    "message": "下載原始檔"
+  },
+  "card_action_duplicate": {
+    "message": "建立副本"
+  },
+  "card_action_delete": {
+    "message": "刪除"
+  },
+  "card_action_original": {
+    "message": "原始"
+  },
+  "card_action_optimized": {
+    "message": "已最佳化"
+  },
+  "export_size": {
+    "message": "大小"
+  },
+  "export_quality": {
+    "message": "品質"
+  },
+  "export_optimize_exports": {
+    "message": "最佳化匯出內容"
+  },
+  "export_pretty": {
+    "message": "美化輸出"
+  },
+  "export_floating": {
+    "message": "浮點數精確度"
+  },
+  "export_filename": {
+    "message": "檔案名稱"
+  },
+  "export_filetype": {
+    "message": "檔案類型"
+  },
+  "export_export_filename": {
+    "message": "Zip 檔案名稱"
+  },
+  "export_filename_prefix": {
+    "message": "檔案名稱前綴"
+  },
+  "export_prefix_tooltip": {
+    "message": "將加在每個檔案名稱開頭的前綴。"
+  },
+  "export_copy_clipboard": {
+    "message": "複製到剪貼簿"
+  },
+  "export_copied": {
+    "message": "已複製"
+  },
+  "export_download": {
+    "message": "下載"
+  },
+  "export_files": {
+    "message": "個檔案"
+  },
+  "export_export": {
+    "message": "匯出"
+  },
+  "export_settings": {
+    "message": "設定"
+  },
+  "main_copy": {
+    "message": "複製"
+  },
+  "main_copy_collection": {
+    "message": "將項目複製到集合"
+  },
+  "main_name": {
+    "message": "名稱"
+  },
+  "main_submit": {
+    "message": "提交"
+  },
+  "main_cancel": {
+    "message": "取消"
+  },
+  "main_delete": {
+    "message": "刪除"
+  },
+  "main_move": {
+    "message": "移動"
+  },
+  "main_move_collection": {
+    "message": "將項目移動到集合"
+  },
+  "main_showing": {
+    "message": "顯示"
+  },
+  "main_of": {
+    "message": "／共"
+  },
+  "main_results": {
+    "message": "筆結果"
+  },
+  "main_select": {
+    "message": "選取"
+  },
+  "main_all": {
+    "message": "全部"
+  },
+  "main_none": {
+    "message": "無"
+  },
+  "main_load_more": {
+    "message": "載入更多"
+  },
+  "upload_upload": {
+    "message": "上傳"
+  },
+  "upload_file": {
+    "message": "檔案"
+  },
+  "upload_clipboard": {
+    "message": "剪貼簿"
+  },
+  "upload_upload_files": {
+    "message": "上傳檔案"
+  },
+  "upload_drag_files": {
+    "message": "或拖放檔案"
+  },
+  "upload_file_limit": {
+    "message": "SVG 檔案上限 10 MB"
+  },
+  "upload_item": {
+    "message": "個項目"
+  },
+  "upload_uploaded": {
+    "message": "已上傳"
+  },
+  "upload_error": {
+    "message": "SVG 無效，請再次確認字串後重試"
+  },
+  "details_optimize": {
+    "message": "最佳化"
+  },
+  "details_format": {
+    "message": "格式"
+  },
+  "details_live": {
+    "message": "這是即時編輯器，試著修改程式碼看看"
+  },
+  "details_download": {
+    "message": "下載"
+  },
+  "details_settings": {
+    "message": "設定"
+  },
+  "details_floating_tooltip": {
+    "message": "浮點數的精確度。會傳遞給每個支援此參數的外掛程式。"
+  },
+  "details_plugin": {
+    "message": "外掛程式"
+  },
+  "details_set_default": {
+    "message": "設為預設"
+  },
+  "details_default": {
+    "message": "預設設定"
+  },
+  "details_svgo_default": {
+    "message": "SVGO 預設值"
+  },
+  "details_deselect_all": {
+    "message": "取消全選"
+  },
+  "details_preview": {
+    "message": "預覽"
+  },
+  "details_react": {
+    "message": "React"
+  },
+  "details_data_uri": {
+    "message": "資料 URI"
+  },
+  "details_svgr": {
+    "message": "SVGR 選項"
+  },
+  "details_component_name": {
+    "message": "元件名稱"
+  },
+  "details_component_desc": {
+    "message": "匯出元件的名稱"
+  },
+  "details_dimensions": {
+    "message": "尺寸"
+  },
+  "details_dimensions_desc": {
+    "message": "保留根 SVG 標籤的 width 與 height 屬性"
+  },
+  "details_ref": {
+    "message": "Ref"
+  },
+  "details_ref_desc": {
+    "message": "為根 SVG 標籤提供轉發 ref"
+  },
+  "details_native": {
+    "message": "Native"
+  },
+  "details_native_desc": {
+    "message": "將所有 SVG 節點改為大寫，並使用含有 react-native-svg 匯入的特定範本。所有不支援的節點都會被移除。"
+  },
+  "details_typescript": {
+    "message": "TypeScript"
+  },
+  "details_typescript_desc": {
+    "message": "產生 TypeScript 的型別定義"
+  },
+  "details_memo": {
+    "message": "Memo"
+  },
+  "details_memo_desc": {
+    "message": "以 React.memo 包裝匯出的元件"
+  },
+  "details_background_color": {
+    "message": "背景顏色"
+  },
+  "details_svgr_error": {
+    "message": "建立 SVGR 元件時發生錯誤"
+  },
+  "details_are_you_sure": {
+    "message": "確定要離開嗎？你的變更將會遺失。"
+  },
+  "details_edit_svg": {
+    "message": "編輯 SVG"
+  },
+  "details_reset_changes": {
+    "message": "重設變更"
+  },
+  "details_save_changes": {
+    "message": "儲存變更"
+  },
+  "onboarding_title": {
+    "message": "開始使用"
+  },
+  "onboarding_new": {
+    "message": "新功能"
+  },
+  "onboarding_version": {
+    "message": "第 5 版"
+  },
+  "onboarding_desc": {
+    "message": "點選工具列上的擴充功能圖示，或在頁面上按一下滑鼠右鍵並選擇 SVG Gobbler 選單項目，即可啟動 SVG Gobbler。"
+  },
+  "onboarding_launch": {
+    "message": "擷取此頁面"
+  },
+  "onboarding_visit": {
+    "message": "前往 GitHub"
+  },
+  "settings_about": {
+    "message": "關於"
+  },
+  "settings_about_desc": {
+    "message": "SVG Gobbler 擴充功能的小小歷史，以及如何支持我們。"
+  },
+  "settings_contribute": {
+    "message": "參與貢獻"
+  },
+  "settings_contribute_desc": {
+    "message": "SVG Gobbler 擴充功能是開放原始碼專案，歡迎在 GitHub 上"
+  },
+  "settings_contribute_desc_2": {
+    "message": "參與貢獻"
+  },
+  "settings_bug": {
+    "message": "回報錯誤"
+  },
+  "settings_bug_desc": {
+    "message": "遇到錯誤，或有功能建議嗎？"
+  },
+  "settings_open_issue": {
+    "message": "在 GitHub 上提出 issue"
+  },
+  "settings_disclaimer": {
+    "message": "免責聲明"
+  },
+  "settings_disclaimer_desc": {
+    "message": "這個開放原始碼瀏覽器擴充功能的設計目的，是方便使用者從網站下載 SVG 圖示，供個人、教育或正當的專業用途使用。使用者應尊重智慧財產權，未經適當授權，不得以本工具侵害著作權或用於商業目的。"
+  },
+  "settings_default_svgo": {
+    "message": "預設 SVGO 設定"
+  },
+  "settings_default_svgo_desc": {
+    "message": "啟動 SVG Gobbler 時所使用的預設 SVGO 外掛程式設定。"
+  },
+  "settings_export": {
+    "message": "匯出"
+  },
+  "settings_export_desc": {
+    "message": "匯出面板的組態設定。"
+  },
+  "settings_general": {
+    "message": "一般"
+  },
+  "settings_general_desc": {
+    "message": "自訂 SVG Gobbler 在瀏覽器中的運作方式。這些設定僅適用於此瀏覽器設定檔。"
+  },
+  "settings_kbd": {
+    "message": "鍵盤快速鍵"
+  },
+  "settings_kbd_desc": {
+    "message": "目前啟動 SVG Gobbler 的快速鍵為"
+  },
+  "settings_kbd_desc_2": {
+    "message": "若要編輯或移除此快速鍵，"
+  },
+  "settings_kbd_desc_3": {
+    "message": "請前往擴充功能快速鍵頁面"
+  },
+  "settings_settings": {
+    "message": "設定"
+  },
+  "topbar_canvas_tooltip": {
+    "message": "畫布顏色"
+  },
+  "topbar_canvas": {
+    "message": "變更畫布顏色"
+  },
+  "topbar_upload": {
+    "message": "上傳"
+  },
+  "topbar_size": {
+    "message": "大小"
+  },
+  "topbar_sort_none": {
+    "message": "無"
+  },
+  "topbar_sort_size_asc": {
+    "message": "檔案大小：由小到大"
+  },
+  "topbar_sort_size_desc": {
+    "message": "檔案大小：由大到小"
+  },
+  "topbar_sort": {
+    "message": "排序"
+  },
+  "topbar_sort_last_asc": {
+    "message": "最後編輯：最近"
+  },
+  "topbar_sort_last_desc": {
+    "message": "最後編輯：最久以前"
+  },
+  "topbar_color_tooltip": {
+    "message": "色彩模式"
+  },
+  "topbar_color": {
+    "message": "切換色彩模式"
+  },
+  "topbar_view": {
+    "message": "檢視"
+  },
+  "topbar_hide_cors": {
+    "message": "隱藏受 CORS 限制的項目"
+  },
+  "topbar_collection": {
+    "message": "集合"
+  },
+  "sidebar_create_new": {
+    "message": "建立新集合"
+  },
+  "sidebar_name": {
+    "message": "名稱"
+  },
+  "sidebar_upload_files": {
+    "message": "上傳檔案"
+  },
+  "sidebar_drag_files": {
+    "message": "或拖放檔案"
+  },
+  "sidebar_file_limit": {
+    "message": "SVG 檔案上限 10 MB"
+  },
+  "sidebar_item": {
+    "message": "個項目"
+  },
+  "sidebar_uploaded": {
+    "message": "已上傳"
+  },
+  "sidebar_create_collection": {
+    "message": "建立集合"
+  },
+  "sidebar_cancel": {
+    "message": "取消"
+  },
+  "sidebar_close": {
+    "message": "關閉側邊欄"
+  },
+  "sidebar_reset": {
+    "message": "重設環境"
+  },
+  "sidebar_review": {
+    "message": "留下評價"
+  },
+  "sidebar_support": {
+    "message": "支持 SVG Gobbler"
+  },
+  "sidebar_free": {
+    "message": "SVG Gobbler 免費、"
+  },
+  "sidebar_open": {
+    "message": "開放原始碼"
+  },
+  "sidebar_support_2": {
+    "message": "，全靠滿滿的正能量運作。如果你遇到問題，或想要目前缺少的功能，請在給予負評前先提出 issue 或寄電子郵件至 ross@rossmoody.com，我們會設法解決。"
+  },
+  "sidebar_support_3": {
+    "message": "如果你喜歡 SVG Gobbler，歡迎留下評價，幫助更多人發現它。"
+  },
+  "sidebar_support_submit": {
+    "message": "提交評價"
+  },
+  "sidebar_new_collection": {
+    "message": "新集合"
+  },
+  "sidebar_settings": {
+    "message": "設定"
+  },
+  "export_apply": {
+    "message": "套用"
+  },
+  "svgo_cleanupAttrs": {
+    "message": "清理屬性"
+  },
+  "svgo_cleanupAttrs_desc": {
+    "message": "移除屬性值中多餘的空白字元。不會修改屬性名稱，即使最佳化後屬性值變成空白也不會移除該屬性。"
+  },
+  "svgo_cleanupEnableBackground": {
+    "message": "清理 enable-background"
+  },
+  "svgo_cleanupEnableBackground_desc": {
+    "message": "移除 enable-background 屬性，但在 filter 元素中使用時除外"
+  },
+  "svgo_cleanupIDs": {
+    "message": "清理 ID"
+  },
+  "svgo_cleanupIDs_desc": {
+    "message": "移除未使用的 ID，並將被其他元素參照的 ID 縮短。"
+  },
+  "svgo_cleanupNumericValues": {
+    "message": "清理數值"
+  },
+  "svgo_cleanupNumericValues_desc": {
+    "message": "將數值四捨五入，並在單位為預設的 'px' 時移除單位。"
+  },
+  "svgo_collapsGroups": {
+    "message": "收合群組"
+  },
+  "svgo_collapsGroups_desc": {
+    "message": "找出實際上沒有作用的群組並將其攤平，同時保留群組內的內容。"
+  },
+  "svgo_convertColors": {
+    "message": "轉換顏色"
+  },
+  "svgo_convertColors_desc": {
+    "message": "將顏色參照轉換為最短的等效寫法。"
+  },
+  "svgo_convertEllipseToCircle": {
+    "message": "將橢圓轉換為圓形"
+  },
+  "svgo_convertEllipseToCircle_desc": {
+    "message": "將半徑相等的橢圓轉換為圓形。"
+  },
+  "svgo_convertPathData": {
+    "message": "轉換路徑資料"
+  },
+  "svgo_convertPathData_desc": {
+    "message": "最佳化 <path>、<glyph> 與 <missing-glyph> 元素中的路徑指令。路徑指令是 d 屬性所使用的語法，每個字元代表一個繪製路徑的指示。"
+  },
+  "svgo_convertShapeToPath": {
+    "message": "將形狀轉換為路徑"
+  },
+  "svgo_convertShapeToPath_desc": {
+    "message": "將基本形狀轉換為 <path> 元素。"
+  },
+  "svgo_convertTransform": {
+    "message": "轉換 transform"
+  },
+  "svgo_convertTransform_desc": {
+    "message": "將多個 transform 合併為一個，並將矩陣轉換為簡短的別名"
+  },
+  "svgo_inlineStyles": {
+    "message": "內嵌樣式"
+  },
+  "svgo_inlineStyles_desc": {
+    "message": "將 <style> 元素中的樣式合併到相符元素的 style 屬性中"
+  },
+  "svgo_mergePaths": {
+    "message": "合併路徑"
+  },
+  "svgo_mergePaths_desc": {
+    "message": "將多個路徑合併為一個；若屬性相同，則合併到 <g> 元素中"
+  },
+  "svgo_mergeStyles": {
+    "message": "合併樣式"
+  },
+  "svgo_mergeStyles_desc": {
+    "message": "將多個 style 元素合併為一個"
+  },
+  "svgo_minifyStyles": {
+    "message": "壓縮樣式"
+  },
+  "svgo_minifyStyles_desc": {
+    "message": "使用 CSSO 壓縮 <style> 元素"
+  },
+  "svgo_moveElemsAttrsToGroup": {
+    "message": "將元素屬性移至群組"
+  },
+  "svgo_moveElemsAttrsToGroup_desc": {
+    "message": "將元素的屬性移至其所屬的群組"
+  },
+  "svgo_moveGroupAttrsToElems": {
+    "message": "將群組屬性移至元素"
+  },
+  "svgo_moveGroupAttrsToElems_desc": {
+    "message": "將部分群組屬性移至其包含的元素"
+  },
+  "svgo_removeComments": {
+    "message": "移除註解"
+  },
+  "svgo_removeComments_desc": {
+    "message": "移除檔案中的 XML 註解。XML 註解是 '<!--' 與 '-->' 語法之間的內容，不會影響呈現結果"
+  },
+  "svgo_removeDesc": {
+    "message": "移除描述"
+  },
+  "svgo_removeDesc_desc": {
+    "message": "若 <desc> 元素為空，或 <desc> 元素看起來只包含編輯器的署名資訊，則從檔案中移除該元素"
+  },
+  "svgo_removeDoctype": {
+    "message": "移除 doctype"
+  },
+  "svgo_removeDoctype_desc": {
+    "message": "從 svg 中移除檔案類型定義（Document Type Definition），也就是 DOCTYPE"
+  },
+  "svgo_removeEditorsNSData": {
+    "message": "移除編輯器的命名空間資料"
+  },
+  "svgo_removeEditorsNSData_desc": {
+    "message": "移除與常見向量編輯軟體相關的所有 XML 命名空間、元素與屬性"
+  },
+  "svgo_removeEmptyAttrs": {
+    "message": "移除空白屬性"
+  },
+  "svgo_removeEmptyAttrs_desc": {
+    "message": "移除值為空的屬性"
+  },
+  "svgo_removeEmptyContainers": {
+    "message": "移除空白容器"
+  },
+  "svgo_removeEmptyContainers_desc": {
+    "message": "移除檔案中沒有子元素或有意義屬性的容器元素"
+  },
+  "svgo_removeEmptyText": {
+    "message": "移除空白文字"
+  },
+  "svgo_removeEmptyText_desc": {
+    "message": "移除沒有有意義屬性的文字元素"
+  },
+  "svgo_removeHiddenElems": {
+    "message": "移除隱藏元素"
+  },
+  "svgo_removeHiddenElems_desc": {
+    "message": "移除檔案中隱藏或不可見的元素，例如寬度與高度定義為 0 的元素，或剛以 CSS 隱藏的元素"
+  },
+  "svgo_removeMetadata": {
+    "message": "移除中繼資料"
+  },
+  "svgo_removeMetadata_desc": {
+    "message": "從檔案中移除 <metadata> 元素。中繼資料不會影響呈現結果，從最佳化的角度來看，隨時都可以安全移除"
+  },
+  "svgo_removeNonInheritableGroupAttrs": {
+    "message": "移除不可繼承的群組屬性"
+  },
+  "svgo_removeNonInheritableGroupAttrs_desc": {
+    "message": "從子元素中移除不可繼承的呈現群組"
+  },
+  "svgo_removeTitle": {
+    "message": "移除標題"
+  },
+  "svgo_removeTitle_desc": {
+    "message": "從檔案中移除 <title> 元素。"
+  },
+  "svgo_removeUnknownsAndDefaults": {
+    "message": "移除未知項目與預設值"
+  },
+  "svgo_removeUnknownsAndDefaults_desc": {
+    "message": "移除未知的元素與屬性，以及已設為預設值的屬性"
+  },
+  "svgo_removeUnusedNS": {
+    "message": "移除未使用的命名空間"
+  },
+  "svgo_removeUnusedNS_desc": {
+    "message": "從檔案中移除未使用的命名空間宣告"
+  },
+  "svgo_removeUselessDefs": {
+    "message": "移除無用的 defs"
+  },
+  "svgo_removeUselessDefs_desc": {
+    "message": "移除 <defs> 元素中沒有可供參照之 ID 的子元素。"
+  },
+  "svgo_removeUselessStrokeAndFill": {
+    "message": "移除無用的 stroke 與 fill"
+  },
+  "svgo_removeUselessStrokeAndFill_desc": {
+    "message": "移除無用的 stroke 與 fill 屬性"
+  },
+  "svgo_removeXMLInstructions": {
+    "message": "移除 XML 指令"
+  },
+  "svgo_removeXMLInstructions_desc": {
+    "message": "移除 XML 處理指令"
+  },
+  "svgo_sortAttrs": {
+    "message": "排序屬性"
+  },
+  "svgo_sortAttrs_desc": {
+    "message": "排序檔案中所有元素的屬性。這不會縮減 SVG 的大小，但能提升可讀性，並可能改善壓縮演算法的表現"
+  },
+  "svgo_sortDefsChildren": {
+    "message": "排序 defs 子元素"
+  },
+  "svgo_sortDefsChildren_desc": {
+    "message": "排序 '<defs>' 元素中的所有子元素。這不會縮減 SVG 的大小，但可能改善壓縮演算法的表現"
+  },
+  "svgo_removeViewBox": {
+    "message": "移除 viewBox"
+  },
+  "svgo_removeViewBox_desc": {
+    "message": "當高度與寬度相同時，移除 viewBox 屬性"
+  },
+  "svgo_cleanupListOfValues": {
+    "message": "清理值清單"
+  },
+  "svgo_cleanupListOfValues_desc": {
+    "message": "將屬性中的數值四捨五入，例如 viewBox、enable-background 與 points 中的數值"
+  },
+  "svgo_convertOneStopGradients": {
+    "message": "轉換單一色標漸層"
+  },
+  "svgo_convertOneStopGradients_desc": {
+    "message": "將實際上等同純色的 <linearGradient> 與 <radialGradient> 節點轉換為該顏色"
+  },
+  "svgo_convertStyleToAttrs": {
+    "message": "將樣式轉換為屬性"
+  },
+  "svgo_convertStyleToAttrs_desc": {
+    "message": "將元素樣式中的呈現屬性轉換為等效的 XML 屬性"
+  },
+  "svgo_prefixIds": {
+    "message": "為 ID 加上前綴"
+  },
+  "svgo_prefixIds_desc": {
+    "message": "以提供的檔案名稱作為元素 ID 與類別名稱的前綴。預設為 'prefix__'"
+  },
+  "svgo_removeDimensions": {
+    "message": "移除尺寸"
+  },
+  "svgo_removeDimensions_desc": {
+    "message": "若有指定，則移除最上層 <svg> 元素的 width 與 height 屬性，並在缺少 viewBox 屬性時以其取代"
+  },
+  "svgo_removeOffCanvasPaths": {
+    "message": "移除畫布外的路徑"
+  },
+  "svgo_removeOffCanvasPaths_desc": {
+    "message": "移除繪製在 viewBox 之外的 <path> 元素"
+  },
+  "svgo_removeRasterImages": {
+    "message": "移除點陣圖"
+  },
+  "svgo_removeRasterImages_desc": {
+    "message": "從檔案中移除內嵌的 JPEG、PNG 與 GIF"
+  },
+  "svgo_removeScriptElement": {
+    "message": "移除 script 元素"
+  },
+  "svgo_removeScriptElement_desc": {
+    "message": "從檔案中移除 <script> 元素"
+  },
+  "svgo_removeStyleElement": {
+    "message": "移除 style 元素"
+  },
+  "svgo_removeStyleElement_desc": {
+    "message": "從檔案中移除 <style> 元素"
+  },
+  "svgo_removeXMLNS": {
+    "message": "移除 XMLNS"
+  },
+  "svgo_removeXMLNS_desc": {
+    "message": "移除檔案中最上層 <svg> 元素的 xmlns 屬性"
+  },
+  "svgo_reusePaths": {
+    "message": "重複使用路徑"
+  },
+  "svgo_reusePaths_desc": {
+    "message": "為相似的路徑建立定義，並將 <path> 元素替換為參照單一 <path> 定義的 <use> 元素"
+  },
+  "zoom_in": {
+    "message": "放大"
+  },
+  "zoom_out": {
+    "message": "縮小"
+  },
+  "name": {
+    "message": "名稱"
+  },
+  "export_prefix_names": {
+    "message": "為檔案名稱加上前綴"
+  },
+  "export_prefix_names_tooltip": {
+    "message": "以編號前綴覆寫對應的圖示名稱"
+  },
+  "settings_merge_label": {
+    "message": "合併來源網址相同的集合"
+  },
+  "settings_merge_tooltip": {
+    "message": "自動合併來源網址相同且 SVG 完全一致的集合"
+  },
+  "settings_importing": {
+    "message": "匯入"
+  },
+  "settings_importing_desc": {
+    "message": "匯入集合時的預設組態設定。"
+  },
+  "settings_collections_title": {
+    "message": "集合"
+  },
+  "settings_collections_desc": {
+    "message": "資料與集合記錄的設定及組態選項"
+  },
+  "settings_reset_title": {
+    "message": "重設 SVG Gobbler"
+  },
+  "settings_reset_desc": {
+    "message": "清除本機儲存空間中所有與 SVG Gobbler 相關的集合與資料，並將 SVG Gobbler 重設為初始狀態"
+  },
+  "settings_reset_action": {
+    "message": "重設 SVG Gobbler"
+  },
+  "settings_export_data": {
+    "message": "以 JSON 匯出資料"
+  },
+  "settings_export_data_desc": {
+    "message": "將所有與 SVG Gobbler 相關的集合與資料匯出為 JSON 檔案。"
+  },
+  "settings_export_all_svg_title": {
+    "message": "將 SVG 匯出為 zip"
+  },
+  "settings_export_all_svg_desc": {
+    "message": "將所有集合中的全部資料以 SVG 形式下載為 zip 檔案。"
+  },
+  "settings_export_all_svg_button": {
+    "message": "匯出 SVG"
+  },
+  "onboarding_card_color": {
+    "message": "看不清楚白色的 SVG 嗎？試著變更畫布顏色 🎨"
+  },
+  "paste_cue_title": {
+    "message": "你知道可以把 SVG 貼到這裡嗎？"
+  },
+  "paste_cue_desc": {
+    "message": "直接在集合檢視中貼上，即可快速將 SVG 加入任何集合。"
+  },
+  "paste_cue_action": {
+    "message": "完成"
+  },
+  "view_always_show_size": {
+    "message": "檢視 SVG 檔案大小"
+  },
+  "download_all": {
+    "message": "全部下載"
+  },
+  "selected": {
+    "message": "已選取"
+  },
+  "export_download_sprite": {
+    "message": "下載"
+  },
+  "export_sprite_prefix": {
+    "message": "為 ID 加上前綴"
+  },
+  "export_sprite_suffix": {
+    "message": "為 ID 加上後綴"
+  },
+  "export_sprite_prefix_tooltip": {
+    "message": "為每個圖示的 ID 加上前綴"
+  },
+  "export_sprite_suffix_tooltip": {
+    "message": "為每個圖示的 ID 加上後綴"
+  },
+  "view_show_name": {
+    "message": "檢視 SVG 名稱"
+  },
+  "view_show_feature_notice": {
+    "message": "全新檢視！"
+  },
+  "sidebar_feedback": {
+    "message": "傳送意見回饋"
+  },
+  "feedback_email": {
+    "message": "電子郵件"
+  },
+  "feedback_email_optional": {
+    "message": "（選填）"
+  },
+  "feedback_feedback": {
+    "message": "意見回饋"
+  },
+  "feedback_email_optional_description": {
+    "message": "若你希望開發者回覆，並在意見回饋中署名感謝，請填寫"
+  },
+  "topbar_sort_alphabetical_asc": {
+    "message": "字母順序：A 到 Z"
+  },
+  "topbar_sort_alphabetical_desc": {
+    "message": "字母順序：Z 到 A"
+  },
+  "settings_sort_collections_label": {
+    "message": "依字母順序排序集合"
+  },
+  "settings_sort_collections_desc": {
+    "message": "每次啟動 SVG Gobbler 時，自動依字母順序排序側邊欄中的集合"
+  },
+  "settings_export_title": {
+    "message": "匯出"
+  },
+  "settings_export__desc": {
+    "message": "在 SVG Gobbler 中管理並以各種格式匯出資料。"
+  },
+  "edit_apply": {
+    "message": "套用"
+  },
+  "edit_applied": {
+    "message": "已套用"
+  },
+  "edit_properties": {
+    "message": "屬性"
+  },
+  "edit_custom_name": {
+    "message": "自訂屬性名稱"
+  },
+  "edit_custom_name_tooltip": {
+    "message": "要套用到 SVG 元素的屬性名稱"
+  },
+  "edit_custom_value": {
+    "message": "自訂屬性值"
+  },
+  "edit_custom_value_tooltip": {
+    "message": "要套用到 SVG 元素的屬性值"
+  },
+  "edit_reset": {
+    "message": "重設"
+  },
+  "edit_id": {
+    "message": "ID"
+  },
+  "edit_class": {
+    "message": "Class"
+  },
+  "edit_style": {
+    "message": "Style"
+  },
+  "edit_height": {
+    "message": "高度"
+  },
+  "edit_width": {
+    "message": "寬度"
+  },
+  "edit_viewbox": {
+    "message": "viewBox"
+  },
+  "edit_fill": {
+    "message": "Fill"
+  },
+  "edit_id_tooltip": {
+    "message": "要套用到所選 SVG 之 id 屬性的字串，將取代現有的 id"
+  },
+  "edit_class_tooltip": {
+    "message": "要套用到所選 SVG 之 class 屬性的字串，將取代現有的 class"
+  },
+  "edit_style_tooltip": {
+    "message": "要套用到所選 SVG 之 style 屬性的字串，將取代現有的 style"
+  },
+  "edit_height_tooltip": {
+    "message": "要套用到所選 SVG 之 height 屬性的字串，將取代現有的 height"
+  },
+  "edit_width_tooltip": {
+    "message": "要套用到所選 SVG 之 width 屬性的字串，將取代現有的 width"
+  },
+  "edit_viewbox_tooltip": {
+    "message": "要套用到所選 SVG 之 viewBox 屬性的字串，將取代現有的 viewBox"
+  },
+  "edit_fill_tooltip": {
+    "message": "要套用到所選 SVG 之 fill 屬性的字串，將取代現有的 fill"
+  },
+  "drop_files": {
+    "message": "放開檔案"
+  },
+  "to_upload": {
+    "message": "即可上傳"
+  },
+  "launch_gobbler": {
+    "message": "啟動 SVG Gobbler"
+  },
+  "launch_gobbler_desc": {
+    "message": "擴充功能的啟動方式設定"
+  },
+  "context_title": {
+    "message": "在快顯功能表中顯示 SVG Gobbler"
+  },
+  "context_desc": {
+    "message": "在頁面上按一下滑鼠右鍵時，於快顯功能表中顯示啟動擴充功能的選項"
+  },
+  "storage_warning_title": {
+    "message": "儲存空間即將用完"
+  },
+  "storage_warning_desc": {
+    "message": "請刪除集合以避免發生錯誤。"
+  },
+  "storage_error_title": {
+    "message": "無法儲存變更"
+  },
+  "storage_error_desc": {
+    "message": "SVG Gobbler 無法寫入瀏覽器儲存空間。重新載入頁面時，你最近的變更可能會遺失。"
+  }
+}
